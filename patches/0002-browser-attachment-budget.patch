@@ -1,0 +1,22 @@
+--- a/demux/demux.c
++++ b/demux/demux.c
+@@ -4069,6 +4069,19 @@
+ int demuxer_add_attachment(demuxer_t *demuxer, char *name, char *type,
+                            void *data, size_t data_size)
+ {
++#ifdef __EMSCRIPTEN__
++    // Browser profile: bound retained attachments independently of packets.
++    size_t attachment_bytes = 0;
++    for (int i = 0; i < demuxer->num_attachments; i++)
++        attachment_bytes += demuxer->attachments[i].data_size;
++    if (demuxer->num_attachments >= 32 || data_size > 4 * 1024 * 1024 ||
++        attachment_bytes + data_size > 16 * 1024 * 1024)
++    {
++        MP_ERR(demuxer, "Browser attachment budget exceeded; attachment omitted.\n");
++        return -1;
++    }
++#endif
++
+     if (!(demuxer->num_attachments % 32))
+         demuxer->attachments = talloc_realloc(demuxer, demuxer->attachments,
+                                               struct demux_attachment,

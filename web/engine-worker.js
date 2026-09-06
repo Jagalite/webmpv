@@ -1,8 +1,32 @@
 import createEngine from './engine/player.mjs';
 
 let engine, canvas, context, timer, audio, pcm, nativeAudio, epoch = -1, forwarded = 0;
-let rendered = 0, ticks = 0, force = true, closing = false;
+let renderMs=0,copyMs=0,maxRenderMs=0;
+let rendered = 0, ticks = 0, force = true, closing = false, presentedPosition=0, frameImage, measureOutput=false, wasWhite=false;
+let ioWorker,ioStats,ioReady,ioClose,ioSession=0,pendingTarget=null,seekSerial=0,restarted=false,position=0;
 const CAPACITY = 8192;
+function releaseSeek(){if(pendingTarget!==null&&restarted&&Math.abs(position-pendingTarget)<0.15){pendingTarget=null;force=true;post({type:'seek-complete',position});}}
+async function closeIO(){if(!ioWorker)return;const old=ioWorker;engine._web_io_cancel();await new Promise(resolve=>{ioClose=resolve;old.postMessage({type:'close'});setTimeout(resolve,1500);});old.terminate();ioWorker=null;ioClose=null;}
+async function openRemote(data){
+  await closeIO();
+  const pointer=engine._web_io_ptr();
+  ioWorker=new Worker(new URL('./io-worker.js',import.meta.url),{type:'module'});
+  const info=await new Promise((resolve,reject)=>{
+    const timeout=setTimeout(()=>reject(Error('Remote open timed out')),20000);
+    ioWorker.onmessage=({data:message})=>{
+      if(message.type==='ready'){clearTimeout(timeout);resolve(message.info);}
+      else if(message.type==='error'){clearTimeout(timeout);reject(Error(message.message));post({type:'error',id:data.id,message:message.message});}
+      else if(message.type==='stats')ioStats=message.stats;
+      else if(message.type==='refresh')post({type:'refresh',id:message.id});
+      else if(message.type==='closed')ioClose?.();
+    };
+    ioWorker.onerror=event=>{clearTimeout(timeout);reject(Error(event.message));};
+    ioWorker.postMessage({type:'init',memory:engine.HEAPU8.buffer,pointer,options:data.options,canRefresh:data.canRefresh});
+  });
+  if(closing)throw Error('Player closed');
+  engine._web_io_configure(++ioSession,BigInt(info.size));
+  post({type:'source',info});submit(data.id,['loadfile','brange://source','replace']);
+}
 const post = message => self.postMessage(message);
 function pumpAudio() {
   // Refresh views after every possible Wasm memory growth.
@@ -37,7 +61,7 @@ function pumpAudio() {
   if (Atomics.load(h, at + 3) !== epoch) return;
   forwarded = written;
   Atomics.store(audio, 0, written);
-  Atomics.store(audio, 2, Atomics.load(h, at + 2));
+  Atomics.store(audio, 2, pendingTarget===null?Atomics.load(h, at + 2):0);
 }
 function tick() {
   if (closing) return;
@@ -48,24 +72,33 @@ function tick() {
       if (!ptr) break;
       const event = JSON.parse(engine.UTF8ToString(ptr));
       engine._free(ptr);
+      if(event.event==='seek'&&ioWorker&&seekSerial){if(engine._web_io_interrupt(seekSerial))ioWorker.postMessage({type:'epoch'});seekSerial=0;}
+      if(event.event==='property-change'&&event.name==='time-pos'){position=event.data;releaseSeek();}
+      if(event.event==='playback-restart'){restarted=true;releaseSeek();}
       post({type:'event', event});
     }
+    const renderStart=performance.now();
     const ptr = engine._web_render(canvas.width, canvas.height, +force);
+    const renderDuration=performance.now()-renderStart;
     force = false;
-    if (ptr) {
-      const bytes = new Uint8ClampedArray(engine.HEAPU8.subarray(ptr, ptr + canvas.width * canvas.height * 4));
+    if (ptr && pendingTarget===null) {
+      renderMs+=renderDuration;maxRenderMs=Math.max(maxRenderMs,renderDuration);const copyStart=performance.now();
+      if(!frameImage||frameImage.width!==canvas.width||frameImage.height!==canvas.height)frameImage=new ImageData(canvas.width,canvas.height);
+      const bytes=frameImage.data;bytes.set(engine.HEAPU8.subarray(ptr,ptr+bytes.length));
       for (let i = 3; i < bytes.length; i += 4) bytes[i] = 255;
-      context.putImageData(new ImageData(bytes, canvas.width, canvas.height), 0, 0);
-      engine._web_presented();
-      rendered++;
+      context.putImageData(frameImage, 0, 0);
+      if(measureOutput){const at=(8*canvas.width+8)*4;const white=bytes[at]>225&&bytes[at+1]>225&&bytes[at+2]>225;if(white&&!wasWhite)post({type:'output',data:{kind:'flash',wallTime:performance.timeOrigin+performance.now(),position}});wasWhite=white;}
+      copyMs+=performance.now()-copyStart;engine._web_presented();
+      rendered++;presentedPosition=position;
     }
-    if (++ticks % 40 === 0) post({type:'diagnostics', data:{rendered, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
+    if (++ticks % 40 === 0 || (ptr && rendered <= 5)) post({type:'diagnostics', data:{rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
   } catch (error) { clearInterval(timer); post({type:'error',message:String(error.stack || error)}); }
 }
 self.onmessage = async ({data}) => {
   try {
     if (data.type === 'init') {
       if (data.disableBrowserCodecs) for (const name of ['VideoDecoder','AudioDecoder','VideoFrame']) Object.defineProperty(globalThis,name,{value:undefined, configurable:true});
+      measureOutput=!!data.measureOutput;
       canvas = data.canvas;
       context = canvas.getContext('2d', {alpha:false});
       audio = new Int32Array(data.audio, 0, 16);
@@ -84,7 +117,11 @@ self.onmessage = async ({data}) => {
     } else if (data.type === 'timing' && engine) {
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 5, data.latencyUs);
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 6, +data.running);
+    } else if (data.type === 'open-remote') {await openRemote(data);
+    } else if(data.type==='refreshed'){ioWorker?.postMessage(data);
+    } else if(data.type==='seek'){pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);seekSerial=engine.HEAPU32[(engine._web_io_ptr()>>>2)+1];submit(data.id,['seek',String(data.seconds),'absolute+exact']);
     } else if (data.type === 'open') {
+      await closeIO();
       if (data.bytes.byteLength > 32 * 1024 * 1024) throw new Error('M0 local fixture limit is 32 MiB');
       try {engine.FS.unlink('/media.mkv');} catch { /* First open. */ }
       engine.FS.writeFile('/media.mkv', new Uint8Array(data.bytes));
@@ -96,6 +133,7 @@ self.onmessage = async ({data}) => {
       closing = true;
       clearInterval(timer);
       if (audio) Atomics.store(audio,2,0);
+      await closeIO();
       engine?._web_destroy();
       post({type:'destroyed'});
     }

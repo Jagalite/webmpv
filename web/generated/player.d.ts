@@ -6,14 +6,33 @@ export type PlayerEvent = {
     error?: string;
     [key: string]: unknown;
 };
+export type RemoteSource = {
+    url: string;
+    headers?: Record<string, string>;
+    credentials?: RequestCredentials;
+    allowedOrigins?: string[];
+    immutable?: boolean;
+    refreshAuthorization?: () => Promise<{
+        url?: string;
+        headers?: Record<string, string>;
+    }>;
+};
 export type PlayerDiagnostics = {
     path: 'wasm';
     rendered: number;
     heapBytes: number;
     queuedFrames: number;
     epoch: number;
+    io?: Record<string, number | string>;
+    seeking?: boolean;
+    position?: number;
+    presentedPosition?: number;
+    ioPending?: boolean;
+    interruptions?: number;
+    renderMs?: number;
+    copyMs?: number;
 };
-/** M0: one isolated module per player, local files up to 32 MiB, stereo SDR. */
+/** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
 export declare class BrowserPlayer extends EventTarget {
     private worker;
     private audioContext;
@@ -30,24 +49,28 @@ export declare class BrowserPlayer extends EventTarget {
     private eventWaiters;
     private hasFile;
     private opening;
+    private refreshAuthorization?;
     private audioHeader;
     diagnostics?: PlayerDiagnostics;
     browserCodecsAbsent: boolean;
     properties: Map<string, unknown>;
     readonly ready: Promise<void>;
-    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs }?: {
+    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput }?: {
         disableBrowserCodecs?: boolean | undefined;
+        measureOutput?: boolean | undefined;
     });
     private sendTiming;
     private fail;
     private request;
     open(file: File | ArrayBuffer): Promise<void>;
+    openRemote(source: RemoteSource): Promise<void>;
     private waitForEvent;
     private openLocal;
     command(...args: string[]): Promise<void>;
     play(): Promise<void>;
     pause(): Promise<void>;
     seek(seconds: number): Promise<void>;
+    rate(rate: number): Promise<void>;
     volume(percent: number): Promise<void>;
     selectTrack(type: 'audio' | 'sub', id: string): Promise<void>;
     subtitleVisible(visible: boolean): Promise<void>;

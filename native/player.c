@@ -2,9 +2,11 @@
 #include <mpv/client.h>
 #include <mpv/render.h>
 #include <stdatomic.h>
+#include <libavutil/mem.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include "audio_bridge.h"
+#include "stream_bridge.h"
 
 static mpv_handle *player;
 static mpv_render_context *renderer;
@@ -17,6 +19,7 @@ EMSCRIPTEN_KEEPALIVE uintptr_t web_audio_ptr(void) { return (uintptr_t)&web_audi
 EMSCRIPTEN_KEEPALIVE int web_create(int rate)
 {
     if (player) return MPV_ERROR_INVALID_PARAMETER;
+    av_max_alloc(32 * 1024 * 1024);
     atomic_store(&web_audio.rate,rate);
     player = mpv_create();
     if (!player) return MPV_ERROR_NOMEM;
@@ -26,11 +29,15 @@ EMSCRIPTEN_KEEPALIVE int web_create(int rate)
         {"terminal","no"}, {"input-default-bindings","no"}, {"input-vo-keyboard","no"},
         {"vo","libmpv"}, {"ao","browser"}, {"hwdec","no"},
         {"video-timing-offset","0"},
+        {"sws-fast","yes"}, {"sws-scaler","bilinear"},
         {"vd-lavc-threads","2"}, {"ad-lavc-threads","1"},
         {"vd-lavc-o","max_pixels=2073600"},
         {"idle","yes"}, {"keep-open","yes"}, {"pause","yes"},
         {"audio-buffer","0.1"}, {"demuxer-max-bytes","33554432"},
         {"demuxer-max-back-bytes","8388608"}, {"cache","no"},
+        {"demuxer-lavf-probesize","1048576"},
+        {"demuxer-lavf-analyzeduration","1"},
+        {"demuxer-lavf-o","max_streams=64,max_probe_packets=64"},
         {"osd-level","0"}, {"sub-fonts-dir","/fonts"},
         {"sub-font","DejaVu Sans"}, {"osd-font","DejaVu Sans"},
         {"sub-ass-override","no"}, {"access-references","no"},
@@ -41,8 +48,10 @@ EMSCRIPTEN_KEEPALIVE int web_create(int rate)
     }
     int ret=mpv_initialize(player);
     if (ret<0) { mpv_terminate_destroy(player); player=NULL; return ret; }
+    ret=web_register_stream(player);
+    if(ret<0){mpv_terminate_destroy(player);player=NULL;return ret;}
     mpv_request_log_messages(player,"warn");
-    const char *props[]={"time-pos","duration","pause","eof-reached","track-list","audio-codec-name","video-codec"};
+    const char *props[]={"time-pos","duration","pause","eof-reached","track-list","audio-codec-name","video-codec","volume","speed","paused-for-cache","cache-buffering-state","demuxer-cache-state","decoder-frame-drop-count","frame-drop-count","avsync","video-params"};
     for(unsigned n=0;n<sizeof(props)/sizeof(props[0]);n++)
         mpv_observe_property(player,n+1,props[n],MPV_FORMAT_NODE);
     mpv_render_param params[]={{MPV_RENDER_PARAM_API_TYPE,MPV_RENDER_API_TYPE_SW},{0}};

@@ -1,0 +1,100 @@
+{
+  "started": "2026-09-06T23:46:52.984Z",
+  "tests": [
+    {
+      "name": "attached ASS shaping, karaoke, vectors and overlap match native reference at DPR 2",
+      "evidence": {
+        "comparison": [
+          {
+            "name": "karaoke",
+            "pixels": 14022,
+            "referencePixels": 15469,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 27167,
+            "referencePixels": 27723,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 62552,
+            "referencePixels": 66434,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "deviceScaleFactor": 2,
+        "tolerance": "RGB delta >=12; 3-pixel edge tolerance; each region precision and recall >=95%"
+      },
+      "passed": true
+    },
+    {
+      "name": "over-budget attachment is reported and playback remains bounded",
+      "evidence": {
+        "messages": [
+          "Browser attachment budget exceeded; attachment omitted.\n",
+          "swscaler: No accelerated colorspace conversion found from yuv420p to rgba.\n"
+        ],
+        "evidence": {
+          "video": {
+            "rendered": 10,
+            "renderMs": 5.99499998986721,
+            "copyMs": 4.255000039935112,
+            "maxRenderMs": 3.354999989271164,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "presentedPosition": 0.23299999999999998,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.23299999999999998,
+            "queuedFrames": 5888
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 13824,
+            "underruns": 0,
+            "rms": 0.06233803329580597,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "destroy releases an actually stalled native demux callback",
+      "evidence": {
+        "milliseconds": 113,
+        "retainedWorkers": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "late authorization renewal cannot satisfy a replacement source",
+      "evidence": {
+        "firstError": "Authorization refresh timed out",
+        "replacementOpened": true,
+        "staleResponseIgnored": true
+      },
+      "passed": true
+    },
+    {
+      "name": "standalone integration example opens, pauses, resumes and closes",
+      "evidence": {
+        "closed": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "logs": [],
+  "wasmSha256": "dc511d91cbf389800fa3680b26dd2fc2cd8d978a741cec66cc9f382ba14702a8",
+  "finished": "2026-09-06T23:47:04.425Z"
+}

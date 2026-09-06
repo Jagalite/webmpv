@@ -51,3 +51,23 @@ backends, scripts, programs and network protocols are disabled.
 
 Any additional portability patches discovered during the build are listed here
 with their rationale before M0 is marked complete.
+
+## 0002: browser attachment retention budget
+
+The Emscripten-only check in `demuxer_add_attachment` bounds mpv's retained
+attachments to 32 entries, 4 MiB per entry and 16 MiB aggregate. Over-budget
+attachments are omitted with an error log; their font fidelity is unsupported.
+Native builds are unchanged. The host also sets a 32 MiB libavutil allocation
+limit and explicit probing/stream limits. The guard does not prevent FFmpeg's
+initial attachment parse allocation; the allocation and total Wasm heap limits
+cover that stage. Normal attached-font fixtures must still render correctly.
+
+## M1 public stream bridge
+
+`native/stream_bridge.c` registers mpv's public stream callbacks. A synchronous
+read waits on a bounded shared mailbox; an independent browser worker owns Fetch.
+Ticketed state prevents stale responses committing into a newer read. Terminal
+close and recoverable seek interruption are separate. On mpv's public seek event,
+the host interrupts only the captured old pending read after mpv has flushed its
+demux/decoder/AO queues. The stalled actual-demux test verifies this boundary;
+no internal demux seek patch was necessary.

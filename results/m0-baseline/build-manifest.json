@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "M1/M2 software player with bounded HTTP streaming",
+  "scope": "M0 software-only local player",
   "buildHost": "Linux-6.12.76-linuxkit-aarch64-with-glibc2.35",
   "toolchainLock": {
     "schema": 1,
@@ -283,18 +283,15 @@
   },
   "patchesAndBindings": {
     "patches/0001-browser-audio-registration.patch": "fb8d06799f8dfce785b1ca1095f47f74fcb8e6c8908a09d16e4ebcfaf71c92dc",
-    "patches/0002-browser-attachment-budget.patch": "d5f5b469c9bc4ba0ad401ce1f485715ffd7a3bff83629e7fa697d3c1ac196254",
     "patches/ffmpeg/0001-h264-sei-film-grain-build-dependency.patch": "6dc56a7a336a62299b47c33d110887121affa6c8e4cc46945dd04f6e5855f6cd",
     "native/ao_browser.c": "7aa16c19023a5e09555542cbb682358573f65bbd9e178d2e95c9927479437137",
     "native/audio_bridge.h": "2599a0af56b530b58ecf4027191d4b572e04578db5bf4fb16af236065998f4fc",
     "native/events.c": "6981c5e2c391417a8731a6ef00322a4ad94ebf51e1162b9be60871b4899e081c",
-    "native/player.c": "a48655b92a18ddc035656438900e719a2c4f1c3952c7c52d16ddaa6898144ac4",
-    "native/stream_bridge.c": "8b19b4299dd00c874752e0de04c92bdde8fc4fceefc41977beb245fb128d4396",
-    "native/stream_bridge.h": "0c60a1c28b883369979f3c23756cb4c6597901b1faa63e12a28172ca58fda196"
+    "native/player.c": "f951dc6b49c966e152d173e25e994d79c5c14b8fca684995213e85eca86fd320"
   },
   "artifacts": {
-    "web/engine/player.mjs": "5ef7415ba3161fb39b727c74862577ccf9a38e4bbd65996db5cbdff9da209c5c",
-    "web/engine/player.wasm": "dc511d91cbf389800fa3680b26dd2fc2cd8d978a741cec66cc9f382ba14702a8"
+    "web/engine/player.mjs": "baefaa7e07bddf1dc5a8b1435b29074fcab498505cbf54028a4f2f986ad545b2",
+    "web/engine/player.wasm": "102fda8a99f146f76c8f24cc77279e98731f1d14920aa62acdc7a309471fa19d"
   },
   "buildConfigurations": {
     "build/obj-ffmpeg/config.h": "d4e73867e9961cccbd5738436401be936f0dffac22e9a6e0b66f782a1c86b260",
@@ -302,16 +299,13 @@
     "build/obj-ffmpeg/ffbuild/config.mak": "1e77bd625ed9ab5a91ab82b0b73af9339192d370ee588ee59a36980608c9988e",
     "build/obj-mpv/config.h": "486a59b5d21701b26aee51d5feb8094fd13377788d73e49e66908a697b51c33c",
     "scripts/build.sh": "8cb8492aa78c036cc3d82e7cd80b6390f1dbb78e2a50b54a5fe2ad908927535c",
-    "scripts/link.sh": "d9b011cf267c896b587d8d0a6cdb356fdffe312b6aac0425aa33a861eca4e1d3",
+    "scripts/link.sh": "2ffc2d085b337f3d101ab2832b968f0d6f0a97e97c2dad74946bec73cb369098",
     "Dockerfile": "493b5e14e657c53d9da949509439d71af62775027a1814ee7dd6ae98ce2f672a"
   },
   "browserBindings": {
-    "src/player.ts": "16ac6f691144300e403bfea000c4b6817b5b068de9a023531eebf6ff53a46ca7",
-    "web/engine-worker.js": "36cbaa25c2e920a6a1efece1cc0e6ccedc7145747321758931edccdf226ac9fd",
-    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
-    "web/io-worker.js": "3bc53d4ebbd68a48a9b58ef9e4ff7dbdd714b76b98b9558547a33c3e66c910b1",
-    "web/range-reader.js": "6a3ce44b8f329c4ed77fd7cb78d4b1809881b5ccc5ed262f714c977aee544f54",
-    "web/generated/player.js": "22d543fd3ea91e42d94f3057b4de83eb76d82e18de60d5ebba7b216a1d50719d"
+    "web/engine-worker.js": "41f3355cd811f10ee8383c12715d56afd01239b0cc54745897f8aa5ca76a1d89",
+    "web/audio-worklet.js": "7a86881ce65aca455661b0ae87f1b6a7fe755bf5896ca27016391bf30cc4ae76",
+    "web/generated/player.js": "4a8e6998d5cc70df47efe7c69a6f46d5d8a2ea73edd0c51f21c60ca45d5f7514"
   },
   "fixtures": {
     "fixtures/DejaVuSans.ttf": "7da195a74c55bef988d0d48f9508bd5d849425c1770dba5d7bfc6ce9ed848954",
@@ -319,8 +313,7 @@
     "fixtures/assets.lock.json": "6938a5b0779b6a545e00911930e2de4bb2e1b3bf66ea15548ee7b575d6f9e4b4",
     "fixtures/m0.ass": "d4852a636c67afcf9389a25121dd7303073e9a18d113907a55f7a1601167e94f",
     "fixtures/m0.ffprobe.json": "1d563bdc5443d71502b9244ebf65e17bfd24f2ee07d169cd266a96cb66804dcb",
-    "fixtures/m0.mkv": "739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba",
-    "fixtures/qualification.ass": "df83ce0669ee7746335f33e75f72193a1ef0771168b45615a1debfcce3cbb78c"
+    "fixtures/m0.mkv": "739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba"
   },
   "tools": {
     "emscripten": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.14 (96371ed7888fc78c040179f4d4faa82a6a07a116)",
@@ -339,11 +332,10 @@
       "MKV"
     ],
     "subtitles": "ASS",
-    "network": "bounded HTTP ranges",
+    "network": false,
     "initialHeapBytes": 134217728,
     "maximumHeapBytes": 536870912,
-    "pthreadPoolSize": 8,
-    "softwareScaler": "bilinear, sws-fast=yes"
+    "pthreadPoolSize": 8
   },
   "reproducibility": "Hash comparison recorded separately; source pins alone are not proof."
 }

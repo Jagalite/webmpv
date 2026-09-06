@@ -3,7 +3,7 @@ set -euo pipefail
 # Run inside the pinned toolchain image. /input is a read-only repository mount;
 # /output is a caller-selected result directory. /work starts empty.
 mkdir -p /work/build/downloads /work/results /output
-cp -R /input/scripts /input/native /input/patches /input/fixtures /work/
+cp -R /input/scripts /input/native /input/patches /input/fixtures /input/src /work/
 mkdir -p /work/web/generated
 cp /input/web/*.js /input/web/*.html /work/web/
 cp /input/web/generated/* /work/web/generated/

@@ -10,7 +10,7 @@ export EM_CACHE="${WEBMPV_CACHE:-${WEBMPV_SDK:-$ROOT/build/emsdk-4.0.14}/upstrea
 export PKG_CONFIG_LIBDIR="$ROOT/build/prefix/lib/pkgconfig"
 export PKG_CONFIG_PATH="$PKG_CONFIG_LIBDIR"
 mkdir -p web/engine
-emcc "${WEBMPV_LINK_OPT:--O2}" -pthread -msimd128 -Inative native/player.c native/events.c \
+emcc "${WEBMPV_LINK_OPT:--O2}" -pthread -msimd128 -Inative native/player.c native/events.c native/stream_bridge.c \
   $(pkg-config --cflags --libs --static mpv) -lstdc++ \
   -sMODULARIZE=1 -sEXPORT_ES6=1 -sEXPORT_NAME=createEngine \
   -sENVIRONMENT=worker -sPTHREAD_POOL_SIZE=8 -sPTHREAD_POOL_SIZE_STRICT=2 \

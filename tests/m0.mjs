@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import os from 'node:os';
-await mkdir('results',{recursive:true});
+const output=process.env.RESULT_DIR||'results/m2/m0-regression';
+await mkdir(output,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:process.env.HEADED!=='1',ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required']});
 const page=await browser.newPage({viewport:{width:1000,height:900}});
 const errors=[],logs=[];
@@ -40,7 +41,7 @@ try {
     await page.evaluate(()=>player.pause());await wait(()=>player.properties.get('pause')===true);await page.waitForTimeout(250);
     const t=await page.evaluate(()=>player.properties.get('time-pos'));await page.waitForTimeout(350);const later=await page.evaluate(()=>player.properties.get('time-pos'));assert.ok(Math.abs(later-t)<0.08);
     await page.evaluate(()=>player.seek(3));await wait(()=>Math.abs(player.properties.get('time-pos')-3)<0.15);await page.waitForTimeout(250);
-    const withASS=await pixels();await page.screenshot({path:'results/m0-subtitles.png'});
+    const withASS=await pixels();await page.screenshot({path:`${output}/m0-subtitles.png`});
     await page.evaluate(()=>player.subtitleVisible(false));await page.waitForTimeout(300);const withoutASS=await pixels();
     assert.ok(withoutASS.changedBottom>300&&withASS.hash!==withoutASS.hash,JSON.stringify({withASS,withoutASS}));
     await page.evaluate(()=>player.subtitleVisible(true));await page.waitForTimeout(250);const restored=await pixels();assert.equal(restored.hash,withASS.hash);
@@ -70,7 +71,7 @@ try {
       await wait(()=>player.diagnostics?.rendered>3&&player.audioDiagnostics().mediaFrames>4096,30000);
       cycles.push(await page.evaluate(()=>({video:player.diagnostics,audio:player.audioDiagnostics()})));
       await page.evaluate(()=>player.destroy());
-      await page.waitForTimeout(100);
+      for(let n=0;n<30&&page.workers().length;n++)await page.waitForTimeout(100);
       assert.equal(page.workers().length,0,'Dedicated workers retained after destroy');
     }
     return cycles;
@@ -94,7 +95,7 @@ try {
   result.failure=String(error.stack||error);
   result.pageStatus=await page.locator('#status').textContent().catch(()=>null);
   result.playerState=await page.evaluate(()=>({events:window.playerEvents,diagnostics:window.player?.diagnostics,audio:window.player?.audioDiagnostics()})).catch(()=>null);
-  await page.screenshot({path:'results/m0-failure.png'}).catch(()=>{});
+  await page.screenshot({path:`${output}/m0-failure.png`}).catch(()=>{});
   console.error(result.failure);
   process.exitCode=1;
 } finally {
@@ -103,6 +104,6 @@ try {
   result.browserArtifactHashes={};
   for(const file of ['web/engine/player.mjs','web/generated/player.js','web/engine-worker.js','web/audio-worklet.js']) result.browserArtifactHashes[file]=createHash('sha256').update(await readFile(file)).digest('hex');
   result.wasmSha256=createHash('sha256').update(await readFile('web/engine/player.wasm')).digest('hex');
-  await writeFile('results/m0-browser.json',JSON.stringify(result,null,2)+'\n');
+  await writeFile(`${output}/m0-browser.json`,JSON.stringify(result,null,2)+'\n');
   await browser.close();
 }

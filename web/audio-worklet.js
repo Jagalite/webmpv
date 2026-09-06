@@ -1,13 +1,13 @@
 // A fixed SharedArrayBuffer, independent of growable Wasm memory.
 // Header: write, read, run, epoch, acknowledged epoch, media frames, underruns.
 class PCMOutput extends AudioWorkletProcessor {
-  constructor({ processorOptions: { buffer, capacity } }) {
+  constructor({ processorOptions: { buffer, capacity, measureOutput=false } }) {
     super();
     this.h = new Int32Array(buffer, 0, 16);
     this.pcm = new Float32Array(buffer, 64);
     this.capacity = capacity;
     this.epoch = -1;
-    this.closed = false;
+    this.closed = false;this.measureOutput=measureOutput;this.lastPulse=-Infinity;
     this.port.onmessage = ({data}) => { if (data === 'close') this.closed = true; };
   }
   process(_inputs, outputs) {
@@ -33,6 +33,7 @@ class PCMOutput extends AudioWorkletProcessor {
       for (const channel of channels) channel.fill(0);
       return true;
     }
+    if(this.measureOutput&&channels.length){for(let i=0;i<count;i++){if(Math.abs(channels[0][i])>0.12&&currentFrame+i-this.lastPulse>sampleRate*0.5){this.lastPulse=currentFrame+i;this.port.postMessage({kind:'click',audioFrame:currentFrame+i,sampleRate});break;}}}
     Atomics.store(h, 1, (read + count) | 0);
     Atomics.add(h, 5, count);
     if (count < channels[0].length) Atomics.add(h, 6, 1);

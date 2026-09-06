@@ -1,7 +1,8 @@
 export type PlayerEvent = {event:string; id?:number; name?:string; data?:unknown; error?:string; [key:string]:unknown};
-export type PlayerDiagnostics = {path:'wasm'; rendered:number; heapBytes:number; queuedFrames:number; epoch:number};
+export type RemoteSource = {url:string;headers?:Record<string,string>;credentials?:RequestCredentials;allowedOrigins?:string[];immutable?:boolean;refreshAuthorization?:()=>Promise<{url?:string;headers?:Record<string,string>}>};
+export type PlayerDiagnostics = {path:'wasm'; rendered:number; heapBytes:number; queuedFrames:number; epoch:number;io?:Record<string,number|string>;seeking?:boolean;position?:number;presentedPosition?:number;ioPending?:boolean;interruptions?:number;renderMs?:number;copyMs?:number};
 
-/** M0: one isolated module per player, local files up to 32 MiB, stereo SDR. */
+/** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
 export class BrowserPlayer extends EventTarget {
   private worker: Worker;
   private audioContext: AudioContext;
@@ -18,13 +19,14 @@ export class BrowserPlayer extends EventTarget {
   private eventWaiters=new Set<(error:Error)=>void>();
   private hasFile=false;
   private opening=false;
+  private refreshAuthorization?:RemoteSource['refreshAuthorization'];
   private audioHeader: Int32Array;
   diagnostics?: PlayerDiagnostics;
   browserCodecsAbsent = false;
   properties = new Map<string, unknown>();
   readonly ready: Promise<void>;
 
-  constructor(canvas:HTMLCanvasElement, {disableBrowserCodecs=false}={}) {
+  constructor(canvas:HTMLCanvasElement, {disableBrowserCodecs=false,measureOutput=false}={}) {
     super();
     if(!crossOriginIsolated) throw new Error('This player requires a secure, cross-origin isolated page.');
     this.audioContext = new AudioContext({latencyHint:'interactive'});
@@ -39,6 +41,9 @@ export class BrowserPlayer extends EventTarget {
         if(data.type==='ready') {clearTimeout(timeout);this.browserCodecsAbsent=data.browserCodecsAbsent;resolve();}
         else if(data.type==='error') {clearTimeout(timeout);const error=new Error(data.message);reject(error);this.fail(error,data.id);}
         else if(data.type==='destroyed') this.onDestroyed?.();
+        else if(data.type==='refresh'){void this.refreshAuthorization?.().then(update=>this.worker.postMessage({type:'refreshed',id:data.id,update}),()=>this.worker.postMessage({type:'refreshed',id:data.id,error:true}));}
+        else if(data.type==='output')this.dispatchEvent(new CustomEvent('output',{detail:data.data}));
+        else if(data.type==='source')this.dispatchEvent(new CustomEvent('source',{detail:data.info}));
         else if(data.type==='diagnostics') this.diagnostics=data.data;
         else if(data.type==='log') this.dispatchEvent(new CustomEvent('log',{detail:data.message}));
         else if(data.type==='event') {
@@ -58,7 +63,8 @@ export class BrowserPlayer extends EventTarget {
       void (async()=>{
         await this.audioContext.audioWorklet.addModule(new URL('../audio-worklet.js',import.meta.url));
         if(this.destroyed) throw new Error('Player destroyed during initialization');
-        this.audioNode=new AudioWorkletNode(this.audioContext,'webmpv-pcm',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2],processorOptions:{buffer:audio,capacity:8192}});
+        this.audioNode=new AudioWorkletNode(this.audioContext,'webmpv-pcm',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2],processorOptions:{buffer:audio,capacity:8192,measureOutput}});
+        this.audioNode.port.onmessage=({data})=>{const stamp=this.audioContext.getOutputTimestamp();const wallTime=stamp.performanceTime!==undefined&&stamp.contextTime!==undefined?performance.timeOrigin+stamp.performanceTime+(data.audioFrame/data.sampleRate-stamp.contextTime)*1000:null;this.dispatchEvent(new CustomEvent('output',{detail:{...data,wallTime,stamp}}));};
         this.analyser=this.audioContext.createAnalyser();
         this.audioNode.connect(this.analyser);this.analyser.connect(this.audioContext.destination);
         const response=await fetch(new URL('../../fixtures/DejaVuSans.ttf',import.meta.url));
@@ -66,7 +72,7 @@ export class BrowserPlayer extends EventTarget {
         const font=await response.arrayBuffer();
         if(this.destroyed) throw new Error('Player destroyed during initialization');
         const offscreen=canvas.transferControlToOffscreen();
-        this.worker.postMessage({type:'init',canvas:offscreen,audio,font,sampleRate:this.audioContext.sampleRate,disableBrowserCodecs},[offscreen,font]);
+        this.worker.postMessage({type:'init',canvas:offscreen,audio,font,sampleRate:this.audioContext.sampleRate,disableBrowserCodecs,measureOutput},[offscreen,font]);
         this.timing=setInterval(()=>this.sendTiming(),20);
         this.sendTiming();
       })().catch(error=>{clearTimeout(timeout);reject(error);});
@@ -79,6 +85,7 @@ export class BrowserPlayer extends EventTarget {
   }
   private fail(error:Error,id?:number,report=true) {
     for(const [key,p] of this.pending) if(!id||key===id) {clearTimeout(p.timer);p.reject(error);this.pending.delete(key);}
+    if(report)for(const cancel of this.eventWaiters)cancel(error);
     if(report) this.dispatchEvent(new CustomEvent('error',{detail:error.message}));
   }
   private request(message:Record<string,unknown>,transfer:Transferable[]=[]):Promise<void> {
@@ -92,16 +99,30 @@ export class BrowserPlayer extends EventTarget {
     });
   }
   async open(file:File|ArrayBuffer):Promise<void> {
+    if(this.destroyed) throw new Error('Player is destroyed');
     if(this.opening) throw new Error('Another open is in progress');
     this.opening=true;
     try {await this.openLocal(file);} finally {this.opening=false;}
+  }
+  async openRemote(source:RemoteSource):Promise<void>{
+    if(this.destroyed)throw new Error('Player is destroyed');
+    if(this.opening)throw new Error('Another open is in progress');
+    this.opening=true;
+    try{
+      await this.ready;
+      if(this.hasFile)await Promise.all([this.waitForEvent(e=>e.event==='end-file'),this.command('stop')]);
+      else await this.command('stop');
+      const {refreshAuthorization,...options}=source;this.refreshAuthorization=refreshAuthorization;
+      const loaded=this.waitForEvent(e=>e.event==='file-loaded'||(e.event==='end-file'&&e.reason==='error'?new Error(String(e.file_error)):false));
+      await Promise.all([loaded,this.request({type:'open-remote',options,canRefresh:!!refreshAuthorization})]);
+    }finally{this.opening=false;}
   }
   private waitForEvent(predicate:(event:PlayerEvent)=>boolean|Error):Promise<void> {
     return new Promise<void>((resolve,reject)=>{
       const finish=(error?:Error)=>{clearTimeout(timeout);this.removeEventListener('mpv',listener);this.eventWaiters.delete(cancel);error?reject(error):resolve();};
       const cancel=(error:Error)=>finish(error);
       const listener=(event:Event)=>{const result=predicate((event as CustomEvent<PlayerEvent>).detail);if(result)finish(result instanceof Error?result:undefined);};
-      const timeout=setTimeout(()=>finish(new Error('Media operation timed out')),15000);
+      const timeout=setTimeout(()=>finish(new Error('Media operation timed out')),25000);
       this.eventWaiters.add(cancel);this.addEventListener('mpv',listener);
     });
   }
@@ -118,7 +139,8 @@ export class BrowserPlayer extends EventTarget {
   async command(...args:string[]):Promise<void> {await this.ready;return this.request({type:'command',args});}
   async play() {await this.audioContext.resume();this.sendTiming();await this.command('set','pause','no');}
   pause() {return this.command('set','pause','yes');}
-  seek(seconds:number) {if(!Number.isFinite(seconds)||seconds<0) throw new Error('Invalid seek time');return this.command('seek',String(seconds),'absolute+exact');}
+  seek(seconds:number) {if(!Number.isFinite(seconds)||seconds<0) throw new Error('Invalid seek time');Atomics.store(this.audioHeader,2,0);return this.ready.then(()=>this.request({type:'seek',seconds}));}
+  rate(rate:number){if(!Number.isFinite(rate)||rate<0.5||rate>2)throw new Error('Playback rate must be 0.5 to 2');return this.command('set','speed',String(rate));}
   volume(percent:number) {if(!Number.isFinite(percent)||percent<0||percent>100) throw new Error('Invalid volume');return this.command('set','volume',String(percent));}
   selectTrack(type:'audio'|'sub',id:string) {
     if(!['audio','sub'].includes(type)||!/^(?:[1-9][0-9]*|auto|no)$/.test(id)) throw new Error('Invalid track selection');

@@ -1,13 +1,17 @@
 {
   "name": "webmpv",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "tsc",
     "build:engine": "bash scripts/build.sh",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test tests/audio-worklet.mjs && node tests/m0.mjs"
+    "test": "node --test tests/audio-worklet.mjs && node tests/m0.mjs",
+    "dev:media": "node scripts/media-server.mjs",
+    "test:stream": "node --test tests/range-reader.mjs && node tests/m1.mjs",
+    "test:qualify": "node tests/m2-functional.mjs && node tests/m2-supplemental.mjs",
+    "test:long": "node tests/m2-long.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",
