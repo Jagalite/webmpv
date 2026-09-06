@@ -1,0 +1,23 @@
+--- a/meson.build
++++ b/meson.build
+@@ -72,6 +72,7 @@
+     'audio/out/ao.c',
+     'audio/out/ao_lavc.c',
+     'audio/out/ao_null.c',
++    'audio/out/ao_browser.c',
+     'audio/out/ao_pcm.c',
+     'audio/out/buffer.c',
+ 
+--- a/audio/out/ao.c
++++ b/audio/out/ao.c
+@@ -55,7 +55,10 @@
+ extern const struct ao_driver audio_out_lavc;
+ extern const struct ao_driver audio_out_sdl;
+ 
++extern const struct ao_driver audio_out_browser;
++
+ static const struct ao_driver * const audio_out_drivers[] = {
++    &audio_out_browser,
+ // native:
+ #if HAVE_ANDROID
+     &audio_out_audiotrack,

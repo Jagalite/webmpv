@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>webmpv · Local playback</title>
+<style>
+:root{color-scheme:dark;font:16px/1.5 system-ui;background:#111719;color:#e4ece7}body{max-width:920px;margin:48px auto;padding:0 24px}h1{font-size:32px;letter-spacing:-1px;margin:0}p{color:#a3b4ab}canvas{width:100%;background:#050807;aspect-ratio:16/9;border-radius:12px;margin:20px 0}button,label{font:inherit;background:#273a30;border:1px solid #42594b;border-radius:7px;padding:9px 15px;color:inherit;cursor:pointer}button:disabled{opacity:.4;cursor:default}nav{display:flex;gap:10px;flex-wrap:wrap}input[type=file]{display:none}#status{min-height:24px}pre{font-size:12px;white-space:pre-wrap;color:#a3b4ab}small{color:#8b9f94}
+</style>
+<h1>webmpv</h1><p>Local playback, powered by mpv.</p>
+<nav><button id="demo">Play test film</button><label>Open local file<input id="file" type="file" accept=".mkv,.mp4,.mov,.wav"></label><button id="play" disabled>Play</button><button id="pause" disabled>Pause</button><button id="seek" disabled>Seek to 5s</button><button id="destroy" disabled>Close player</button></nav>
+<div id="screen"><canvas width="640" height="360"></canvas></div>
+<div id="status" role="status">Ready to open a file.</div>
+<small>M0 preview · H.264/AAC, SDR, stereo · Local files up to 32 MiB</small>
+<details><summary>Playback diagnostics</summary><pre id="diagnostics"></pre></details>
+<script type="module">
+import {BrowserPlayer} from '/web/generated/player.js';
+let player;
+const status=document.querySelector('#status');
+window.playerEvents=[];window.playerErrors=[];
+async function create(){
+ if(player)await player.destroy();
+ const canvas=document.createElement('canvas');canvas.width=640;canvas.height=360;document.querySelector('#screen').replaceChildren(canvas);
+ player=window.player=new BrowserPlayer(canvas,{disableBrowserCodecs:new URLSearchParams(location.search).has('no-codecs')});
+ player.addEventListener('mpv',({detail})=>{window.playerEvents.push(detail);if(window.playerEvents.length>500)window.playerEvents.shift();});
+ player.addEventListener('error',({detail})=>{window.playerErrors.push(detail);status.textContent=detail;});
+ player.addEventListener('log',({detail})=>console.log(detail));
+ status.textContent='Starting player…';await player.ready;
+ for(const id of ['play','pause','seek','destroy'])document.getElementById(id).disabled=false;
+ return player;
+}
+async function run(action){try{await action();}catch(error){status.textContent=error.message;window.playerErrors.push(error.message);console.error(error);}}
+window.createPlayer=create;
+document.querySelector('#demo').onclick=()=>run(async()=>{const p=await create();const response=await fetch('/fixtures/m0.mkv');await p.open(await response.arrayBuffer());await p.selectTrack('sub','1');await p.play();status.textContent='Playing test film.';});
+document.querySelector('#file').onchange=event=>run(async()=>{const file=event.target.files[0];if(file){const p=await create();await p.open(file);await p.play();status.textContent=file.name;}});
+document.querySelector('#play').onclick=()=>run(()=>player.play());
+document.querySelector('#pause').onclick=()=>run(()=>player.pause());
+document.querySelector('#seek').onclick=()=>run(()=>player.seek(5));
+document.querySelector('#destroy').onclick=()=>run(async()=>{await player.destroy();status.textContent='Player closed.';for(const id of ['play','pause','seek','destroy'])document.getElementById(id).disabled=true;});
+setInterval(()=>{if(player)document.querySelector('#diagnostics').textContent=JSON.stringify({video:player.diagnostics,audio:player.audioDiagnostics(),time:player.properties.get('time-pos')},null,2);},250);
+</script></html>

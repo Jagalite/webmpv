@@ -1,0 +1,25 @@
+
+> webmpv@0.0.1 test
+> node --test tests/audio-worklet.mjs && node tests/m0.mjs
+
+✔ PCM ring wraps and handles actual output quantum length (2.044292ms)
+✔ underrun silence never advances media consumption (0.966542ms)
+✔ pause and generation reset suppress queued stale PCM (0.757ms)
+✔ closed output processor releases its processing lifetime (0.313834ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 138.572167
+PASS isolated software-only browser
+PASS upstream initialization and local decode
+PASS changing visible software frames and output PCM
+PASS pause, ASS composition and paused redraw
+PASS resize, volume, seek, resume and EOF
+PASS reopen a local fixture in the same instance
+PASS graceful destroy and rejected use after destruction
+PASS ten complete player lifecycles
+PASS invalid media rejection and cleanup during initialization

@@ -1,0 +1,16 @@
+{
+  "name": "webmpv",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:engine": "bash scripts/build.sh",
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test tests/audio-worklet.mjs && node tests/m0.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.58.2",
+    "typescript": "5.9.3"
+  }
+}
