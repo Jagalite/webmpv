@@ -1,11 +1,15 @@
 {
-  "started": "2026-09-06T23:43:19.970Z",
+  "network": {
+    "rtt": 80,
+    "mbps": 10
+  },
+  "started": "2026-09-07T02:51:13.945Z",
   "browser": "152.0.7977.76",
   "tests": [
     {
       "name": "real browser CORS, authorization, renewal, cookies and rejected responses",
       "passed": true,
-      "milliseconds": 12948,
+      "milliseconds": 17260,
       "evidence": [
         {
           "mode": "auth",
@@ -37,8 +41,8 @@
             "aborted": 0,
             "mode": "auth",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -71,8 +75,8 @@
             "aborted": 0,
             "mode": "cookie",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -91,7 +95,7 @@
           },
           "server": {
             "requests": 10,
-            "bytes": 2293760,
+            "bytes": 327680,
             "ranges": [
               {
                 "start": 0,
@@ -134,11 +138,11 @@
                 "end": 262143
               }
             ],
-            "aborted": 5,
+            "aborted": 10,
             "mode": "cors-denied",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -162,8 +166,8 @@
             "aborted": 0,
             "mode": "forbidden",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -192,8 +196,8 @@
             "aborted": 1,
             "mode": "ignore-range",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -212,18 +216,18 @@
           },
           "server": {
             "requests": 1,
-            "bytes": 262144,
+            "bytes": 32768,
             "ranges": [
               {
                 "start": 0,
                 "end": 262143
               }
             ],
-            "aborted": 0,
+            "aborted": 1,
             "mode": "bad-range",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -242,7 +246,7 @@
           },
           "server": {
             "requests": 10,
-            "bytes": 1310720,
+            "bytes": 327680,
             "ranges": [
               {
                 "start": 0,
@@ -288,8 +292,8 @@
             "aborted": 10,
             "mode": "encoded",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -313,8 +317,8 @@
             "aborted": 0,
             "mode": "redirect",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -347,8 +351,8 @@
             "aborted": 0,
             "mode": "retry",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         },
         {
@@ -385,8 +389,8 @@
             "aborted": 1,
             "mode": "truncate",
             "stall": false,
-            "rtt": 0,
-            "mbps": 0
+            "rtt": 80,
+            "mbps": 10
           }
         }
       ]
@@ -394,18 +398,20 @@
     {
       "name": "front index: shaped startup and distant seek",
       "passed": true,
-      "milliseconds": 4231,
+      "milliseconds": 4363,
       "evidence": {
         "startup": {
-          "milliseconds": 2995.109999999404,
+          "milliseconds": 2881.564999999944,
           "video": {
-            "rendered": 3,
-            "renderMs": 16.365000009536743,
-            "copyMs": 17.43000002205372,
-            "maxRenderMs": 11.345000013709068,
+            "rendered": 7,
+            "renderMs": 35.41499999980442,
+            "copyMs": 21.319999999832362,
+            "maxRenderMs": 9.849999999860302,
             "heapBytes": 134217728,
-            "epoch": 2,
+            "epoch": 8,
             "path": "wasm",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
             "presentedPosition": 0,
             "ioPending": true,
             "ioSerial": 27,
@@ -426,28 +432,30 @@
             },
             "seeking": false,
             "position": 0,
-            "queuedFrames": 7936
+            "queuedFrames": 0
           },
           "audio": {
             "state": "running",
             "sampleRate": 48000,
-            "mediaFrames": 768,
+            "mediaFrames": 4864,
             "underruns": 0,
-            "rms": 0.2131112187062035,
+            "rms": 0.17519743481967073,
             "latencyConfidence": "reported-latency estimate"
           }
         },
         "seek": {
-          "milliseconds": 765,
+          "milliseconds": 630,
           "bytes": 524288,
           "video": {
-            "rendered": 4,
-            "renderMs": 21.71500000357628,
-            "copyMs": 22.01500003039837,
-            "maxRenderMs": 11.345000013709068,
+            "rendered": 8,
+            "renderMs": 37.50499999988824,
+            "copyMs": 23.244999999878928,
+            "maxRenderMs": 9.849999999860302,
             "heapBytes": 134217728,
-            "epoch": 4,
+            "epoch": 10,
             "path": "wasm",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
             "presentedPosition": 1620,
             "ioPending": true,
             "ioSerial": 30,
@@ -476,18 +484,20 @@
     {
       "name": "tail index: shaped startup and distant seek",
       "passed": true,
-      "milliseconds": 3764,
+      "milliseconds": 3935,
       "evidence": {
         "startup": {
-          "milliseconds": 2957.5499999970198,
+          "milliseconds": 2837.7000000001863,
           "video": {
-            "rendered": 3,
-            "renderMs": 10.014999985694885,
-            "copyMs": 9.854999989271164,
-            "maxRenderMs": 6.334999993443489,
+            "rendered": 7,
+            "renderMs": 37.00499999988824,
+            "copyMs": 20.115000000456348,
+            "maxRenderMs": 9.684999999823049,
             "heapBytes": 134217728,
-            "epoch": 2,
+            "epoch": 8,
             "path": "wasm",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
             "presentedPosition": 0,
             "ioPending": true,
             "ioSerial": 31,
@@ -513,23 +523,25 @@
           "audio": {
             "state": "running",
             "sampleRate": 48000,
-            "mediaFrames": 512,
+            "mediaFrames": 6144,
             "underruns": 0,
-            "rms": 0.17519743481967073,
+            "rms": 0.23121664471657247,
             "latencyConfidence": "reported-latency estimate"
           }
         },
         "seek": {
-          "milliseconds": 598,
-          "bytes": 458752,
+          "milliseconds": 548,
+          "bytes": 425984,
           "video": {
-            "rendered": 4,
-            "renderMs": 13.90999998152256,
-            "copyMs": 13.309999987483025,
-            "maxRenderMs": 6.334999993443489,
+            "rendered": 8,
+            "renderMs": 40.02999999979511,
+            "copyMs": 22.740000000456348,
+            "maxRenderMs": 9.684999999823049,
             "heapBytes": 134217728,
-            "epoch": 4,
+            "epoch": 10,
             "path": "wasm",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
             "presentedPosition": 1620,
             "ioPending": true,
             "ioSerial": 33,
@@ -558,42 +570,44 @@
     {
       "name": "100 seeks at five per second, then latest output and PCM recover",
       "passed": true,
-      "milliseconds": 21932,
+      "milliseconds": 25556,
       "evidence": {
         "video": {
-          "rendered": 19,
-          "renderMs": 46.60999996960163,
-          "copyMs": 48.73000003397465,
-          "maxRenderMs": 6.2750000059604645,
+          "rendered": 16,
+          "renderMs": 40.955000000074506,
+          "copyMs": 38.59999999962747,
+          "maxRenderMs": 6.039999999804422,
           "heapBytes": 134217728,
-          "epoch": 130,
+          "epoch": 106,
           "path": "wasm",
-          "presentedPosition": 301.3666666666667,
-          "ioPending": false,
-          "ioSerial": 353,
-          "interruptions": 0,
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 301.3,
+          "ioPending": true,
+          "ioSerial": 115,
+          "interruptions": 32,
           "io": {
-            "fetchedBytes": 87818240,
-            "requests": 335,
+            "fetchedBytes": 19202048,
+            "requests": 97,
             "retries": 0,
-            "aborts": 0,
+            "aborts": 32,
             "cacheBytes": 16777216,
             "peakCacheBytes": 16777216,
             "activeBytes": 0,
             "peakActiveBytes": 262144,
             "size": "1157252207",
-            "reads": 353,
-            "seeks": 65,
-            "interruptions": 0
+            "reads": 114,
+            "seeks": 52,
+            "interruptions": 32
           },
           "seeking": false,
-          "position": 301.3666666666667,
-          "queuedFrames": 6144
+          "position": 301.3,
+          "queuedFrames": 7936
         },
         "audio": {
           "state": "running",
           "sampleRate": 48000,
-          "mediaFrames": 35840,
+          "mediaFrames": 32512,
           "underruns": 0,
           "rms": 0,
           "latencyConfidence": "reported-latency estimate"
@@ -604,44 +618,46 @@
     {
       "name": "five-second network outage recovers on the same source",
       "passed": true,
-      "milliseconds": 6082,
+      "milliseconds": 8760,
       "evidence": {
         "video": {
-          "rendered": 9,
-          "renderMs": 21.635000005364418,
-          "copyMs": 22.450000002980232,
-          "maxRenderMs": 5.25500001013279,
+          "rendered": 7,
+          "renderMs": 21.475000000093132,
+          "copyMs": 25.584999999729916,
+          "maxRenderMs": 7.699999999953434,
           "heapBytes": 134217728,
           "epoch": 4,
           "path": "wasm",
-          "presentedPosition": 900.0666666666666,
-          "ioPending": false,
-          "ioSerial": 33,
-          "interruptions": 0,
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 900,
+          "ioPending": true,
+          "ioSerial": 29,
+          "interruptions": 1,
           "io": {
-            "fetchedBytes": 4194304,
-            "requests": 19,
+            "fetchedBytes": 2752512,
+            "requests": 14,
             "retries": 3,
-            "aborts": 0,
-            "cacheBytes": 4194304,
-            "peakCacheBytes": 4194304,
+            "aborts": 1,
+            "cacheBytes": 2621440,
+            "peakCacheBytes": 2621440,
             "activeBytes": 0,
             "peakActiveBytes": 262144,
             "size": "1157252207",
-            "reads": 33,
+            "reads": 28,
             "seeks": 2,
-            "interruptions": 0
+            "interruptions": 1
           },
           "seeking": false,
-          "position": 900.0666666666666,
-          "queuedFrames": 7680
+          "position": 900,
+          "queuedFrames": 8192
         },
         "audio": {
           "state": "running",
           "sampleRate": 48000,
-          "mediaFrames": 14336,
+          "mediaFrames": 8704,
           "underruns": 0,
-          "rms": 0,
+          "rms": 0.17527986976126678,
           "latencyConfidence": "reported-latency estimate"
         },
         "errors": []
@@ -650,7 +666,7 @@
     {
       "name": "multiple tracks, volume, rate and composed ASS paused redraw",
       "passed": true,
-      "milliseconds": 4162,
+      "milliseconds": 12256,
       "evidence": {
         "tracks": [
           {
@@ -786,23 +802,47 @@
         "compare": {
           "changed": 109900,
           "mismatch": 0
-        }
+        },
+        "frequencies": [
+          {
+            "expected": 440,
+            "hz": 445.3125,
+            "milliseconds": 2
+          },
+          {
+            "expected": 880,
+            "hz": 867.1875,
+            "milliseconds": 1004
+          },
+          {
+            "expected": 440,
+            "hz": 421.875,
+            "milliseconds": 725
+          },
+          {
+            "expected": 880,
+            "hz": 867.1875,
+            "milliseconds": 1
+          }
+        ]
       }
     },
     {
-      "name": "VFR and B-frame playback reaches the final decoded frames",
+      "name": "VFR and B-frame playback preserves ordered variable timestamps and final frames",
       "passed": true,
-      "milliseconds": 12677,
+      "milliseconds": 12868,
       "evidence": {
         "video": {
-          "rendered": 268,
-          "renderMs": 1839.8200000971556,
-          "copyMs": 543.4049999713898,
-          "maxRenderMs": 10.534999996423721,
+          "rendered": 273,
+          "renderMs": 84.27499999804422,
+          "copyMs": 81.55499999877065,
+          "maxRenderMs": 3.359999999869615,
           "heapBytes": 134217728,
           "epoch": 2,
           "path": "wasm",
-          "presentedPosition": 11.833,
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 11.967979833333276,
           "ioPending": false,
           "ioSerial": 15,
           "interruptions": 0,
@@ -821,17 +861,289 @@
             "interruptions": 0
           },
           "seeking": false,
-          "position": 11.833,
-          "queuedFrames": 5633
+          "position": 11.967979833333276,
+          "queuedFrames": 0
         },
-        "position": 11.97331316666661,
+        "position": 11.967979833333276,
+        "positions": [
+          0,
+          0.06699999999999999,
+          0.133,
+          0.19999999999999998,
+          0.267,
+          0.33299999999999996,
+          0.39999999999999997,
+          0.46699999999999997,
+          0.533,
+          0.6,
+          0.6669999999999999,
+          0.733,
+          0.7999999999999999,
+          0.867,
+          0.9329999999999999,
+          1,
+          1.067,
+          1.133,
+          1.2,
+          1.267,
+          1.333,
+          1.4,
+          1.4669999999999999,
+          1.533,
+          1.5999999999999999,
+          1.6669999999999998,
+          1.7329999999999999,
+          1.7999999999999998,
+          1.867,
+          1.9329999999999998,
+          2,
+          2.0669999999999997,
+          2.133,
+          2.1999999999999997,
+          2.267,
+          2.3329999999999997,
+          2.4,
+          2.467,
+          2.533,
+          2.6,
+          2.667,
+          2.733,
+          2.8,
+          2.867,
+          2.933,
+          3,
+          3.0669999999999997,
+          3.133,
+          3.1999999999999997,
+          3.267,
+          3.3329999999999997,
+          3.4,
+          3.4669999999999996,
+          3.533,
+          3.5999999999999996,
+          3.667,
+          3.7329999999999997,
+          3.8,
+          3.867,
+          3.933,
+          4,
+          4.067,
+          4.133,
+          4.2,
+          4.2669999999999995,
+          4.333,
+          4.3999999999999995,
+          4.467,
+          4.5329999999999995,
+          4.6,
+          4.667,
+          4.733,
+          4.8,
+          4.867,
+          4.933,
+          5,
+          5.067,
+          5.133,
+          5.2,
+          5.2669999999999995,
+          5.333,
+          5.3999999999999995,
+          5.467,
+          5.5329999999999995,
+          5.6,
+          5.667,
+          5.733,
+          5.8,
+          5.867,
+          5.933,
+          6,
+          6.0329999999999995,
+          6.066999999999999,
+          6.1,
+          6.133,
+          6.167,
+          6.199999999999999,
+          6.233,
+          6.2669999999999995,
+          6.3,
+          6.332999999999999,
+          6.367,
+          6.3999999999999995,
+          6.433,
+          6.467,
+          6.5,
+          6.5329999999999995,
+          6.566999999999999,
+          6.6,
+          6.633,
+          6.667,
+          6.699999999999999,
+          6.733,
+          6.7669999999999995,
+          6.8,
+          6.832999999999999,
+          6.867,
+          6.8999999999999995,
+          6.933,
+          6.967,
+          7,
+          7.0329999999999995,
+          7.066999999999999,
+          7.1,
+          7.133,
+          7.167,
+          7.199999999999999,
+          7.233,
+          7.2669999999999995,
+          7.3,
+          7.332999999999999,
+          7.367,
+          7.3999999999999995,
+          7.433,
+          7.467,
+          7.5,
+          7.5329999999999995,
+          7.566999999999999,
+          7.6,
+          7.633,
+          7.667,
+          7.699999999999999,
+          7.733,
+          7.7669999999999995,
+          7.8,
+          7.832999999999999,
+          7.867,
+          7.8999999999999995,
+          7.933,
+          7.967,
+          8,
+          8.033,
+          8.067,
+          8.1,
+          8.133,
+          8.167,
+          8.2,
+          8.232999999999999,
+          8.267,
+          8.299999999999999,
+          8.333,
+          8.366999999999999,
+          8.4,
+          8.433,
+          8.466999999999999,
+          8.5,
+          8.533,
+          8.567,
+          8.6,
+          8.633,
+          8.667,
+          8.7,
+          8.732999999999999,
+          8.767,
+          8.799999999999999,
+          8.833,
+          8.866999999999999,
+          8.9,
+          8.933,
+          8.966999999999999,
+          9,
+          9.033,
+          9.067,
+          9.1,
+          9.133,
+          9.167,
+          9.2,
+          9.232999999999999,
+          9.267,
+          9.299999999999999,
+          9.333,
+          9.366999999999999,
+          9.4,
+          9.433,
+          9.466999999999999,
+          9.5,
+          9.533,
+          9.567,
+          9.6,
+          9.633,
+          9.667,
+          9.7,
+          9.732999999999999,
+          9.767,
+          9.799999999999999,
+          9.833,
+          9.866999999999999,
+          9.9,
+          9.933,
+          9.966999999999999,
+          10,
+          10.033,
+          10.067,
+          10.1,
+          10.133,
+          10.167,
+          10.2,
+          10.232999999999999,
+          10.267,
+          10.299999999999999,
+          10.333,
+          10.366999999999999,
+          10.4,
+          10.433,
+          10.466999999999999,
+          10.5,
+          10.533,
+          10.567,
+          10.6,
+          10.633,
+          10.667,
+          10.7,
+          10.732999999999999,
+          10.767,
+          10.799999999999999,
+          10.833,
+          10.866999999999999,
+          10.9,
+          10.933,
+          10.966999999999999,
+          11,
+          11.033,
+          11.067,
+          11.1,
+          11.133,
+          11.167,
+          11.2,
+          11.232999999999999,
+          11.267,
+          11.299999999999999,
+          11.333,
+          11.366999999999999,
+          11.4,
+          11.433,
+          11.466999999999999,
+          11.5,
+          11.533,
+          11.567,
+          11.6,
+          11.633,
+          11.667,
+          11.7,
+          11.732999999999999,
+          11.767,
+          11.799999999999999,
+          11.833,
+          11.866999999999999,
+          11.899999999999999,
+          11.933,
+          11.967979833333276
+        ],
         "errors": []
       }
     },
     {
       "name": "100 complete lifecycles including invalid media",
       "passed": true,
-      "milliseconds": 41312,
+      "milliseconds": 121432,
       "evidence": [
         {
           "i": 0,
@@ -1348,6 +1660,6 @@
   ],
   "passed": true,
   "logs": [],
-  "finished": "2026-09-06T23:45:07.263Z",
+  "finished": "2026-09-07T02:54:40.484Z",
   "wasmSha256": "dc511d91cbf389800fa3680b26dd2fc2cd8d978a741cec66cc9f382ba14702a8"
 }

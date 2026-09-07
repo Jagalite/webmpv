@@ -1,7 +1,7 @@
 # Software playback profile
 
-M1 is accepted. M2 sustained qualification is in progress; this table is scoped
-to the reference device and fixtures, not a general codec/browser guarantee.
+M1 and M2/G1 are accepted for this declared software profile. See the
+[M2 acceptance record](validation/M2.md) for measured results and limitations.
 
 | Area | Implemented and exercised boundary |
 |---|---|
@@ -38,3 +38,15 @@ No browser-unsupported codec configuration has been established for this
 declared H.264/AAC profile. No claim is made for other browsers/devices, multiple
 simultaneous instances, arbitrary codecs, HDR, surround output, network
 redirects, segmented/live streams, DRM, hardware acceleration or WebCodecs.
+
+The final shaped hour measured 18.8 ms p95 / 25.2 ms maximum output sync error,
+zero drops in the required ten-minute window and zero drops across the hour.
+Wasm stayed at 128 MiB, HTTP cache at 16 MiB, and median browser-process RSS
+decreased by 65.2 MiB between the declared windows. Median browser CPU use was
+56.2% of one core. File-loop boundaries produced brief PCM underruns and are
+excluded from steady-state sync as declared in advance.
+
+Exact MKV seeks use a half-second demux preroll through a public mpv option.
+MP4 uses zero additional preroll. Warm startup explicitly follows playback of
+unrelated local media on the same engine; first-use startup can exceed three
+seconds. See the qualification contract for the full cache-state definition.

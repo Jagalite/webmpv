@@ -2,12 +2,16 @@ import createEngine from './engine/player.mjs';
 
 let engine, canvas, context, timer, audio, pcm, nativeAudio, epoch = -1, forwarded = 0;
 let renderMs=0,copyMs=0,maxRenderMs=0;
-let rendered = 0, ticks = 0, force = true, closing = false, presentedPosition=0, frameImage, measureOutput=false, wasWhite=false;
+let rendered = 0, sourceRendered = 0, ticks = 0, force = true, closing = false, presentedPosition=0, frameImage, measureOutput=false, wasWhite=false;
 let ioWorker,ioStats,ioReady,ioClose,ioSession=0,pendingTarget=null,seekSerial=0,restarted=false,position=0;
+let internalId=0x80000000,demuxFormat='',seekPrerollSeconds=0;
+const internalCommands=new Map();
+function internalCommand(args,done){const id=internalId++;internalCommands.set(id,done);submit(id,args);}
 const CAPACITY = 8192;
 function releaseSeek(){if(pendingTarget!==null&&restarted&&Math.abs(position-pendingTarget)<0.15){pendingTarget=null;force=true;post({type:'seek-complete',position});}}
 async function closeIO(){if(!ioWorker)return;const old=ioWorker;engine._web_io_cancel();await new Promise(resolve=>{ioClose=resolve;old.postMessage({type:'close'});setTimeout(resolve,1500);});old.terminate();ioWorker=null;ioClose=null;}
 async function openRemote(data){
+  sourceRendered=0;
   await closeIO();
   const pointer=engine._web_io_ptr();
   ioWorker=new Worker(new URL('./io-worker.js',import.meta.url),{type:'module'});
@@ -72,6 +76,18 @@ function tick() {
       if (!ptr) break;
       const event = JSON.parse(engine.UTF8ToString(ptr));
       engine._free(ptr);
+      if(event.event==='command-reply'&&internalCommands.has(event.id)){
+        const done=internalCommands.get(event.id);internalCommands.delete(event.id);
+        if(event.error)throw Error(`Playback configuration failed: ${event.error}`);
+        done(event.result);continue;
+      }
+      if(event.event==='file-loaded'){
+        // Configure from mpv's detected format before resolving the host's open.
+        internalCommand(['expand-text','${file-format}'],format=>{
+          demuxFormat=String(format);seekPrerollSeconds=/^(mkv|matroska(?:,|$))/.test(demuxFormat)?0.5:0;
+          internalCommand(['set','hr-seek-demuxer-offset',String(seekPrerollSeconds)],()=>post({type:'event',event}));
+        });continue;
+      }
       if(event.event==='seek'&&ioWorker&&seekSerial){if(engine._web_io_interrupt(seekSerial))ioWorker.postMessage({type:'epoch'});seekSerial=0;}
       if(event.event==='property-change'&&event.name==='time-pos'){position=event.data;releaseSeek();}
       if(event.event==='playback-restart'){restarted=true;releaseSeek();}
@@ -89,9 +105,9 @@ function tick() {
       context.putImageData(frameImage, 0, 0);
       if(measureOutput){const at=(8*canvas.width+8)*4;const white=bytes[at]>225&&bytes[at+1]>225&&bytes[at+2]>225;if(white&&!wasWhite)post({type:'output',data:{kind:'flash',wallTime:performance.timeOrigin+performance.now(),position}});wasWhite=white;}
       copyMs+=performance.now()-copyStart;engine._web_presented();
-      rendered++;presentedPosition=position;
+      rendered++;sourceRendered++;presentedPosition=position;
     }
-    if (++ticks % 40 === 0 || (ptr && rendered <= 5)) post({type:'diagnostics', data:{rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
+    if (++ticks % 40 === 0 || (ptr && sourceRendered <= 5)) post({type:'diagnostics', data:{rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
   } catch (error) { clearInterval(timer); post({type:'error',message:String(error.stack || error)}); }
 }
 self.onmessage = async ({data}) => {
@@ -119,8 +135,9 @@ self.onmessage = async ({data}) => {
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 6, +data.running);
     } else if (data.type === 'open-remote') {await openRemote(data);
     } else if(data.type==='refreshed'){ioWorker?.postMessage(data);
-    } else if(data.type==='seek'){pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);seekSerial=engine.HEAPU32[(engine._web_io_ptr()>>>2)+1];submit(data.id,['seek',String(data.seconds),'absolute+exact']);
+    } else if(data.type==='seek'){sourceRendered=0;pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);seekSerial=engine.HEAPU32[(engine._web_io_ptr()>>>2)+1];submit(data.id,['seek',String(data.seconds),'absolute+exact']);
     } else if (data.type === 'open') {
+      sourceRendered=0;
       await closeIO();
       if (data.bytes.byteLength > 32 * 1024 * 1024) throw new Error('M0 local fixture limit is 32 MiB');
       try {engine.FS.unlink('/media.mkv');} catch { /* First open. */ }
@@ -131,6 +148,7 @@ self.onmessage = async ({data}) => {
     else if (data.type === 'resize') {canvas.width=data.width;canvas.height=data.height;force=true;}
     else if (data.type === 'destroy') {
       closing = true;
+      internalCommands.clear();
       clearInterval(timer);
       if (audio) Atomics.store(audio,2,0);
       await closeIO();

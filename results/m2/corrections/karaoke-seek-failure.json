@@ -1,0 +1,68 @@
+{
+  "network": {
+    "rtt": 80,
+    "mbps": 10
+  },
+  "started": "2026-09-07T02:22:51.526Z",
+  "tests": [
+    {
+      "name": "attached ASS shaping, karaoke, vectors and overlap match native reference at DPR 2",
+      "evidence": {
+        "comparison": [
+          {
+            "name": "karaoke",
+            "pixels": 14022,
+            "referencePixels": 15469,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 27167,
+            "referencePixels": 27723,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 62658,
+            "referencePixels": 66434,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "resizedComparison": [
+          {
+            "name": "karaoke",
+            "pixels": 6418,
+            "referencePixels": 7374,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 11986,
+            "referencePixels": 12425,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 28597,
+            "referencePixels": 31224,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "deviceScaleFactor": 2,
+        "tolerance": "RGB delta >=12; 3-pixel edge tolerance; each region precision and recall >=95%"
+      },
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: {\"actual\":{\"yellow\":2625,\"red\":0,\"highlightShare\":1},\"reference\":{\"yellow\":1080,\"red\":2779,\"highlightShare\":0.27986525006478363}}\n    at file:///Volumes/seed2/Projects/webmpv/tests/m2-supplemental.mjs:43:65\n    at async check (file:///Volumes/seed2/Projects/webmpv/tests/m2-supplemental.mjs:11:46)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/m2-supplemental.mjs:36:2",
+  "logs": [],
+  "wasmSha256": "dc511d91cbf389800fa3680b26dd2fc2cd8d978a741cec66cc9f382ba14702a8",
+  "finished": "2026-09-07T02:23:07.352Z"
+}

@@ -8,14 +8,31 @@ parser.add_argument('--engine',type=pathlib.Path,default=root/'web/engine')
 parser.add_argument('--output',type=pathlib.Path,default=root/'build/releases')
 args=parser.parse_args()
 version=json.loads((root/'package.json').read_text())['version']
-evidence=['results/m1/browser.json','results/m2/functional.json',
+evidence=['results/m1/browser.json','results/m2/m1-regression/browser.json','results/m2/functional.json',
           'results/m2/supplemental.json','results/m2/m0-regression/m0-browser.json',
           'results/m2/reproducibility.json','results/m2/bindings-reproducibility.json',
           'results/m2/long.json']
 for name in evidence:
-    if not json.loads((root/name).read_text()).get('passed'):
+    if not (root/name).is_file():
+        raise SystemExit(f'Missing required qualification evidence: {name}')
+    record=json.loads((root/name).read_text())
+    if not record.get('passed') or record.get('failure'):
         raise SystemExit(f'Qualification has not passed: {name}')
 long=json.loads((root/'results/m2/long.json').read_text())
+for name in ['results/m2/functional.json','results/m2/supplemental.json']:
+    if json.loads((root/name).read_text()).get('network')!={'mbps':10,'rtt':80}:
+        raise SystemExit(f'Qualification must declare the controlled network: {name}')
+bindings=json.loads((root/'results/m2/bindings-reproducibility.json').read_text())['manifest']
+for group in ['inputs','outputs']:
+    for name,expected in bindings[group].items():
+        if hashlib.sha256((root/name).read_bytes()).hexdigest()!=expected:
+            raise SystemExit(f'Qualified browser assembly changed: {name}')
+for name in evidence:
+    record=json.loads((root/name).read_text())
+    if 'wasmSha256' in record and record['wasmSha256']!=long['artifactHashes']['web/engine/player.wasm']:
+        raise SystemExit(f'Acceptance record uses a different engine: {name}')
+if long.get('network')!={'mbps':10,'rtt':80}:
+    raise SystemExit('The long run must use 10 Mbps and 80 ms RTT')
 if long['elapsedSeconds']<3600:
     raise SystemExit('A full 60-minute run is required')
 for name,expected in long['artifactHashes'].items():
@@ -27,7 +44,7 @@ for folder in ['web','src','native','scripts','patches','fixtures','docs','third
     for file in sorted((root/folder).rglob('*')):
         if file.is_file() and '__pycache__' not in file.parts:
             name=str(file.relative_to(root))
-            if name.startswith('results/release-'):
+            if name in ['results/release-manifest.json','results/release-summary.json','results/release-reproducibility.json']:
                 continue
             files[name]=args.engine/file.name if name.startswith('web/engine/') else file
 for name in ['README.md','Dockerfile','sources.lock.json','toolchain.lock.json',

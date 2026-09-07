@@ -1,4 +1,4 @@
-# M0 source and build provenance
+# Source and build provenance
 
 `sources.lock.json` records the upstream repository, exact release/commit,
 archive URL and SHA-256 for each native dependency. `scripts/fetch-sources.py`
@@ -25,12 +25,21 @@ The test film and subtitle script are original generated fixtures. The generatio
 command, media probe and checked-in bytes are supplied. Fixture generation is
 separate from engine compilation; engine builds consume the frozen fixture.
 
-The browser bindings, audio output driver, worker/worklet, build scripts and two
-small build/registration patches were written for this repository. The excluded
+The browser bindings, audio output driver, worker/worklet, build scripts, build/registration patches and browser attachment-budget guard
+were written for this repository. The excluded
 libmpv-wasm implementation, its wrapper, mpv fork and Emscripten fork were not
 used as implementation inputs. See `docs/PATCHES.md` for each change's purpose.
 
 `results/build-manifest.json` ties native sources, patches, configuration,
 fixtures and engine artifact hashes together. Actual repeat-build comparisons
 and browser acceptance results are recorded separately; pins alone are not a
-claim of binary reproducibility or playback correctness.
+claim of binary reproducibility or playback correctness. The final browser
+sidecars have a separate assembly manifest under
+`results/m2/bindings-reproducibility.json`; native build manifests preserve the
+snapshot used at compilation, while runtime and release hashes identify the
+final assembled player.
+
+The final browser assembly also records the public mpv format query and MKV
+preroll configuration, plus first-output diagnostics after reopening/seeking.
+These are original binding/configuration changes; the qualified native source
+and engine files remain those from the two clean container builds.

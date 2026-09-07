@@ -80,3 +80,50 @@ it also records every sample, peak RSS and fixed queue/heap counters. This
 allows bounded browser/JIT caches while rejecting sustained growth. Missing
 output signals are reported separately and must remain below 1%; the sync
 threshold requires more than 3500 independently paired signals.
+
+The matched long-run harness explicitly configures and verifies the origin's
+10 Mbps body pacing and 80 ms media-response delay; it no longer relies on
+external server state. This is application-layer network emulation on loopback,
+not a claim about arbitrary WAN/TLS/preflight behavior. The harness records
+per-process CPU time and `pmset` power/thermal reports alongside the existing
+RSS and output observations. Unavailable physical temperature/throttling
+sensors are reported as unknown. These additions retain the existing targets.
+
+Additional predeclared reference checks use the same three-pixel/95% region
+precision and recall threshold after resize to 1280×720 at DPR 2. Karaoke
+phases at 2.25 and 3.25 seconds compare highlighted-color share against native
+references within 15 percentage points, and require the share to increase.
+Actual audio track output is checked by its 440/880 Hz spectral peak within
+40 Hz; VFR property timestamps must remain ordered and include both frame
+intervals, with presentation reaching the final frame's time.
+
+## Startup cache-state clarification before final qualification
+
+The original harness began measurement immediately after `ready`, before the
+instance had decoded or rendered media. That first-use case measured
+3037–3078 ms on the front-index fixture and is not a reliable sub-three-second
+claim. It remains reported separately. To make the architecture's warm-engine
+condition explicit, the final warm test first plays the unrelated small local
+fixture through actual Canvas/PCM output, pauses it, then times the complete
+remote open and play operation on the same instance. The measured remote source
+has no cached ranges. Both new video output and an increase over the previous
+PCM counter are required. No demux-analysis setting or acceptance threshold is
+changed. Six diagnostic measurements with this protocol were 2766–2884 ms;
+the final functional suite must independently pass using the same protocol.
+
+## Exact-seek preroll correction before final qualification
+
+The expanded shaped-network karaoke test exposed an early paused MKV seek
+landing at 4 seconds when 2.25 seconds was requested. The same failure occurred
+through mpv's ordinary seek command without browser read interruption. With the
+public `hr-seek-demuxer-offset=0.5` setting, the settled decoded position was
+2.267 seconds, the corresponding 30 fps frame. The browser engine now queries mpv's detected format through its public
+command API and sets this preroll for MKV before resolving open. MP4 retains
+zero additional preroll; applying the MKV setting globally added enough range
+work to miss the MP4 distant-seek target. It adds decode/read work around seeks; the existing
+two-second/eight-MiB distant-seek thresholds remain unchanged and must be rerun.
+No native decoder patch or resource-cap increase is involved.
+
+First-output diagnostics are emitted for the first five frames of every source
+and seek, while cumulative frame counters remain unchanged. This avoids adding
+the periodic diagnostic interval to warm reopen and seek measurements.

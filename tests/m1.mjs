@@ -2,7 +2,8 @@ import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {writeFile,mkdir,readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-await mkdir('results/m1',{recursive:true});
+const output=process.env.RESULT_DIR||'results/m1';
+await mkdir(output,{recursive:true});
 await mkdir('build/private-results',{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:process.env.HEADED!=='1',ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required']});
 const page=await browser.newPage({viewport:{width:1100,height:900}}),logs=[];
@@ -34,4 +35,4 @@ try{
  });
  await page.evaluate(()=>player.destroy());for(let i=0;i<30&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);report.passed=true;
 }catch(error){report.failure=String(error.stack||error);report.state=await page.evaluate(()=>({events:window.playerEvents,diagnostics:window.player?.diagnostics,errors:window.playerErrors}));console.error(report.failure);await page.screenshot({path:'build/private-results/m1-failure.png'});process.exitCode=1;}
-finally{report.logs=logs;report.finished=new Date().toISOString();report.wasmSha256=createHash('sha256').update(await readFile('web/engine/player.wasm')).digest('hex');await writeFile('results/m1/browser.json',JSON.stringify(report,null,2)+'\n');await browser.close();}
+finally{report.logs=logs;report.finished=new Date().toISOString();report.wasmSha256=createHash('sha256').update(await readFile('web/engine/player.wasm')).digest('hex');await writeFile(`${output}/browser.json`,JSON.stringify(report,null,2)+'\n');await browser.close();}
