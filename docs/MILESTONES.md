@@ -10,12 +10,18 @@ table is not a current status report.
 | M1 | Bounded authenticated direct-file streaming, seek cancellation, controls and cleanup | Complete; `m1-streaming-baseline`; [evidence](validation/M1.md) |
 | M2 / G1 | Qualified, usable software player and versioned source/artifact delivery | Complete; `m2-software-baseline`; [acceptance record](validation/M2.md) |
 | M3 | Matched experiments comparing software playback with browser decoding | Follow-up complete; memory passes, net CPU benefit fails; [evidence](validation/M3-followup.md) |
-| G2 | Explicit decision on benefit, patch cost and ownership of a decoder fork | Pending user decision; M3 recommendation is defer |
-| M4 | Approved WebCodecs integration with CPU frame copy-back and software recovery | Requires G2 approval |
-| G3 / M5 | Decision and optional retained-browser-frame integration | Requires measured need after M4 |
-| S1 | Fixed HLS/DASH VOD with software decoding | Independent workstream after G1 |
+| G2 | Explicit decision on benefit, patch cost and ownership of a decoder fork | Approved by user to proceed despite M3 recommendation to defer |
+| M4 | Approved WebCodecs integration with CPU frame copy-back and software recovery | Complete with user-accepted 57:38 endurance exception; [candidate acceptance](validation/CANDIDATE.md) |
+| G3 | Integrated copy-back cost evaluation | Complete; median paired CPU reduction 20.1%; [decision](validation/G3.md) |
+| M5 | Optional retained-browser-frame integration | Deferred by G3; further net benefit is unproven |
+| S1 | Fixed HLS/DASH VOD with software decoding | Complete for the declared fixed-VOD profile; [evidence](validation/S1.md) |
 
-M2 acceptance requires all Phase 1 matrix rows on the declared
+The clean software candidate also passed full G1 requalification. The optional
+M4 candidate has a specific user-approved exception for its interrupted 57:38
+run; its original strict gate result remains failed. See the acceptance record
+above. M5 is deferred, not implemented.
+
+Baseline M2 acceptance requires all Phase 1 matrix rows on the declared
 [reference profile](M1-M2-PROFILE.md), including the full 60-minute measurement,
 100 seeks and 100 player lifecycles. Interrupted or differently conditioned
 runs remain evidence of their actual conditions and cannot replace the required

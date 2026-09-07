@@ -8,17 +8,22 @@ export type PlayerEvent = {
 };
 export type RemoteSource = {
     url: string;
+    format?: 'file' | 'hls' | 'dash';
     headers?: Record<string, string>;
     credentials?: RequestCredentials;
     allowedOrigins?: string[];
     immutable?: boolean;
-    refreshAuthorization?: () => Promise<{
+    refreshAuthorization?: (resource?: {
+        url: string;
+    }) => Promise<{
         url?: string;
         headers?: Record<string, string>;
     }>;
 };
 export type PlayerDiagnostics = {
     path: 'wasm';
+    decoder?: 'software' | 'webcodecs';
+    decoderStats?: Record<string, number | boolean>;
     rendered: number;
     heapBytes: number;
     queuedFrames: number;
@@ -35,6 +40,7 @@ export type PlayerDiagnostics = {
 /** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
 export declare class BrowserPlayer extends EventTarget {
     private worker;
+    private workerOwner;
     private audioContext;
     private audioNode?;
     private analyser?;
@@ -55,9 +61,11 @@ export declare class BrowserPlayer extends EventTarget {
     browserCodecsAbsent: boolean;
     properties: Map<string, unknown>;
     readonly ready: Promise<void>;
-    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput }?: {
-        disableBrowserCodecs?: boolean | undefined;
-        measureOutput?: boolean | undefined;
+    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, decoder, decoderFaultAfter }?: {
+        disableBrowserCodecs?: boolean;
+        measureOutput?: boolean;
+        decoder?: 'software' | 'webcodecs';
+        decoderFaultAfter?: number;
     });
     private sendTiming;
     private fail;

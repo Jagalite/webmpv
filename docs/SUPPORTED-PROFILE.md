@@ -50,3 +50,13 @@ Exact MKV seeks use a half-second demux preroll through a public mpv option.
 MP4 uses zero additional preroll. Warm startup explicitly follows playback of
 unrelated local media on the same engine; first-use startup can exceed three
 seconds. See the qualification contract for the full cache-state definition.
+
+## S1 development checkout (not an accepted release)
+
+Finite single-video HLS TS/fMP4 and single-period static DASH fMP4 now use nested
+browser resource loading with software decode. Synthetic 640×360 H.264/AAC tests
+cover alternate stereo audio, HLS single-resource WebVTT subtitles, fMP4 init and
+byte ranges, nonzero timestamp offsets, missing-segment recovery, seeks and
+teardown. TS and fMP4 timestamp-reset discontinuity seeks also pass.
+These S1 checks do not extend the M2 performance
+or long-run qualification to segmented media. See [S1 evidence](validation/S1.md).

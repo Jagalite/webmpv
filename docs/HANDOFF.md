@@ -1,11 +1,31 @@
 # webmpv handoff
 
-Updated 2026-09-07. M0, M1 and M2/G1 are complete for the declared software
-profile. No implementation work remains for those milestones. The first bounded
-M3 experiment and isolated packet-bridge follow-up are complete. The follow-up
-passes the memory gate but fails the net CPU-benefit threshold. See
-[follow-up evidence](validation/M3-followup.md). The recommendation
-is to defer M4; G2 remains the user's decision. S1 has not started.
+Updated 2026-09-07. M0, M1, M2/G1, M3 and the declared S1 fixed-VOD work are
+complete. M4 implementation is accepted with the user's explicit exception for
+the optional decoder's interrupted 57:38 endurance run. The clean software
+candidate passed strict foreground G1, including the full hour. Both backends
+passed 8/8 functional cases and 7/7 supplemental cases. See
+[clean candidate acceptance](validation/CANDIDATE.md) and the
+[exact runtime records](../results/development/candidate-acceptance.json).
+
+The optional full-hour test remains failed in its original record: foreground
+moved to T3 Code at its terminal sample. The user said to accept that run rather
+than repeat it. Do not restart it automatically or describe it as a strict
+60-minute pass. Earlier failed attempts remain preserved.
+
+G3 evaluation is complete: median paired CPU savings were 20.1%. M5 retained
+frames remain deferred because their further net benefit is unproven. M3's
+historical investment-gate failure is unchanged. Software remains the default.
+
+The user prohibited Docker; all current builds used local tools. Both clean
+native builds produced identical artifacts and native inputs. Final browser
+assemblies independently match the checkout. The original full comparison
+retains the browser sidecar changes made during native compilation, covered
+separately by the final browser assembly proof. See [M4 evidence](validation/M4.md).
+
+The accepted 0.2.0 archive is unchanged. The user subsequently authorized committing and pushing S1/M4 and a matched
+three-way benchmark of native browser, Wasm software and mpv/WebCodecs playback.
+No new release package or tag was requested.
 
 ## Checkpoint and source of truth
 
@@ -68,19 +88,21 @@ npm run dev
 Open `http://127.0.0.1:4179`. The server supplies required COOP/COEP headers.
 Use **Play test film**, a local file up to 32 MiB, or **Open URL** for large media.
 `web/example.html` demonstrates the host API. A fresh clone does not include
-the ignored native engine or large generated fixtures. Build the engine with
-Docker using the pinned ARM64 environment:
+the ignored native engine or large generated fixtures. Current work uses the
+local Emscripten 4.0.14 installation. Set `WEBMPV_SDK` and `WEBMPV_EM_CONFIG` for
+that installation, with a writable `WEBMPV_CACHE` if needed, then run:
 
 ```sh
-bash scripts/build-container.sh
-mkdir -p web/engine
-cp build/container-result/player.* web/engine/
+bash scripts/build.sh
+python3 scripts/reproduce-local.py
+python3 scripts/reproduce-bindings.py
 ```
 
-See the [README](../README.md) for a second independent build and local-toolchain
-requirements. `bash scripts/build-bindings.sh` separately assembles browser
-bindings and their manifest. Native and browser builds each have independent
-reproducibility evidence.
+See the [README](../README.md) for local-toolchain requirements. Browser
+reproduction uses the existing `scripts/build-bindings.sh` assembly path twice
+from one source snapshot. Native and browser reproducibility are checked
+separately. Historical container records remain evidence for the accepted M2
+archive; Docker is not used for current work.
 
 The supplied MKV's original location is
 `/Users/jagatranvo/Downloads/full_subs_test.mkv`. After macOS blocked resumed CLI
@@ -182,31 +204,13 @@ recorded hash; a repack containing later documentation is a different artifact.
 before packaging; see the README and acceptance record before replacing release
 evidence. Distribution beyond Git source requires a separate artifact delivery.
 
-## Next milestones
+## Completion and future work
 
-M3 now has measured evidence and a recommendation to defer M4. Continue with
-a newly justified experiment described in [follow-up evidence](validation/M3-followup.md), or select S1 for
-additional input formats. Neither M4 nor M5 is authorized.
+The authorized implementation and qualification work is closed under
+[the candidate acceptance record](validation/CANDIDATE.md), including the user's
+optional endurance exception. G3 is complete and M5 is deferred, not implemented.
 
-1. **S1, independent after G1:** fixed HLS/DASH VOD with software decoding.
-   Qualify nested manifests/segments, TS/fMP4 init and byte ranges, audio/subtitles,
-   authorization, discontinuities, cancellation and retries. Live, low latency,
-   ABR, DRM and HDR are separate scope.
-2. **M3:** the first benchmark and follow-up are complete. Memory now passes in
-   the isolated setup; net CPU benefit does not meet the gate. Any further
-   experiment needs an explicit rationale and contract. Preserve the matched benchmark
-   using identical demuxed packets to compare software
-   decoding, WebCodecs copy-back and practical retained-frame presentation.
-   Predeclare the useful-benefit threshold; include message/copy overhead, frame
-   delivery, memory, startup/seek effects, measurable CPU/energy and uncertainty.
-   Estimate patch cost and maintenance ownership. This is not a production fork.
-3. **G2 → M4:** only after explicit approval based on M3 evidence, implement
-   WebCodecs copy-back with correct timestamps, drain/reset and bounded ownership,
-   plus keyframe/preroll recovery into software. Keep a separately buildable
-   software artifact and rerun G1 regressions.
-4. **G3 → M5:** only if measured copy costs justify another approved integration,
-   introduce retained browser frames, bounded leases, CPU-filter downloads and
-   ASS composition. Compare all three complete paths before selecting defaults.
-
-G1 acceptance is the completed stopping point; it does not automatically approve
-M4 or M5. Broader browser/device/codec support requires its own qualification.
+A future retained-frame effort needs a concrete measured opportunity and a
+bounded design preserving filters, subtitles, recovery and ownership. Broader
+browser/device/codec support requires separate qualification. Git closeout and the three-way benchmark are now authorized. A new release
+package remains a separate action.

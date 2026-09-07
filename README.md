@@ -121,3 +121,13 @@ browser bindings are included. Archive hashes and reproducibility evidence are
 recorded in the repository's `results/release-summary.json` and
 `results/release-reproducibility.json`. Each archive includes its own
 `release-manifest.json` with hashes of the contained files.
+
+## Development milestones
+
+S1 fixed HLS/DASH VOD passes its declared functional profile, including TS/fMP4
+timestamp-reset seeks and worker cleanup. See [S1 validation](docs/validation/S1.md).
+The optional M4 browser copy-back decoder is accepted with an explicit
+user-approved 57:38 endurance exception; software remains the default. See
+[clean candidate acceptance](docs/validation/CANDIDATE.md). See [M4 validation](docs/validation/M4.md) and
+[integration instructions](docs/INTEGRATION.md). The accepted 0.2.0 archive is
+unchanged.

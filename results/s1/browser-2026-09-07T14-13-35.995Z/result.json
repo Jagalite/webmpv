@@ -1,0 +1,4509 @@
+{
+  "scope": "S1 real software playback",
+  "started": "2026-09-07T14:13:37.148Z",
+  "browser": "152.0.7977.76",
+  "tests": [
+    {
+      "name": "hls-ts: moving software output, audio, seeks and cleanup",
+      "milliseconds": 5699,
+      "passed": true,
+      "evidence": {
+        "first": {
+          "hash": 4051632703,
+          "nonblack": 230385
+        },
+        "second": {
+          "hash": 3461440122,
+          "nonblack": 230385
+        },
+        "tracks": [
+          {
+            "id": "1",
+            "type": "audio",
+            "lang": "en",
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 0,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "decoder": "aac",
+            "decoder-desc": "AAC (Advanced Audio Coding)",
+            "codec": "aac",
+            "codec-desc": "AAC (Advanced Audio Coding)",
+            "codec-profile": "LC",
+            "demux-channel-count": 2,
+            "demux-channels": "stereo",
+            "demux-samplerate": 48000,
+            "demux-bitrate": 97159,
+            "format-name": "fltp",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "language": "en",
+              "comment": "English"
+            }
+          },
+          {
+            "id": "2",
+            "type": "audio",
+            "lang": "fr",
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": false,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": false,
+            "ff-index": 1,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "codec": "aac",
+            "demux-channel-count": 2,
+            "demux-channels": "stereo",
+            "demux-samplerate": 48000,
+            "demux-bitrate": 96136,
+            "format-name": "fltp",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "language": "fr",
+              "comment": "Alternate"
+            }
+          },
+          {
+            "id": "1",
+            "type": "sub",
+            "lang": "en",
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 2,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "decoder": "webvtt",
+            "decoder-desc": "WebVTT subtitle",
+            "codec": "webvtt",
+            "codec-desc": "WebVTT subtitle",
+            "codec-profile": "Advanced Sub Station Alpha",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "language": "en",
+              "comment": "English"
+            }
+          },
+          {
+            "id": "1",
+            "type": "video",
+            "image": false,
+            "albumart": false,
+            "default": false,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 3,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "decoder": "h264",
+            "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "codec": "h264",
+            "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "codec-profile": "High",
+            "demux-w": 640,
+            "demux-h": 360,
+            "demux-fps": 30,
+            "format-name": "yuv420p",
+            "metadata": {
+              "variant_bitrate": "2000000"
+            }
+          }
+        ],
+        "audio": {
+          "state": "running",
+          "sampleRate": 44100,
+          "mediaFrames": 31232,
+          "underruns": 0,
+          "rms": 0.062205429645106294,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "seeks": [
+          {
+            "rendered": 25,
+            "renderMs": 26.21000001579523,
+            "copyMs": 10.584999978542328,
+            "maxRenderMs": 13.71000000089407,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 13,
+            "ioPending": true,
+            "ioSerial": 57,
+            "interruptions": 0,
+            "io": {
+              "opens": 16,
+              "requests": 18,
+              "retries": 1,
+              "aborts": 0,
+              "handles": 3,
+              "retainedBytes": 256529,
+              "peakRetainedBytes": 279841,
+              "fetchedBytes": 1038670,
+              "size": "0",
+              "reads": 28,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 13,
+            "queuedFrames": 0
+          },
+          {
+            "rendered": 33,
+            "renderMs": 29.245000012218952,
+            "copyMs": 12.824999995529652,
+            "maxRenderMs": 13.71000000089407,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 3,
+            "ioPending": false,
+            "ioSerial": 80,
+            "interruptions": 0,
+            "io": {
+              "opens": 21,
+              "requests": 23,
+              "retries": 1,
+              "aborts": 0,
+              "handles": 3,
+              "retainedBytes": 237353,
+              "peakRetainedBytes": 279841,
+              "fetchedBytes": 1555106,
+              "size": "0",
+              "reads": 41,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 3,
+            "queuedFrames": 0
+          },
+          {
+            "rendered": 41,
+            "renderMs": 32.225000001490116,
+            "copyMs": 14.845000006258488,
+            "maxRenderMs": 13.71000000089407,
+            "heapBytes": 134217728,
+            "epoch": 8,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 19,
+            "ioPending": false,
+            "ioSerial": 103,
+            "interruptions": 0,
+            "io": {
+              "opens": 26,
+              "requests": 28,
+              "retries": 1,
+              "aborts": 0,
+              "handles": 3,
+              "retainedBytes": 236789,
+              "peakRetainedBytes": 279841,
+              "fetchedBytes": 2070790,
+              "size": "0",
+              "reads": 55,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 19,
+            "queuedFrames": 0
+          },
+          {
+            "rendered": 49,
+            "renderMs": 35.17999999970198,
+            "copyMs": 16.905000016093254,
+            "maxRenderMs": 13.71000000089407,
+            "heapBytes": 134217728,
+            "epoch": 10,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 7,
+            "ioPending": true,
+            "ioSerial": 126,
+            "interruptions": 0,
+            "io": {
+              "opens": 31,
+              "requests": 33,
+              "retries": 1,
+              "aborts": 0,
+              "handles": 3,
+              "retainedBytes": 237353,
+              "peakRetainedBytes": 279841,
+              "fetchedBytes": 2583842,
+              "size": "0",
+              "reads": 67,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 7,
+            "queuedFrames": 0
+          }
+        ],
+        "subtitlePixels": {
+          "on": {
+            "hash": 1155660401,
+            "nonblack": 230377
+          },
+          "off": {
+            "hash": 554703829,
+            "nonblack": 230391
+          }
+        },
+        "diagnostics": {
+          "rendered": 71,
+          "renderMs": 43.02499997615814,
+          "copyMs": 22.350000023841858,
+          "maxRenderMs": 13.71000000089407,
+          "heapBytes": 134217728,
+          "epoch": 14,
+          "path": "wasm",
+          "demuxFormat": "hls",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 5,
+          "ioPending": false,
+          "ioSerial": 173,
+          "interruptions": 0,
+          "io": {
+            "opens": 41,
+            "requests": 43,
+            "retries": 1,
+            "aborts": 0,
+            "handles": 3,
+            "retainedBytes": 250325,
+            "peakRetainedBytes": 279841,
+            "fetchedBytes": 3609946,
+            "size": "0",
+            "reads": 95,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 5,
+          "queuedFrames": 0
+        },
+        "network": {
+          "requests": [
+            {
+              "path": "ts/master.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "ts/master.m3u8",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/master.m3u8",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english.m3u8",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate.m3u8",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/subtitles.m3u8",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video.m3u8",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-000.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-000.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/subtitles.vtt",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-000.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-001.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-001.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-005.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-006.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-006.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-007.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-007.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-000.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-001.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-001.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-002.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-002.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-008.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-009.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-009.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-010.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-010.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-002.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-003.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-003.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-004.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/english-004.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-002.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-003.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-003.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-004.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-004.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-001.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-002.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-002.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/video-003.ts",
+              "range": null,
+              "authorized": true
+            },
+            {
+              "path": "ts/alternate-003.ts",
+              "range": null,
+              "authorized": true
+            }
+          ],
+          "aborted": 0,
+          "active": 0,
+          "auth": true,
+          "retry": 0
+        },
+        "events": [
+          {
+            "event": "idle"
+          },
+          {
+            "event": "command-reply",
+            "id": 100,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos"
+          },
+          {
+            "event": "property-change",
+            "id": 2,
+            "name": "duration"
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "property-change",
+            "id": 4,
+            "name": "eof-reached"
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": []
+          },
+          {
+            "event": "property-change",
+            "id": 6,
+            "name": "audio-codec-name"
+          },
+          {
+            "event": "property-change",
+            "id": 7,
+            "name": "video-codec"
+          },
+          {
+            "event": "property-change",
+            "id": 8,
+            "name": "volume",
+            "data": 100
+          },
+          {
+            "event": "property-change",
+            "id": 9,
+            "name": "speed",
+            "data": 1
+          },
+          {
+            "event": "property-change",
+            "id": 10,
+            "name": "paused-for-cache"
+          },
+          {
+            "event": "property-change",
+            "id": 11,
+            "name": "cache-buffering-state"
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state"
+          },
+          {
+            "event": "property-change",
+            "id": 13,
+            "name": "decoder-frame-drop-count"
+          },
+          {
+            "event": "property-change",
+            "id": 14,
+            "name": "frame-drop-count"
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync"
+          },
+          {
+            "event": "property-change",
+            "id": 16,
+            "name": "video-params"
+          },
+          {
+            "event": "command-reply",
+            "id": 101,
+            "result": {
+              "playlist_entry_id": 1
+            }
+          },
+          {
+            "event": "start-file",
+            "playlist_entry_id": 1
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "audio",
+                "lang": "en",
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 0,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "codec": "aac",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "demux-bitrate": 97159,
+                "format-name": "fltp",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "en",
+                  "comment": "English"
+                }
+              },
+              {
+                "id": "2",
+                "type": "audio",
+                "lang": "fr",
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 1,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "codec": "aac",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "demux-bitrate": 96136,
+                "format-name": "fltp",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "fr",
+                  "comment": "Alternate"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "lang": "en",
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 2,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "codec": "webvtt",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "en",
+                  "comment": "English"
+                }
+              },
+              {
+                "id": "1",
+                "type": "video",
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 3,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "codec": "h264",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30,
+                "format-name": "yuv420p",
+                "metadata": {
+                  "variant_bitrate": "2000000"
+                }
+              }
+            ]
+          },
+          {
+            "event": "audio-reconfig"
+          },
+          {
+            "event": "audio-reconfig"
+          },
+          {
+            "event": "audio-reconfig"
+          },
+          {
+            "event": "video-reconfig"
+          },
+          {
+            "event": "video-reconfig"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 2,
+            "name": "duration",
+            "data": 24
+          },
+          {
+            "event": "property-change",
+            "id": 4,
+            "name": "eof-reached",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 6,
+            "name": "audio-codec-name",
+            "data": "aac"
+          },
+          {
+            "event": "property-change",
+            "id": 10,
+            "name": "paused-for-cache",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 11,
+            "name": "cache-buffering-state",
+            "data": 100
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 1.1,
+              "reader-pts": 0.10000000000000009,
+              "cache-duration": 1,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 142120,
+              "fw-bytes": 142120,
+              "raw-input-rate": 540,
+              "debug-low-level-seeks": 0,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 2.5,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1,
+                  "reader-pts": 1.5,
+                  "cache-end": 2.5
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0879999999999999,
+                  "reader-pts": 1.4000000000000001,
+                  "cache-end": 2.488
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 13,
+            "name": "decoder-frame-drop-count",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 14,
+            "name": "frame-drop-count",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg",
+            "level": "warn",
+            "text": "swscaler: No accelerated colorspace conversion found from yuv420p to rgba.\n"
+          },
+          {
+            "event": "file-loaded"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "audio",
+                "lang": "en",
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 0,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "decoder": "aac",
+                "decoder-desc": "AAC (Advanced Audio Coding)",
+                "codec": "aac",
+                "codec-desc": "AAC (Advanced Audio Coding)",
+                "codec-profile": "LC",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "demux-bitrate": 97159,
+                "format-name": "fltp",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "en",
+                  "comment": "English"
+                }
+              },
+              {
+                "id": "2",
+                "type": "audio",
+                "lang": "fr",
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 1,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "codec": "aac",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "demux-bitrate": 96136,
+                "format-name": "fltp",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "fr",
+                  "comment": "Alternate"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "lang": "en",
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 2,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "decoder": "webvtt",
+                "decoder-desc": "WebVTT subtitle",
+                "codec": "webvtt",
+                "codec-desc": "WebVTT subtitle",
+                "codec-profile": "Advanced Sub Station Alpha",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "en",
+                  "comment": "English"
+                }
+              },
+              {
+                "id": "1",
+                "type": "video",
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 3,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "decoder": "h264",
+                "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec": "h264",
+                "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec-profile": "High",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30,
+                "format-name": "yuv420p",
+                "metadata": {
+                  "variant_bitrate": "2000000"
+                }
+              }
+            ]
+          },
+          {
+            "event": "property-change",
+            "id": 7,
+            "name": "video-codec",
+            "data": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 1.130666666666667,
+              "reader-pts": 0.2346666666666668,
+              "cache-duration": 0.8960000000000001,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 134784,
+              "fw-bytes": 134784,
+              "raw-input-rate": 540,
+              "debug-low-level-seeks": 0,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 2.5333333333333337,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.0000000000000002,
+                  "reader-pts": 1.5333333333333334,
+                  "cache-end": 2.5333333333333337
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.8960000000000001,
+                  "reader-pts": 1.6346666666666667,
+                  "cache-end": 2.530666666666667
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 16,
+            "name": "video-params",
+            "data": {
+              "pixelformat": "yuv420p",
+              "average-bpp": 12,
+              "w": 640,
+              "h": 360,
+              "dw": 640,
+              "dh": 360,
+              "crop-x": 0,
+              "crop-y": 0,
+              "crop-w": 640,
+              "crop-h": 360,
+              "aspect": 1.7777777777777777,
+              "aspect-name": "16:9",
+              "par": 1,
+              "sar": 1.7777777777777777,
+              "sar-name": "16:9",
+              "colormatrix": "bt.601",
+              "colorlevels": "limited",
+              "primaries": "bt.709",
+              "gamma": "bt.1886",
+              "sig-peak": 0,
+              "light": "display",
+              "chroma-location": "mpeg2/4/h264",
+              "stereo-in": "mono",
+              "rotate": 0
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 102,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.1
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.002911553287981733
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.13333333333333333
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00440815192743757
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.16666666666666669
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00009976190476174152
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.2
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.007401349206348995
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.23333333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.003092959183673305
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.26666666666666666
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004589557823129031
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 1.6853333333333333,
+              "reader-pts": 0.682666666666667,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 172528,
+              "fw-bytes": 172528,
+              "raw-input-rate": 540,
+              "debug-low-level-seeks": 0,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 3.0853333333333333,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.3,
+                  "reader-pts": 1.7666666666666668,
+                  "cache-end": 3.066666666666667
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 2.082666666666667,
+                  "cache-end": 3.0853333333333333
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.3
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0002811678004532303
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.33333333333333337
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.001777766439909012
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.3666666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0032743650793647383
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.4
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0047709637188204645
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.43333333333333335
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0004625736961447746
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.4666666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.007764160997732028
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.003455770975056227
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5333333333333333
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004952369614512064
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 1.8773333333333335,
+              "reader-pts": 0.8746666666666667,
+              "cache-duration": 1.0026666666666668,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 166128,
+              "fw-bytes": 166128,
+              "raw-input-rate": 540,
+              "debug-low-level-seeks": 0,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 3.2773333333333334,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2333333333333334,
+                  "reader-pts": 2.033333333333333,
+                  "cache-end": 3.2666666666666666
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666668,
+                  "reader-pts": 2.2746666666666666,
+                  "cache-end": 3.2773333333333334
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5666666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0006439795918362634
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.6
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0021405782312921007
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.6333333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.003637176870747827
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.6666666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.005133775510203775
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.7000000000000001
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0008253854875283073
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.7333333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0023219841269841446
+          },
+          {
+            "event": "command-reply",
+            "id": 103,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "command-reply",
+            "id": 104,
+            "result": null
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-duration": 0,
+              "eof": false,
+              "underrun": true,
+              "idle": false,
+              "total-bytes": 0,
+              "fw-bytes": 0,
+              "raw-input-rate": 540,
+              "debug-low-level-seeks": 1,
+              "debug-byte-level-seeks": 0,
+              "ts-per-stream": [],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "command-reply",
+            "id": 105,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 14.378666666666668,
+              "reader-pts": 13.376000000000001,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 179592,
+              "fw-bytes": 179592,
+              "raw-input-rate": 303122,
+              "debug-low-level-seeks": 1,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 15.778666666666668,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2666666666666675,
+                  "reader-pts": 14.5,
+                  "cache-end": 15.766666666666667
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 14.776000000000002,
+                  "cache-end": 15.778666666666668
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13.033333333333333
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.002897947845767135
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13.066666666666666
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004394546485222861
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13.100000000000001
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00008615646254561682
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13.133333333333335
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0015827551019995667
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13.166666666666668
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.003079353741455293
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 13.200000000000001
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.007478446711976616
+          },
+          {
+            "event": "command-reply",
+            "id": 106,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "command-reply",
+            "id": 107,
+            "result": null
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-duration": 0,
+              "eof": false,
+              "underrun": true,
+              "idle": false,
+              "total-bytes": 0,
+              "fw-bytes": 0,
+              "raw-input-rate": 303122,
+              "debug-low-level-seeks": 2,
+              "debug-byte-level-seeks": 0,
+              "ts-per-stream": [],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 4.117333333333333,
+              "reader-pts": 3.178666666666667,
+              "cache-duration": 0.9386666666666659,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 160928,
+              "fw-bytes": 160928,
+              "raw-input-rate": 303122,
+              "debug-low-level-seeks": 2,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 5.533333333333333,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.0666666666666664,
+                  "reader-pts": 4.466666666666667,
+                  "cache-end": 5.533333333333333
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.9386666666666663,
+                  "reader-pts": 4.578666666666667,
+                  "cache-end": 5.517333333333333
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 108,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.0333333333333337
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.002893412698404152
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.066666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004390011337859878
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.1
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.005886609977315604
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.1333333333333333
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.007383208616770887
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.166666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0030748185940949746
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.2
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004571417233550701
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 4.565333333333333,
+              "reader-pts": 3.5626666666666673,
+              "cache-duration": 1.002666666666666,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 178576,
+              "fw-bytes": 178576,
+              "raw-input-rate": 303122,
+              "debug-low-level-seeks": 2,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 5.965333333333334,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2333333333333334,
+                  "reader-pts": 4.7,
+                  "cache-end": 5.933333333333334
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 4.962666666666667,
+                  "cache-end": 5.965333333333334
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 109,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "command-reply",
+            "id": 110,
+            "result": null
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 20.160000000000004,
+              "reader-pts": 19.17866666666667,
+              "cache-duration": 0.9813333333333354,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 163912,
+              "fw-bytes": 163912,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 3,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 21.566666666666666,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.0999999999999979,
+                  "reader-pts": 20.46666666666667,
+                  "cache-end": 21.566666666666666
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.9813333333333354,
+                  "reader-pts": 20.578666666666667,
+                  "cache-end": 21.560000000000002
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 111,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19.033333333333335
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0028934126984907493
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19.066666666666666
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004390011337950028
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19.1
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0000816213152745604
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19.133333333333333
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0015782199547338394
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19.166666666666668
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00887980725632076
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 19.2
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 20.565333333333335,
+              "reader-pts": 19.56266666666667,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 176352,
+              "fw-bytes": 176352,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 3,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 21.965333333333334,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2333333333333343,
+                  "reader-pts": 20.7,
+                  "cache-end": 21.933333333333334
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 20.962666666666667,
+                  "cache-end": 21.965333333333334
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0045714172336488446
+          },
+          {
+            "event": "command-reply",
+            "id": 112,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "command-reply",
+            "id": 113,
+            "result": null
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 8.128,
+              "reader-pts": 7.167999999999999,
+              "cache-duration": 0.9600000000000009,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 158536,
+              "fw-bytes": 158536,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 4,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 9.533333333333333,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.0666666666666664,
+                  "reader-pts": 8.466666666666667,
+                  "cache-end": 9.533333333333333
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.9600000000000009,
+                  "reader-pts": 8.568,
+                  "cache-end": 9.528
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 114,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.033333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.002902482993216715
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.066666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004399081632672441
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.1000000000000005
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00009069160999874981
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.133333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0015872902494553642
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.166666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0030838888889110905
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.2
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.010385476190498899
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 8.554666666666666,
+              "reader-pts": 7.552,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 175728,
+              "fw-bytes": 175728,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 4,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 9.954666666666666,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2333333333333325,
+                  "reader-pts": 8.700000000000001,
+                  "cache-end": 9.933333333333334
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 8.952,
+                  "cache-end": 9.954666666666666
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "audio-reconfig"
+          },
+          {
+            "event": "audio-reconfig"
+          },
+          {
+            "event": "audio-reconfig"
+          },
+          {
+            "event": "command-reply",
+            "id": 115,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "audio",
+                "lang": "en",
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 0,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "codec": "aac",
+                "codec-desc": "AAC (Advanced Audio Coding)",
+                "codec-profile": "LC",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "demux-bitrate": 97159,
+                "format-name": "fltp",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "en",
+                  "comment": "English"
+                }
+              },
+              {
+                "id": "2",
+                "type": "audio",
+                "lang": "fr",
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 1,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "decoder": "aac",
+                "decoder-desc": "AAC (Advanced Audio Coding)",
+                "codec": "aac",
+                "codec-desc": "AAC (Advanced Audio Coding)",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "demux-bitrate": 96136,
+                "format-name": "fltp",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "fr",
+                  "comment": "Alternate"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "lang": "en",
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 2,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "decoder": "webvtt",
+                "decoder-desc": "WebVTT subtitle",
+                "codec": "webvtt",
+                "codec-desc": "WebVTT subtitle",
+                "codec-profile": "Advanced Sub Station Alpha",
+                "metadata": {
+                  "variant_bitrate": "2000000",
+                  "language": "en",
+                  "comment": "English"
+                }
+              },
+              {
+                "id": "1",
+                "type": "video",
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 3,
+                "hls-bitrate": 2000000,
+                "program-id": 0,
+                "decoder": "h264",
+                "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec": "h264",
+                "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec-profile": "High",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30,
+                "format-name": "yuv420p",
+                "metadata": {
+                  "variant_bitrate": "2000000"
+                }
+              }
+            ]
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.233333333333333
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "property-change",
+            "id": 10,
+            "name": "paused-for-cache",
+            "data": true
+          },
+          {
+            "event": "property-change",
+            "id": 11,
+            "name": "cache-buffering-state",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 6.122666666666667,
+              "reader-pts": 6.122666666666667,
+              "cache-duration": 0,
+              "eof": false,
+              "underrun": true,
+              "idle": false,
+              "total-bytes": 0,
+              "fw-bytes": 0,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 5,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 7.533333333333334,
+              "ts-per-stream": [
+                {
+                  "type": "audio",
+                  "cache-duration": 0,
+                  "reader-pts": 7.522666666666667,
+                  "cache-end": 7.522666666666667
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 11,
+            "name": "cache-buffering-state",
+            "data": 4
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 6.421333333333333,
+              "reader-pts": 6.421333333333333,
+              "cache-duration": 0,
+              "eof": false,
+              "underrun": true,
+              "idle": false,
+              "total-bytes": 0,
+              "fw-bytes": 0,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 5,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 7.833333333333334,
+              "ts-per-stream": [
+                {
+                  "type": "audio",
+                  "cache-duration": 0,
+                  "reader-pts": 7.8213333333333335,
+                  "cache-end": 7.8213333333333335
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 11,
+            "name": "cache-buffering-state",
+            "data": 25
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 7.658666666666667,
+              "reader-pts": 7.402666666666667,
+              "cache-duration": 0.2560000000000002,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 45248,
+              "fw-bytes": 45248,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 5,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 9.066666666666666,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 0.33333333333333215,
+                  "reader-pts": 8.733333333333334,
+                  "cache-end": 9.066666666666666
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.2560000000000002,
+                  "reader-pts": 8.802666666666667,
+                  "cache-end": 9.058666666666667
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "property-change",
+            "id": 10,
+            "name": "paused-for-cache",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "id": 11,
+            "name": "cache-buffering-state",
+            "data": 100
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 8.448,
+              "reader-pts": 7.594666666666667,
+              "cache-duration": 0.8533333333333335,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 158976,
+              "fw-bytes": 158976,
+              "raw-input-rate": 648498,
+              "debug-low-level-seeks": 5,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 9.866666666666667,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.1333333333333329,
+                  "reader-pts": 8.733333333333334,
+                  "cache-end": 9.866666666666667
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.8533333333333335,
+                  "reader-pts": 8.994666666666667,
+                  "cache-end": 9.848
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.266666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.002902482993221156
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.300000000000001
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004399081632676882
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.333333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 8.704,
+              "reader-pts": 7.701333333333334,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 176680,
+              "fw-bytes": 176680,
+              "raw-input-rate": 740140,
+              "debug-low-level-seeks": 5,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 10.104000000000001,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2666666666666657,
+                  "reader-pts": 8.833333333333334,
+                  "cache-end": 10.1
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 9.101333333333335,
+                  "cache-end": 10.104000000000001
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00009069161000141435
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.366666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0015872902494580288
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.4
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.003083888888914643
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.433333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004580487528371258
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.466666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.006077086167827872
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.5
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0017686961451524041
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.533333333333334
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.003265294784607242
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.566666666666667
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.004761893424064745
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 8.96,
+              "reader-pts": 7.957333333333333,
+              "cache-duration": 1.0026666666666681,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 174584,
+              "fw-bytes": 174584,
+              "raw-input-rate": 740140,
+              "debug-low-level-seeks": 5,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 10.360000000000001,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.2666666666666675,
+                  "reader-pts": 9.066666666666666,
+                  "cache-end": 10.333333333333334
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666681,
+                  "reader-pts": 9.357333333333333,
+                  "cache-end": 10.360000000000001
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 7.6000000000000005
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.006258492063520471
+          },
+          {
+            "event": "command-reply",
+            "id": 116,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "command-reply",
+            "id": 117,
+            "result": null
+          },
+          {
+            "event": "command-reply",
+            "id": 118,
+            "result": null
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 5
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "log-message",
+            "prefix": "ffmpeg/demuxer",
+            "level": "warn",
+            "text": "hls: The m3u8 list sequence may have been wrapped.\n"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 6.122666666666667,
+              "reader-pts": 5.184000000000001,
+              "cache-duration": 0.9386666666666663,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 152240,
+              "fw-bytes": 152240,
+              "raw-input-rate": 740140,
+              "debug-low-level-seeks": 6,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 7.533333333333334,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.0666666666666673,
+                  "reader-pts": 6.466666666666667,
+                  "cache-end": 7.533333333333334
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 0.9386666666666663,
+                  "reader-pts": 6.5840000000000005,
+                  "cache-end": 7.522666666666667
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 119,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 6.186666666666667,
+              "reader-pts": 5.184000000000001,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": false,
+              "total-bytes": 158560,
+              "fw-bytes": 158560,
+              "raw-input-rate": 740140,
+              "debug-low-level-seeks": 6,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 7.586666666666667,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.1000000000000005,
+                  "reader-pts": 6.466666666666667,
+                  "cache-end": 7.566666666666667
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 6.5840000000000005,
+                  "cache-end": 7.586666666666667
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 6.186666666666667,
+              "reader-pts": 5.184000000000001,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 158560,
+              "fw-bytes": 158560,
+              "raw-input-rate": 740140,
+              "debug-low-level-seeks": 6,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 7.586666666666667,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.1000000000000005,
+                  "reader-pts": 6.466666666666667,
+                  "cache-end": 7.566666666666667
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 6.5840000000000005,
+                  "cache-end": 7.586666666666667
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "command-reply",
+            "id": 120,
+            "result": null
+          }
+        ]
+      }
+    }
+  ],
+  "passed": false,
+  "failure": "page.waitForFunction: Timeout 20000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/s1.mjs:31:20\n    at async check (/Volumes/seed2/Projects/webmpv/tests/s1.mjs:15:96)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/s1.mjs:22:5",
+  "player": {
+    "diagnostics": {
+      "rendered": 27,
+      "renderMs": 24.299999982118607,
+      "copyMs": 8.300000011920929,
+      "maxRenderMs": 13.989999994635582,
+      "heapBytes": 134217728,
+      "epoch": 6,
+      "path": "wasm",
+      "demuxFormat": "hls",
+      "seekPrerollSeconds": 0,
+      "presentedPosition": 24,
+      "ioPending": false,
+      "ioSerial": 130,
+      "interruptions": 0,
+      "io": {
+        "opens": 30,
+        "requests": 32,
+        "retries": 1,
+        "aborts": 0,
+        "handles": 1,
+        "retainedBytes": 473,
+        "peakRetainedBytes": 263538,
+        "fetchedBytes": 1898566,
+        "size": "0",
+        "reads": 72,
+        "seeks": 1,
+        "interruptions": 0
+      },
+      "seeking": false,
+      "position": 24,
+      "queuedFrames": 0
+    },
+    "events": [
+      {
+        "event": "idle"
+      },
+      {
+        "event": "command-reply",
+        "id": 100,
+        "result": null
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos"
+      },
+      {
+        "event": "property-change",
+        "id": 2,
+        "name": "duration"
+      },
+      {
+        "event": "property-change",
+        "id": 3,
+        "name": "pause",
+        "data": true
+      },
+      {
+        "event": "property-change",
+        "id": 4,
+        "name": "eof-reached"
+      },
+      {
+        "event": "property-change",
+        "id": 5,
+        "name": "track-list",
+        "data": []
+      },
+      {
+        "event": "property-change",
+        "id": 6,
+        "name": "audio-codec-name"
+      },
+      {
+        "event": "property-change",
+        "id": 7,
+        "name": "video-codec"
+      },
+      {
+        "event": "property-change",
+        "id": 8,
+        "name": "volume",
+        "data": 100
+      },
+      {
+        "event": "property-change",
+        "id": 9,
+        "name": "speed",
+        "data": 1
+      },
+      {
+        "event": "property-change",
+        "id": 10,
+        "name": "paused-for-cache"
+      },
+      {
+        "event": "property-change",
+        "id": 11,
+        "name": "cache-buffering-state"
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state"
+      },
+      {
+        "event": "property-change",
+        "id": 13,
+        "name": "decoder-frame-drop-count"
+      },
+      {
+        "event": "property-change",
+        "id": 14,
+        "name": "frame-drop-count"
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync"
+      },
+      {
+        "event": "property-change",
+        "id": 16,
+        "name": "video-params"
+      },
+      {
+        "event": "command-reply",
+        "id": 101,
+        "result": {
+          "playlist_entry_id": 1
+        }
+      },
+      {
+        "event": "start-file",
+        "playlist_entry_id": 1
+      },
+      {
+        "event": "audio-reconfig"
+      },
+      {
+        "event": "audio-reconfig"
+      },
+      {
+        "event": "audio-reconfig"
+      },
+      {
+        "event": "video-reconfig"
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0
+      },
+      {
+        "event": "video-reconfig"
+      },
+      {
+        "event": "property-change",
+        "id": 2,
+        "name": "duration",
+        "data": 24
+      },
+      {
+        "event": "property-change",
+        "id": 4,
+        "name": "eof-reached",
+        "data": false
+      },
+      {
+        "event": "property-change",
+        "id": 6,
+        "name": "audio-codec-name",
+        "data": "aac"
+      },
+      {
+        "event": "property-change",
+        "id": 10,
+        "name": "paused-for-cache",
+        "data": false
+      },
+      {
+        "event": "property-change",
+        "id": 11,
+        "name": "cache-buffering-state",
+        "data": 100
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state",
+        "data": {
+          "cache-end": 1.0993489583333333,
+          "reader-pts": 0.09934895833333333,
+          "cache-duration": 1,
+          "eof": false,
+          "underrun": false,
+          "idle": true,
+          "total-bytes": 140440,
+          "fw-bytes": 140440,
+          "raw-input-rate": 378,
+          "debug-low-level-seeks": 0,
+          "debug-byte-level-seeks": 0,
+          "debug-ts-last": 1.0993489583333333,
+          "ts-per-stream": [
+            {
+              "type": "video",
+              "cache-duration": 1,
+              "reader-pts": 0.09934895833333333,
+              "cache-end": 1.0993489583333333
+            },
+            {
+              "type": "audio",
+              "cache-duration": 1.0879999999999999,
+              "reader-pts": 0,
+              "cache-end": 1.0879999999999999
+            }
+          ],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        }
+      },
+      {
+        "event": "property-change",
+        "id": 13,
+        "name": "decoder-frame-drop-count",
+        "data": 0
+      },
+      {
+        "event": "property-change",
+        "id": 14,
+        "name": "frame-drop-count",
+        "data": 0
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "warn",
+        "text": "swscaler: No accelerated colorspace conversion found from yuv420p to rgba.\n"
+      },
+      {
+        "event": "file-loaded"
+      },
+      {
+        "event": "playback-restart"
+      },
+      {
+        "event": "property-change",
+        "id": 5,
+        "name": "track-list",
+        "data": [
+          {
+            "id": "1",
+            "type": "audio",
+            "lang": "en",
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 0,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "decoder": "aac",
+            "decoder-desc": "AAC (Advanced Audio Coding)",
+            "codec": "aac",
+            "codec-desc": "AAC (Advanced Audio Coding)",
+            "codec-profile": "LC",
+            "demux-channel-count": 2,
+            "demux-channels": "stereo",
+            "demux-samplerate": 48000,
+            "demux-bitrate": 96108,
+            "format-name": "fltp",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "compatible_brands": "iso5iso6mp41",
+              "handler_name": "SoundHandler",
+              "vendor_id": "[0][0][0][0]",
+              "comment": "English",
+              "major_brand": "iso5",
+              "minor_version": "512",
+              "language": "en",
+              "encoder": "Lavf62.12.102"
+            }
+          },
+          {
+            "id": "2",
+            "type": "audio",
+            "lang": "fr",
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": false,
+            "ff-index": 1,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "codec": "aac",
+            "demux-channel-count": 2,
+            "demux-channels": "stereo",
+            "demux-samplerate": 48000,
+            "demux-bitrate": 95968,
+            "format-name": "fltp",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "compatible_brands": "iso5iso6mp41",
+              "handler_name": "SoundHandler",
+              "vendor_id": "[0][0][0][0]",
+              "comment": "Alternate",
+              "major_brand": "iso5",
+              "minor_version": "512",
+              "language": "fr",
+              "encoder": "Lavf62.12.102"
+            }
+          },
+          {
+            "id": "1",
+            "type": "sub",
+            "lang": "en",
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 2,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "decoder": "webvtt",
+            "decoder-desc": "WebVTT subtitle",
+            "codec": "webvtt",
+            "codec-desc": "WebVTT subtitle",
+            "codec-profile": "Advanced Sub Station Alpha",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "language": "en",
+              "comment": "English"
+            }
+          },
+          {
+            "id": "1",
+            "type": "video",
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 3,
+            "hls-bitrate": 2000000,
+            "program-id": 0,
+            "decoder": "h264",
+            "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "codec": "h264",
+            "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "codec-profile": "High",
+            "demux-w": 640,
+            "demux-h": 360,
+            "demux-fps": 30,
+            "format-name": "yuv420p",
+            "metadata": {
+              "variant_bitrate": "2000000",
+              "language": "und",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "minor_version": "512",
+              "compatible_brands": "iso5iso6mp41",
+              "major_brand": "iso5",
+              "encoder": "Lavf62.12.102"
+            }
+          }
+        ]
+      },
+      {
+        "event": "property-change",
+        "id": 7,
+        "name": "video-codec",
+        "data": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state",
+        "data": {
+          "cache-end": 1.216,
+          "reader-pts": 0.23466666666666666,
+          "cache-duration": 0.9813333333333333,
+          "eof": false,
+          "underrun": false,
+          "idle": false,
+          "total-bytes": 146088,
+          "fw-bytes": 146088,
+          "raw-input-rate": 378,
+          "debug-low-level-seeks": 0,
+          "debug-byte-level-seeks": 0,
+          "debug-ts-last": 1.2326822916666667,
+          "ts-per-stream": [
+            {
+              "type": "video",
+              "cache-duration": 1.1,
+              "reader-pts": 0.13268229166666667,
+              "cache-end": 1.2326822916666667
+            },
+            {
+              "type": "audio",
+              "cache-duration": 0.9813333333333333,
+              "reader-pts": 0.23466666666666666,
+              "cache-end": 1.216
+            }
+          ],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        }
+      },
+      {
+        "event": "property-change",
+        "id": 16,
+        "name": "video-params",
+        "data": {
+          "pixelformat": "yuv420p",
+          "average-bpp": 12,
+          "w": 640,
+          "h": 360,
+          "dw": 640,
+          "dh": 360,
+          "crop-x": 0,
+          "crop-y": 0,
+          "crop-w": 640,
+          "crop-h": 360,
+          "aspect": 1.7777777777777777,
+          "aspect-name": "16:9",
+          "par": 1,
+          "sar": 1.7777777777777777,
+          "sar-name": "16:9",
+          "colormatrix": "bt.601",
+          "colorlevels": "limited",
+          "primaries": "bt.709",
+          "gamma": "bt.1886",
+          "sig-peak": 0,
+          "light": "display",
+          "chroma-location": "mpeg2/4/h264",
+          "stereo-in": "mono",
+          "rotate": 0
+        }
+      },
+      {
+        "event": "command-reply",
+        "id": 102,
+        "result": null
+      },
+      {
+        "event": "property-change",
+        "id": 3,
+        "name": "pause",
+        "data": false
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.09934895833333333
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.002904998582766341
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.13268229166666667
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.004401597222222053
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.166015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.005898195861677835
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.19934895833333333
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0015898058390021452
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.23268229166666665
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0030864044784578715
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.266015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.004583003117913598
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state",
+        "data": {
+          "cache-end": 1.6426666666666667,
+          "reader-pts": 0.64,
+          "cache-duration": 1.0026666666666668,
+          "eof": false,
+          "underrun": false,
+          "idle": false,
+          "total-bytes": 167320,
+          "fw-bytes": 167320,
+          "raw-input-rate": 378,
+          "debug-low-level-seeks": 0,
+          "debug-byte-level-seeks": 0,
+          "debug-ts-last": 1.6426666666666667,
+          "ts-per-stream": [
+            {
+              "type": "video",
+              "cache-duration": 1.2666666666666666,
+              "reader-pts": 0.366015625,
+              "cache-end": 1.6326822916666666
+            },
+            {
+              "type": "audio",
+              "cache-duration": 1.0026666666666668,
+              "reader-pts": 0.64,
+              "cache-end": 1.6426666666666667
+            }
+          ],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        }
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.2993489583333333
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0002746130952379078
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.3326822916666667
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0017712117346935785
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.366015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0032678103741493048
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.39934895833333334
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0047644090136050865
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.43268229166666666
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.00045601899092934106
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.466015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0019526176303850673
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.4993489583333333
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0034492162698409046
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.5326822916666667
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state",
+        "data": {
+          "cache-end": 1.8986666666666665,
+          "reader-pts": 0.896,
+          "cache-duration": 1.0026666666666664,
+          "eof": false,
+          "underrun": false,
+          "idle": false,
+          "total-bytes": 164368,
+          "fw-bytes": 164368,
+          "raw-input-rate": 378,
+          "debug-low-level-seeks": 0,
+          "debug-byte-level-seeks": 0,
+          "debug-ts-last": 1.8986666666666665,
+          "ts-per-stream": [
+            {
+              "type": "video",
+              "cache-duration": 1.2333333333333334,
+              "reader-pts": 0.6326822916666667,
+              "cache-end": 1.866015625
+            },
+            {
+              "type": "audio",
+              "cache-duration": 1.0026666666666664,
+              "reader-pts": 0.896,
+              "cache-end": 1.8986666666666665
+            }
+          ],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        }
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.004945814909296575
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.566015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0006374248866207743
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.5993489583333333
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0021340235260767226
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.6326822916666667
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.009435610827663976
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.666015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.005127220804988508
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.6993489583333333
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0066238194444444565
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.7326822916666667
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.0023154294217687665
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 0.766015625
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0.003812028061224715
+      },
+      {
+        "event": "command-reply",
+        "id": 103,
+        "result": null
+      },
+      {
+        "event": "property-change",
+        "id": 3,
+        "name": "pause",
+        "data": true
+      },
+      {
+        "event": "command-reply",
+        "id": 104,
+        "result": null
+      },
+      {
+        "event": "seek"
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 13
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync",
+        "data": 0
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state",
+        "data": {
+          "cache-duration": 0,
+          "eof": false,
+          "underrun": true,
+          "idle": false,
+          "total-bytes": 0,
+          "fw-bytes": 0,
+          "raw-input-rate": 378,
+          "debug-low-level-seeks": 1,
+          "debug-byte-level-seeks": 0,
+          "ts-per-stream": [],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        }
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (399736734 > 2653).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2657\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-2002693504 > 3701).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3705\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (2001894346 > 4601).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4605\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-852027119 > 2881).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2885\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (2065451269 > 2705).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2709\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1261441888 > 3778).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3782\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (950477011 > 4639).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4643\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (797839171 > 2974).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2978\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1777254831 > 2663).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2667\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (2005743144 > 4014).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4018\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1014681965 > 2848).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2852\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1109708580 > 2790).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2794\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-866328002 > 4109).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4113\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (210201892 > 2935).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2939\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1259453907 > 2754).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2758\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (828598226 > 4361).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4365\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1711253196 > 2896).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2900\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1500263960 > 2530).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2534\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-706459193 > 4455).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4459\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-332224013 > 3113).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3117\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1568539908 > 2733).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2737\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1035197170 > 3751).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3755\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1699656971 > 4453).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4457\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (935992660 > 3171).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3175\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-436792703 > 2601).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2605\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1746874319 > 4129).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4133\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1446273084 > 2859).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2863\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (805980934 > 3708).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3712\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1277357173 > 3896).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3900\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (167525904 > 4234).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4238\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-864013930 > 2671).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2675\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-2014298052 > 4110).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4114\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-752368470 > 2980).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2984\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (195365472 > 2672).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2676\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (874368138 > 4582).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4586\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (324993974 > 3117).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3121\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (33364418 > 2591).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2595\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1419338208 > 4591).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4595\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (406307013 > 2984).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2988\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1603385138 > 2810).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2814\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1339508655 > 4572).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4576\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (526113794 > 3100).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3104\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (2125317160 > 2741).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2745\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (176001922 > 4888).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4892\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-609072210 > 2999).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3003\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (298030149 > 3170).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3174\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-656338086 > 4748).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4752\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1953382352 > 3271).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3275\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (558244229 > 2831).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2835\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (317978183 > 4568).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 4572\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1731210415 > 3150).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3154\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (1935077290 > 2715).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2719\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (-1168101652 > 3147).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 3151\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: Invalid NAL unit size (242495316 > 2696).\n"
+      },
+      {
+        "event": "log-message",
+        "prefix": "ffmpeg",
+        "level": "error",
+        "text": "NULL: missing picture in access unit with size 2700\n"
+      },
+      {
+        "event": "playback-restart"
+      },
+      {
+        "event": "seek"
+      },
+      {
+        "event": "playback-restart"
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos",
+        "data": 24
+      },
+      {
+        "event": "property-change",
+        "id": 4,
+        "name": "eof-reached",
+        "data": true
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state",
+        "data": {
+          "cache-duration": 0,
+          "eof": true,
+          "underrun": false,
+          "idle": true,
+          "total-bytes": 0,
+          "fw-bytes": 0,
+          "raw-input-rate": 110292,
+          "debug-low-level-seeks": 2,
+          "debug-byte-level-seeks": 0,
+          "ts-per-stream": [],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        }
+      }
+    ],
+    "errors": []
+  },
+  "hashes": {
+    "web/engine/player.wasm": "8e3c45f6cdf49001226fffc4c0d9eb50a164379136e8cea31cb754c78428993c",
+    "web/engine/player.mjs": "274c2363bbae1dfb3aa5971443964499ba2eb186dcf871ed06338b0b3ef44ef1",
+    "web/io-worker.js": "d4c24850a18b391d0a45b2c50c2fd886d88ccd57e31bdf295cc6ed17c90fa46c",
+    "web/resource-loader.js": "a083c774a9846bd228c08023d2d324561d998dc12dc973066fccabcea053d473",
+    "native/stream_bridge.c": "78c5e7665bcb1e5122c2793e51086f86a6da7f3e482a703f50b0f0ef2672ebe5"
+  }
+}

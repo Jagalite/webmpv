@@ -1,0 +1,72 @@
+--- a/demux/demux_lavf.c
++++ b/demux/demux_lavf.c
+@@ -28,6 +28,11 @@
+ 
+ #include <libavformat/avformat.h>
+ #include <libavformat/avio.h>
++#ifdef __EMSCRIPTEN__
++extern const char *web_resource_url(void);
++extern int web_resource_avio_open(AVFormatContext*,AVIOContext**,const char*,int,AVDictionary**);
++extern int web_resource_avio_close(AVFormatContext*,AVIOContext*);
++#endif
+ 
+ #include <libavutil/avutil.h>
+ #include <libavutil/avstring.h>
+@@ -425,6 +430,9 @@
+     struct stream *s = priv->stream;
+ 
+     priv->filename = remove_prefix(s->url, prefixes);
++#ifdef __EMSCRIPTEN__
++    if (web_resource_url()) priv->filename = talloc_strdup(priv, web_resource_url());
++#endif
+ 
+     char *avdevice_format = NULL;
+     if (s->info && strcmp(s->info->name, "avdevice") == 0) {
+@@ -1018,6 +1026,9 @@
+             MP_VERBOSE(demuxer, "Option extension_picky=0 was set due to known FFmpeg bugs\n");
+     }
+ 
++#ifdef __EMSCRIPTEN__
++    if (web_resource_url()) priv->format_hack.no_stream = false;
++#endif
+     if ((priv->avif_flags & AVFMT_NOFILE) || priv->format_hack.no_stream) {
+         mp_setup_av_network_options(&dopts, priv->avif->name,
+                                     demuxer->global, demuxer->log);
+@@ -1061,6 +1072,24 @@
+     };
+ 
+     avfc->opaque = demuxer;
++#ifdef __EMSCRIPTEN__
++    const char *browser_url = web_resource_url();
++    if (browser_url) {
++        // The manifest's real URL is also the base for every relative resource.
++        priv->filename = talloc_strdup(priv, browser_url);
++        priv->default_io_open = web_resource_avio_open;
++        priv->default_io_close2 = web_resource_avio_close;
++        avfc->io_open = nested_io_open;
++        avfc->io_close2 = nested_io_close2;
++        avfc->flags |= AVFMT_FLAG_CUSTOM_IO;
++        av_dict_set(&dopts, "http_persistent", "0", 0);
++        av_dict_set(&dopts, "http_multiple", "0", 0);
++        // HLS WebVTT is upstream experimental; the browser admission policy
++        // restricts each subtitle rendition to one finite full-timeline file.
++        if (strcmp(priv->avif->name, "hls") == 0)
++            av_dict_set(&dopts, "strict", "experimental", 0);
++    } else
++#endif
+     if (demuxer->access_references) {
+         priv->default_io_open = avfc->io_open;
+         avfc->io_open = nested_io_open;
+@@ -1418,6 +1447,12 @@
+         // io_open on the main playlist, but never calls io_close. This happens
+         // to work out for us (since we don't really use custom I/O), but it's
+         // still weird. Compensate.
++#ifdef __EMSCRIPTEN__
++        if (priv->default_io_close2 == web_resource_avio_close) {
++            while (priv->num_nested)
++                web_resource_avio_close(NULL, priv->nested[--priv->num_nested].id);
++        }
++#endif
+         if (priv->num_nested == 1 && priv->nested[0].id == leaking)
+             priv->num_nested = 0;
+         if (priv->num_nested) {

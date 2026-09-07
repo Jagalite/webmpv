@@ -1,0 +1,48 @@
+✔ PCM ring wraps and handles actual output quantum length (2.116084ms)
+✔ underrun silence never advances media consumption (1.049958ms)
+✔ pause and generation reset suppress queued stale PCM (0.772375ms)
+✔ closed output processor releases its processing lifetime (0.300666ms)
+✔ eight pending inputs apply backpressure before the ninth packet (3.110917ms)
+✔ copy-back preserves timestamp/color and closes its source exactly once (0.542958ms)
+✔ stale copy completion cannot publish into a replacement request (0.44525ms)
+✔ reset closes queued frames and rejects late generation output (0.447084ms)
+✔ EOF waits for queued output; close releases each remaining frame (0.421375ms)
+✔ close preempts an unfinished copy and closes its frame immediately (0.431542ms)
+✔ a request published immediately after acknowledgment runs without another notification (3.6945ms)
+✔ 64-bit positions and bounded LRU (143.305083ms)
+✔ unaligned misses start at the requested byte and inner reads reuse the bounded window (4.569ms)
+✔ reject ignore-range (3.959125ms)
+✔ reject bad-range (3.725ms)
+✔ reject encoded (4.186334ms)
+✔ reject forbidden (3.380917ms)
+✔ representation changes are terminal (5.96825ms)
+✔ recover truncate without false EOF (71.398625ms)
+✔ recover retry without false EOF (250.817167ms)
+✔ 401 renewal and default redirect rejection (4758.333208ms)
+✔ supersede blocked read and reuse source; close cancels (115.767917ms)
+✔ ordinary 200 resource, relative URL, bounded reads and close accounting (13.028417ms)
+✔ explicit range preserves absolute resource offsets and total size (0.785709ms)
+✔ requested ranges reject 200, malformed ranges and changed lengths (0.752125ms)
+✔ origin, protocol, embedded credentials and URL length are checked before fetch (0.458666ms)
+✔ nested authorization refresh receives resource URL and updates only that request (1.041458ms)
+✔ refresh cannot redirect credentials to an unapproved origin (0.337542ms)
+✔ bounded transient HTTP retry and truncation recovery (304.427166ms)
+✔ unknown-length bodies cannot exceed media resource cap (2.222458ms)
+✔ aggregate retention limit is enforced across handles and reclaimed on close (32.265916ms)
+✔ handle count is bounded independently of body size (1.694542ms)
+✔ destroy cancels pending authorization and rejects stale completion (0.345291ms)
+✔ epoch cancellation discards a response even if transport ignores abort (0.3345ms)
+✔ manifest admission rejects live, encrypted and adaptive HLS (1.439125ms)
+✔ DASH admission accepts fixed static and rejects live, adaptive, entities and multiple periods (1.740666ms)
+✔ HLS subtitle policy admits one full-timeline resource and rejects segmented subtitles (0.716334ms)
+✔ fixed HLS discontinuities remain native timeline input (0.059375ms)
+✔ DASH timeline and template resource counts are bounded (0.22225ms)
+✔ disconnect during metadata lookup does not leave a phantom active request (1.254667ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5896.364458

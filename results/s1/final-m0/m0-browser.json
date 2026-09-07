@@ -1,0 +1,851 @@
+{
+  "schema": 1,
+  "started": "2026-09-07T15:48:31.916Z",
+  "browser": "152.0.7977.76",
+  "headless": false,
+  "host": {
+    "platform": "darwin",
+    "release": "25.5.0",
+    "arch": "arm64",
+    "cpu": "Apple M1"
+  },
+  "tests": [
+    {
+      "name": "isolated software-only browser",
+      "passed": true,
+      "milliseconds": 67,
+      "evidence": {
+        "isolated": true,
+        "disabled": true
+      }
+    },
+    {
+      "name": "upstream initialization and local decode",
+      "passed": true,
+      "milliseconds": 1836,
+      "evidence": {
+        "video": {
+          "rendered": 21,
+          "renderMs": 90.0500000002794,
+          "copyMs": 29.069999999832362,
+          "maxRenderMs": 43.45999999996275,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 0.567,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.567,
+          "queuedFrames": 7168
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 44100,
+          "mediaFrames": 33024,
+          "underruns": 0,
+          "rms": 0.06229061291953169,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "codecsAbsent": true,
+        "events": [
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": []
+          },
+          {
+            "event": "property-change",
+            "id": 6,
+            "name": "audio-codec-name"
+          },
+          {
+            "event": "property-change",
+            "id": 7,
+            "name": "video-codec"
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "video",
+                "src-id": 1,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 0,
+                "codec": "h264",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30.000000300000004,
+                "demux-par": 1,
+                "metadata": {
+                  "ENCODER": "Lavc libx264",
+                  "DURATION": "00:00:12.000000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "audio",
+                "src-id": 2,
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 1,
+                "codec": "aac",
+                "demux-channel-count": 2,
+                "demux-channels": "unknown2",
+                "demux-samplerate": 48000,
+                "metadata": {
+                  "ENCODER": "Lavc aac",
+                  "DURATION": "00:00:12.021000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "src-id": 3,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 2,
+                "codec": "ass",
+                "metadata": {
+                  "ENCODER": "Lavc ass",
+                  "DURATION": "00:00:12.000000000"
+                }
+              }
+            ]
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "video",
+                "src-id": 1,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 0,
+                "decoder": "h264",
+                "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec": "h264",
+                "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30.000000300000004,
+                "demux-par": 1,
+                "metadata": {
+                  "ENCODER": "Lavc libx264",
+                  "DURATION": "00:00:12.000000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "audio",
+                "src-id": 2,
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 1,
+                "decoder": "aac",
+                "decoder-desc": "AAC (Advanced Audio Coding)",
+                "codec": "aac",
+                "codec-desc": "AAC (Advanced Audio Coding)",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "metadata": {
+                  "ENCODER": "Lavc aac",
+                  "DURATION": "00:00:12.021000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "src-id": 3,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 2,
+                "codec": "ass",
+                "metadata": {
+                  "ENCODER": "Lavc ass",
+                  "DURATION": "00:00:12.000000000"
+                }
+              }
+            ]
+          },
+          {
+            "event": "property-change",
+            "id": 6,
+            "name": "audio-codec-name",
+            "data": "aac"
+          },
+          {
+            "event": "property-change",
+            "id": 7,
+            "name": "video-codec",
+            "data": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+          },
+          {
+            "event": "file-loaded"
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "video",
+                "src-id": 1,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 0,
+                "decoder": "h264",
+                "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec": "h264",
+                "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec-profile": "High",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30.000000300000004,
+                "demux-par": 1,
+                "metadata": {
+                  "ENCODER": "Lavc libx264",
+                  "DURATION": "00:00:12.000000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "audio",
+                "src-id": 2,
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 1,
+                "decoder": "aac",
+                "decoder-desc": "AAC (Advanced Audio Coding)",
+                "codec": "aac",
+                "codec-desc": "AAC (Advanced Audio Coding)",
+                "codec-profile": "LC",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "metadata": {
+                  "ENCODER": "Lavc aac",
+                  "DURATION": "00:00:12.021000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "src-id": 3,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": false,
+                "ff-index": 2,
+                "codec": "ass",
+                "metadata": {
+                  "ENCODER": "Lavc ass",
+                  "DURATION": "00:00:12.000000000"
+                }
+              }
+            ]
+          },
+          {
+            "event": "property-change",
+            "id": 5,
+            "name": "track-list",
+            "data": [
+              {
+                "id": "1",
+                "type": "video",
+                "src-id": 1,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 0,
+                "decoder": "h264",
+                "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec": "h264",
+                "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec-profile": "High",
+                "demux-w": 640,
+                "demux-h": 360,
+                "demux-fps": 30.000000300000004,
+                "demux-par": 1,
+                "metadata": {
+                  "ENCODER": "Lavc libx264",
+                  "DURATION": "00:00:12.000000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "audio",
+                "src-id": 2,
+                "audio-channels": 2,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 1,
+                "decoder": "aac",
+                "decoder-desc": "AAC (Advanced Audio Coding)",
+                "codec": "aac",
+                "codec-desc": "AAC (Advanced Audio Coding)",
+                "codec-profile": "LC",
+                "demux-channel-count": 2,
+                "demux-channels": "stereo",
+                "demux-samplerate": 48000,
+                "metadata": {
+                  "ENCODER": "Lavc aac",
+                  "DURATION": "00:00:12.021000000"
+                }
+              },
+              {
+                "id": "1",
+                "type": "sub",
+                "src-id": 3,
+                "image": false,
+                "albumart": false,
+                "default": false,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 2,
+                "codec": "ass",
+                "codec-desc": "Advanced Sub Station Alpha",
+                "metadata": {
+                  "ENCODER": "Lavc ass",
+                  "DURATION": "00:00:12.000000000"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "changing visible software frames and output PCM",
+      "passed": true,
+      "milliseconds": 468,
+      "evidence": {
+        "first": {
+          "width": 640,
+          "height": 360,
+          "nonblack": 230398,
+          "yellow": 7862,
+          "changedBottom": 0,
+          "hash": 1610557204
+        },
+        "second": {
+          "width": 640,
+          "height": 360,
+          "nonblack": 230399,
+          "yellow": 6554,
+          "changedBottom": 15432,
+          "hash": 2339196364
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 44100,
+          "mediaFrames": 59392,
+          "underruns": 0,
+          "rms": 0.062489628239822015,
+          "latencyConfidence": "reported-latency estimate"
+        }
+      }
+    },
+    {
+      "name": "pause, ASS composition and paused redraw",
+      "passed": true,
+      "milliseconds": 5307,
+      "evidence": {
+        "pausedTime": 1.3,
+        "later": 1.3,
+        "withASS": {
+          "width": 640,
+          "height": 360,
+          "nonblack": 230397,
+          "yellow": 7862,
+          "changedBottom": 14646,
+          "hash": 3589725026
+        },
+        "withoutASS": {
+          "width": 640,
+          "height": 360,
+          "nonblack": 230397,
+          "yellow": 7950,
+          "changedBottom": 7365,
+          "hash": 399347485
+        },
+        "restored": {
+          "width": 640,
+          "height": 360,
+          "nonblack": 230397,
+          "yellow": 7862,
+          "changedBottom": 7365,
+          "hash": 3589725026
+        }
+      }
+    },
+    {
+      "name": "resize, volume, seek, resume and EOF",
+      "passed": true,
+      "milliseconds": 2805,
+      "evidence": {
+        "resized": {
+          "width": 800,
+          "height": 450,
+          "nonblack": 359997,
+          "yellow": 9810,
+          "changedBottom": 0,
+          "hash": 3713272573
+        },
+        "position": 11.969075010203973
+      }
+    },
+    {
+      "name": "reopen a local fixture in the same instance",
+      "passed": true,
+      "milliseconds": 1378,
+      "evidence": {
+        "position": 0.367,
+        "audio": {
+          "state": "running",
+          "sampleRate": 44100,
+          "mediaFrames": 167248,
+          "underruns": 158,
+          "rms": 0.003995669596796565,
+          "latencyConfidence": "reported-latency estimate"
+        }
+      }
+    },
+    {
+      "name": "graceful destroy and rejected use after destruction",
+      "passed": true,
+      "milliseconds": 202,
+      "evidence": {
+        "audio": {
+          "state": "closed",
+          "sampleRate": 44100,
+          "mediaFrames": 167760,
+          "underruns": 158,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "rejected": "Cannot resume a closed AudioContext."
+      }
+    },
+    {
+      "name": "ten complete player lifecycles",
+      "passed": true,
+      "milliseconds": 9941,
+      "evidence": [
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 11.109999999403954,
+            "copyMs": 31.910000000614673,
+            "maxRenderMs": 7.8549999999813735,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 7680
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4864,
+            "underruns": 0,
+            "rms": 0.06217930777398629,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 16.869999999646097,
+            "copyMs": 10.960000000428408,
+            "maxRenderMs": 9.694999999832362,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 7936
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4864,
+            "underruns": 0,
+            "rms": 0.06217930777398629,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 6,
+            "renderMs": 18.950000000651926,
+            "copyMs": 12.124999999534339,
+            "maxRenderMs": 11.629999999888241,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.09999999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.09999999999999999,
+            "queuedFrames": 6400
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 6144,
+            "underruns": 0,
+            "rms": 0.06234954214207195,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 14.984999999869615,
+            "copyMs": 13.809999999124557,
+            "maxRenderMs": 9.714999999850988,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 6144
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4608,
+            "underruns": 0,
+            "rms": 0.06196028913823035,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 11.494999999646097,
+            "copyMs": 7.940000000409782,
+            "maxRenderMs": 6.589999999850988,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 5888
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4864,
+            "underruns": 0,
+            "rms": 0.06217930777398629,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 10.234999999403954,
+            "copyMs": 7.555000000167638,
+            "maxRenderMs": 6.134999999776483,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 7936
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4608,
+            "underruns": 0,
+            "rms": 0.06196028913823035,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 12.239999999757856,
+            "copyMs": 7.759999999310821,
+            "maxRenderMs": 6.989999999757856,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 6144
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4864,
+            "underruns": 0,
+            "rms": 0.06217930777398629,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 12.529999999795109,
+            "copyMs": 10.619999999646097,
+            "maxRenderMs": 7.685000000055879,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 5888
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 5120,
+            "underruns": 0,
+            "rms": 0.06235798778158365,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 12.670000000391155,
+            "copyMs": 9.585000000428408,
+            "maxRenderMs": 8.120000000111759,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 7936
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4608,
+            "underruns": 0,
+            "rms": 0.06196028913823035,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        {
+          "video": {
+            "rendered": 5,
+            "renderMs": 12.305000000167638,
+            "copyMs": 9.199999999720603,
+            "maxRenderMs": 7.8250000001862645,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.06699999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.06699999999999999,
+            "queuedFrames": 7936
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 44100,
+            "mediaFrames": 4608,
+            "underruns": 0,
+            "rms": 0.06196028913823035,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid media rejection and cleanup during initialization",
+      "passed": true,
+      "milliseconds": 532,
+      "evidence": {
+        "invalid": "unrecognized file format",
+        "cancelled": "Player destroyed"
+      }
+    }
+  ],
+  "passed": true,
+  "errors": [],
+  "logs": [],
+  "finished": "2026-09-07T15:49:04.874Z",
+  "fixtureSha256": "739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba",
+  "browserArtifactHashes": {
+    "web/engine/player.mjs": "1794c9f008ecbc41680bcaff2db404ba83a3cf507ba2aeb2a3c6e371c7532578",
+    "web/generated/player.js": "326fb424fd8504ed920d8e4919b2baf82639d37b94d934f66c27c24dcb31f1dc",
+    "web/engine-worker.js": "8c05fc39e3b4d5c40e6a441eb1bfcee06a6e81b2d9159204703b950d2feb7069",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1"
+  },
+  "wasmSha256": "3dc656d621cd3b3048d50067df07624e97b240ee9b8c97de218977c3433ef7fb"
+}

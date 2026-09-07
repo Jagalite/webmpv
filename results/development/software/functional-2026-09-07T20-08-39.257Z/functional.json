@@ -1,0 +1,429 @@
+{
+  "network": {
+    "rtt": 80,
+    "mbps": 10
+  },
+  "started": "2026-09-07T20:08:41.749Z",
+  "browser": "152.0.7977.76",
+  "tests": [
+    {
+      "name": "real browser CORS, authorization, renewal, cookies and rejected responses",
+      "passed": false,
+      "error": "Error: Foreground browser condition changed during real browser CORS, authorization, renewal, cookies and rejected responses\n    at check (file:///Volumes/seed2/Projects/webmpv/build/qualification/software-functional-2026-09-07T20-08-39.257Z.mjs:15:340)\n    at async file:///Volumes/seed2/Projects/webmpv/build/qualification/software-functional-2026-09-07T20-08-39.257Z.mjs:20:2"
+    }
+  ],
+  "passed": false,
+  "foregroundChecks": [
+    {
+      "name": "real browser CORS, authorization, renewal, cookies and rejected responses",
+      "before": {
+        "at": "2026-09-07T20:08:42.006Z",
+        "focused": true,
+        "visibility": "visible",
+        "browserPID": 16275,
+        "foregroundPID": 16275,
+        "matched": true
+      },
+      "after": {
+        "at": "2026-09-07T20:08:59.922Z",
+        "focused": false,
+        "visibility": "visible",
+        "browserPID": 16275,
+        "foregroundPID": 701,
+        "matched": false
+      },
+      "completedCaseEvidence": [
+        {
+          "mode": "auth",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 1,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 2,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 2,
+            "bytes": 262144,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 0,
+            "mode": "auth",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "cookie",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 0,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 262144,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 0,
+            "mode": "cookie",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "cors-denied",
+          "ok": false,
+          "error": "Media read retry deadline exceeded",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 10,
+            "retries": 9,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 10,
+            "bytes": 327680,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 10,
+            "mode": "cors-denied",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "forbidden",
+          "ok": false,
+          "error": "Expected HTTP 206; received 403",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 0,
+            "ranges": [],
+            "aborted": 0,
+            "mode": "forbidden",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "ignore-range",
+          "ok": false,
+          "error": "Expected HTTP 206; received 200",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 0,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 1,
+            "mode": "ignore-range",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "bad-range",
+          "ok": false,
+          "error": "Incoherent media range or changed length",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 32768,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 1,
+            "mode": "bad-range",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "encoded",
+          "ok": false,
+          "error": "Media read retry deadline exceeded",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 10,
+            "retries": 9,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 10,
+            "bytes": 327680,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 10,
+            "mode": "encoded",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "redirect",
+          "ok": false,
+          "error": "Media read retry deadline exceeded",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 10,
+            "retries": 9,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 10,
+            "bytes": 0,
+            "ranges": [],
+            "aborted": 0,
+            "mode": "redirect",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "retry",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 0,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 3,
+            "retries": 2,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 3,
+            "bytes": 262144,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 0,
+            "mode": "retry",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "truncate",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 0,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 2,
+            "bytes": 294912,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 1,
+            "mode": "truncate",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        }
+      ]
+    }
+  ],
+  "failure": "Error: Foreground browser condition changed during real browser CORS, authorization, renewal, cookies and rejected responses\n    at check (file:///Volumes/seed2/Projects/webmpv/build/qualification/software-functional-2026-09-07T20-08-39.257Z.mjs:15:340)\n    at async file:///Volumes/seed2/Projects/webmpv/build/qualification/software-functional-2026-09-07T20-08-39.257Z.mjs:20:2",
+  "state": {
+    "events": [],
+    "errors": []
+  },
+  "logs": [],
+  "finished": "2026-09-07T20:09:00.101Z",
+  "wasmSha256": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583"
+}

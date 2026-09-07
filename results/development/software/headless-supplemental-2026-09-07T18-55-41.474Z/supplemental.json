@@ -1,0 +1,106 @@
+{
+  "network": {
+    "rtt": 80,
+    "mbps": 10
+  },
+  "started": "2026-09-07T18:55:44.377Z",
+  "tests": [
+    {
+      "name": "attached ASS shaping, karaoke, vectors and overlap match native reference at DPR 2",
+      "evidence": {
+        "comparison": [
+          {
+            "name": "karaoke",
+            "pixels": 14022,
+            "referencePixels": 15469,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 27167,
+            "referencePixels": 27723,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 62658,
+            "referencePixels": 66434,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "resizedComparison": [
+          {
+            "name": "karaoke",
+            "pixels": 6418,
+            "referencePixels": 7374,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 11986,
+            "referencePixels": 12425,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 28597,
+            "referencePixels": 31224,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "deviceScaleFactor": 2,
+        "tolerance": "RGB delta >=12; 3-pixel edge tolerance; each region precision and recall >=95%"
+      },
+      "passed": true
+    },
+    {
+      "name": "karaoke highlight advances at the reference timestamps",
+      "evidence": {
+        "phases": [
+          {
+            "position": 2.25,
+            "actual": {
+              "yellow": 1127,
+              "red": 3047,
+              "highlightShare": 0.2700047915668424
+            },
+            "reference": {
+              "yellow": 1080,
+              "red": 2779,
+              "highlightShare": 0.27986525006478363
+            }
+          },
+          {
+            "position": 3.25,
+            "actual": {
+              "yellow": 2758,
+              "red": 1372,
+              "highlightShare": 0.6677966101694915
+            },
+            "reference": {
+              "yellow": 2689,
+              "red": 1243,
+              "highlightShare": 0.6838758901322483
+            }
+          }
+        ],
+        "mask": "The native on/off glyph sample positions are shared by both color measurements",
+        "tolerance": "Highlighted-color share within 15 percentage points of the native reference and increasing between phases"
+      },
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "failure": "Error: ENOENT: no such file or directory, stat 'build/fixtures/over-budget.mkv'\n    at async Object.stat (node:internal/fs/promises:1037:18)\n    at async resolvePathsAndDirectoryForInputFiles (/Volumes/seed2/Projects/webmpv/node_modules/playwright-core/lib/client/elementHandle.js:213:18)\n    at async convertInputFiles (/Volumes/seed2/Projects/webmpv/node_modules/playwright-core/lib/client/elementHandle.js:232:42)\n    at async Frame.setInputFiles (/Volumes/seed2/Projects/webmpv/node_modules/playwright-core/lib/client/frame.js:349:23)\n    at async Locator.setInputFiles (/Volumes/seed2/Projects/webmpv/node_modules/playwright-core/lib/client/locator.js:265:12)\n    at async file:///Volumes/seed2/Projects/webmpv/build/qualification/software-supplemental-2026-09-07T18-55-41.474Z.mjs:49:103\n    at async check (file:///Volumes/seed2/Projects/webmpv/build/qualification/software-supplemental-2026-09-07T18-55-41.474Z.mjs:12:46)\n    at async file:///Volumes/seed2/Projects/webmpv/build/qualification/software-supplemental-2026-09-07T18-55-41.474Z.mjs:48:2",
+  "logs": [],
+  "wasmSha256": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+  "finished": "2026-09-07T18:56:00.104Z",
+  "executionMode": "headless-diagnostic",
+  "qualificationEligible": false
+}

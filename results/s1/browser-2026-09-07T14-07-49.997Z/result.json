@@ -1,0 +1,142 @@
+{
+  "scope": "S1 real software playback",
+  "started": "2026-09-07T14:07:51.934Z",
+  "browser": "152.0.7977.76",
+  "tests": [],
+  "passed": false,
+  "failure": "page.evaluate: Error: Failed to execute 'decode' on 'TextDecoder': The provided ArrayBufferView value must not be shared.\n    at worker.onmessage (http://127.0.0.1:4179/web/generated/player.js:44:35)\n    at open (/Volumes/seed2/Projects/webmpv/tests/s1.mjs:16:59)\n    at /Volumes/seed2/Projects/webmpv/tests/s1.mjs:23:73\n    at async check (/Volumes/seed2/Projects/webmpv/tests/s1.mjs:15:96)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/s1.mjs:22:5",
+  "player": {
+    "diagnostics": {
+      "rendered": 1,
+      "renderMs": 0.5849999934434891,
+      "copyMs": 3.8250000029802322,
+      "maxRenderMs": 0.5849999934434891,
+      "heapBytes": 134217728,
+      "epoch": 0,
+      "path": "wasm",
+      "demuxFormat": "",
+      "seekPrerollSeconds": 0,
+      "ioPending": false,
+      "ioSerial": 0,
+      "interruptions": 0,
+      "seeking": false,
+      "queuedFrames": 0
+    },
+    "events": [
+      {
+        "event": "idle"
+      },
+      {
+        "event": "command-reply",
+        "id": 100,
+        "result": null
+      },
+      {
+        "event": "property-change",
+        "id": 1,
+        "name": "time-pos"
+      },
+      {
+        "event": "property-change",
+        "id": 2,
+        "name": "duration"
+      },
+      {
+        "event": "property-change",
+        "id": 3,
+        "name": "pause",
+        "data": true
+      },
+      {
+        "event": "property-change",
+        "id": 4,
+        "name": "eof-reached"
+      },
+      {
+        "event": "property-change",
+        "id": 5,
+        "name": "track-list",
+        "data": []
+      },
+      {
+        "event": "property-change",
+        "id": 6,
+        "name": "audio-codec-name"
+      },
+      {
+        "event": "property-change",
+        "id": 7,
+        "name": "video-codec"
+      },
+      {
+        "event": "property-change",
+        "id": 8,
+        "name": "volume",
+        "data": 100
+      },
+      {
+        "event": "property-change",
+        "id": 9,
+        "name": "speed",
+        "data": 1
+      },
+      {
+        "event": "property-change",
+        "id": 10,
+        "name": "paused-for-cache"
+      },
+      {
+        "event": "property-change",
+        "id": 11,
+        "name": "cache-buffering-state"
+      },
+      {
+        "event": "property-change",
+        "id": 12,
+        "name": "demuxer-cache-state"
+      },
+      {
+        "event": "property-change",
+        "id": 13,
+        "name": "decoder-frame-drop-count"
+      },
+      {
+        "event": "property-change",
+        "id": 14,
+        "name": "frame-drop-count"
+      },
+      {
+        "event": "property-change",
+        "id": 15,
+        "name": "avsync"
+      },
+      {
+        "event": "property-change",
+        "id": 16,
+        "name": "video-params"
+      },
+      {
+        "event": "command-reply",
+        "id": 101,
+        "result": {
+          "playlist_entry_id": 1
+        }
+      },
+      {
+        "event": "start-file",
+        "playlist_entry_id": 1
+      }
+    ],
+    "errors": [
+      "Failed to execute 'decode' on 'TextDecoder': The provided ArrayBufferView value must not be shared.",
+      "Failed to execute 'decode' on 'TextDecoder': The provided ArrayBufferView value must not be shared."
+    ]
+  },
+  "hashes": {
+    "web/engine/player.wasm": "419edd8a11e83b37110adcf14582f1b04a80b59bf7fae82064d8b0850708594f",
+    "web/engine/player.mjs": "274c2363bbae1dfb3aa5971443964499ba2eb186dcf871ed06338b0b3ef44ef1",
+    "web/io-worker.js": "5d2f34cb2522f26699d77330e3305cd4167923ebce4a67b95bc7f8a4f6335216",
+    "web/resource-loader.js": "c076c333518263456b2032d858187f2f3d19e1f3a2ad8861fc47dfcd32f05f01",
+    "native/stream_bridge.c": "78c5e7665bcb1e5122c2793e51086f86a6da7f3e482a703f50b0f0ef2672ebe5"
+  }
+}

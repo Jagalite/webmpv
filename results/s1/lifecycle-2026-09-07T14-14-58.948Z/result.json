@@ -1,0 +1,137 @@
+{
+  "scope": "S1 cancellation and lifecycle",
+  "browser": "152.0.7977.76",
+  "tests": [
+    {
+      "name": "stalled nested open is interrupted by seek",
+      "passed": true,
+      "milliseconds": 10917,
+      "evidence": {
+        "before": {
+          "rendered": 265,
+          "renderMs": 178.7600000500679,
+          "copyMs": 148.6050000190735,
+          "maxRenderMs": 6.719999998807907,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "demuxFormat": "hls",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 8.754666666666667,
+          "ioPending": true,
+          "ioSerial": 52,
+          "interruptions": 0,
+          "io": {
+            "opens": 6,
+            "requests": 6,
+            "retries": 0,
+            "aborts": 0,
+            "handles": 1,
+            "retainedBytes": 449,
+            "peakRetainedBytes": 252745,
+            "fetchedBytes": 1210605,
+            "size": "0",
+            "reads": 41,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 8.754666666666667,
+          "queuedFrames": 7424
+        },
+        "after": {
+          "rendered": 266,
+          "renderMs": 179.22500005364418,
+          "copyMs": 148.93000001460314,
+          "maxRenderMs": 6.719999998807907,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "demuxFormat": "hls",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 18,
+          "ioPending": true,
+          "ioSerial": 63,
+          "interruptions": 1,
+          "io": {
+            "opens": 9,
+            "requests": 9,
+            "retries": 0,
+            "aborts": 1,
+            "handles": 2,
+            "retainedBytes": 252557,
+            "peakRetainedBytes": 252745,
+            "fetchedBytes": 1699593,
+            "size": "0",
+            "reads": 48,
+            "seeks": 1,
+            "interruptions": 1
+          },
+          "seeking": false,
+          "position": 18,
+          "queuedFrames": 8192
+        },
+        "network": {
+          "requests": [
+            {
+              "path": "muxed/media.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-000.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-001.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-002.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-003.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-004.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-005.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-006.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-009.ts",
+              "range": null,
+              "authorized": false
+            }
+          ],
+          "aborted": 1,
+          "active": 0,
+          "stall": "av-005.ts"
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "hashes": {
+    "web/engine/player.wasm": "8e3c45f6cdf49001226fffc4c0d9eb50a164379136e8cea31cb754c78428993c",
+    "web/engine/player.mjs": "274c2363bbae1dfb3aa5971443964499ba2eb186dcf871ed06338b0b3ef44ef1",
+    "web/io-worker.js": "d4c24850a18b391d0a45b2c50c2fd886d88ccd57e31bdf295cc6ed17c90fa46c",
+    "web/resource-loader.js": "a083c774a9846bd228c08023d2d324561d998dc12dc973066fccabcea053d473",
+    "native/stream_bridge.c": "78c5e7665bcb1e5122c2793e51086f86a6da7f3e482a703f50b0f0ef2672ebe5"
+  }
+}

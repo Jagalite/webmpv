@@ -1,0 +1,223 @@
+{
+  "scope": "M4 integrated copy-back and fallback",
+  "tests": [
+    {
+      "name": "{}",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "rendered": 32,
+          "renderMs": 34.42499999841675,
+          "copyMs": 10.125000000465661,
+          "maxRenderMs": 4.089999999850988,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 33,
+            "frames": 30,
+            "closedFrames": 30,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 84.96000000135973,
+            "outstanding": 3,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 0.967,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.967,
+          "queuedFrames": 6912
+        },
+        "final": {
+          "rendered": 125,
+          "renderMs": 121.75999999931082,
+          "copyMs": 31.825000001117587,
+          "maxRenderMs": 4.089999999850988,
+          "heapBytes": 134217728,
+          "epoch": 8,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 252,
+            "frames": 244,
+            "closedFrames": 244,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 6,
+            "errors": 0,
+            "copyMs": 370.67500000074506,
+            "outstanding": 2,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 11.979143037414858,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 11.979143037414858,
+          "queuedFrames": 148
+        }
+      }
+    },
+    {
+      "name": "{\"disableBrowserCodecs\":true}",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "rendered": 33,
+          "renderMs": 10.745000000111759,
+          "copyMs": 9.4300000006333,
+          "maxRenderMs": 2.385000000242144,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "software",
+          "decoderStats": {
+            "submitted": 0,
+            "frames": 0,
+            "closedFrames": 0,
+            "peakOutstanding": 0,
+            "peakFrames": 0,
+            "resets": 0,
+            "errors": 1,
+            "copyMs": 0,
+            "outstanding": 0,
+            "queued": 0,
+            "active": false
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 1,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 1,
+          "queuedFrames": 7680
+        },
+        "final": {
+          "rendered": 121,
+          "renderMs": 31.899999996181577,
+          "copyMs": 29.790000001899898,
+          "maxRenderMs": 2.385000000242144,
+          "heapBytes": 134217728,
+          "epoch": 8,
+          "path": "wasm",
+          "decoder": "software",
+          "decoderStats": {
+            "submitted": 0,
+            "frames": 0,
+            "closedFrames": 0,
+            "peakOutstanding": 0,
+            "peakFrames": 0,
+            "resets": 0,
+            "errors": 1,
+            "copyMs": 0,
+            "outstanding": 0,
+            "queued": 0,
+            "active": false
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 11.799999999999999,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 11.799999999999999,
+          "queuedFrames": 7060
+        }
+      }
+    },
+    {
+      "name": "{\"decoderFaultAfter\":12}",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "rendered": 32,
+          "renderMs": 21.024999999906868,
+          "copyMs": 9.590000000782311,
+          "maxRenderMs": 3.9900000002235174,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "software",
+          "decoderStats": {
+            "submitted": 14,
+            "frames": 12,
+            "closedFrames": 12,
+            "peakOutstanding": 3,
+            "peakFrames": 1,
+            "resets": 0,
+            "errors": 1,
+            "copyMs": 16.12500000046566,
+            "outstanding": 0,
+            "queued": 0,
+            "active": false
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 0.967,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.967,
+          "queuedFrames": 6144
+        },
+        "final": {
+          "rendered": 120,
+          "renderMs": 69.49500000057742,
+          "copyMs": 51.87000000104308,
+          "maxRenderMs": 3.9900000002235174,
+          "heapBytes": 134217728,
+          "epoch": 8,
+          "path": "wasm",
+          "decoder": "software",
+          "decoderStats": {
+            "submitted": 14,
+            "frames": 12,
+            "closedFrames": 12,
+            "peakOutstanding": 3,
+            "peakFrames": 1,
+            "resets": 0,
+            "errors": 1,
+            "copyMs": 16.12500000046566,
+            "outstanding": 0,
+            "queued": 0,
+            "active": false
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 11.799999999999999,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 11.799999999999999,
+          "queuedFrames": 6400
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "hashes": {
+    "web/engine-m4/player.wasm": "e69220833f9e417c02aae4c8553706525e06aa1b5860cfd2997c96e8fd4abd53",
+    "web/engine-m4/player.mjs": "606a02748a116076e015e046da8e2486dcefdb4d065f7214658582f47e83d336",
+    "native/vd_browser.c": "5e21e229e16633eafbd43afcfd692090d464418369c500894c39636654f11bfd",
+    "web/browser-decoder-worker.js": "4e06fdf4a83934cd5bb9a5215984764c0bce46c78968940fb2ba5cc797013baa",
+    "web/engine-worker.js": "5e48d1f39e287af3a5bbc92a71524e927af925338c161d83434f93db67e9b22c"
+  }
+}

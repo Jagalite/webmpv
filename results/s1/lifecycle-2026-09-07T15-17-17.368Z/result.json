@@ -1,0 +1,67 @@
+{
+  "scope": "S1 cancellation and lifecycle",
+  "browser": "152.0.7977.76",
+  "headless": false,
+  "tests": [
+    {
+      "name": "unsupported manifests fail before nested media requests",
+      "passed": true,
+      "milliseconds": 793,
+      "evidence": [
+        {
+          "file": "live.m3u8",
+          "error": "HLS must be finite VOD",
+          "network": {
+            "requests": [
+              {
+                "path": "muxed/live.m3u8",
+                "range": null,
+                "authorized": false
+              }
+            ],
+            "aborted": 0,
+            "active": 0
+          }
+        },
+        {
+          "file": "encrypted.m3u8",
+          "error": "Encrypted or live HLS is unsupported",
+          "network": {
+            "requests": [
+              {
+                "path": "muxed/encrypted.m3u8",
+                "range": null,
+                "authorized": false
+              }
+            ],
+            "aborted": 0,
+            "active": 0
+          }
+        },
+        {
+          "file": "discontinuity.m3u8",
+          "error": "HLS discontinuities are not yet supported",
+          "network": {
+            "requests": [
+              {
+                "path": "muxed/discontinuity.m3u8",
+                "range": null,
+                "authorized": false
+              }
+            ],
+            "aborted": 0,
+            "active": 0
+          }
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "hashes": {
+    "web/engine/player.wasm": "428207a70d6bbe4db7a99d4667858d4938b181db67d04a3157420a0f1e216f45",
+    "web/engine/player.mjs": "274c2363bbae1dfb3aa5971443964499ba2eb186dcf871ed06338b0b3ef44ef1",
+    "web/io-worker.js": "d4c24850a18b391d0a45b2c50c2fd886d88ccd57e31bdf295cc6ed17c90fa46c",
+    "web/resource-loader.js": "a083c774a9846bd228c08023d2d324561d998dc12dc973066fccabcea053d473",
+    "native/stream_bridge.c": "78c5e7665bcb1e5122c2793e51086f86a6da7f3e482a703f50b0f0ef2672ebe5"
+  }
+}

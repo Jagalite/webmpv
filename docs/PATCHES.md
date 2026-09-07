@@ -71,3 +71,52 @@ close and recoverable seek interruption are separate. On mpv's public seek event
 the host interrupts only the captured old pending read after mpv has flushed its
 demux/decoder/AO queues. The stalled actual-demux test verifies this boundary;
 no internal demux seek patch was necessary.
+
+## S1 0003: browser nested AVIO (in qualification)
+
+The Emscripten-only `demux_lavf` seam wraps the already opened manifest stream,
+restores its real URL as the relative-resource base, and sends nested AVIO
+open/close callbacks to the existing browser mailbox. Native builds keep their
+original behavior. The bridge serializes open/read/close across demux callers,
+retains a handle per resource, and keeps terminal cancellation at session scope.
+mpv still owns demuxing, timing, software decoding, track selection and subtitles.
+
+## S1 FFmpeg 0002: pinned HLS/DASH custom AVIO coverage (in qualification)
+
+Pinned FFmpeg 7.1.1 DASH has two direct `ffio_open_whitelist` calls. Route them
+through the format context's public I/O callbacks and use the matching close
+callback. HLS/DASH protocol admission recognizes HTTP(S) custom AVIO in Emscripten
+without enabling native sockets or a private URLProtocol. Browser Fetch enforces
+origins, headers, redirects, resource bounds and cancellation on every request.
+HTTP persistence and parallel HTTP paths are disabled for this custom transport.
+
+DASH adds locked upstream libxml2 2.13.8, built statically without HTTP, FTP,
+modules, programs or Python. Its MIT notice is in `third_party/notices/libxml2`.
+S1 qualification is separate from the accepted M2 software release.
+
+## S1 FFmpeg 0003: upstream fMP4 seek index reset
+
+Backports the MOV fragment/sample index reset from upstream FFmpeg n8.0 to the
+pinned n7.1.1 source. HLS resets the AVIO position when seeking; retaining MOV's
+old fragment offsets then produces corrupt NAL units. The newer MOV reader
+recognizes that reset, clears its fragment/sample indexes and reads the next
+root atom. Source URL and exact source-file hash are recorded in the patch.
+The [upstream report](https://ffmpeg.org/pipermail/ffmpeg-devel/2024-November/335634.html)
+describes the same failure. Our pre-fix browser run retains the reproduced
+corruption; post-fix qualification must cover fMP4 HLS seeks and direct MP4.
+
+## S1 FFmpeg 0004: discontinuity timeline mapping
+
+`patches/ffmpeg/0004-hls-ts-discontinuity-timeline.patch` handles finite TS and
+fMP4 playlist timestamp resets. Native packet byte positions identify each
+playlist period despite AVIO read-ahead. Period timestamps map onto the playlist
+timeline, and seeks restart at the period boundary to establish the raw origin.
+The original failing TS fixture and a repeated-init fMP4 fixture now pass.
+
+## M4 0004: optional decoder selection
+
+`patches/0004-optional-browser-decoder.patch` tries a weak optional decoder at
+mpv's existing video-decoder selection seam, then retains `vd_lavc` selection.
+Only the separate M4 link supplies `native/vd_browser.c`. Its dedicated browser
+service returns owned CPU frames and retains bounded compressed keyframe replay
+for software recovery. The software artifact does not link that driver.

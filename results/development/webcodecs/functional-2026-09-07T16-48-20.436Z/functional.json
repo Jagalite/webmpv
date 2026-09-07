@@ -1,0 +1,1658 @@
+{
+  "network": {
+    "rtt": 80,
+    "mbps": 10
+  },
+  "started": "2026-09-07T16:48:34.864Z",
+  "browser": "152.0.7977.76",
+  "tests": [
+    {
+      "name": "real browser CORS, authorization, renewal, cookies and rejected responses",
+      "passed": true,
+      "milliseconds": 16889,
+      "evidence": [
+        {
+          "mode": "auth",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 1,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 2,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 2,
+            "bytes": 262144,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 0,
+            "mode": "auth",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "cookie",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 0,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 262144,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 0,
+            "mode": "cookie",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "cors-denied",
+          "ok": false,
+          "error": "Media read retry deadline exceeded",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 10,
+            "retries": 9,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 10,
+            "bytes": 327680,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 10,
+            "mode": "cors-denied",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "forbidden",
+          "ok": false,
+          "error": "Expected HTTP 206; received 403",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 0,
+            "ranges": [],
+            "aborted": 0,
+            "mode": "forbidden",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "ignore-range",
+          "ok": false,
+          "error": "Expected HTTP 206; received 200",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 0,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 1,
+            "mode": "ignore-range",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "bad-range",
+          "ok": false,
+          "error": "Incoherent media range or changed length",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 1,
+            "bytes": 32768,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 1,
+            "mode": "bad-range",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "encoded",
+          "ok": false,
+          "error": "Media read retry deadline exceeded",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 10,
+            "retries": 9,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 10,
+            "bytes": 327680,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 10,
+            "mode": "encoded",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "redirect",
+          "ok": false,
+          "error": "Media read retry deadline exceeded",
+          "stats": {
+            "fetchedBytes": 0,
+            "requests": 10,
+            "retries": 9,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 10,
+            "bytes": 0,
+            "ranges": [],
+            "aborted": 0,
+            "mode": "redirect",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "retry",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 0,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 3,
+            "retries": 2,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 3,
+            "bytes": 262144,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 0,
+            "mode": "retry",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        },
+        {
+          "mode": "truncate",
+          "ok": true,
+          "info": {
+            "size": "2121565",
+            "etag": "\"739ffccce18413a01f0b6bfa32511ffaad8d71086513f3066902a0e7a1e619ba\""
+          },
+          "refreshes": 0,
+          "stats": {
+            "fetchedBytes": 262144,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 1,
+            "cacheBytes": 0,
+            "peakCacheBytes": 262144,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144
+          },
+          "server": {
+            "requests": 2,
+            "bytes": 294912,
+            "ranges": [
+              {
+                "start": 0,
+                "end": 262143
+              },
+              {
+                "start": 0,
+                "end": 262143
+              }
+            ],
+            "aborted": 1,
+            "mode": "truncate",
+            "stall": false,
+            "rtt": 80,
+            "mbps": 10
+          }
+        }
+      ]
+    },
+    {
+      "name": "front index: shaped startup and distant seek",
+      "passed": true,
+      "milliseconds": 5394,
+      "evidence": {
+        "startup": {
+          "milliseconds": 2808.5750000001863,
+          "video": {
+            "rendered": 7,
+            "renderMs": 35.52000000141561,
+            "copyMs": 21.794999999925494,
+            "maxRenderMs": 9.53000000026077,
+            "heapBytes": 134217728,
+            "epoch": 8,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 12,
+              "frames": 4,
+              "receivedFrames": 6,
+              "closedFrames": 6,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 9.584999999962747,
+              "outstanding": 4,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": true,
+            "ioSerial": 26,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 2097152,
+              "requests": 8,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 2097152,
+              "peakCacheBytes": 2097152,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "1157038449",
+              "reads": 25,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 5888,
+            "underruns": 0,
+            "rms": 0.24663520849600876,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        "seek": {
+          "milliseconds": 866,
+          "bytes": 688128,
+          "video": {
+            "rendered": 8,
+            "renderMs": 37.62500000093132,
+            "copyMs": 23.66000000014901,
+            "maxRenderMs": 9.53000000026077,
+            "heapBytes": 134217728,
+            "epoch": 10,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 26,
+              "frames": 7,
+              "receivedFrames": 14,
+              "closedFrames": 14,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 2,
+              "errors": 0,
+              "copyMs": 16.6949999993667,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 1620,
+            "ioPending": true,
+            "ioSerial": 30,
+            "interruptions": 1,
+            "io": {
+              "fetchedBytes": 2883584,
+              "requests": 12,
+              "retries": 0,
+              "aborts": 1,
+              "cacheBytes": 2883584,
+              "peakCacheBytes": 2883584,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "1157038449",
+              "reads": 29,
+              "seeks": 2,
+              "interruptions": 1
+            },
+            "seeking": false,
+            "position": 1620,
+            "queuedFrames": 8192
+          }
+        }
+      }
+    },
+    {
+      "name": "tail index: shaped startup and distant seek",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: startup 3112.0049999998882 ms\n    at file:///Volumes/seed2/Projects/webmpv/build/qualification/webcodecs-functional-2026-09-07T16-48-20.436Z.mjs:38:10\n    at async check (file:///Volumes/seed2/Projects/webmpv/build/qualification/webcodecs-functional-2026-09-07T16-48-20.436Z.mjs:14:75)\n    at async file:///Volumes/seed2/Projects/webmpv/build/qualification/webcodecs-functional-2026-09-07T16-48-20.436Z.mjs:29:37"
+    },
+    {
+      "name": "100 seeks at five per second, then latest output and PCM recover",
+      "passed": true,
+      "milliseconds": 25491,
+      "evidence": {
+        "video": {
+          "rendered": 20,
+          "renderMs": 48.35000000055879,
+          "copyMs": 43.945000001229346,
+          "maxRenderMs": 5.4500000001862645,
+          "heapBytes": 134217728,
+          "epoch": 110,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 87,
+            "frames": 52,
+            "receivedFrames": 58,
+            "closedFrames": 58,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 108,
+            "errors": 0,
+            "copyMs": 126.71000000089407,
+            "outstanding": 8,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 301.43333333333334,
+          "ioPending": true,
+          "ioSerial": 114,
+          "interruptions": 34,
+          "io": {
+            "fetchedBytes": 17891328,
+            "requests": 96,
+            "retries": 0,
+            "aborts": 34,
+            "cacheBytes": 16252928,
+            "peakCacheBytes": 16252928,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "1157038449",
+            "reads": 113,
+            "seeks": 49,
+            "interruptions": 34
+          },
+          "seeking": false,
+          "position": 301.43333333333334,
+          "queuedFrames": 7680
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 32512,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      }
+    },
+    {
+      "name": "five-second network outage recovers on the same source",
+      "passed": true,
+      "milliseconds": 9577,
+      "evidence": {
+        "video": {
+          "rendered": 7,
+          "renderMs": 17.970000000670552,
+          "copyMs": 22.294999999925494,
+          "maxRenderMs": 5.445000000298023,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "decoderStats": {
+            "submitted": 18,
+            "frames": 6,
+            "receivedFrames": 8,
+            "closedFrames": 8,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 2,
+            "errors": 1,
+            "copyMs": 21.660000001080334,
+            "outstanding": 0,
+            "queued": 0,
+            "active": false
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 900,
+          "ioPending": true,
+          "ioSerial": 30,
+          "interruptions": 1,
+          "io": {
+            "fetchedBytes": 2981888,
+            "requests": 15,
+            "retries": 3,
+            "aborts": 1,
+            "cacheBytes": 2883584,
+            "peakCacheBytes": 2883584,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "1157038449",
+            "reads": 29,
+            "seeks": 2,
+            "interruptions": 1
+          },
+          "seeking": false,
+          "position": 900,
+          "queuedFrames": 8192
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 8704,
+          "underruns": 0,
+          "rms": 0.21361880003547407,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      }
+    },
+    {
+      "name": "multiple tracks, volume, rate and composed ASS paused redraw",
+      "passed": true,
+      "milliseconds": 12195,
+      "evidence": {
+        "tracks": [
+          {
+            "id": "1",
+            "type": "video",
+            "src-id": 1,
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 0,
+            "decoder": "h264",
+            "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "codec": "h264",
+            "demux-w": 1920,
+            "demux-h": 1080,
+            "demux-fps": 30.000000300000004,
+            "demux-par": 1,
+            "metadata": {
+              "HANDLER_NAME": "VideoHandler",
+              "ENCODER": "Lavc62.28.102 libx264",
+              "DURATION": "00:00:12.066000000"
+            }
+          },
+          {
+            "id": "1",
+            "type": "audio",
+            "src-id": 2,
+            "lang": "eng",
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": false,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 1,
+            "decoder": "aac",
+            "decoder-desc": "AAC (Advanced Audio Coding)",
+            "codec": "aac",
+            "codec-desc": "AAC (Advanced Audio Coding)",
+            "codec-profile": "LC",
+            "demux-channel-count": 2,
+            "demux-channels": "stereo",
+            "demux-samplerate": 48000,
+            "metadata": {
+              "ENCODER": "Lavc62.28.102 aac",
+              "DURATION": "00:00:12.021000000"
+            }
+          },
+          {
+            "id": "2",
+            "type": "audio",
+            "src-id": 3,
+            "lang": "jpn",
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": false,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": false,
+            "ff-index": 2,
+            "codec": "aac",
+            "demux-channel-count": 2,
+            "demux-channels": "unknown2",
+            "demux-samplerate": 48000,
+            "metadata": {
+              "ENCODER": "Lavc62.28.102 aac",
+              "DURATION": "00:00:12.021000000"
+            }
+          },
+          {
+            "id": "1",
+            "type": "sub",
+            "src-id": 4,
+            "lang": "eng",
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 3,
+            "codec": "ass",
+            "codec-desc": "Advanced Sub Station Alpha",
+            "metadata": {
+              "ENCODER": "Lavc62.28.102 ass",
+              "DURATION": "00:00:12.000000000"
+            }
+          },
+          {
+            "id": "2",
+            "type": "sub",
+            "src-id": 5,
+            "lang": "ara",
+            "image": false,
+            "albumart": false,
+            "default": false,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": false,
+            "ff-index": 4,
+            "codec": "ass",
+            "metadata": {
+              "ENCODER": "Lavc62.28.102 ass",
+              "DURATION": "00:00:12.000000000"
+            }
+          }
+        ],
+        "compare": {
+          "changed": 109900,
+          "mismatch": 0
+        },
+        "frequencies": [
+          {
+            "expected": 440,
+            "hz": 445.3125,
+            "milliseconds": 3
+          },
+          {
+            "expected": 880,
+            "hz": 890.625,
+            "milliseconds": 1032
+          },
+          {
+            "expected": 440,
+            "hz": 445.3125,
+            "milliseconds": 106
+          },
+          {
+            "expected": 880,
+            "hz": 890.625,
+            "milliseconds": 16
+          }
+        ]
+      }
+    },
+    {
+      "name": "VFR and B-frame playback preserves ordered variable timestamps and final frames",
+      "passed": true,
+      "milliseconds": 13725,
+      "evidence": {
+        "video": {
+          "rendered": 273,
+          "renderMs": 70.44499999005347,
+          "copyMs": 61.62499999627471,
+          "maxRenderMs": 2.4100000001490116,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 270,
+            "frames": 270,
+            "receivedFrames": 270,
+            "closedFrames": 270,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 416.39500000700355,
+            "outstanding": 0,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 11.97331316666661,
+          "ioPending": false,
+          "ioSerial": 15,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 1044004,
+            "requests": 4,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 1048576,
+            "peakCacheBytes": 1048576,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "1044004",
+            "reads": 15,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 11.973333999999943,
+          "queuedFrames": 0
+        },
+        "position": 11.973333999999943,
+        "positions": [
+          0,
+          0.06699999999999999,
+          0.133,
+          0.19999999999999998,
+          0.267,
+          0.33299999999999996,
+          0.39999999999999997,
+          0.46699999999999997,
+          0.533,
+          0.6,
+          0.6669999999999999,
+          0.733,
+          0.7999999999999999,
+          0.867,
+          0.9329999999999999,
+          1,
+          1.067,
+          1.133,
+          1.2,
+          1.267,
+          1.333,
+          1.4,
+          1.4669999999999999,
+          1.533,
+          1.5999999999999999,
+          1.6669999999999998,
+          1.7329999999999999,
+          1.7999999999999998,
+          1.867,
+          1.9329999999999998,
+          2,
+          2.0669999999999997,
+          2.133,
+          2.1999999999999997,
+          2.267,
+          2.3329999999999997,
+          2.4,
+          2.467,
+          2.533,
+          2.6,
+          2.667,
+          2.733,
+          2.8,
+          2.867,
+          2.933,
+          3,
+          3.0669999999999997,
+          3.133,
+          3.1999999999999997,
+          3.267,
+          3.3329999999999997,
+          3.4,
+          3.4669999999999996,
+          3.533,
+          3.5999999999999996,
+          3.667,
+          3.7329999999999997,
+          3.8,
+          3.867,
+          3.933,
+          4,
+          4.067,
+          4.133,
+          4.2,
+          4.2669999999999995,
+          4.333,
+          4.3999999999999995,
+          4.467,
+          4.5329999999999995,
+          4.6,
+          4.667,
+          4.733,
+          4.8,
+          4.867,
+          4.933,
+          5,
+          5.067,
+          5.133,
+          5.2,
+          5.2669999999999995,
+          5.333,
+          5.3999999999999995,
+          5.467,
+          5.5329999999999995,
+          5.6,
+          5.667,
+          5.733,
+          5.8,
+          5.867,
+          5.933,
+          6,
+          6.0329999999999995,
+          6.066999999999999,
+          6.1,
+          6.133,
+          6.167,
+          6.199999999999999,
+          6.233,
+          6.2669999999999995,
+          6.3,
+          6.332999999999999,
+          6.367,
+          6.3999999999999995,
+          6.433,
+          6.467,
+          6.5,
+          6.5329999999999995,
+          6.566999999999999,
+          6.6,
+          6.633,
+          6.667,
+          6.699999999999999,
+          6.733,
+          6.7669999999999995,
+          6.8,
+          6.832999999999999,
+          6.867,
+          6.8999999999999995,
+          6.933,
+          6.967,
+          7,
+          7.0329999999999995,
+          7.066999999999999,
+          7.1,
+          7.133,
+          7.167,
+          7.199999999999999,
+          7.233,
+          7.2669999999999995,
+          7.3,
+          7.332999999999999,
+          7.367,
+          7.3999999999999995,
+          7.433,
+          7.467,
+          7.5,
+          7.5329999999999995,
+          7.566999999999999,
+          7.6,
+          7.633,
+          7.667,
+          7.699999999999999,
+          7.733,
+          7.7669999999999995,
+          7.8,
+          7.832999999999999,
+          7.867,
+          7.8999999999999995,
+          7.933,
+          7.967,
+          8,
+          8.033,
+          8.067,
+          8.1,
+          8.133,
+          8.167,
+          8.2,
+          8.232999999999999,
+          8.267,
+          8.299999999999999,
+          8.333,
+          8.366999999999999,
+          8.4,
+          8.433,
+          8.466999999999999,
+          8.5,
+          8.533,
+          8.567,
+          8.6,
+          8.633,
+          8.667,
+          8.7,
+          8.732999999999999,
+          8.767,
+          8.799999999999999,
+          8.833,
+          8.866999999999999,
+          8.9,
+          8.933,
+          8.966999999999999,
+          9,
+          9.033,
+          9.067,
+          9.1,
+          9.133,
+          9.167,
+          9.2,
+          9.232999999999999,
+          9.267,
+          9.299999999999999,
+          9.333,
+          9.366999999999999,
+          9.4,
+          9.433,
+          9.466999999999999,
+          9.5,
+          9.533,
+          9.567,
+          9.6,
+          9.633,
+          9.667,
+          9.7,
+          9.732999999999999,
+          9.767,
+          9.799999999999999,
+          9.833,
+          9.866999999999999,
+          9.9,
+          9.933,
+          9.966999999999999,
+          10,
+          10.033,
+          10.067,
+          10.1,
+          10.133,
+          10.167,
+          10.2,
+          10.232999999999999,
+          10.267,
+          10.299999999999999,
+          10.333,
+          10.366999999999999,
+          10.4,
+          10.433,
+          10.466999999999999,
+          10.5,
+          10.533,
+          10.567,
+          10.6,
+          10.633,
+          10.667,
+          10.7,
+          10.732999999999999,
+          10.767,
+          10.799999999999999,
+          10.833,
+          10.866999999999999,
+          10.9,
+          10.933,
+          10.966999999999999,
+          11,
+          11.033,
+          11.067,
+          11.1,
+          11.133,
+          11.167,
+          11.2,
+          11.232999999999999,
+          11.267,
+          11.299999999999999,
+          11.333,
+          11.366999999999999,
+          11.4,
+          11.433,
+          11.466999999999999,
+          11.5,
+          11.533,
+          11.567,
+          11.6,
+          11.633,
+          11.667,
+          11.7,
+          11.732999999999999,
+          11.767,
+          11.799999999999999,
+          11.833,
+          11.866999999999999,
+          11.899999999999999,
+          11.933,
+          11.97331316666661,
+          11.973333999999943
+        ],
+        "errors": []
+      }
+    },
+    {
+      "name": "100 complete lifecycles including invalid media",
+      "passed": true,
+      "milliseconds": 126399,
+      "evidence": [
+        {
+          "i": 0,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 1,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 2,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 3,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 4,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 5,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 6,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 7,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 8,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 9,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 10,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 11,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 12,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 13,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 14,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 15,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 16,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 17,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 18,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 19,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 20,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 21,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 22,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 23,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 24,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 25,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 26,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 27,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 28,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 29,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 30,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 31,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 32,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 33,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 34,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 35,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 36,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 37,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 38,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 39,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 40,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 41,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 42,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 43,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 44,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 45,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 46,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 47,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 48,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 49,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 50,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 51,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 52,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 53,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 54,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 55,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 56,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 57,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 58,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 59,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 60,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 61,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 62,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 63,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 64,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 65,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 66,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 67,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 68,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 69,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 70,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 71,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 72,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 73,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 74,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 75,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 76,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 77,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 78,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 79,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 80,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 81,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 82,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 83,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 84,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 85,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 86,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 87,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 88,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 89,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 90,
+          "rejection": "unrecognized file format",
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 91,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 92,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 93,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 94,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 95,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 96,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 97,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 98,
+          "heap": 134217728,
+          "errors": []
+        },
+        {
+          "i": 99,
+          "heap": 134217728,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "passed": false,
+  "logs": [],
+  "finished": "2026-09-07T16:52:09.189Z",
+  "wasmSha256": "92fbbedbf6f342fc308fc63d65abc594be4b9b23ec70ae893b8f1f3c881c2963"
+}

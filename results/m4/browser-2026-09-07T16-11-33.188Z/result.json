@@ -1,0 +1,58 @@
+{
+  "scope": "M4 integrated copy-back and fallback",
+  "tests": [],
+  "passed": false,
+  "failure": "page.waitForFunction: Timeout 15000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/m4.mjs:29:16\n    at async check (/Volumes/seed2/Projects/webmpv/tests/m4.mjs:9:73)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/m4.mjs:21:3",
+  "diagnostics": {
+    "rendered": 32,
+    "renderMs": 19.344999998807907,
+    "copyMs": 30.05499999783933,
+    "maxRenderMs": 3.8799999998882413,
+    "heapBytes": 134217728,
+    "epoch": 4,
+    "path": "wasm",
+    "decoder": "webcodecs",
+    "decoderStats": {
+      "submitted": 104,
+      "frames": 99,
+      "receivedFrames": 99,
+      "closedFrames": 99,
+      "peakOutstanding": 8,
+      "peakFrames": 5,
+      "resets": 2,
+      "errors": 0,
+      "copyMs": 188.285000000149,
+      "outstanding": 3,
+      "queued": 0,
+      "active": true
+    },
+    "demuxFormat": "mkv",
+    "seekPrerollSeconds": 0.5,
+    "presentedPosition": 2.167,
+    "ioPending": false,
+    "ioSerial": 0,
+    "interruptions": 0,
+    "seeking": true,
+    "position": 7,
+    "queuedFrames": 0
+  },
+  "workers": [
+    "http://127.0.0.1:4179/web/engine-worker.js",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/engine-m4/player.mjs",
+    "http://127.0.0.1:4179/web/browser-decoder-worker.js"
+  ],
+  "hashes": {
+    "web/engine-m4/player.wasm": "dd720e89a6e1d53540a21d4f27cbe9f8e45a9823a22b16be96948a6cc04d4e78",
+    "web/engine-m4/player.mjs": "606a02748a116076e015e046da8e2486dcefdb4d065f7214658582f47e83d336",
+    "native/vd_browser.c": "c9dc922fd7376e939b53c4c025529487d26d020355ba116d3a80b5f380b9ce4c",
+    "web/browser-decoder-worker.js": "c04c77e61d58c121fccc7d0adcc0dfe7b1da081dfd3ba4c59465c1ce2406fb7a",
+    "web/engine-worker.js": "454849043e872136d1582d65af2db1e5f3dda0120064c36032e28553a58ef442"
+  }
+}

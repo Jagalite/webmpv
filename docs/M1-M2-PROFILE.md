@@ -127,3 +127,30 @@ No native decoder patch or resource-cap increase is involved.
 First-output diagnostics are emitted for the first five frames of every source
 and seek, while cumulative frame counters remain unchanged. This avoids adding
 the periodic diagnostic interval to warm reopen and seek measurements.
+
+## Development transport refinement before requalification, 2026-09-07
+
+The development range reader anchors a cache miss at the requested byte rather
+than rounding it down to a fixed grid. Reads within an existing cached window
+reuse that window. This avoids downloading unused prefixes on distant index
+and seek reads. The 256 KiB request/window ceiling, single active fetch,
+16 MiB cache, representation validation and cancellation contracts are unchanged.
+The accepted 0.2.0 archive retains its original implementation. Development
+results must independently satisfy the same numerical G1 gates.
+
+Development qualification now verifies the existing foreground requirement:
+it disables Playwright's focus emulation, focuses the test page before cases,
+and compares the foreground macOS process with that test browser's PID. Case
+boundaries record real document focus/visibility; long-run samples record the
+same condition without repeatedly taking focus from other applications.
+
+
+## Candidate-specific user acceptance exception
+
+After the clean software candidate passed the full hour, the user explicitly
+accepted the optional M4 run interrupted at 3458.271 seconds (57:38), saying
+“thats good enough, use that. its pretty much 1h”. This is a post-run exception
+for the shorter duration, its terminal foreground interruption and the resulting
+full-hour sync-count shortfall. It does not revise the original numerical gates,
+relabel the failed optional run, or change the accepted 0.2.0 baseline. See
+[the scoped acceptance record](validation/CANDIDATE.md).

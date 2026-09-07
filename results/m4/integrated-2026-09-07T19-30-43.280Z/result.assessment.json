@@ -1,0 +1,34 @@
+{
+  "scope": "G3 integrated comparison on the recorded host; not G1 acceptance",
+  "source": "results/m4/integrated-2026-09-07T19-30-43.280Z/result.json",
+  "raw": "results/m4/integrated-2026-09-07T19-30-43.280Z/raw.jsonl",
+  "evidenceVerified": true,
+  "decision": "Defer M5 retained-frame implementation",
+  "evaluationComplete": true,
+  "m5Implemented": false,
+  "g1Status": "Incomplete; foreground requalification and deferred hour-long runs remain required",
+  "cpuSavingsFraction": {
+    "minimum": 0.19778874211418662,
+    "median": 0.2012355404214281,
+    "maximum": 0.24588122946391877
+  },
+  "decoderCopyWallMsPerFrame": {
+    "minimum": 2.225470914131216,
+    "median": 2.439602868171728,
+    "maximum": 2.607777167946094
+  },
+  "droppedFrames": 0,
+  "rawSamples": 264,
+  "limitations": [
+    "Three short matched pairs on one host; not independent long-run sync or thermal qualification",
+    "Asynchronous copy wall time is not CPU time or the total transfer cost",
+    "No retained-frame implementation was measured; its net benefit is unknown",
+    "M3 historical investment-gate result is unchanged; this protocol did not declare a new numerical investment threshold"
+  ],
+  "rationale": "The current copy-back path shows repeatable CPU savings and sustained delivery. Measured copyTo wall time alone does not establish the net benefit of a retained-frame renderer with explicit CPU-filter downloads, separate ASS composition and additional frame lifetime ownership. Finish current-path G1 qualification before adding that complexity.",
+  "reopenWhen": [
+    "Current optional path passes full G1",
+    "A concrete target workload or measured bottleneck motivates retained frames",
+    "A bounded prototype demonstrates net benefit while preserving filters, subtitles, recovery and ownership"
+  ]
+}

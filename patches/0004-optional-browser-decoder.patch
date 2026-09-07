@@ -1,0 +1,20 @@
+Optional browser decoder at the existing mpv selection seam.
+The weak driver is supplied only by the separate M4 link target.
+
+--- a/filters/f_decoder_wrapper.c
++++ b/filters/f_decoder_wrapper.c
+@@ -452,7 +452,13 @@
+         struct mp_decoder_entry *sel = &list->entries[n];
+         MP_VERBOSE(p, "Opening decoder %s\n", sel->decoder);
+ 
+-        p->decoder = driver->create(p->decf, p->codec, sel->decoder);
++#ifdef __EMSCRIPTEN__
++        extern const struct mp_decoder_fns vd_browser __attribute__((weak));
++        if (driver == &vd_lavc && &vd_browser)
++            p->decoder = vd_browser.create(p->decf, p->codec, sel->decoder);
++#endif
++        if (!p->decoder)
++            p->decoder = driver->create(p->decf, p->codec, sel->decoder);
+         if (p->decoder) {
+             p->codec->decoder = talloc_strdup(p, sel->decoder);
+             p->codec->decoder_desc = talloc_strdup(p, sel->desc && sel->desc[0] ? sel->desc : NULL);

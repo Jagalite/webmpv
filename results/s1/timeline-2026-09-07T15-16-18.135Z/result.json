@@ -1,0 +1,289 @@
+{
+  "scope": "S1 timeline boundaries and failures",
+  "browser": "152.0.7977.76",
+  "headless": false,
+  "tests": [
+    {
+      "name": "offset: forward playback and seeks across timeline boundary",
+      "passed": true,
+      "milliseconds": 7486,
+      "evidence": {
+        "seeks": [
+          {
+            "rendered": 15,
+            "renderMs": 8.285000000381842,
+            "copyMs": 8.130000000121072,
+            "maxRenderMs": 2.2399999999906868,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 7,
+            "ioPending": true,
+            "ioSerial": 24,
+            "interruptions": 0,
+            "io": {
+              "opens": 4,
+              "requests": 4,
+              "retries": 0,
+              "aborts": 0,
+              "handles": 2,
+              "retainedBytes": 255753,
+              "peakRetainedBytes": 255753,
+              "fetchedBytes": 741921,
+              "size": "0",
+              "reads": 18,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 7,
+            "queuedFrames": 0
+          },
+          {
+            "rendered": 16,
+            "renderMs": 8.845000000437722,
+            "copyMs": 8.585000000195578,
+            "maxRenderMs": 2.2399999999906868,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 13,
+            "ioPending": false,
+            "ioSerial": 38,
+            "interruptions": 0,
+            "io": {
+              "opens": 6,
+              "requests": 6,
+              "retries": 0,
+              "aborts": 0,
+              "handles": 2,
+              "retainedBytes": 236201,
+              "peakRetainedBytes": 255753,
+              "fetchedBytes": 1229969,
+              "size": "0",
+              "reads": 28,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 13,
+            "queuedFrames": 0
+          },
+          {
+            "rendered": 17,
+            "renderMs": 9.485000000335276,
+            "copyMs": 9.070000000298023,
+            "maxRenderMs": 2.2399999999906868,
+            "heapBytes": 134217728,
+            "epoch": 8,
+            "path": "wasm",
+            "demuxFormat": "hls",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 3,
+            "ioPending": false,
+            "ioSerial": 52,
+            "interruptions": 0,
+            "io": {
+              "opens": 8,
+              "requests": 8,
+              "retries": 0,
+              "aborts": 0,
+              "handles": 2,
+              "retainedBytes": 242593,
+              "peakRetainedBytes": 255753,
+              "fetchedBytes": 1708617,
+              "size": "0",
+              "reads": 39,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 3,
+            "queuedFrames": 0
+          }
+        ],
+        "diagnostics": {
+          "rendered": 169,
+          "renderMs": 88.13500000117347,
+          "copyMs": 75.375,
+          "maxRenderMs": 2.2399999999906868,
+          "heapBytes": 134217728,
+          "epoch": 10,
+          "path": "wasm",
+          "demuxFormat": "hls",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 14.048,
+          "ioPending": false,
+          "ioSerial": 90,
+          "interruptions": 0,
+          "io": {
+            "opens": 12,
+            "requests": 12,
+            "retries": 0,
+            "aborts": 0,
+            "handles": 2,
+            "retainedBytes": 236201,
+            "peakRetainedBytes": 255753,
+            "fetchedBytes": 2689413,
+            "size": "0",
+            "reads": 69,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 14.048,
+          "queuedFrames": 8192
+        },
+        "network": {
+          "requests": [
+            {
+              "path": "muxed/offset.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-003.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-006.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-007.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-009.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-010.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-004.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-005.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-007.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-008.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-009.ts",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "muxed/av-010.ts",
+              "range": null,
+              "authorized": false
+            }
+          ],
+          "aborted": 0,
+          "active": 0,
+          "fail": null
+        }
+      }
+    },
+    {
+      "name": "missing initialization resource terminates open and cleans up",
+      "passed": true,
+      "milliseconds": 384,
+      "evidence": {
+        "error": "Unexpected resource HTTP 404",
+        "network": {
+          "requests": [
+            {
+              "path": "fmp4/master.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/english.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/alternate.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/subtitles.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/video.m3u8",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/english-init.mp4",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/english-000.m4s",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/alternate-init.mp4",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/alternate-000.m4s",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/subtitles.vtt",
+              "range": null,
+              "authorized": false
+            },
+            {
+              "path": "fmp4/video-init.mp4",
+              "range": null,
+              "authorized": false
+            }
+          ],
+          "aborted": 0,
+          "active": 0,
+          "fail": "video-init.mp4"
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "hashes": {
+    "web/engine/player.wasm": "428207a70d6bbe4db7a99d4667858d4938b181db67d04a3157420a0f1e216f45",
+    "web/engine/player.mjs": "274c2363bbae1dfb3aa5971443964499ba2eb186dcf871ed06338b0b3ef44ef1",
+    "web/io-worker.js": "d4c24850a18b391d0a45b2c50c2fd886d88ccd57e31bdf295cc6ed17c90fa46c",
+    "web/resource-loader.js": "a083c774a9846bd228c08023d2d324561d998dc12dc973066fccabcea053d473",
+    "native/stream_bridge.c": "78c5e7665bcb1e5122c2793e51086f86a6da7f3e482a703f50b0f0ef2672ebe5"
+  }
+}

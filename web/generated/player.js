@@ -1,6 +1,7 @@
 /** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
 export class BrowserPlayer extends EventTarget {
     worker;
+    workerOwner;
     audioContext;
     audioNode;
     analyser;
@@ -21,12 +22,26 @@ export class BrowserPlayer extends EventTarget {
     browserCodecsAbsent = false;
     properties = new Map();
     ready;
-    constructor(canvas, { disableBrowserCodecs = false, measureOutput = false } = {}) {
+    constructor(canvas, { disableBrowserCodecs = false, measureOutput = false, decoder = 'software', decoderFaultAfter = 0 } = {}) {
         super();
         if (!crossOriginIsolated)
             throw new Error('This player requires a secure, cross-origin isolated page.');
         this.audioContext = new AudioContext({ latencyHint: 'interactive' });
-        this.worker = new Worker(new URL('../engine-worker.js', import.meta.url), { type: 'module' });
+        // A disposable same-origin owner gives the browser a complete worker-tree
+        // teardown boundary, including native pthread workers and decoder resources.
+        this.workerOwner = canvas.ownerDocument.createElement('iframe');
+        this.workerOwner.hidden = true;
+        this.workerOwner.setAttribute('aria-hidden', 'true');
+        canvas.ownerDocument.body.append(this.workerOwner);
+        const owner = this.workerOwner.contentWindow;
+        try {
+            this.worker = new owner.Worker(new URL('../engine-worker.js', import.meta.url), { type: 'module' });
+        }
+        catch (error) {
+            this.workerOwner.remove();
+            void this.audioContext.close();
+            throw error;
+        }
         const audio = new SharedArrayBuffer(64 + 8192 * 2 * 4);
         this.audioHeader = new Int32Array(audio, 0, 16);
         this.ready = new Promise((resolve, reject) => {
@@ -45,10 +60,13 @@ export class BrowserPlayer extends EventTarget {
                     reject(error);
                     this.fail(error, data.id);
                 }
-                else if (data.type === 'destroyed')
+                else if (data.type === 'destroyed') {
+                    if (this.diagnostics && data.decoderStats)
+                        this.diagnostics.decoderStats = data.decoderStats;
                     this.onDestroyed?.();
+                }
                 else if (data.type === 'refresh') {
-                    void this.refreshAuthorization?.().then(update => this.worker.postMessage({ type: 'refreshed', id: data.id, update }), () => this.worker.postMessage({ type: 'refreshed', id: data.id, error: true }));
+                    void this.refreshAuthorization?.(data.resource).then(update => this.worker.postMessage({ type: 'refreshed', id: data.id, update }), () => this.worker.postMessage({ type: 'refreshed', id: data.id, error: true }));
                 }
                 else if (data.type === 'output')
                     this.dispatchEvent(new CustomEvent('output', { detail: data.data }));
@@ -95,7 +113,7 @@ export class BrowserPlayer extends EventTarget {
                 if (this.destroyed)
                     throw new Error('Player destroyed during initialization');
                 const offscreen = canvas.transferControlToOffscreen();
-                this.worker.postMessage({ type: 'init', canvas: offscreen, audio, font, sampleRate: this.audioContext.sampleRate, disableBrowserCodecs, measureOutput }, [offscreen, font]);
+                this.worker.postMessage({ type: 'init', canvas: offscreen, audio, font, sampleRate: this.audioContext.sampleRate, disableBrowserCodecs, measureOutput, decoder, decoderFaultAfter }, [offscreen, font]);
                 this.timing = setInterval(() => this.sendTiming(), 20);
                 this.sendTiming();
             })().catch(error => { clearTimeout(timeout); reject(error); });
@@ -239,6 +257,7 @@ export class BrowserPlayer extends EventTarget {
             finally {
                 clearTimeout(timeout);
                 this.worker.terminate();
+                this.workerOwner.remove();
                 await this.audioContext.close();
             }
         })();

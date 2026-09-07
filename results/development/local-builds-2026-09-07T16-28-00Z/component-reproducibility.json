@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "Independent native artifacts/inputs and separately assembled final browser sidecars",
+  "native": {
+    "software": true,
+    "webcodecs": true
+  },
+  "nativeRecord": "results/development/local-builds-2026-09-07T16-28-00Z/comparison.json",
+  "fullNativeManifestComparisonPassed": false,
+  "browserRecord": "results/development/bindings-2026-09-07T17-44-00Z/comparison.json",
+  "browserPassed": true,
+  "explanation": "The full comparison retains browserBindings=false because io-worker.js and range-reader.js changed during the native build. Neither file is compiled into the native artifacts. Their final bytes are independently assembled and match this checkout."
+}

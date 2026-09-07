@@ -1,0 +1,61 @@
+--- a/libavformat/hls.c
++++ b/libavformat/hls.c
+@@ -665,6 +665,14 @@
+     if (!proto_name)
+         proto_name = avio_find_protocol_name(url);
+ 
++#ifdef __EMSCRIPTEN__
++    // Browser custom AVIO has no native HTTP URLProtocol. Transport policy is
++    // enforced by the host's bounded loader, including every nested resource.
++    if (!proto_name && (s->flags & AVFMT_FLAG_CUSTOM_IO)) {
++        if (av_strstart(url, "https://", NULL)) proto_name = "https";
++        else if (av_strstart(url, "http://", NULL)) proto_name = "http";
++    }
++#endif
+     if (!proto_name)
+         return AVERROR_INVALIDDATA;
+ 
+--- a/libavformat/dashdec.c
++++ b/libavformat/dashdec.c
+@@ -418,6 +418,14 @@
+     if (!proto_name)
+         proto_name = avio_find_protocol_name(url);
+ 
++#ifdef __EMSCRIPTEN__
++    // Browser custom AVIO has no native HTTP URLProtocol. Transport policy is
++    // enforced by the host's bounded loader, including every nested resource.
++    if (!proto_name && (s->flags & AVFMT_FLAG_CUSTOM_IO)) {
++        if (av_strstart(url, "https://", NULL)) proto_name = "https";
++        else if (av_strstart(url, "http://", NULL)) proto_name = "http";
++    }
++#endif
+     if (!proto_name)
+         return AVERROR_INVALIDDATA;
+ 
+@@ -446,7 +454,7 @@
+     av_freep(pb);
+     av_dict_copy(&tmp, *opts, 0);
+     av_dict_copy(&tmp, opts2, 0);
+-    ret = ffio_open_whitelist(pb, url, AVIO_FLAG_READ, c->interrupt_callback, &tmp, s->protocol_whitelist, s->protocol_blacklist);
++    ret = s->io_open(s, pb, url, AVIO_FLAG_READ, &tmp);
+     if (ret >= 0) {
+         // update cookies on http response with setcookies.
+         char *new_cookies = NULL;
+@@ -1225,7 +1233,7 @@
+         close_in = 1;
+ 
+         av_dict_copy(&opts, c->avio_opts, 0);
+-        ret = ffio_open_whitelist(&in, url, AVIO_FLAG_READ, c->interrupt_callback, &opts, s->protocol_whitelist, s->protocol_blacklist);
++        ret = s->io_open(s, &in, url, AVIO_FLAG_READ, &opts);
+         av_dict_free(&opts);
+         if (ret < 0)
+             return ret;
+@@ -1368,7 +1376,7 @@
+ 
+     av_bprint_finalize(&buf, NULL);
+     if (close_in) {
+-        avio_close(in);
++        ff_format_io_close(s, &in);
+     }
+     return ret;
+ }

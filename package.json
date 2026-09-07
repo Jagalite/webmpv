@@ -11,7 +11,12 @@
     "dev:media": "node scripts/media-server.mjs",
     "test:stream": "node --test tests/range-reader.mjs && node tests/m1.mjs",
     "test:qualify": "node tests/m2-functional.mjs && node tests/m2-supplemental.mjs",
-    "test:long": "node tests/m2-long.mjs"
+    "test:long": "node tests/m2-long.mjs",
+    "test:resources": "node --test tests/resource-loader.mjs",
+    "dev:segments": "node scripts/s1-media-server.mjs",
+    "test:browser-decoder": "node --test tests/browser-decoder-worker.mjs && node tests/m4.mjs",
+    "build:browser-decoder": "WEBMPV_BROWSER_DECODER=1 WEBMPV_ENGINE_DIR=web/engine-m4 WEBMPV_MANIFEST_DIR=results/m4 bash scripts/link.sh",
+    "test:segments": "node tests/s1.mjs && node tests/s1-lifecycle.mjs && node tests/s1-timeline.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",

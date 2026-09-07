@@ -1,4 +1,5 @@
-import createEngine from './engine/player.mjs';
+let decoderWorker,decoderStats;
+
 
 let engine, canvas, context, timer, audio, pcm, nativeAudio, epoch = -1, forwarded = 0;
 let renderMs=0,copyMs=0,maxRenderMs=0;
@@ -9,7 +10,7 @@ const internalCommands=new Map();
 function internalCommand(args,done){const id=internalId++;internalCommands.set(id,done);submit(id,args);}
 const CAPACITY = 8192;
 function releaseSeek(){if(pendingTarget!==null&&restarted&&Math.abs(position-pendingTarget)<0.15){pendingTarget=null;force=true;post({type:'seek-complete',position});}}
-async function closeIO(){if(!ioWorker)return;const old=ioWorker;engine._web_io_cancel();await new Promise(resolve=>{ioClose=resolve;old.postMessage({type:'close'});setTimeout(resolve,1500);});old.terminate();ioWorker=null;ioClose=null;}
+async function closeIO(){if(!ioWorker)return;const old=ioWorker;engine._web_io_cancel();await new Promise(resolve=>{ioClose=resolve;old.postMessage({type:'close'});setTimeout(resolve,1500);});old.terminate();ioWorker=null;ioClose=null;engine.ccall('web_io_root',null,['number','string'],[0,'']);}
 async function openRemote(data){
   sourceRendered=0;
   await closeIO();
@@ -21,7 +22,7 @@ async function openRemote(data){
       if(message.type==='ready'){clearTimeout(timeout);resolve(message.info);}
       else if(message.type==='error'){clearTimeout(timeout);reject(Error(message.message));post({type:'error',id:data.id,message:message.message});}
       else if(message.type==='stats')ioStats=message.stats;
-      else if(message.type==='refresh')post({type:'refresh',id:message.id});
+      else if(message.type==='refresh')post({type:'refresh',id:message.id,resource:message.resource});
       else if(message.type==='closed')ioClose?.();
     };
     ioWorker.onerror=event=>{clearTimeout(timeout);reject(Error(event.message));};
@@ -29,6 +30,7 @@ async function openRemote(data){
   });
   if(closing)throw Error('Player closed');
   engine._web_io_configure(++ioSession,BigInt(info.size));
+  engine.ccall('web_io_root',null,['number','string'],[info.resource??0,info.url??'']);
   post({type:'source',info});submit(data.id,['loadfile','brange://source','replace']);
 }
 const post = message => self.postMessage(message);
@@ -107,7 +109,7 @@ function tick() {
       copyMs+=performance.now()-copyStart;engine._web_presented();
       rendered++;sourceRendered++;presentedPosition=position;
     }
-    if (++ticks % 40 === 0 || (ptr && sourceRendered <= 5)) post({type:'diagnostics', data:{rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
+    if (++ticks % 40 === 0 || (ptr && sourceRendered <= 5)) post({type:'diagnostics', data:{rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', decoder:decoderStats?.active?'webcodecs':'software',decoderStats, demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
   } catch (error) { clearInterval(timer); post({type:'error',message:String(error.stack || error)}); }
 }
 self.onmessage = async ({data}) => {
@@ -119,12 +121,28 @@ self.onmessage = async ({data}) => {
       context = canvas.getContext('2d', {alpha:false});
       audio = new Int32Array(data.audio, 0, 16);
       pcm = new Float32Array(data.audio, 64);
+      const createEngine=(await import(data.decoder==='webcodecs'?'./engine-m4/player.mjs':'./engine/player.mjs')).default;
       engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});
       if (closing) return;
       engine.FS.mkdir('/fonts');
       engine.FS.writeFile('/fonts/DejaVuSans.ttf', new Uint8Array(data.font));
       const fontSize=engine.FS.stat('/fonts/DejaVuSans.ttf').size;
       if(Number(fontSize) !== data.font.byteLength) throw new Error('Subtitle font write failed');
+      if(data.decoder==='webcodecs'){
+        decoderWorker=new Worker(new URL('./browser-decoder-worker.js',import.meta.url),{type:'module'});
+        await new Promise((resolve,reject)=>{
+          const deadline=setTimeout(()=>reject(Error('Decoder service initialization timed out')),5000);
+          decoderWorker.onmessage=({data:message})=>{
+            if(message.ready){clearTimeout(deadline);resolve();}
+            if(message.stats)decoderStats=message.stats;
+            if(message.wakeup&&!closing)engine._web_decoder_wakeup();
+            if(message.error)post({type:'log',message:message.error});
+          };
+          decoderWorker.onerror=error=>{clearTimeout(deadline);reject(Error(error.message));};
+          decoderWorker.postMessage({memory:engine.HEAPU8.buffer,pointer:engine._web_decoder_ptr(),disabled:data.disableBrowserCodecs,faultAfter:data.decoderFaultAfter});
+        });
+        engine._web_decoder_enable(1);
+      }
       const result = engine._web_create(data.sampleRate);
       if (result < 0) throw new Error(`mpv initialization failed: ${result}`);
       nativeAudio = engine._web_audio_ptr();
@@ -152,8 +170,19 @@ self.onmessage = async ({data}) => {
       clearInterval(timer);
       if (audio) Atomics.store(audio,2,0);
       await closeIO();
+      decoderWorker?.postMessage({type:'cancel'});
       engine?._web_destroy();
-      post({type:'destroyed'});
+      // Native joins precede the queued pthread pool-return messages.
+      const deadline=performance.now()+2000;
+      while(engine?.PThread.runningWorkers.length&&performance.now()<deadline)
+        await new Promise(resolve=>setTimeout(resolve,10));
+      if(engine?.PThread.runningWorkers.length)throw Error('Native thread cleanup did not settle');
+      engine?.PThread.terminateAllThreads();
+      decoderWorker?.terminate();decoderWorker=null;
+      // Let child termination and queued cleanup run before closing their owner.
+      await new Promise(resolve=>setTimeout(resolve,50));
+      post({type:'destroyed',decoderStats});
+      self.close();
     }
   } catch (error) {post({type:'error',id:data.id,message:String(error.stack || error)});}
 };

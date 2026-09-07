@@ -1,0 +1,233 @@
+{
+  "started": "2026-09-07T19:05:19.010Z",
+  "host": {
+    "os": "25.5.0",
+    "arch": "arm64",
+    "cpu": "Apple M1",
+    "memory": 8589934592
+  },
+  "protocol": {
+    "warmupSeconds": 30,
+    "measurementSeconds": 60,
+    "network": {
+      "mbps": 10,
+      "rtt": 80
+    },
+    "orders": [
+      [
+        "software",
+        "webcodecs"
+      ],
+      [
+        "webcodecs",
+        "software"
+      ],
+      [
+        "software",
+        "webcodecs"
+      ]
+    ]
+  },
+  "hashes": {
+    "docs/M4-MEASUREMENT-PROTOCOL.md": "62206c99baa5f76185306be9fb34eacb3397d4b2449d7598c3483d7bfcb2711d",
+    "tests/m4-measure.mjs": "5ce7b47cd6398a603d036e462febcab00cb872294ce6ece3f2d0ced5dafb91b7",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/engine/player.wasm": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+    "web/engine/player.mjs": "d16a4002bac04633b0d60c986b222812732eb70ed124f1ef1477a4fe6348350e",
+    "web/engine-m4/player.wasm": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+    "web/engine-m4/player.mjs": "8b60d4d1ca3ffee86d62e92144a5bb1e73ebba1b3614b51dd911282a1a8046ce",
+    "web/index.html": "4bbc9d75736f18e9abe2a2b19ee9613d1527c2dd21550548351e2b0648ca635f",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403",
+    "scripts/media-server.mjs": "863dd2f996dcfdf55418e589b49f47abfbe29ce20a7f93130809f1a3357c36cd"
+  },
+  "measurements": [
+    {
+      "backend": "software",
+      "pair": 0,
+      "samples": [
+        {
+          "at": 1788807924689,
+          "phase": "warmup",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 32182,
+              "cpuTime": 1.053379
+            },
+            {
+              "type": "renderer",
+              "id": 32197,
+              "cpuTime": 0.059746
+            },
+            {
+              "type": "renderer",
+              "id": 32194,
+              "cpuTime": 0.712864
+            },
+            {
+              "type": "renderer",
+              "id": 32193,
+              "cpuTime": 0.190493
+            },
+            {
+              "type": "GPU",
+              "id": 32189,
+              "cpuTime": 0.362739
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 32190,
+              "cpuTime": 0.119224
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 32191,
+              "cpuTime": 0.041525
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 32223,
+              "cpuTime": 0.103304
+            }
+          ],
+          "rss": [
+            {
+              "pid": 32182,
+              "bytes": 210583552
+            },
+            {
+              "pid": 32189,
+              "bytes": 151715840
+            },
+            {
+              "pid": 32190,
+              "bytes": 84393984
+            },
+            {
+              "pid": 32191,
+              "bytes": 58523648
+            },
+            {
+              "pid": 32193,
+              "bytes": 138592256
+            },
+            {
+              "pid": 32194,
+              "bytes": 334397440
+            },
+            {
+              "pid": 32197,
+              "bytes": 76005376
+            },
+            {
+              "pid": 32223,
+              "bytes": 75071488
+            }
+          ],
+          "totalRSS": 1129283584,
+          "foreground": {
+            "at": "2026-09-07T19:05:24.690Z",
+            "focused": false,
+            "visibility": "visible",
+            "browserPID": 32182,
+            "foregroundPID": 88628,
+            "matched": false
+          },
+          "video": {
+            "rendered": 7,
+            "renderMs": 18.675000002607703,
+            "copyMs": 23.654999997466803,
+            "maxRenderMs": 6.5,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.13333333333333333,
+            "ioPending": true,
+            "ioSerial": 27,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 2359296,
+              "requests": 9,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 2359296,
+              "peakCacheBytes": 2359296,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "1157038449",
+              "reads": 26,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.13333333333333333,
+            "queuedFrames": 6912
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 15360,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "drops": 0,
+          "errors": []
+        }
+      ],
+      "passed": false,
+      "browser": "152.0.7977.76",
+      "networkBefore": {
+        "requests": 0,
+        "bytes": 0,
+        "ranges": [],
+        "aborted": 0,
+        "mode": "normal",
+        "stall": false,
+        "rtt": 80,
+        "mbps": 10,
+        "outageUntil": 0
+      },
+      "foregroundAtStart": {
+        "at": "2026-09-07T19:05:21.039Z",
+        "focused": true,
+        "visibility": "visible",
+        "browserPID": 32182,
+        "foregroundPID": 32182,
+        "matched": true
+      },
+      "failure": "AssertionError [ERR_ASSERTION]: Foreground condition changed\n    at sample (file:///Volumes/seed2/Projects/webmpv/tests/m4-measure.mjs:45:11)\n    at async measure (file:///Volumes/seed2/Projects/webmpv/tests/m4-measure.mjs:52:27)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/m4-measure.mjs:79:88"
+    }
+  ],
+  "passed": false,
+  "energy": "unavailable",
+  "hardwareAcceleration": "unknown",
+  "failure": "AssertionError [ERR_ASSERTION]: Foreground condition changed\n    at sample (file:///Volumes/seed2/Projects/webmpv/tests/m4-measure.mjs:45:11)\n    at async measure (file:///Volumes/seed2/Projects/webmpv/tests/m4-measure.mjs:52:27)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/m4-measure.mjs:79:88",
+  "hashesAfter": {
+    "docs/M4-MEASUREMENT-PROTOCOL.md": "62206c99baa5f76185306be9fb34eacb3397d4b2449d7598c3483d7bfcb2711d",
+    "tests/m4-measure.mjs": "5ce7b47cd6398a603d036e462febcab00cb872294ce6ece3f2d0ced5dafb91b7",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/engine/player.wasm": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+    "web/engine/player.mjs": "d16a4002bac04633b0d60c986b222812732eb70ed124f1ef1477a4fe6348350e",
+    "web/engine-m4/player.wasm": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+    "web/engine-m4/player.mjs": "8b60d4d1ca3ffee86d62e92144a5bb1e73ebba1b3614b51dd911282a1a8046ce",
+    "web/index.html": "4bbc9d75736f18e9abe2a2b19ee9613d1527c2dd21550548351e2b0648ca635f",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403",
+    "scripts/media-server.mjs": "863dd2f996dcfdf55418e589b49f47abfbe29ce20a7f93130809f1a3357c36cd"
+  },
+  "runtimeUnchanged": true,
+  "finished": "2026-09-07T19:05:25.074Z"
+}

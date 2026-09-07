@@ -1,0 +1,193 @@
+{
+  "network": {
+    "rtt": 80,
+    "mbps": 10
+  },
+  "started": "2026-09-07T18:58:26.642Z",
+  "tests": [
+    {
+      "name": "attached ASS shaping, karaoke, vectors and overlap match native reference at DPR 2",
+      "evidence": {
+        "comparison": [
+          {
+            "name": "karaoke",
+            "pixels": 14022,
+            "referencePixels": 15469,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 27167,
+            "referencePixels": 27723,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 62658,
+            "referencePixels": 66434,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "resizedComparison": [
+          {
+            "name": "karaoke",
+            "pixels": 6418,
+            "referencePixels": 7374,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 11986,
+            "referencePixels": 12425,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 28597,
+            "referencePixels": 31224,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "deviceScaleFactor": 2,
+        "tolerance": "RGB delta >=12; 3-pixel edge tolerance; each region precision and recall >=95%"
+      },
+      "passed": true
+    },
+    {
+      "name": "karaoke highlight advances at the reference timestamps",
+      "evidence": {
+        "phases": [
+          {
+            "position": 2.25,
+            "actual": {
+              "yellow": 1127,
+              "red": 3047,
+              "highlightShare": 0.2700047915668424
+            },
+            "reference": {
+              "yellow": 1080,
+              "red": 2779,
+              "highlightShare": 0.27986525006478363
+            }
+          },
+          {
+            "position": 3.25,
+            "actual": {
+              "yellow": 2758,
+              "red": 1372,
+              "highlightShare": 0.6677966101694915
+            },
+            "reference": {
+              "yellow": 2689,
+              "red": 1243,
+              "highlightShare": 0.6838758901322483
+            }
+          }
+        ],
+        "mask": "The native on/off glyph sample positions are shared by both color measurements",
+        "tolerance": "Highlighted-color share within 15 percentage points of the native reference and increasing between phases"
+      },
+      "passed": true
+    },
+    {
+      "name": "over-budget attachment is reported and playback remains bounded",
+      "evidence": {
+        "messages": [
+          "Browser attachment budget exceeded; attachment omitted.\n",
+          "swscaler: No accelerated colorspace conversion found from yuv420p to rgba.\n"
+        ],
+        "evidence": {
+          "video": {
+            "rendered": 6,
+            "renderMs": 9.584999999031425,
+            "copyMs": 6.125000001862645,
+            "maxRenderMs": 4.5150000005960464,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 8,
+              "frames": 0,
+              "receivedFrames": 0,
+              "closedFrames": 0,
+              "peakOutstanding": 8,
+              "peakFrames": 0,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.09999999999999999,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.09999999999999999,
+            "queuedFrames": 7680
+          },
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 7936,
+            "underruns": 0,
+            "rms": 0.06189627209619424,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "destroy releases an actually stalled native demux callback",
+      "evidence": {
+        "milliseconds": 177,
+        "retainedWorkers": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "late authorization renewal cannot satisfy a replacement source",
+      "evidence": {
+        "firstError": "Authorization refresh timed out",
+        "replacementOpened": true,
+        "staleResponseIgnored": true
+      },
+      "passed": true
+    },
+    {
+      "name": "renewed media URL opens and cross-origin renewal is rejected before Fetch",
+      "evidence": {
+        "refreshes": 1,
+        "denied": "Media origin is not allowed",
+        "foreignRequests": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "standalone integration example opens, pauses, resumes and closes",
+      "evidence": {
+        "closed": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "logs": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "wasmSha256": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+  "finished": "2026-09-07T18:58:54.861Z",
+  "executionMode": "headless-diagnostic",
+  "qualificationEligible": false
+}

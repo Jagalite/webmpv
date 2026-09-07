@@ -6,12 +6,12 @@
 </style>
 <h1>webmpv</h1><p>Software playback, powered by mpv.</p>
 <nav><button id="demo">Play test film</button><label>Open local file<input id="file" type="file" accept=".mkv,.mp4,.mov,.wav"></label><button id="play" disabled>Play</button><button id="pause" disabled>Pause</button><button id="seek" disabled>Seek to 5s</button><button id="destroy" disabled>Close player</button></nav>
-<form id="remote"><input id="url" type="url" placeholder="Media URL (MP4 or MKV)" aria-label="Media URL" required style="width:65%;padding:10px;margin-top:15px"><button>Open URL</button></form>
+<form id="remote"><input id="url" type="url" placeholder="Media URL" aria-label="Media URL" required style="width:65%;padding:10px;margin-top:15px"><select id="source-format" aria-label="Source format"><option value="file">Direct file</option><option value="hls">HLS VOD</option><option value="dash">DASH VOD</option></select> <button>Open URL</button></form>
 <nav style="margin-top:12px"><label>Audio <select id="audio-track"></select></label><label>Subtitles <select id="sub-track"><option value="no">Off</option></select></label><label>Volume <input id="volume" type="range" min="0" max="100" value="100"></label><label>Speed <select id="rate"><option>0.5</option><option selected>1</option><option>1.5</option><option>2</option></select></label></nav>
 <div><input id="timeline" type="range" min="0" max="1" step="0.1" value="0" style="width:85%" aria-label="Playback position"><span id="time">0:00</span></div>
 <div id="screen"><canvas width="640" height="360"></canvas></div>
 <div id="status" role="status">Ready to open a file.</div>
-<small>H.264/AAC · SDR · Stereo · Remote servers must support byte ranges and browser access</small>
+<small>H.264/AAC · SDR · Stereo · Browser access required · Direct files need byte ranges · Segmented VOD is in qualification</small>
 <details><summary>Playback diagnostics</summary><pre id="diagnostics"></pre></details>
 <script type="module">
 import {BrowserPlayer} from '/web/generated/player.js';
@@ -21,7 +21,7 @@ window.playerEvents=[];window.playerErrors=[];
 async function create(){
  if(player)await player.destroy();
  const canvas=document.createElement('canvas');canvas.width=640;canvas.height=360;document.querySelector('#screen').replaceChildren(canvas);
- player=window.player=new BrowserPlayer(canvas,{disableBrowserCodecs:new URLSearchParams(location.search).has('no-codecs'),measureOutput:new URLSearchParams(location.search).has('measure-output')});
+ player=window.player=new BrowserPlayer(canvas,{decoder:new URLSearchParams(location.search).get('decoder')==='webcodecs'?'webcodecs':'software',disableBrowserCodecs:new URLSearchParams(location.search).has('no-codecs'),measureOutput:new URLSearchParams(location.search).has('measure-output')});
  player.addEventListener('mpv',({detail})=>{window.playerEvents.push(detail);if(window.playerEvents.length>500)window.playerEvents.shift();
  if(detail.event==='property-change'){
   if(detail.name==='track-list')for(const [type,id] of [['audio','audio-track'],['sub','sub-track']]){const select=document.getElementById(id);select.replaceChildren();if(type==='sub')select.add(new Option('Off','no'));for(const track of detail.data||[])if(track.type===type){const option=new Option(track.title||track.lang||`${type} ${track.id}`,track.id);option.selected=!!track.selected;select.add(option);}}
@@ -39,7 +39,7 @@ async function create(){
 }
 async function run(action){try{await action();}catch(error){status.textContent=error.message;window.playerErrors.push(error.message);console.error(error);}}
 window.createPlayer=create;
-document.getElementById('remote').onsubmit=event=>{event.preventDefault();run(async()=>{const p=await create();await p.openRemote({url:document.getElementById('url').value});await p.play();});};
+document.getElementById('remote').onsubmit=event=>{event.preventDefault();run(async()=>{const p=await create();await p.openRemote({url:document.getElementById('url').value,format:document.getElementById('source-format').value});await p.play();});};
 document.getElementById('audio-track').onchange=event=>run(()=>player.selectTrack('audio',event.target.value));
 document.getElementById('sub-track').onchange=event=>run(()=>player.selectTrack('sub',event.target.value));
 document.getElementById('volume').oninput=event=>run(()=>player.volume(Number(event.target.value)));

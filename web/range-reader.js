@@ -19,8 +19,16 @@ export class RangeReader {
     if(this.total!==undefined&&offset>=this.total)return new Uint8Array();
     this.busy=true;const epoch=this.epoch;
     try{
-      const blockSize=this.options.blockBytes,start=offset/BigInt(blockSize)*BigInt(blockSize),key=String(start);
+      // Anchor misses at the requested position, avoiding an unused prefix on
+      // distant index/seek reads. Cached windows can still satisfy inner reads.
+      let start=offset,key=String(start);
       let bytes=this.cache.get(key);
+      if(!bytes)for(const [cachedKey,cachedBytes] of this.cache){
+        const cachedStart=BigInt(cachedKey);
+        if(offset>=cachedStart&&offset<cachedStart+BigInt(cachedBytes.length)){
+          start=cachedStart;key=cachedKey;bytes=cachedBytes;break;
+        }
+      }
       if(bytes){this.cache.delete(key);this.cache.set(key,bytes);}
       else{
         bytes=await this.fetchBlock(start,epoch);

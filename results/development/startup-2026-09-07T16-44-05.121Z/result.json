@@ -1,0 +1,774 @@
+{
+  "scope": "Matched warm startup diagnostic; does not replace G1",
+  "runs": [
+    {
+      "backend": "software",
+      "milliseconds": 2879.1650000000373,
+      "startWall": 1788799449522.2651,
+      "stages": [
+        {
+          "name": "end-file",
+          "milliseconds": 2.5150000005960464
+        },
+        {
+          "name": "range-reader-ready",
+          "milliseconds": 438.625
+        },
+        {
+          "name": "start-file",
+          "milliseconds": 442.70000000018626
+        },
+        {
+          "name": "file-loaded",
+          "milliseconds": 2578.8100000005215
+        },
+        {
+          "name": "open-resolved",
+          "milliseconds": 2578.8250000001863
+        },
+        {
+          "name": "play-resolved",
+          "milliseconds": 2582.7450000001118
+        },
+        {
+          "name": "playback-restart",
+          "milliseconds": 2869.175000000745
+        }
+      ],
+      "video": {
+        "rendered": 7,
+        "renderMs": 38.04000000003725,
+        "copyMs": 24.169999999925494,
+        "maxRenderMs": 10.855000000447035,
+        "heapBytes": 134217728,
+        "epoch": 8,
+        "path": "wasm",
+        "decoder": "software",
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 0,
+        "presentedPosition": 0,
+        "ioPending": true,
+        "ioSerial": 27,
+        "interruptions": 0,
+        "io": {
+          "fetchedBytes": 2359296,
+          "requests": 9,
+          "retries": 0,
+          "aborts": 0,
+          "cacheBytes": 2359296,
+          "peakCacheBytes": 2359296,
+          "activeBytes": 0,
+          "peakActiveBytes": 262144,
+          "size": "1157038449",
+          "reads": 26,
+          "seeks": 1,
+          "interruptions": 0
+        },
+        "seeking": false,
+        "position": 0,
+        "queuedFrames": 0
+      },
+      "audio": {
+        "state": "running",
+        "sampleRate": 48000,
+        "mediaFrames": 5120,
+        "underruns": 0,
+        "rms": 0.17519743481967073,
+        "latencyConfidence": "reported-latency estimate"
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799449632.08,
+          "duration": 328.35500000044703,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799449965.84,
+          "duration": 299.58499999996275,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799450266.5051,
+          "duration": 299.20000000018626,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799450573.85,
+          "duration": 298.39499999955297,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799450873.105,
+          "duration": 295.09999999962747,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799451168.98,
+          "duration": 297.46999999973923,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799451467.1401,
+          "duration": 298.304999999702,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799451766.5151,
+          "duration": 298.34499999973923,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799448413",
+          "startWall": 1788799452078.05,
+          "duration": 300.01500000059605,
+          "initiatorType": "fetch"
+        }
+      ],
+      "server": {
+        "requests": 10,
+        "bytes": 2359296,
+        "ranges": [
+          {
+            "start": 0,
+            "end": 262143
+          },
+          {
+            "start": 262144,
+            "end": 524287
+          },
+          {
+            "start": 524288,
+            "end": 786431
+          },
+          {
+            "start": 786432,
+            "end": 1048575
+          },
+          {
+            "start": 1048576,
+            "end": 1310719
+          },
+          {
+            "start": 1310720,
+            "end": 1572863
+          },
+          {
+            "start": 1572864,
+            "end": 1835007
+          },
+          {
+            "start": 1835008,
+            "end": 2097151
+          },
+          {
+            "start": 2097152,
+            "end": 2359295
+          },
+          {
+            "start": 2359296,
+            "end": 2621439
+          }
+        ],
+        "aborted": 0,
+        "mode": "normal",
+        "stall": false,
+        "rtt": 80,
+        "mbps": 10
+      }
+    },
+    {
+      "backend": "webcodecs",
+      "milliseconds": 2778.3300000000745,
+      "startWall": 1788799454023.99,
+      "stages": [
+        {
+          "name": "end-file",
+          "milliseconds": 3.0300000002607703
+        },
+        {
+          "name": "range-reader-ready",
+          "milliseconds": 309.035000000149
+        },
+        {
+          "name": "start-file",
+          "milliseconds": 313.2649999996647
+        },
+        {
+          "name": "file-loaded",
+          "milliseconds": 2422.8650000002235
+        },
+        {
+          "name": "open-resolved",
+          "milliseconds": 2422.8849999997765
+        },
+        {
+          "name": "play-resolved",
+          "milliseconds": 2427.859999999404
+        },
+        {
+          "name": "playback-restart",
+          "milliseconds": 2757.5949999997392
+        }
+      ],
+      "video": {
+        "rendered": 7,
+        "renderMs": 37.44000000040978,
+        "copyMs": 21.83000000100583,
+        "maxRenderMs": 10.040000000037253,
+        "heapBytes": 134217728,
+        "epoch": 8,
+        "path": "wasm",
+        "decoder": "webcodecs",
+        "decoderStats": {
+          "submitted": 18,
+          "frames": 6,
+          "receivedFrames": 8,
+          "closedFrames": 8,
+          "peakOutstanding": 8,
+          "peakFrames": 5,
+          "resets": 0,
+          "errors": 0,
+          "copyMs": 25.93500000052154,
+          "outstanding": 8,
+          "queued": 0,
+          "active": true
+        },
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 0,
+        "presentedPosition": 0,
+        "ioPending": true,
+        "ioSerial": 27,
+        "interruptions": 0,
+        "io": {
+          "fetchedBytes": 2359296,
+          "requests": 9,
+          "retries": 0,
+          "aborts": 0,
+          "cacheBytes": 2359296,
+          "peakCacheBytes": 2359296,
+          "activeBytes": 0,
+          "peakActiveBytes": 262144,
+          "size": "1157038449",
+          "reads": 26,
+          "seeks": 1,
+          "interruptions": 0
+        },
+        "seeking": false,
+        "position": 0,
+        "queuedFrames": 7424
+      },
+      "audio": {
+        "state": "running",
+        "sampleRate": 48000,
+        "mediaFrames": 5888,
+        "underruns": 0,
+        "rms": 0.24663520849600876,
+        "latencyConfidence": "reported-latency estimate"
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799454033.91,
+          "duration": 298.67499999981374,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799454338.21,
+          "duration": 296.8849999997765,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799454636.175,
+          "duration": 298.89000000059605,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799454942.45,
+          "duration": 298.65500000026077,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799455242.07,
+          "duration": 298.089999999851,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799455541.06,
+          "duration": 296.6499999994412,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799455838.49,
+          "duration": 297.6699999999255,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799456137.16,
+          "duration": 297.8150000004098,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799452873",
+          "startWall": 1788799456449.395,
+          "duration": 330.43999999947846,
+          "initiatorType": "fetch"
+        }
+      ],
+      "server": {
+        "requests": 10,
+        "bytes": 2359296,
+        "ranges": [
+          {
+            "start": 0,
+            "end": 262143
+          },
+          {
+            "start": 262144,
+            "end": 524287
+          },
+          {
+            "start": 524288,
+            "end": 786431
+          },
+          {
+            "start": 786432,
+            "end": 1048575
+          },
+          {
+            "start": 1048576,
+            "end": 1310719
+          },
+          {
+            "start": 1310720,
+            "end": 1572863
+          },
+          {
+            "start": 1572864,
+            "end": 1835007
+          },
+          {
+            "start": 1835008,
+            "end": 2097151
+          },
+          {
+            "start": 2097152,
+            "end": 2359295
+          },
+          {
+            "start": 2359296,
+            "end": 2621439
+          }
+        ],
+        "aborted": 0,
+        "mode": "normal",
+        "stall": false,
+        "rtt": 80,
+        "mbps": 10
+      }
+    },
+    {
+      "backend": "webcodecs",
+      "milliseconds": 2738.2199999997392,
+      "startWall": 1788799457996.585,
+      "stages": [
+        {
+          "name": "end-file",
+          "milliseconds": 5.205000000074506
+        },
+        {
+          "name": "range-reader-ready",
+          "milliseconds": 310.0149999996647
+        },
+        {
+          "name": "start-file",
+          "milliseconds": 314.3099999995902
+        },
+        {
+          "name": "file-loaded",
+          "milliseconds": 2429.429999999702
+        },
+        {
+          "name": "open-resolved",
+          "milliseconds": 2429.4500000001863
+        },
+        {
+          "name": "play-resolved",
+          "milliseconds": 2434.19000000041
+        },
+        {
+          "name": "playback-restart",
+          "milliseconds": 2729.480000000447
+        }
+      ],
+      "video": {
+        "rendered": 7,
+        "renderMs": 34.89999999944121,
+        "copyMs": 22.164999998174608,
+        "maxRenderMs": 9.464999999850988,
+        "heapBytes": 134217728,
+        "epoch": 8,
+        "path": "wasm",
+        "decoder": "webcodecs",
+        "decoderStats": {
+          "submitted": 12,
+          "frames": 4,
+          "receivedFrames": 6,
+          "closedFrames": 6,
+          "peakOutstanding": 8,
+          "peakFrames": 5,
+          "resets": 0,
+          "errors": 0,
+          "copyMs": 6.595000000670552,
+          "outstanding": 4,
+          "queued": 0,
+          "active": true
+        },
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 0,
+        "presentedPosition": 0,
+        "ioPending": true,
+        "ioSerial": 26,
+        "interruptions": 0,
+        "io": {
+          "fetchedBytes": 2097152,
+          "requests": 8,
+          "retries": 0,
+          "aborts": 0,
+          "cacheBytes": 2097152,
+          "peakCacheBytes": 2097152,
+          "activeBytes": 0,
+          "peakActiveBytes": 262144,
+          "size": "1157038449",
+          "reads": 25,
+          "seeks": 1,
+          "interruptions": 0
+        },
+        "seeking": false,
+        "position": 0,
+        "queuedFrames": 0
+      },
+      "audio": {
+        "state": "running",
+        "sampleRate": 48000,
+        "mediaFrames": 4864,
+        "underruns": 0,
+        "rms": 0.17519743481967073,
+        "latencyConfidence": "reported-latency estimate"
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799458008.56,
+          "duration": 297.56499999947846,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799458312.03,
+          "duration": 295.96999999973923,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799458609.085,
+          "duration": 296.32499999925494,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799458912.8398,
+          "duration": 299.3199999993667,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799459213.05,
+          "duration": 297.410000000149,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799459511.685,
+          "duration": 300.00499999988824,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799459812.38,
+          "duration": 297.90499999932945,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799460111.27,
+          "duration": 295.70000000018626,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-webcodecs-1788799457336",
+          "startWall": 1788799460421.515,
+          "duration": 299.82500000018626,
+          "initiatorType": "fetch"
+        }
+      ],
+      "server": {
+        "requests": 10,
+        "bytes": 2359296,
+        "ranges": [
+          {
+            "start": 0,
+            "end": 262143
+          },
+          {
+            "start": 262144,
+            "end": 524287
+          },
+          {
+            "start": 524288,
+            "end": 786431
+          },
+          {
+            "start": 786432,
+            "end": 1048575
+          },
+          {
+            "start": 1048576,
+            "end": 1310719
+          },
+          {
+            "start": 1310720,
+            "end": 1572863
+          },
+          {
+            "start": 1572864,
+            "end": 1835007
+          },
+          {
+            "start": 1835008,
+            "end": 2097151
+          },
+          {
+            "start": 2097152,
+            "end": 2359295
+          },
+          {
+            "start": 2359296,
+            "end": 2621439
+          }
+        ],
+        "aborted": 0,
+        "mode": "normal",
+        "stall": false,
+        "rtt": 80,
+        "mbps": 10
+      }
+    },
+    {
+      "backend": "software",
+      "milliseconds": 2755.2999999998137,
+      "startWall": 1788799462096.27,
+      "stages": [
+        {
+          "name": "end-file",
+          "milliseconds": 3.894999999552965
+        },
+        {
+          "name": "range-reader-ready",
+          "milliseconds": 307.0699999993667
+        },
+        {
+          "name": "start-file",
+          "milliseconds": 308.84999999962747
+        },
+        {
+          "name": "file-loaded",
+          "milliseconds": 2449.75
+        },
+        {
+          "name": "open-resolved",
+          "milliseconds": 2449.7649999996647
+        },
+        {
+          "name": "play-resolved",
+          "milliseconds": 2454.5750000001863
+        },
+        {
+          "name": "playback-restart",
+          "milliseconds": 2742.4900000002235
+        }
+      ],
+      "video": {
+        "rendered": 7,
+        "renderMs": 40.84499999880791,
+        "copyMs": 21.645000002346933,
+        "maxRenderMs": 14.495000000111759,
+        "heapBytes": 134217728,
+        "epoch": 8,
+        "path": "wasm",
+        "decoder": "software",
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 0,
+        "presentedPosition": 0,
+        "ioPending": true,
+        "ioSerial": 27,
+        "interruptions": 0,
+        "io": {
+          "fetchedBytes": 2359296,
+          "requests": 9,
+          "retries": 0,
+          "aborts": 0,
+          "cacheBytes": 2359296,
+          "peakCacheBytes": 2359296,
+          "activeBytes": 0,
+          "peakActiveBytes": 262144,
+          "size": "1157038449",
+          "reads": 26,
+          "seeks": 1,
+          "interruptions": 0
+        },
+        "seeking": false,
+        "position": 0,
+        "queuedFrames": 0
+      },
+      "audio": {
+        "state": "running",
+        "sampleRate": 48000,
+        "mediaFrames": 5376,
+        "underruns": 0,
+        "rms": 0.2131112187062035,
+        "latencyConfidence": "reported-latency estimate"
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799462106.8499,
+          "duration": 295.96999999973923,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799462408.5698,
+          "duration": 298.03000000026077,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799462707.89,
+          "duration": 299.0149999996647,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799463014.8398,
+          "duration": 297.1349999997765,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799463312.95,
+          "duration": 299,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799463612.7598,
+          "duration": 298.45999999996275,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799463911.9849,
+          "duration": 298.76500000059605,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799464211.8848,
+          "duration": 299.320000000298,
+          "initiatorType": "fetch"
+        },
+        {
+          "name": "http://127.0.0.1:4180/media/front?id=startup-software-1788799461132",
+          "startWall": 1788799464523.42,
+          "duration": 299.70000000018626,
+          "initiatorType": "fetch"
+        }
+      ],
+      "server": {
+        "requests": 10,
+        "bytes": 2359296,
+        "ranges": [
+          {
+            "start": 0,
+            "end": 262143
+          },
+          {
+            "start": 262144,
+            "end": 524287
+          },
+          {
+            "start": 524288,
+            "end": 786431
+          },
+          {
+            "start": 786432,
+            "end": 1048575
+          },
+          {
+            "start": 1048576,
+            "end": 1310719
+          },
+          {
+            "start": 1310720,
+            "end": 1572863
+          },
+          {
+            "start": 1572864,
+            "end": 1835007
+          },
+          {
+            "start": 1835008,
+            "end": 2097151
+          },
+          {
+            "start": 2097152,
+            "end": 2359295
+          },
+          {
+            "start": 2359296,
+            "end": 2621439
+          }
+        ],
+        "aborted": 0,
+        "mode": "normal",
+        "stall": false,
+        "rtt": 80,
+        "mbps": 10
+      }
+    }
+  ],
+  "hashes": {
+    "web/engine/player.wasm": "3dc656d621cd3b3048d50067df07624e97b240ee9b8c97de218977c3433ef7fb",
+    "web/engine-m4/player.wasm": "92fbbedbf6f342fc308fc63d65abc594be4b9b23ec70ae893b8f1f3c881c2963",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/io-worker.js": "e8e0983479d351b6dc6e63dd185e296746e93cc83becf6f13e3242378fae6d91",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4"
+  },
+  "browserClosed": true
+}
