@@ -13,6 +13,9 @@ See the
 [M2 acceptance record](docs/validation/M2.md)
 and [supported profile](docs/SUPPORTED-PROFILE.md).
 
+For continuation, see the [handoff](docs/HANDOFF.md) for checkpoints, code
+ownership, local setup, validation evidence and remaining milestones.
+
 ## Run the local demo
 
 After building the engine:
