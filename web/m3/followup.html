@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>webmpv M3 isolated bridge benchmark</title>
+<style>body{background:#121820;color:#e4edf5;font:16px system-ui;margin:20px}canvas{width:min(960px,95vw);height:auto}pre{white-space:pre-wrap}</style>
+<h1>M3 isolated bridge benchmark</h1>
+<p>Keep this window visible during measurement.</p>
+<canvas width="1920" height="1080"></canvas><pre id="status">Ready</pre>
+<script type="module">
+let worker;
+window.runBenchmark = async options => {
+  const started = performance.now();
+  const manifest = await (await fetch('./fixture/manifest.json')).json();
+  const packets = await (await fetch('./fixture/packets.bin')).arrayBuffer();
+  const fetchMs = performance.now() - started;
+  const old = document.querySelector('canvas'), canvas = old.cloneNode(); old.replaceWith(canvas);
+  const offscreen = canvas.transferControlToOffscreen();
+  worker = new Worker('./worker-v2.js', {type:'module'});
+  window.progress = {phase:'loading'};
+  const visibility = [{at:performance.now(),state:document.visibilityState}];
+  const changed = () => visibility.push({at:performance.now(),state:document.visibilityState});
+  document.addEventListener('visibilitychange',changed);
+  const transferAt = performance.timeOrigin + performance.now();
+  return new Promise((resolve,reject) => {
+    worker.onerror = e => {cleanup(); reject(Error(e.message));};
+    worker.onmessage = ({data}) => {
+      if(data.type === 'progress') {
+        window.progress = data; document.querySelector('#status').textContent = JSON.stringify(data,null,2);
+      } else if(data.type === 'done') {
+        cleanup(); resolve({...data.result,fetchMs,visibility});
+      } else if(data.type === 'error') {cleanup(); reject(Error(data.error));}
+    };
+    function cleanup(){worker.terminate();document.removeEventListener('visibilitychange',changed);}
+    worker.postMessage({options,manifest,packets,canvas:offscreen,transferAt},[packets,offscreen]);
+  });
+};
+</script>

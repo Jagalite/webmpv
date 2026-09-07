@@ -1,8 +1,11 @@
 # webmpv handoff
 
 Updated 2026-09-07. M0, M1 and M2/G1 are complete for the declared software
-profile. No implementation work remains for those milestones. M3 and S1 have
-not started; the next development direction is still a decision.
+profile. No implementation work remains for those milestones. The first bounded
+M3 experiment and isolated packet-bridge follow-up are complete. The follow-up
+passes the memory gate but fails the net CPU-benefit threshold. See
+[follow-up evidence](validation/M3-followup.md). The recommendation
+is to defer M4; G2 remains the user's decision. S1 has not started.
 
 ## Checkpoint and source of truth
 
@@ -181,14 +184,18 @@ evidence. Distribution beyond Git source requires a separate artifact delivery.
 
 ## Next milestones
 
-Choose S1 for additional input formats or M3 to evaluate decoding efficiency.
-Neither has been started or selected by this handoff.
+M3 now has measured evidence and a recommendation to defer M4. Continue with
+a newly justified experiment described in [follow-up evidence](validation/M3-followup.md), or select S1 for
+additional input formats. Neither M4 nor M5 is authorized.
 
 1. **S1, independent after G1:** fixed HLS/DASH VOD with software decoding.
    Qualify nested manifests/segments, TS/fMP4 init and byte ranges, audio/subtitles,
    authorization, discontinuities, cancellation and retries. Live, low latency,
    ABR, DRM and HDR are separate scope.
-2. **M3:** a matched benchmark using identical demuxed packets to compare software
+2. **M3:** the first benchmark and follow-up are complete. Memory now passes in
+   the isolated setup; net CPU benefit does not meet the gate. Any further
+   experiment needs an explicit rationale and contract. Preserve the matched benchmark
+   using identical demuxed packets to compare software
    decoding, WebCodecs copy-back and practical retained-frame presentation.
    Predeclare the useful-benefit threshold; include message/copy overhead, frame
    delivery, memory, startup/seek effects, measurable CPU/energy and uncertainty.

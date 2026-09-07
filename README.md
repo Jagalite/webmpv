@@ -99,7 +99,13 @@ and runtime hashes before producing an accepted baseline.
 
 The small local fixture retains its bounded WasmFS path; remote media uses HTTP
 ranges. WebCodecs, segmented streaming, live playback and hardware acceleration
-remain outside this software baseline. No M3 or later decoder work is started.
+remain outside this software baseline. M3 now has an isolated
+[decoder benchmark](experiments/m3/README.md) and a predeclared
+[measurement contract](docs/M3-BENCHMARK.md). The [first results](docs/validation/M3.md)
+show a CPU benefit but fail the comparison memory gate. The
+[isolated packet-bridge follow-up](docs/validation/M3-followup.md) passes memory
+but misses the net CPU-benefit threshold. Production decoder integration
+still requires a separate G2 decision.
 
 ## Accepted baseline archive
 

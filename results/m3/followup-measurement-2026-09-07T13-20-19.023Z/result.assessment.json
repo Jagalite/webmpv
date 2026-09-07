@@ -1,0 +1,206 @@
+{
+  "complete": true,
+  "browserIsolation": true,
+  "variants": {
+    "software": {
+      "pixelPass": true,
+      "seekPass": true,
+      "checks": [
+        {
+          "pair": 0,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        },
+        {
+          "pair": 1,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        },
+        {
+          "pair": 2,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        }
+      ],
+      "runtimePass": true,
+      "cpuPercent": [
+        40.74438534154699,
+        37.22520504499961,
+        37.21182903002165
+      ],
+      "medianCPUPercent": 37.22520504499961,
+      "rssGrowthMiB": [
+        0.734375,
+        -343.734375,
+        7.25
+      ],
+      "peakRSSMiB": 961.390625,
+      "seekMs": 246.6849999949336
+    },
+    "copyback-direct": {
+      "pixelPass": true,
+      "seekPass": true,
+      "checks": [
+        {
+          "pair": 0,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        },
+        {
+          "pair": 1,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        },
+        {
+          "pair": 2,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        }
+      ],
+      "runtimePass": true,
+      "cpuPercent": [
+        27.435626343972704,
+        25.031742876788858,
+        25.346265850045718
+      ],
+      "medianCPUPercent": 25.346265850045718,
+      "rssGrowthMiB": [
+        45.703125,
+        -35.53125,
+        -313.03125
+      ],
+      "peakRSSMiB": 1218.546875,
+      "seekMs": 158.8800000026822
+    },
+    "copyback-bridge": {
+      "pixelPass": true,
+      "seekPass": true,
+      "checks": [
+        {
+          "pair": 0,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        },
+        {
+          "pair": 1,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        },
+        {
+          "pair": 2,
+          "fixedWarmup": true,
+          "fullDelivery": true,
+          "foreground": true,
+          "counters": true,
+          "memory": true,
+          "ownership": true,
+          "bridge": true
+        }
+      ],
+      "runtimePass": true,
+      "cpuPercent": [
+        36.52922056733858,
+        26.4794683352931,
+        25.32673459077131
+      ],
+      "medianCPUPercent": 26.4794683352931,
+      "rssGrowthMiB": [
+        -31.78125,
+        -427.109375,
+        20.46875
+      ],
+      "peakRSSMiB": 1173.296875,
+      "seekMs": 168.48000000417233
+    }
+  },
+  "pairs": [
+    {
+      "pair": 0,
+      "softwareCPU": 40.74438534154699,
+      "directCPU": 27.435626343972704,
+      "bridgeCPU": 36.52922056733858,
+      "directReduction": 0.3266403183165304,
+      "netReduction": 0.10345388055002058,
+      "bridgeCPUIncrement": 9.093594223365873
+    },
+    {
+      "pair": 1,
+      "softwareCPU": 37.22520504499961,
+      "directCPU": 25.031742876788858,
+      "bridgeCPU": 26.4794683352931,
+      "directReduction": 0.32755930164711555,
+      "netReduction": 0.28866830140268007,
+      "bridgeCPUIncrement": 1.447725458504241
+    },
+    {
+      "pair": 2,
+      "softwareCPU": 37.21182903002165,
+      "directCPU": 25.346265850045718,
+      "bridgeCPU": 25.32673459077131,
+      "directReduction": 0.3188653578517483,
+      "netReduction": 0.3193902248035623,
+      "bridgeCPUIncrement": -0.019531259274408797
+    }
+  ],
+  "netBenefitPassed": false,
+  "candidate": false,
+  "decision": "Defer G2: incomplete or failing follow-up evidence",
+  "hardwareAcceleration": "unknown",
+  "energy": "not measured",
+  "medianNetReduction": 0.28866830140268007,
+  "medianBridgeCPUIncrement": 1.447725458504241,
+  "bridge": {
+    "requests": 8640,
+    "medianRoundTripMs": 0.16499999910593033,
+    "p95RoundTripMs": 0.23499999940395355,
+    "p99RoundTripMs": 0.27000000327825546,
+    "maximumRoundTripMs": 2.0749999955296516,
+    "meanProducerCopyMs": 0.025969907390471135
+  },
+  "evidence": {
+    "resultFile": "results/m3/followup-measurement-2026-09-07T13-20-19.023Z/result.json",
+    "resultSha256": "10e9009510d35e3d9efc765f283828f15de4e99980c5110a56e48ea5f02a6d5e",
+    "assessmentCodeSha256": "c86b406eba133da66168422e1dc65d78d3300575446931ff6dd2581a57b49a57",
+    "fixtureManifestSha256": "69ec3e429cc3af8c67ea7397bf4308009302a36e65d3ff893478f12e990f55e1"
+  }
+}
