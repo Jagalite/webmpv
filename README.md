@@ -104,8 +104,8 @@ remain outside this software baseline. M3 now has an isolated
 [measurement contract](docs/M3-BENCHMARK.md). The [first results](docs/validation/M3.md)
 show a CPU benefit but fail the comparison memory gate. The
 [isolated packet-bridge follow-up](docs/validation/M3-followup.md) passes memory
-but misses the net CPU-benefit threshold. Production decoder integration
-still requires a separate G2 decision.
+but misses the net CPU-benefit threshold. The subsequent G2 decision authorized optional production integration; see the
+[development candidate acceptance](docs/validation/CANDIDATE.md).
 
 ## Accepted baseline archive
 
@@ -131,3 +131,26 @@ user-approved 57:38 endurance exception; software remains the default. See
 [clean candidate acceptance](docs/validation/CANDIDATE.md). See [M4 validation](docs/validation/M4.md) and
 [integration instructions](docs/INTEGRATION.md). The accepted 0.2.0 archive is
 unchanged.
+
+## Compare the three playback paths
+
+The [three-way results](docs/validation/THREE-WAY.md) compare native HTML video,
+mpv software decoding and our patched mpv with WebCodecs copy-back. On the test
+host, median CPU was 10.24%, 54.09% and 45.27% of one core respectively; WebCodecs
+was slower than software in one of three rounds.
+
+With both local engine variants and browser bindings built, generate the fixture
+using `bash scripts/make-qualification-fixtures.sh`. Start `npm run dev` on port
+4179 and `node scripts/benchmark-media-server.mjs` on port 4183 in separate
+terminals, checking for existing servers first. Then run:
+
+```sh
+node --test tests/benchmark-media-server.mjs
+node tests/three-way-benchmark.mjs --smoke
+node tests/three-way-benchmark.mjs
+```
+
+The measured run takes about 15 minutes. Leave its Chrome window foreground and
+avoid concurrent heavy work. The short headless smoke only checks plumbing.
+Results are saved under `results/benchmark/`; the validation report includes the
+raw-sample assessment command. Use the local toolchain; Docker is not required.

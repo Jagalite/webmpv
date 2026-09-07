@@ -1,0 +1,49 @@
+{
+  "verified": true,
+  "source": "results/benchmark/measurement-2026-09-07T22-38-32.546Z/result.json",
+  "sourceSha256": "e3ff7d9e3138fe2958ca82951a93c457cf539453ae9b3905c50be0d6962611f8",
+  "rawSha256": "7a6ef0fc391666e2035205bb55cfb2e95d78d8fe7f09619fb456576adfea8553",
+  "summary": {
+    "native": {
+      "cpuMedianPercentOfOneCore": 10.235727074128219,
+      "cpuRangePercentOfOneCore": [
+        6.113576857072811,
+        11.918991199478489
+      ],
+      "medianOfTrialRSSMiB": 939.484375,
+      "droppedFrames": 0
+    },
+    "software": {
+      "cpuMedianPercentOfOneCore": 54.09202904462752,
+      "cpuRangePercentOfOneCore": [
+        42.860927688545175,
+        55.59601782325275
+      ],
+      "medianOfTrialRSSMiB": 1088.859375,
+      "droppedFrames": 0
+    },
+    "webcodecs": {
+      "cpuMedianPercentOfOneCore": 45.2713956929147,
+      "cpuRangePercentOfOneCore": [
+        44.50779779466301,
+        49.644575215112226
+      ],
+      "medianOfTrialRSSMiB": 1423.234375,
+      "droppedFrames": 0
+    }
+  },
+  "pairedWebcodecsSavingsVsSoftware": [
+    0.1771837998914264,
+    -0.15827113159708905,
+    0.18570794338474772
+  ],
+  "medianPairedWebcodecsSavingsVsSoftware": 0.1771837998914264,
+  "webcodecsFasterRounds": 2,
+  "scope": "Three complete playback pipelines on the recorded synthetic test video and host",
+  "limitations": [
+    "CPU advantage over software reversed in one round",
+    "RSS is process residency, not a long-term memory bound",
+    "Native and mpv frame-counter semantics differ",
+    "Hardware selection, energy and native independent A/V sync were not measured"
+  ]
+}

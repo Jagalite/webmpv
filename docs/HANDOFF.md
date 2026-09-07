@@ -25,6 +25,10 @@ separately by the final browser assembly proof. See [M4 evidence](validation/M4.
 
 The accepted 0.2.0 archive is unchanged. The user subsequently authorized committing and pushing S1/M4 and a matched
 three-way benchmark of native browser, Wasm software and mpv/WebCodecs playback.
+S1/M4 was committed and pushed as `2fba039`. The three-way benchmark is complete:
+all nine trials passed, with median CPU 10.24% native, 54.09% software and 45.27%
+mpv/WebCodecs. The optional path was slower in one round. See
+[the comparison report](validation/THREE-WAY.md) for raw evidence and limits.
 No new release package or tag was requested.
 
 ## Checkpoint and source of truth
@@ -212,5 +216,5 @@ optional endurance exception. G3 is complete and M5 is deferred, not implemented
 
 A future retained-frame effort needs a concrete measured opportunity and a
 bounded design preserving filters, subtitles, recovery and ownership. Broader
-browser/device/codec support requires separate qualification. Git closeout and the three-way benchmark are now authorized. A new release
+browser/device/codec support requires separate qualification. The three-way benchmark and its raw-sample audit are complete. A new release
 package remains a separate action.
