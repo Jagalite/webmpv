@@ -1,0 +1,126 @@
+Setting up EMSDK environment (suppress these messages with EMSDK_QUIET=1)
+Adding directories to PATH:
+PATH += /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+
+Setting environment variables:
+PATH = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14:/Users/jagatranvo/.nvm/versions/node/v23.5.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/jagatranvo/.grok/bin:/Users/jagatranvo/.bun/bin:/Users/jagatranvo/.antigravity/antigravity/bin:/Users/jagatranvo/.opencode/bin:/Users/jagatranvo/.local/share/mise/installs/ruby/3.4.2/bin:/opt/homebrew/bin:/Users/jagatranvo/.nvm/versions/node/v23.5.0/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/go/bin:/Users/jagatranvo/.codex/tmp/arg0/codex-arg06VJICb:/Users/jagatranvo/.local/bin:/Users/jagatranvo/.cargo/bin
+EMSDK = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+EMSDK_PYTHON = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/bin/python3
+SSL_CERT_FILE = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/lib/python3.13/site-packages/certifi/cacert.pem
+make: make -j 4
+CC	libavfilter/version.o
+CC	libavformat/version.o
+CC	libavcodec/version.o
+CC	libpostproc/version.o
+In file included from src/libpostproc/version.c:27:
+./libavutil/ffversion.h:2:18: warning: extra tokens at end of #ifndef directive [-Wextra-tokens]
+    2 | #ifndef BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+      |                  //
+./libavutil/ffversion.h:3:18: warning: ISO C99 requires whitespace after the macro name [-Wc99-extensions]
+    3 | #define BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+In file included from src/libavfilter/version.c:27:
+./libavutil/ffversion.h:2:18: warning: extra tokens at end of #ifndef directive [-Wextra-tokens]
+    2 | #ifndef BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+      |                  //
+./libavutil/ffversion.h:3:18: warning: ISO C99 requires whitespace after the macro name [-Wc99-extensions]
+    3 | #define BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+In file included from src/libavcodec/version.c:29:
+./libavutil/ffversion.h:2:18: warning: extra tokens at end of #ifndef directive [-Wextra-tokens]
+    2 | #ifndef BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+      |                  //
+./libavutil/ffversion.h:3:18: warning: ISO C99 requires whitespace after the macro name [-Wc99-extensions]
+    3 | #define BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+In file included from src/libavformat/version.c:28:
+./libavutil/ffversion.h:2:18: warning: extra tokens at end of #ifndef directive [-Wextra-tokens]
+    2 | #ifndef BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+      |                  //
+./libavutil/ffversion.h:3:18: warning: ISO C99 requires whitespace after the macro name [-Wc99-extensions]
+    3 | #define BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+2 warnings generated.
+2 warnings generated.
+2 warnings generated.
+2 warnings generated.
+CC	libswresample/version.o
+CC	libswscale/version.o
+CC	libavutil/version.o
+In file included from src/libavutil/version.c:28:
+./libavutil/ffversion.h:2:18: warning: extra tokens at end of #ifndef directive [-Wextra-tokens]
+    2 | #ifndef BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+      |                  //
+./libavutil/ffversion.h:3:18: warning: ISO C99 requires whitespace after the macro name [-Wc99-extensions]
+    3 | #define BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+In file included from src/libswresample/version.c:27:
+./libavutil/ffversion.h:2:18: warning: extra tokens at end of #ifndef directive [-Wextra-tokens]
+    2 | #ifndef BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+      |                  //
+./libavutil/ffversion.h:3:18: warning: ISO C99 requires whitespace after the macro name [-Wc99-extensions]
+    3 | #define BUILD_OBJ-SOFTWARE-FULL-FFMPEG/AVUTIL/FFVERSION_H
+      |                  ^
+2 warnings generated.
+2 warnings generated.
+AR	libavformat/libavformat.a
+AR	libavfilter/libavfilter.a
+AR	libavcodec/libavcodec.a
+AR	libpostproc/libpostproc.a
+AR	libswresample/libswresample.a
+AR	libswscale/libswscale.a
+AR	libavutil/libavutil.a
+emcc: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]
+{
+  "decoder": {
+    "baseline": 6,
+    "expanded": 496,
+    "added": 490
+  },
+  "demuxer": {
+    "baseline": 11,
+    "expanded": 352,
+    "added": 341
+  },
+  "parser": {
+    "baseline": 3,
+    "expanded": 60,
+    "added": 57
+  },
+  "bsf": {
+    "baseline": 0,
+    "expanded": 45,
+    "added": 45
+  },
+  "filter": {
+    "baseline": 6,
+    "expanded": 472,
+    "added": 466
+  },
+  "encoder": {
+    "baseline": 0,
+    "expanded": 0,
+    "added": 0
+  },
+  "muxer": {
+    "baseline": 0,
+    "expanded": 0,
+    "added": 0
+  },
+  "protocol": {
+    "baseline": 1,
+    "expanded": 1,
+    "added": 0
+  },
+  "hwaccel": {
+    "baseline": 0,
+    "expanded": 0,
+    "added": 0
+  }
+}

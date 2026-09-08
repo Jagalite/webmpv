@@ -1,0 +1,27 @@
+Setting up EMSDK environment (suppress these messages with EMSDK_QUIET=1)
+Adding directories to PATH:
+PATH += /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+
+Setting environment variables:
+PATH = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14:/Users/jagatranvo/.nvm/versions/node/v23.5.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/jagatranvo/.grok/bin:/Users/jagatranvo/.bun/bin:/Users/jagatranvo/.antigravity/antigravity/bin:/Users/jagatranvo/.opencode/bin:/Users/jagatranvo/.local/share/mise/installs/ruby/3.4.2/bin:/opt/homebrew/bin:/Users/jagatranvo/.nvm/versions/node/v23.5.0/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/go/bin:/Users/jagatranvo/.codex/tmp/arg0/codex-arg06VJICb:/Users/jagatranvo/.local/bin:/Users/jagatranvo/.cargo/bin
+EMSDK = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+EMSDK_PYTHON = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/bin/python3
+SSL_CERT_FILE = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/lib/python3.13/site-packages/certifi/cacert.pem
+experiments/retained-presenter/player.c:25:114: error: too few arguments to function call, single argument 'ctx' was not specified
+   25 | EMSCRIPTEN_KEEPALIVE double web_selected_delay(void) { return selected_target>0?(selected_target-mpv_get_time_us())/1000:0; }
+      |                                                                                                  ~~~~~~~~~~~~~~~ ^
+/Volumes/seed2/Projects/webmpv/build/prefix/include/mpv/client.h:623:20: note: 'mpv_get_time_us' declared here
+  623 | MPV_EXPORT int64_t mpv_get_time_us(mpv_handle *ctx);
+      |                    ^               ~~~~~~~~~~~~~~~
+1 error generated.
+emcc: error: '/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/bin/clang -target wasm32-unknown-emscripten -fignore-exceptions -mllvm -combiner-global-alias-analysis=false -mllvm -enable-emscripten-sjlj -mllvm -disable-lsr --sysroot=/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot -D__EMSCRIPTEN_SHARED_MEMORY__=1 -DEMSCRIPTEN -Xclang -iwithsysroot/include/fakesdl -Xclang -iwithsysroot/include/compat -O2 -pthread -msimd128 -Inative -Ibuild/sources/mpv -Ibuild/obj-mpv -I/Volumes/seed2/Projects/webmpv/build/prefix/include -I/Volumes/seed2/Projects/webmpv/build/prefix/include/fribidi -I/Volumes/seed2/Projects/webmpv/build/prefix/include/harfbuzz -I/Volumes/seed2/Projects/webmpv/build/prefix/include/freetype2 -DPL_HAVE_PTHREAD -DPTHREAD_HAS_SETCLOCK -pthread -DPL_STATIC -pthread -c experiments/retained-presenter/player.c -o /var/folders/p2/hs2582qs5672qbvtm4z5_9840000gn/T/emscripten_temp_i_c0alqo/player_0.o' failed (returned 1)
+Setting up EMSDK environment (suppress these messages with EMSDK_QUIET=1)
+Adding directories to PATH:
+PATH += /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+
+Setting environment variables:
+PATH = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14:/Users/jagatranvo/.nvm/versions/node/v23.5.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/jagatranvo/.grok/bin:/Users/jagatranvo/.bun/bin:/Users/jagatranvo/.antigravity/antigravity/bin:/Users/jagatranvo/.opencode/bin:/Users/jagatranvo/.local/share/mise/installs/ruby/3.4.2/bin:/opt/homebrew/bin:/Users/jagatranvo/.nvm/versions/node/v23.5.0/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/go/bin:/Users/jagatranvo/.codex/tmp/arg0/codex-arg06VJICb:/Users/jagatranvo/.local/bin:/Users/jagatranvo/.cargo/bin
+EMSDK = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+EMSDK_PYTHON = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/bin/python3
+SSL_CERT_FILE = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/lib/python3.13/site-packages/certifi/cacert.pem
+emcc: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]

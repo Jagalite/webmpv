@@ -1,0 +1,83 @@
+{
+  "started": "2026-09-07T23:10:26.391Z",
+  "smoke": true,
+  "performanceEligible": false,
+  "passed": false,
+  "hashes": {
+    "experiments/canvas-ablation/PROTOCOL.md": "41c237e114cfab36ecd9f4e1c49d2a7a5b6909405a4f2495ad03df25917b0d82",
+    "experiments/canvas-ablation/prepare.py": "ac9cef325e1329255fa70deb4354098b813e153411f5b4518f2804f59f01dcd6",
+    "tests/canvas-ablation.mjs": "d5833be876a2fb3699dbce470961c5f692fb838ee692822d671ee211f5381e97",
+    "web/ablation.html": "f2d464b673ed98156bd5deda0d3dabc6d218e90420de1e7efb8214e0d1dbaed9",
+    "web/ablation-engine-worker.js": "5d28f9ac2ca42d797c95df19507f96a0e3a23fd2034dc5e6952d0ecac7814457",
+    "web/generated/ablation-player.js": "c47ec8a883ba430a1bb863f0602b0cca9b73429715072bddad997711abb03ca3",
+    "scripts/benchmark-media-server.mjs": "829e8231930034b85f6d7472e587d5ab31dc621404a2d7af24278583e9da8bfb",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/benchmark.html": "2f488b303c8e210bafb7a3b89f4f7b1c07339c07fc010093028d0548788bbe3c",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
+    "web/engine/player.wasm": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+    "web/engine/player.mjs": "d16a4002bac04633b0d60c986b222812732eb70ed124f1ef1477a4fe6348350e",
+    "web/engine-m4/player.wasm": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+    "web/engine-m4/player.mjs": "8b60d4d1ca3ffee86d62e92144a5bb1e73ebba1b3614b51dd911282a1a8046ce",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403"
+  },
+  "host": {
+    "os": "25.5.0",
+    "arch": "arm64",
+    "cpu": "Apple M1",
+    "memory": 8589934592
+  },
+  "hardwareAcceleration": "unknown",
+  "energy": "unavailable",
+  "protocol": {
+    "warmupSeconds": 2,
+    "measurementSeconds": 4,
+    "network": {
+      "mbps": 10,
+      "rtt": 80
+    },
+    "cssPresentation": [
+      960,
+      540
+    ],
+    "source": [
+      1920,
+      1080
+    ],
+    "deviceScaleFactor": 1,
+    "orders": [
+      [
+        "full",
+        "bypass"
+      ]
+    ]
+  },
+  "trials": [],
+  "failure": "TypeError: fetch failed\n    at node:internal/deps/undici/undici:13484:13\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/canvas-ablation.mjs:91:22",
+  "hashesAfter": {
+    "experiments/canvas-ablation/PROTOCOL.md": "41c237e114cfab36ecd9f4e1c49d2a7a5b6909405a4f2495ad03df25917b0d82",
+    "experiments/canvas-ablation/prepare.py": "ac9cef325e1329255fa70deb4354098b813e153411f5b4518f2804f59f01dcd6",
+    "tests/canvas-ablation.mjs": "d5833be876a2fb3699dbce470961c5f692fb838ee692822d671ee211f5381e97",
+    "web/ablation.html": "f2d464b673ed98156bd5deda0d3dabc6d218e90420de1e7efb8214e0d1dbaed9",
+    "web/ablation-engine-worker.js": "5d28f9ac2ca42d797c95df19507f96a0e3a23fd2034dc5e6952d0ecac7814457",
+    "web/generated/ablation-player.js": "c47ec8a883ba430a1bb863f0602b0cca9b73429715072bddad997711abb03ca3",
+    "scripts/benchmark-media-server.mjs": "829e8231930034b85f6d7472e587d5ab31dc621404a2d7af24278583e9da8bfb",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/benchmark.html": "2f488b303c8e210bafb7a3b89f4f7b1c07339c07fc010093028d0548788bbe3c",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
+    "web/engine/player.wasm": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+    "web/engine/player.mjs": "d16a4002bac04633b0d60c986b222812732eb70ed124f1ef1477a4fe6348350e",
+    "web/engine-m4/player.wasm": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+    "web/engine-m4/player.mjs": "8b60d4d1ca3ffee86d62e92144a5bb1e73ebba1b3614b51dd911282a1a8046ce",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403"
+  },
+  "runtimeUnchanged": true,
+  "finished": "2026-09-07T23:10:27.269Z"
+}

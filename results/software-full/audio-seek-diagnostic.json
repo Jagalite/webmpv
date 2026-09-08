@@ -1,0 +1,1230 @@
+{
+  "scope": "Compare existing and expanded software paused audio seek position; diagnostic, not performance",
+  "browser": "152.0.7977.76",
+  "runs": [
+    {
+      "entry": "index.html",
+      "fixture": "control.wav",
+      "fixtureSha256": "c88f56c94579953e33d554646c57322785016e5af21edb9b6c6bd16f017ff184",
+      "engineSha256": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+      "before": {
+        "p": {
+          "time-pos": 0.47466700000000017,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "pcm_s16le",
+              "decoder-desc": "PCM signed 16-bit little-endian",
+              "codec": "pcm_s16le",
+              "codec-desc": "PCM signed 16-bit little-endian",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 1536000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "pcm_s16le",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.792,
+            "reader-pts": 0.768,
+            "cache-duration": 1.024,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 201120,
+            "fw-bytes": 201120,
+            "raw-input-rate": 2523194,
+            "debug-low-level-seeks": 1,
+            "debug-byte-level-seeks": 1,
+            "debug-ts-last": 1.792,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.768,
+                "cache-end": 1.792
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 25088,
+          "underruns": 0,
+          "rms": 0.06261915486004081,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "latency": 0.037333333333333336
+      },
+      "paused": {
+        "p": {
+          "time-pos": 0.5633128333333335,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "pcm_s16le",
+              "decoder-desc": "PCM signed 16-bit little-endian",
+              "codec": "pcm_s16le",
+              "codec-desc": "PCM signed 16-bit little-endian",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 1536000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "pcm_s16le",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.8773333333333333,
+            "reader-pts": 0.8533333333333333,
+            "cache-duration": 1.024,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 201120,
+            "fw-bytes": 201120,
+            "raw-input-rate": 2523194,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.8773333333333333,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.8533333333333333,
+                "cache-end": 1.8773333333333333
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 25600,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "d": {
+          "rendered": 2,
+          "renderMs": 0.755000002682209,
+          "copyMs": 4.260000001639128,
+          "maxRenderMs": 0.5899999998509884,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "wav",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.75,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.5633128333333335,
+          "queuedFrames": 0
+        },
+        "events": [
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.3333333332441484e-7
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.0960003333333333
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.19200033333333338
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.24000033333333343
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.33066700000000016
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.42666700000000013
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.47466700000000017
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.75
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5633128333333335
+          }
+        ]
+      },
+      "resumed": {
+        "p": {
+          "time-pos": 1.0166461666666664,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "pcm_s16le",
+              "decoder-desc": "PCM signed 16-bit little-endian",
+              "codec": "pcm_s16le",
+              "codec-desc": "PCM signed 16-bit little-endian",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 1536000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "pcm_s16le",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 2.304,
+            "reader-pts": 1.28,
+            "cache-duration": 1.0239999999999998,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 201120,
+            "fw-bytes": 201120,
+            "raw-input-rate": 2871094,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 2.304,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.0239999999999998,
+                "reader-pts": 1.28,
+                "cache-end": 2.304
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 42496,
+          "underruns": 0,
+          "rms": 0.06273782839738282,
+          "latencyConfidence": "reported-latency estimate"
+        }
+      }
+    },
+    {
+      "entry": "software-full.html",
+      "fixture": "control.wav",
+      "fixtureSha256": "c88f56c94579953e33d554646c57322785016e5af21edb9b6c6bd16f017ff184",
+      "engineSha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+      "before": {
+        "p": {
+          "time-pos": 0.42133366666666683,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "pcm_s16le",
+              "decoder-desc": "PCM signed 16-bit little-endian",
+              "codec": "pcm_s16le",
+              "codec-desc": "PCM signed 16-bit little-endian",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 1536000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "pcm_s16le",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.792,
+            "reader-pts": 0.768,
+            "cache-duration": 1.024,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 201120,
+            "fw-bytes": 201120,
+            "raw-input-rate": 2647569,
+            "debug-low-level-seeks": 1,
+            "debug-byte-level-seeks": 1,
+            "debug-ts-last": 1.792,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.768,
+                "cache-end": 1.792
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 24320,
+          "underruns": 0,
+          "rms": 0.06271056826343563,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "latency": 0.037333333333333336
+      },
+      "paused": {
+        "p": {
+          "time-pos": 0.5473128333333335,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "pcm_s16le",
+              "decoder-desc": "PCM signed 16-bit little-endian",
+              "codec": "pcm_s16le",
+              "codec-desc": "PCM signed 16-bit little-endian",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 1536000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "pcm_s16le",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.8773333333333333,
+            "reader-pts": 0.8533333333333333,
+            "cache-duration": 1.024,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 201120,
+            "fw-bytes": 201120,
+            "raw-input-rate": 2647569,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.8773333333333333,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.8533333333333333,
+                "cache-end": 1.8773333333333333
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 24576,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "d": {
+          "rendered": 2,
+          "renderMs": 0.6750000007450581,
+          "copyMs": 2.469999998807907,
+          "maxRenderMs": 0.5749999992549419,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "wav",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.75,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.5473128333333335,
+          "queuedFrames": 0
+        },
+        "events": [
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.0053336666666666255
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.0960003333333333
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.18666700000000003
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.24000033333333343
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.3253336666666668
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.42133366666666683
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.75
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5473128333333335
+          }
+        ]
+      },
+      "resumed": {
+        "p": {
+          "time-pos": 1.0273128333333332,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "pcm_s16le",
+              "decoder-desc": "PCM signed 16-bit little-endian",
+              "codec": "pcm_s16le",
+              "codec-desc": "PCM signed 16-bit little-endian",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 1536000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "pcm_s16le",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 2.304,
+            "reader-pts": 1.28,
+            "cache-duration": 1.0239999999999998,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 201120,
+            "fw-bytes": 201120,
+            "raw-input-rate": 3004572,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 2.304,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.0239999999999998,
+                "reader-pts": 1.28,
+                "cache-end": 2.304
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 41472,
+          "underruns": 0,
+          "rms": 0.06273782839738282,
+          "latencyConfidence": "reported-latency estimate"
+        }
+      }
+    },
+    {
+      "entry": "software-full.html",
+      "fixture": "audio.flac",
+      "fixtureSha256": "174a6a5020c94b0a3022a20d97b51ec15c9fde863729fee387fb091ed17a5cbc",
+      "engineSha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+      "before": {
+        "p": {
+          "time-pos": 0.4160003333333333,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "flac",
+              "decoder-desc": "FLAC (Free Lossless Audio Codec)",
+              "codec": "flac",
+              "codec-desc": "FLAC (Free Lossless Audio Codec)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "flac",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.8239999999999998,
+            "reader-pts": 0.768,
+            "cache-duration": 1.0559999999999998,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 18440,
+            "fw-bytes": 18440,
+            "raw-input-rate": 530467,
+            "debug-low-level-seeks": 1,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 1.8239999999999998,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.0559999999999998,
+                "reader-pts": 0.768,
+                "cache-end": 1.8239999999999998
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 24064,
+          "underruns": 0,
+          "rms": 0.06228158894423396,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "latency": 0.037333333333333336
+      },
+      "paused": {
+        "p": {
+          "time-pos": 0.5420003333333333,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "flac",
+              "decoder-desc": "FLAC (Free Lossless Audio Codec)",
+              "codec": "flac",
+              "codec-desc": "FLAC (Free Lossless Audio Codec)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "flac",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-duration": 0,
+            "eof": false,
+            "underrun": true,
+            "idle": false,
+            "total-bytes": 0,
+            "fw-bytes": 0,
+            "raw-input-rate": 530467,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 0,
+            "ts-per-stream": [],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 24320,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "d": {
+          "rendered": 2,
+          "renderMs": 0.7899999991059303,
+          "copyMs": 2.5100000016391277,
+          "maxRenderMs": 0.6750000007450581,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "flac",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.75,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.5420003333333333,
+          "queuedFrames": 0
+        },
+        "events": [
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 3.3333333332441484e-7
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.0960003333333333
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.18666700000000003
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.24533366666666667
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.33066699999999993
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.4160003333333333
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.75
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5420003333333333
+          }
+        ]
+      },
+      "resumed": {
+        "p": {
+          "time-pos": 1.0113336666666668,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "flac",
+              "decoder-desc": "FLAC (Free Lossless Audio Codec)",
+              "codec": "flac",
+              "codec-desc": "FLAC (Free Lossless Audio Codec)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "format-name": "s16"
+            }
+          ],
+          "audio-codec-name": "flac",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 2.304,
+            "reader-pts": 1.248,
+            "cache-duration": 1.0559999999999998,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 18424,
+            "fw-bytes": 18424,
+            "raw-input-rate": 530467,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 2.304,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1.0559999999999998,
+                "reader-pts": 1.248,
+                "cache-end": 2.304
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 41216,
+          "underruns": 0,
+          "rms": 0.0627437910084305,
+          "latencyConfidence": "reported-latency estimate"
+        }
+      }
+    },
+    {
+      "entry": "software-full.html",
+      "fixture": "audio.wv",
+      "fixtureSha256": "48b78d2ef93c2dd2b79adc9736dd22af8dad48b76f1cc2855f0102865e30d565",
+      "engineSha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+      "before": {
+        "p": {
+          "time-pos": 0.43200033333333365,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "wavpack",
+              "decoder-desc": "WavPack",
+              "codec": "wavpack",
+              "codec-desc": "WavPack",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "format-name": "s16p"
+            }
+          ],
+          "audio-codec-name": "wavpack",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.5,
+            "reader-pts": 0.5,
+            "cache-duration": 1,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 46096,
+            "fw-bytes": 46096,
+            "raw-input-rate": 1924639,
+            "debug-low-level-seeks": 1,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.5,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1,
+                "reader-pts": 0.5,
+                "cache-end": 1.5
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 24576,
+          "underruns": 0,
+          "rms": 0.062529726887987,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "latency": 0.037333333333333336
+      },
+      "paused": {
+        "p": {
+          "time-pos": 0.5846461666666671,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "wavpack",
+              "decoder-desc": "WavPack",
+              "codec": "wavpack",
+              "codec-desc": "WavPack",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "format-name": "s16p"
+            }
+          ],
+          "audio-codec-name": "wavpack",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.5,
+            "reader-pts": 0.5,
+            "cache-duration": 1,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 46096,
+            "fw-bytes": 46096,
+            "raw-input-rate": 1924639,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.5,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1,
+                "reader-pts": 0.5,
+                "cache-end": 1.5
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 24832,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "d": {
+          "rendered": 2,
+          "renderMs": 0.6449999995529652,
+          "copyMs": 2.5700000002980232,
+          "maxRenderMs": 0.5500000007450581,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "wv",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.75,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0.5846461666666671,
+          "queuedFrames": 0
+        },
+        "events": [
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.0053336666666666255
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.1066669999999999
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.19733366666666674
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.24533366666666667
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.33600033333333357
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.43200033333333365
+          },
+          {
+            "event": "seek"
+          },
+          {
+            "event": "playback-restart"
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.75
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 0.5846461666666671
+          }
+        ]
+      },
+      "resumed": {
+        "p": {
+          "time-pos": 1.016646166666667,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "audio",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "wavpack",
+              "decoder-desc": "WavPack",
+              "codec": "wavpack",
+              "codec-desc": "WavPack",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "format-name": "s16p"
+            }
+          ],
+          "audio-codec-name": "wavpack",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 2,
+            "reader-pts": 1,
+            "cache-duration": 1,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 46080,
+            "fw-bytes": 46080,
+            "raw-input-rate": 1924639,
+            "debug-low-level-seeks": 2,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 2,
+            "ts-per-stream": [
+              {
+                "type": "audio",
+                "cache-duration": 1,
+                "reader-pts": 1,
+                "cache-end": 2
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          }
+        },
+        "a": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 41728,
+          "underruns": 0,
+          "rms": 0.06273782839738282,
+          "latencyConfidence": "reported-latency estimate"
+        }
+      }
+    }
+  ]
+}

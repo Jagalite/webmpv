@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "checks": {
+    "completeFunctionalMatrix": true,
+    "runtimeUnchanged": true,
+    "recordedBuildMatchesCurrentInputs": true,
+    "testedInputsMatchCurrentInputs": true,
+    "testedBuildManifestMatches": true,
+    "protectedArchivesAndEnginesUnchanged": true,
+    "baselineArchiveMatchesAcceptedHash": true,
+    "correctPinnedVersion": true,
+    "versionHeaderCorrectionLeavesLinkedArchivesIdentical": true
+  },
+  "functionalResult": "results/software-full/functional-2026-09-08T02-19-18.231Z/result.json",
+  "functionalResultSha256": "5b1ad91568edfc4168b1ac0a1fb68f1aae364e1e4107c730ac10cd6b10cd3497",
+  "buildManifestSha256": "e46527ed57a1b7d9353058d0502c500abb38e1867d42a9bf76611d2116a3574e",
+  "protectedFileCount": 21,
+  "browser": "152.0.7977.76",
+  "counts": {
+    "decoder": {
+      "baseline": 6,
+      "expanded": 496,
+      "added": 490
+    },
+    "demuxer": {
+      "baseline": 11,
+      "expanded": 352,
+      "added": 341
+    },
+    "parser": {
+      "baseline": 3,
+      "expanded": 60,
+      "added": 57
+    },
+    "bsf": {
+      "baseline": 0,
+      "expanded": 45,
+      "added": 45
+    },
+    "filter": {
+      "baseline": 6,
+      "expanded": 472,
+      "added": 466
+    },
+    "encoder": {
+      "baseline": 0,
+      "expanded": 0,
+      "added": 0
+    },
+    "muxer": {
+      "baseline": 0,
+      "expanded": 0,
+      "added": 0
+    },
+    "protocol": {
+      "baseline": 1,
+      "expanded": 1,
+      "added": 0
+    },
+    "hwaccel": {
+      "baseline": 0,
+      "expanded": 0,
+      "added": 0
+    }
+  },
+  "artifacts": {
+    "web/engine-software-full/player.mjs": {
+      "bytes": 53315,
+      "gzipBytes": 14515,
+      "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358"
+    },
+    "web/engine-software-full/player.wasm": {
+      "bytes": 20720845,
+      "gzipBytes": 7651155,
+      "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce"
+    }
+  },
+  "limitations": [
+    "Only the representative matrix is playback-qualified; counts are registrations.",
+    "AV1 needs an external software decoder in pinned FFmpeg 7.1.1.",
+    "Paused audio-only time reporting has an existing buffer offset; resumed seeking is checked.",
+    "Video filters configured before open; subtitle tracks selected before seeking.",
+    "Existing browser I/O, 1080p and memory limits remain; no new performance qualification."
+  ]
+}

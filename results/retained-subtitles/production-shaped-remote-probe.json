@@ -1,0 +1,75 @@
+{
+  "diagnostics": {
+    "rendered": 1,
+    "renderMs": 1.4450000002980232,
+    "copyMs": 12.214999999850988,
+    "maxRenderMs": 1.4450000002980232,
+    "heapBytes": 134217728,
+    "epoch": 4,
+    "path": "wasm",
+    "decoder": "software",
+    "decoderStats": {
+      "submitted": 7,
+      "frames": 0,
+      "receivedFrames": 0,
+      "closedFrames": 0,
+      "peakOutstanding": 7,
+      "peakFrames": 0,
+      "resets": 2,
+      "errors": 0,
+      "copyMs": 0,
+      "outstanding": 0,
+      "queued": 0,
+      "active": false
+    },
+    "demuxFormat": "mkv",
+    "seekPrerollSeconds": 0.5,
+    "ioPending": true,
+    "ioSerial": 116,
+    "interruptions": 1,
+    "io": {
+      "fetchedBytes": 4981019,
+      "requests": 21,
+      "retries": 0,
+      "aborts": 1,
+      "cacheBytes": 5242880,
+      "peakCacheBytes": 5242880,
+      "activeBytes": 0,
+      "peakActiveBytes": 262144,
+      "size": "9039757",
+      "reads": 115,
+      "seeks": 3,
+      "interruptions": 1
+    },
+    "seeking": true,
+    "position": 5,
+    "queuedFrames": 0
+  },
+  "position": 5,
+  "logs": [
+    {
+      "event": "log-message",
+      "prefix": "mkv",
+      "level": "error",
+      "text": "Corrupt file detected. Trying to resync starting from position 1058337...\n"
+    },
+    {
+      "event": "log-message",
+      "prefix": "mkv",
+      "level": "error",
+      "text": "Cluster found at 2281073.\n"
+    },
+    {
+      "event": "log-message",
+      "prefix": "vd_browser",
+      "level": "warn",
+      "text": "Browser decode failed or reached its bound; replaying in software.\n"
+    },
+    {
+      "event": "log-message",
+      "prefix": "vd_browser",
+      "level": "warn",
+      "text": "could not consume packet\n"
+    }
+  ]
+}

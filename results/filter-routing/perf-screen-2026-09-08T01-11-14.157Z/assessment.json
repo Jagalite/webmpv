@@ -1,0 +1,181 @@
+{
+  "passed": true,
+  "wallSeconds": 143.529,
+  "scope": "One fixed-order triplet, not replicated qualification",
+  "currentMeasuredInputsMatch": true,
+  "nativeBuildInputsPreserved": true,
+  "routingRegressionChecks": [
+    {
+      "result": "functional-2026-09-08T01-10-24.657Z",
+      "passed": 8,
+      "currentInputsMatch": true
+    },
+    {
+      "result": "lifecycle-2026-09-08T01-10-47.462Z",
+      "passed": 4,
+      "currentInputsMatch": true
+    }
+  ],
+  "injectedStallCheckPassed": true,
+  "trials": [
+    {
+      "variant": "retained",
+      "foregroundSamples": 21,
+      "rssMiB": 1062.515625,
+      "fps": 29.88743692586363,
+      "summary": {
+        "elapsedSeconds": 30.916,
+        "cpuSeconds": 7.400596999999998,
+        "cpuPercentOfOneCore": 23.937757148402113,
+        "processTurnover": [],
+        "medianRSSBytes": 1114128384,
+        "rendered": 924,
+        "dropped": 0,
+        "dropFraction": 0,
+        "frameCounter": "mpv scheduled frames, retained draw submissions checked",
+        "positionSeconds": 30.93333333333333,
+        "decoderCopyWallMsPerFrame": 0,
+        "decodedFrames": 924,
+        "audioFrames": 1484032,
+        "renderWallMsPerFrame": 0.015790043310040518,
+        "canvasWallMsPerFrame": 0,
+        "presentationDraws": 924,
+        "presentationTimingSamples": 924,
+        "presentationLateP95Ms": 14.56000499970105,
+        "presentationLateMaxMs": 19.381664003278274,
+        "originBytes": 30408704
+      },
+      "cleanup": {
+        "decoderStats": {
+          "submitted": 1287,
+          "frames": 1284,
+          "receivedFrames": 1285,
+          "closedFrames": 1285,
+          "peakOutstanding": 8,
+          "peakFrames": 5,
+          "resets": 0,
+          "errors": 0,
+          "copyMs": 0,
+          "actualWidth": 1920,
+          "actualHeight": 1080,
+          "placeholderFrames": 1284,
+          "transferredFrames": 1284,
+          "outstanding": 0,
+          "queued": 0,
+          "active": false
+        },
+        "presentation": {
+          "received": 1284,
+          "closed": 1284,
+          "drawn": 1282,
+          "redraws": 1,
+          "peakRetained": 4,
+          "peakPending": 1,
+          "missing": 0,
+          "lateMs": [],
+          "pts": [],
+          "pixelChecks": [],
+          "retained": 0,
+          "pending": 0
+        },
+        "retainedWorkers": 0
+      }
+    },
+    {
+      "variant": "copyback-null",
+      "foregroundSamples": 21,
+      "rssMiB": 1153.5625,
+      "fps": 29.998378466028864,
+      "summary": {
+        "elapsedSeconds": 30.835,
+        "cpuSeconds": 15.610719,
+        "cpuPercentOfOneCore": 50.62662234473812,
+        "processTurnover": [],
+        "medianRSSBytes": 1209597952,
+        "rendered": 925,
+        "dropped": 0,
+        "dropFraction": 0,
+        "frameCounter": "mpv software-render Canvas submissions",
+        "positionSeconds": 30.866665999999995,
+        "decoderCopyWallMsPerFrame": 3.4027277657523785,
+        "decodedFrames": 922,
+        "audioFrames": 1479936,
+        "renderWallMsPerFrame": 3.3196270270283157,
+        "canvasWallMsPerFrame": 2.575232432452408,
+        "originBytes": 30638080
+      },
+      "cleanup": {
+        "decoderStats": {
+          "submitted": 1301,
+          "frames": 1295,
+          "receivedFrames": 1299,
+          "closedFrames": 1299,
+          "peakOutstanding": 8,
+          "peakFrames": 5,
+          "resets": 0,
+          "errors": 0,
+          "copyMs": 4325.235000062734,
+          "outstanding": 0,
+          "queued": 0,
+          "active": false
+        },
+        "retainedWorkers": 0
+      }
+    },
+    {
+      "variant": "copyback-mirror",
+      "foregroundSamples": 21,
+      "rssMiB": 1060.953125,
+      "fps": 30.03061689792196,
+      "summary": {
+        "elapsedSeconds": 30.702,
+        "cpuSeconds": 15.635526000000002,
+        "cpuPercentOfOneCore": 50.92673441469612,
+        "processTurnover": [],
+        "medianRSSBytes": 1112489984,
+        "rendered": 922,
+        "dropped": 0,
+        "dropFraction": 0,
+        "frameCounter": "mpv software-render Canvas submissions",
+        "positionSeconds": 30.700000000000003,
+        "decoderCopyWallMsPerFrame": 3.5170043337634107,
+        "decodedFrames": 923,
+        "audioFrames": 1473536,
+        "renderWallMsPerFrame": 3.4241377439414538,
+        "canvasWallMsPerFrame": 2.4431616052007405,
+        "originBytes": 30146560
+      },
+      "cleanup": {
+        "decoderStats": {
+          "submitted": 1275,
+          "frames": 1273,
+          "receivedFrames": 1273,
+          "closedFrames": 1273,
+          "peakOutstanding": 8,
+          "peakFrames": 5,
+          "resets": 0,
+          "errors": 0,
+          "copyMs": 4342.925000037998,
+          "outstanding": 0,
+          "queued": 0,
+          "active": false
+        },
+        "retainedWorkers": 0
+      }
+    }
+  ],
+  "comparison": [
+    {
+      "round": 0,
+      "cpu": {
+        "retained": 23.937757148402113,
+        "copyback-null": 50.62662234473812,
+        "copyback-mirror": 50.92673441469612
+      },
+      "copybackOverheadPoints": 26.688865196336003,
+      "copybackRelativePercent": 111.49275611277365,
+      "mirrorIncrementPoints": 0.3001120699580042,
+      "mirrorRelativePercent": 0.5927949684543687
+    }
+  ]
+}

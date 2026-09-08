@@ -12,7 +12,7 @@ async function open(id,file='muxed/media.m3u8',format='hls'){await page.evaluate
 async function destroy(){await page.evaluate(()=>player.destroy());for(let i=0;i<50&&page.workers().length;i++)await page.waitForTimeout(100);assert.deepEqual(page.workers().map(w=>w.url()),[]);}
 async function networkWait(id,predicate,timeout=15000){const deadline=Date.now()+timeout;while(Date.now()<deadline){const s=await control(id);if(predicate(s))return s;await new Promise(r=>setTimeout(r,100));}throw Error('Network condition timed out');}
 try{
- await page.goto('http://127.0.0.1:4179/?no-codecs');await wait(()=>typeof createPlayer==='function');
+ await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');await wait(()=>typeof createPlayer==='function');
  if(!process.env.S1_CHECK||process.env.S1_CHECK==='stall')await check('stalled nested open is interrupted by seek',async()=>{
   const id='stall';await control(id,{requests:[],aborted:0,stall:'av-005.ts'});await open(id);
   await networkWait(id,s=>s.active>0&&s.requests.some(r=>r.path.endsWith('av-005.ts')));

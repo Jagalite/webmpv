@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "scope": "One fixed-order foreground pair; quick diagnostic, not replicated qualification",
+  "currentInputsMatch": true,
+  "priorFunctionalInputsPreserved": true,
+  "trials": [
+    {
+      "variant": "subs-off",
+      "foregroundSamples": 21,
+      "closedVideoFrames": 1247,
+      "rssMiB": 940.046875,
+      "summary": {
+        "elapsedSeconds": 30.047,
+        "cpuSeconds": 7.309024,
+        "cpuPercentOfOneCore": 24.325303690884283,
+        "processTurnover": [],
+        "medianRSSBytes": 985710592,
+        "rendered": 900,
+        "dropped": 0,
+        "dropFraction": 0,
+        "frameCounter": "mpv scheduled frames; retained VideoFrame presentation",
+        "positionSeconds": 30.066666666666663,
+        "decoderCopyWallMsPerFrame": 0,
+        "subtitleUpdates": 0,
+        "subtitleBitmapBytes": 0,
+        "subtitlePeakPacketBytes": 0,
+        "canvasSubmissions": 900,
+        "decodedFrames": 904,
+        "audioFrames": 1443072,
+        "renderWallMsPerFrame": 0.017155555602576998,
+        "canvasWallMsPerFrame": 0,
+        "pixelCopies": 0,
+        "placeholderFrames": 904,
+        "presentationTimingSamples": 900,
+        "presentationDraws": 900,
+        "presentationLateP95Ms": 11.900928000744898,
+        "presentationLateMaxMs": 16.063714001193148,
+        "originBytes": 29622272
+      }
+    },
+    {
+      "variant": "subs-on",
+      "foregroundSamples": 21,
+      "closedVideoFrames": 1247,
+      "rssMiB": 1065.125,
+      "summary": {
+        "elapsedSeconds": 30.044,
+        "cpuSeconds": 8.942513,
+        "cpuPercentOfOneCore": 29.764721741445875,
+        "processTurnover": [],
+        "medianRSSBytes": 1116864512,
+        "rendered": 902,
+        "dropped": 0,
+        "dropFraction": 0,
+        "frameCounter": "mpv scheduled frames; retained VideoFrame presentation",
+        "positionSeconds": 30.06666666666667,
+        "decoderCopyWallMsPerFrame": 0,
+        "subtitleUpdates": 201,
+        "subtitleBitmapBytes": 118243584,
+        "subtitlePeakPacketBytes": 599668,
+        "canvasSubmissions": 902,
+        "decodedFrames": 901,
+        "audioFrames": 1442816,
+        "renderWallMsPerFrame": 0.26228935703916056,
+        "canvasWallMsPerFrame": 0,
+        "pixelCopies": 0,
+        "placeholderFrames": 901,
+        "presentationTimingSamples": 902,
+        "presentationDraws": 902,
+        "presentationLateP95Ms": 13.282458000743645,
+        "presentationLateMaxMs": 22.285245001339717,
+        "originBytes": 29622272
+      }
+    }
+  ],
+  "comparison": [
+    {
+      "round": 0,
+      "cpu": {
+        "subs-off": 24.325303690884283,
+        "subs-on": 29.764721741445875
+      },
+      "subtitleOverheadPercentagePoints": 5.439418050561592,
+      "subtitleRelativeOverheadPercent": 22.361151662003586
+    }
+  ],
+  "wallSeconds": 92.727
+}

@@ -1,0 +1,368 @@
+{
+  "started": "2026-09-08T02:44:57.777Z",
+  "browser": "152.0.7977.76",
+  "scope": "Headless three-mode API functional checks, not performance qualification",
+  "tests": [
+    {
+      "name": "explicit mode changes preserve playback state",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 1.25\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/player-api.mjs:51:213\n    at async check (file:///Volumes/seed2/Projects/webmpv/tests/player-api.mjs:27:426)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/player-api.mjs:48:2",
+      "state": {
+        "errors": [],
+        "events": [
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.006651458333329252
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 2.133
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.00031812499999617216
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 2.1670000000000003
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0063181249999959554
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 2.2
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": -0.000009226406253226571
+          },
+          {
+            "event": "property-change",
+            "id": 12,
+            "name": "demuxer-cache-state",
+            "data": {
+              "cache-end": 3.6694999999999998,
+              "reader-pts": 2.6668333333333334,
+              "cache-duration": 1.0026666666666664,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 186448,
+              "fw-bytes": 186448,
+              "raw-input-rate": 1251027,
+              "debug-low-level-seeks": 1,
+              "debug-byte-level-seeks": 2,
+              "debug-ts-last": 3.6694999999999998,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.367,
+                  "reader-pts": 2.3000000000000003,
+                  "cache-end": 3.6670000000000003
+                },
+                {
+                  "type": "audio",
+                  "cache-duration": 1.0026666666666664,
+                  "reader-pts": 2.6668333333333334,
+                  "cache-end": 3.6694999999999998
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            }
+          },
+          {
+            "event": "property-change",
+            "id": 1,
+            "name": "time-pos",
+            "data": 2.233
+          },
+          {
+            "event": "property-change",
+            "id": 15,
+            "name": "avsync",
+            "data": 0.0003181249999957281
+          },
+          {
+            "event": "command-reply",
+            "id": 109,
+            "result": null
+          },
+          {
+            "event": "property-change",
+            "id": 3,
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "property-change",
+            "name": "time-pos",
+            "data": 2.233
+          },
+          {
+            "event": "property-change",
+            "name": "duration",
+            "data": 12.011
+          },
+          {
+            "event": "property-change",
+            "name": "pause",
+            "data": true
+          },
+          {
+            "event": "property-change",
+            "name": "eof-reached",
+            "data": false
+          },
+          {
+            "event": "property-change",
+            "name": "volume",
+            "data": 41
+          },
+          {
+            "event": "property-change",
+            "name": "speed",
+            "data": 1
+          },
+          {
+            "event": "property-change",
+            "name": "track-list",
+            "data": []
+          },
+          {
+            "event": "file-loaded"
+          }
+        ],
+        "d": {
+          "mode": "native",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "position": 2.233,
+            "rendered": 15,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "p": {
+          "time-pos": 2.233,
+          "duration": 12.011,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 41,
+          "speed": 1,
+          "track-list": []
+        }
+      }
+    },
+    {
+      "name": "invalid filter rolls back to old playback",
+      "passed": true,
+      "evidence": {
+        "error": "error running command",
+        "same": true,
+        "filters": "",
+        "pause": false
+      },
+      "milliseconds": 621
+    },
+    {
+      "name": "source replacement resets position and preserves controls",
+      "passed": true,
+      "evidence": {
+        "time-pos": 0,
+        "duration": 12.011,
+        "pause": true,
+        "eof-reached": false,
+        "track-list": [
+          {
+            "id": "1",
+            "type": "video",
+            "src-id": 1,
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 0,
+            "decoder": "h264",
+            "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "codec": "h264",
+            "demux-w": 640,
+            "demux-h": 360,
+            "demux-fps": 30,
+            "demux-par": 1,
+            "metadata": {
+              "language": "und",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc libx264"
+            }
+          },
+          {
+            "id": "1",
+            "type": "audio",
+            "src-id": 2,
+            "audio-channels": 2,
+            "image": false,
+            "albumart": false,
+            "default": true,
+            "forced": false,
+            "dependent": false,
+            "visual-impaired": false,
+            "hearing-impaired": false,
+            "external": false,
+            "selected": true,
+            "main-selection": 0,
+            "ff-index": 1,
+            "decoder": "aac",
+            "decoder-desc": "AAC (Advanced Audio Coding)",
+            "codec": "aac",
+            "codec-desc": "AAC (Advanced Audio Coding)",
+            "codec-profile": "LC",
+            "demux-channel-count": 2,
+            "demux-channels": "stereo",
+            "demux-samplerate": 48000,
+            "demux-bitrate": 96127,
+            "metadata": {
+              "language": "und",
+              "handler_name": "SoundHandler",
+              "vendor_id": "[0][0][0][0]"
+            }
+          }
+        ],
+        "audio-codec-name": "aac",
+        "volume": 53,
+        "speed": 1,
+        "paused-for-cache": false,
+        "cache-buffering-state": 100,
+        "demuxer-cache-state": {
+          "cache-end": 1.167,
+          "reader-pts": 0.167,
+          "cache-duration": 1,
+          "eof": false,
+          "underrun": false,
+          "idle": true,
+          "total-bytes": 136728,
+          "fw-bytes": 136728,
+          "raw-input-rate": 1953337,
+          "debug-low-level-seeks": 0,
+          "debug-byte-level-seeks": 2,
+          "debug-ts-last": 1.167,
+          "ts-per-stream": [
+            {
+              "type": "video",
+              "cache-duration": 1,
+              "reader-pts": 0.167,
+              "cache-end": 1.167
+            },
+            {
+              "type": "audio",
+              "cache-duration": 1.0026666666666666,
+              "reader-pts": 0.1495,
+              "cache-end": 1.1521666666666666
+            }
+          ],
+          "bof-cached": false,
+          "eof-cached": false,
+          "seekable-ranges": []
+        },
+        "decoder-frame-drop-count": 0,
+        "frame-drop-count": 0,
+        "avsync": 0,
+        "video-params": {
+          "pixelformat": "yuv420p",
+          "average-bpp": 12,
+          "w": 2,
+          "h": 2,
+          "dw": 2,
+          "dh": 2,
+          "crop-x": 0,
+          "crop-y": 0,
+          "crop-w": 2,
+          "crop-h": 2,
+          "aspect": 1,
+          "aspect-name": "Square",
+          "par": 1,
+          "sar": 1,
+          "sar-name": "Square",
+          "colormatrix": "bt.601",
+          "colorlevels": "limited",
+          "primaries": "bt.601-525",
+          "gamma": "bt.1886",
+          "sig-peak": 0,
+          "light": "display",
+          "chroma-location": "mpeg2/4/h264",
+          "stereo-in": "mono",
+          "rotate": 0
+        }
+      },
+      "milliseconds": 944
+    }
+  ],
+  "passed": false,
+  "hashes": {
+    "src/index.ts": "3fe3790cf92dcb3a69eadb70b79ecdbdbf7d913fdc07f4f15e894608ac4bf2ff",
+    "src/types.ts": "86a46aa014b38dfe154342418fb0e8cf105004aa3429dc27780bbc0d67cbf0c8",
+    "src/unified-player.ts": "982c360bed997e7e1e5c45aec0e53e14df9101b1dce975228ca315f2ce64019e",
+    "src/internal/native-player.ts": "3768a11eccdf364b0cf187908cbf5fc6bf27dad6967cd1f4aef60f88a27ea530",
+    "src/internal/wasm-player.ts": "f8509ed0e57df642b0c1d589cb66d612e747d20fc90a4b3a83deaae72c79df41",
+    "web/generated/index.js": "863d16a28f20be70fb13cefe9ceb8d96870c64eab7e8f56e7c8d10cf4ae29a46",
+    "web/generated/unified-player.js": "f04dce02cdc8a0aef5bb825c610df2e0afd1eea7d6247223685a0de2f50d376b",
+    "web/generated/internal/native-player.js": "2d24882680b0dc840b6299e7542401da2d390ce5ecf7a87bf1ae116c3dca8da2",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/player.html": "3a9516067b55e5014fc317f732f98dbf3dbf2dab8f94df0fd24e6db6ee50616a",
+    "tests/player-api.mjs": "5c1d4f405e1d5f8c0a626ee40cc61e19a6ce828db54270f94a3021bd81fab553"
+  },
+  "fixtures": {
+    "mp4": "6c9cac6f4212f470d79a9f829f29ba459e6c3e401fab9feb6d757a10a507404c",
+    "tracks": "61b96c090b9777559a678f9bacdac87a577e0471e4ad2898abcde97159c301b4"
+  },
+  "selection": [
+    "explicit mode changes preserve playback state",
+    "invalid filter rolls back to old playback",
+    "source replacement resets position and preserves controls"
+  ],
+  "hashesAfter": {
+    "src/index.ts": "3fe3790cf92dcb3a69eadb70b79ecdbdbf7d913fdc07f4f15e894608ac4bf2ff",
+    "src/types.ts": "86a46aa014b38dfe154342418fb0e8cf105004aa3429dc27780bbc0d67cbf0c8",
+    "src/unified-player.ts": "982c360bed997e7e1e5c45aec0e53e14df9101b1dce975228ca315f2ce64019e",
+    "src/internal/native-player.ts": "3768a11eccdf364b0cf187908cbf5fc6bf27dad6967cd1f4aef60f88a27ea530",
+    "src/internal/wasm-player.ts": "f8509ed0e57df642b0c1d589cb66d612e747d20fc90a4b3a83deaae72c79df41",
+    "web/generated/index.js": "863d16a28f20be70fb13cefe9ceb8d96870c64eab7e8f56e7c8d10cf4ae29a46",
+    "web/generated/unified-player.js": "f04dce02cdc8a0aef5bb825c610df2e0afd1eea7d6247223685a0de2f50d376b",
+    "web/generated/internal/native-player.js": "2d24882680b0dc840b6299e7542401da2d390ce5ecf7a87bf1ae116c3dca8da2",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/player.html": "3a9516067b55e5014fc317f732f98dbf3dbf2dab8f94df0fd24e6db6ee50616a",
+    "tests/player-api.mjs": "5c1d4f405e1d5f8c0a626ee40cc61e19a6ce828db54270f94a3021bd81fab553"
+  },
+  "finished": "2026-09-08T02:45:03.518Z"
+}

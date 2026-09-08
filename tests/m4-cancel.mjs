@@ -6,7 +6,7 @@ const output=`results/m4/cancel-${new Date().toISOString().replaceAll(':','-')}`
 const browser=await chromium.launch({channel:'chrome',headless:false,args:['--autoplay-policy=no-user-gesture-required']});
 const page=await browser.newPage(),result={passed:false};
 try{
- await page.goto('http://127.0.0.1:4179/?decoder=webcodecs');await page.evaluate(()=>createPlayer());
+ await page.goto('http://127.0.0.1:4179/web/index.html?decoder=webcodecs');await page.evaluate(()=>createPlayer());
  const service=page.workers().find(w=>w.url().endsWith('/browser-decoder-worker.js'));assert.ok(service);
  // Hold a genuine copy operation in the browser service without adding a
  // production test hook. Destruction must preempt it and close the frame.

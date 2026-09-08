@@ -1,0 +1,402 @@
+{
+  "started": "2026-09-08T01:10:47.473Z",
+  "passed": true,
+  "hashes": {
+    "web/filter-player.js": "ca4f0dc821f965981e7b71e9fa50b16f6fbdad1c26b0338ac6c54be08a331429",
+    "web/filter-retained-engine-worker.js": "e1d5192f640f22df0c65492d6a79aa9c8c6801c2927c772f0d780c389be5ddfa",
+    "web/filter-copyback-engine-worker.js": "3ed07bde3b0e3c69c4bbd3e5eeefaf09d97dc32032acce09157af400375c6915",
+    "web/generated/filter-retained-player.js": "f705ee99d047c98fb7b90acc71b9d336903e9d60b060a72595e98c326813a8fd",
+    "web/generated/filter-copyback-player.js": "4e704c1771c786ad784a39a787608d1d1e7f8331381d02a93df1f5e7dc959938",
+    "web/filters.html": "0d7a6349c435af20a2480ddce9d2d96c329a126bfa422d359feca9af6025e1fc",
+    "web/engine-filter-copyback/player.wasm": "4bf2d2ba2ad751c48ce33d2e62c00c8a63042168d8172c98c4953968bcee3828",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "tests/filter-routing-lifecycle.mjs": "6895077edf33f4954f304952beaadb6e97acb0f48fd885c369195d9f75abe472",
+    "build/fixtures/tracks.mkv": "61b96c090b9777559a678f9bacdac87a577e0471e4ad2898abcde97159c301b4"
+  },
+  "tests": [
+    {
+      "name": "grayscale, resize and seek through the filtered route",
+      "passed": true,
+      "evidence": {
+        "width": 1280,
+        "height": 720,
+        "maxChannelDifference": 0,
+        "d": {
+          "rendered": 5,
+          "renderMs": 75.58499999716878,
+          "copyMs": 86.21499999985099,
+          "maxRenderMs": 49.15500000119209,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 43,
+            "frames": 32,
+            "receivedFrames": 36,
+            "closedFrames": 36,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 2,
+            "errors": 0,
+            "copyMs": 107.5549999885261,
+            "outstanding": 5,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 3,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 3,
+          "queuedFrames": 0,
+          "route": "copyback",
+          "videoFilters": "lavfi=[format=gray]",
+          "switching": false
+        }
+      }
+    },
+    {
+      "name": "invalid-filter rollback resumes playing video and audio",
+      "passed": true,
+      "evidence": {
+        "rollback": {
+          "failure": "Error: Could not apply video filters: error running command",
+          "same": true
+        },
+        "before": {
+          "position": 3.2329999999999997,
+          "audio": 14592
+        },
+        "after": {
+          "position": 3.933,
+          "audio": 48640,
+          "pause": false
+        }
+      }
+    },
+    {
+      "name": "local source replacement starts paused at zero on the selected route",
+      "passed": true,
+      "evidence": {
+        "diagnostics": {
+          "subtitles": {
+            "updates": 1,
+            "bytes": 0,
+            "peakBytes": 0,
+            "parts": 0,
+            "renders": 3
+          },
+          "presentation": {
+            "received": 2,
+            "closed": 0,
+            "drawn": 1,
+            "redraws": 1,
+            "peakRetained": 2,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              3.695400000894068
+            ],
+            "pts": [
+              0
+            ],
+            "pixelChecks": [],
+            "retained": 2,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 1,
+          "rendered": 3,
+          "renderMs": 0.29500000178813934,
+          "copyMs": 0,
+          "maxRenderMs": 0.23000000044703484,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 8,
+            "frames": 0,
+            "receivedFrames": 0,
+            "closedFrames": 0,
+            "peakOutstanding": 8,
+            "peakFrames": 0,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 0,
+            "outstanding": 8,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 0,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 0,
+          "queuedFrames": 0,
+          "route": "retained",
+          "videoFilters": "",
+          "switching": false
+        },
+        "pause": true,
+        "position": 0
+      }
+    },
+    {
+      "name": "destroy cancels an in-flight engine switch and contains all workers",
+      "passed": true,
+      "evidence": {
+        "failure": "Error: Could not apply video filters: Player destroyed",
+        "elapsedMs": 205,
+        "history": [
+          {
+            "diagnostics": {
+              "rendered": 1,
+              "renderMs": 0.5549999997019768,
+              "copyMs": 5.429999999701977,
+              "maxRenderMs": 0.5549999997019768,
+              "heapBytes": 134217728,
+              "epoch": 0,
+              "path": "wasm",
+              "decoder": "software",
+              "demuxFormat": "",
+              "seekPrerollSeconds": 0,
+              "ioPending": false,
+              "ioSerial": 0,
+              "interruptions": 0,
+              "seeking": false,
+              "queuedFrames": 0
+            },
+            "audio": {
+              "state": "closed",
+              "sampleRate": 48000,
+              "mediaFrames": 0,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            }
+          },
+          {
+            "diagnostics": {
+              "rendered": 35,
+              "renderMs": 679.0800000093877,
+              "copyMs": 136.46999999508262,
+              "maxRenderMs": 49.15500000119209,
+              "heapBytes": 134217728,
+              "epoch": 4,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 75,
+                "frames": 63,
+                "receivedFrames": 71,
+                "closedFrames": 71,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 2,
+                "errors": 0,
+                "copyMs": 209.2799999937415,
+                "outstanding": 0,
+                "queued": 0,
+                "active": false
+              },
+              "demuxFormat": "mkv",
+              "seekPrerollSeconds": 0.5,
+              "presentedPosition": 3.933,
+              "ioPending": false,
+              "ioSerial": 0,
+              "interruptions": 0,
+              "seeking": false,
+              "position": 3.933,
+              "queuedFrames": 7168
+            },
+            "audio": {
+              "state": "closed",
+              "sampleRate": 48000,
+              "mediaFrames": 48896,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            }
+          },
+          {
+            "diagnostics": {
+              "subtitles": {
+                "updates": 2,
+                "bytes": 0,
+                "peakBytes": 0,
+                "parts": 0,
+                "renders": 6
+              },
+              "presentation": {
+                "received": 62,
+                "closed": 62,
+                "drawn": 2,
+                "redraws": 1,
+                "peakRetained": 6,
+                "peakPending": 1,
+                "missing": 0,
+                "lateMs": [],
+                "pts": [],
+                "pixelChecks": [],
+                "retained": 0,
+                "pending": 0
+              },
+              "mode": "retained",
+              "skipCanvas": true,
+              "canvasSubmissions": 2,
+              "rendered": 4,
+              "renderMs": 0.6000000014901161,
+              "copyMs": 0,
+              "maxRenderMs": 0.26500000059604645,
+              "heapBytes": 134217728,
+              "epoch": 4,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 75,
+                "frames": 62,
+                "receivedFrames": 71,
+                "closedFrames": 71,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 2,
+                "errors": 0,
+                "copyMs": 0,
+                "actualWidth": 1920,
+                "actualHeight": 1080,
+                "placeholderFrames": 62,
+                "transferredFrames": 62,
+                "outstanding": 0,
+                "queued": 0,
+                "active": false
+              },
+              "demuxFormat": "mkv",
+              "seekPrerollSeconds": 0.5,
+              "presentedPosition": 3.933,
+              "ioPending": false,
+              "ioSerial": 0,
+              "interruptions": 0,
+              "seeking": false,
+              "position": 3.933,
+              "queuedFrames": 0
+            },
+            "audio": {
+              "state": "closed",
+              "sampleRate": 48000,
+              "mediaFrames": 0,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            }
+          },
+          {
+            "audio": {
+              "state": "closed",
+              "sampleRate": 48000,
+              "mediaFrames": 0,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            }
+          },
+          {
+            "diagnostics": {
+              "subtitles": {
+                "updates": 1,
+                "bytes": 0,
+                "peakBytes": 0,
+                "parts": 0,
+                "renders": 3
+              },
+              "presentation": {
+                "received": 2,
+                "closed": 2,
+                "drawn": 1,
+                "redraws": 1,
+                "peakRetained": 2,
+                "peakPending": 1,
+                "missing": 0,
+                "lateMs": [],
+                "pts": [],
+                "pixelChecks": [],
+                "retained": 0,
+                "pending": 0
+              },
+              "mode": "retained",
+              "skipCanvas": true,
+              "canvasSubmissions": 1,
+              "rendered": 3,
+              "renderMs": 0.29500000178813934,
+              "copyMs": 0,
+              "maxRenderMs": 0.23000000044703484,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 8,
+                "frames": 2,
+                "receivedFrames": 6,
+                "closedFrames": 6,
+                "peakOutstanding": 8,
+                "peakFrames": 4,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 0,
+                "actualWidth": 1920,
+                "actualHeight": 1080,
+                "placeholderFrames": 2,
+                "transferredFrames": 2,
+                "outstanding": 0,
+                "queued": 0,
+                "active": false
+              },
+              "demuxFormat": "mkv",
+              "seekPrerollSeconds": 0.5,
+              "presentedPosition": 0,
+              "ioPending": false,
+              "ioSerial": 0,
+              "interruptions": 0,
+              "seeking": false,
+              "position": 0,
+              "queuedFrames": 0
+            },
+            "audio": {
+              "state": "closed",
+              "sampleRate": 48000,
+              "mediaFrames": 0,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            }
+          }
+        ],
+        "source": null,
+        "candidate": null
+      }
+    }
+  ],
+  "hashesAfter": {
+    "web/filter-player.js": "ca4f0dc821f965981e7b71e9fa50b16f6fbdad1c26b0338ac6c54be08a331429",
+    "web/filter-retained-engine-worker.js": "e1d5192f640f22df0c65492d6a79aa9c8c6801c2927c772f0d780c389be5ddfa",
+    "web/filter-copyback-engine-worker.js": "3ed07bde3b0e3c69c4bbd3e5eeefaf09d97dc32032acce09157af400375c6915",
+    "web/generated/filter-retained-player.js": "f705ee99d047c98fb7b90acc71b9d336903e9d60b060a72595e98c326813a8fd",
+    "web/generated/filter-copyback-player.js": "4e704c1771c786ad784a39a787608d1d1e7f8331381d02a93df1f5e7dc959938",
+    "web/filters.html": "0d7a6349c435af20a2480ddce9d2d96c329a126bfa422d359feca9af6025e1fc",
+    "web/engine-filter-copyback/player.wasm": "4bf2d2ba2ad751c48ce33d2e62c00c8a63042168d8172c98c4953968bcee3828",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "tests/filter-routing-lifecycle.mjs": "6895077edf33f4954f304952beaadb6e97acb0f48fd885c369195d9f75abe472",
+    "build/fixtures/tracks.mkv": "61b96c090b9777559a678f9bacdac87a577e0471e4ad2898abcde97159c301b4"
+  },
+  "runtimeUnchanged": true,
+  "finished": "2026-09-08T01:10:55.486Z"
+}

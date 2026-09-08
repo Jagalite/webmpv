@@ -20,7 +20,7 @@ async function compareImages(on,off,refOn,refOff,width=1920,height=1080){return 
   },{on,off,refOn,refOff,width,height});}
 
 try{
- await page.goto('http://127.0.0.1:4179/?no-codecs');await page.waitForFunction(()=>typeof createPlayer==='function');
+ await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');await page.waitForFunction(()=>typeof createPlayer==='function');
  for(const id of ['m2-reference','m2-close-pending','m2-karaoke'])await fetch(`http://127.0.0.1:4180/control?id=${id}`,{method:'POST',body:JSON.stringify({...network,mode:'normal',stall:false,outageUntil:0})});
  await check('attached ASS shaping, karaoke, vectors and overlap match native reference at DPR 2',async()=>{
   await page.evaluate(async()=>{await createPlayer();player.resize(1920,1080);await player.openRemote({url:'http://127.0.0.1:4180/media/tracks?id=m2-reference'});await player.selectTrack('sub','2');await player.seek(5);});
@@ -67,7 +67,7 @@ try{
   const denied=await page.evaluate(async()=>{const {RangeReader}=await import('/web/range-reader.js');const r=new RangeReader({url:'http://127.0.0.1:4180/media/m0?id=m2-url-expired'},async()=>({url:'http://127.0.0.1:4181/media/m0?id=m2-denied-renewal'}));try{await r.open();return null;}catch(e){return e.message;}finally{r.close();}});assert.match(denied,/origin is not allowed/);const foreign=await(await fetch('http://127.0.0.1:4181/control?id=m2-denied-renewal')).json();assert.equal(foreign.requests,0);return {refreshes:1,denied,foreignRequests:foreign.requests};
  });
  await check('standalone integration example opens, pauses, resumes and closes',async()=>{
-  await page.goto('http://127.0.0.1:4179/web/example.html');await page.click('#demo');await page.waitForFunction(()=>document.querySelector('[role=status]').textContent==='Playing example film.');await page.waitForTimeout(500);await page.click('#pause');await page.click('#play');await page.click('#close');await page.waitForFunction(()=>document.querySelector('[role=status]').textContent==='Closed.');for(let i=0;i<30&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);return {closed:true};
+  await page.goto('http://127.0.0.1:4179/web/legacy-example.html');await page.click('#demo');await page.waitForFunction(()=>document.querySelector('[role=status]').textContent==='Playing example film.');await page.waitForTimeout(500);await page.click('#pause');await page.click('#play');await page.click('#close');await page.waitForFunction(()=>document.querySelector('[role=status]').textContent==='Closed.');for(let i=0;i<30&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);return {closed:true};
  });result.passed=true;
 }catch(error){result.failure=String(error.stack);console.error(result.failure);process.exitCode=1;}
 finally{result.logs=logs;result.wasmSha256=createHash('sha256').update(await readFile('web/engine/player.wasm')).digest('hex');result.finished=new Date().toISOString();await writeFile('results/m2/supplemental.json',JSON.stringify(result,null,2)+'\n');await browser.close();}

@@ -1,0 +1,22 @@
+results/player-api/functional-2026-09-08T02-41-22.408Z
+PASS exactly three modes and native default
+PASS native local playback loads no Wasm
+PASS native text tracks and capability rejection
+PASS hybrid actual retained frames and subtitles
+PASS software expanded decode and filters
+FAIL explicit mode changes preserve playback state Error: page.evaluate: Error: Hybrid mode requires supported WebCodecs H.264 decoding. Choose software mode for this source.
+    at Player.settled (http://127.0.0.1:50312/web/generated/unified-player.js:131:23)
+    at Player.replace (http://127.0.0.1:50312/web/generated/unified-player.js:184:24)
+    at async http://127.0.0.1:50312/web/generated/unified-player.js:258:17
+PASS filter reopens preserve state and reject leaving software
+FAIL invalid filter rolls back to old playback AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+PASS native unsupported request policy rolls back
+PASS native remote playback
+FAIL source replacement resets position and preserves controls Error: page.evaluate: Error: Hybrid mode requires supported WebCodecs H.264 decoding. Choose software mode for this source.
+    at Player.settled (http://127.0.0.1:50312/web/generated/unified-player.js:131:23)
+    at Player.replace (http://127.0.0.1:50312/web/generated/unified-player.js:184:24)
+PASS destroy interrupts native candidate load
+PASS queued changes and destroy release all workers

@@ -15,7 +15,7 @@ async function check(name,fn){const started=Date.now();try{const evidence=await 
 async function open(name,id){await control(id,{...network,mode:'normal',stall:false,outageUntil:0});await page.evaluate(async({name,id})=>{await createPlayer();player.resize(1920,1080);await player.openRemote({url:`http://127.0.0.1:4180/media/${name}?id=${id}`});await player.play();},{name,id});await wait(()=>player.diagnostics?.rendered>5&&player.audioDiagnostics().mediaFrames>4096);}
 async function destroy(){await page.evaluate(()=>player?.destroy());for(let i=0;i<30&&page.workers().length;i++)await page.waitForTimeout(100);if(page.workers().length){const cdp=await browser.newBrowserCDPSession();result.cleanupDebug={targets:await cdp.send('Target.getTargets'),workers:await Promise.all(page.workers().map(async w=>({url:w.url(),probe:await Promise.race([w.evaluate(()=>1).catch(e=>String(e)),new Promise(r=>setTimeout(()=>r('timeout'),1000))])})))};await cdp.detach();}assert.equal(page.workers().length,0,JSON.stringify(result.cleanupDebug));}
 try{
- await page.goto('http://127.0.0.1:4179/?no-codecs');await wait(()=>typeof createPlayer==='function');
+ await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');await wait(()=>typeof createPlayer==='function');
  await check('real browser CORS, authorization, renewal, cookies and rejected responses',async()=>{
   const cases=[];
   for(const mode of ['auth','cookie','cors-denied','forbidden','ignore-range','bad-range','encoded','redirect','retry','truncate']){

@@ -12,7 +12,7 @@ async function open(id,file='muxed/media.m3u8',format='hls'){await page.evaluate
 async function destroy(){await page.evaluate(()=>player.destroy());for(let i=0;i<50&&page.workers().length;i++)await page.waitForTimeout(100);assert.deepEqual(page.workers().map(w=>w.url()),[]);}
 async function networkWait(id,predicate,timeout=15000){const deadline=Date.now()+timeout;while(Date.now()<deadline){const s=await control(id);if(predicate(s))return s;await new Promise(r=>setTimeout(r,100));}throw Error('Network condition timed out');}
 try{
- await page.goto('http://127.0.0.1:4179/?no-codecs');await wait(()=>typeof createPlayer==='function');
+ await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');await wait(()=>typeof createPlayer==='function');
  for(const [id,file,fail] of [['fmp4-discontinuity','fmp4-discontinuity/media.m3u8',null],['discontinuity','discontinuity.m3u8',null],['offset','offset.m3u8',null],['gap','gap.m3u8','av-005.ts']]){
   if(process.env.S1_CASE&&process.env.S1_CASE!==id)continue;
   await check(`${id}: forward playback and seeks across timeline boundary`,async()=>{

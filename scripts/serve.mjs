@@ -12,7 +12,7 @@ const server=http.createServer(async(req,res)=>{
     const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
     if(pathname==='/favicon.ico'){res.writeHead(204).end();return;}
     if(!pathname.startsWith('/web/')&&!pathname.startsWith('/fixtures/')&&pathname!=='/') {res.writeHead(404).end();return;}
-    const file=path.resolve(root,'.'+(pathname==='/'?'/web/index.html':pathname));
+    const file=path.resolve(root,'.'+(pathname==='/'?'/web/player.html':pathname));
     const mount=path.join(root,pathname==='/'?'web':pathname.split('/')[1]);
     if(!file.startsWith(mount+path.sep)) {res.writeHead(403).end();return;}
     const info=await stat(file);
@@ -21,4 +21,4 @@ const server=http.createServer(async(req,res)=>{
     res.end(await readFile(file));
   } catch {res.writeHead(404).end('Not found');}
 });
-server.listen(Number(process.env.PORT||4179),'127.0.0.1',()=>console.log('webmpv: http://127.0.0.1:4179'));
+server.listen(Number(process.env.PORT||4179),'127.0.0.1',()=>console.log(`webmpv: http://127.0.0.1:${server.address().port}`));

@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><title>Retained-frame subtitles</title>
+<style>body{margin:16px;background:#111;color:#eee;font:16px system-ui}canvas{display:block;width:960px;height:540px;background:black}button{padding:8px;margin-right:8px}</style>
+<h1>Retained-frame subtitle experiment</h1><p id="status">Functional subtitle validation. No long benchmark is running.</p>
+<div><button id="play">Load and play subtitle fixture</button><button id="pause">Pause / resume</button><button id="toggle">Toggle subtitles</button></div>
+<div id="surface"></div>
+<script type="module">
+import {BrowserPlayer} from './generated/subtitled-player.js';
+const progress=document.createElement('p');document.querySelector('#surface').before(progress);
+let progressState={index:0,total:6,label:'Ready',phase:'Functional checks',remainingSeconds:90,at:Date.now()};
+window.setBenchmarkProgress=update=>{progressState={...progressState,...update,at:Date.now()};paintProgress();};
+function paintProgress(){const s=progressState,left=Math.max(0,Math.ceil(s.remainingSeconds-(Date.now()-s.at)/1000));progress.textContent=s.done?'All checks complete. Safe to close.':s.failed?'Checks stopped. Safe to close.':`Check ${s.index} of ${s.total}: ${s.label} · ${s.phase} · about ${left}s remaining. No foreground hold required.`;}
+paintProgress();const progressTimer=setInterval(paintProgress,1000);addEventListener('pagehide',()=>clearInterval(progressTimer),{once:true});
+window.playerErrors=[];window.playerEvents=[];let visible=true;
+window.createPlayer=async()=>{
+ if(window.player)await player.destroy();
+ document.querySelector('#surface').replaceChildren();
+ const canvas=document.createElement('canvas');canvas.width=1920;canvas.height=1080;document.querySelector('#surface').append(canvas);
+ visible=true;window.player=new BrowserPlayer(canvas,{decoder:'webcodecs'});
+ player.addEventListener('error',({detail})=>playerErrors.push(String(detail)));
+ player.addEventListener('mpv',({detail})=>playerEvents.push(detail));
+ player.addEventListener('log',({detail})=>playerEvents.push({event:'browser-log',text:detail}));
+ await player.ready;return true;
+};
+window.capturePNG=()=>{const source=document.querySelector('canvas'),c=document.createElement('canvas');c.width=source.width;c.height=source.height;c.getContext('2d').drawImage(source,0,0);return c.toDataURL('image/png').split(',')[1];};
+document.querySelector('#play').onclick=async()=>{await createPlayer();const response=await fetch('http://127.0.0.1:4180/media/tracks?id=subs-manual');if(!response.ok)throw Error('Fixture download failed');await player.open(await response.arrayBuffer());await player.selectTrack('sub','2');await player.play();setBenchmarkProgress({index:1,total:1,label:'Manual subtitle playback',phase:'Playback',remainingSeconds:12});};
+document.querySelector('#pause').onclick=()=>player.properties.get('pause')?player.play():player.pause();
+document.querySelector('#toggle').onclick=()=>player.subtitleVisible(visible=!visible);
+</script>

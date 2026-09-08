@@ -1,117 +1,141 @@
 # Browser integration
 
-Run `node scripts/serve.mjs`, then open `/web/example.html` for a complete small
-host application. `/` supplies the fuller player with tracks, volume, playback
-rate, timeline and diagnostics. Host the `web/` and `fixtures/DejaVuSans.ttf`
-paths together as shown in the release bundle.
+The public entry point is `web/generated/index.js` (with matching TypeScript
+declarations). It exports `Player`, `PLAYBACK_MODES`, and public types. Exactly
+three modes are accepted, in this order: `native`, `hybrid`, `software`.
+`native` is the default. Copy-back and experimental decoder controls are not
+public modes or constructor options.
 
 ```ts
-import {BrowserPlayer} from './web/generated/player.js';
+import {Player, PLAYBACK_MODES} from './web/generated/index.js';
 
-const player = new BrowserPlayer(document.querySelector('canvas')!);
-await player.ready;
-await player.openRemote({
-  url: mediaURL,
-  headers: {Authorization: `Bearer ${accessToken}`},
-  allowedOrigins: [new URL(mediaURL).origin],
-  // Return fresh authorization or a renewed URL on one HTTP 401.
-  refreshAuthorization: async () => ({headers: {
-    Authorization: `Bearer ${await renewAccessToken()}`
-  }})
+const player = new Player(document.querySelector<HTMLElement>('#surface')!, {
+  mode: 'native', width: 1280, height: 720,
 });
-await player.play(); // Call from a user gesture when autoplay is restricted.
+await player.openRemote({url: mediaURL});
+await player.play(); // Use a user gesture when autoplay is restricted.
 await player.seek(120);
-await player.selectTrack('audio', '2'); // IDs come from track-list events.
-await player.selectTrack('sub', '1');
 await player.volume(75);
 await player.rate(1.5);
-player.resize(1280, 720); // Output pixels, including the chosen device scale.
-await player.pause();
+
+await player.setMode('hybrid'); // Explicit reopen, preserving position/play state.
+await player.selectTrack('sub', '1');
+await player.setMode('software');
+await player.setVideoFilters('hflip,eq=brightness=0.1');
+await player.setAudioFilters('volume=0.5');
+await player.setVideoFilters('');
+await player.setAudioFilters('');
+await player.setMode('native');
 await player.destroy();
 ```
 
-Use `credentials: 'include'` for cookies when the origin permits credentialed
-CORS. Renewal URLs must remain on the explicit origin allowlist. A source needs
-coherent `206` byte ranges, identity representation, readable `Content-Range`
-and a strong ETag. `immutable: true` is an explicit host assertion for a
-version-addressed asset without an ETag. Redirects and ignored ranges fail.
+| Mode | Video decode/presentation | Subtitles | Filters |
+| --- | --- | --- | --- |
+| Native | Browser `<video>` | Browser-supported embedded tracks and external WebVTT | Unavailable |
+| Hybrid | WebCodecs video, mpv scheduling, retained browser frames | mpv/libass | Unavailable through this API |
+| Software | Expanded FFmpeg software decode and mpv software render | mpv/libass | FFmpeg video/audio filters |
 
-Serve the page securely with `Cross-Origin-Opener-Policy: same-origin` and
-`Cross-Origin-Embedder-Policy: require-corp`. The media origin must allow the page
-origin and requested headers, and expose `Content-Range`, `ETag`, `Retry-After`
-and representation headers. Credentialed CORS needs an explicit origin and
-`Access-Control-Allow-Credentials: true`. The supplied servers demonstrate this
-on localhost. No transcoding service is involved.
+Hybrid currently admits supported H.264 avcC inputs; audio uses mpv/FFmpeg's
+existing retained-engine codec build. It does not inherit the expanded software
+codec inventory. Unsupported hybrid decoding fails with a software-mode action;
+it does not silently select a fourth playback mode. Native codec/container/track
+support depends on the browser. Native HLS/DASH is admitted only when the browser
+reports support; this library adds no native MSE playback engine.
 
-`mpv` events expose property changes, track lists, buffering, end-of-file and
-command replies. Its `log-message` events include native warnings such as
-unsupported attachment budgets; `error` and `log` events report host failures
-and runtime logs. `diagnostics` and `audioDiagnostics()` expose the
-selected software path, heap, range/cache counters, output position and PCM
-consumption. Internal mpv `avsync` is not independent output-sync evidence.
+`setVideoFilters()` and `setAudioFilters()` reject outside software mode, even
+for an empty chain. Select software explicitly first. Clear active filters before
+leaving software mode. Filter changes reopen with filters configured before load.
+Mode/filter changes preserve position, pause, volume and speed. Failed candidate
+opens/configuration restore the old player. Changes are not gapless; at most an
+old and candidate session coexist. Track IDs are mode-specific and reset to auto
+when crossing between native and mpv modes. External browser text tracks remain
+associated with the current source and are restored when returning to native.
 
-The player accepts one open operation at a time. Seeks supersede old output and
-network reads; command promises acknowledge mpv's command processing. Wait for
-diagnostics to clear `seeking` and reach the target when actual presentation is
-required. Destruction is asynchronous and idempotent. A canvas transferred to
-an engine cannot be transferred again: create a fresh canvas for a new player.
+Use `player.capabilities` to enable controls. Observe `modechange` events with
+`phase: 'loading' | 'ready' | 'failed'`, and `mpv` events for normalized properties
+(`time-pos`, `duration`, `pause`, `track-list`, volume and speed). Native events are
+adapted to these common property names; they do not imply mpv is running.
+`error`, `log`, `source` and `output` events carry backend information when
+available. `diagnostics.mode` always identifies a public mode; `backend` contains
+mode-specific details. Native audio does not expose Wasm PCM counters.
 
-Local `open(File | ArrayBuffer)` retains the explicit 32 MiB limit. Use remote
-ranges for large files. Multiple instances, other browsers, HDR, DRM, live and
-segmented streams are outside this release's qualification profile.
+The host supplies a container element, not a canvas. Player owns its surface and
+worker tree. `ready` resolves without loading an engine; `open()`/`openRemote()`
+resolve once the selected backend has loaded. Source/control operations serialize
+through a bounded 32-operation queue. `destroy()` cancels an in-flight candidate,
+awaits cleanup, removes owned DOM and is idempotent. Await it before discarding a
+slot. New sources open paused; call `play()` explicitly.
 
-## S1 fixed segmented VOD
+## Sources and deployment
 
-In the development checkout, supply `format: 'hls'` or `format: 'dash'` to
-`openRemote`; omission keeps the direct-file range behavior. For example:
+`open(File | ArrayBuffer)` supports native browser File playback, including files
+larger than 32 MiB. ArrayBuffer sources and local files in mpv modes are limited to
+32 MiB. Large mpv sources need HTTP ranges. Arrays are copied for reopen ownership;
+Files are immutable references.
+
+Native external subtitles:
+
+```ts
+await player.addTextTrack({src: subtitleURL, label: 'English', language: 'en'});
+await player.selectTrack('sub', '1');
+await player.subtitleVisible(false);
+```
+
+Keep caller-owned blob text-track URLs alive until the source is replaced or the
+player is destroyed. Native audio track switching requires the browser's audio
+track API. Unsupported requests reject instead of silently doing nothing.
+
+mpv modes accept `RemoteSource` headers, credentials, explicit origin allowlists,
+immutability assertions and authorization renewal:
 
 ```ts
 await player.openRemote({
-  url: manifestURL,
-  format: 'hls',
-  allowedOrigins: [new URL(manifestURL).origin],
-  refreshAuthorization: async resource => ({headers: {
-    Authorization: `Bearer ${await renewAccessToken()}`
-  }})
+  url: mediaURL,
+  headers: {Authorization: `Bearer ${token}`},
+  allowedOrigins: [new URL(mediaURL).origin],
+  refreshAuthorization: async () => ({headers: {Authorization: `Bearer ${await renewToken()}`}}),
 });
 ```
 
-The optional refresh argument identifies the actual requested resource URL.
-Return renewed headers for nested requests; a replacement URL must refer to that
-resource, not unconditionally to the root manifest. All resources must satisfy
-the origin and credential policy. Ordinary resources require HTTP 200; explicit
-byte ranges require matching 206 responses. Redirects are rejected.
+Native requests reject headers, renewal callbacks, explicit origin restrictions,
+immutability assertions and `credentials: 'omit'`, which `<video>` cannot enforce.
+Native credentialed CORS uses `credentials: 'include'`; the default is anonymous
+CORS. Range/redirect guarantees belong to mpv modes, not native requests.
 
-Manifest bodies are limited to 1 MiB, each media/init body to 8 MiB, retained
-bodies to 16 MiB, simultaneous handles to 16, and resource opens to 10,000. One
-request runs at a time, with a 15-second deadline and four attempts.
+Serve all `web/` assets and `fixtures/DejaVuSans.ttf` at the relative locations in
+the repository. Native mode lazily imports only its browser adapter and does not
+require cross-origin isolation. Hybrid/software require a secure isolated page:
+`Cross-Origin-Opener-Policy: same-origin` and
+`Cross-Origin-Embedder-Policy: require-corp`. The media server must satisfy CORS,
+CORP where applicable, range and representation requirements. The complete
+checkout is not yet a standalone published npm distribution.
 
-Only finite single-video HLS and single-period, one-representation-per-adaptation
-DASH are admitted. TS/fMP4 timestamp-reset discontinuities are handled natively. HLS WebVTT must be one full-timeline resource without
-X-TIMESTAMP-MAP. Live, adaptive and encrypted HLS manifests are rejected. See
-[the passing S1 profile and its limits](validation/S1.md).
+Build the JS/API with `npm run build`. Software uses `web/engine-software-full`
+from `npm run build:software-full`. Hybrid uses the retained subtitle engine in
+`web/engine-retained-subs`; its existing native build is described in
+`experiments/retained-subtitles/README.md`. Worker filenames are implementation
+details, not additional playback modes. FFmpeg build flags affect the bundled
+Wasm capabilities, not the public mode list.
 
-## Optional M4 decoder (accepted with endurance exception)
+Software's existing 1080p/memory limits and paused audio-only time-reporting offset
+remain; see [software verification](../results/software-full/README.md).
+Segmented mpv VOD retains the S1 constraints in [S1 validation](validation/S1.md).
+No new performance or long foreground qualification is implied by API tests.
 
-Build the optional artifact with `npm run build:browser-decoder` after the native
-libraries are built. It writes `web/engine-m4/`; the software engine remains in
-`web/engine/`. Instantiate `BrowserPlayer(canvas, {decoder: 'webcodecs'})` to opt
-in. The default remains `software`. AAC, filtering, subtitle composition and
-presentation timing remain with mpv. Unsupported configurations and decode
-errors recover through software; diagnostics report `decoder` and `decoderStats`.
+## Migration and historical experiments
 
-The current copy-back path admits bounded H.264 avcC inputs and I420/NV12 output.
-It retains compressed keyframe replay data up to 16 MiB / 256 packets and bounds
-browser inputs/frames to eight. The host owns a hidden same-origin frame for the
-worker tree and removes it during destruction. Keep awaiting `destroy()` before
-reusing a player slot. This development candidate is accepted with the user-approved 57:38 endurance
-exception; its original strict long-run gate remains failed. See
-[candidate acceptance](validation/CANDIDATE.md) and [the M4 contract](M4-CONTRACT.md).
+Replace `BrowserPlayer(canvas, {decoder: ...})` with `Player(container, {mode: ...})`
+from `index.js`. Replace raw mpv `command('set', 'vf', ...)` calls with
+`setVideoFilters()` in software mode. There is no arbitrary public `command()`;
+use typed controls so state survives a reopen. The package export map exposes
+only this entry point.
 
-
-For supplemental diagnostics without occupying the foreground browser, run
-`node scripts/qualify-development.mjs software supplemental --headless-diagnostic`
-and then the same command with `webcodecs`. These commands preserve accepted
-evidence and mark new results `qualificationEligible: false`. They do not run
-long tests or replace foreground acceptance. Ensure the synthetic
-oversized-attachment fixture and native subtitle reference images exist first.
+The old `src/player.ts`, generated clients, `/web/index.html`,
+`/web/legacy-example.html`, filter router and
+experiment pages are frozen compatibility/evidence fixtures. They are not the
+public API, default demo or default API test path. Their original inputs and
+benchmark binaries remain preserved for comparison. Legacy test URLs now target
+those explicit pages because `/` serves the three-mode demo. The new maintained mpv client
+is shared by hybrid/software in `src/internal/wasm-player.ts`; native resource
+ownership lives in `src/internal/native-player.ts`, and transaction/state ownership
+lives in `src/unified-player.ts`.

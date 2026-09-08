@@ -21,7 +21,7 @@ async function destroy(){await page.evaluate(()=>player.destroy());for(let i=0;i
  }
  assert.deepEqual(page.workers().map(w=>w.url()),[],'Workers retained after destroy');}
 try{
-  await page.goto('http://127.0.0.1:4179/?no-codecs');await wait(()=>typeof createPlayer==='function');
+  await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');await wait(()=>typeof createPlayer==='function');
   for(const [id,file,format] of [['hls-ts','ts/master.m3u8','hls'],['hls-fmp4','fmp4/master.m3u8','hls'],['dash','dash/manifest.mpd','dash'],['range','byterange/media.m3u8','hls']]){
     if(process.env.S1_CASE&&process.env.S1_CASE!==id)continue;
     await check(`${id}: moving software output, audio, seeks and cleanup`,async()=>{

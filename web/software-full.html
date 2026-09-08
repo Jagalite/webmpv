@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>webmpv · Local playback</title>
+<style>
+:root{color-scheme:dark;font:16px/1.5 system-ui;background:#111719;color:#e4ece7}body{max-width:920px;margin:48px auto;padding:0 24px}h1{font-size:32px;letter-spacing:-1px;margin:0}p{color:#a3b4ab}canvas{width:100%;background:#050807;aspect-ratio:16/9;border-radius:12px;margin:20px 0}button,label{font:inherit;background:#273a30;border:1px solid #42594b;border-radius:7px;padding:9px 15px;color:inherit;cursor:pointer}button:disabled{opacity:.4;cursor:default}nav{display:flex;gap:10px;flex-wrap:wrap}input[type=file]{display:none}#status{min-height:24px}pre{font-size:12px;white-space:pre-wrap;color:#a3b4ab}small{color:#8b9f94}
+</style>
+<h1>webmpv</h1><p>Expanded software playback, powered by mpv and FFmpeg.</p>
+<nav><button id="demo">Play test film</button><label>Open local file<input id="file" type="file" ></label><button id="play" disabled>Play</button><button id="pause" disabled>Pause</button><button id="seek" disabled>Seek to 5s</button><button id="destroy" disabled>Close player</button></nav>
+<form id="remote"><input id="url" type="url" placeholder="Media URL" aria-label="Media URL" required style="width:65%;padding:10px;margin-top:15px"><select id="source-format" aria-label="Source format"><option value="file">Direct file</option><option value="hls">HLS VOD</option><option value="dash">DASH VOD</option></select> <button>Open URL</button></form>
+<nav style="margin-top:12px"><label>Audio <select id="audio-track"></select></label><label>Subtitles <select id="sub-track"><option value="no">Off</option></select></label><label>Volume <input id="volume" type="range" min="0" max="100" value="100"></label><label>Speed <select id="rate"><option>0.5</option><option selected>1</option><option>1.5</option><option>2</option></select></label></nav>
+<div><input id="timeline" type="range" min="0" max="1" step="0.1" value="0" style="width:85%" aria-label="Playback position"><span id="time">0:00</span></div>
+<div id="screen"><canvas width="640" height="360"></canvas></div>
+<div id="status" role="status">Ready to open a file.</div>
+<small>Expanded software playback · Up to 1080p · Stereo output · Local files up to 32 MiB · Direct URLs need byte ranges</small>
+<details><summary>Playback diagnostics</summary><pre id="diagnostics"></pre></details>
+<script type="module">
+import {BrowserPlayer} from '/web/generated/software-full-player.js';
+let player;
+const status=document.querySelector('#status');
+window.playerEvents=[];window.playerErrors=[];
+async function create(){
+ if(player)await player.destroy();
+ const canvas=document.createElement('canvas');canvas.width=640;canvas.height=360;document.querySelector('#screen').replaceChildren(canvas);
+ player=window.player=new BrowserPlayer(canvas,{decoder:'software',disableBrowserCodecs:new URLSearchParams(location.search).has('no-codecs'),measureOutput:new URLSearchParams(location.search).has('measure-output')});
+ player.addEventListener('mpv',({detail})=>{window.playerEvents.push(detail);if(window.playerEvents.length>500)window.playerEvents.shift();
+ if(detail.event==='property-change'){
+  if(detail.name==='track-list')for(const [type,id] of [['audio','audio-track'],['sub','sub-track']]){const select=document.getElementById(id);select.replaceChildren();if(type==='sub')select.add(new Option('Off','no'));for(const track of detail.data||[])if(track.type===type){const option=new Option(track.title||track.lang||`${type} ${track.id}`,track.id);option.selected=!!track.selected;select.add(option);}}
+  if(detail.name==='duration')document.getElementById('timeline').max=detail.data||1;
+  if(detail.name==='time-pos'){document.getElementById('timeline').value=detail.data||0;document.getElementById('time').textContent=`${Math.floor((detail.data||0)/60)}:${String(Math.floor((detail.data||0)%60)).padStart(2,'0')}`;}
+  if(detail.name==='paused-for-cache'&&detail.data)status.textContent='Buffering…';
+  if(detail.name==='pause')status.textContent=detail.data?'Paused.':'Playing.';
+ }
+ });
+ player.addEventListener('error',({detail})=>{window.playerErrors.push(detail);status.textContent=detail;});
+ player.addEventListener('log',({detail})=>console.log(detail));
+ status.textContent='Starting player…';await player.ready;
+ for(const id of ['play','pause','seek','destroy'])document.getElementById(id).disabled=false;
+ return player;
+}
+async function run(action){try{await action();}catch(error){status.textContent=error.message;window.playerErrors.push(error.message);console.error(error);}}
+window.createPlayer=create;
+document.getElementById('remote').onsubmit=event=>{event.preventDefault();run(async()=>{const p=await create();await p.openRemote({url:document.getElementById('url').value,format:document.getElementById('source-format').value});await p.play();});};
+document.getElementById('audio-track').onchange=event=>run(()=>player.selectTrack('audio',event.target.value));
+document.getElementById('sub-track').onchange=event=>run(()=>player.selectTrack('sub',event.target.value));
+document.getElementById('volume').oninput=event=>run(()=>player.volume(Number(event.target.value)));
+document.getElementById('rate').onchange=event=>run(()=>player.rate(Number(event.target.value)));
+document.getElementById('timeline').oninput=event=>run(()=>player.seek(Number(event.target.value)));
+document.querySelector('#demo').onclick=()=>run(async()=>{const p=await create();const response=await fetch('/fixtures/m0.mkv');await p.open(await response.arrayBuffer());await p.selectTrack('sub','1');await p.play();status.textContent='Playing test film.';});
+document.querySelector('#file').onchange=event=>run(async()=>{const file=event.target.files[0];if(file){const p=await create();await p.open(file);await p.play();status.textContent=file.name;}});
+document.querySelector('#play').onclick=()=>run(()=>player.play());
+document.querySelector('#pause').onclick=()=>run(()=>player.pause());
+document.querySelector('#seek').onclick=()=>run(()=>player.seek(5));
+document.querySelector('#destroy').onclick=()=>run(async()=>{await player.destroy();status.textContent='Player closed.';for(const id of ['play','pause','seek','destroy'])document.getElementById(id).disabled=true;});
+setInterval(()=>{if(player)document.querySelector('#diagnostics').textContent=JSON.stringify({video:player.diagnostics,audio:player.audioDiagnostics(),time:player.properties.get('time-pos')},null,2);},250);
+</script></html>

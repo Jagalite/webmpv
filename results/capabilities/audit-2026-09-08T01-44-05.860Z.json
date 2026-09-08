@@ -1,0 +1,130 @@
+{
+  "at": "2026-09-08T01:44:05.860Z",
+  "scope": "Compiled capability inventory and browser API queries; not a sample-based playback qualification",
+  "configSha256": "07fc37ebaeb3238b3d63b95b875ce0d04b6f274edf1b3c33a00ae53a9a25ab9a",
+  "configMatchesRecordedBuild": true,
+  "enabledDecoders": [
+    "H264",
+    "AAC",
+    "PCM_S16LE",
+    "SSA",
+    "ASS",
+    "WEBVTT"
+  ],
+  "enabledDemuxers": [
+    "AAC",
+    "AC3",
+    "ASS",
+    "DASH",
+    "EAC3",
+    "HLS",
+    "MATROSKA",
+    "MOV",
+    "MPEGTS",
+    "WAV",
+    "WEBVTT"
+  ],
+  "retainedBridgeVideoCodecs": [
+    "H264"
+  ],
+  "notes": [
+    "ASS and SSA decoder registrations share AV_CODEC_ID_ASS",
+    "A demuxer without its matching decoder is not a playable codec",
+    "Software and retained routes share the Wasm audio and demux paths"
+  ],
+  "browser": "152.0.7977.76",
+  "browserQueries": {
+    "video": [
+      {
+        "name": "H264",
+        "mime": "video/mp4; codecs=\"avc1.640028\"",
+        "nativeCanPlayType": "probably",
+        "browserWebCodecsReportedSupport": true
+      },
+      {
+        "name": "HEVC",
+        "mime": "video/mp4; codecs=\"hvc1.1.6.L93.B0\"",
+        "nativeCanPlayType": "probably",
+        "browserWebCodecsReportedSupport": true
+      },
+      {
+        "name": "VP9",
+        "mime": "video/webm; codecs=\"vp09.00.10.08\"",
+        "nativeCanPlayType": "probably",
+        "browserWebCodecsReportedSupport": true
+      },
+      {
+        "name": "VP8",
+        "mime": "video/webm; codecs=\"vp8\"",
+        "nativeCanPlayType": "probably",
+        "browserWebCodecsReportedSupport": true
+      },
+      {
+        "name": "AV1",
+        "mime": "video/mp4; codecs=\"av01.0.08M.08\"",
+        "nativeCanPlayType": "probably",
+        "browserWebCodecsReportedSupport": true
+      },
+      {
+        "name": "MPEG2",
+        "mime": "video/mp2t; codecs=\"mp2v\"",
+        "nativeCanPlayType": "",
+        "browserWebCodecsReportedSupport": null
+      },
+      {
+        "name": "MPEG4_PART2",
+        "mime": "video/mp4; codecs=\"mp4v.20.9\"",
+        "nativeCanPlayType": "",
+        "browserWebCodecsReportedSupport": false
+      },
+      {
+        "name": "VC1",
+        "mime": "video/x-ms-wmv; codecs=\"WVC1\"",
+        "nativeCanPlayType": "",
+        "browserWebCodecsReportedSupport": null
+      }
+    ],
+    "audio": [
+      {
+        "name": "AAC",
+        "mime": "audio/mp4; codecs=\"mp4a.40.2\"",
+        "nativeCanPlayType": "probably"
+      },
+      {
+        "name": "MP3",
+        "mime": "audio/mpeg",
+        "nativeCanPlayType": "probably"
+      },
+      {
+        "name": "OPUS",
+        "mime": "audio/ogg; codecs=\"opus\"",
+        "nativeCanPlayType": "probably"
+      },
+      {
+        "name": "VORBIS",
+        "mime": "audio/ogg; codecs=\"vorbis\"",
+        "nativeCanPlayType": "probably"
+      },
+      {
+        "name": "FLAC",
+        "mime": "audio/flac",
+        "nativeCanPlayType": "probably"
+      },
+      {
+        "name": "AC3",
+        "mime": "audio/mp4; codecs=\"ac-3\"",
+        "nativeCanPlayType": ""
+      },
+      {
+        "name": "EAC3",
+        "mime": "audio/mp4; codecs=\"ec-3\"",
+        "nativeCanPlayType": ""
+      },
+      {
+        "name": "PCM_S16LE",
+        "mime": "audio/wav; codecs=\"1\"",
+        "nativeCanPlayType": "probably"
+      }
+    ]
+  }
+}

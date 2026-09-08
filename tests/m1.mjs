@@ -12,7 +12,7 @@ await page.addInitScript(()=>{for(const name of ['VideoDecoder','AudioDecoder','
 const report={browser:browser.version(),headless:process.env.HEADED!=='1',started:new Date().toISOString(),passed:false,tests:[]};
 async function check(name,fn){const start=Date.now(),evidence=await fn();report.tests.push({name,evidence,milliseconds:Date.now()-start});console.log('PASS',name);}
 try{
- await page.goto('http://127.0.0.1:4179/?no-codecs');await page.waitForFunction(()=>typeof createPlayer==='function');
+ await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');await page.waitForFunction(()=>typeof createPlayer==='function');
  await check('remote fixture startup',async()=>{await page.evaluate(async()=>{const p=await createPlayer();await p.openRemote({url:'http://127.0.0.1:4180/media/m0?id=browser-small'});await p.selectTrack('sub','1');await p.play();});await page.waitForFunction(()=>player.diagnostics?.rendered>10&&player.audioDiagnostics().mediaFrames>12000);return page.evaluate(()=>({video:player.diagnostics,audio:player.audioDiagnostics(),errors:playerErrors}));});
  await check('remote exact seek',async()=>{await page.evaluate(()=>player.seek(8));await page.waitForFunction(()=>!player.diagnostics?.seeking&&player.diagnostics?.presentedPosition>8);return page.evaluate(()=>player.diagnostics);});
  await page.evaluate(()=>player.destroy());

@@ -30,7 +30,7 @@ async function measure(backend,pair){
   const id=`m4-measure-${pair}-${backend}-${Date.now()}`;
   const control=async options=>fetch(`http://127.0.0.1:4180/control?id=${id}`,options?{method:'POST',body:JSON.stringify(options)}:{}).then(r=>r.json());
   record.networkBefore=await control({...result.protocol.network,mode:'normal',stall:false,outageUntil:0});
-  await page.goto(`http://127.0.0.1:4179/?${backend==='software'?'no-codecs':'decoder=webcodecs'}`);
+  await page.goto(`http://127.0.0.1:4179/web/index.html?${backend==='software'?'no-codecs':'decoder=webcodecs'}`);
   await page.waitForFunction(()=>typeof createPlayer==='function');
   record.foregroundAtStart=await focusForQualification(page,browser);
   await page.evaluate(async id=>{await createPlayer();player.resize(1920,1080);await player.openRemote({url:`http://127.0.0.1:4180/media/front?id=${id}`});await player.play();},id);

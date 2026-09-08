@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><title>Video filter routing</title>
+<style>body{margin:16px;background:#111;color:#eee;font:16px system-ui}canvas{width:960px;height:540px;max-width:100%;object-fit:contain}button,select{padding:8px;margin:4px}#status{min-height:2em}</style>
+<h1>Video filters</h1><p>Changing filters briefly reloads playback at the current position.</p>
+<button id="load">Load test video</button><button id="pause">Pause / resume</button><button id="subs">Toggle subtitles</button>
+<label>Video effect <select id="filter"><option value="">Off</option><option value="hflip">Mirror</option><option value="vflip">Flip vertically</option><option value="negate">Negative</option><option value="lavfi=[format=gray]">Grayscale</option><option value="crop=960:540:480:270">Crop center</option></select></label>
+<p id="status" role="status">Ready. No foreground hold required for functional checks.</p><div id="surface"></div>
+<script type="module">
+import {FilterPlayer} from './filter-player.js';
+window.errors=[];window.events=[];
+window.createPlayer=async()=>{
+ if(window.player)await player.destroy();
+ document.querySelector('#surface').replaceChildren();window.player=new FilterPlayer(document.querySelector('#surface'));
+ player.addEventListener('error',e=>errors.push(String(e.detail)));
+ player.addEventListener('mpv',e=>events.push(e.detail));
+ player.addEventListener('routing',e=>{document.querySelector('#status').textContent=e.detail.phase==='loading'?'Applying video effect…':e.detail.phase==='failed'?`Effect failed; previous playback restored. ${e.detail.message}`:'Ready';});
+};
+window.capturePNG=()=>{const canvas=[...document.querySelectorAll('canvas')].find(c=>c.style.display!=='none'),copy=document.createElement('canvas');copy.width=canvas.width;copy.height=canvas.height;copy.getContext('2d').drawImage(canvas,0,0);return copy.toDataURL('image/png').split(',')[1];};
+let visible=true;
+async function action(fn){const controls=[...document.querySelectorAll('button,select')];controls.forEach(c=>c.disabled=true);try{await fn();}catch(e){document.querySelector('#status').textContent=String(e);}finally{controls.forEach(c=>c.disabled=false);}}
+load.onclick=()=>action(async()=>{await createPlayer();const r=await fetch('http://127.0.0.1:4180/media/tracks?id=filter-demo');if(!r.ok)throw Error('Test video download failed');await player.setVideoFilters(document.querySelector('#filter').value);await player.open(await r.arrayBuffer());await player.selectTrack('sub','2');visible=true;await player.play();});
+pause.onclick=()=>action(()=>player.properties.get('pause')?player.play():player.pause());
+subs.onclick=()=>action(()=>player.subtitleVisible(visible=!visible));
+filter.onchange=()=>action(()=>player.setVideoFilters(filter.value));
+</script>

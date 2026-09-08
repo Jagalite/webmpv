@@ -1,0 +1,42 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>webmpv three-way benchmark</title>
+<style>body{margin:16px;background:#111;color:#eee;font:16px system-ui}video,canvas{display:block;width:960px;height:540px;background:black}</style>
+<h1>Subtitle overhead: two short tests</h1>
+<p id="status">Please leave this window foreground until the benchmark finishes.</p>
+<div id="surface"></div>
+<script type="module">
+import './benchmark-progress.js';
+import {BrowserPlayer} from './generated/subtitle-perf-player.js';
+let player,video,variant,errors=[],events=[];
+window.startBenchmark=async(kind,url)=>{
+ variant=kind;document.querySelector('h1').textContent=`Benchmark: ${kind}`;
+ if(kind==='native'){
+  video=document.createElement('video');video.width=1920;video.height=1080;video.preload='auto';video.controls=false;video.muted=false;video.volume=1;video.playsInline=true;
+  for(const name of ['waiting','stalled','error'])video.addEventListener(name,()=>events.push({name,at:performance.now(),position:video.currentTime}));
+  document.querySelector('#surface').append(video);video.src=url;await video.play();
+ }else{
+  const canvas=document.createElement('canvas');canvas.width=1920;canvas.height=1080;document.querySelector('#surface').append(canvas);
+  player=new BrowserPlayer(canvas,{decoder:kind==='software'?'software':'webcodecs',disableBrowserCodecs:kind==='software'});
+  player.addEventListener('error',({detail})=>errors.push(String(detail)));
+  await player.ready;player.resize(1920,1080);await player.openRemote({url});await player.request({type:'perf-subtitle',content:await(await fetch('/fixtures/subtitle-perf.ass')).text()});await player.subtitleVisible(kind==='subs-on');await player.play();
+ }
+};
+window.benchmarkState=()=>{
+ if(variant==='native'){
+  const quality=video.getVideoPlaybackQuality();
+  return {variant,position:video.currentTime,rendered:quality.totalVideoFrames-quality.droppedVideoFrames,dropped:quality.droppedVideoFrames,
+   frameCounter:'getVideoPlaybackQuality total minus dropped',width:video.videoWidth,height:video.videoHeight,
+   ready:video.readyState>=3&&!video.paused,audio:{muted:video.muted,volume:video.volume,decodedBytes:video.webkitAudioDecodedByteCount??null},
+   errors:video.error?[`${video.error.code}: ${video.error.message}`]:[],events:events.slice()};
+ }
+ const diagnostics=player?.diagnostics,audio=player?.audioDiagnostics();
+ return {variant,position:player?.properties.get('time-pos'),rendered:diagnostics?.rendered??0,dropped:player?.properties.get('frame-drop-count')??0,
+  frameCounter:'mpv scheduled frames; retained VideoFrame presentation',ready:(diagnostics?.rendered??0)>5&&(audio?.mediaFrames??0)>4096,diagnostics,audio,errors:errors.slice()};
+};
+window.stopBenchmark=async()=>{
+ if(video){video.pause();video.removeAttribute('src');video.load();video.remove();}
+ if(player)await player.destroy();
+ return {decoderStats:player?.diagnostics?.decoderStats,presentation:player?.diagnostics?.presentation};
+};
+</script>

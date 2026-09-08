@@ -5,7 +5,7 @@ const browser=await chromium.launch({channel:'chrome',headless:false,ignoreDefau
 const page=await browser.newPage({viewport:{width:1280,height:1100}});const logs=[];
 page.on('console',m=>logs.push(m.text()));page.on('pageerror',e=>logs.push(String(e)));
 try{
- await page.goto('http://127.0.0.1:4179/?no-codecs&measure-output');await page.waitForFunction(()=>typeof createPlayer==='function');
+ await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs&measure-output');await page.waitForFunction(()=>typeof createPlayer==='function');
  await fetch('http://127.0.0.1:4180/media/front?id=warm',{headers:{Range:'bytes=0-0'}}).then(r=>r.arrayBuffer());
  await page.evaluate(async()=>{await createPlayer();player.resize(1920,1080);window.signals=[];window.samples=[];player.addEventListener('output',({detail})=>signals.push(detail));window.start=performance.now();await player.openRemote({url:'http://127.0.0.1:4180/media/front?id=qual-smoke'});await player.play();});
  await page.waitForFunction(()=>player.diagnostics?.rendered>10&&player.audioDiagnostics().mediaFrames>12000,{},{timeout:20000});

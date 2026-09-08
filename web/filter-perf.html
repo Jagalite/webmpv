@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><title>Video filter performance</title>
+<style>body{margin:16px;background:#111;color:#eee;font:16px system-ui}canvas{display:block;width:960px;height:540px;background:black}</style>
+<h1>Video filter performance: three short tests</h1><p>Please leave this window foreground until the tests finish.</p><div id="surface"></div>
+<script type="module">
+import './benchmark-progress.js';
+import {FilterPlayer} from './filter-player.js';
+let player,variant,errors=[];
+window.startBenchmark=async(kind,url)=>{
+ variant=kind;document.querySelector('h1').textContent=`Benchmark: ${kind}`;
+ player=new FilterPlayer(document.querySelector('#surface'));
+ player.addEventListener('error',e=>errors.push(String(e.detail)));
+ await player.subtitleVisible(false);
+ await player.setVideoFilters(kind==='retained'?'':kind==='copyback-null'?'null':'hflip');
+ await player.openRemote({url});await player.play();
+};
+window.benchmarkState=()=>{const d=player?.diagnostics,a=player?.audioDiagnostics();return {variant,position:player?.properties.get('time-pos'),rendered:d?.rendered??0,dropped:player?.properties.get('frame-drop-count')??0,frameCounter:variant==='retained'?'mpv scheduled frames, retained draw submissions checked':'mpv software-render Canvas submissions',ready:(d?.rendered??0)>5&&(a?.mediaFrames??0)>4096,diagnostics:d,audio:a,errors:errors.slice()};};
+window.checkPixels=()=>{const source=document.querySelector('canvas'),canvas=document.createElement('canvas');canvas.width=192;canvas.height=108;const ctx=canvas.getContext('2d');ctx.drawImage(source,0,0,192,108);const pixels=ctx.getImageData(0,0,192,108).data;let min=255,max=0;for(let i=0;i<pixels.length;i++)if(i%4!==3){min=Math.min(min,pixels[i]);max=Math.max(max,pixels[i]);}return {min,max};};
+window.stopBenchmark=async()=>{await player.destroy();const d=player.history.at(-1)?.diagnostics;return {decoderStats:d?.decoderStats,presentation:d?.presentation};};
+</script>

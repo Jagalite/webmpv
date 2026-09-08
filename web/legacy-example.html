@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>webmpv integration example</title>
+<style>body{font:16px system-ui;max-width:960px;margin:40px auto;padding:0 20px}canvas{width:100%;background:#111}button,input{font:inherit;padding:8px;margin:8px 0}input{width:65%}</style>
+<h1>Video player</h1>
+<canvas width="960" height="540"></canvas>
+<form><input type="url" aria-label="Media URL" placeholder="MP4 or MKV URL" required><button>Open</button></form>
+<button id="demo">Play example film</button><button id="play">Play</button><button id="pause">Pause</button><button id="close">Close</button>
+<p role="status">Ready.</p>
+<script type="module">
+import {BrowserPlayer} from './generated/player.js';
+let player;
+const status=document.querySelector('[role=status]');
+async function create(){
+ await player?.destroy();
+ const old=document.querySelector('canvas'),canvas=old.cloneNode();old.replaceWith(canvas);
+ player=new BrowserPlayer(canvas);
+ player.addEventListener('error',({detail})=>status.textContent=detail);
+ await player.ready;return player;
+}
+async function run(action){try{await action();}catch(error){status.textContent=error.message;}}
+document.querySelector('form').onsubmit=event=>{event.preventDefault();run(async()=>{
+ const p=await create();await p.openRemote({url:document.querySelector('input').value});await p.play();status.textContent='Playing.';
+});};
+document.querySelector('#demo').onclick=()=>run(async()=>{const p=await create();await p.open(await(await fetch('../fixtures/m0.mkv')).arrayBuffer());await p.play();status.textContent='Playing example film.';});
+document.querySelector('#play').onclick=()=>run(()=>player.play());
+document.querySelector('#pause').onclick=()=>run(()=>player.pause());
+document.querySelector('#close').onclick=()=>run(async()=>{await player?.destroy();status.textContent='Closed.';});
+</script>
+</html>

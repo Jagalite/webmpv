@@ -7,7 +7,7 @@
     "build": "tsc",
     "build:engine": "bash scripts/build.sh",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test tests/audio-worklet.mjs && node tests/m0.mjs",
+    "test": "node --test tests/audio-worklet.mjs && node tests/player-api.mjs",
     "dev:media": "node scripts/media-server.mjs",
     "test:stream": "node --test tests/range-reader.mjs && node tests/m1.mjs",
     "test:qualify": "node tests/m2-functional.mjs && node tests/m2-supplemental.mjs",
@@ -16,10 +16,21 @@
     "dev:segments": "node scripts/s1-media-server.mjs",
     "test:browser-decoder": "node --test tests/browser-decoder-worker.mjs && node tests/m4.mjs",
     "build:browser-decoder": "WEBMPV_BROWSER_DECODER=1 WEBMPV_ENGINE_DIR=web/engine-m4 WEBMPV_MANIFEST_DIR=results/m4 bash scripts/link.sh",
-    "test:segments": "node tests/s1.mjs && node tests/s1-lifecycle.mjs && node tests/s1-timeline.mjs"
+    "test:segments": "node tests/s1.mjs && node tests/s1-lifecycle.mjs && node tests/s1-timeline.mjs",
+    "build:software-full": "bash experiments/software-full/build.sh",
+    "fixtures:software-full": "python3 experiments/software-full/fixtures.py",
+    "test:software-full": "node tests/software-full.mjs",
+    "test:api": "node tests/player-api.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",
     "typescript": "5.9.3"
-  }
+  },
+  "exports": {
+    ".": {
+      "types": "./web/generated/index.d.ts",
+      "import": "./web/generated/index.js"
+    }
+  },
+  "types": "./web/generated/index.d.ts"
 }

@@ -23,7 +23,7 @@ try{
   if(result.probeWorkerRoute)await page.context().route('**/browser-decoder-worker.js',async route=>{
    const response=await route.fetch();await route.fulfill({response,body:workerOverride});
   });
-  await page.goto(`http://127.0.0.1:4179/?${backend==='software'?'no-codecs':'decoder=webcodecs'}`);
+  await page.goto(`http://127.0.0.1:4179/web/index.html?${backend==='software'?'no-codecs':'decoder=webcodecs'}`);
   await page.waitForFunction(()=>typeof createPlayer==='function');
   const id=`startup-${backend}-${Date.now()}`;
   await fetch(`http://127.0.0.1:4180/media/${media}?id=warm`,{headers:{Range:'bytes=0-0'}}).then(r=>r.arrayBuffer());

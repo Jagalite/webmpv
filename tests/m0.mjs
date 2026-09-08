@@ -19,7 +19,7 @@ async function check(name,fn){const start=Date.now();const evidence=await fn();r
 async function wait(expression,timeout=15000){await page.waitForFunction(expression,{},{timeout});}
 async function pixels(){return page.evaluate(()=>{const src=document.querySelector('canvas'), c=document.createElement('canvas');c.width=src.width;c.height=src.height;const ctx=c.getContext('2d');ctx.drawImage(src,0,0);const bytes=ctx.getImageData(0,0,c.width,c.height).data;const previous=window.lastPixelSample;let changedBottom=0;let nonblack=0,yellow=0,hash=2166136261;for(let i=0;i<bytes.length;i+=4){if(bytes[i]+bytes[i+1]+bytes[i+2]>40)nonblack++;if(i/4>c.width*(c.height-75)&&bytes[i]>170&&bytes[i+1]>170&&bytes[i+2]<100)yellow++;if(previous?.length===bytes.length&&i/4>c.width*(c.height-75)&&(bytes[i]!==previous[i]||bytes[i+1]!==previous[i+1]||bytes[i+2]!==previous[i+2]))changedBottom++;hash=Math.imul(hash^bytes[i],16777619);}window.lastPixelSample=bytes;return {width:c.width,height:c.height,nonblack,yellow,changedBottom,hash:hash>>>0};});}
 try {
-  await page.goto('http://127.0.0.1:4179/?no-codecs');
+  await page.goto('http://127.0.0.1:4179/web/index.html?no-codecs');
   await wait(()=>typeof window.createPlayer==='function');
   await check('isolated software-only browser',async()=>{
     const data=await page.evaluate(()=>({isolated:crossOriginIsolated,disabled:['VideoDecoder','AudioDecoder','VideoFrame'].every(n=>typeof globalThis[n]==='undefined')}));assert.ok(data.isolated&&data.disabled);return data;

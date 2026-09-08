@@ -1,0 +1,662 @@
+{
+  "started": "2026-09-08T00:24:15.869Z",
+  "passed": true,
+  "scope": "headless local-file functional subtitle validation; not performance or remote-stream qualification",
+  "hashes": {
+    "web/subtitle-overlay.js": "060b06df7f444f99323bfbe2f58776713ddea9e5b97cdc08b608fdb3f19e7f23",
+    "web/subtitled-engine-worker.js": "49f4c76eb41d0ba2cd5e50b33f6e4b12769565f28b137c929dcdf517c5396732",
+    "web/generated/subtitled-player.js": "8863421c512540669982b2894ac4ecde3a5bc81b2532bd6ee286f7f4f281b72f",
+    "web/subtitled.html": "6db661644b04b1d4e7df3ec9fa57f06d2ae162a9ab4c29d3763fc56c94fc7fa4",
+    "web/engine-retained-subs/player.wasm": "cb2faed4789776e7b7caf6eba39c743f67dd05c71c49b804e410c4865189f82f",
+    "web/engine-retained-subs/player.mjs": "149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae",
+    "experiments/retained-subtitles/subtitles.c": "4bda939619c14a9284521dcfa7ed68b454ea605e2a43b625e9225008f5a7d22a",
+    "experiments/retained-subtitles/prepare.py": "e6a955d5f061cf1d1b7de40db6ba4e9577ea2c8cc37057f117dfd3ee220e022b",
+    "experiments/retained-subtitles/player.c": "6e4e5816e2347bfb30aff5ea004ba1b2c474255e981ed8de6abfec7c0ac40034",
+    "experiments/retained-subtitles/vo_libmpv.c": "32e4417e90de2aa9ff172bbb400d197263ceb5b5d6a8d11b7abf0d0cf7bdf3d0",
+    "tests/retained-subtitles.mjs": "30e5fc52c8555b55aaf7b99af9d14d8634354838e767bd475cd6543ff95c79cb",
+    "fixtures/qualification.ass": "df83ce0669ee7746335f33e75f72193a1ef0771168b45615a1debfcce3cbb78c"
+  },
+  "tests": [
+    {
+      "name": "native-reference ASS shaping, vectors and overlap at paused 5 seconds",
+      "passed": true,
+      "evidence": {
+        "comparison": [
+          {
+            "name": "karaoke",
+            "pixels": 14033,
+            "referencePixels": 15469,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 27167,
+            "referencePixels": 27723,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 62539,
+            "referencePixels": 66434,
+            "precision": 1,
+            "recall": 1
+          }
+        ],
+        "diagnostics": {
+          "subtitles": {
+            "updates": 4,
+            "bytes": 1334147,
+            "peakBytes": 594652,
+            "parts": 0,
+            "renders": 8
+          },
+          "presentation": {
+            "received": 34,
+            "closed": 28,
+            "drawn": 2,
+            "redraws": 2,
+            "peakRetained": 6,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              26.400040000447063,
+              0.3449999988079071
+            ],
+            "pts": [
+              0,
+              5000000
+            ],
+            "pixelChecks": [],
+            "retained": 6,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 2,
+          "rendered": 5,
+          "renderMs": 20.570000000298023,
+          "copyMs": 0,
+          "maxRenderMs": 14.219999998807907,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 47,
+            "frames": 33,
+            "receivedFrames": 37,
+            "closedFrames": 37,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 2,
+            "errors": 0,
+            "copyMs": 0,
+            "actualWidth": 1920,
+            "actualHeight": 1080,
+            "placeholderFrames": 33,
+            "transferredFrames": 33,
+            "outstanding": 8,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 5,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 5,
+          "queuedFrames": 0
+        }
+      }
+    },
+    {
+      "name": "paused subtitle visibility and cache stability",
+      "passed": true,
+      "evidence": {
+        "a": {
+          "position": 5,
+          "subtitles": {
+            "updates": 5,
+            "bytes": 1928799,
+            "peakBytes": 594652,
+            "parts": 21,
+            "renders": 9
+          }
+        },
+        "b": {
+          "position": 5,
+          "subtitles": {
+            "updates": 5,
+            "bytes": 1928799,
+            "peakBytes": 594652,
+            "parts": 21,
+            "renders": 9
+          }
+        }
+      }
+    },
+    {
+      "name": "resize to 720p preserves native subtitle placement",
+      "passed": true,
+      "evidence": {
+        "comparison": [
+          {
+            "name": "karaoke",
+            "pixels": 6407,
+            "referencePixels": 7374,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "vectors and overlap",
+            "pixels": 11986,
+            "referencePixels": 12425,
+            "precision": 1,
+            "recall": 1
+          },
+          {
+            "name": "shaping and accents",
+            "pixels": 28547,
+            "referencePixels": 31224,
+            "precision": 1,
+            "recall": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "backward paused seeks and karaoke progression match reference",
+      "passed": true,
+      "evidence": {
+        "phases": [
+          {
+            "position": 2.25,
+            "comparison": [
+              {
+                "name": "karaoke",
+                "pixels": 14634,
+                "referencePixels": 15812,
+                "precision": 1,
+                "recall": 1
+              },
+              {
+                "name": "vectors and overlap",
+                "pixels": 27167,
+                "referencePixels": 27724,
+                "precision": 1,
+                "recall": 1
+              },
+              {
+                "name": "shaping and accents",
+                "pixels": 62658,
+                "referencePixels": 66455,
+                "precision": 1,
+                "recall": 1
+              }
+            ],
+            "actual": {
+              "yellow": 1131,
+              "red": 3049,
+              "highlightShare": 0.27057416267942586
+            },
+            "reference": {
+              "yellow": 1080,
+              "red": 2779,
+              "highlightShare": 0.27986525006478363
+            }
+          },
+          {
+            "position": 3.25,
+            "comparison": [
+              {
+                "name": "karaoke",
+                "pixels": 14765,
+                "referencePixels": 15932,
+                "precision": 1,
+                "recall": 1
+              },
+              {
+                "name": "vectors and overlap",
+                "pixels": 27167,
+                "referencePixels": 27724,
+                "precision": 1,
+                "recall": 1
+              },
+              {
+                "name": "shaping and accents",
+                "pixels": 62643,
+                "referencePixels": 66250,
+                "precision": 1,
+                "recall": 1
+              }
+            ],
+            "actual": {
+              "yellow": 2759,
+              "red": 1373,
+              "highlightShare": 0.6677153920619555
+            },
+            "reference": {
+              "yellow": 2689,
+              "red": 1243,
+              "highlightShare": 0.6838758901322483
+            }
+          }
+        ],
+        "diagnostics": {
+          "subtitles": {
+            "updates": 14,
+            "bytes": 4488818,
+            "peakBytes": 594652,
+            "parts": 0,
+            "renders": 21
+          },
+          "presentation": {
+            "received": 144,
+            "closed": 137,
+            "drawn": 4,
+            "redraws": 10,
+            "peakRetained": 7,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              26.400040000447063,
+              0.3449999988079071,
+              216.58988800119187,
+              0.24000000208616257
+            ],
+            "pts": [
+              0,
+              5000000,
+              2267000,
+              3267000
+            ],
+            "pixelChecks": [],
+            "retained": 7,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 4,
+          "rendered": 15,
+          "renderMs": 28.764999993145466,
+          "copyMs": 0,
+          "maxRenderMs": 14.219999998807907,
+          "heapBytes": 134217728,
+          "epoch": 8,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 171,
+            "frames": 143,
+            "receivedFrames": 157,
+            "closedFrames": 157,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 6,
+            "errors": 0,
+            "copyMs": 0,
+            "actualWidth": 1920,
+            "actualHeight": 1080,
+            "placeholderFrames": 143,
+            "transferredFrames": 143,
+            "outstanding": 8,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 3.267,
+          "ioPending": false,
+          "ioSerial": 0,
+          "interruptions": 0,
+          "seeking": false,
+          "position": 3.267,
+          "queuedFrames": 0
+        }
+      }
+    },
+    {
+      "name": "animated ASS updates while real retained video and audio play",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "d": {
+            "subtitles": {
+              "updates": 16,
+              "bytes": 5640679,
+              "peakBytes": 594652,
+              "parts": 21,
+              "renders": 25
+            },
+            "presentation": {
+              "received": 212,
+              "closed": 206,
+              "drawn": 5,
+              "redraws": 11,
+              "peakRetained": 7,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                26.400040000447063,
+                0.3449999988079071,
+                216.58988800119187,
+                0.24000000208616257,
+                216.75503200014828
+              ],
+              "pts": [
+                0,
+                5000000,
+                2267000,
+                3267000,
+                4200000
+              ],
+              "pixelChecks": [],
+              "retained": 6,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 5,
+            "rendered": 17,
+            "renderMs": 30.484999991953373,
+            "copyMs": 0,
+            "maxRenderMs": 14.219999998807907,
+            "heapBytes": 134217728,
+            "epoch": 10,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 246,
+              "frames": 211,
+              "receivedFrames": 230,
+              "closedFrames": 230,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 8,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 211,
+              "transferredFrames": 211,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 4.2,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 4.2,
+            "queuedFrames": 0
+          },
+          "a": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 0,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        },
+        "after": {
+          "d": {
+            "subtitles": {
+              "updates": 55,
+              "bytes": 28830998,
+              "peakBytes": 599668,
+              "parts": 21,
+              "renders": 69
+            },
+            "presentation": {
+              "received": 256,
+              "closed": 249,
+              "drawn": 48,
+              "redraws": 12,
+              "peakRetained": 8,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                26.400040000447063,
+                0.3449999988079071,
+                216.58988800119187,
+                0.24000000208616257,
+                216.75503200014828,
+                13.61361800297982,
+                11.261520001788085,
+                7.114667000298141,
+                8.857958999552466,
+                9.009934000298017,
+                7.122517000744665,
+                9.157306001638972,
+                9.763637999851198,
+                11.168361001788071,
+                7.627855001043827,
+                12.055337997914648,
+                14.864454997913526,
+                11.193892000000233,
+                10.613249001192344,
+                14.91122899821221,
+                4.047427000000425,
+                10.394202002681595,
+                7.4949900005958625,
+                6.1884319992550445,
+                9.387554000744785,
+                12.277316998658534,
+                6.957115998361587,
+                14.765145002085774,
+                15.268830998212252,
+                11.323656997317812,
+                6.844501998659325,
+                17.07173600283113,
+                7.424310000446894,
+                11.892644000894506,
+                6.337329000595673,
+                11.686256999552825,
+                12.83057500014911,
+                12.595392999254727,
+                10.510482000596312,
+                6.135330999403777,
+                14.983758997913355,
+                10.353516003128789,
+                8.413438000447059,
+                12.745722000297974,
+                6.420828000148504,
+                7.761835001788313,
+                4.516812001043036,
+                7.29181699970195
+              ],
+              "pts": [
+                0,
+                5000000,
+                2267000,
+                3267000,
+                4200000,
+                4233000,
+                4267000,
+                4300000,
+                4333000,
+                4367000,
+                4400000,
+                4433000,
+                4467000,
+                4500000,
+                4533000,
+                4567000,
+                4600000,
+                4633000,
+                4667000,
+                4700000,
+                4733000,
+                4767000,
+                4800000,
+                4833000,
+                4867000,
+                4900000,
+                4933000,
+                4967000,
+                5000000,
+                5033000,
+                5067000,
+                5100000,
+                5133000,
+                5167000,
+                5200000,
+                5233000,
+                5267000,
+                5300000,
+                5333000,
+                5367000,
+                5400000,
+                5433000,
+                5467000,
+                5500000,
+                5533000,
+                5567000,
+                5600000,
+                5633000
+              ],
+              "pixelChecks": [],
+              "retained": 7,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 48,
+            "rendered": 61,
+            "renderMs": 48.37499998137355,
+            "copyMs": 0,
+            "maxRenderMs": 14.219999998807907,
+            "heapBytes": 134217728,
+            "epoch": 10,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 287,
+              "frames": 253,
+              "receivedFrames": 273,
+              "closedFrames": 272,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 8,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 253,
+              "transferredFrames": 253,
+              "outstanding": 7,
+              "queued": 1,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 5.633,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 5.633,
+            "queuedFrames": 6912
+          },
+          "a": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 72448,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          }
+        }
+      }
+    },
+    {
+      "name": "track switching and complete frame/worker cleanup",
+      "passed": true,
+      "evidence": {
+        "subtitles": {
+          "updates": 57,
+          "bytes": 30038100,
+          "peakBytes": 607434,
+          "parts": 21,
+          "renders": 71
+        },
+        "presentation": {
+          "received": 256,
+          "closed": 256,
+          "drawn": 48,
+          "redraws": 14,
+          "peakRetained": 8,
+          "peakPending": 1,
+          "missing": 0,
+          "lateMs": [],
+          "pts": [],
+          "pixelChecks": [],
+          "retained": 0,
+          "pending": 0
+        },
+        "mode": "retained",
+        "skipCanvas": true,
+        "canvasSubmissions": 48,
+        "rendered": 63,
+        "renderMs": 55.19999998062849,
+        "copyMs": 0,
+        "maxRenderMs": 14.219999998807907,
+        "heapBytes": 134217728,
+        "epoch": 10,
+        "path": "wasm",
+        "decoder": "webcodecs",
+        "decoderStats": {
+          "submitted": 287,
+          "frames": 256,
+          "receivedFrames": 277,
+          "closedFrames": 277,
+          "peakOutstanding": 8,
+          "peakFrames": 5,
+          "resets": 8,
+          "errors": 0,
+          "copyMs": 0,
+          "actualWidth": 1920,
+          "actualHeight": 1080,
+          "placeholderFrames": 256,
+          "transferredFrames": 256,
+          "outstanding": 0,
+          "queued": 0,
+          "active": false
+        },
+        "demuxFormat": "mkv",
+        "seekPrerollSeconds": 0.5,
+        "presentedPosition": 5.633,
+        "ioPending": false,
+        "ioSerial": 0,
+        "interruptions": 0,
+        "seeking": false,
+        "position": 5.633,
+        "queuedFrames": 6912
+      }
+    }
+  ],
+  "hashesAfter": {
+    "web/subtitle-overlay.js": "060b06df7f444f99323bfbe2f58776713ddea9e5b97cdc08b608fdb3f19e7f23",
+    "web/subtitled-engine-worker.js": "49f4c76eb41d0ba2cd5e50b33f6e4b12769565f28b137c929dcdf517c5396732",
+    "web/generated/subtitled-player.js": "8863421c512540669982b2894ac4ecde3a5bc81b2532bd6ee286f7f4f281b72f",
+    "web/subtitled.html": "6db661644b04b1d4e7df3ec9fa57f06d2ae162a9ab4c29d3763fc56c94fc7fa4",
+    "web/engine-retained-subs/player.wasm": "cb2faed4789776e7b7caf6eba39c743f67dd05c71c49b804e410c4865189f82f",
+    "web/engine-retained-subs/player.mjs": "149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae",
+    "experiments/retained-subtitles/subtitles.c": "4bda939619c14a9284521dcfa7ed68b454ea605e2a43b625e9225008f5a7d22a",
+    "experiments/retained-subtitles/prepare.py": "e6a955d5f061cf1d1b7de40db6ba4e9577ea2c8cc37057f117dfd3ee220e022b",
+    "experiments/retained-subtitles/player.c": "6e4e5816e2347bfb30aff5ea004ba1b2c474255e981ed8de6abfec7c0ac40034",
+    "experiments/retained-subtitles/vo_libmpv.c": "32e4417e90de2aa9ff172bbb400d197263ceb5b5d6a8d11b7abf0d0cf7bdf3d0",
+    "tests/retained-subtitles.mjs": "30e5fc52c8555b55aaf7b99af9d14d8634354838e767bd475cd6543ff95c79cb",
+    "fixtures/qualification.ass": "df83ce0669ee7746335f33e75f72193a1ef0771168b45615a1debfcce3cbb78c"
+  },
+  "runtimeUnchanged": true,
+  "finished": "2026-09-08T00:24:28.077Z"
+}

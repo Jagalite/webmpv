@@ -16,7 +16,7 @@ async function pixels(){return page.evaluate(()=>{const c=document.createElement
 async function at(position){await page.evaluate(async position=>{await player.pause();await player.seek(position);},position);await page.waitForFunction(position=>!player.diagnostics.seeking&&Math.abs(player.diagnostics.presentedPosition-position)<0.2,position,{timeout:15000});await page.waitForTimeout(300);}
 async function cleanup(){await page.evaluate(()=>player.destroy());for(let i=0;i<50&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);const stats=await page.evaluate(()=>player.diagnostics?.decoderStats);if(stats){assert.equal(stats.active,false);assert.equal(stats.queued,0);assert.equal(stats.outstanding,0);assert.equal(stats.closedFrames,stats.receivedFrames);}}
 try{
- await page.goto('http://127.0.0.1:4179/');
+ await page.goto('http://127.0.0.1:4179/web/index.html');
  for(const options of [{},{disableBrowserCodecs:true},{decoderFaultAfter:12}]){
   await check(JSON.stringify(options),async()=>{
    await open(options);

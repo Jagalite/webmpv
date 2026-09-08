@@ -1,0 +1,31 @@
+from pathlib import Path
+s=Path('experiments/retained-presenter/vo_libmpv.c').read_text()
+s=s.replace('    mp_mutex_unlock(&ctx->lock);\n\n    MP_STATS(ctx, "glcb-render");','    struct osd_state *subtitle_osd=ctx->vo?ctx->vo->osd:NULL;\n    mp_mutex_unlock(&ctx->lock);\n\n    MP_STATS(ctx, "glcb-render");')
+s=s.replace('    if(frame->current) web_experiment_frame', '    extern void web_subtitle_render(struct osd_state *osd,double pts);\n    web_subtitle_render(subtitle_osd,frame->current?frame->current->pts:0);\n    if(frame->current) web_experiment_frame')
+Path('experiments/retained-subtitles/vo_libmpv.c').write_text(s)
+s=Path('experiments/retained-presenter/player.c').read_text().replace('    if(!renderer || w<1', '    extern void web_subtitle_size(int w,int h);\n    web_subtitle_size(w,h);\n    if(!renderer || w<1')
+Path('experiments/retained-subtitles/player.c').write_text(s)
+s=Path('experiments/retained-presenter/compile-hook.py').read_text().replace('retained-presenter','retained-subtitles').replace('build/retained','build/retained-subs')
+Path('experiments/retained-subtitles/compile-hook.py').write_text(s)
+s=Path('experiments/retained-presenter/link.sh').read_text().replace('retained-presenter/player.c','retained-subtitles/player.c experiments/retained-subtitles/subtitles.c').replace('build/retained/','build/retained-subs/').replace('web/engine-retained','web/engine-retained-subs')
+Path('experiments/retained-subtitles/link.sh').write_text(s)
+s=Path('web/retained-engine-worker.js').read_text()
+s="import {SubtitleOverlay} from './subtitle-overlay.js';\nconst subtitles=new SubtitleOverlay();let frameGeneration=-1,minGeneration=-1;\n"+s
+s=s.replace("'./engine-retained/player.mjs'","'./engine-retained-subs/player.mjs'")
+s=s.replace(' presentation.received++;', ''' presentation.received++;
+ if(message.generation<minGeneration){closeOwned(message.retainedFrame);return;}
+ if(message.generation!==frameGeneration){for(const f of frames.values())closeOwned(f);frames.clear();if(heldFrame)closeOwned(heldFrame);heldFrame=null;frameGeneration=message.generation;minGeneration=frameGeneration;subtitles.clear();}
+ if(pendingTarget!==null&&message.pts/1e6<pendingTarget-.15){closeOwned(message.retainedFrame);return;}''')
+s=s.replace('  presentation.drawn++;canvasSubmissions++;', '  subtitles.draw(context,request.overlay);\n  presentation.drawn++;canvasSubmissions++;')
+s=s.replace(" if(engine._web_selected_redraw()&&heldFrame){context.drawImage(heldFrame,0,0,canvas.width,canvas.height);presentation.redraws++;engine._web_presented();return;}\n const key=Math.round(engine._web_selected_pts()*1e6);", " const key=Math.round(engine._web_selected_pts()*1e6),overlay=subtitles.read(engine);\n if(engine._web_selected_redraw()&&heldFrame&&Math.round(heldFrame.timestamp)===key){context.drawImage(heldFrame,0,0,canvas.width,canvas.height);subtitles.draw(context,overlay);presentation.redraws++;engine._web_presented();return;}")
+s=s.replace('pendingFrames.set(key,{deadline:', 'pendingFrames.set(key,{overlay,deadline:')
+s=s.replace('data:{presentation:', 'data:{subtitles:{...subtitles.stats},presentation:')
+s=s.replace("} else if(data.type==='seek'){sourceRendered=0;", "} else if(data.type==='seek'){cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();sourceRendered=0;")
+s=s.replace("} else if (data.type === 'open') {", "} else if (data.type === 'open') {cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();")
+s=s.replace('async function openRemote(data){', 'async function openRemote(data){cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();')
+s=s.replace("else if (data.type === 'resize') {canvas.width", "else if (data.type === 'resize') {subtitles.clear();canvas.width")
+s=s.replace('closing = true;cleanupFrames();', 'closing = true;cleanupFrames();subtitles.clear();')
+Path('web/subtitled-engine-worker.js').write_text(s)
+s=Path('web/generated/retained-player.js').read_text().replace('../retained-engine-worker.js','../subtitled-engine-worker.js')
+s=s.replace('this.diagnostics.decoderStats = data.decoderStats;this.diagnostics.presentation=data.presentation;', '{this.diagnostics.decoderStats = data.decoderStats;this.diagnostics.presentation=data.presentation;}')
+Path('web/generated/subtitled-player.js').write_text(s)

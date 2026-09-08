@@ -1,0 +1,529 @@
+{
+  "started": "2026-09-08T01:06:55.505Z",
+  "smoke": true,
+  "screen": true,
+  "replicated": false,
+  "performanceEligible": false,
+  "passed": false,
+  "hashes": {
+    "experiments/filter-routing/PERF-PROTOCOL.md": "9b6bfdba303bb3ebd6d824aac0bd0c1add5ba3bdbae3c4b5287b210ad1d91e20",
+    "experiments/filter-routing/prepare-perf.py": "a036c88a81e372c111fd6521856f6807566be6a2fb14b5ea0da02678048b7f9c",
+    "tests/filter-perf.mjs": "61c7cdeae1cfac24f9fa39850a2faae98106bbbfdf12cf3e03913b1e15e281e1",
+    "web/filter-perf.html": "84106496ef1c681dac175ca7c6624d632b8c2f054727c7e2f4103dd2da9c9f70",
+    "web/filter-player.js": "ca4f0dc821f965981e7b71e9fa50b16f6fbdad1c26b0338ac6c54be08a331429",
+    "web/filter-retained-engine-worker.js": "e4c4cc39219ee9cf2e28edf45a9b352ae8e00f9021cb5479ea04309f90513ab2",
+    "web/filter-copyback-engine-worker.js": "3ed07bde3b0e3c69c4bbd3e5eeefaf09d97dc32032acce09157af400375c6915",
+    "web/generated/filter-retained-player.js": "f705ee99d047c98fb7b90acc71b9d336903e9d60b060a72595e98c326813a8fd",
+    "web/generated/filter-copyback-player.js": "4e704c1771c786ad784a39a787608d1d1e7f8331381d02a93df1f5e7dc959938",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-filter-copyback/player.wasm": "4bf2d2ba2ad751c48ce33d2e62c00c8a63042168d8172c98c4953968bcee3828",
+    "web/engine-filter-copyback/player.mjs": "8a8180fd6a27c43417c386b0b9c316c5ccf9a7943fde8fbccfe8f3f4d4c4af26",
+    "web/benchmark-progress.js": "966e50491d6a24e34255ef1b58a64c112d1b58e3cc987914d16f43ab4933fe8e",
+    "scripts/benchmark-media-server.mjs": "829e8231930034b85f6d7472e587d5ab31dc621404a2d7af24278583e9da8bfb",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403"
+  },
+  "host": {
+    "os": "25.5.0",
+    "arch": "arm64",
+    "cpu": "Apple M1",
+    "memory": 8589934592
+  },
+  "hardwareAcceleration": "unknown",
+  "energy": "unavailable",
+  "protocol": {
+    "warmupSeconds": 2,
+    "measurementSeconds": 5,
+    "network": {
+      "mbps": 10,
+      "rtt": 80
+    },
+    "cssPresentation": [
+      960,
+      540
+    ],
+    "source": [
+      1920,
+      1080
+    ],
+    "deviceScaleFactor": 1,
+    "orders": [
+      [
+        "retained",
+        "copyback-null",
+        "copyback-mirror"
+      ]
+    ]
+  },
+  "trials": [
+    {
+      "variant": "retained",
+      "round": 0,
+      "samples": [
+        {
+          "at": 1788829627312,
+          "phase": "warmup",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 76661,
+              "cpuTime": 1.417944
+            },
+            {
+              "type": "renderer",
+              "id": 76753,
+              "cpuTime": 0.086119
+            },
+            {
+              "type": "renderer",
+              "id": 76747,
+              "cpuTime": 2.005444
+            },
+            {
+              "type": "renderer",
+              "id": 76746,
+              "cpuTime": 0.310249
+            },
+            {
+              "type": "GPU",
+              "id": 76738,
+              "cpuTime": 0.566207
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 76739,
+              "cpuTime": 0.173494
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 76741,
+              "cpuTime": 0.066716
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 76756,
+              "cpuTime": 0.234638
+            }
+          ],
+          "rss": [
+            {
+              "pid": 76661,
+              "bytes": 149192704
+            },
+            {
+              "pid": 76738,
+              "bytes": 103104512
+            },
+            {
+              "pid": 76739,
+              "bytes": 74907648
+            },
+            {
+              "pid": 76741,
+              "bytes": 52002816
+            },
+            {
+              "pid": 76746,
+              "bytes": 99876864
+            },
+            {
+              "pid": 76747,
+              "bytes": 196902912
+            },
+            {
+              "pid": 76753,
+              "bytes": 65568768
+            },
+            {
+              "pid": 76756,
+              "bytes": 64634880
+            }
+          ],
+          "totalRSS": 806191104,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "retained",
+            "position": 1.0666666666666667,
+            "rendered": 7,
+            "dropped": 28,
+            "frameCounter": "mpv scheduled frames, retained draw submissions checked",
+            "ready": true,
+            "diagnostics": {
+              "subtitles": {
+                "updates": 1,
+                "bytes": 0,
+                "peakBytes": 0,
+                "parts": 0,
+                "renders": 7
+              },
+              "presentation": {
+                "received": 35,
+                "closed": 32,
+                "drawn": 5,
+                "redraws": 1,
+                "peakRetained": 31,
+                "peakPending": 1,
+                "missing": 0,
+                "lateMs": [
+                  10.344192000447038,
+                  7.58444499702,
+                  924.5453089998509,
+                  3.8687059986586974,
+                  0.7944050017886184
+                ],
+                "pts": [
+                  0,
+                  33333,
+                  66667,
+                  1033333,
+                  1066667
+                ],
+                "pixelChecks": [],
+                "retained": 3,
+                "pending": 0
+              },
+              "mode": "retained",
+              "skipCanvas": true,
+              "canvasSubmissions": 5,
+              "rendered": 7,
+              "renderMs": 1.0199999995529652,
+              "copyMs": 0,
+              "maxRenderMs": 0.5100000016391277,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 41,
+                "frames": 33,
+                "receivedFrames": 33,
+                "closedFrames": 33,
+                "peakOutstanding": 8,
+                "peakFrames": 3,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 0,
+                "actualWidth": 1920,
+                "actualHeight": 1080,
+                "placeholderFrames": 33,
+                "transferredFrames": 33,
+                "outstanding": 8,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 1.0666666666666667,
+              "ioPending": true,
+              "ioSerial": 30,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 3145728,
+                "requests": 12,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 3145728,
+                "peakCacheBytes": 3145728,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 29,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 1.0666666666666667,
+              "queuedFrames": 7936,
+              "route": "retained",
+              "videoFilters": "",
+              "switching": false
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 54272,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": [
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded",
+              "Error: Retained frame bound exceeded"
+            ]
+          }
+        }
+      ],
+      "passed": false,
+      "browser": "152.0.7977.76",
+      "originBefore": {
+        "mbps": 10,
+        "rtt": 80,
+        "requests": 0,
+        "bytes": 0,
+        "active": 0,
+        "peakActive": 0,
+        "aborted": 0,
+        "ranges": [],
+        "etag": "\"d1eaaba3243264ae5f458b792603b4ff2c4cb36a16e878356f71c7d52aea1a97\"",
+        "size": 1157038449
+      },
+      "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded'\n+ ]\n- []\n\n    at sample (file:///Volumes/seed2/Projects/webmpv/tests/filter-perf.mjs:46:11)\n    at async trial (file:///Volumes/seed2/Projects/webmpv/tests/filter-perf.mjs:57:16)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/filter-perf.mjs:119:89",
+      "failureState": {
+        "variant": "retained",
+        "position": 2.3666666666666667,
+        "rendered": 43,
+        "dropped": 28,
+        "frameCounter": "mpv scheduled frames, retained draw submissions checked",
+        "ready": true,
+        "diagnostics": {
+          "subtitles": {
+            "updates": 1,
+            "bytes": 0,
+            "peakBytes": 0,
+            "parts": 0,
+            "renders": 43
+          },
+          "presentation": {
+            "received": 71,
+            "closed": 68,
+            "drawn": 41,
+            "redraws": 1,
+            "peakRetained": 31,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              10.344192000447038,
+              7.58444499702,
+              924.5453089998509,
+              3.8687059986586974,
+              0.7944050017886184,
+              8.729517003129331,
+              7.645752000745233,
+              3.4525699967216497,
+              1.5445089971681227,
+              12.542810001043108,
+              6.530807998360615,
+              2.8627859989574063,
+              4.149365002384002,
+              8.64438900089408,
+              6.036192000148731,
+              5.117409998808398,
+              4.849501002086072,
+              8.309357002831348,
+              7.281120001191994,
+              2.992793999850619,
+              1.164573001192366,
+              8.034332998360696,
+              4.872168000446436,
+              2.153681997764579,
+              4.965533001191943,
+              6.164389001937707,
+              6.016008002235139,
+              5.80791400014914,
+              0.5393169976159697,
+              8.514340997168802,
+              6.98119200119163,
+              6.307906001341507,
+              9.382849999254177,
+              7.714404998212558,
+              4.626135998807513,
+              6.137881998361081,
+              5.579460997169008,
+              6.124468997615622,
+              6.046232000148848,
+              6.5026740017874545,
+              4.684500999404008
+            ],
+            "pts": [
+              0,
+              33333,
+              66667,
+              1033333,
+              1066667,
+              1100000,
+              1133333,
+              1166667,
+              1200000,
+              1233333,
+              1266667,
+              1300000,
+              1333333,
+              1366667,
+              1400000,
+              1433333,
+              1466667,
+              1500000,
+              1533333,
+              1566667,
+              1600000,
+              1633333,
+              1666667,
+              1700000,
+              1733333,
+              1766667,
+              1800000,
+              1833333,
+              1866667,
+              1900000,
+              1933333,
+              1966667,
+              2000000,
+              2033333,
+              2066667,
+              2100000,
+              2133333,
+              2166667,
+              2200000,
+              2233333,
+              2266667
+            ],
+            "pixelChecks": [],
+            "retained": 3,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 41,
+          "rendered": 43,
+          "renderMs": 2.120000012218952,
+          "copyMs": 0,
+          "maxRenderMs": 0.5100000016391277,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 75,
+            "frames": 69,
+            "receivedFrames": 69,
+            "closedFrames": 69,
+            "peakOutstanding": 8,
+            "peakFrames": 6,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 0,
+            "actualWidth": 1920,
+            "actualHeight": 1080,
+            "placeholderFrames": 69,
+            "transferredFrames": 69,
+            "outstanding": 6,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 2.2666666666666666,
+          "ioPending": true,
+          "ioSerial": 34,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 3932160,
+            "requests": 15,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 3932160,
+            "peakCacheBytes": 3932160,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "1157038449",
+            "reads": 33,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 2.2666666666666666,
+          "queuedFrames": 7680,
+          "route": "retained",
+          "videoFilters": "",
+          "switching": false
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 116736,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": [
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded",
+          "Error: Retained frame bound exceeded"
+        ]
+      },
+      "closeAcknowledged": true,
+      "retainedBrowserPIDs": []
+    }
+  ],
+  "origin": {
+    "mbps": 10,
+    "rtt": 80,
+    "requests": 0,
+    "bytes": 0,
+    "active": 0,
+    "peakActive": 0,
+    "aborted": 0,
+    "ranges": [],
+    "etag": "\"d1eaaba3243264ae5f458b792603b4ff2c4cb36a16e878356f71c7d52aea1a97\"",
+    "size": 1157038449
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded',\n+   'Error: Retained frame bound exceeded'\n+ ]\n- []\n\n    at sample (file:///Volumes/seed2/Projects/webmpv/tests/filter-perf.mjs:46:11)\n    at async trial (file:///Volumes/seed2/Projects/webmpv/tests/filter-perf.mjs:57:16)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/filter-perf.mjs:119:89",
+  "hashesAfter": {
+    "experiments/filter-routing/PERF-PROTOCOL.md": "9b6bfdba303bb3ebd6d824aac0bd0c1add5ba3bdbae3c4b5287b210ad1d91e20",
+    "experiments/filter-routing/prepare-perf.py": "a036c88a81e372c111fd6521856f6807566be6a2fb14b5ea0da02678048b7f9c",
+    "tests/filter-perf.mjs": "61c7cdeae1cfac24f9fa39850a2faae98106bbbfdf12cf3e03913b1e15e281e1",
+    "web/filter-perf.html": "84106496ef1c681dac175ca7c6624d632b8c2f054727c7e2f4103dd2da9c9f70",
+    "web/filter-player.js": "ca4f0dc821f965981e7b71e9fa50b16f6fbdad1c26b0338ac6c54be08a331429",
+    "web/filter-retained-engine-worker.js": "e4c4cc39219ee9cf2e28edf45a9b352ae8e00f9021cb5479ea04309f90513ab2",
+    "web/filter-copyback-engine-worker.js": "3ed07bde3b0e3c69c4bbd3e5eeefaf09d97dc32032acce09157af400375c6915",
+    "web/generated/filter-retained-player.js": "f705ee99d047c98fb7b90acc71b9d336903e9d60b060a72595e98c326813a8fd",
+    "web/generated/filter-copyback-player.js": "4e704c1771c786ad784a39a787608d1d1e7f8331381d02a93df1f5e7dc959938",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-filter-copyback/player.wasm": "4bf2d2ba2ad751c48ce33d2e62c00c8a63042168d8172c98c4953968bcee3828",
+    "web/engine-filter-copyback/player.mjs": "8a8180fd6a27c43417c386b0b9c316c5ccf9a7943fde8fbccfe8f3f4d4c4af26",
+    "web/benchmark-progress.js": "966e50491d6a24e34255ef1b58a64c112d1b58e3cc987914d16f43ab4933fe8e",
+    "scripts/benchmark-media-server.mjs": "829e8231930034b85f6d7472e587d5ab31dc621404a2d7af24278583e9da8bfb",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403"
+  },
+  "runtimeUnchanged": true,
+  "finished": "2026-09-08T01:07:12.463Z"
+}

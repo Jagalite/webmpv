@@ -1,0 +1,1404 @@
+{
+  "started": "2026-09-07T23:10:42.160Z",
+  "smoke": true,
+  "performanceEligible": false,
+  "passed": false,
+  "hashes": {
+    "experiments/canvas-ablation/PROTOCOL.md": "41c237e114cfab36ecd9f4e1c49d2a7a5b6909405a4f2495ad03df25917b0d82",
+    "experiments/canvas-ablation/prepare.py": "ac9cef325e1329255fa70deb4354098b813e153411f5b4518f2804f59f01dcd6",
+    "tests/canvas-ablation.mjs": "d5833be876a2fb3699dbce470961c5f692fb838ee692822d671ee211f5381e97",
+    "web/ablation.html": "f2d464b673ed98156bd5deda0d3dabc6d218e90420de1e7efb8214e0d1dbaed9",
+    "web/ablation-engine-worker.js": "5d28f9ac2ca42d797c95df19507f96a0e3a23fd2034dc5e6952d0ecac7814457",
+    "web/generated/ablation-player.js": "c47ec8a883ba430a1bb863f0602b0cca9b73429715072bddad997711abb03ca3",
+    "scripts/benchmark-media-server.mjs": "829e8231930034b85f6d7472e587d5ab31dc621404a2d7af24278583e9da8bfb",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/benchmark.html": "2f488b303c8e210bafb7a3b89f4f7b1c07339c07fc010093028d0548788bbe3c",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
+    "web/engine/player.wasm": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+    "web/engine/player.mjs": "d16a4002bac04633b0d60c986b222812732eb70ed124f1ef1477a4fe6348350e",
+    "web/engine-m4/player.wasm": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+    "web/engine-m4/player.mjs": "8b60d4d1ca3ffee86d62e92144a5bb1e73ebba1b3614b51dd911282a1a8046ce",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403"
+  },
+  "host": {
+    "os": "25.5.0",
+    "arch": "arm64",
+    "cpu": "Apple M1",
+    "memory": 8589934592
+  },
+  "hardwareAcceleration": "unknown",
+  "energy": "unavailable",
+  "protocol": {
+    "warmupSeconds": 2,
+    "measurementSeconds": 4,
+    "network": {
+      "mbps": 10,
+      "rtt": 80
+    },
+    "cssPresentation": [
+      960,
+      540
+    ],
+    "source": [
+      1920,
+      1080
+    ],
+    "deviceScaleFactor": 1,
+    "orders": [
+      [
+        "full",
+        "bypass"
+      ]
+    ]
+  },
+  "trials": [
+    {
+      "variant": "full",
+      "round": 0,
+      "samples": [
+        {
+          "at": 1788822650808,
+          "phase": "warmup",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.418247
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.071763
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 0.798075
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.286047
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 0.479922
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.166212
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059524
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.191922
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 170278912
+            },
+            {
+              "pid": 99078,
+              "bytes": 129400832
+            },
+            {
+              "pid": 99079,
+              "bytes": 81100800
+            },
+            {
+              "pid": 99080,
+              "bytes": 56246272
+            },
+            {
+              "pid": 99090,
+              "bytes": 111689728
+            },
+            {
+              "pid": 99092,
+              "bytes": 248627200
+            },
+            {
+              "pid": 99098,
+              "bytes": 69877760
+            },
+            {
+              "pid": 99099,
+              "bytes": 70746112
+            }
+          ],
+          "totalRSS": 937967616,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 0.13333333333333333,
+            "rendered": 6,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 6,
+              "rendered": 6,
+              "renderMs": 39.94500000216067,
+              "copyMs": 37.49000000022352,
+              "maxRenderMs": 12.100000001490116,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 10,
+                "frames": 2,
+                "receivedFrames": 2,
+                "closedFrames": 2,
+                "peakOutstanding": 8,
+                "peakFrames": 2,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 10.18500000052154,
+                "outstanding": 8,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 0.1,
+              "ioPending": true,
+              "ioSerial": 27,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 2359296,
+                "requests": 9,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 2359296,
+                "peakCacheBytes": 2359296,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 26,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 0.1,
+              "queuedFrames": 7424
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 9472,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822652062,
+          "phase": "warmup",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.528354
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.071763
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 1.314987
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.287244
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 0.703639
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.17598
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059524
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.205281
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 155303936
+            },
+            {
+              "pid": 99078,
+              "bytes": 121208832
+            },
+            {
+              "pid": 99079,
+              "bytes": 78774272
+            },
+            {
+              "pid": 99080,
+              "bytes": 55672832
+            },
+            {
+              "pid": 99090,
+              "bytes": 105398272
+            },
+            {
+              "pid": 99092,
+              "bytes": 216956928
+            },
+            {
+              "pid": 99098,
+              "bytes": 69304320
+            },
+            {
+              "pid": 99099,
+              "bytes": 67371008
+            }
+          ],
+          "totalRSS": 869990400,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 1.4333333333333333,
+            "rendered": 42,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 42,
+              "rendered": 42,
+              "renderMs": 206.36999999918044,
+              "copyMs": 175.39000000990927,
+              "maxRenderMs": 12.100000001490116,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 44,
+                "frames": 39,
+                "receivedFrames": 39,
+                "closedFrames": 39,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 127.1900000050664,
+                "outstanding": 5,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 1.3,
+              "ioPending": true,
+              "ioSerial": 31,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 3407872,
+                "requests": 13,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 3407872,
+                "peakCacheBytes": 3407872,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 30,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 1.3,
+              "queuedFrames": 5632
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 71936,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822653171,
+          "phase": "warmup",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.682662
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.072542
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 1.863209
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.287732
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 0.896212
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.184446
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059524
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.219506
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 156483584
+            },
+            {
+              "pid": 99078,
+              "bytes": 121503744
+            },
+            {
+              "pid": 99079,
+              "bytes": 78364672
+            },
+            {
+              "pid": 99080,
+              "bytes": 55656448
+            },
+            {
+              "pid": 99090,
+              "bytes": 104726528
+            },
+            {
+              "pid": 99092,
+              "bytes": 247545856
+            },
+            {
+              "pid": 99098,
+              "bytes": 70205440
+            },
+            {
+              "pid": 99099,
+              "bytes": 68485120
+            }
+          ],
+          "totalRSS": 902971392,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 2.5,
+            "rendered": 77,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 77,
+              "rendered": 77,
+              "renderMs": 391.25000000558794,
+              "copyMs": 314.50500000081956,
+              "maxRenderMs": 12.100000001490116,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 81,
+                "frames": 73,
+                "receivedFrames": 73,
+                "closedFrames": 73,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 238.21500000171363,
+                "outstanding": 8,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 2.466666666666667,
+              "ioPending": true,
+              "ioSerial": 35,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 4194304,
+                "requests": 16,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 4194304,
+                "peakCacheBytes": 4194304,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 34,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 2.466666666666667,
+              "queuedFrames": 7424
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 122880,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822653195,
+          "phase": "measurement",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.686991
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.072542
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 1.875956
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.287732
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 0.90092
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.184534
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059524
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.219807
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 157270016
+            },
+            {
+              "pid": 99078,
+              "bytes": 121470976
+            },
+            {
+              "pid": 99079,
+              "bytes": 78364672
+            },
+            {
+              "pid": 99080,
+              "bytes": 55656448
+            },
+            {
+              "pid": 99090,
+              "bytes": 104726528
+            },
+            {
+              "pid": 99092,
+              "bytes": 242417664
+            },
+            {
+              "pid": 99098,
+              "bytes": 70205440
+            },
+            {
+              "pid": 99099,
+              "bytes": 68485120
+            }
+          ],
+          "totalRSS": 898596864,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 2.533333333333333,
+            "rendered": 77,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 77,
+              "rendered": 77,
+              "renderMs": 391.25000000558794,
+              "copyMs": 314.50500000081956,
+              "maxRenderMs": 12.100000001490116,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 81,
+                "frames": 73,
+                "receivedFrames": 73,
+                "closedFrames": 73,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 238.21500000171363,
+                "outstanding": 8,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 2.466666666666667,
+              "ioPending": true,
+              "ioSerial": 35,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 4194304,
+                "requests": 16,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 4194304,
+                "peakCacheBytes": 4194304,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 34,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 2.466666666666667,
+              "queuedFrames": 7424
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 124160,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822654228,
+          "phase": "measurement",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.707377
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.072542
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 2.32724
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.288571
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 1.11168
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.192973
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059524
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.231335
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 148193280
+            },
+            {
+              "pid": 99078,
+              "bytes": 121028608
+            },
+            {
+              "pid": 99079,
+              "bytes": 78725120
+            },
+            {
+              "pid": 99080,
+              "bytes": 55656448
+            },
+            {
+              "pid": 99090,
+              "bytes": 105021440
+            },
+            {
+              "pid": 99092,
+              "bytes": 227377152
+            },
+            {
+              "pid": 99098,
+              "bytes": 69287936
+            },
+            {
+              "pid": 99099,
+              "bytes": 68190208
+            }
+          ],
+          "totalRSS": 873480192,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 3.533333333333333,
+            "rendered": 103,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 103,
+              "rendered": 103,
+              "renderMs": 519.9449999984354,
+              "copyMs": 418.179999999702,
+              "maxRenderMs": 12.100000001490116,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 107,
+                "frames": 101,
+                "receivedFrames": 101,
+                "closedFrames": 101,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 321.58000000938773,
+                "outstanding": 6,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 3.3333333333333335,
+              "ioPending": true,
+              "ioSerial": 38,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 4980736,
+                "requests": 19,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 4980736,
+                "peakCacheBytes": 4980736,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 37,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 3.3333333333333335,
+              "queuedFrames": 7424
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 173056,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822655243,
+          "phase": "measurement",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.720719
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.072542
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 2.772619
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.289082
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 1.312189
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.197569
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059683
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.241854
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 151420928
+            },
+            {
+              "pid": 99078,
+              "bytes": 121995264
+            },
+            {
+              "pid": 99079,
+              "bytes": 79036416
+            },
+            {
+              "pid": 99080,
+              "bytes": 56180736
+            },
+            {
+              "pid": 99090,
+              "bytes": 106545152
+            },
+            {
+              "pid": 99092,
+              "bytes": 236077056
+            },
+            {
+              "pid": 99098,
+              "bytes": 69287936
+            },
+            {
+              "pid": 99099,
+              "bytes": 67452928
+            }
+          ],
+          "totalRSS": 887996416,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 4.566666666666666,
+            "rendered": 137,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 137,
+              "rendered": 137,
+              "renderMs": 696.9650000054389,
+              "copyMs": 553.7550000008196,
+              "maxRenderMs": 12.100000001490116,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 139,
+                "frames": 133,
+                "receivedFrames": 134,
+                "closedFrames": 133,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 419.32000000961125,
+                "outstanding": 6,
+                "queued": 1,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 4.466666666666667,
+              "ioPending": true,
+              "ioSerial": 42,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 5767168,
+                "requests": 22,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 5767168,
+                "peakCacheBytes": 5767168,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 41,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 4.466666666666667,
+              "queuedFrames": 6912
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 221952,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822656261,
+          "phase": "measurement",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.735296
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.072542
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 3.261504
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.28985
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 1.51146
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.206352
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059683
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.252828
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 144457728
+            },
+            {
+              "pid": 99078,
+              "bytes": 120946688
+            },
+            {
+              "pid": 99079,
+              "bytes": 77660160
+            },
+            {
+              "pid": 99080,
+              "bytes": 55476224
+            },
+            {
+              "pid": 99090,
+              "bytes": 105283584
+            },
+            {
+              "pid": 99092,
+              "bytes": 227590144
+            },
+            {
+              "pid": 99098,
+              "bytes": 69009408
+            },
+            {
+              "pid": 99099,
+              "bytes": 67141632
+            }
+          ],
+          "totalRSS": 867565568,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 5.566666666666666,
+            "rendered": 164,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 164,
+              "rendered": 164,
+              "renderMs": 842.9650000073016,
+              "copyMs": 661.3300000037998,
+              "maxRenderMs": 12.879999998956919,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 167,
+                "frames": 162,
+                "receivedFrames": 162,
+                "closedFrames": 162,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 518.7600000146776,
+                "outstanding": 5,
+                "queued": 0,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 5.366666666666666,
+              "ioPending": true,
+              "ioSerial": 44,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 6291456,
+                "requests": 24,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 6291456,
+                "peakCacheBytes": 6291456,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 43,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 5.366666666666666,
+              "queuedFrames": 6656
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 270848,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788822657352,
+          "phase": "measurement",
+          "processes": [
+            {
+              "type": "browser",
+              "id": 99068,
+              "cpuTime": 1.751521
+            },
+            {
+              "type": "renderer",
+              "id": 99098,
+              "cpuTime": 0.074964
+            },
+            {
+              "type": "renderer",
+              "id": 99092,
+              "cpuTime": 3.717623
+            },
+            {
+              "type": "renderer",
+              "id": 99090,
+              "cpuTime": 0.292885
+            },
+            {
+              "type": "GPU",
+              "id": 99078,
+              "cpuTime": 1.703876
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 99079,
+              "cpuTime": 0.214056
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 99080,
+              "cpuTime": 0.059683
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 99099,
+              "cpuTime": 0.26499
+            }
+          ],
+          "rss": [
+            {
+              "pid": 99068,
+              "bytes": 140656640
+            },
+            {
+              "pid": 99078,
+              "bytes": 118341632
+            },
+            {
+              "pid": 99079,
+              "bytes": 77856768
+            },
+            {
+              "pid": 99080,
+              "bytes": 55427072
+            },
+            {
+              "pid": 99090,
+              "bytes": 103579648
+            },
+            {
+              "pid": 99092,
+              "bytes": 213467136
+            },
+            {
+              "pid": 99098,
+              "bytes": 72220672
+            },
+            {
+              "pid": 99099,
+              "bytes": 65241088
+            }
+          ],
+          "totalRSS": 846790656,
+          "foreground": {
+            "matched": null,
+            "scope": "headless smoke"
+          },
+          "state": {
+            "variant": "full",
+            "position": 6.666666666666667,
+            "rendered": 197,
+            "dropped": 0,
+            "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+            "ready": true,
+            "diagnostics": {
+              "skipCanvas": false,
+              "canvasSubmissions": 197,
+              "rendered": 197,
+              "renderMs": 1002.7650000099093,
+              "copyMs": 785.1150000020862,
+              "maxRenderMs": 12.879999998956919,
+              "heapBytes": 134217728,
+              "epoch": 2,
+              "path": "wasm",
+              "decoder": "webcodecs",
+              "decoderStats": {
+                "submitted": 201,
+                "frames": 195,
+                "receivedFrames": 196,
+                "closedFrames": 195,
+                "peakOutstanding": 8,
+                "peakFrames": 5,
+                "resets": 0,
+                "errors": 0,
+                "copyMs": 630.6250000093132,
+                "outstanding": 6,
+                "queued": 1,
+                "active": true
+              },
+              "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+              "seekPrerollSeconds": 0,
+              "presentedPosition": 6.466666666666667,
+              "ioPending": true,
+              "ioSerial": 48,
+              "interruptions": 0,
+              "io": {
+                "fetchedBytes": 7077888,
+                "requests": 27,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 7077888,
+                "peakCacheBytes": 7077888,
+                "activeBytes": 0,
+                "peakActiveBytes": 262144,
+                "size": "1157038449",
+                "reads": 47,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 6.466666666666667,
+              "queuedFrames": 5888
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 323072,
+              "underruns": 0,
+              "rms": 0,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        }
+      ],
+      "passed": false,
+      "browser": "152.0.7977.76",
+      "originBefore": {
+        "mbps": 10,
+        "rtt": 80,
+        "requests": 0,
+        "bytes": 0,
+        "active": 0,
+        "peakActive": 0,
+        "aborted": 0,
+        "ranges": [],
+        "etag": "\"d1eaaba3243264ae5f458b792603b4ff2c4cb36a16e878356f71c7d52aea1a97\"",
+        "size": 1157038449
+      },
+      "summary": {
+        "elapsedSeconds": 4.157,
+        "cpuSeconds": 2.791592000000001,
+        "cpuPercentOfOneCore": 67.1540052922781,
+        "processTurnover": [],
+        "medianRSSBytes": 873480192,
+        "rendered": 120,
+        "dropped": 0,
+        "dropFraction": 0,
+        "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+        "positionSeconds": 4.133333333333334,
+        "decoderCopyWallMsPerFrame": 3.2164754098983575
+      },
+      "failure": "AssertionError [ERR_ASSERTION]: Frame delivery below 29 fps\n    at trial (file:///Volumes/seed2/Projects/webmpv/tests/canvas-ablation.mjs:66:72)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/canvas-ablation.mjs:92:89",
+      "failureState": {
+        "variant": "full",
+        "position": 6.666666666666667,
+        "rendered": 197,
+        "dropped": 0,
+        "frameCounter": "mpv rendered and acknowledged frames; bypass does not display",
+        "ready": true,
+        "diagnostics": {
+          "skipCanvas": false,
+          "canvasSubmissions": 197,
+          "rendered": 197,
+          "renderMs": 1002.7650000099093,
+          "copyMs": 785.1150000020862,
+          "maxRenderMs": 12.879999998956919,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 201,
+            "frames": 195,
+            "receivedFrames": 196,
+            "closedFrames": 195,
+            "peakOutstanding": 8,
+            "peakFrames": 5,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 630.6250000093132,
+            "outstanding": 6,
+            "queued": 1,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 6.466666666666667,
+          "ioPending": true,
+          "ioSerial": 48,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 7077888,
+            "requests": 27,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 7077888,
+            "peakCacheBytes": 7077888,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "1157038449",
+            "reads": 47,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 6.466666666666667,
+          "queuedFrames": 5888
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 323840,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      }
+    }
+  ],
+  "origin": {
+    "mbps": 10,
+    "rtt": 80,
+    "requests": 0,
+    "bytes": 0,
+    "active": 0,
+    "peakActive": 0,
+    "aborted": 0,
+    "ranges": [],
+    "etag": "\"d1eaaba3243264ae5f458b792603b4ff2c4cb36a16e878356f71c7d52aea1a97\"",
+    "size": 1157038449
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: Frame delivery below 29 fps\n    at trial (file:///Volumes/seed2/Projects/webmpv/tests/canvas-ablation.mjs:66:72)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/canvas-ablation.mjs:92:89",
+  "hashesAfter": {
+    "experiments/canvas-ablation/PROTOCOL.md": "41c237e114cfab36ecd9f4e1c49d2a7a5b6909405a4f2495ad03df25917b0d82",
+    "experiments/canvas-ablation/prepare.py": "ac9cef325e1329255fa70deb4354098b813e153411f5b4518f2804f59f01dcd6",
+    "tests/canvas-ablation.mjs": "d5833be876a2fb3699dbce470961c5f692fb838ee692822d671ee211f5381e97",
+    "web/ablation.html": "f2d464b673ed98156bd5deda0d3dabc6d218e90420de1e7efb8214e0d1dbaed9",
+    "web/ablation-engine-worker.js": "5d28f9ac2ca42d797c95df19507f96a0e3a23fd2034dc5e6952d0ecac7814457",
+    "web/generated/ablation-player.js": "c47ec8a883ba430a1bb863f0602b0cca9b73429715072bddad997711abb03ca3",
+    "scripts/benchmark-media-server.mjs": "829e8231930034b85f6d7472e587d5ab31dc621404a2d7af24278583e9da8bfb",
+    "scripts/qualification-foreground.mjs": "f768b3a3412e66dda94dcef1de3ed9ddd2faf3bdc51576a67093b535987b782c",
+    "web/benchmark.html": "2f488b303c8e210bafb7a3b89f4f7b1c07339c07fc010093028d0548788bbe3c",
+    "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
+    "web/engine/player.wasm": "dc34c7839c6fa167dc56650816d30a71fb8abb4f5cb31d0a02e4fe6cfbb72583",
+    "web/engine/player.mjs": "d16a4002bac04633b0d60c986b222812732eb70ed124f1ef1477a4fe6348350e",
+    "web/engine-m4/player.wasm": "b268dbc702bd1e250eebee80bc87781bd5b21b6f2c5c3c0958a4ac7cbe7fbb55",
+    "web/engine-m4/player.mjs": "8b60d4d1ca3ffee86d62e92144a5bb1e73ebba1b3614b51dd911282a1a8046ce",
+    "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
+    "web/browser-decoder-worker.js": "a357340738e6ba6ad159d625400f5f8cacd760d5215474d96ce5465f18641315",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
+    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403"
+  },
+  "runtimeUnchanged": true,
+  "finished": "2026-09-07T23:10:58.345Z"
+}
