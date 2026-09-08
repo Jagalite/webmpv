@@ -12,8 +12,10 @@ const result={started:new Date().toISOString(),scope:'Generated codec samples th
 await copyFile('build/fixtures/format-matrix/manifest.json',out+'/fixtures.json');
 let browser,server;
 try{
- server=spawn(process.execPath,['scripts/serve.mjs'],{env:{...process.env,PORT:'0'},stdio:['ignore','pipe','inherit']});
+ const performanceConfig=process.env.WEBMPV_PERFORMANCE_CONFIG;
+ server=spawn(process.execPath,performanceConfig?['experiments/playback-performance/serve.mjs',performanceConfig]:['scripts/serve.mjs'],{env:{...process.env,PORT:'0',...(performanceConfig?{DEFAULT_MOUNT:'candidate'}:{})},stdio:['ignore','pipe','inherit']});
  const origin=await new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(Error('server timeout')),10000);server.once('error',reject);server.stdout.on('data',b=>{const m=/http:\/\/127\.0\.0\.1:\d+/.exec(String(b));if(m){clearTimeout(t);resolve(m[0]);}});});
+ if(performanceConfig)result.assetSnapshot=await(await fetch(origin+'/__metadata')).json();
  browser=await chromium.launch({channel:'chrome',headless:process.env.HEADED!=='1',args:['--autoplay-policy=no-user-gesture-required']});result.browser=browser.version();
  const page=await browser.newPage();await page.addInitScript(()=>{for(const name of ['VideoDecoder','AudioDecoder','VideoFrame','MediaSource'])Object.defineProperty(globalThis,name,{value:undefined,configurable:true});HTMLMediaElement.prototype.play=function(){throw Error('Native playback forbidden in software matrix');};});
  const selection=process.env.ONLY?.split(',');const cases=manifest.cases.filter(c=>!selection||selection.includes(c.codec));result.selection=selection||'all generated fixtures';
@@ -40,5 +42,6 @@ try{
   finally{try{await page.evaluate(()=>p.destroy());for(let i=0;i<40&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);assert.equal(await page.locator('#surface canvas,iframe').count(),0);r.cleanup=true;}catch(error){r.cleanupError=String(error);}r.milliseconds=Date.now()-start;result.cases.push(r);console.log(`${index+1}/${cases.length} ${r.decode&&r.seek&&r.cleanup?'PASS':'GAP'} ${r.file}${r.error?' '+r.error:''}`);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
  }
  result.finished=new Date().toISOString();assert.deepEqual(await hashes(),result.hashes);result.inputsUnchanged=true;
+ if(performanceConfig)result.assetSnapshotAfter=await(await fetch(origin+'/__metadata')).json();
  result.counts={tested:result.cases.length,decode:result.cases.filter(c=>c.decode).length,seek:result.cases.filter(c=>c.seek).length,cleanup:result.cases.filter(c=>c.cleanup).length};console.log(result.counts);if(result.cases.some(c=>!c.decode||!c.seek||!c.cleanup))process.exitCode=1;
 }finally{await browser?.close();server?.kill();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}

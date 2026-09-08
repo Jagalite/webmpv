@@ -1,0 +1,1345 @@
+{
+  "mode": "software",
+  "paused": false,
+  "input": "build/fixtures/playback-performance/bbb-key-240.mp4",
+  "scope": "Instrumented worker CPU sampling; not a performance comparison",
+  "targets": [
+    {
+      "target": {
+        "targetId": "E1D48865BE954DD08B3A2C846C270653",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "469FB65B025C244880FFA04FE64D5361",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 9984.213
+        },
+        {
+          "name": "_emscripten_get_now",
+          "milliseconds": 8.568
+        },
+        {
+          "name": "read_buffer",
+          "milliseconds": 4.072
+        },
+        {
+          "name": "growMemViews",
+          "milliseconds": 3.03
+        },
+        {
+          "name": "write_audio",
+          "milliseconds": 3.026
+        },
+        {
+          "name": "_clock_time_get",
+          "milliseconds": 2.828
+        },
+        {
+          "name": "bigintToI53Checked",
+          "milliseconds": 2.8
+        },
+        {
+          "name": "emscripten_futex_wake",
+          "milliseconds": 1.541
+        },
+        {
+          "name": "add_pending",
+          "milliseconds": 1.514
+        },
+        {
+          "name": "filter_recursive",
+          "milliseconds": 1.512
+        },
+        {
+          "name": "mp_aframe_get_data_rw",
+          "milliseconds": 1.505
+        },
+        {
+          "name": "av_channel_layout_uninit",
+          "milliseconds": 1.5
+        },
+        {
+          "name": "process_out",
+          "milliseconds": 1.482
+        },
+        {
+          "name": "av_frame_free",
+          "milliseconds": 1.481
+        },
+        {
+          "name": "emscripten_builtin_free",
+          "milliseconds": 1.463
+        },
+        {
+          "name": "mp_aframe_get_data_ro",
+          "milliseconds": 1.33
+        },
+        {
+          "name": "__pthread_cond_timedwait",
+          "milliseconds": 1.328
+        }
+      ],
+      "samples": 6757
+    },
+    {
+      "target": {
+        "targetId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "type": "worker",
+        "title": "http://127.0.0.1:64843/web/software-full-engine-worker.js",
+        "url": "http://127.0.0.1:64843/web/software-full-engine-worker.js",
+        "attached": true,
+        "parentId": "A16F57F6A43CB26F4C00F11249F1781A",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "5F99502A6D29B3F3243E4CBC5592138D",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "(idle)",
+          "milliseconds": 8688.948
+        },
+        {
+          "name": "tick",
+          "milliseconds": 512.792
+        },
+        {
+          "name": "yuv2rgb_c_32",
+          "milliseconds": 475.601
+        },
+        {
+          "name": "_emscripten_get_now",
+          "milliseconds": 71.178
+        },
+        {
+          "name": "mp_image_copy",
+          "milliseconds": 42.775
+        },
+        {
+          "name": "pumpAudio",
+          "milliseconds": 30.029
+        },
+        {
+          "name": "(program)",
+          "milliseconds": 19.478
+        },
+        {
+          "name": "post",
+          "milliseconds": 18.214
+        },
+        {
+          "name": "putImageData",
+          "milliseconds": 17.54
+        },
+        {
+          "name": "self.onmessage",
+          "milliseconds": 14.849
+        },
+        {
+          "name": "UTF8ArrayToString",
+          "milliseconds": 14.804
+        },
+        {
+          "name": "postMessage",
+          "milliseconds": 13.543
+        },
+        {
+          "name": "wasm-to-js",
+          "milliseconds": 10.774
+        },
+        {
+          "name": "_clock_time_get",
+          "milliseconds": 10.6
+        },
+        {
+          "name": "decode",
+          "milliseconds": 9.069
+        },
+        {
+          "name": "__clock_gettime",
+          "milliseconds": 9.026
+        },
+        {
+          "name": "bigintToI53Checked",
+          "milliseconds": 7.275
+        },
+        {
+          "name": "mpv_wait_event",
+          "milliseconds": 6.103
+        },
+        {
+          "name": "now",
+          "milliseconds": 6.075
+        },
+        {
+          "name": "growMemViews",
+          "milliseconds": 6.032
+        },
+        {
+          "name": "lock",
+          "milliseconds": 4.601
+        },
+        {
+          "name": "printf_core",
+          "milliseconds": 4.584
+        },
+        {
+          "name": "fmt_fp",
+          "milliseconds": 3.067
+        },
+        {
+          "name": "get buffer",
+          "milliseconds": 2.83
+        },
+        {
+          "name": "quoted",
+          "milliseconds": 2.803
+        },
+        {
+          "name": "strlen",
+          "milliseconds": 2.622
+        },
+        {
+          "name": "web_event",
+          "milliseconds": 2.555
+        },
+        {
+          "name": "scale_internal",
+          "milliseconds": 1.631
+        },
+        {
+          "name": "mp_time_ns_add",
+          "milliseconds": 1.575
+        },
+        {
+          "name": "mp_image_params_equal",
+          "milliseconds": 1.545
+        },
+        {
+          "name": "node",
+          "milliseconds": 1.542
+        },
+        {
+          "name": "mp_image_crop",
+          "milliseconds": 1.534
+        },
+        {
+          "name": "mpv_render_context_update",
+          "milliseconds": 1.534
+        },
+        {
+          "name": "ta_free_children",
+          "milliseconds": 1.532
+        },
+        {
+          "name": "wait_wakeup",
+          "milliseconds": 1.528
+        }
+      ],
+      "samples": 6779
+    },
+    {
+      "target": {
+        "targetId": "DF34FD8E589B6F88AD3B44495444AE23",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "777C1DC46A2D011EB18B5651AD8B3BEE",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 9822.813
+        },
+        {
+          "name": "_emscripten_get_now",
+          "milliseconds": 27.614
+        },
+        {
+          "name": "core_thread",
+          "milliseconds": 10.542
+        },
+        {
+          "name": "wasm-to-js",
+          "milliseconds": 8.739
+        },
+        {
+          "name": "bigintToI53Checked",
+          "milliseconds": 7.598
+        },
+        {
+          "name": "_clock_time_get",
+          "milliseconds": 7.46
+        },
+        {
+          "name": "strlen",
+          "milliseconds": 7.305
+        },
+        {
+          "name": "property_imgparams",
+          "milliseconds": 6.272
+        },
+        {
+          "name": "__clock_gettime",
+          "milliseconds": 6.095
+        },
+        {
+          "name": "decode_spectrum_and_dequant",
+          "milliseconds": 6.079
+        },
+        {
+          "name": "do_action",
+          "milliseconds": 6.041
+        },
+        {
+          "name": "growMemViews",
+          "milliseconds": 5.873
+        },
+        {
+          "name": "ff_tx_fft_sr_combine_float_c",
+          "milliseconds": 4.668
+        },
+        {
+          "name": "user_wrapper_process",
+          "milliseconds": 4.612
+        },
+        {
+          "name": "m_property_read_sub",
+          "milliseconds": 4.608
+        },
+        {
+          "name": "emscripten_futex_wake",
+          "milliseconds": 4.593
+        },
+        {
+          "name": "conv_AV_SAMPLE_FMT_FLT_to_AV_SAMPLE_FMT_FLT",
+          "milliseconds": 4.563
+        },
+        {
+          "name": "__pthread_cond_timedwait",
+          "milliseconds": 4.388
+        },
+        {
+          "name": "property_time",
+          "milliseconds": 3.084
+        },
+        {
+          "name": "int_get",
+          "milliseconds": 3.083
+        },
+        {
+          "name": "m_property_do",
+          "milliseconds": 3.039
+        },
+        {
+          "name": "handle_command_updates",
+          "milliseconds": 3.03
+        },
+        {
+          "name": "mp_pin_can_transfer_data",
+          "milliseconds": 3.03
+        },
+        {
+          "name": "emscripten_builtin_free",
+          "milliseconds": 3.027
+        },
+        {
+          "name": "now",
+          "milliseconds": 3.024
+        },
+        {
+          "name": "emscripten_builtin_malloc",
+          "milliseconds": 3.013
+        },
+        {
+          "name": "mp_input_read_cmd",
+          "milliseconds": 3.01
+        },
+        {
+          "name": "update_osd_msg",
+          "milliseconds": 2.946
+        },
+        {
+          "name": "prune_old_packets",
+          "milliseconds": 2.797
+        },
+        {
+          "name": "__pthread_mutex_unlock",
+          "milliseconds": 2.775
+        },
+        {
+          "name": "demux_update",
+          "milliseconds": 2.685
+        },
+        {
+          "name": "mp_process_input",
+          "milliseconds": 2.487
+        },
+        {
+          "name": "af_fmt_to_bytes",
+          "milliseconds": 1.636
+        },
+        {
+          "name": "output_chain_process",
+          "milliseconds": 1.608
+        },
+        {
+          "name": "memchr",
+          "milliseconds": 1.566
+        }
+      ],
+      "samples": 6792
+    },
+    {
+      "target": {
+        "targetId": "A4D09AA39FE9E950FC62CF43250C3B7A",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "BFD833B8AD8B9868A1C3EBD6DBAD8BC3",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 8759.135
+        },
+        {
+          "name": "put_h264_chroma_mc8_8_c",
+          "milliseconds": 146.832
+        },
+        {
+          "name": "decode_cabac_residual_nondc_internal",
+          "milliseconds": 129.555
+        },
+        {
+          "name": "put_h264_qpel8_h_lowpass_8",
+          "milliseconds": 88.517
+        },
+        {
+          "name": "biweight_h264_pixels16_8_c",
+          "milliseconds": 88.36
+        },
+        {
+          "name": "put_h264_qpel8_v_lowpass_8",
+          "milliseconds": 73.427
+        },
+        {
+          "name": "ff_h264_decode_mb_cabac",
+          "milliseconds": 70.393
+        },
+        {
+          "name": "ff_h264_filter_mb",
+          "milliseconds": 66.235
+        },
+        {
+          "name": "h264_v_loop_filter_luma_8_c",
+          "milliseconds": 65.454
+        },
+        {
+          "name": "biweight_h264_pixels8_8_c",
+          "milliseconds": 45.983
+        },
+        {
+          "name": "loop_filter",
+          "milliseconds": 38.271
+        },
+        {
+          "name": "h264_h_loop_filter_luma_8_c",
+          "milliseconds": 38.254
+        },
+        {
+          "name": "ff_h264_hl_decode_mb",
+          "milliseconds": 31.619
+        },
+        {
+          "name": "mc_part_420_simple_8",
+          "milliseconds": 31.177
+        },
+        {
+          "name": "put_h264_qpel8_hv_lowpass_8",
+          "milliseconds": 31.126
+        },
+        {
+          "name": "h264_v_loop_filter_chroma_8_c",
+          "milliseconds": 28.64
+        },
+        {
+          "name": "await_references",
+          "milliseconds": 26.852
+        },
+        {
+          "name": "weight_h264_pixels16_8_c",
+          "milliseconds": 20.086
+        },
+        {
+          "name": "put_h264_qpel16_mc00_8_c",
+          "milliseconds": 18.68
+        },
+        {
+          "name": "h264_v_loop_filter_luma_intra_8_c",
+          "milliseconds": 16.153
+        },
+        {
+          "name": "ff_emulated_edge_mc_8",
+          "milliseconds": 15.119
+        },
+        {
+          "name": "avg_h264_qpel16_mc00_8_c",
+          "milliseconds": 15.112
+        },
+        {
+          "name": "avg_h264_chroma_mc8_8_c",
+          "milliseconds": 14.94
+        },
+        {
+          "name": "fill_decode_caches_13948",
+          "milliseconds": 14.486
+        },
+        {
+          "name": "h264_h_loop_filter_chroma_8_c",
+          "milliseconds": 14.388
+        },
+        {
+          "name": "ff_h264_idct8_add_8_c",
+          "milliseconds": 11.854
+        },
+        {
+          "name": "decode_cabac_mb_mvd",
+          "milliseconds": 10.651
+        },
+        {
+          "name": "ff_h264_idct_add_8_c",
+          "milliseconds": 8.724
+        },
+        {
+          "name": "ff_h264_pred_direct_motion",
+          "milliseconds": 8.692
+        },
+        {
+          "name": "check_mv",
+          "milliseconds": 7.41
+        },
+        {
+          "name": "put_h264_chroma_mc4_8_c",
+          "milliseconds": 6.131
+        },
+        {
+          "name": "fill_decode_neighbors_13947",
+          "milliseconds": 5.648
+        },
+        {
+          "name": "decode_cabac_mb_skip",
+          "milliseconds": 5.464
+        },
+        {
+          "name": "decode_cabac_mb_ref",
+          "milliseconds": 4.634
+        },
+        {
+          "name": "get_cabac_noinline",
+          "milliseconds": 4.595
+        }
+      ],
+      "samples": 6796
+    },
+    {
+      "target": {
+        "targetId": "726F1DAAC98279A1E03988EE1F51E94D",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "111129ABAA4C4CD7DD527A7A396F913F",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 8804.86
+        },
+        {
+          "name": "put_h264_chroma_mc8_8_c",
+          "milliseconds": 143.752
+        },
+        {
+          "name": "put_h264_qpel8_v_lowpass_8",
+          "milliseconds": 81.437
+        },
+        {
+          "name": "biweight_h264_pixels16_8_c",
+          "milliseconds": 80.615
+        },
+        {
+          "name": "ff_h264_filter_mb",
+          "milliseconds": 77.192
+        },
+        {
+          "name": "decode_cabac_residual_nondc_internal",
+          "milliseconds": 68.34
+        },
+        {
+          "name": "ff_h264_decode_mb_cabac",
+          "milliseconds": 58.198
+        },
+        {
+          "name": "put_h264_qpel8_h_lowpass_8",
+          "milliseconds": 56.977
+        },
+        {
+          "name": "h264_v_loop_filter_luma_8_c",
+          "milliseconds": 51.764
+        },
+        {
+          "name": "put_h264_qpel8_hv_lowpass_8",
+          "milliseconds": 42.879
+        },
+        {
+          "name": "biweight_h264_pixels8_8_c",
+          "milliseconds": 42.357
+        },
+        {
+          "name": "ff_h264_hl_decode_mb",
+          "milliseconds": 41.609
+        },
+        {
+          "name": "loop_filter",
+          "milliseconds": 39.78
+        },
+        {
+          "name": "h264_h_loop_filter_luma_8_c",
+          "milliseconds": 39.08
+        },
+        {
+          "name": "mc_part_420_simple_8",
+          "milliseconds": 35.258
+        },
+        {
+          "name": "put_h264_qpel16_mc00_8_c",
+          "milliseconds": 34.948
+        },
+        {
+          "name": "weight_h264_pixels16_8_c",
+          "milliseconds": 29.435
+        },
+        {
+          "name": "await_references",
+          "milliseconds": 26.85
+        },
+        {
+          "name": "h264_h_loop_filter_chroma_8_c",
+          "milliseconds": 24.912
+        },
+        {
+          "name": "h264_v_loop_filter_chroma_8_c",
+          "milliseconds": 24.135
+        },
+        {
+          "name": "avg_h264_chroma_mc8_8_c",
+          "milliseconds": 23.584
+        },
+        {
+          "name": "fill_decode_caches_13948",
+          "milliseconds": 22.298
+        },
+        {
+          "name": "decode_cabac_mb_mvd",
+          "milliseconds": 20.568
+        },
+        {
+          "name": "ff_h264_idct8_add_8_c",
+          "milliseconds": 16.725
+        },
+        {
+          "name": "ff_emulated_edge_mc_8",
+          "milliseconds": 13.771
+        },
+        {
+          "name": "avg_h264_qpel16_mc00_8_c",
+          "milliseconds": 11.477
+        },
+        {
+          "name": "ff_h264_pred_direct_motion",
+          "milliseconds": 10.217
+        },
+        {
+          "name": "ff_h264_idct_add_8_c",
+          "milliseconds": 9.105
+        },
+        {
+          "name": "put_h264_chroma_mc4_8_c",
+          "milliseconds": 7.637
+        },
+        {
+          "name": "decode_cabac_residual_dc_internal",
+          "milliseconds": 7.635
+        },
+        {
+          "name": "decode_slice_13971",
+          "milliseconds": 7.279
+        },
+        {
+          "name": "check_mv",
+          "milliseconds": 6.16
+        },
+        {
+          "name": "h264_v_loop_filter_chroma_intra_8_c",
+          "milliseconds": 6.106
+        },
+        {
+          "name": "fill_decode_neighbors_13947",
+          "milliseconds": 6.055
+        },
+        {
+          "name": "decode_cabac_mb_intra4x4_pred_mode",
+          "milliseconds": 6.001
+        }
+      ],
+      "samples": 6792
+    },
+    {
+      "target": {
+        "targetId": "DE20097AEE24B330450F9256053CE867",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "6AD421B6099A5CD97136494059138DB8",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "(idle)",
+          "milliseconds": 10073.016
+        }
+      ],
+      "samples": 6798
+    },
+    {
+      "target": {
+        "targetId": "E7B207032DB5B29806B96F8BB2C30BAC",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "33213856468B6E249F3398F75DE7910A",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 10061.595
+        },
+        {
+          "name": "thread_work",
+          "milliseconds": 3.055
+        },
+        {
+          "name": "__private_cond_signal",
+          "milliseconds": 1.612
+        },
+        {
+          "name": "h264_parse",
+          "milliseconds": 1.586
+        },
+        {
+          "name": "avio_seek",
+          "milliseconds": 1.541
+        },
+        {
+          "name": "bigintToI53Checked",
+          "milliseconds": 1.517
+        },
+        {
+          "name": "strcmp",
+          "milliseconds": 1.515
+        },
+        {
+          "name": "_clock_time_get",
+          "milliseconds": 1.498
+        },
+        {
+          "name": "av_buffer_unref",
+          "milliseconds": 1.483
+        },
+        {
+          "name": "compute_pkt_fields",
+          "milliseconds": 1.167
+        },
+        {
+          "name": "wasmfs::MemoryDataFile::read(unsigned char*, unsigned long, long long)",
+          "milliseconds": 1.126
+        }
+      ],
+      "samples": 6801
+    },
+    {
+      "target": {
+        "targetId": "9EF2A8E95E0A0934314EDD1DBAF0894D",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "67939DD1B690990142B83B6F6F949095",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 10078.032
+        },
+        {
+          "name": "__timedwait_cp",
+          "milliseconds": 1.456
+        },
+        {
+          "name": "wasm-to-js",
+          "milliseconds": 1.059
+        }
+      ],
+      "samples": 6799
+    },
+    {
+      "target": {
+        "targetId": "8B7FC3D33F8639976BCE3FE451FE98E1",
+        "type": "worker",
+        "title": "em-pthread",
+        "url": "http://127.0.0.1:64843/web/engine-software-full/player.mjs",
+        "attached": true,
+        "parentId": "DEC744859CAE8246BB87D19D44E34EF2",
+        "canAccessOpener": false,
+        "parentFrameId": "1FA64E621320072C868492969B3E21E0",
+        "browserContextId": "B26AE53788E5E6F960DF0C12AE8A37C0"
+      },
+      "sessionId": "4F7BE7A2CEFA1BDF20408D7F4A9FB539",
+      "ready": true,
+      "started": true,
+      "top": [
+        {
+          "name": "emscripten_futex_wait",
+          "milliseconds": 9995.868
+        },
+        {
+          "name": "_emscripten_get_now",
+          "milliseconds": 42.028
+        },
+        {
+          "name": "wasm-to-js",
+          "milliseconds": 7.556
+        },
+        {
+          "name": "_clock_time_get",
+          "milliseconds": 6.128
+        },
+        {
+          "name": "now",
+          "milliseconds": 4.455
+        },
+        {
+          "name": "emscripten_futex_wake",
+          "milliseconds": 4.398
+        },
+        {
+          "name": "bigintToI53Checked",
+          "milliseconds": 3.078
+        },
+        {
+          "name": "__timedwait_cp",
+          "milliseconds": 2.771
+        },
+        {
+          "name": "__clock_gettime",
+          "milliseconds": 1.618
+        },
+        {
+          "name": "emscripten_builtin_free",
+          "milliseconds": 1.565
+        },
+        {
+          "name": "destroy_frame",
+          "milliseconds": 1.553
+        },
+        {
+          "name": "control_2491",
+          "milliseconds": 1.543
+        },
+        {
+          "name": "a_swap",
+          "milliseconds": 1.532
+        },
+        {
+          "name": "__pthread_cond_timedwait",
+          "milliseconds": 1.524
+        },
+        {
+          "name": "pthread_cond_broadcast",
+          "milliseconds": 1.518
+        },
+        {
+          "name": "ta_set_parent",
+          "milliseconds": 1.509
+        },
+        {
+          "name": "js-to-wasm:i:i",
+          "milliseconds": 1.506
+        },
+        {
+          "name": "mp_image_new_ref",
+          "milliseconds": 1.502
+        },
+        {
+          "name": "get buffer",
+          "milliseconds": 1.501
+        },
+        {
+          "name": "vo_wait_default",
+          "milliseconds": 1.319
+        },
+        {
+          "name": "av_mallocz",
+          "milliseconds": 1.217
+        }
+      ],
+      "samples": 6797
+    }
+  ],
+  "hashes": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "build/playback-performance/native-baseline/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "build/playback-performance/native-baseline/player.wasm": "b6c2207c516029a1cc4cc1f924d98f55dc108d8109430534764db48341f5a23c",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "tests/profile-playback.mjs": "8da25a0c9be2f56f4c16485194bcdb25c80bb9b82355f663cf31574c39a26757",
+    "experiments/playback-performance/serve.mjs": "eeb4fcb9c7a6922d55853e692b50eaca612687923c375dfefec8f19dba08aa2b",
+    "web/hybrid-performance.html": "b4fedb49d845e0f1d53b68c3e3bd9470e0a3935b8cefd67107adc474d8e88778",
+    "build/fixtures/playback-performance/bbb-key-240.mp4": "705f0d12b3ffe9bf19ff5956ab3b6a9322075e6bed862434ffedd153a895329d"
+  },
+  "browser": "152.0.7977.76",
+  "serverSnapshot": {
+    "candidate": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0,
+        "source": "web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0,
+        "source": "web/filter-retained-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 0,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0,
+        "source": "web/software-full-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0,
+        "source": "build/playback-performance/native-baseline/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "b6c2207c516029a1cc4cc1f924d98f55dc108d8109430534764db48341f5a23c",
+        "bytes": 21272946,
+        "hits": 0,
+        "source": "build/playback-performance/native-baseline/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/b6c2207c516029a1cc4cc1f924d98f55dc108d8109430534764db48341f5a23c.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+        "bytes": 7096894,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0,
+        "source": "web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0,
+        "source": "web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0,
+        "source": "web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    }
+  },
+  "gpuInfo": {
+    "devices": [
+      {
+        "vendorId": 4203,
+        "deviceId": 0,
+        "vendorString": "Google Inc. (Apple)",
+        "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1, Version 26.5.2 (Build 25F84))",
+        "driverVendor": "Apple",
+        "driverVersion": "26.5.2"
+      }
+    ],
+    "auxAttributes": {
+      "amdSwitchable": false,
+      "canSupportThreadedTextureMailbox": false,
+      "directRenderingVersion": "",
+      "displayType": "ANGLE_METAL",
+      "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+      "glImplementationParts": "(gl=egl-angle,angle=metal)",
+      "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1, Version 26.5.2 (Build 25F84))",
+      "glResetNotificationStrategy": 33362,
+      "glVendor": "Google Inc. (Apple)",
+      "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28467 git hash: 736ed80c7552)",
+      "glWsExtensions": "",
+      "glWsVendor": "",
+      "glWsVersion": "",
+      "inProcessGpu": false,
+      "initializationTime": 0.058532,
+      "isAsan": false,
+      "isClangCoverage": false,
+      "jpegDecodeAcceleratorSupported": false,
+      "maxMsaaSamples": "4",
+      "optimus": false,
+      "passthroughCmdDecoder": true,
+      "pixelShaderVersion": "3.00",
+      "processCrashCount": 0,
+      "sandboxed": false,
+      "skiaBackendType": "GraphiteDawnMetal",
+      "subpixelFontRendering": true,
+      "targetCpuBits": 64,
+      "vertexShaderVersion": "3.00",
+      "visibilityCallbackCallCount": 0
+    },
+    "featureStatus": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "enabled_on",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "driverBugWorkarounds": [
+      "disable_2d_canvas_auto_flush",
+      "enable_webgl_timer_query_extensions",
+      "disabled_extension_GL_KHR_blend_equation_advanced",
+      "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+    ],
+    "videoDecoding": [],
+    "videoEncoding": []
+  },
+  "processStart": [
+    {
+      "type": "browser",
+      "id": 5796,
+      "cpuTime": 1.022923
+    },
+    {
+      "type": "renderer",
+      "id": 5845,
+      "cpuTime": 0.069586
+    },
+    {
+      "type": "renderer",
+      "id": 5843,
+      "cpuTime": 2.279792
+    },
+    {
+      "type": "renderer",
+      "id": 5842,
+      "cpuTime": 0.19575
+    },
+    {
+      "type": "GPU",
+      "id": 5802,
+      "cpuTime": 0.592239
+    },
+    {
+      "type": "network.mojom.NetworkService",
+      "id": 5803,
+      "cpuTime": 0.105355
+    },
+    {
+      "type": "storage.mojom.StorageService",
+      "id": 5805,
+      "cpuTime": 0.046943
+    },
+    {
+      "type": "audio.mojom.AudioService",
+      "id": 5846,
+      "cpuTime": 0.110035
+    }
+  ],
+  "measureStart": 1788882354604,
+  "processEnd": [
+    {
+      "type": "browser",
+      "id": 5796,
+      "cpuTime": 1.045443
+    },
+    {
+      "type": "renderer",
+      "id": 5845,
+      "cpuTime": 0.070154
+    },
+    {
+      "type": "renderer",
+      "id": 5843,
+      "cpuTime": 8.282517
+    },
+    {
+      "type": "renderer",
+      "id": 5842,
+      "cpuTime": 0.196734
+    },
+    {
+      "type": "GPU",
+      "id": 5802,
+      "cpuTime": 1.416812
+    },
+    {
+      "type": "network.mojom.NetworkService",
+      "id": 5803,
+      "cpuTime": 0.106352
+    },
+    {
+      "type": "storage.mojom.StorageService",
+      "id": 5805,
+      "cpuTime": 0.046969
+    },
+    {
+      "type": "audio.mojom.AudioService",
+      "id": 5846,
+      "cpuTime": 0.162501
+    }
+  ],
+  "measureEnd": 1788882364697,
+  "final": {
+    "mode": "software",
+    "position": 13.9,
+    "quality": {
+      "frameDrops": 0,
+      "decoderDrops": 0,
+      "avsync": 0.004000333333214812
+    },
+    "diagnostics": {
+      "mode": "software",
+      "switching": false,
+      "videoFilters": "",
+      "audioFilters": "",
+      "backend": {
+        "rendered": 419,
+        "renderMs": 889.385000012815,
+        "copyMs": 793.9599999710917,
+        "maxRenderMs": 5.660000000149012,
+        "heapBytes": 134217728,
+        "epoch": 4,
+        "path": "wasm",
+        "decoder": "software",
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 0,
+        "presentedPosition": 13.8,
+        "ioPending": false,
+        "ioSerial": 0,
+        "interruptions": 0,
+        "seeking": false,
+        "position": 13.8,
+        "queuedFrames": 7424
+      }
+    },
+    "audio": {
+      "state": "running",
+      "sampleRate": 48000,
+      "mediaFrames": 669696,
+      "underruns": 0,
+      "rms": 0.05054788017889949,
+      "latencyConfidence": "reported-latency estimate"
+    },
+    "errors": []
+  },
+  "serverFinal": {
+    "candidate": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0,
+        "source": "web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0,
+        "source": "web/filter-retained-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 1,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 1,
+        "source": "web/software-full-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 9,
+        "source": "build/playback-performance/native-baseline/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "b6c2207c516029a1cc4cc1f924d98f55dc108d8109430534764db48341f5a23c",
+        "bytes": 21272946,
+        "hits": 1,
+        "source": "build/playback-performance/native-baseline/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/b6c2207c516029a1cc4cc1f924d98f55dc108d8109430534764db48341f5a23c.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+        "bytes": 7096894,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0,
+        "source": "web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 1,
+        "source": "web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0,
+        "source": "web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    }
+  },
+  "hashesAfter": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "build/playback-performance/native-baseline/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "build/playback-performance/native-baseline/player.wasm": "b6c2207c516029a1cc4cc1f924d98f55dc108d8109430534764db48341f5a23c",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "tests/profile-playback.mjs": "8da25a0c9be2f56f4c16485194bcdb25c80bb9b82355f663cf31574c39a26757",
+    "experiments/playback-performance/serve.mjs": "eeb4fcb9c7a6922d55853e692b50eaca612687923c375dfefec8f19dba08aa2b",
+    "web/hybrid-performance.html": "b4fedb49d845e0f1d53b68c3e3bd9470e0a3935b8cefd67107adc474d8e88778",
+    "build/fixtures/playback-performance/bbb-key-240.mp4": "705f0d12b3ffe9bf19ff5956ab3b6a9322075e6bed862434ffedd153a895329d"
+  },
+  "inputsUnchanged": true
+}

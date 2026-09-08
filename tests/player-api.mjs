@@ -5,10 +5,12 @@ import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 const out=`results/player-api/functional-${new Date().toISOString().replaceAll(':','-')}`;
 await mkdir(out,{recursive:true});console.log(out);
-const server=spawn(process.execPath,['scripts/serve.mjs'],{env:{...process.env,PORT:'0'},stdio:['ignore','pipe','inherit']});
+const performanceConfig=process.env.WEBMPV_PERFORMANCE_CONFIG;
+const server=spawn(process.execPath,performanceConfig?['experiments/playback-performance/serve.mjs',performanceConfig]:['scripts/serve.mjs'],{env:{...process.env,PORT:'0',...(performanceConfig?{DEFAULT_MOUNT:'candidate'}:{})},stdio:['ignore','pipe','inherit']});
 const origin=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('App server timeout')),10000);server.once('error',reject);server.stdout.on('data',b=>{const m=/http:\/\/127\.0\.0\.1:\d+/.exec(String(b));if(m){clearTimeout(timer);resolve(m[0]);}});});
 const browser=await chromium.launch({channel:'chrome',headless:true,ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required']});
 const result={started:new Date().toISOString(),browser:browser.version(),scope:'Headless three-mode API functional checks, not performance qualification',tests:[],passed:false};
+if(performanceConfig)result.assetSnapshot=await(await fetch(origin+'/__metadata')).json();
 const page=await browser.newPage();const requests=[];const pageErrors=[];page.on('pageerror',e=>{pageErrors.push(String(e));console.error('PAGE',String(e));});page.on('request',r=>requests.push(r.url()));
 const fixture=await readFile('fixtures/example.mp4');const tracks=await readFile('build/fixtures/tracks.mkv');
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -16,7 +18,7 @@ const paths=['src/index.ts','src/types.ts','src/unified-player.ts','src/internal
 const hashes=async()=>Object.fromEntries(await Promise.all(paths.map(async p=>[p,hash(await readFile(p))])));
 result.hashes=await hashes();result.fixtures={mp4:hash(fixture),tracks:hash(tracks)};
 const only=process.env.ONLY?.split('|');result.selection=only||'full';
-const total=only?.length||19;
+const total=only?.length||21;
 async function setup(){
  await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await page.goto(origin+'/');
  await page.waitForFunction(()=>window.player);await page.evaluate(()=>player.destroy());
@@ -41,6 +43,18 @@ try{
  await check('hybrid actual retained frames and subtitles',async()=>{
   await page.evaluate(()=>make('hybrid'));await page.evaluate(()=>player.selectTrack('sub','1'));await open(tracks);await page.evaluate(()=>player.play());await page.waitForFunction(()=>player.diagnostics.backend?.presentation?.drawn>12);await page.evaluate(()=>player.pause());
   const d=await page.evaluate(()=>player.diagnostics);assert.equal(d.mode,'hybrid');assert.equal(d.backend.decoder,'webcodecs');assert.equal(d.backend.decoderStats.copyMs,0);assert.ok(d.backend.subtitles.parts>0);return d;
+ });
+ await check('hybrid idle polling wakes for seek and resume',async()=>{
+  await page.evaluate(()=>make('hybrid'));await open();await page.waitForTimeout(650);
+  const before=await page.evaluate(()=>player.diagnostics.backend.pumpTicks);await page.waitForTimeout(500);
+  const after=await page.evaluate(()=>player.diagnostics.backend.pumpTicks);assert.ok(Number.isFinite(before)&&after>before&&after-before<=10,JSON.stringify({before,after}));
+  await page.evaluate(async()=>{await player.seek(2);await player.subtitleVisible(false);await player.subtitleVisible(true);await player.play();});
+  await page.waitForFunction(()=>player.properties.get('time-pos')>2.3,null,{timeout:3000});return {idleTicks:after-before,position:await page.evaluate(()=>player.properties.get('time-pos'))};
+ });
+ await check('hybrid audio timing survives delayed worker initialization',async()=>{
+  await page.route('**/filter-retained-engine-worker.js*',async route=>{const response=await route.fetch();const body=(await response.text()).replace('engine = await createEngine','await new Promise(resolve=>setTimeout(resolve,250));engine = await createEngine');await route.fulfill({response,body});});
+  try {await page.evaluate(()=>make('hybrid'));await open();await page.evaluate(()=>player.play());await page.waitForFunction(()=>player.audioDiagnostics().mediaFrames>12000,null,{timeout:5000});return page.evaluate(()=>({audio:player.audioDiagnostics(),position:player.properties.get('time-pos')}));}
+  finally {await page.unroute('**/filter-retained-engine-worker.js*');}
  });
  await check('hybrid seeks beyond the diagnostic sample budget',async()=>{
   await page.route('**/filter-retained-engine-worker.js*',async route=>{
@@ -112,4 +126,4 @@ try{
  });
  result.hashesAfter=await hashes();assert.deepEqual(result.hashesAfter,result.hashes);result.passed=result.tests.length===total&&result.tests.every(t=>t.passed);if(!result.passed)process.exitCode=1;
 }catch(e){result.failure=String(e.stack);process.exitCode=1;console.error(e);}
-finally{await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await browser.close();server.kill('SIGTERM');result.finished=new Date().toISOString();await writeFile(`${out}/result.json`,JSON.stringify(result,null,2)+'\n');}
+finally{if(performanceConfig)result.assetSnapshotAfter=await(await fetch(origin+'/__metadata')).json();await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await browser.close();server.kill('SIGTERM');result.finished=new Date().toISOString();await writeFile(`${out}/result.json`,JSON.stringify(result,null,2)+'\n');}

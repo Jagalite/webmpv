@@ -1,0 +1,64 @@
+{
+  "source": "results/playback-performance/2026-09-08T22-14-48.082Z/result.json",
+  "scope": "Matched short passage replay; does not replace either hour or isolate the cause of presentation drops. No clean CPU aggregate from this failed comparison.",
+  "passed": false,
+  "inputsUnchanged": true,
+  "trials": [
+    {
+      "variant": "baseline",
+      "passed": true,
+      "error": null,
+      "measuredSeconds": 90.761,
+      "positionFirst": 496.03266666666667,
+      "positionLast": 586.7993333333334,
+      "presentationDrops": 0,
+      "decoderDrops": 0,
+      "audioUnderruns": 0,
+      "dropIntervals": []
+    },
+    {
+      "variant": "candidate",
+      "passed": true,
+      "error": null,
+      "measuredSeconds": 90.714,
+      "positionFirst": 496.03266666666667,
+      "positionLast": 586.7326666666667,
+      "presentationDrops": 0,
+      "decoderDrops": 0,
+      "audioUnderruns": 0,
+      "dropIntervals": []
+    },
+    {
+      "variant": "candidate",
+      "passed": true,
+      "error": null,
+      "measuredSeconds": 90.903,
+      "positionFirst": 496.1326666666667,
+      "positionLast": 587.0326666666667,
+      "presentationDrops": 0,
+      "decoderDrops": 0,
+      "audioUnderruns": 0,
+      "dropIntervals": []
+    },
+    {
+      "variant": "baseline",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n",
+      "measuredSeconds": 90.977,
+      "positionFirst": 495.99933333333337,
+      "positionLast": 586.9993333333333,
+      "presentationDrops": 1,
+      "decoderDrops": 0,
+      "audioUnderruns": 0,
+      "dropIntervals": [
+        {
+          "delta": 1,
+          "positionFirst": 584.9326666666667,
+          "positionLast": 586.9993333333333,
+          "atFirst": 1788906148128,
+          "atLast": 1788906150165
+        }
+      ]
+    }
+  ]
+}

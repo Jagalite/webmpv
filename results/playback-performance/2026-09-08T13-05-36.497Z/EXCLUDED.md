@@ -1,0 +1,1 @@
+Exploratory run excluded from comparison evidence: the harness file was edited while its already-loaded process was running. Runtime asset bytes were not edited, but the final source-identity check correctly failed. The exact originally executed harness is preserved at build/playback-performance/harness-before-reuse.mjs. Repeat with the new harness held fixed.

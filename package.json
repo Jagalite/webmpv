@@ -7,7 +7,7 @@
     "build": "tsc",
     "build:engine": "bash scripts/build.sh",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test tests/audio-worklet.mjs tests/retained-video.mjs && node tests/player-api.mjs",
+    "test": "node --test tests/audio-worklet.mjs tests/retained-video.mjs tests/timing-coalescing.mjs && node tests/player-api.mjs",
     "dev:media": "node scripts/media-server.mjs",
     "test:stream": "node --test tests/range-reader.mjs && node tests/m1.mjs",
     "test:qualify": "node tests/m2-functional.mjs && node tests/m2-supplemental.mjs",
@@ -22,7 +22,8 @@
     "test:software-full": "node tests/software-full.mjs",
     "test:api": "node tests/player-api.mjs",
     "fixtures:formats": "python3 experiments/format-matrix/generate.py",
-    "test:formats": "node tests/format-matrix.mjs"
+    "test:formats": "node tests/format-matrix.mjs",
+    "test:decoder-simd": "bash experiments/playback-performance/test-maintained-kernels.sh"
   },
   "devDependencies": {
     "playwright": "1.58.2",

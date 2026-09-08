@@ -34,7 +34,7 @@ See the [integration guide](docs/INTEGRATION.md) for the full support contract.
 The [three-mode API validation](results/player-api/README.md) records the original API and legacy regression checks. The
 [review-fix verification](results/player-api/REVIEW-FIXES.md) adds regressions for
 long-playback seeking, aspect ratio, cancellation and source replacement; the
-current API suite has 19 checks plus seven AudioWorklet/presentation unit checks.
+current API suite has 21 checks plus AudioWorklet, presentation and timing unit checks.
 These are functional results; they do not constitute new performance or endurance
 qualification. Next is packaging a beta and testing it from a clean consumer app.
 
@@ -66,6 +66,33 @@ accepted and benchmarked engines are preserved. Its component inventory is broad
 representative browser test matrix; it does not imply every format is qualified.
 See the [expanded-profile verification](results/software-full/README.md) for the
 21 passing checks, payload sizes and documented limitations.
+
+## Hybrid scheduling performance
+
+The [latest scheduling screen](results/hybrid-performance/README.md) reduces
+Hybrid polling during playback and while paused, while keeping commands responsive.
+The short headless comparison observed lower active and paused CPU with frame,
+audio and cleanup checks passing. Baseline CPU varied; these results do not
+establish a fixed speedup, foreground qualification or native parity.
+
+## Decoder and playback optimization work
+
+The development Software engine now specializes selected eight-bit H.264
+interpolation, weighted prediction and deblocking operations with Wasm SIMD.
+FFmpeg still owns decoding and keeps its other widths, bit depths and configured
+formats. Both software build recipes accept `WEBMPV_DECODER_SIMD=0` to omit these
+additional replacements. See the [kernel notes](native/simd/README.md).
+
+Software keeps a 5 ms active service cadence and slows its worker pump after
+paused work settles. Both mpv modes suppress unchanged audio-timing messages.
+Hybrid omits the software replay cache that its retained-frame renderer cannot
+use, fixing long-GOP playback beyond the old cache bound. Decoder failures remain explicit
+and can be recovered by reopening in Software mode.
+
+The [performance work record](results/playback-performance/README.md) separates
+accepted changes, experimental renderers, CPU measurements and functional checks.
+Development engine artifacts differ from the historical accepted release archive.
+No new foreground qualification or native-parity claim follows from these changes.
 
 ## Generated browser format matrix
 

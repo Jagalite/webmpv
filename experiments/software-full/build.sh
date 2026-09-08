@@ -42,7 +42,8 @@ for i in "${!LIBS[@]}"; do
   name=${LIBS[$i]#-l}; LIBS[$i]="$OBJ/lib$name/lib$name.a";;
  esac
 done
-emcc -O2 -pthread -msimd128 -Inative native/player.c native/events.c native/stream_bridge.c \
+source scripts/decoder-simd.sh
+emcc -O2 -pthread -msimd128 -Inative native/player.c native/events.c native/stream_bridge.c "${DECODER_SIMD_SOURCES[@]}" \
  "${LIBS[@]}" "$OBJ/libpostproc/libpostproc.a" -lstdc++ \
  -sMODULARIZE=1 -sEXPORT_ES6=1 -sEXPORT_NAME=createEngine \
  -sENVIRONMENT=worker -sPTHREAD_POOL_SIZE=8 -sPTHREAD_POOL_SIZE_STRICT=2 \

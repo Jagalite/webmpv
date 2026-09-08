@@ -10,6 +10,7 @@ export class WasmPlayer extends EventTarget {
   private audioNode?: AudioWorkletNode;
   private analyser?: AnalyserNode;
   private timing?: ReturnType<typeof setInterval>;
+  private lastTiming?: {latencyUs:number;running:boolean};
   private nextId = 100;
   private pending = new Map<number,{resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>}>();
   private destroyed = false;
@@ -47,7 +48,7 @@ export class WasmPlayer extends EventTarget {
       const timeout=this.readyTimer=setTimeout(()=>reject(new Error('Player initialization timed out')),60000);
       this.worker.onerror = event => { clearTimeout(timeout);reject(new Error(event.message));this.fail(new Error(event.message)); };
       this.worker.onmessage = ({data}) => {
-        if(data.type==='ready') {clearTimeout(timeout);this.browserCodecsAbsent=data.browserCodecsAbsent;resolve();}
+        if(data.type==='ready') {clearTimeout(timeout);this.browserCodecsAbsent=data.browserCodecsAbsent;this.sendTiming(true);resolve();}
         else if(data.type==='error') {clearTimeout(timeout);const error=new Error(data.message);reject(error);this.fail(error,data.id);}
         else if(data.type==='destroyed') {if(this.diagnostics){this.diagnostics.decoderStats=data.decoderStats;if(data.presentation)this.diagnostics.presentation=data.presentation;}this.onDestroyed?.();}
         else if(data.type==='refresh'){void this.refreshAuthorization?.(data.resource).then(update=>this.worker.postMessage({type:'refreshed',id:data.id,update}),()=>this.worker.postMessage({type:'refreshed',id:data.id,error:true}));}
@@ -87,10 +88,14 @@ export class WasmPlayer extends EventTarget {
       })().catch(error=>{clearTimeout(timeout);reject(error);});
     });
   }
-  private sendTiming() {
+  private sendTiming(force=false) {
+    if(this.destroyed)return;
     // Fallback latency estimate, explicitly not an independent A/V sync measurement.
     const latency=(this.audioContext.baseLatency||0)+(this.audioContext.outputLatency||0);
-    this.worker.postMessage({type:'timing',latencyUs:Math.round(latency*1e6),running:this.audioContext.state==='running'});
+    const latencyUs=Math.round(latency*1e6),running=this.audioContext.state==='running';
+    if(!force&&this.lastTiming?.latencyUs===latencyUs&&this.lastTiming.running===running)return;
+    this.lastTiming={latencyUs,running};
+    this.worker.postMessage({type:'timing',latencyUs,running});
   }
   private fail(error:Error,id?:number,report=true) {
     for(const [key,p] of this.pending) if(!id||key===id) {clearTimeout(p.timer);p.reject(error);this.pending.delete(key);}

@@ -1,4 +1,5 @@
-// Optional mpv CPU-frame decoder. Browser transport does not own playback time.
+// mpv browser decoder with copy-back or retained-frame output.
+// Browser transport does not own playback time.
 #include <emscripten.h>
 #include <emscripten/threading.h>
 #include <stddef.h>
@@ -58,6 +59,7 @@ struct browser_priv {
     AVPacket *replay[256];
     int count, replay_at, bytes;
     bool browser, replaying, drained, software_open, software_failed;
+    bool retained_only, submitted_keyframe;
     int64_t delivered, recovery_target;
 };
 static void clear_replay(struct browser_priv *p) {
@@ -67,6 +69,13 @@ static void clear_replay(struct browser_priv *p) {
 static void fallback(struct mp_filter *f) {
     struct browser_priv *p=f->priv;
     if(!p->browser)return;
+    if(p->retained_only){
+        // This renderer consumes browser-owned VideoFrames. Software AVFrames
+        // cannot satisfy that contract; the public API owns explicit mode changes.
+        MP_ERR(f,"Retained browser decode failed. Reopen in software mode.\n");
+        request(5);p->browser=false;p->software_failed=true;
+        mp_filter_internal_mark_failed(f);return;
+    }
     MP_WARN(f,"Browser decode failed or reached its bound; replaying in software.\n");
     request(5);p->browser=false;p->replaying=true;p->replay_at=0;p->recovery_target=p->delivered;
     if(!p->software_open){
@@ -84,14 +93,15 @@ static int send(struct mp_filter *f,struct demux_packet *packet) {
     mp_set_av_packet(p->packet,packet,&p->timebase);
     if(!p->browser)return avcodec_send_packet(p->software,packet?p->packet:NULL);
     if(!packet){p->drained=true;return request(3);}
-    if(p->packet->size>WEB_DEC_PACKET_MAX || p->count>=256 ||
-       p->bytes+p->packet->size>16*1024*1024 || p->packet->pts==AV_NOPTS_VALUE ||
+    if(p->packet->size>WEB_DEC_PACKET_MAX ||
+       (!p->retained_only&&(p->count>=256||p->bytes+p->packet->size>16*1024*1024)) ||
+       p->packet->pts==AV_NOPTS_VALUE ||
        av_packet_get_side_data(p->packet,AV_PKT_DATA_NEW_EXTRADATA,NULL) ||
-       (!p->count&&!(p->packet->flags&AV_PKT_FLAG_KEY))) {
+       (!p->submitted_keyframe&&!(p->packet->flags&AV_PKT_FLAG_KEY))) {
         fallback(f);return AVERROR(EAGAIN);
     }
-    AVPacket *copy=av_packet_clone(p->packet);
-    if(!copy){fallback(f);return AVERROR(EAGAIN);}
+    AVPacket *copy=p->retained_only?NULL:av_packet_clone(p->packet);
+    if(!p->retained_only&&!copy){fallback(f);return AVERROR(EAGAIN);}
     web_decoder.size=p->packet->size;web_decoder.key=!!(p->packet->flags&AV_PKT_FLAG_KEY);
     web_decoder.timestamp=av_rescale_q(p->packet->pts,p->timebase,(AVRational){1,1000000});
     web_decoder.duration=p->packet->duration>0?av_rescale_q(p->packet->duration,p->timebase,(AVRational){1,1000000}):0;
@@ -99,7 +109,8 @@ static int send(struct mp_filter *f,struct demux_packet *packet) {
     int result=request(2);
     if(result==AVERROR(EAGAIN)){av_packet_free(&copy);return result;}
     // Retain even a rejected submission: recovery must not omit that packet.
-    p->replay[p->count++]=copy;p->bytes+=copy->size;
+    if(copy){p->replay[p->count++]=copy;p->bytes+=copy->size;}
+    if(result>=0)p->submitted_keyframe=true;
     if(result<0)fallback(f);
     return 0;
 }
@@ -159,7 +170,7 @@ static int receive(struct mp_filter *f,struct mp_frame *out) {
     av_frame_unref(p->frame);
     // Keep the most recent *delivered* keyframe and later packets, including
     // queued B frames. Submission alone is insufficient to prune recovery data.
-    if(p->browser){
+    if(p->browser&&!p->retained_only){
         int cut=0;
         for(int i=1;i<p->count;i++)if((p->replay[i]->flags&AV_PKT_FLAG_KEY)&&p->replay[i]->pts<=p->delivered)cut=i;
         for(int i=0;i<cut;i++){p->bytes-=p->replay[i]->size;av_packet_free(&p->replay[i]);}
@@ -170,7 +181,7 @@ static int receive(struct mp_filter *f,struct mp_frame *out) {
 static void process(struct mp_filter *f){struct browser_priv *p=f->priv;lavc_process(f,&p->state,send,receive);}
 static void reset(struct mp_filter *f){
     struct browser_priv *p=f->priv;clear_replay(p);if(p->software_open)avcodec_flush_buffers(p->software);
-    p->delivered=p->recovery_target=AV_NOPTS_VALUE;p->drained=false;p->state=(struct lavc_state){0};
+    p->delivered=p->recovery_target=AV_NOPTS_VALUE;p->drained=false;p->submitted_keyframe=false;p->state=(struct lavc_state){0};
     if(p->browser&&request(6)<0)fallback(f);
 }
 static void destroy(struct mp_filter *f){
@@ -183,6 +194,7 @@ static struct mp_decoder *create(struct mp_filter *parent,struct mp_codec_params
     if(!web_decoder_enabled()||!codec->codec||strcmp(codec->codec,"h264"))return NULL;
     struct mp_filter *f=mp_filter_create(parent,&info);if(!f)return NULL;
     struct browser_priv *p=f->priv;p->public.f=f;p->delivered=p->recovery_target=AV_NOPTS_VALUE;
+    p->retained_only=atomic_load(&enabled)==2;
     const AVCodec *decoder=avcodec_find_decoder(AV_CODEC_ID_H264);
     p->software=avcodec_alloc_context3(decoder);p->packet=av_packet_alloc();p->frame=av_frame_alloc();
     if(!p->software||!p->packet||!p->frame||mp_set_avctx_codec_headers(p->software,codec)<0)goto fail;
@@ -196,7 +208,7 @@ static struct mp_decoder *create(struct mp_filter *parent,struct mp_codec_params
     if(request(1)<0)goto fail;
     p->browser=true;mp_filter_add_pin(f,MP_PIN_IN,"in");mp_filter_add_pin(f,MP_PIN_OUT,"out");
     pthread_mutex_lock(&owner_lock);owner=f;pthread_mutex_unlock(&owner_lock);
-    MP_INFO(f,"Using optional browser copy-back decoder.\n");return &p->public;
+    MP_INFO(f,"Using browser %s decoder.\n",p->retained_only?"retained-frame":"copy-back");return &p->public;
 fail:
     talloc_free(f);return NULL;
 }

@@ -1,0 +1,17 @@
+results/playback-performance/final-checks-2026-09-08T19-37-56.001Z
+RUN typescript
+PASS typescript 0 
+RUN units
+PASS units 0 
+RUN rgbx-experiment-units
+PASS rgbx-experiment-units 0 
+RUN m4-simd
+PASS m4-simd 0 
+RUN m4-no-simd
+PASS m4-no-simd 0 
+RUN software-full
+PASS software-full 0 
+RUN format-matrix
+CHECK EXIT format-matrix 1 
+{"candidateCounts": {"tested": 115, "decode": 112, "seek": 106, "cleanup": 115}, "differences": [], "noOutcomeRegressions": true}
+{"passed":true,"checks":[{"name":"typescript","exitCode":0},{"name":"units","exitCode":0},{"name":"rgbx-experiment-units","exitCode":0},{"name":"m4-simd","exitCode":0},{"name":"m4-no-simd","exitCode":0},{"name":"software-full","exitCode":0},{"name":"format-matrix","exitCode":1},{"name":"format-baseline-comparison","exitCode":0}]}

@@ -1,0 +1,1 @@
+Excluded as candidate comparison evidence: page-scoped interception did not override the nested retained decoder worker. The counted run exposed this because the added request counters were absent. Repeat with context-scoped routing and mandatory override-hit verification.

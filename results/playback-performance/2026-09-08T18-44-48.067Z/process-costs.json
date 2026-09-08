@@ -1,0 +1,39 @@
+{
+  "source": "results/playback-performance/2026-09-08T18-44-48.067Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "native": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 2.89899815295499,
+        "audio.mojom.AudioService": 0.38838963845263136,
+        "browser": 0.16235190818644402,
+        "network.mojom.NetworkService": 0.0746751219798241,
+        "renderer": 1.7199780480980176,
+        "storage.mojom.StorageService": 0.0021800181177764103
+      }
+    },
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 8.716615447210705,
+        "audio.mojom.AudioService": 0.6369109990208326,
+        "browser": 0.18146141561580226,
+        "network.mojom.NetworkService": 0.08788122112574431,
+        "renderer": 42.137126769380366,
+        "storage.mojom.StorageService": 0.001352542845717005
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 8.581352447634199,
+        "audio.mojom.AudioService": 0.6322506894321949,
+        "browser": 0.177113661110335,
+        "network.mojom.NetworkService": 0.08428999303514453,
+        "renderer": 34.10028331185638,
+        "storage.mojom.StorageService": 0.002287163539155875
+      }
+    }
+  }
+}

@@ -53,6 +53,7 @@ export declare class WasmPlayer extends EventTarget {
     private audioNode?;
     private analyser?;
     private timing?;
+    private lastTiming?;
     private nextId;
     private pending;
     private destroyed;

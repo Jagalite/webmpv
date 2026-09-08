@@ -1,0 +1,115 @@
+{
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "mode": "hybrid",
+  "overrides": {
+    "web/engine-retained-subs/player.mjs": "build/playback-performance/decoder-hints/player.mjs",
+    "web/engine-retained-subs/player.wasm": "build/playback-performance/decoder-hints/player.wasm",
+    "web/retained-decoder-worker.js": "build/playback-performance/decoder-hints-counted/worker.js"
+  },
+  "baselineOverrides": {
+    "web/engine-retained-subs/player.mjs": "build/playback-performance/hybrid-baseline/player.mjs",
+    "web/engine-retained-subs/player.wasm": "build/playback-performance/hybrid-baseline/player.wasm",
+    "web/retained-decoder-worker.js": "build/playback-performance/hybrid-baseline-counted/worker.js"
+  },
+  "baseline": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+  },
+  "servedBaselineHashes": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "a67ba7ee5e8e3227eac3505b11171647465ece204bd84b89a375adf1bc83e43f",
+    "web/retained-decoder-worker.js": "3681bfd0c44f0ae4594e2671d76fca6dffc15bbb9984df5956818dae3d357bd4",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+  },
+  "servedCandidateHashes": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "368eb3f7a2719d7df0a595c81192848105f939124e4d84a5f1fe40340c9e5ae3",
+    "web/retained-decoder-worker.js": "773c433230a3e47c940b4647b442230fef21dd63bb64637e6f85a4ff2f930e55",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+  },
+  "hashes": {
+    "build/playback-performance/hybrid-baseline/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "build/playback-performance/hybrid-baseline/player.wasm": "a67ba7ee5e8e3227eac3505b11171647465ece204bd84b89a375adf1bc83e43f",
+    "build/playback-performance/hybrid-baseline-counted/worker.js": "3681bfd0c44f0ae4594e2671d76fca6dffc15bbb9984df5956818dae3d357bd4",
+    "build/playback-performance/decoder-hints/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "build/playback-performance/decoder-hints/player.wasm": "368eb3f7a2719d7df0a595c81192848105f939124e4d84a5f1fe40340c9e5ae3",
+    "build/playback-performance/decoder-hints-counted/worker.js": "773c433230a3e47c940b4647b442230fef21dd63bb64637e6f85a4ff2f930e55",
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "src/internal/wasm-player.ts": "6b6bdba865bdf809e9eb9674f857dad5a5fc9ae0bf355286e807ea50fdfc0d3a",
+    "web/hybrid-performance.html": "d2e1f61b2764491e9ee2a859657267053ffcc92e0e8546d7be1c6ae92e4ba099",
+    "tests/playback-performance.mjs": "d8219d1946a1f8c2d170f88a88669bb0605507a2c15337ebf16d93db98007c29",
+    "build/hybrid-performance/sample.mp4": "cf07e7c5fe25d2b1e4ed1bb8a9f32ce59f428bc61eeea2222d858ae066399de7"
+  },
+  "order": [
+    "baseline",
+    "candidate"
+  ],
+  "warmupSeconds": 6,
+  "measurementSeconds": 12,
+  "idleSeconds": 4,
+  "trials": [
+    {
+      "variant": "baseline",
+      "browser": "152.0.7977.76",
+      "samples": [],
+      "routeHits": {
+        "web/generated/internal/wasm-player.js": 1,
+        "web/filter-retained-engine-worker.js": 1,
+        "web/retained-video.js": 1,
+        "web/subtitle-overlay.js": 1,
+        "web/engine-retained-subs/player.mjs": 1,
+        "web/engine-retained-subs/player.wasm": 1
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Override was not served: web/retained-decoder-worker.js"
+    },
+    {
+      "variant": "candidate",
+      "browser": "152.0.7977.76",
+      "samples": [],
+      "routeHits": {
+        "web/generated/internal/wasm-player.js": 1,
+        "web/filter-retained-engine-worker.js": 1,
+        "web/retained-video.js": 1,
+        "web/subtitle-overlay.js": 1,
+        "web/engine-retained-subs/player.mjs": 1,
+        "web/engine-retained-subs/player.wasm": 1
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Override was not served: web/retained-decoder-worker.js"
+    }
+  ],
+  "reuseBrowser": true,
+  "inputsUnchanged": true
+}

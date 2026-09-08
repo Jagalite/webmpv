@@ -1,0 +1,21 @@
+{
+  "observationWindowUtc": [
+    "2026-09-08T16:21:02Z",
+    "2026-09-08T16:22:17Z"
+  ],
+  "method": "Read-only ps -axo pid,pcpu,rss,comm snapshot; no other processes modified",
+  "outsideTaskRustCompilers": [
+    {
+      "pid": 80804,
+      "cpuPercent": 80.9,
+      "rssKiB": 196672
+    },
+    {
+      "pid": 80782,
+      "cpuPercent": 78.8,
+      "rssKiB": 367328
+    }
+  ],
+  "thermalState": "pmset -g therm did not expose CPU power/performance warnings on this host",
+  "interpretation": "Concurrent host compilation limits attribution of the later frame drops and CPU increase. This snapshot does not prove the cause or cover the entire measurement."
+}

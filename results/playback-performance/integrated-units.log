@@ -1,0 +1,517 @@
+✔ PCM ring wraps and handles actual output quantum length (2.204709ms)
+✔ underrun silence never advances media consumption (0.681334ms)
+✔ pause and generation reset suppress queued stale PCM (0.758084ms)
+✔ closed output processor releases its processing lifetime (0.334083ms)
+✔ eight pending inputs apply backpressure before the ninth packet (2.496416ms)
+✔ copy-back preserves timestamp/color and closes its source exactly once (0.55075ms)
+✔ stale copy completion cannot publish into a replacement request (0.434209ms)
+✔ reset closes queued frames and rejects late generation output (0.448375ms)
+✔ EOF waits for queued output; close releases each remaining frame (0.460375ms)
+✔ close preempts an unfinished copy and closes its frame immediately (0.416792ms)
+✔ a request published immediately after acknowledgment runs without another notification (3.728917ms)
+✖ 64-bit positions and bounded LRU (15.402125ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:6:63)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ unaligned misses start at the requested byte and inner reads reuse the bounded window (1.1625ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:8:17)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject ignore-range (0.738959ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject bad-range (0.64025ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject encoded (0.741167ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject forbidden (0.531292ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ representation changes are terminal (0.546584ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:23:66)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ recover truncate without false EOF (0.51425ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ recover retry without false EOF (2.460667ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ 401 renewal and default redirect rejection (0.892458ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:25:73)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ supersede blocked read and reuse source; close cancels (0.462708ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:26:88)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✔ ordinary 200 resource, relative URL, bounded reads and close accounting (12.18825ms)
+✔ explicit range preserves absolute resource offsets and total size (0.703792ms)
+✔ requested ranges reject 200, malformed ranges and changed lengths (0.749584ms)
+✔ origin, protocol, embedded credentials and URL length are checked before fetch (0.449375ms)
+✔ nested authorization refresh receives resource URL and updates only that request (1.04275ms)
+✔ refresh cannot redirect credentials to an unapproved origin (0.345083ms)
+✔ bounded transient HTTP retry and truncation recovery (306.148833ms)
+✔ unknown-length bodies cannot exceed media resource cap (2.19075ms)
+✔ aggregate retention limit is enforced across handles and reclaimed on close (7.940458ms)
+✔ handle count is bounded independently of body size (1.315583ms)
+✔ destroy cancels pending authorization and rejects stale completion (0.334333ms)
+✔ epoch cancellation discards a response even if transport ignores abort (0.247625ms)
+✔ manifest admission rejects live, encrypted and adaptive HLS (0.58ms)
+✔ DASH admission accepts fixed static and rejects live, adaptive, entities and multiple periods (1.782958ms)
+✔ HLS subtitle policy admits one full-timeline resource and rejects segmented subtitles (0.596875ms)
+✔ fixed HLS discontinuities remain native timeline input (0.053041ms)
+✔ DASH timeline and template resource counts are bounded (0.214625ms)
+✔ 16:9 video is centered inside 4:3 canvas (0.799417ms)
+✔ anamorphic pixels use the demux sample aspect ratio (0.152334ms)
+✔ rotated video fits the canvas and restores subtitle coordinates (0.125417ms)
+✔ unchanged observations do not repeatedly wake the engine worker (0.778542ms)
+✔ changed latency and AudioContext state are delivered immediately (0.14025ms)
+✔ post-initialization handoff republishes state even if an early message was ignored (0.091583ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 34
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 676.738292
+
+✖ failing tests:
+
+test at tests/range-reader.mjs:6:1
+✖ 64-bit positions and bounded LRU (15.402125ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:6:63)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:7:1
+✖ unaligned misses start at the requested byte and inner reads reuse the bounded window (1.1625ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:8:17)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject ignore-range (0.738959ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject bad-range (0.64025ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject encoded (0.741167ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject forbidden (0.531292ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:23:1
+✖ representation changes are terminal (0.546584ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:23:66)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:24:40
+✖ recover truncate without false EOF (0.51425ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:24:40
+✖ recover retry without false EOF (2.460667ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:25:1
+✖ 401 renewal and default redirect rejection (0.892458ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:25:73)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:26:1
+✖ supersede blocked read and reuse source; close cancels (0.462708ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:26:88)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect EPERM 127.0.0.1:4180 - Local (0.0.0.0:0)
+        at internalConnect (node:net:1115:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+        at node:net:1353:9
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }

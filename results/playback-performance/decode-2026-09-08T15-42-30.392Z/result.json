@@ -1,0 +1,320 @@
+{
+  "scope": "Isolated FFmpeg Wasm decode throughput and full-frame checksums; rendering and audio excluded",
+  "configuration": {
+    "baseline": {
+      "build": "simd",
+      "threads": 2
+    },
+    "candidate": {
+      "build": "simd",
+      "threads": 1
+    }
+  },
+  "hashes": {
+    "tests/decode-performance.mjs": "ef49a494803dde6e4652449c3d3967881bda6a6f0330fda7172fe7d7ec0da6e8",
+    "experiments/playback-performance/decode-benchmark.c": "5db4a42c0ca31eb48fcb793ff8cfe60ccee23e919b8ba47a81ce4fba241649b9",
+    "build/fixtures/playback-performance/h264-1080p60.mp4": "cc693617d7aab9fd8ab13d7575d0d5487b5b89111254c129ce75f7063f51fc50",
+    "build/playback-performance/decode-simd/decoder.mjs": "633f7551b92783887daedfea9e42912d85a5c86c1348c4e41dba464c5b6cf4f5",
+    "build/playback-performance/decode-simd/decoder.wasm": "837408d36021e0f0d9745e8b2a13d15ae7a9186f816b03323c51557a7079be75",
+    "build/playback-performance/decode-simd/manifest.json": "95bcfa1319992d3b14c69a65a4faf808585d05f005c576fb0f73689639b764ab",
+    "experiments/playback-performance/link-decode.sh": "ca328ef2ae40faa2271b7aee3dc838b7cd99b04b2d14df84edca0d1833ce757f",
+    "experiments/playback-performance/simd/h264-biweight.c": "027f7da9f30e63a8680b05decf3e3b86668bd3a16c230f2e90566456ec827410",
+    "experiments/playback-performance/simd/h264-chroma.c": "aef6da01de0977579070e319bab406ae0f476be5df7e9b746bca395280bedc08",
+    "experiments/playback-performance/simd/test-biweight.c": "c24900a7cc7b5df1b310375e98bbbb5f4d81627c6ff8f61f39beef9d6b427ba6",
+    "experiments/playback-performance/simd/test-chroma.c": "b396dca7486d5488f202c39354c1706ac2ccec9ba1c4f630224c953189fa3d56",
+    "experiments/playback-performance/simd/test-yuv-rgb.c": "862df3a9138f96db07a79e8ded26a8684ea38321a33bb4d949672dd2d1fc098b",
+    "experiments/playback-performance/simd/yuv-rgb.c": "ad80156e0a46c693e7db7bf50851ef822fa92513a8685dc5a107cd5c5978896c",
+    "build/obj-software-full-ffmpeg/libavcodec/libavcodec.a": "331cc794da297555b78d944d08ddc61a82afa394574d7e9e5fe816ce3c28dd0c",
+    "build/obj-software-full-ffmpeg/libavfilter/libavfilter.a": "04f86c3d3544c19e2f26e2a7c210c7d05388f3e7c248c5700857ea796590c9ae",
+    "build/obj-software-full-ffmpeg/libavformat/libavformat.a": "7098662ec4fd2a247c30a33bf5d973cd91d1c8d8be61430c317945a34db67068",
+    "build/obj-software-full-ffmpeg/libavutil/libavutil.a": "7cec6a7720ce81e0f52df9a2fdc9a6212b6e2c383644d7ac79407307a86c4cf7",
+    "build/obj-software-full-ffmpeg/libpostproc/libpostproc.a": "b17de7838e074e1d4844c1358849c9ce591467ad755f3462e7113ec7e889571d",
+    "build/obj-software-full-ffmpeg/libswresample/libswresample.a": "ea7f20fc42fe3887962c2eb127f1fa5568ea94e9cda9428b7ad39abcc6ababe0",
+    "build/obj-software-full-ffmpeg/libswscale/libswscale.a": "806ecae72bc0441b6ebe5eb2582647e6338e19a2f52a95acddd2e5ca7363957e"
+  },
+  "input": "build/fixtures/playback-performance/h264-1080p60.mp4",
+  "cycles": 2,
+  "trials": [
+    {
+      "variant": "baseline",
+      "build": "simd",
+      "threads": 2,
+      "verify": false,
+      "warmup": true,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 14908.664,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 15037.720042,
+      "cpuMicroseconds": {
+        "user": 11774497,
+        "system": 535930
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "simd",
+      "threads": 1,
+      "verify": false,
+      "warmup": true,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 19745.542,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 1,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 19783.064875,
+      "cpuMicroseconds": {
+        "user": 10649748,
+        "system": 406453
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "simd",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 14578.954,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 14691.675792000002,
+      "cpuMicroseconds": {
+        "user": 11618523,
+        "system": 464225
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "simd",
+      "threads": 1,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 22229.454,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 1,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 22248.055291999997,
+      "cpuMicroseconds": {
+        "user": 11155894,
+        "system": 316051
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "simd",
+      "threads": 1,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 31043.552,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 1,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 31080.818291000003,
+      "cpuMicroseconds": {
+        "user": 11264051,
+        "system": 288346
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "simd",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 17572.013,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 17616.978083999988,
+      "cpuMicroseconds": {
+        "user": 11740583,
+        "system": 545527
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "simd",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 13306.509,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 13367.297250000003,
+      "cpuMicroseconds": {
+        "user": 12059623,
+        "system": 425870
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "simd",
+      "threads": 1,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 13590.796,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 1,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 13623.864250000013,
+      "cpuMicroseconds": {
+        "user": 10704977,
+        "system": 383356
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "simd",
+      "threads": 1,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 11536.803,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 1,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 11556.901624999999,
+      "cpuMicroseconds": {
+        "user": 9592883,
+        "system": 306233
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "simd",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 4784.713,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 4809.448959000001,
+      "cpuMicroseconds": {
+        "user": 8512631,
+        "system": 137122
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "simd",
+      "threads": 2,
+      "verify": true,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 10586.952,
+        "verified": true,
+        "pixelMD5": "f45eb7866de9b40297b15245671d4be9",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 10599.937957999995,
+      "cpuMicroseconds": {
+        "user": 16011249,
+        "system": 279332
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "simd",
+      "threads": 1,
+      "verify": true,
+      "warmup": false,
+      "measurement": {
+        "frames": 1560,
+        "milliseconds": 15949.328,
+        "verified": true,
+        "pixelMD5": "f45eb7866de9b40297b15245671d4be9",
+        "threads": 1,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 15960.950415999978,
+      "cpuMicroseconds": {
+        "user": 15694181,
+        "system": 147077
+      }
+    }
+  ],
+  "hashesAfter": {
+    "tests/decode-performance.mjs": "ef49a494803dde6e4652449c3d3967881bda6a6f0330fda7172fe7d7ec0da6e8",
+    "experiments/playback-performance/decode-benchmark.c": "5db4a42c0ca31eb48fcb793ff8cfe60ccee23e919b8ba47a81ce4fba241649b9",
+    "build/fixtures/playback-performance/h264-1080p60.mp4": "cc693617d7aab9fd8ab13d7575d0d5487b5b89111254c129ce75f7063f51fc50",
+    "build/playback-performance/decode-simd/decoder.mjs": "633f7551b92783887daedfea9e42912d85a5c86c1348c4e41dba464c5b6cf4f5",
+    "build/playback-performance/decode-simd/decoder.wasm": "837408d36021e0f0d9745e8b2a13d15ae7a9186f816b03323c51557a7079be75",
+    "build/playback-performance/decode-simd/manifest.json": "95bcfa1319992d3b14c69a65a4faf808585d05f005c576fb0f73689639b764ab",
+    "experiments/playback-performance/link-decode.sh": "ca328ef2ae40faa2271b7aee3dc838b7cd99b04b2d14df84edca0d1833ce757f",
+    "experiments/playback-performance/simd/h264-biweight.c": "027f7da9f30e63a8680b05decf3e3b86668bd3a16c230f2e90566456ec827410",
+    "experiments/playback-performance/simd/h264-chroma.c": "aef6da01de0977579070e319bab406ae0f476be5df7e9b746bca395280bedc08",
+    "experiments/playback-performance/simd/test-biweight.c": "c24900a7cc7b5df1b310375e98bbbb5f4d81627c6ff8f61f39beef9d6b427ba6",
+    "experiments/playback-performance/simd/test-chroma.c": "b396dca7486d5488f202c39354c1706ac2ccec9ba1c4f630224c953189fa3d56",
+    "experiments/playback-performance/simd/test-yuv-rgb.c": "862df3a9138f96db07a79e8ded26a8684ea38321a33bb4d949672dd2d1fc098b",
+    "experiments/playback-performance/simd/yuv-rgb.c": "ad80156e0a46c693e7db7bf50851ef822fa92513a8685dc5a107cd5c5978896c",
+    "build/obj-software-full-ffmpeg/libavcodec/libavcodec.a": "331cc794da297555b78d944d08ddc61a82afa394574d7e9e5fe816ce3c28dd0c",
+    "build/obj-software-full-ffmpeg/libavfilter/libavfilter.a": "04f86c3d3544c19e2f26e2a7c210c7d05388f3e7c248c5700857ea796590c9ae",
+    "build/obj-software-full-ffmpeg/libavformat/libavformat.a": "7098662ec4fd2a247c30a33bf5d973cd91d1c8d8be61430c317945a34db67068",
+    "build/obj-software-full-ffmpeg/libavutil/libavutil.a": "7cec6a7720ce81e0f52df9a2fdc9a6212b6e2c383644d7ac79407307a86c4cf7",
+    "build/obj-software-full-ffmpeg/libpostproc/libpostproc.a": "b17de7838e074e1d4844c1358849c9ce591467ad755f3462e7113ec7e889571d",
+    "build/obj-software-full-ffmpeg/libswresample/libswresample.a": "ea7f20fc42fe3887962c2eb127f1fa5568ea94e9cda9428b7ad39abcc6ababe0",
+    "build/obj-software-full-ffmpeg/libswscale/libswscale.a": "806ecae72bc0441b6ebe5eb2582647e6338e19a2f52a95acddd2e5ca7363957e"
+  },
+  "assessment": {
+    "baseline": {
+      "milliseconds": 12560.54725,
+      "cpuMicroseconds": 11376026,
+      "trials": 4
+    },
+    "candidate": {
+      "milliseconds": 19600.15125,
+      "cpuMicroseconds": 11002947.75,
+      "trials": 4
+    },
+    "elapsedReductionPercent": -56.04536060321734,
+    "cpuReductionPercent": 3.2795129863451455
+  },
+  "passed": true,
+  "cleanup": {
+    "workersTerminated": 8,
+    "remainingResources": []
+  }
+}

@@ -1,0 +1,1646 @@
+{
+  "scope": "Headless native/worker ABI compatibility and injected stalled-output recovery; no performance claims",
+  "started": "2026-09-08T14:03:15.495Z",
+  "hashes": {
+    "tests/hybrid-hints-runtime.mjs": "d964db15c1841fe0c6bc9346a75858146c5ea2224cae3dc143c49e6fa008d020",
+    "experiments/playback-performance/serve.mjs": "3ec630a88226f187f05f0129a0de18afd238da591d9e119983eaf15b1eb2289c",
+    "build/hybrid-performance/sample.mp4": "cf07e7c5fe25d2b1e4ed1bb8a9f32ce59f428bc61eeea2222d858ae066399de7",
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "build/playback-performance/decoder-hints/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "build/playback-performance/decoder-hints/player.wasm": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+    "build/playback-performance/decoder-hints/worker.js": "57cf6d81ddc418e8e30cc2c381fa8680e72ce1ddb65c258eb51be0fbfe39fe3c",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "build/playback-performance/baseline/web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "results/playback-performance/hints-runtime-2026-09-08T14-03-15.461Z/stalled-decoder.js": "862b3ffa6cbc1ce5ce1737d11fa1df29571e85f0d02d1d28e21b0e56fe9153cb"
+  },
+  "tests": [
+    {
+      "name": "hinted",
+      "passed": true,
+      "paused": {
+        "mode": "hybrid",
+        "position": 0.7,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 153,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 25
+            },
+            "presentation": {
+              "position": 0.7,
+              "received": 24,
+              "closed": 21,
+              "drawn": 22,
+              "redraws": 2,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                14.659904000186259,
+                25.751079000335324,
+                10.049229000186301,
+                12.16864199973918,
+                4.9803569994412555,
+                29.37095899962742,
+                14.619588999702046,
+                26.12062100000003,
+                16.993769999776532,
+                10.719205000596048,
+                24.792665999962765,
+                13.032905999850982,
+                13.912682000037307,
+                28.73203900052158,
+                18.810261000745072,
+                22.415436999925532,
+                12.10020499981374,
+                9.115429000186168,
+                18.869252999962782,
+                14.75194300029807,
+                2.079349000074444,
+                4.5452930001861205
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 22,
+            "rendered": 25,
+            "renderMs": 0.8450000025331974,
+            "copyMs": 0,
+            "maxRenderMs": 0.2649999996647239,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 26,
+              "frames": 18,
+              "receivedFrames": 18,
+              "closedFrames": 18,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 18,
+              "transferredFrames": 18,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.7,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.7,
+            "queuedFrames": 5120
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 37888,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "playing": {
+        "mode": "hybrid",
+        "position": 5.533333333333333,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 226,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 43
+            },
+            "presentation": {
+              "position": 5.533333,
+              "received": 73,
+              "closed": 70,
+              "drawn": 39,
+              "redraws": 2,
+              "peakRetained": 6,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                14.659904000186259,
+                25.751079000335324,
+                10.049229000186301,
+                12.16864199973918,
+                4.9803569994412555,
+                29.37095899962742,
+                14.619588999702046,
+                26.12062100000003,
+                16.993769999776532,
+                10.719205000596048,
+                24.792665999962765,
+                13.032905999850982,
+                13.912682000037307,
+                28.73203900052158,
+                18.810261000745072,
+                22.415436999925532,
+                12.10020499981374,
+                9.115429000186168,
+                18.869252999962782,
+                14.75194300029807,
+                2.079349000074444,
+                4.5452930001861205,
+                0.15500000026077032,
+                23.998649999255576,
+                14.145059999328623,
+                7.774731999776122,
+                14.055585999776667,
+                20.40183800048453,
+                15.20346000014888,
+                7.032350000707083,
+                25.64129100007449,
+                29.50913400011177,
+                18.992602999590417,
+                3.959185000520847,
+                21.667679999962274,
+                11.909295000036764,
+                13.69673400029842,
+                22.483177000595788,
+                21.939336000149524
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000,
+                5000000,
+                5033333,
+                5066667,
+                5100000,
+                5133333,
+                5166667,
+                5200000,
+                5233333,
+                5266667,
+                5300000,
+                5333333,
+                5366667,
+                5400000,
+                5433333,
+                5466667,
+                5500000,
+                5533333
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 39,
+            "rendered": 42,
+            "renderMs": 1.0450000017881393,
+            "copyMs": 0,
+            "maxRenderMs": 0.2649999996647239,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 77,
+              "frames": 67,
+              "receivedFrames": 67,
+              "closedFrames": 67,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 2,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 67,
+              "transferredFrames": 67,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 5.533333333333333,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 5.533333333333333,
+            "queuedFrames": 5376
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 67072,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "cleanup": {
+        "mode": "hybrid",
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": ""
+      }
+    },
+    {
+      "name": "legacy",
+      "passed": true,
+      "paused": {
+        "mode": "hybrid",
+        "position": 0.7,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 142,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 25
+            },
+            "presentation": {
+              "position": 0.7,
+              "received": 24,
+              "closed": 21,
+              "drawn": 22,
+              "redraws": 2,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                8.464968000335261,
+                15.165053000521539,
+                19.960237000000006,
+                11.598505999478448,
+                12.703210000484319,
+                19.63863400040981,
+                27.933529999553002,
+                16.590998999478472,
+                0.7153090004097749,
+                18.219189000409756,
+                18.954276999366698,
+                6.293602000037254,
+                2.5590929999254968,
+                5.880268999441228,
+                9.107023000484332,
+                18.646718999962786,
+                13.084181000148988,
+                26.026846999664713,
+                8.349924999888344,
+                12.25178299955303,
+                22.98089499944126,
+                13.470213000148988
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 22,
+            "rendered": 25,
+            "renderMs": 0.5099999979138374,
+            "copyMs": 0,
+            "maxRenderMs": 0.1600000001490116,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 26,
+              "frames": 19,
+              "receivedFrames": 19,
+              "closedFrames": 19,
+              "peakOutstanding": 8,
+              "peakFrames": 4,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 19,
+              "transferredFrames": 19,
+              "outstanding": 7,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.7,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.7,
+            "queuedFrames": 7168
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 37632,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "playing": {
+        "mode": "hybrid",
+        "position": 5.533333333333333,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 216,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 44
+            },
+            "presentation": {
+              "position": 5.533333,
+              "received": 73,
+              "closed": 70,
+              "drawn": 39,
+              "redraws": 2,
+              "peakRetained": 6,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                8.464968000335261,
+                15.165053000521539,
+                19.960237000000006,
+                11.598505999478448,
+                12.703210000484319,
+                19.63863400040981,
+                27.933529999553002,
+                16.590998999478472,
+                0.7153090004097749,
+                18.219189000409756,
+                18.954276999366698,
+                6.293602000037254,
+                2.5590929999254968,
+                5.880268999441228,
+                9.107023000484332,
+                18.646718999962786,
+                13.084181000148988,
+                26.026846999664713,
+                8.349924999888344,
+                12.25178299955303,
+                22.98089499944126,
+                13.470213000148988,
+                0.21999999973922968,
+                21.68768200040995,
+                10.774620000298455,
+                6.913603999515544,
+                10.542979999814634,
+                11.06150999966485,
+                24.46511100029784,
+                20.69112600007429,
+                31.689248000074258,
+                17.941616999478356,
+                5.38824499985094,
+                15.927974000074755,
+                16.109027000409696,
+                21.97233299988784,
+                8.841246000223691,
+                19.59582800052158,
+                21.650424000633393
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000,
+                5000000,
+                5033333,
+                5066667,
+                5100000,
+                5133333,
+                5166667,
+                5200000,
+                5233333,
+                5266667,
+                5300000,
+                5333333,
+                5366667,
+                5400000,
+                5433333,
+                5466667,
+                5500000,
+                5533333
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 39,
+            "rendered": 42,
+            "renderMs": 0.8549999939277768,
+            "copyMs": 0,
+            "maxRenderMs": 0.1600000001490116,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 82,
+              "frames": 72,
+              "receivedFrames": 72,
+              "closedFrames": 72,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 2,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 72,
+              "transferredFrames": 72,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 5.533333333333333,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 5.533333333333333,
+            "queuedFrames": 6656
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 66816,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "cleanup": {
+        "mode": "hybrid",
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": ""
+      }
+    },
+    {
+      "name": "reverse",
+      "passed": true,
+      "paused": {
+        "mode": "hybrid",
+        "position": 0.7333333333333333,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 142,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 26
+            },
+            "presentation": {
+              "position": 0.733333,
+              "received": 25,
+              "closed": 22,
+              "drawn": 23,
+              "redraws": 2,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                9.02027200040979,
+                9.170621000223548,
+                28.947569999850998,
+                5.207898000037233,
+                6.477929999254911,
+                9.67803400067055,
+                14.291102999813745,
+                18.03710299962745,
+                6.269340999851011,
+                6.800613000521594,
+                11.58042100078228,
+                27.62036499962744,
+                18.302993999701926,
+                21.907673999515737,
+                8.152335000186213,
+                11.708970000111776,
+                19.101039000335277,
+                18.868778000782413,
+                10.062047000633356,
+                12.076998999962711,
+                7.695708999664703,
+                13.825268999590207,
+                17.494653000298058
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000,
+                733333
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 23,
+            "rendered": 26,
+            "renderMs": 0.834999998100102,
+            "copyMs": 0,
+            "maxRenderMs": 0.26999999955296516,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 29,
+              "frames": 24,
+              "receivedFrames": 24,
+              "closedFrames": 24,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 24,
+              "transferredFrames": 24,
+              "outstanding": 5,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.7333333333333333,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0.7333333333333333,
+            "queuedFrames": 5376
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 38400,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "playing": {
+        "mode": "hybrid",
+        "position": 5.533333333333333,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 217,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 44
+            },
+            "presentation": {
+              "position": 5.533333,
+              "received": 74,
+              "closed": 71,
+              "drawn": 40,
+              "redraws": 2,
+              "peakRetained": 6,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                9.02027200040979,
+                9.170621000223548,
+                28.947569999850998,
+                5.207898000037233,
+                6.477929999254911,
+                9.67803400067055,
+                14.291102999813745,
+                18.03710299962745,
+                6.269340999851011,
+                6.800613000521594,
+                11.58042100078228,
+                27.62036499962744,
+                18.302993999701926,
+                21.907673999515737,
+                8.152335000186213,
+                11.708970000111776,
+                19.101039000335277,
+                18.868778000782413,
+                10.062047000633356,
+                12.076998999962711,
+                7.695708999664703,
+                13.825268999590207,
+                17.494653000298058,
+                0.35499999951571226,
+                24.942689999963477,
+                8.512465999478081,
+                13.673169000669986,
+                26.75561799958996,
+                8.137047999776769,
+                17.63076099985119,
+                20.247470000185785,
+                29.969384000409264,
+                15.058772000073986,
+                24.861007999366848,
+                8.367805999440861,
+                14.038491000186696,
+                13.584399000782469,
+                20.35704000007445,
+                8.336478999478459,
+                19.742074000074354
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000,
+                733333,
+                5000000,
+                5033333,
+                5066667,
+                5100000,
+                5133333,
+                5166667,
+                5200000,
+                5233333,
+                5266667,
+                5300000,
+                5333333,
+                5366667,
+                5400000,
+                5433333,
+                5466667,
+                5500000,
+                5533333
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 40,
+            "rendered": 43,
+            "renderMs": 1.1500000013038516,
+            "copyMs": 0,
+            "maxRenderMs": 0.26999999955296516,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 80,
+              "frames": 68,
+              "receivedFrames": 70,
+              "closedFrames": 70,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 2,
+              "errors": 0,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 68,
+              "transferredFrames": 68,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 5.533333333333333,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 5.533333333333333,
+            "queuedFrames": 6400
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 68096,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "cleanup": {
+        "mode": "hybrid",
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": ""
+      }
+    },
+    {
+      "name": "stalled decoder wakes native fallback and supports explicit Software recovery",
+      "passed": true,
+      "detectionMilliseconds": 4718.629375,
+      "failed": {
+        "mode": "hybrid",
+        "position": 1.6333333333333333,
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 403,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 49
+            },
+            "presentation": {
+              "position": 1.533333,
+              "received": 48,
+              "closed": 46,
+              "drawn": 47,
+              "redraws": 1,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                13.01960799981373,
+                10.950109000447014,
+                20.43361799959024,
+                11.673386000558821,
+                11.413498000111758,
+                16.770221000111803,
+                9.986527000409751,
+                5.168586000782284,
+                26.669997000186186,
+                8.800188999851002,
+                15.955197000298085,
+                5.673258000521628,
+                10.468218000819547,
+                15.830085000409781,
+                20.42484500026069,
+                10.903441999962752,
+                7.188218000074471,
+                7.575196999962827,
+                14.579852999739273,
+                12.13841000018624,
+                19.238250000894027,
+                21.25848999973914,
+                9.931838999701995,
+                21.956607000782242,
+                8.105341000409908,
+                25.721838999925467,
+                8.18687099996282,
+                10.196543000298107,
+                11.773578000111684,
+                20.54836199959027,
+                8.820927000707798,
+                15.941919999962693,
+                22.436790999925506,
+                30.2267910000744,
+                13.34522099970195,
+                17.75681600007465,
+                8.32031699992558,
+                14.975196999739183,
+                20.739317000186247,
+                9.343425999999909,
+                10.813569999925448,
+                24.09353800048416,
+                22.153178000074604,
+                15.985872000298059,
+                11.300300999254887,
+                25.66651999985106,
+                18.935124999478376
+              ],
+              "pts": [
+                0,
+                33333,
+                66667,
+                100000,
+                133333,
+                166667,
+                200000,
+                233333,
+                266667,
+                300000,
+                333333,
+                366667,
+                400000,
+                433333,
+                466667,
+                500000,
+                533333,
+                566667,
+                600000,
+                633333,
+                666667,
+                700000,
+                733333,
+                766667,
+                800000,
+                833333,
+                866667,
+                900000,
+                933333,
+                966667,
+                1000000,
+                1033333,
+                1066667,
+                1100000,
+                1133333,
+                1166667,
+                1200000,
+                1233333,
+                1266667,
+                1300000,
+                1333333,
+                1366667,
+                1400000,
+                1433333,
+                1466667,
+                1500000,
+                1533333
+              ],
+              "pixelChecks": [],
+              "retained": 2,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 47,
+            "rendered": 49,
+            "renderMs": 1.3649999964982271,
+            "copyMs": 0,
+            "maxRenderMs": 0.31499999947845936,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "decoderStats": {
+              "submitted": 56,
+              "frames": 48,
+              "receivedFrames": 54,
+              "closedFrames": 54,
+              "peakOutstanding": 8,
+              "peakFrames": 5,
+              "resets": 0,
+              "errors": 1,
+              "copyMs": 0,
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "placeholderFrames": 48,
+              "transferredFrames": 48,
+              "outstanding": 0,
+              "queued": 0,
+              "active": false
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 1.5333333333333332,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 1.5333333333333332,
+            "queuedFrames": 7424
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 243968,
+          "underruns": 154,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": [
+          "Error: Retained frame 1600000 did not arrive\n    at presentSelected (http://127.0.0.1:65109/stalled/web/filter-retained-engine-worker.js?mode=retained:63:115)\n    at tick (http://127.0.0.1:65109/stalled/web/filter-retained-engine-worker.js?mode=retained:188:7)\n    at http://127.0.0.1:65109/stalled/web/filter-retained-engine-worker.js?mode=retained:81:5",
+          "Hybrid decoder stopped. Reopen in software mode."
+        ]
+      },
+      "recovered": {
+        "mode": "software",
+        "position": 1.9,
+        "diagnostics": {
+          "mode": "software",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "rendered": 12,
+            "renderMs": 38.03500000014901,
+            "copyMs": 40.55499999970198,
+            "maxRenderMs": 7.990000000223517,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 1.9,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 1.9,
+            "queuedFrames": 6656
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 16384,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": [
+          "Error: Retained frame 1600000 did not arrive\n    at presentSelected (http://127.0.0.1:65109/stalled/web/filter-retained-engine-worker.js?mode=retained:63:115)\n    at tick (http://127.0.0.1:65109/stalled/web/filter-retained-engine-worker.js?mode=retained:188:7)\n    at http://127.0.0.1:65109/stalled/web/filter-retained-engine-worker.js?mode=retained:81:5",
+          "Hybrid decoder stopped. Reopen in software mode."
+        ]
+      },
+      "cleanup": {
+        "mode": "software",
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": ""
+      }
+    }
+  ],
+  "snapshot": {
+    "hinted": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 0
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+        "bytes": 7382647,
+        "hits": 0
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "57cf6d81ddc418e8e30cc2c381fa8680e72ce1ddb65c258eb51be0fbfe39fe3c",
+        "bytes": 8455,
+        "hits": 0
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0
+      }
+    },
+    "legacy": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 0
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+        "bytes": 7382647,
+        "hits": 0
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0
+      }
+    },
+    "reverse": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 0
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+        "bytes": 7096894,
+        "hits": 0
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "57cf6d81ddc418e8e30cc2c381fa8680e72ce1ddb65c258eb51be0fbfe39fe3c",
+        "bytes": 8455,
+        "hits": 0
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0
+      }
+    },
+    "stalled": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 0
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+        "bytes": 7382647,
+        "hits": 0
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "862b3ffa6cbc1ce5ce1737d11fa1df29571e85f0d02d1d28e21b0e56fe9153cb",
+        "bytes": 8509,
+        "hits": 0
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0
+      }
+    }
+  },
+  "browser": "152.0.7977.76",
+  "snapshotAfter": {
+    "hinted": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 1
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 1
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 1
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 9
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+        "bytes": 7382647,
+        "hits": 1
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "57cf6d81ddc418e8e30cc2c381fa8680e72ce1ddb65c258eb51be0fbfe39fe3c",
+        "bytes": 8455,
+        "hits": 1
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 1
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 1
+      }
+    },
+    "legacy": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 1
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 1
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 1
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 9
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+        "bytes": 7382647,
+        "hits": 1
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 1
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 1
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 1
+      }
+    },
+    "reverse": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 1
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 1
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 1
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 9
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+        "bytes": 7096894,
+        "hits": 1
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "57cf6d81ddc418e8e30cc2c381fa8680e72ce1ddb65c258eb51be0fbfe39fe3c",
+        "bytes": 8455,
+        "hits": 1
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 1
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 1
+      }
+    },
+    "stalled": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 1
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 1
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 1
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 1
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 9
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 1
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 9
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+        "bytes": 7382647,
+        "hits": 1
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "862b3ffa6cbc1ce5ce1737d11fa1df29571e85f0d02d1d28e21b0e56fe9153cb",
+        "bytes": 8509,
+        "hits": 1
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 2
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 1
+      }
+    }
+  },
+  "hashesAfter": {
+    "tests/hybrid-hints-runtime.mjs": "d964db15c1841fe0c6bc9346a75858146c5ea2224cae3dc143c49e6fa008d020",
+    "experiments/playback-performance/serve.mjs": "3ec630a88226f187f05f0129a0de18afd238da591d9e119983eaf15b1eb2289c",
+    "build/hybrid-performance/sample.mp4": "cf07e7c5fe25d2b1e4ed1bb8a9f32ce59f428bc61eeea2222d858ae066399de7",
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "build/playback-performance/decoder-hints/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "build/playback-performance/decoder-hints/player.wasm": "739da0f38a346f6138cfdc3dd8c02515ad7f340d11882651ca321637867a0a92",
+    "build/playback-performance/decoder-hints/worker.js": "57cf6d81ddc418e8e30cc2c381fa8680e72ce1ddb65c258eb51be0fbfe39fe3c",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "build/playback-performance/baseline/web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "results/playback-performance/hints-runtime-2026-09-08T14-03-15.461Z/stalled-decoder.js": "862b3ffa6cbc1ce5ce1737d11fa1df29571e85f0d02d1d28e21b0e56fe9153cb"
+  },
+  "passed": true,
+  "finished": "2026-09-08T14:04:02.994Z"
+}

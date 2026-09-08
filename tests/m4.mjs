@@ -2,9 +2,18 @@ import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {spawn} from 'node:child_process';
 const output=`results/m4/browser-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(output,{recursive:true});
-const browser=await chromium.launch({channel:'chrome',headless:false,ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required']});
+const performanceConfig=process.env.WEBMPV_PERFORMANCE_CONFIG;
+let server,origin=process.env.WEBMPV_ORIGIN||'http://127.0.0.1:4179';
+if(performanceConfig){
+ server=spawn(process.execPath,['experiments/playback-performance/serve.mjs',performanceConfig],{env:{...process.env,PORT:'0',DEFAULT_MOUNT:'candidate'},stdio:['ignore','pipe','inherit']});
+ origin=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('App server timeout')),10000);server.once('error',reject);server.stdout.on('data',bytes=>{const match=/http:\/\/127\.0\.0\.1:\d+/.exec(String(bytes));if(match){clearTimeout(timer);resolve(match[0]);}});});
+}
+const browser=await chromium.launch({channel:'chrome',headless:process.env.HEADLESS==='1',ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required']});
 const page=await browser.newPage(),result={scope:'M4 integrated copy-back and fallback',tests:[],passed:false},logs=[];
+result.headless=process.env.HEADLESS==='1';result.browser=browser.version();
+if(performanceConfig)result.assetSnapshot=await(await fetch(origin+'/__metadata')).json();
 page.on('console',m=>logs.push(m.text()));page.on('pageerror',e=>logs.push(String(e)));
 async function check(name,fn){console.log(`RUN ${name}`);const evidence=await fn();result.tests.push({name,passed:true,evidence});console.log(`PASS ${name}`);}
 async function open(options){await page.evaluate(async options=>{
@@ -16,7 +25,7 @@ async function pixels(){return page.evaluate(()=>{const c=document.createElement
 async function at(position){await page.evaluate(async position=>{await player.pause();await player.seek(position);},position);await page.waitForFunction(position=>!player.diagnostics.seeking&&Math.abs(player.diagnostics.presentedPosition-position)<0.2,position,{timeout:15000});await page.waitForTimeout(300);}
 async function cleanup(){await page.evaluate(()=>player.destroy());for(let i=0;i<50&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);const stats=await page.evaluate(()=>player.diagnostics?.decoderStats);if(stats){assert.equal(stats.active,false);assert.equal(stats.queued,0);assert.equal(stats.outstanding,0);assert.equal(stats.closedFrames,stats.receivedFrames);}}
 try{
- await page.goto('http://127.0.0.1:4179/web/index.html');
+ await page.goto(origin+'/web/index.html');
  for(const options of [{},{disableBrowserCodecs:true},{decoderFaultAfter:12}]){
   await check(JSON.stringify(options),async()=>{
    await open(options);
@@ -51,6 +60,7 @@ try{
  result.passed=true;
 }catch(error){result.failure=String(error.stack||error);console.error(result.failure);try{result.diagnostics=await page.evaluate(()=>player?.diagnostics);result.workers=page.workers().map(w=>w.url());}catch{}process.exitCode=1;}
 finally{
+ if(performanceConfig)result.assetSnapshotFinal=await(await fetch(origin+'/__metadata')).json();
  for(const f of ['web/engine-m4/player.wasm','web/engine-m4/player.mjs','native/vd_browser.c','web/browser-decoder-worker.js','web/engine-worker.js']) (result.hashes??={})[f]=createHash('sha256').update(await readFile(f)).digest('hex');
- await writeFile(`${output}/result.json`,JSON.stringify(result,null,2)+'\n');await writeFile(`${output}/console.json`,JSON.stringify(logs,null,2)+'\n');await browser.close();console.log(output);
+ await writeFile(`${output}/result.json`,JSON.stringify(result,null,2)+'\n');await writeFile(`${output}/console.json`,JSON.stringify(logs,null,2)+'\n');await browser.close();server?.kill();console.log(output);
 }

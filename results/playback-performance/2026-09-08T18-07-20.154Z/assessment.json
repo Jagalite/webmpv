@@ -1,0 +1,97 @@
+{
+  "source": "results/playback-performance/2026-09-08T18-07-20.154Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/bbb-stream.mp4",
+  "mode": "hybrid",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 2,
+      "passed": 2,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 16.804917779743704,
+        "median": 16.804917779743704,
+        "min": 14.627652920333368,
+        "max": 18.982182639154036
+      },
+      "pausedCpuPercent": {
+        "mean": 3.3612094084422153,
+        "median": 3.3612094084422153,
+        "min": 2.3951097804390296,
+        "max": 4.327309036445401
+      },
+      "rssMean": {
+        "mean": 1005465284.9230769,
+        "median": 1005465284.9230769,
+        "min": 957978781.5384616,
+        "max": 1052951788.3076923
+      },
+      "renderMs": {
+        "mean": 29.14249998703599,
+        "median": 29.14249998703599,
+        "min": 22.849999897181988,
+        "max": 35.43500007688999
+      },
+      "copyMs": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "measuredSeconds": 120.352,
+      "frames": 3612,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "07d35e47e0f36f0821e9af099e91769a05d4b2cc3c141331c857e4adf2447c5d"
+      ]
+    },
+    "candidate": {
+      "trials": 2,
+      "passed": 2,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 18.456357278481555,
+        "median": 18.456357278481555,
+        "min": 12.034115025113923,
+        "max": 24.87859953184919
+      },
+      "pausedCpuPercent": {
+        "mean": 2.451307614637794,
+        "median": 2.451307614637794,
+        "min": 1.3217673489764232,
+        "max": 3.580847880299165
+      },
+      "rssMean": {
+        "mean": 1051687069.5384614,
+        "median": 1051687069.5384614,
+        "min": 940827254.1538461,
+        "max": 1162546884.9230769
+      },
+      "renderMs": {
+        "mean": 29.5800000410527,
+        "median": 29.5800000410527,
+        "min": 17.09500002488494,
+        "max": 42.06500005722046
+      },
+      "copyMs": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "measuredSeconds": 120.363,
+      "frames": 3612,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "07d35e47e0f36f0821e9af099e91769a05d4b2cc3c141331c857e4adf2447c5d"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": -9.827120372635578,
+    "minimumTrialsPerVariant": 2,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate isolated software bindings from the unchanged production bindings."""
 from pathlib import Path
+import runpy
 root = Path(__file__).resolve().parents[2]
 
 def replace_once(text, before, after):
@@ -11,6 +12,7 @@ worker = (root/'web/engine-worker.js').read_text()
 worker = replace_once(worker,
     "const createEngine=(await import(data.decoder==='webcodecs'?'./engine-m4/player.mjs':'./engine/player.mjs')).default;",
     "if(data.decoder!=='software')throw Error('This build supports software decoding only');\n      const createEngine=(await import('./engine-software-full/player.mjs')).default;")
+worker=runpy.run_path(str(root/'experiments/software-full/scheduler.py'))['schedule_software_worker'](worker)
 (root/'web/software-full-engine-worker.js').write_text(worker)
 player = (root/'web/generated/player.js').read_text()
 player = replace_once(player, "'../engine-worker.js'", "'../software-full-engine-worker.js'")

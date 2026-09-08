@@ -1,0 +1,23 @@
+results/playback-performance/2026-09-08T15-50-39.068Z
+node:internal/errors:540
+      throw error;
+      ^
+
+RangeError [ERR_OUT_OF_RANGE]: The value of "fd" is out of range. It must be >= 0 && <= 2147483647. Received -1
+    at new ReadStream (node:internal/fs/streams:187:15)
+    at FileHandle.createReadStream (node:internal/fs/promises:363:12)
+    at Server.<anonymous> (file:///Volumes/seed2/Projects/webmpv/experiments/playback-performance/range-origin.mjs:31:47)
+    at Server.emit (node:events:513:28)
+    at parserOnIncoming (node:_http_server:1153:12)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17) {
+  code: 'ERR_OUT_OF_RANGE'
+}
+
+Node.js v23.5.0
+native Error: page.evaluate: Error: Native loadeddata timed out
+    at http://127.0.0.1:53963/native/web/generated/internal/native-player.js:51:51
+baseline Error: page.evaluate: Error: Media read retry deadline exceeded
+    at worker.onmessage (http://127.0.0.1:53963/baseline/web/generated/internal/wasm-player.js:60:35)
+candidate Error: page.evaluate: Error: Media read retry deadline exceeded
+    at worker.onmessage (http://127.0.0.1:53963/candidate/web/generated/internal/wasm-player.js:60:35)
+TypeError: fetch failed

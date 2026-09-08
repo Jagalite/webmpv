@@ -1,0 +1,451 @@
+✔ PCM ring wraps and handles actual output quantum length (1.413833ms)
+✔ underrun silence never advances media consumption (0.71725ms)
+✔ pause and generation reset suppress queued stale PCM (1.238958ms)
+✔ closed output processor releases its processing lifetime (0.370333ms)
+✔ eight pending inputs apply backpressure before the ninth packet (2.747875ms)
+✔ copy-back preserves timestamp/color and closes its source exactly once (0.592792ms)
+✔ stale copy completion cannot publish into a replacement request (0.445875ms)
+✔ reset closes queued frames and rejects late generation output (0.47025ms)
+✔ EOF waits for queued output; close releases each remaining frame (0.450875ms)
+✔ close preempts an unfinished copy and closes its frame immediately (0.428166ms)
+✔ a request published immediately after acknowledgment runs without another notification (3.924167ms)
+✖ 64-bit positions and bounded LRU (18.543333ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:6:63)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ unaligned misses start at the requested byte and inner reads reuse the bounded window (2.077167ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:8:17)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject ignore-range (0.996625ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject bad-range (0.833625ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject encoded (0.822334ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ reject forbidden (0.692375ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ representation changes are terminal (1.177041ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:23:66)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ recover truncate without false EOF (0.855875ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ recover retry without false EOF (2.2145ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ 401 renewal and default redirect rejection (0.87825ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:25:73)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✖ supersede blocked read and reuse source; close cancels (0.612167ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:26:88)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+✔ ordinary 200 resource, relative URL, bounded reads and close accounting (13.029125ms)
+✔ explicit range preserves absolute resource offsets and total size (0.723541ms)
+✔ requested ranges reject 200, malformed ranges and changed lengths (0.784792ms)
+✔ origin, protocol, embedded credentials and URL length are checked before fetch (0.491875ms)
+✔ nested authorization refresh receives resource URL and updates only that request (1.067375ms)
+✔ refresh cannot redirect credentials to an unapproved origin (0.369917ms)
+✔ bounded transient HTTP retry and truncation recovery (305.178ms)
+✔ unknown-length bodies cannot exceed media resource cap (2.252709ms)
+✔ aggregate retention limit is enforced across handles and reclaimed on close (9.275334ms)
+✔ handle count is bounded independently of body size (1.272083ms)
+✔ destroy cancels pending authorization and rejects stale completion (0.311792ms)
+✔ epoch cancellation discards a response even if transport ignores abort (0.23775ms)
+✔ manifest admission rejects live, encrypted and adaptive HLS (0.5605ms)
+✔ DASH admission accepts fixed static and rejects live, adaptive, entities and multiple periods (0.693958ms)
+✔ HLS subtitle policy admits one full-timeline resource and rejects segmented subtitles (1.521125ms)
+✔ fixed HLS discontinuities remain native timeline input (0.299416ms)
+✔ DASH timeline and template resource counts are bounded (0.267208ms)
+✔ 16:9 video is centered inside 4:3 canvas (0.804834ms)
+✔ anamorphic pixels use the demux sample aspect ratio (0.140667ms)
+✔ rotated video fits the canvas and restores subtitle coordinates (0.1315ms)
+✔ unchanged observations do not repeatedly wake the engine worker (0.829125ms)
+✔ changed latency and AudioContext state are delivered immediately (0.156708ms)
+✔ post-initialization handoff republishes state even if an early message was ignored (0.092291ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 34
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 637.7685
+
+✖ failing tests:
+
+test at tests/range-reader.mjs:6:1
+✖ 64-bit positions and bounded LRU (18.543333ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:6:63)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:7:1
+✖ unaligned misses start at the requested byte and inner reads reuse the bounded window (2.077167ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:8:17)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject ignore-range (0.996625ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject bad-range (0.833625ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject encoded (0.822334ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:22:70
+✖ reject forbidden (0.692375ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:22:114)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:23:1
+✖ representation changes are terminal (1.177041ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:23:66)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:24:40
+✖ recover truncate without false EOF (0.855875ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:24:40
+✖ recover retry without false EOF (2.2145ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:24:103)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:25:1
+✖ 401 renewal and default redirect rejection (0.87825ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:25:73)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }
+
+test at tests/range-reader.mjs:26:1
+✖ supersede blocked read and reuse source; close cancels (0.612167ms)
+  TypeError [Error]: fetch failed
+      at node:internal/deps/undici/undici:13484:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async setup (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:5:90)
+      at async TestContext.<anonymous> (file:///Volumes/seed2/Projects/webmpv/tests/range-reader.mjs:26:88)
+      at async Test.run (node:internal/test_runner/test:932:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:629:7) {
+    [cause]: Error: connect ECONNREFUSED 127.0.0.1:4180
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1634:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 4180
+    }
+  }

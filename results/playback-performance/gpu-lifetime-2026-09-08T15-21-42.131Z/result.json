@@ -1,0 +1,578 @@
+{
+  "tests": [
+    {
+      "name": "weak",
+      "rounds": 1,
+      "state": {
+        "mode": "hybrid",
+        "position": 0,
+        "quality": {
+          "frameDrops": 0,
+          "decoderDrops": 0,
+          "avsync": 0
+        },
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "presenter": "webgpu",
+            "gpuStats": {
+              "draws": 4,
+              "videoImports": 1,
+              "overlayUploads": 0,
+              "overlayBytes": 0,
+              "peakTiles": 0
+            },
+            "pumpTicks": 56,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 5
+            },
+            "presentation": {
+              "position": 0,
+              "received": 3,
+              "closed": 0,
+              "drawn": 1,
+              "redraws": 3,
+              "peakRetained": 3,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                10.129992000223524
+              ],
+              "pts": [
+                0
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 1,
+            "rendered": 5,
+            "renderMs": 0.36500000208616257,
+            "copyMs": 0,
+            "maxRenderMs": 0.18999999947845936,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 8,
+              "frames": 0,
+              "receivedFrames": 0,
+              "closedFrames": 0,
+              "peakOutstanding": 8,
+              "peakFrames": 0,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 7424
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 768,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": [
+          "WebGPU presentation error: Destroyed texture [Texture \"IOSurface(Gles2Read|RasterRead|DisplayRead|Scanout|WebgpuRead|MacosVideoToolbox)\"] used in a submit.\n - While calling [Queue].Submit([[CommandBuffer]])\n"
+        ]
+      },
+      "workersAfter": 0,
+      "expectedOutcome": "Destroyed texture error",
+      "passed": true
+    },
+    {
+      "name": "fixed",
+      "rounds": 8,
+      "state": {
+        "mode": "hybrid",
+        "position": 0,
+        "quality": {
+          "frameDrops": 0,
+          "decoderDrops": 0,
+          "avsync": 0
+        },
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "presenter": "webgpu",
+            "gpuStats": {
+              "draws": 11,
+              "videoImports": 1,
+              "overlayUploads": 0,
+              "overlayBytes": 0,
+              "peakTiles": 0
+            },
+            "pumpTicks": 196,
+            "subtitles": {
+              "updates": 9,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 12
+            },
+            "presentation": {
+              "position": 0,
+              "received": 3,
+              "closed": 0,
+              "drawn": 1,
+              "redraws": 10,
+              "peakRetained": 3,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                1.9842719997764675
+              ],
+              "pts": [
+                0
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 1,
+            "rendered": 12,
+            "renderMs": 0.6099999956786633,
+            "copyMs": 0,
+            "maxRenderMs": 0.14999999850988388,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 8,
+              "frames": 0,
+              "receivedFrames": 0,
+              "closedFrames": 0,
+              "peakOutstanding": 8,
+              "peakFrames": 0,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 7552
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 640,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "workersAfter": 0,
+      "expectedOutcome": "Eight clean garbage-collection/redraw cycles",
+      "passed": true
+    },
+    {
+      "name": "weak",
+      "rounds": 1,
+      "state": {
+        "mode": "hybrid",
+        "position": 0,
+        "quality": {
+          "frameDrops": 0,
+          "decoderDrops": 0,
+          "avsync": 0
+        },
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "presenter": "webgpu",
+            "gpuStats": {
+              "draws": 4,
+              "videoImports": 1,
+              "overlayUploads": 0,
+              "overlayBytes": 0,
+              "peakTiles": 0
+            },
+            "pumpTicks": 44,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 5
+            },
+            "presentation": {
+              "position": 0,
+              "received": 3,
+              "closed": 0,
+              "drawn": 1,
+              "redraws": 3,
+              "peakRetained": 3,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                3.814431999776474
+              ],
+              "pts": [
+                0
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 1,
+            "rendered": 5,
+            "renderMs": 0.3200000002980232,
+            "copyMs": 0,
+            "maxRenderMs": 0.15499999932944775,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 8,
+              "frames": 0,
+              "receivedFrames": 0,
+              "closedFrames": 0,
+              "peakOutstanding": 8,
+              "peakFrames": 0,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 7680
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 512,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": [
+          "WebGPU presentation error: Destroyed texture [Texture \"IOSurface(Gles2Read|RasterRead|DisplayRead|Scanout|WebgpuRead|MacosVideoToolbox)\"] used in a submit.\n - While calling [Queue].Submit([[CommandBuffer]])\n"
+        ]
+      },
+      "workersAfter": 0,
+      "expectedOutcome": "Destroyed texture error",
+      "passed": true
+    },
+    {
+      "name": "fixed",
+      "rounds": 8,
+      "state": {
+        "mode": "hybrid",
+        "position": 0,
+        "quality": {
+          "frameDrops": 0,
+          "decoderDrops": 0,
+          "avsync": 0
+        },
+        "diagnostics": {
+          "mode": "hybrid",
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "presenter": "webgpu",
+            "gpuStats": {
+              "draws": 11,
+              "videoImports": 1,
+              "overlayUploads": 0,
+              "overlayBytes": 0,
+              "peakTiles": 0
+            },
+            "pumpTicks": 196,
+            "subtitles": {
+              "updates": 9,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 12
+            },
+            "presentation": {
+              "position": 0,
+              "received": 3,
+              "closed": 0,
+              "drawn": 1,
+              "redraws": 10,
+              "peakRetained": 3,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                3.0750959992549554
+              ],
+              "pts": [
+                0
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 1,
+            "rendered": 12,
+            "renderMs": 0.5750000011175871,
+            "copyMs": 0,
+            "maxRenderMs": 0.2050000000745058,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 8,
+              "frames": 0,
+              "receivedFrames": 0,
+              "closedFrames": 0,
+              "peakOutstanding": 8,
+              "peakFrames": 0,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 0,
+            "interruptions": 0,
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 7680
+          }
+        },
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 512,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "errors": []
+      },
+      "workersAfter": 0,
+      "expectedOutcome": "Eight clean garbage-collection/redraw cycles",
+      "passed": true
+    }
+  ],
+  "browser": "152.0.7977.76",
+  "passed": true,
+  "assets": {
+    "fixed": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 2,
+        "source": "web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "08bba87ee604aad10127647425d62e916e2d0311cca85124973d166b74285970",
+        "bytes": 27059,
+        "hits": 2,
+        "source": "build/playback-performance/decoder-strict/gpu-worker.js",
+        "snapshotFile": "build/playback-performance/assets/08bba87ee604aad10127647425d62e916e2d0311cca85124973d166b74285970.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 2,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0,
+        "source": "web/software-full-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0,
+        "source": "web/engine-software-full/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0,
+        "source": "web/engine-software-full/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "dad4b5b00be0d2ab712a735628dc2befa1ab37f1a8c09c034bf1b8c2e0605faa",
+        "bytes": 54262,
+        "hits": 18,
+        "source": "build/playback-performance/decoder-strict/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/dad4b5b00be0d2ab712a735628dc2befa1ab37f1a8c09c034bf1b8c2e0605faa.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "669ac76092d3fa25f638a6a501e8f92ab6750c0cdb3941766dc897a125f5cbe1",
+        "bytes": 7382968,
+        "hits": 2,
+        "source": "build/playback-performance/decoder-strict/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/669ac76092d3fa25f638a6a501e8f92ab6750c0cdb3941766dc897a125f5cbe1.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 2,
+        "source": "web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 2,
+        "source": "web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 2,
+        "source": "web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    },
+    "weak": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 2,
+        "source": "web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "f0a0c81286d1ae0bbd750b941af1e2c531464d605429b2c8f77e6c1477b3f2d1",
+        "bytes": 27033,
+        "hits": 2,
+        "source": "results/playback-performance/gpu-lifetime-2026-09-08T15-21-42.131Z/weak-worker.js",
+        "snapshotFile": "build/playback-performance/assets/f0a0c81286d1ae0bbd750b941af1e2c531464d605429b2c8f77e6c1477b3f2d1.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+        "bytes": 15098,
+        "hits": 2,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+        "bytes": 12070,
+        "hits": 0,
+        "source": "web/software-full-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+        "bytes": 53315,
+        "hits": 0,
+        "source": "web/engine-software-full/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+        "bytes": 20720845,
+        "hits": 0,
+        "source": "web/engine-software-full/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "dad4b5b00be0d2ab712a735628dc2befa1ab37f1a8c09c034bf1b8c2e0605faa",
+        "bytes": 54262,
+        "hits": 18,
+        "source": "build/playback-performance/decoder-strict/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/dad4b5b00be0d2ab712a735628dc2befa1ab37f1a8c09c034bf1b8c2e0605faa.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "669ac76092d3fa25f638a6a501e8f92ab6750c0cdb3941766dc897a125f5cbe1",
+        "bytes": 7382968,
+        "hits": 2,
+        "source": "build/playback-performance/decoder-strict/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/669ac76092d3fa25f638a6a501e8f92ab6750c0cdb3941766dc897a125f5cbe1.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 2,
+        "source": "web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 2,
+        "source": "web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 2,
+        "source": "web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    }
+  }
+}

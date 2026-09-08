@@ -1,0 +1,891 @@
+results/playback-performance/final-features-2026-09-08T21-49-57.442Z
+RUN software-1080p60
+{
+  "source": "results/playback-performance/2026-09-08T21-49-58.031Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/h264-1080p60.mp4",
+  "mode": "software",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 79.08823860278073,
+        "median": 78.99882026371293,
+        "min": 76.78850880106276,
+        "max": 81.5668050826343
+      },
+      "pausedCpuPercent": {
+        "mean": 5.945664572363483,
+        "median": 5.975257006494376,
+        "min": 3.362434179830705,
+        "max": 8.469710096634474
+      },
+      "rssMean": {
+        "mean": 1013134482.2857143,
+        "median": 887335204.5714285,
+        "min": 870098066.2857143,
+        "max": 1407769453.7142856
+      },
+      "renderMs": {
+        "mean": 1620.4949999582022,
+        "median": 1602.4974999539554,
+        "min": 1538.9399999007583,
+        "max": 1738.0450000241399
+      },
+      "copyMs": {
+        "mean": 1389.1537500116974,
+        "median": 1390.5074999853969,
+        "min": 1344.8350000977516,
+        "max": 1430.7649999782443
+      },
+      "measuredSeconds": 48.175,
+      "frames": 2881,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "eb6f78595cddfd13de89f15497abcad9bae7d102c0f107f490ae3318438d35e6"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 70.51359188607984,
+        "median": 69.67729175455017,
+        "min": 68.17332004319304,
+        "max": 74.52646399202595
+      },
+      "pausedCpuPercent": {
+        "mean": 5.2356051949225435,
+        "median": 5.172518727837133,
+        "min": 3.560606464511821,
+        "max": 7.036776859504086
+      },
+      "rssMean": {
+        "mean": 921461906.2857143,
+        "median": 886748891.4285715,
+        "min": 866034834.2857143,
+        "max": 1046315008
+      },
+      "renderMs": {
+        "mean": 1554.1587499473244,
+        "median": 1533.8699999377131,
+        "min": 1464.439999975264,
+        "max": 1684.4549999386072
+      },
+      "copyMs": {
+        "mean": 1348.470000013709,
+        "median": 1333.7974999435246,
+        "min": 1270.0250000581145,
+        "max": 1456.2600001096725
+      },
+      "measuredSeconds": 48.174,
+      "frames": 2895,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "eb6f78595cddfd13de89f15497abcad9bae7d102c0f107f490ae3318438d35e6"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": 10.841873416560588,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T21-49-58.031Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 15.627282649695372,
+        "audio.mojom.AudioService": 0.8305348060825579,
+        "browser": 0.09308789381050557,
+        "network.mojom.NetworkService": 0.00508475334855105,
+        "renderer": 62.53089068277059,
+        "storage.mojom.StorageService": 0.0013578170731800513
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 15.796182382579413,
+        "audio.mojom.AudioService": 0.89942848005568,
+        "browser": 0.05311916413885096,
+        "network.mojom.NetworkService": 0.0016132063963388572,
+        "renderer": 53.761863816850955,
+        "storage.mojom.StorageService": 0.0013848360586086194
+      }
+    }
+  }
+}
+PASS software-1080p60
+RUN software-h264-10bit
+{
+  "source": "results/playback-performance/2026-09-08T21-54-38.416Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/h264-10bit.mkv",
+  "mode": "software",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 35.809255873329086,
+        "median": 36.28634385538994,
+        "min": 31.705231304924542,
+        "max": 38.95910447761194
+      },
+      "pausedCpuPercent": {
+        "mean": 6.168897239882907,
+        "median": 6.506979062811562,
+        "min": 4.51048427358949,
+        "max": 7.151146560319015
+      },
+      "rssMean": {
+        "mean": 1242530962.2857141,
+        "median": 1254047744.0,
+        "min": 1163474651.4285715,
+        "max": 1298553709.7142856
+      },
+      "renderMs": {
+        "mean": 913.050000037998,
+        "median": 936.0825000219047,
+        "min": 809.400000013411,
+        "max": 970.6350000947714
+      },
+      "copyMs": {
+        "mean": 171.54374992102385,
+        "median": 171.5199999064207,
+        "min": 155.47999998182058,
+        "max": 187.65499988943338
+      },
+      "measuredSeconds": 48.242999999999995,
+      "frames": 1440,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "e2ed96e8c31e0b378e5c4c963e0546c2b77aafbe9b9f9d7662d7ecb9129bfa5c"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 30.0570636476953,
+        "median": 31.65080404509286,
+        "min": 18.407698696121574,
+        "max": 38.51894780447391
+      },
+      "pausedCpuPercent": {
+        "mean": 4.519602102588687,
+        "median": 5.281472672800024,
+        "min": 1.7517224163755556,
+        "max": 5.763740648379143
+      },
+      "rssMean": {
+        "mean": 1230240621.7142856,
+        "median": 1235694153.142857,
+        "min": 1125285888,
+        "max": 1324288292.5714285
+      },
+      "renderMs": {
+        "mean": 740.5174999963492,
+        "median": 790.1849999763072,
+        "min": 422.31000004708767,
+        "max": 959.3899999856949
+      },
+      "copyMs": {
+        "mean": 150.59249999560416,
+        "median": 162.07499996572733,
+        "min": 94.59499999135733,
+        "max": 183.62500005960464
+      },
+      "measuredSeconds": 48.239000000000004,
+      "frames": 1450,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "e2ed96e8c31e0b378e5c4c963e0546c2b77aafbe9b9f9d7662d7ecb9129bfa5c"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": 16.06342294847307,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T21-54-38.416Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 5.909330031597893,
+        "audio.mojom.AudioService": 0.680352429819866,
+        "browser": 0.11655929336297796,
+        "network.mojom.NetworkService": 0.008593759021683259,
+        "renderer": 29.09261696698378,
+        "storage.mojom.StorageService": 0.001803392542896975
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 5.237332681839045,
+        "audio.mojom.AudioService": 0.617072857262758,
+        "browser": 0.2090960425112388,
+        "network.mojom.NetworkService": 0.03176710685157592,
+        "renderer": 23.95747725917219,
+        "storage.mojom.StorageService": 0.004317700058487487
+      }
+    }
+  }
+}
+PASS software-h264-10bit
+RUN software-hevc-10bit
+{
+  "source": "results/playback-performance/2026-09-08T21-57-33.067Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/hevc-10bit.mkv",
+  "mode": "software",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 22.780364832924732,
+        "median": 19.03477644789087,
+        "min": 18.817498546632358,
+        "max": 34.23440788928483
+      },
+      "pausedCpuPercent": {
+        "mean": 3.530958937810106,
+        "median": 3.437668497254073,
+        "min": 2.5457542457542655,
+        "max": 4.702744510978013
+      },
+      "rssMean": {
+        "mean": 1110697106.2857144,
+        "median": 1091916361.142857,
+        "min": 969602779.4285715,
+        "max": 1289352923.4285715
+      },
+      "renderMs": {
+        "mean": 470.48249998502433,
+        "median": 357.54500006884336,
+        "min": 351.2649998739362,
+        "max": 815.5749999284744
+      },
+      "copyMs": {
+        "mean": 103.68499996140599,
+        "median": 88.2449999935925,
+        "min": 84.58999987691641,
+        "max": 153.65999998152256
+      },
+      "measuredSeconds": 48.197,
+      "frames": 1441,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "004884565c9277aa0bd6c33cffe7f2b118194b8fc2c60cde29271b459b4ea85b"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 21.35054951875503,
+        "median": 18.07575964887865,
+        "min": 17.4457218807111,
+        "max": 31.804956896551733
+      },
+      "pausedCpuPercent": {
+        "mean": 2.5932809182028684,
+        "median": 2.7520253976855047,
+        "min": 1.7264867566216577,
+        "max": 3.142586120818807
+      },
+      "rssMean": {
+        "mean": 1154909915.4285715,
+        "median": 1107141778.2857141,
+        "min": 1094420772.5714285,
+        "max": 1310935332.5714285
+      },
+      "renderMs": {
+        "mean": 450.12625002861023,
+        "median": 355.28999998420477,
+        "min": 352.5200001001358,
+        "max": 737.4050000458956
+      },
+      "copyMs": {
+        "mean": 104.1512499563396,
+        "median": 87.54749994724989,
+        "min": 85.69499994814396,
+        "max": 155.81499998271465
+      },
+      "measuredSeconds": 48.188,
+      "frames": 1444,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "004884565c9277aa0bd6c33cffe7f2b118194b8fc2c60cde29271b459b4ea85b"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": 6.276525089287299,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T21-57-33.067Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 4.506308411377897,
+        "audio.mojom.AudioService": 0.6979131485212625,
+        "browser": 0.08964101758199482,
+        "network.mojom.NetworkService": 0.012973609520431709,
+        "renderer": 17.47270686227796,
+        "storage.mojom.StorageService": 0.0008217836451848981
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 4.109252671545523,
+        "audio.mojom.AudioService": 0.6328993395024833,
+        "browser": 0.17156798237328197,
+        "network.mojom.NetworkService": 0.013026395227177278,
+        "renderer": 16.42084490116186,
+        "storage.mojom.StorageService": 0.0029582289447130667
+      }
+    }
+  }
+}
+PASS software-hevc-10bit
+RUN software-vp9
+{
+  "source": "results/playback-performance/2026-09-08T22-00-28.398Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/vp9-30fps.webm",
+  "mode": "software",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 22.19035102584339,
+        "median": 20.931233746092225,
+        "min": 14.981233975684386,
+        "max": 31.917702635504725
+      },
+      "pausedCpuPercent": {
+        "mean": 3.145685374248724,
+        "median": 2.1410669228540984,
+        "min": 1.9295852073963171,
+        "max": 6.371022443890381
+      },
+      "rssMean": {
+        "mean": 1108881408.0,
+        "median": 1141976502.857143,
+        "min": 952116370.2857143,
+        "max": 1199456256
+      },
+      "renderMs": {
+        "mean": 165.37750001996756,
+        "median": 153.99500001594424,
+        "min": 96.38000001758337,
+        "max": 257.14000003039837
+      },
+      "copyMs": {
+        "mean": 131.33125002123415,
+        "median": 122.4400000050664,
+        "min": 86.17500002682209,
+        "max": 194.27000004798174
+      },
+      "measuredSeconds": 48.268,
+      "frames": 1446,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "adeb41e33e59c9adfb13b86ae4ded67613c85326d5577518d1e5c6a79cb8d44d"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 23.591796380690255,
+        "median": 24.685734015191166,
+        "min": 13.136037532176367,
+        "max": 31.85967996020232
+      },
+      "pausedCpuPercent": {
+        "mean": 3.253169871515102,
+        "median": 2.547275851956316,
+        "min": 1.7804097951024462,
+        "max": 6.13771798704533
+      },
+      "rssMean": {
+        "mean": 1192131437.7142859,
+        "median": 1193220973.7142859,
+        "min": 1140162560,
+        "max": 1241921243.4285715
+      },
+      "renderMs": {
+        "mean": 189.04875002801418,
+        "median": 193.06500005349517,
+        "min": 90.8449999243021,
+        "max": 279.2200000807643
+      },
+      "copyMs": {
+        "mean": 146.23499999195337,
+        "median": 155.57250002771616,
+        "min": 80.77499999850988,
+        "max": 193.0199999138713
+      },
+      "measuredSeconds": 48.212,
+      "frames": 1455,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "adeb41e33e59c9adfb13b86ae4ded67613c85326d5577518d1e5c6a79cb8d44d"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": -6.315561899920863,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T22-00-28.398Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 4.865588876347294,
+        "audio.mojom.AudioService": 0.5595106190773471,
+        "browser": 0.11543959171840805,
+        "network.mojom.NetworkService": 0.007175342098799095,
+        "renderer": 16.641309543457506,
+        "storage.mojom.StorageService": 0.0013270531440295837
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 5.051586337907099,
+        "audio.mojom.AudioService": 0.536443012993712,
+        "browser": 0.14657424503092498,
+        "network.mojom.NetworkService": 0.010624541590810697,
+        "renderer": 17.842744015014123,
+        "storage.mojom.StorageService": 0.003824228153593679
+      }
+    }
+  }
+}
+PASS software-vp9
+RUN software-filters-subs
+{
+  "source": "results/playback-performance/2026-09-08T22-03-25.163Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/sample-ass.mkv",
+  "mode": "software",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 56.21701185840688,
+        "median": 57.277906612623426,
+        "min": 52.465558135677526,
+        "max": 57.84667607270313
+      },
+      "pausedCpuPercent": {
+        "mean": 6.312384510751167,
+        "median": 6.808703241895332,
+        "min": 3.741258741258751,
+        "max": 7.890872817955256
+      },
+      "rssMean": {
+        "mean": 1328932571.4285715,
+        "median": 1337193033.142857,
+        "min": 1159373970.2857144,
+        "max": 1481970249.142857
+      },
+      "renderMs": {
+        "mean": 1069.4412500541657,
+        "median": 1099.5900000967085,
+        "min": 963.3999999687076,
+        "max": 1115.1850000545382
+      },
+      "copyMs": {
+        "mean": 755.3625000137836,
+        "median": 771.3699999935925,
+        "min": 697.7050000801682,
+        "max": 781.004999987781
+      },
+      "measuredSeconds": 48.195,
+      "frames": 1448,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "0c407d1d024a375b829a49b8310b570b01eb015d78956953f0314292a97b49ac"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 49.55396662495403,
+        "median": 50.18869398910876,
+        "min": 44.64554134838924,
+        "max": 53.192937173209366
+      },
+      "pausedCpuPercent": {
+        "mean": 4.175248428599171,
+        "median": 4.023413393203546,
+        "min": 2.4046906187625896,
+        "max": 6.249476309227004
+      },
+      "rssMean": {
+        "mean": 1336583314.2857141,
+        "median": 1383215689.142857,
+        "min": 1082118729.142857,
+        "max": 1497783149.7142856
+      },
+      "renderMs": {
+        "mean": 1015.6474999766797,
+        "median": 1026.6924999691546,
+        "min": 895.754999987781,
+        "max": 1113.4499999806285
+      },
+      "copyMs": {
+        "mean": 718.3274999856949,
+        "median": 728.0349999368191,
+        "min": 645.2749999910593,
+        "max": 771.9650000780821
+      },
+      "measuredSeconds": 48.184,
+      "frames": 1443,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "0c407d1d024a375b829a49b8310b570b01eb015d78956953f0314292a97b49ac"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": 11.852364636944746,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T22-03-25.163Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 8.903348434903734,
+        "audio.mojom.AudioService": 0.7087458089540348,
+        "browser": 0.1549901675468928,
+        "network.mojom.NetworkService": 0.005623524919546074,
+        "renderer": 46.443438609775086,
+        "storage.mojom.StorageService": 0.0008653123075513061
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 8.722150136878778,
+        "audio.mojom.AudioService": 0.726957279962454,
+        "browser": 0.20112352893462557,
+        "network.mojom.NetworkService": 0.008413885441201597,
+        "renderer": 39.892326357200886,
+        "storage.mojom.StorageService": 0.0029954365361167606
+      }
+    }
+  }
+}
+PASS software-filters-subs
+RUN hybrid-subs
+{
+  "source": "results/playback-performance/2026-09-08T22-06-25.104Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/sample-ass.mkv",
+  "mode": "hybrid",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 18.026287948129234,
+        "median": 17.869365671641795,
+        "min": 17.732592285358763,
+        "max": 18.633828163874583
+      },
+      "pausedCpuPercent": {
+        "mean": 2.8934751929729723,
+        "median": 2.9184315684315862,
+        "min": 2.7093453273364023,
+        "max": 3.027692307692315
+      },
+      "rssMean": {
+        "mean": 839198427.4285715,
+        "median": 782588781.7142857,
+        "min": 750742966.8571428,
+        "max": 1040873179.4285715
+      },
+      "renderMs": {
+        "mean": 49.221249993890524,
+        "median": 49.06750001013279,
+        "min": 48.514999970793724,
+        "max": 50.23499998450279
+      },
+      "copyMs": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "measuredSeconds": 48.233000000000004,
+      "frames": 1444,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "0648bf731b108af567d3ede98347f072bdf0ba125b7ec0dc9f627f3a278eb67a"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 17.656077981139887,
+        "median": 17.781986226587556,
+        "min": 17.06093698175789,
+        "max": 17.999402489626547
+      },
+      "pausedCpuPercent": {
+        "mean": 2.80993092030286,
+        "median": 2.7293476119487368,
+        "min": 2.5614078881676634,
+        "max": 3.219620569146304
+      },
+      "rssMean": {
+        "mean": 753157266.2857143,
+        "median": 734596534.8571429,
+        "min": 683620059.4285715,
+        "max": 859815936
+      },
+      "renderMs": {
+        "mean": 49.33124999143183,
+        "median": 49.139999993145466,
+        "min": 48.83499990403652,
+        "max": 50.210000075399876
+      },
+      "copyMs": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "measuredSeconds": 48.221000000000004,
+      "frames": 1439,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "0648bf731b108af567d3ede98347f072bdf0ba125b7ec0dc9f627f3a278eb67a"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": 2.053722696844895,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T22-06-25.104Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 8.095278257643846,
+        "audio.mojom.AudioService": 0.6724266366407637,
+        "browser": 0.15517493432178942,
+        "network.mojom.NetworkService": 0.004880254108202716,
+        "renderer": 9.097449712706194,
+        "storage.mojom.StorageService": 0.0010781527084368797
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 7.871273920346266,
+        "audio.mojom.AudioService": 0.6531069186197429,
+        "browser": 0.20995858769544332,
+        "network.mojom.NetworkService": 0.01513873642974833,
+        "renderer": 8.902970328118288,
+        "storage.mojom.StorageService": 0.003629489930401348
+      }
+    }
+  }
+}
+PASS hybrid-subs
+RUN hybrid-plain
+{
+  "source": "results/playback-performance/2026-09-08T22-09-23.500Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/hybrid-performance/sample.mp4",
+  "mode": "hybrid",
+  "allChecksPassed": true,
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 17.449634848834844,
+        "median": 17.487424831028783,
+        "min": 14.765983402489628,
+        "max": 20.057706330792183
+      },
+      "pausedCpuPercent": {
+        "mean": 4.618559718259003,
+        "median": 4.503657507869338,
+        "min": 4.025554889022205,
+        "max": 5.44136896827513
+      },
+      "rssMean": {
+        "mean": 856378221.7142857,
+        "median": 827594459.4285715,
+        "min": 684174774.8571428,
+        "max": 1086149193.142857
+      },
+      "renderMs": {
+        "mean": 6.51125000603497,
+        "median": 6.587499983608723,
+        "min": 5.089999981224537,
+        "max": 7.780000075697899
+      },
+      "copyMs": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "measuredSeconds": 48.418,
+      "frames": 1442,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "dcaadaa8714d2815621b1dce6616963e2148d66ea4e240f0babbeb29a103072f"
+      ]
+    },
+    "candidate": {
+      "trials": 4,
+      "passed": 4,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 16.36113501531726,
+        "median": 16.676521073823345,
+        "min": 12.628872654823173,
+        "max": 19.462625258799182
+      },
+      "pausedCpuPercent": {
+        "mean": 3.5031391640734877,
+        "median": 3.2901500252290194,
+        "min": 3.010370567848578,
+        "max": 4.421886037987333
+      },
+      "rssMean": {
+        "mean": 752771657.1428571,
+        "median": 747990454.8571429,
+        "min": 673195154.2857143,
+        "max": 841910564.5714285
+      },
+      "renderMs": {
+        "mean": 5.877499997615814,
+        "median": 5.96249995008111,
+        "min": 4.019999958574772,
+        "max": 7.565000131726265
+      },
+      "copyMs": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "measuredSeconds": 48.235,
+      "frames": 1438,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "dcaadaa8714d2815621b1dce6616963e2148d66ea4e240f0babbeb29a103072f"
+      ]
+    }
+  },
+  "comparison": {
+    "cpuReductionPercent": 6.237951928204765,
+    "minimumTrialsPerVariant": 4,
+    "sameRawSeekPixels": true,
+    "interpretation": "Observed whole-browser CPU means on this host; no foreground qualification or universal speedup guarantee."
+  }
+}
+{
+  "source": "results/playback-performance/2026-09-08T22-09-23.500Z/result.json",
+  "scope": "Percent of one CPU core, grouped by CDP process type. Not function attribution; external macOS services excluded.",
+  "groups": {
+    "baseline": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 7.9503558297285455,
+        "audio.mojom.AudioService": 0.7972412675612957,
+        "browser": 0.17315632752259036,
+        "network.mojom.NetworkService": 0.006374155751049848,
+        "renderer": 8.520764639387119,
+        "storage.mojom.StorageService": 0.0017426288842420099
+      }
+    },
+    "candidate": {
+      "trials": 4,
+      "meanCpuPercent": {
+        "GPU": 7.682014516200418,
+        "audio.mojom.AudioService": 0.6855357922748416,
+        "browser": 0.1358778556152962,
+        "network.mojom.NetworkService": 0.015642077584325037,
+        "renderer": 7.840539576250395,
+        "storage.mojom.StorageService": 0.0015251973919875523
+      }
+    }
+  }
+}
+PASS hybrid-plain
+{"passed":true,"cases":[{"name":"software-1080p60","passed":true},{"name":"software-h264-10bit","passed":true},{"name":"software-hevc-10bit","passed":true},{"name":"software-vp9","passed":true},{"name":"software-filters-subs","passed":true},{"name":"hybrid-subs","passed":true},{"name":"hybrid-plain","passed":true}]}

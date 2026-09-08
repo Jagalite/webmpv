@@ -1,0 +1,3409 @@
+{
+  "serverConfiguration": {
+    "baseline": {
+      "web/retained-video.js": "build/playback-performance/baseline/web/retained-video.js",
+      "web/filter-retained-engine-worker.js": "build/playback-performance/baseline/web/filter-retained-engine-worker.js",
+      "web/generated/internal/wasm-player.js": "web/generated/internal/wasm-player.js",
+      "web/software-full-engine-worker.js": "web/software-full-engine-worker.js",
+      "web/engine-software-full/player.mjs": "web/engine-software-full/player.mjs",
+      "web/engine-software-full/player.wasm": "web/engine-software-full/player.wasm",
+      "web/engine-retained-subs/player.mjs": "build/playback-performance/baseline/web/engine-retained-subs/player.mjs",
+      "web/engine-retained-subs/player.wasm": "build/playback-performance/baseline/web/engine-retained-subs/player.wasm",
+      "web/retained-decoder-worker.js": "build/playback-performance/baseline/web/retained-decoder-worker.js",
+      "web/audio-worklet.js": "build/playback-performance/baseline/web/audio-worklet.js",
+      "web/subtitle-overlay.js": "build/playback-performance/baseline/web/subtitle-overlay.js"
+    },
+    "candidate": {
+      "web/retained-video.js": "web/retained-video.js",
+      "web/filter-retained-engine-worker.js": "web/filter-retained-engine-worker.js",
+      "web/generated/internal/wasm-player.js": "web/generated/internal/wasm-player.js",
+      "web/software-full-engine-worker.js": "build/playback-performance/rgbx-frame/worker.js",
+      "web/engine-software-full/player.mjs": "web/engine-software-full/player.mjs",
+      "web/engine-software-full/player.wasm": "web/engine-software-full/player.wasm",
+      "web/engine-retained-subs/player.mjs": "web/engine-retained-subs/player.mjs",
+      "web/engine-retained-subs/player.wasm": "web/engine-retained-subs/player.wasm",
+      "web/retained-decoder-worker.js": "web/retained-decoder-worker.js",
+      "web/audio-worklet.js": "web/audio-worklet.js",
+      "web/subtitle-overlay.js": "web/subtitle-overlay.js"
+    },
+    "native": {}
+  },
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "mode": "software",
+  "extraInputs": [],
+  "decoderIdentities": {},
+  "overrides": {
+    "web/software-full-engine-worker.js": "build/playback-performance/rgbx-frame/worker.js",
+    "web/generated/internal/wasm-player.js": "web/generated/internal/wasm-player.js",
+    "web/engine-software-full/player.mjs": "web/engine-software-full/player.mjs",
+    "web/engine-software-full/player.wasm": "web/engine-software-full/player.wasm"
+  },
+  "baselineOverrides": {
+    "web/software-full-engine-worker.js": "web/software-full-engine-worker.js",
+    "web/generated/internal/wasm-player.js": "web/generated/internal/wasm-player.js",
+    "web/engine-software-full/player.mjs": "web/engine-software-full/player.mjs",
+    "web/engine-software-full/player.wasm": "web/engine-software-full/player.wasm"
+  },
+  "baseline": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "7cd37a2f05abb595bb9ec81aee3d6826a229ad110058f78c2217c8c13ae15caf",
+    "web/software-full-engine-worker.js": "aa46c52b778df96e71d1690776a7a3fd08611acb248ae31d2b5e3ec8345cb6a6",
+    "web/engine-software-full/player.mjs": "3bda4a16c58e15dd1116685edc1785f1b93966c4410830d444e29f3d9533e358",
+    "web/engine-software-full/player.wasm": "cb368caff4dae34c993bacec049f43b2de69d6e43eb4535ccda1d91ec51a36ce",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+  },
+  "servedBaselineHashes": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+    "web/generated/internal/wasm-player.js": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+    "web/software-full-engine-worker.js": "c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0",
+    "web/engine-software-full/player.mjs": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+    "web/engine-software-full/player.wasm": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+    "web/engine-retained-subs/player.mjs": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+    "web/engine-retained-subs/player.wasm": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+  },
+  "servedCandidateHashes": {
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "5f8e547f8a9c6ca26c46293ba315f79edb9717dd9d703599c189f880e715c258",
+    "web/generated/internal/wasm-player.js": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+    "web/software-full-engine-worker.js": "ba88728fdeb1b716e65ae95ede4b2cc8d4c8aa1a2672043dd5321406cbdf5aa4",
+    "web/engine-software-full/player.mjs": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+    "web/engine-software-full/player.wasm": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+    "web/engine-retained-subs/player.mjs": "149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae",
+    "web/engine-retained-subs/player.wasm": "cb178393c840e20bad54b86ce84321d0adaa984cd7b90a250b556ccf32129b3c",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+  },
+  "hashes": {
+    "experiments/playback-performance/serve.mjs": "eeb4fcb9c7a6922d55853e692b50eaca612687923c375dfefec8f19dba08aa2b",
+    "web/software-full-engine-worker.js": "c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0",
+    "web/generated/internal/wasm-player.js": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+    "web/engine-software-full/player.mjs": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+    "web/engine-software-full/player.wasm": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+    "build/playback-performance/rgbx-frame/worker.js": "ba88728fdeb1b716e65ae95ede4b2cc8d4c8aa1a2672043dd5321406cbdf5aa4",
+    "web/retained-video.js": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+    "web/filter-retained-engine-worker.js": "5f8e547f8a9c6ca26c46293ba315f79edb9717dd9d703599c189f880e715c258",
+    "web/engine-retained-subs/player.mjs": "149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae",
+    "web/engine-retained-subs/player.wasm": "cb178393c840e20bad54b86ce84321d0adaa984cd7b90a250b556ccf32129b3c",
+    "web/retained-decoder-worker.js": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+    "web/subtitle-overlay.js": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+    "src/internal/wasm-player.ts": "5cc7414d1aa44c9bf22ad13d509067c2688ab3d6e80c1e4b3a160ba5fc04ee1f",
+    "web/hybrid-performance.html": "911af27401603f577dfbc151ffc443b3316c6ee6b727daa0b32c456f797532b0",
+    "tests/playback-performance.mjs": "b4577aa4a177ca1f61e6fe7a32bfd01e43ab8627dd3e0d05e5b3b21f8d4d7cea",
+    "build/fixtures/playback-performance/bbb-key-240.mp4": "705f0d12b3ffe9bf19ff5956ab3b6a9322075e6bed862434ffedd153a895329d"
+  },
+  "order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline",
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline"
+  ],
+  "warmupSeconds": 6,
+  "measurementSeconds": 12,
+  "idleSeconds": 2,
+  "trials": [
+    {
+      "variant": "baseline",
+      "browser": "152.0.7977.76",
+      "samples": [
+        {
+          "at": 1788889485171,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.946365
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.06609
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 2.479483
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.183696
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 0.735904
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.099887
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04156
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.117385
+            }
+          ],
+          "rss": 1389608960,
+          "state": {
+            "mode": "software",
+            "position": 5.933333333333334,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.00266700000002551
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 900,
+                "rendered": 177,
+                "renderMs": 368.2999999858439,
+                "copyMs": 327.6349999755621,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 5.800000000000001,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 5.800000000000001,
+                "queuedFrames": 6400
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 288768,
+              "underruns": 0,
+              "rms": 0.032861912943944256,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889487179,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.948756
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.06609
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 3.086957
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.183909
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 0.901608
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.099887
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04156
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.129045
+            }
+          ],
+          "rss": 1381810176,
+          "state": {
+            "mode": "software",
+            "position": 7.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666667083108
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1202,
+                "rendered": 238,
+                "renderMs": 493.40499998256564,
+                "copyMs": 437.329999987036,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 7.833333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 7.833333333333334,
+                "queuedFrames": 7936
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 385280,
+              "underruns": 0,
+              "rms": 0.043474312366537614,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889489185,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.952641
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.066585
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 3.803432
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.184599
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 1.063721
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.101353
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04159
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.140215
+            }
+          ],
+          "rss": 1384595456,
+          "state": {
+            "mode": "software",
+            "position": 9.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.006666999999987766
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1502,
+                "rendered": 299,
+                "renderMs": 614.3649999797344,
+                "copyMs": 552.2949999831617,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 9.866666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 9.866666666666667,
+                "queuedFrames": 7936
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 481536,
+              "underruns": 0,
+              "rms": 0.046368798819840094,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889491194,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.955011
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.066585
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 4.614476
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.184633
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 1.223905
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.10138
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04159
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.153308
+            }
+          ],
+          "rss": 1385381888,
+          "state": {
+            "mode": "software",
+            "position": 11.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.001333666666599953
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1806,
+                "rendered": 361,
+                "renderMs": 738.5099999830127,
+                "copyMs": 660.6449999883771,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 11.933333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 11.933333333333334,
+                "queuedFrames": 6400
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 577792,
+              "underruns": 0,
+              "rms": 0.0354967727085601,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889493202,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.955729
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.066585
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 5.325079
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.184678
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 1.384148
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.10138
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04159
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.164811
+            }
+          ],
+          "rss": 1386102784,
+          "state": {
+            "mode": "software",
+            "position": 13.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666665466623
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2114,
+                "rendered": 422,
+                "renderMs": 862.9599999710917,
+                "copyMs": 769.9549999907613,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 13.966666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 13.966666666666667,
+                "queuedFrames": 7680
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 674304,
+              "underruns": 0,
+              "rms": 0.05015579784141681,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889495208,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.957501
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.066585
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 6.024534
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.184716
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 1.544394
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.10138
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04159
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.175528
+            }
+          ],
+          "rss": 1386741760,
+          "state": {
+            "mode": "software",
+            "position": 16,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 3.3333318683048674e-7
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2388,
+                "rendered": 477,
+                "renderMs": 974.7299999594688,
+                "copyMs": 867.855000000447,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 15.8,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 15.8,
+                "queuedFrames": 6656
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 770560,
+              "underruns": 0,
+              "rms": 0.06532349852820254,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889497216,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 0.95835
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.066585
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 6.637501
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.184762
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 1.702113
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.10138
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.04159
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.184806
+            }
+          ],
+          "rss": 1387462656,
+          "state": {
+            "mode": "software",
+            "position": 18,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 3.3333330051732446e-7
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2690,
+                "rendered": 538,
+                "renderMs": 1097.3249999545515,
+                "copyMs": 974.6950000226498,
+                "maxRenderMs": 5.130000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 17.833333333333336,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 17.833333333333336,
+                "queuedFrames": 6528
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 866816,
+              "underruns": 0,
+              "rms": 0.08096992043344625,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        }
+      ],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    14696.\nPages active:                                 169366.\nPages inactive:                               152500.\nPages speculative:                             14147.\nPages throttled:                                   0.\nPages wired down:                              81940.\nPages purgeable:                                2412.\n\"Translation faults\":                      665578560.\nPages copy-on-write:                        33585601.\nPages zero filled:                         304590872.\nPages reactivated:                          69427360.\nPages purged:                                2456308.\nFile-backed pages:                            140114.\nAnonymous pages:                              195899.\nPages stored in compressor:                   268600.\nPages occupied by compressor:                  55700.\nDecompressions:                             62606051.\nCompressions:                               95093270.\nPageins:                                    17391035.\nPageouts:                                     109267.\nSwapins:                                      201230.\nSwapouts:                                     326768.\n",
+      "summary": {
+        "renderMs": 729.0249999687076,
+        "copyMs": 647.0600000470877,
+        "cpuPercent": 43.227206309672056,
+        "elapsed": 12.045,
+        "frames": 361,
+        "position": 12.066666666666666,
+        "dropOrErrorDelta": 0,
+        "rssMean": 1385957668.5714285,
+        "churn": [],
+        "pausedCpuPercent": 1.688067898152762
+      },
+      "pixels": "291d24324dbac5da0e970f5c52d8d59072b92903b62a813f03472914adc5d0c5",
+      "rawPixelSha256": "e770c8c59beea3322c07c283e8f7f6532fa5e5caa0f101ab23b52ba17846c0d4",
+      "passed": true
+    },
+    {
+      "variant": "candidate",
+      "browser": "152.0.7977.76",
+      "samples": [],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    13586.\nPages active:                                 167496.\nPages inactive:                               165955.\nPages speculative:                               821.\nPages throttled:                                   0.\nPages wired down:                              86063.\nPages purgeable:                                3241.\n\"Translation faults\":                      666017781.\nPages copy-on-write:                        33611261.\nPages zero filled:                         304783348.\nPages reactivated:                          69450481.\nPages purged:                                2458471.\nFile-backed pages:                            109429.\nAnonymous pages:                              224843.\nPages stored in compressor:                   267392.\nPages occupied by compressor:                  54551.\nDecompressions:                             62607854.\nCompressions:                               95095670.\nPageins:                                    17417862.\nPageouts:                                     109494.\nSwapins:                                      201242.\nSwapouts:                                     326768.\n",
+      "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "variant": "candidate",
+      "browser": "152.0.7977.76",
+      "samples": [],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    38134.\nPages active:                                 153283.\nPages inactive:                               151006.\nPages speculative:                              1802.\nPages throttled:                                   0.\nPages wired down:                              84532.\nPages purgeable:                                 932.\n\"Translation faults\":                      666073955.\nPages copy-on-write:                        33613438.\nPages zero filled:                         304827363.\nPages reactivated:                          69473441.\nPages purged:                                2458799.\nFile-backed pages:                            104353.\nAnonymous pages:                              201738.\nPages stored in compressor:                   279556.\nPages occupied by compressor:                  59636.\nDecompressions:                             62608068.\nCompressions:                               95110097.\nPageins:                                    17419365.\nPageouts:                                     109507.\nSwapins:                                      201242.\nSwapouts:                                     326768.\n",
+      "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "variant": "baseline",
+      "browser": "152.0.7977.76",
+      "samples": [
+        {
+          "at": 1788889517903,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.31561
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.067003
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 13.701453
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.22295
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 3.160787
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.161651
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042261
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.298449
+            }
+          ],
+          "rss": 1229520896,
+          "state": {
+            "mode": "software",
+            "position": 5.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666666923236
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 891,
+                "rendered": 176,
+                "renderMs": 358.8650000318885,
+                "copyMs": 315.4100000038743,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 5.766666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 5.766666666666667,
+                "queuedFrames": 7936
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 288768,
+              "underruns": 0,
+              "rms": 0.032861912943944256,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889519913,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.317298
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.067016
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 14.298952
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.222971
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 3.321072
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.16166
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042271
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.30848
+            }
+          ],
+          "rss": 1212350464,
+          "state": {
+            "mode": "software",
+            "position": 7.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666667083108
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1193,
+                "rendered": 237,
+                "renderMs": 482.91000002622604,
+                "copyMs": 422.8949999958277,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 7.800000000000001,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 7.800000000000001,
+                "queuedFrames": 7936
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 385280,
+              "underruns": 0,
+              "rms": 0.043474312366537614,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889521920,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.317879
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.067016
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 15.026819
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.222971
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 3.478151
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.16166
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042271
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.317923
+            }
+          ],
+          "rss": 1212661760,
+          "state": {
+            "mode": "software",
+            "position": 9.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.006666999999987766
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1494,
+                "rendered": 298,
+                "renderMs": 605.9000000208616,
+                "copyMs": 539.7049999795854,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 9.833333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 9.833333333333334,
+                "queuedFrames": 6656
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 481536,
+              "underruns": 0,
+              "rms": 0.046368798819840094,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889523928,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.318903
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.067016
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 15.845213
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.222971
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 3.643691
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.16166
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042271
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.328601
+            }
+          ],
+          "rss": 1212465152,
+          "state": {
+            "mode": "software",
+            "position": 11.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.001333666666599953
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1796,
+                "rendered": 359,
+                "renderMs": 729.3950000330806,
+                "copyMs": 648.3099999651313,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 11.866666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 11.866666666666667,
+                "queuedFrames": 6656
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 577792,
+              "underruns": 0,
+              "rms": 0.0354967727085601,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889525934,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.319344
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.067016
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 16.548999
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.222971
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 3.803261
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.16166
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042271
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.339816
+            }
+          ],
+          "rss": 1144979456,
+          "state": {
+            "mode": "software",
+            "position": 13.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.006666999999879408
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2102,
+                "rendered": 420,
+                "renderMs": 853.7150000408292,
+                "copyMs": 756.8949999660254,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 13.9,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 13.9,
+                "queuedFrames": 6912
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 674048,
+              "underruns": 0,
+              "rms": 0.04859869403481447,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889527942,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.320072
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.067016
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 17.236431
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.222971
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 3.96322
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.16166
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042271
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.35088
+            }
+          ],
+          "rss": 1127923712,
+          "state": {
+            "mode": "software",
+            "position": 16,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.005333666666523129
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2407,
+                "rendered": 481,
+                "renderMs": 978.2150000371039,
+                "copyMs": 865.8699999600649,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 15.933333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 15.933333333333334,
+                "queuedFrames": 6144
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 770560,
+              "underruns": 0,
+              "rms": 0.06532349852820254,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889529950,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.320963
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.06704
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 17.868961
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.22298
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 4.124433
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.16167
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.042282
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.360705
+            }
+          ],
+          "rss": 1128022016,
+          "state": {
+            "mode": "software",
+            "position": 18,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 3.333332969646108e-7
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2713,
+                "rendered": 542,
+                "renderMs": 1102.025000039488,
+                "copyMs": 973.0999999456108,
+                "maxRenderMs": 5.775000002235174,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 17.96666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 17.96666666666667,
+                "queuedFrames": 6912
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 866816,
+              "underruns": 0,
+              "rms": 0.08096992043344625,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        }
+      ],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    12745.\nPages active:                                 161470.\nPages inactive:                               161638.\nPages speculative:                               863.\nPages throttled:                                   0.\nPages wired down:                              84702.\nPages purgeable:                                 785.\n\"Translation faults\":                      666167028.\nPages copy-on-write:                        33618783.\nPages zero filled:                         304885506.\nPages reactivated:                          69478809.\nPages purged:                                2459002.\nFile-backed pages:                            102777.\nAnonymous pages:                              221194.\nPages stored in compressor:                   289332.\nPages occupied by compressor:                  67074.\nDecompressions:                             62609197.\nCompressions:                               95121225.\nPageins:                                    17420814.\nPageouts:                                     109594.\nSwapins:                                      201242.\nSwapouts:                                     326768.\n",
+      "summary": {
+        "renderMs": 743.1600000075996,
+        "copyMs": 657.6899999417365,
+        "cpuPercent": 43.15489333444009,
+        "elapsed": 12.047,
+        "frames": 366,
+        "position": 12.033333333333333,
+        "dropOrErrorDelta": 0,
+        "rssMean": 1181131922.2857144,
+        "churn": [],
+        "pausedCpuPercent": 1.8645708582834364
+      },
+      "pixels": "291d24324dbac5da0e970f5c52d8d59072b92903b62a813f03472914adc5d0c5",
+      "rawPixelSha256": "e770c8c59beea3322c07c283e8f7f6532fa5e5caa0f101ab23b52ba17846c0d4",
+      "passed": true
+    },
+    {
+      "variant": "baseline",
+      "browser": "152.0.7977.76",
+      "samples": [
+        {
+          "at": 1788889539674,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.495967
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.068473
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 20.704314
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.225666
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 4.715414
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.181553
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043566
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.411015
+            }
+          ],
+          "rss": 1135886336,
+          "state": {
+            "mode": "software",
+            "position": 5.933333333333334,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.008000333333358256
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 907,
+                "rendered": 178,
+                "renderMs": 360.94000001624227,
+                "copyMs": 318.97499999031425,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 5.833333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 5.833333333333334,
+                "queuedFrames": 6656
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 288512,
+              "underruns": 0,
+              "rms": 0.031017093254801887,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889541680,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.49684
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.068663
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 21.295806
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.225853
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 4.874475
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.181581
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043593
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.423028
+            }
+          ],
+          "rss": 1134886912,
+          "state": {
+            "mode": "software",
+            "position": 7.933333333333334,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0026670000000414973
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1206,
+                "rendered": 239,
+                "renderMs": 482.84000000730157,
+                "copyMs": 428.28499998524785,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 7.866666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 7.866666666666667,
+                "queuedFrames": 5632
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 384768,
+              "underruns": 0,
+              "rms": 0.046369882923175704,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889543688,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.498882
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.068849
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 22.037507
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.225992
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 5.036484
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.181905
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043783
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.43527
+            }
+          ],
+          "rss": 1134084096,
+          "state": {
+            "mode": "software",
+            "position": 9.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666666532437
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1506,
+                "rendered": 300,
+                "renderMs": 604.4250000119209,
+                "copyMs": 538.3799999840558,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 9.9,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 9.9,
+                "queuedFrames": 6400
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 481280,
+              "underruns": 0,
+              "rms": 0.04413455770520053,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889545695,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.499672
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.068849
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 22.933674
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.226125
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 5.206583
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.181958
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043797
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.447377
+            }
+          ],
+          "rss": 1135951872,
+          "state": {
+            "mode": "software",
+            "position": 11.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.006666999999932699
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1808,
+                "rendered": 361,
+                "renderMs": 738.8650000207126,
+                "copyMs": 655.0249999985099,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 11.933333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 11.933333333333334,
+                "queuedFrames": 6912
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 577536,
+              "underruns": 0,
+              "rms": 0.032691640625791274,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889547702,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.500906
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.068965
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 23.700703
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.226249
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 5.376802
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.181992
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043823
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.458528
+            }
+          ],
+          "rss": 1137819648,
+          "state": {
+            "mode": "software",
+            "position": 13.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.006666999999879408
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2083,
+                "rendered": 417,
+                "renderMs": 863.3750000037253,
+                "copyMs": 763.0950000025332,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 13.8,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 13.8,
+                "queuedFrames": 6912
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 673792,
+              "underruns": 0,
+              "rms": 0.04852073778728888,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889549711,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.50249
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069001
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 24.389999
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.226382
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 5.540427
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.184024
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043832
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.470992
+            }
+          ],
+          "rss": 1139392512,
+          "state": {
+            "mode": "software",
+            "position": 16,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.005333666666523129
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2383,
+                "rendered": 478,
+                "renderMs": 985.7900000214577,
+                "copyMs": 870.4550000056624,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 15.833333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 15.833333333333334,
+                "queuedFrames": 7168
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 770304,
+              "underruns": 0,
+              "rms": 0.06766399441622023,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889551717,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.503403
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069001
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 25.019342
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.22652
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 5.700888
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.184263
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.043854
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.482697
+            }
+          ],
+          "rss": 1140342784,
+          "state": {
+            "mode": "software",
+            "position": 18,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 3.3333330051732446e-7
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2684,
+                "rendered": 539,
+                "renderMs": 1106.620000012219,
+                "copyMs": 975.6400000117719,
+                "maxRenderMs": 5.699999999254942,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 17.866666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 17.866666666666667,
+                "queuedFrames": 7424
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 866560,
+              "underruns": 0,
+              "rms": 0.0831090245569732,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        }
+      ],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     9551.\nPages active:                                 139756.\nPages inactive:                               138307.\nPages speculative:                              3002.\nPages throttled:                                   0.\nPages wired down:                              82766.\nPages purgeable:                                 155.\n\"Translation faults\":                      666445312.\nPages copy-on-write:                        33632222.\nPages zero filled:                         305029688.\nPages reactivated:                          69595242.\nPages purged:                                2459849.\nFile-backed pages:                            103771.\nAnonymous pages:                              177294.\nPages stored in compressor:                   385941.\nPages occupied by compressor:                 115048.\nDecompressions:                             62634970.\nCompressions:                               95251112.\nPageins:                                    17426620.\nPageouts:                                     109669.\nSwapins:                                      201250.\nSwapouts:                                     326768.\n",
+      "summary": {
+        "renderMs": 745.6799999959767,
+        "copyMs": 656.6650000214577,
+        "cpuPercent": 44.70646848791831,
+        "elapsed": 12.043,
+        "frames": 361,
+        "position": 12.066666666666666,
+        "dropOrErrorDelta": 0,
+        "rssMean": 1136909165.7142856,
+        "churn": [],
+        "pausedCpuPercent": 1.7945554445554575
+      },
+      "pixels": "291d24324dbac5da0e970f5c52d8d59072b92903b62a813f03472914adc5d0c5",
+      "rawPixelSha256": "e770c8c59beea3322c07c283e8f7f6532fa5e5caa0f101ab23b52ba17846c0d4",
+      "passed": true
+    },
+    {
+      "variant": "candidate",
+      "browser": "152.0.7977.76",
+      "samples": [],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    82489.\nPages active:                                 103882.\nPages inactive:                                94452.\nPages speculative:                             14770.\nPages throttled:                                   0.\nPages wired down:                              85055.\nPages purgeable:                                 814.\n\"Translation faults\":                      666618705.\nPages copy-on-write:                        33639295.\nPages zero filled:                         305094748.\nPages reactivated:                          69628759.\nPages purged:                                2459985.\nFile-backed pages:                            112625.\nAnonymous pages:                              100479.\nPages stored in compressor:                   357643.\nPages occupied by compressor:                 107857.\nDecompressions:                             62683482.\nCompressions:                               95296477.\nPageins:                                    17436422.\nPageouts:                                     109686.\nSwapins:                                      201250.\nSwapouts:                                     326768.\n",
+      "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "variant": "candidate",
+      "browser": "152.0.7977.76",
+      "samples": [],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    81156.\nPages active:                                 109105.\nPages inactive:                                95694.\nPages speculative:                             15111.\nPages throttled:                                   0.\nPages wired down:                              82945.\nPages purgeable:                                 699.\n\"Translation faults\":                      666658262.\nPages copy-on-write:                        33640969.\nPages zero filled:                         305118418.\nPages reactivated:                          69628759.\nPages purged:                                2459985.\nFile-backed pages:                            113050.\nAnonymous pages:                              106860.\nPages stored in compressor:                   352295.\nPages occupied by compressor:                 104367.\nDecompressions:                             62686757.\nCompressions:                               95296477.\nPageins:                                    17436550.\nPageouts:                                     109686.\nSwapins:                                      201250.\nSwapouts:                                     326768.\n",
+      "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "variant": "baseline",
+      "browser": "152.0.7977.76",
+      "samples": [
+        {
+          "at": 1788889572026,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.812934
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069561
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 32.219767
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.231484
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 7.205974
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241444
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044737
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.623589
+            }
+          ],
+          "rss": 1261092864,
+          "state": {
+            "mode": "software",
+            "position": 5.933333333333334,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.002667000000024622
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 880,
+                "rendered": 176,
+                "renderMs": 366.7500000298023,
+                "copyMs": 323.4100000113249,
+                "maxRenderMs": 5.505000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 5.766666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 5.766666666666667,
+                "queuedFrames": 5888
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 288512,
+              "underruns": 0,
+              "rms": 0.031017093254801887,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889574033,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.814095
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069561
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 32.845347
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.231628
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 7.382459
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241444
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044737
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.637215
+            }
+          ],
+          "rss": 1251098624,
+          "state": {
+            "mode": "software",
+            "position": 7.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666667083108
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1177,
+                "rendered": 237,
+                "renderMs": 493.62500001490116,
+                "copyMs": 434.47500002384186,
+                "maxRenderMs": 5.505000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 7.800000000000001,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 7.800000000000001,
+                "queuedFrames": 7424
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 384768,
+              "underruns": 0,
+              "rms": 0.046369882923175704,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889576040,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.81582
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069561
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 33.583765
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.231756
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 7.546228
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241647
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044762
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.648803
+            }
+          ],
+          "rss": 1252278272,
+          "state": {
+            "mode": "software",
+            "position": 9.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.00666699999998599
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1472,
+                "rendered": 298,
+                "renderMs": 617.890000000596,
+                "copyMs": 551.0600000321865,
+                "maxRenderMs": 5.505000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 9.833333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 9.833333333333334,
+                "queuedFrames": 5888
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 481024,
+              "underruns": 0,
+              "rms": 0.06892654320532636,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889578047,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.816535
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069561
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 34.408673
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.231916
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 7.714214
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241647
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044762
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.660493
+            }
+          ],
+          "rss": 1251688448,
+          "state": {
+            "mode": "software",
+            "position": 11.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.001333666666599953
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 1770,
+                "rendered": 359,
+                "renderMs": 741.839999999851,
+                "copyMs": 658.8050000295043,
+                "maxRenderMs": 5.505000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 11.866666666666667,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 11.866666666666667,
+                "queuedFrames": 6144
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 577536,
+              "underruns": 0,
+              "rms": 0.032691640625791274,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889580056,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.817626
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069608
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 35.132262
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.232064
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 7.882003
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241715
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044803
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.673823
+            }
+          ],
+          "rss": 1252147200,
+          "state": {
+            "mode": "software",
+            "position": 13.966666666666667,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 0.0013336666665466623
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2068,
+                "rendered": 420,
+                "renderMs": 866.7000000029802,
+                "copyMs": 770.705000013113,
+                "maxRenderMs": 5.505000002682209,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 13.9,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 13.9,
+                "queuedFrames": 6144
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 673792,
+              "underruns": 0,
+              "rms": 0.04852073778728888,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889582061,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.818051
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069608
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 35.850289
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.232181
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 8.050076
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241715
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044803
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.6851
+            }
+          ],
+          "rss": 1252933632,
+          "state": {
+            "mode": "software",
+            "position": 16,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 3.3333318683048674e-7
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2369,
+                "rendered": 481,
+                "renderMs": 999.410000000149,
+                "copyMs": 886.2700000330806,
+                "maxRenderMs": 6.144999999552965,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 15.933333333333334,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 15.933333333333334,
+                "queuedFrames": 7936
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 770048,
+              "underruns": 0,
+              "rms": 0.06275504860192414,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788889584069,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 64360,
+              "cpuTime": 1.819107
+            },
+            {
+              "type": "renderer",
+              "id": 64376,
+              "cpuTime": 0.069608
+            },
+            {
+              "type": "renderer",
+              "id": 64373,
+              "cpuTime": 36.559182
+            },
+            {
+              "type": "renderer",
+              "id": 64372,
+              "cpuTime": 0.232297
+            },
+            {
+              "type": "GPU",
+              "id": 64367,
+              "cpuTime": 8.221401
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 64368,
+              "cpuTime": 0.241736
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 64369,
+              "cpuTime": 0.044823
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 64377,
+              "cpuTime": 0.695776
+            }
+          ],
+          "rss": 1252999168,
+          "state": {
+            "mode": "software",
+            "position": 18,
+            "quality": {
+              "frameDrops": 0,
+              "decoderDrops": 0,
+              "avsync": 3.3333330051732446e-7
+            },
+            "diagnostics": {
+              "mode": "software",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "pumpTicks": 2674,
+                "rendered": 543,
+                "renderMs": 1142.1050000041723,
+                "copyMs": 1008.2400000169873,
+                "maxRenderMs": 6.144999999552965,
+                "heapBytes": 134217728,
+                "epoch": 2,
+                "path": "wasm",
+                "decoder": "software",
+                "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+                "seekPrerollSeconds": 0,
+                "presentedPosition": 18,
+                "ioPending": false,
+                "ioSerial": 0,
+                "interruptions": 0,
+                "seeking": false,
+                "position": 18,
+                "queuedFrames": 7168
+              }
+            },
+            "audio": {
+              "state": "running",
+              "sampleRate": 48000,
+              "mediaFrames": 866560,
+              "underruns": 0,
+              "rms": 0.0831090245569732,
+              "latencyConfidence": "reported-latency estimate"
+            },
+            "errors": []
+          }
+        }
+      ],
+      "routeHits": {
+        "web/retained-video.js": 0,
+        "web/filter-retained-engine-worker.js": 0,
+        "web/generated/internal/wasm-player.js": 1,
+        "web/software-full-engine-worker.js": 1,
+        "web/engine-software-full/player.mjs": 9,
+        "web/engine-software-full/player.wasm": 1,
+        "web/engine-retained-subs/player.mjs": 0,
+        "web/engine-retained-subs/player.wasm": 0,
+        "web/retained-decoder-worker.js": 0,
+        "web/audio-worklet.js": 1,
+        "web/subtitle-overlay.js": 0
+      },
+      "hostMemoryBefore": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    55827.\nPages active:                                 123307.\nPages inactive:                               105938.\nPages speculative:                             19384.\nPages throttled:                                   0.\nPages wired down:                              84557.\nPages purgeable:                                 741.\n\"Translation faults\":                      666826925.\nPages copy-on-write:                        33655955.\nPages zero filled:                         305180531.\nPages reactivated:                          69628759.\nPages purged:                                2459985.\nFile-backed pages:                            124665.\nAnonymous pages:                              123964.\nPages stored in compressor:                   343872.\nPages occupied by compressor:                  99371.\nDecompressions:                             62693750.\nCompressions:                               95296477.\nPageins:                                    17446094.\nPageouts:                                     109686.\nSwapins:                                      201250.\nSwapouts:                                     326768.\n",
+      "summary": {
+        "renderMs": 775.35499997437,
+        "copyMs": 684.8300000056624,
+        "cpuPercent": 45.12530100473307,
+        "elapsed": 12.043,
+        "frames": 367,
+        "position": 12.066666666666666,
+        "dropOrErrorDelta": 0,
+        "rssMean": 1253462601.142857,
+        "churn": [],
+        "pausedCpuPercent": 6.209495252373843
+      },
+      "pixels": "291d24324dbac5da0e970f5c52d8d59072b92903b62a813f03472914adc5d0c5",
+      "rawPixelSha256": "e770c8c59beea3322c07c283e8f7f6532fa5e5caa0f101ab23b52ba17846c0d4",
+      "passed": true
+    }
+  ],
+  "reuseBrowser": true,
+  "input": "build/fixtures/playback-performance/bbb-key-240.mp4",
+  "remote": false,
+  "prewarm": 0,
+  "startPosition": 0,
+  "sampleInterval": 2,
+  "reusePage": true,
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "mime_codec_string": "avc1.640029",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 41,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/30000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 782000,
+        "duration": "26.066667",
+        "bit_rate": "2641301",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "782",
+        "extradata_size": 43,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "GPAC ISO Video Handler"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "mime_codec_string": "mp4a.40.2",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1248000,
+        "duration": "26.000000",
+        "bit_rate": "128335",
+        "nb_frames": "1220",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "GPAC ISO Audio Handler"
+        }
+      }
+    ],
+    "format": {
+      "filename": "build/fixtures/playback-performance/bbb-key-240.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "26.066667",
+      "size": "9053172",
+      "bit_rate": "2778467",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "title": "Big Buck Bunny, Sunflower version",
+        "artist": "Blender Foundation 2008, Janus Bager Kristensen 2013",
+        "composer": "Sacha Goedegebure",
+        "encoder": "Lavf62.12.102",
+        "comment": "Creative Commons Attribution 3.0 - http://bbb3d.renderfarming.net",
+        "genre": "Animation"
+      }
+    }
+  },
+  "expectedFps": 30,
+  "playbackOptions": {
+    "width": 1920,
+    "height": 1080,
+    "videoFilters": "",
+    "audioFilters": "",
+    "subtitle": ""
+  },
+  "presenters": {
+    "candidate": "videoframe-rgbx"
+  },
+  "serverSnapshot": {
+    "baseline": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/filter-retained-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+        "bytes": 15427,
+        "hits": 0,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0",
+        "bytes": 12651,
+        "hits": 0,
+        "source": "web/software-full-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+        "bytes": 53315,
+        "hits": 0,
+        "source": "web/engine-software-full/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+        "bytes": 20752667,
+        "hits": 0,
+        "source": "web/engine-software-full/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/engine-retained-subs/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+        "bytes": 7096894,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/engine-retained-subs/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    },
+    "candidate": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0,
+        "source": "web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "5f8e547f8a9c6ca26c46293ba315f79edb9717dd9d703599c189f880e715c258",
+        "bytes": 18507,
+        "hits": 0,
+        "source": "web/filter-retained-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/5f8e547f8a9c6ca26c46293ba315f79edb9717dd9d703599c189f880e715c258.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+        "bytes": 15427,
+        "hits": 0,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "ba88728fdeb1b716e65ae95ede4b2cc8d4c8aa1a2672043dd5321406cbdf5aa4",
+        "bytes": 13892,
+        "hits": 0,
+        "source": "build/playback-performance/rgbx-frame/worker.js",
+        "snapshotFile": "build/playback-performance/assets/ba88728fdeb1b716e65ae95ede4b2cc8d4c8aa1a2672043dd5321406cbdf5aa4.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+        "bytes": 53315,
+        "hits": 0,
+        "source": "web/engine-software-full/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+        "bytes": 20752667,
+        "hits": 0,
+        "source": "web/engine-software-full/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae",
+        "bytes": 54262,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "cb178393c840e20bad54b86ce84321d0adaa984cd7b90a250b556ccf32129b3c",
+        "bytes": 7097323,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/cb178393c840e20bad54b86ce84321d0adaa984cd7b90a250b556ccf32129b3c.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0,
+        "source": "web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 0,
+        "source": "web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0,
+        "source": "web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    },
+    "native": {}
+  },
+  "gpuInfo": {
+    "devices": [
+      {
+        "vendorId": 4203,
+        "deviceId": 0,
+        "vendorString": "Google Inc. (Apple)",
+        "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1, Version 26.5.2 (Build 25F84))",
+        "driverVendor": "Apple",
+        "driverVersion": "26.5.2"
+      }
+    ],
+    "auxAttributes": {
+      "amdSwitchable": false,
+      "canSupportThreadedTextureMailbox": false,
+      "directRenderingVersion": "",
+      "displayType": "ANGLE_METAL",
+      "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+      "glImplementationParts": "(gl=egl-angle,angle=metal)",
+      "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1, Version 26.5.2 (Build 25F84))",
+      "glResetNotificationStrategy": 33362,
+      "glVendor": "Google Inc. (Apple)",
+      "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28467 git hash: 736ed80c7552)",
+      "glWsExtensions": "",
+      "glWsVendor": "",
+      "glWsVersion": "",
+      "inProcessGpu": false,
+      "initializationTime": 0.044452,
+      "isAsan": false,
+      "isClangCoverage": false,
+      "jpegDecodeAcceleratorSupported": false,
+      "maxMsaaSamples": "4",
+      "optimus": false,
+      "passthroughCmdDecoder": true,
+      "pixelShaderVersion": "3.00",
+      "processCrashCount": 0,
+      "sandboxed": false,
+      "skiaBackendType": "GraphiteDawnMetal",
+      "subpixelFontRendering": true,
+      "targetCpuBits": 64,
+      "vertexShaderVersion": "3.00",
+      "visibilityCallbackCallCount": 0
+    },
+    "featureStatus": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "enabled_on",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "driverBugWorkarounds": [
+      "disable_2d_canvas_auto_flush",
+      "enable_webgl_timer_query_extensions",
+      "disabled_extension_GL_KHR_blend_equation_advanced",
+      "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+    ],
+    "videoDecoding": [],
+    "videoEncoding": []
+  },
+  "inputsUnchanged": true,
+  "serverFinal": {
+    "baseline": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe",
+        "bytes": 18460,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/filter-retained-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/4089ce1b7fc793ced72131b0246284a0f94b7fb721e6ec1705bf57eeecd1ffbe.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+        "bytes": 15427,
+        "hits": 4,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0",
+        "bytes": 12651,
+        "hits": 4,
+        "source": "web/software-full-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+        "bytes": 53315,
+        "hits": 36,
+        "source": "web/engine-software-full/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+        "bytes": 20752667,
+        "hits": 4,
+        "source": "web/engine-software-full/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf",
+        "bytes": 54262,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/engine-retained-subs/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/fd397d98a90b897e880495571b1cffb01f41c4a0c2fffa514549d312764fdfdf.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d",
+        "bytes": 7096894,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/engine-retained-subs/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/b9598e95d7b187d1850c3e62e02db6176287c113dc966e220756007966fe472d.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 4,
+        "source": "build/playback-performance/baseline/web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0,
+        "source": "build/playback-performance/baseline/web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    },
+    "candidate": {
+      "web/retained-video.js": {
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824",
+        "bytes": 1019,
+        "hits": 0,
+        "source": "web/retained-video.js",
+        "snapshotFile": "build/playback-performance/assets/9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824.js"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "sha256": "5f8e547f8a9c6ca26c46293ba315f79edb9717dd9d703599c189f880e715c258",
+        "bytes": 18507,
+        "hits": 0,
+        "source": "web/filter-retained-engine-worker.js",
+        "snapshotFile": "build/playback-performance/assets/5f8e547f8a9c6ca26c46293ba315f79edb9717dd9d703599c189f880e715c258.js"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "sha256": "0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7",
+        "bytes": 15427,
+        "hits": 4,
+        "source": "web/generated/internal/wasm-player.js",
+        "snapshotFile": "build/playback-performance/assets/0ee8f4a00a44d037c7dbff52d473b3d0107bf5dca891dafcde661fe7e8367cf7.js"
+      },
+      "web/software-full-engine-worker.js": {
+        "sha256": "ba88728fdeb1b716e65ae95ede4b2cc8d4c8aa1a2672043dd5321406cbdf5aa4",
+        "bytes": 13892,
+        "hits": 4,
+        "source": "build/playback-performance/rgbx-frame/worker.js",
+        "snapshotFile": "build/playback-performance/assets/ba88728fdeb1b716e65ae95ede4b2cc8d4c8aa1a2672043dd5321406cbdf5aa4.js"
+      },
+      "web/engine-software-full/player.mjs": {
+        "sha256": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
+        "bytes": 53315,
+        "hits": 36,
+        "source": "web/engine-software-full/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e.mjs"
+      },
+      "web/engine-software-full/player.wasm": {
+        "sha256": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9",
+        "bytes": 20752667,
+        "hits": 4,
+        "source": "web/engine-software-full/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9.wasm"
+      },
+      "web/engine-retained-subs/player.mjs": {
+        "sha256": "149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae",
+        "bytes": 54262,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.mjs",
+        "snapshotFile": "build/playback-performance/assets/149c15cd359d46b1c5f33d1ee0ef13e637e3f2fea6165e561ccca53b9153c2ae.mjs"
+      },
+      "web/engine-retained-subs/player.wasm": {
+        "sha256": "cb178393c840e20bad54b86ce84321d0adaa984cd7b90a250b556ccf32129b3c",
+        "bytes": 7097323,
+        "hits": 0,
+        "source": "web/engine-retained-subs/player.wasm",
+        "snapshotFile": "build/playback-performance/assets/cb178393c840e20bad54b86ce84321d0adaa984cd7b90a250b556ccf32129b3c.wasm"
+      },
+      "web/retained-decoder-worker.js": {
+        "sha256": "ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7",
+        "bytes": 7802,
+        "hits": 0,
+        "source": "web/retained-decoder-worker.js",
+        "snapshotFile": "build/playback-performance/assets/ef64c639b8fd34833ca5ef40645e8feefbb36e3c6909998f8a918268b9e55ff7.js"
+      },
+      "web/audio-worklet.js": {
+        "sha256": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
+        "bytes": 1916,
+        "hits": 4,
+        "source": "web/audio-worklet.js",
+        "snapshotFile": "build/playback-performance/assets/ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1.js"
+      },
+      "web/subtitle-overlay.js": {
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0",
+        "bytes": 1894,
+        "hits": 0,
+        "source": "web/subtitle-overlay.js",
+        "snapshotFile": "build/playback-performance/assets/8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0.js"
+      }
+    },
+    "native": {}
+  },
+  "passed": false
+}

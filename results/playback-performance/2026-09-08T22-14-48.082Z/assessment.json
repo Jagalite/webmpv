@@ -1,0 +1,94 @@
+{
+  "source": "results/playback-performance/2026-09-08T22-14-48.082Z/result.json",
+  "scope": "Short headless development CPU screen; no foreground/endurance/native-parity qualification",
+  "input": "build/fixtures/playback-performance/bbb-stream.mp4",
+  "mode": "software",
+  "allChecksPassed": false,
+  "groups": {
+    "baseline": {
+      "trials": 2,
+      "passed": 1,
+      "failures": [
+        "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n"
+      ],
+      "cpuPercent": {
+        "mean": 60.510465949030966,
+        "median": 60.510465949030966,
+        "min": 60.510465949030966,
+        "max": 60.510465949030966
+      },
+      "pausedCpuPercent": {
+        "mean": 3.52668665667146,
+        "median": 3.52668665667146,
+        "min": 3.52668665667146,
+        "max": 3.52668665667146
+      },
+      "rssMean": {
+        "mean": 823081939.4782609,
+        "median": 823081939.4782609,
+        "min": 823081939.4782609,
+        "max": 823081939.4782609
+      },
+      "renderMs": {
+        "mean": 6091.515000000596,
+        "median": 6091.515000000596,
+        "min": 6091.515000000596,
+        "max": 6091.515000000596
+      },
+      "copyMs": {
+        "mean": 5364.7699999809265,
+        "median": 5364.7699999809265,
+        "min": 5364.7699999809265,
+        "max": 5364.7699999809265
+      },
+      "measuredSeconds": 90.761,
+      "frames": 2722,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "b66b294759deaf29b9bab2f0181df3e3bb5546e7233c5199d4e07f8e7a30b40e"
+      ]
+    },
+    "candidate": {
+      "trials": 2,
+      "passed": 2,
+      "failures": [],
+      "cpuPercent": {
+        "mean": 57.27059041167115,
+        "median": 57.27059041167115,
+        "min": 55.280742773992976,
+        "max": 59.26043804934932
+      },
+      "pausedCpuPercent": {
+        "mean": 2.5416874687973134,
+        "median": 2.5416874687973134,
+        "min": 2.0476285571648076,
+        "max": 3.0357463804298197
+      },
+      "rssMean": {
+        "mean": 527971906.78260875,
+        "median": 527971906.78260875,
+        "min": 504927810.7826087,
+        "max": 551016002.7826087
+      },
+      "renderMs": {
+        "mean": 7118.162500042468,
+        "median": 7118.162500042468,
+        "min": 6870.0200000703335,
+        "max": 7366.305000014603
+      },
+      "copyMs": {
+        "mean": 6397.147499911487,
+        "median": 6397.147499911487,
+        "min": 5974.359999805689,
+        "max": 6819.935000017285
+      },
+      "measuredSeconds": 181.61700000000002,
+      "frames": 5448,
+      "dropOrErrorDelta": 0,
+      "rawSeekPixelHashes": [
+        "b66b294759deaf29b9bab2f0181df3e3bb5546e7233c5199d4e07f8e7a30b40e"
+      ]
+    }
+  },
+  "comparison": null
+}

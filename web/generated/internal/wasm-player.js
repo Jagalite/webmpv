@@ -6,6 +6,7 @@ export class WasmPlayer extends EventTarget {
     audioNode;
     analyser;
     timing;
+    lastTiming;
     nextId = 100;
     pending = new Map();
     destroyed = false;
@@ -53,6 +54,7 @@ export class WasmPlayer extends EventTarget {
                 if (data.type === 'ready') {
                     clearTimeout(timeout);
                     this.browserCodecsAbsent = data.browserCodecsAbsent;
+                    this.sendTiming(true);
                     resolve();
                 }
                 else if (data.type === 'error') {
@@ -123,10 +125,16 @@ export class WasmPlayer extends EventTarget {
             })().catch(error => { clearTimeout(timeout); reject(error); });
         });
     }
-    sendTiming() {
+    sendTiming(force = false) {
+        if (this.destroyed)
+            return;
         // Fallback latency estimate, explicitly not an independent A/V sync measurement.
         const latency = (this.audioContext.baseLatency || 0) + (this.audioContext.outputLatency || 0);
-        this.worker.postMessage({ type: 'timing', latencyUs: Math.round(latency * 1e6), running: this.audioContext.state === 'running' });
+        const latencyUs = Math.round(latency * 1e6), running = this.audioContext.state === 'running';
+        if (!force && this.lastTiming?.latencyUs === latencyUs && this.lastTiming.running === running)
+            return;
+        this.lastTiming = { latencyUs, running };
+        this.worker.postMessage({ type: 'timing', latencyUs, running });
     }
     fail(error, id, report = true) {
         for (const [key, p] of this.pending)

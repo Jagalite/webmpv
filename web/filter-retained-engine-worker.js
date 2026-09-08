@@ -73,6 +73,16 @@ let internalId=0x80000000,demuxFormat='',seekPrerollSeconds=0;
 const internalCommands=new Map();
 function internalCommand(args,done){const id=internalId++;internalCommands.set(id,done);submit(id,args);}
 const CAPACITY = 8192;
+let paused=true, busyUntil=0, pumpFailed=false, nextDiagnostics=0;
+function schedulePump(delay=10) {
+  clearTimeout(timer);
+  if(closing||pumpFailed||!engine)return;
+  timer=setTimeout(()=>{
+    tick();
+    schedulePump(paused&&pendingTarget===null&&pendingFrames.size===0&&performance.now()>=busyUntil?100:10);
+  },delay);
+}
+
 function releaseSeek(){if(pendingTarget!==null&&restarted&&Math.abs(position-pendingTarget)<0.15){pendingTarget=null;force=true;post({type:'seek-complete',position});}}
 async function closeIO(){if(!ioWorker)return;const old=ioWorker;engine._web_io_cancel();await new Promise(resolve=>{ioClose=resolve;old.postMessage({type:'close'});setTimeout(resolve,1500);});old.terminate();ioWorker=null;ioClose=null;engine.ccall('web_io_root',null,['number','string'],[0,'']);}
 async function openRemote(data){minFramePts=-Infinity;cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();
@@ -147,6 +157,7 @@ function tick() {
         if(event.error)throw Error(`Playback configuration failed: ${event.error}`);
         done(event.result);continue;
       }
+      if(event.event==='property-change'&&event.name==='pause'){paused=!!event.data;busyUntil=performance.now()+300;}
       if(event.event==='property-change'&&event.name==='track-list')videoTrack=event.data?.find(t=>t.type==='video'&&t.selected);
       if(event.event==='file-loaded'){
         // Configure from mpv's detected format before resolving the host's open.
@@ -177,8 +188,9 @@ function tick() {
       presentSelected();
       rendered++;sourceRendered++;presentedPosition=position;
     }
-    if (++ticks % 40 === 0 || (ptr && sourceRendered <= 5)) post({type:'diagnostics', data:{subtitles:{...subtitles.stats},presentation:{...presentation,lateMs:presentation.lateMs.slice(-120),pts:presentation.pts.slice(-120),retained:frames.size+(heldFrame?1:0),pending:pendingFrames.size},mode,skipCanvas,canvasSubmissions,rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', decoder:decoderStats?.active?'webcodecs':'software',decoderStats, demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});
-  } catch (error) { clearInterval(timer); post({type:'error',message:String(error.stack || error)}); }
+    ticks++;
+    if (performance.now()>=nextDiagnostics || (ptr && sourceRendered <= 5)) {nextDiagnostics=performance.now()+200;post({type:'diagnostics', data:{pumpTicks:ticks,subtitles:{...subtitles.stats},presentation:{...presentation,lateMs:presentation.lateMs.slice(-120),pts:presentation.pts.slice(-120),retained:frames.size+(heldFrame?1:0),pending:pendingFrames.size},mode,skipCanvas,canvasSubmissions,rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', decoder:decoderStats?.active?'webcodecs':'software',decoderStats, demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});}
+  } catch (error) { pumpFailed=true;clearInterval(timer); post({type:'error',message:String(error.stack || error)}); }
 }
 self.onmessage = async ({data}) => {
   try {
@@ -201,7 +213,7 @@ self.onmessage = async ({data}) => {
         await new Promise((resolve,reject)=>{
           const deadline=setTimeout(()=>reject(Error('Decoder service initialization timed out')),5000);
           decoderWorker.onmessage=({data:message})=>{
-            if(message.retainedFrame){try{receiveFrame(message);}catch(error){cleanupFrames();clearInterval(timer);post({type:"error",message:String(error)});}}
+            if(message.retainedFrame){try{receiveFrame(message);}catch(error){cleanupFrames();pumpFailed=true;clearInterval(timer);post({type:"error",message:String(error)});}}
             if(message.ready){clearTimeout(deadline);resolve();}
             if(message.stats)decoderStats=message.stats;
             if(message.wakeup&&!closing)engine._web_decoder_wakeup();
@@ -210,13 +222,13 @@ self.onmessage = async ({data}) => {
           decoderWorker.onerror=error=>{clearTimeout(deadline);reject(Error(error.message));};
           decoderWorker.postMessage({memory:engine.HEAPU8.buffer,pointer:engine._web_decoder_ptr(),disabled:data.disableBrowserCodecs,faultAfter:data.decoderFaultAfter});
         });
-        engine._web_decoder_enable(1);
+        engine._web_decoder_enable(2); // Retained frames cannot use software replay.
       }
       const result = engine._web_create(data.sampleRate);
       if (result < 0) throw new Error(`mpv initialization failed: ${result}`);
       engine._web_experiment_skip_render(mode!=='copy-render');
       nativeAudio = engine._web_audio_ptr();
-      timer = setInterval(tick, 5);
+      schedulePump();
       post({type:'ready', browserCodecsAbsent:['VideoDecoder','AudioDecoder','VideoFrame'].every(name=>typeof globalThis[name]==='undefined')});
     } else if (data.type === 'timing' && engine) {
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 5, data.latencyUs);
@@ -233,7 +245,7 @@ self.onmessage = async ({data}) => {
       if(Number(engine.FS.stat('/media.mkv').size) !== data.bytes.byteLength) throw new Error('Local media write failed');
       submit(data.id, ['loadfile','/media.mkv','replace']);
     } else if (data.type === 'command') submit(data.id,data.args);
-    else if (data.type === 'resize') {subtitles.clear();canvas.width=data.width;canvas.height=data.height;force=true;}
+    else if (data.type === 'resize') {busyUntil=performance.now()+300;schedulePump(0);subtitles.clear();canvas.width=data.width;canvas.height=data.height;force=true;}
     else if (data.type === 'destroy') {
       closing = true;cleanupFrames();subtitles.clear();
       internalCommands.clear();
@@ -259,6 +271,7 @@ self.onmessage = async ({data}) => {
 function submit(id,args) {
   if (!engine || closing) throw new Error('Player is unavailable');
   if (args.length > 4 || !args.length) throw new Error('Invalid command arity');
+  busyUntil=performance.now()+300;schedulePump(0);
   const padded = [...args];
   while (padded.length < 4) padded.push(null);
   const result = engine.ccall('web_command_args','number',['number','string','string','string','string'],[id,...padded]);

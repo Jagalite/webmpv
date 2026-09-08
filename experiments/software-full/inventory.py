@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Record configured components separately from browser-qualified formats."""
-import hashlib, json, re, gzip
+import hashlib, json, re, gzip, os
 from pathlib import Path
 root = Path(__file__).resolve().parents[2]
 obj = root/'build/obj-software-full-ffmpeg'
@@ -16,9 +16,11 @@ paths = [obj/'config.h',obj/'libavutil/ffversion.h',obj/'config_components.h',ob
 paths += sorted(obj.glob('lib*/lib*.a'))
 paths += [root/p for p in ['native/player.c','native/events.c','native/stream_bridge.c','native/stream_bridge.h','web/engine-worker.js','web/generated/player.js','web/software-full-engine-worker.js','web/generated/software-full-player.js','web/software-full.html','web/audio-worklet.js','web/io-worker.js','web/range-reader.js','web/resource-loader.js','web/vod-manifest.js','fixtures/DejaVuSans.ttf']]
 paths += sorted((root/'experiments/software-full').glob('*.*'))
+paths += sorted((root/'native/simd').glob('*.c'))+[root/'scripts/decoder-simd.sh']
 paths += sorted((root/'web/engine-software-full').glob('*'))
 artifacts = {str(p.relative_to(root)): {'bytes':p.stat().st_size,'gzipBytes':len(gzip.compress(p.read_bytes(),mtime=0)),'sha256':digest(p)} for p in (root/'web/engine-software-full').glob('*') if p.is_file()}
 report = {'schema':1,'scope':'Built-in software playback, FFmpeg 7.1.1. Registrations are not per-format runtime qualification.',
+ 'decoderSimd':os.environ.get('WEBMPV_DECODER_SIMD','1')=='1',
  'selection':'Upstream defaults with GPL filters and already bundled zlib/libxml2/libass; no new external codec libraries. Encoding, muxing, devices, hardware acceleration and native network protocols disabled.',
  'baseline':base,'enabled':full,'added':{k:sorted(set(full[k])-set(base[k])) for k in full},
  'counts':{k:{'baseline':len(base[k]),'expanded':len(full[k]),'added':len(set(full[k])-set(base[k]))} for k in full},

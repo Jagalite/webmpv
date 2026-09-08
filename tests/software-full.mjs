@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import http from 'node:http';
+import {spawn} from 'node:child_process';
 const out=`results/software-full/functional-${new Date().toISOString().replaceAll(':','-')}`;
 await mkdir(out,{recursive:true});console.log(out);
 const manifest=JSON.parse(await readFile('build/fixtures/software-full/manifest.json'));
@@ -21,6 +22,13 @@ const server=http.createServer((req,res)=>{
  if(m){rangeRequests++;start=Number(m[1]);end=Math.min(end,m[2]?Number(m[2]):end);res.statusCode=206;res.setHeader('Content-Range',`bytes ${start}-${end}/${remote.length}`);}
  res.setHeader('Content-Length',end-start+1);res.end(req.method==='HEAD'?undefined:remote.subarray(start,end+1));
 });await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const performanceConfig=process.env.WEBMPV_PERFORMANCE_CONFIG;
+let appServer,origin='http://127.0.0.1:4179';
+if(performanceConfig){
+ appServer=spawn(process.execPath,['experiments/playback-performance/serve.mjs',performanceConfig],{env:{...process.env,PORT:'0',DEFAULT_MOUNT:'candidate'},stdio:['ignore','pipe','inherit']});
+ origin=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('App server timeout')),10000);appServer.once('error',reject);appServer.stdout.on('data',bytes=>{const match=/http:\/\/127\.0\.0\.1:\d+/.exec(String(bytes));if(match){clearTimeout(timer);resolve(match[0]);}});});
+ result.assetSnapshot=await(await fetch(origin+'/__metadata')).json();
+}
 const browser=await chromium.launch({channel:'chrome',headless:true,ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required']});
 result.browser=browser.version();const page=await browser.newPage();const pageErrors=[];
 page.on('pageerror',e=>pageErrors.push(String(e)));
@@ -29,7 +37,7 @@ const save=()=>writeFile(`${out}/result.json`,JSON.stringify(result,null,2)+'\n'
 const only=process.env.ONLY?.split(',');
 const total=only?.length||manifest.cases.length+3;
 result.selection=only||'full matrix';
-async function reset(){await page.evaluate(()=>player?.destroy()).catch(()=>{});await page.goto('http://127.0.0.1:4179/web/software-full.html?no-codecs');await page.waitForFunction(()=>typeof createPlayer==='function');await page.evaluate(()=>{window.nativeLogs=[];window.fixtureErrors=[];});}
+async function reset(){await page.evaluate(()=>player?.destroy()).catch(()=>{});await page.goto(origin+'/web/software-full.html?no-codecs');await page.waitForFunction(()=>typeof createPlayer==='function');await page.evaluate(()=>{window.nativeLogs=[];window.fixtureErrors=[];});}
 async function create(){await page.evaluate(async()=>{await createPlayer();player.addEventListener('log',({detail})=>nativeLogs.push(detail));});assert.equal(await page.evaluate(()=>player.browserCodecsAbsent),true);}
 async function open(file){const bytes=await readFile(file);await page.evaluate(async b=>{await player.open(Uint8Array.from(atob(b),c=>c.charCodeAt(0)).buffer);},bytes.toString('base64'));}
 async function pixels(){return page.evaluate(async()=>{const source=document.querySelector('canvas'),snapshot=await createImageBitmap(await(await fetch(source.toDataURL())).blob()),c=document.createElement('canvas');c.width=snapshot.width;c.height=snapshot.height;const ctx=c.getContext('2d');ctx.drawImage(snapshot,0,0);snapshot.close();return Array.from(ctx.getImageData(0,0,c.width,c.height).data);});}
@@ -96,4 +104,4 @@ try{
  result.preservedAfter=await hashes(preservedPaths);assert.deepEqual(result.preservedAfter,result.preserved);
  result.passed=result.tests.length===total&&result.tests.every(t=>t.passed);if(!result.passed)process.exitCode=1;
 }catch(e){result.failure=String(e.stack);console.error(e);process.exitCode=1;}
-finally{await page.evaluate(()=>player?.destroy()).catch(()=>{});await browser.close();await new Promise(resolve=>server.close(resolve));result.finished=new Date().toISOString();await save();}
+finally{if(performanceConfig)result.assetSnapshotAfter=await(await fetch(origin+'/__metadata')).json();await page.evaluate(()=>player?.destroy()).catch(()=>{});await browser.close();await new Promise(resolve=>server.close(resolve));appServer?.kill();result.finished=new Date().toISOString();await save();}

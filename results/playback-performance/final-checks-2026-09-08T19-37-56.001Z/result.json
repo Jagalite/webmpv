@@ -1,0 +1,175 @@
+{
+  "scope": "Sequential final source/build regressions; no CPU comparison",
+  "checks": [
+    {
+      "name": "typescript",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "env": {},
+      "started": "2026-09-08T19:37:56.002Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/typescript.log",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:37:56.778Z"
+    },
+    {
+      "name": "units",
+      "args": [
+        "--test",
+        "tests/audio-worklet.mjs",
+        "tests/browser-decoder-worker.mjs",
+        "tests/range-reader.mjs",
+        "tests/resource-loader.mjs",
+        "tests/retained-video.mjs",
+        "tests/timing-coalescing.mjs"
+      ],
+      "env": {},
+      "started": "2026-09-08T19:37:56.884Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/units.log",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:38:02.279Z"
+    },
+    {
+      "name": "rgbx-experiment-units",
+      "args": [
+        "--test",
+        "tests/rgbx-frame-uploader.mjs"
+      ],
+      "env": {},
+      "started": "2026-09-08T19:38:02.282Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/rgbx-experiment-units.log",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:38:02.548Z"
+    },
+    {
+      "name": "m4-simd",
+      "args": [
+        "tests/m4.mjs"
+      ],
+      "env": {
+        "HEADLESS": "1",
+        "WEBMPV_PERFORMANCE_CONFIG": "build/playback-performance/m4-simd.json"
+      },
+      "started": "2026-09-08T19:38:02.548Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/m4-simd.log",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:38:50.436Z",
+      "loadedArtifacts": {
+        "web/engine/player.mjs": {
+          "sha256": "c75de552b2aadba7764fc9422d29875e61ecb01134ffb23913988a878811656f",
+          "bytes": 53614,
+          "hits": 9,
+          "source": "build/playback-performance/narrow-simd/player.mjs",
+          "snapshotFile": "build/playback-performance/assets/c75de552b2aadba7764fc9422d29875e61ecb01134ffb23913988a878811656f.mjs"
+        },
+        "web/engine/player.wasm": {
+          "sha256": "2988723b707da6d625e6b3d625b957ad6297de1167b28a71352e19c86c9af058",
+          "bytes": 7125778,
+          "hits": 1,
+          "source": "build/playback-performance/narrow-simd/player.wasm",
+          "snapshotFile": "build/playback-performance/assets/2988723b707da6d625e6b3d625b957ad6297de1167b28a71352e19c86c9af058.wasm"
+        },
+        "web/engine-m4/player.mjs": {
+          "sha256": "c75de552b2aadba7764fc9422d29875e61ecb01134ffb23913988a878811656f",
+          "bytes": 53614,
+          "hits": 216,
+          "source": "build/playback-performance/narrow-simd/player.mjs",
+          "snapshotFile": "build/playback-performance/assets/c75de552b2aadba7764fc9422d29875e61ecb01134ffb23913988a878811656f.mjs"
+        },
+        "web/engine-m4/player.wasm": {
+          "sha256": "2988723b707da6d625e6b3d625b957ad6297de1167b28a71352e19c86c9af058",
+          "bytes": 7125778,
+          "hits": 24,
+          "source": "build/playback-performance/narrow-simd/player.wasm",
+          "snapshotFile": "build/playback-performance/assets/2988723b707da6d625e6b3d625b957ad6297de1167b28a71352e19c86c9af058.wasm"
+        }
+      },
+      "evidence": "results/m4/browser-2026-09-08T19-38-03.033Z/result.json"
+    },
+    {
+      "name": "m4-no-simd",
+      "args": [
+        "tests/m4.mjs"
+      ],
+      "env": {
+        "HEADLESS": "1",
+        "WEBMPV_PERFORMANCE_CONFIG": "build/playback-performance/m4-no-simd.json"
+      },
+      "started": "2026-09-08T19:38:50.548Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/m4-no-simd.log",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:39:42.477Z",
+      "loadedArtifacts": {
+        "web/engine/player.mjs": {
+          "sha256": "8978a6cc481b761e4dae5fd046d8539ae2dd7d4c98fc82bec2448c228ad08afd",
+          "bytes": 53614,
+          "hits": 9,
+          "source": "build/playback-performance/narrow-no-simd/player.mjs",
+          "snapshotFile": "build/playback-performance/assets/8978a6cc481b761e4dae5fd046d8539ae2dd7d4c98fc82bec2448c228ad08afd.mjs"
+        },
+        "web/engine/player.wasm": {
+          "sha256": "52bb97ea0bf4ad881f90f2ead05322cf65038fdc9f59b4a27b2be27894d5f265",
+          "bytes": 7095731,
+          "hits": 1,
+          "source": "build/playback-performance/narrow-no-simd/player.wasm",
+          "snapshotFile": "build/playback-performance/assets/52bb97ea0bf4ad881f90f2ead05322cf65038fdc9f59b4a27b2be27894d5f265.wasm"
+        },
+        "web/engine-m4/player.mjs": {
+          "sha256": "8978a6cc481b761e4dae5fd046d8539ae2dd7d4c98fc82bec2448c228ad08afd",
+          "bytes": 53614,
+          "hits": 216,
+          "source": "build/playback-performance/narrow-no-simd/player.mjs",
+          "snapshotFile": "build/playback-performance/assets/8978a6cc481b761e4dae5fd046d8539ae2dd7d4c98fc82bec2448c228ad08afd.mjs"
+        },
+        "web/engine-m4/player.wasm": {
+          "sha256": "52bb97ea0bf4ad881f90f2ead05322cf65038fdc9f59b4a27b2be27894d5f265",
+          "bytes": 7095731,
+          "hits": 24,
+          "source": "build/playback-performance/narrow-no-simd/player.wasm",
+          "snapshotFile": "build/playback-performance/assets/52bb97ea0bf4ad881f90f2ead05322cf65038fdc9f59b4a27b2be27894d5f265.wasm"
+        }
+      },
+      "evidence": "results/m4/browser-2026-09-08T19-38-56.127Z/result.json"
+    },
+    {
+      "name": "software-full",
+      "args": [
+        "tests/software-full.mjs"
+      ],
+      "env": {
+        "WEBMPV_PERFORMANCE_CONFIG": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/current.json"
+      },
+      "started": "2026-09-08T19:39:42.521Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/software-full.log",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:40:56.550Z"
+    },
+    {
+      "name": "format-matrix",
+      "args": [
+        "tests/format-matrix.mjs"
+      ],
+      "env": {},
+      "started": "2026-09-08T19:40:56.551Z",
+      "log": "results/playback-performance/final-checks-2026-09-08T19-37-56.001Z/format-matrix.log",
+      "exitCode": 1,
+      "signal": null,
+      "finished": "2026-09-08T19:44:47.984Z"
+    },
+    {
+      "name": "format-baseline-comparison",
+      "started": "2026-09-08T19:44:48.002Z",
+      "exitCode": 0,
+      "signal": null,
+      "finished": "2026-09-08T19:44:48.310Z"
+    }
+  ],
+  "passed": true
+}

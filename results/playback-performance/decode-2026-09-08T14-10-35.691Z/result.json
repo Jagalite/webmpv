@@ -1,0 +1,320 @@
+{
+  "scope": "Isolated FFmpeg Wasm decode throughput and full-frame checksums; rendering and audio excluded",
+  "configuration": {
+    "baseline": {
+      "build": "baseline",
+      "threads": 2
+    },
+    "candidate": {
+      "build": "lto",
+      "threads": 2
+    }
+  },
+  "hashes": {
+    "tests/decode-performance.mjs": "04ff89b173b3e148c1647f3ea4d3bc47ca945c9cfd8e1482d4e360111ecadff6",
+    "experiments/playback-performance/decode-benchmark.c": "5db4a42c0ca31eb48fcb793ff8cfe60ccee23e919b8ba47a81ce4fba241649b9",
+    "build/hybrid-performance/sample.mp4": "cf07e7c5fe25d2b1e4ed1bb8a9f32ce59f428bc61eeea2222d858ae066399de7",
+    "build/playback-performance/decode-baseline/decoder.mjs": "633f7551b92783887daedfea9e42912d85a5c86c1348c4e41dba464c5b6cf4f5",
+    "build/playback-performance/decode-baseline/decoder.wasm": "f493ccae7601cce6eea739d859cd9b9d11178f76a9627dd9f44b17a73bd48d7f",
+    "build/playback-performance/decode-lto/decoder.mjs": "8b3d8bc2b69d7b05f0fa6143a6aacd2362c430aa4bd87590d61e75ef33e3abd9",
+    "build/playback-performance/decode-lto/decoder.wasm": "e56f8d9ec6f36df6dc789334ade621fad70b8f84125baf31b189dc0b2bb50ea9",
+    "build/playback-performance/decode-lto/manifest.json": "ed987a0d74a3933425754ebf6642d2171e4abae4be5f4fcd2a102b6515927058",
+    "experiments/playback-performance/link-decode.sh": "ca328ef2ae40faa2271b7aee3dc838b7cd99b04b2d14df84edca0d1833ce757f",
+    "experiments/playback-performance/simd/h264-biweight.c": "027f7da9f30e63a8680b05decf3e3b86668bd3a16c230f2e90566456ec827410",
+    "experiments/playback-performance/simd/h264-chroma.c": "aef6da01de0977579070e319bab406ae0f476be5df7e9b746bca395280bedc08",
+    "experiments/playback-performance/simd/test-biweight.c": "c24900a7cc7b5df1b310375e98bbbb5f4d81627c6ff8f61f39beef9d6b427ba6",
+    "experiments/playback-performance/simd/test-chroma.c": "b396dca7486d5488f202c39354c1706ac2ccec9ba1c4f630224c953189fa3d56",
+    "experiments/playback-performance/simd/test-yuv-rgb.c": "62f7d0281fb22ecf94d94e51ead78b4d98e15b233c73453d7c1fbe63a9dc49f4",
+    "experiments/playback-performance/simd/yuv-rgb.c": "ad80156e0a46c693e7db7bf50851ef822fa92513a8685dc5a107cd5c5978896c",
+    "build/obj-performance-ffmpeg-thinlto/libavcodec/libavcodec.a": "22c6b8375a0a829e0ad9d2929c3b225df7388faa9ea2f42e3e60a94a73c0bec4",
+    "build/obj-performance-ffmpeg-thinlto/libavfilter/libavfilter.a": "cfe06684e48edc8b9443bc53c5e3ee2573c8392502cf826f7a3a1f0049cc50a2",
+    "build/obj-performance-ffmpeg-thinlto/libavformat/libavformat.a": "58c6b1ca5c6cd8e97a856369d8c985bb88e1f3d30fd30e08eedb9fe2456fd601",
+    "build/obj-performance-ffmpeg-thinlto/libavutil/libavutil.a": "8fd845e5fa3ba0e368a6b6a7fd36cace0f90ceb7be3540a8a56b39a3f63a8363",
+    "build/obj-performance-ffmpeg-thinlto/libpostproc/libpostproc.a": "32fe7e44c190118afa6a8eee05dabd608fce0f4a22a6c65cd9bb56b8f3303a11",
+    "build/obj-performance-ffmpeg-thinlto/libswresample/libswresample.a": "f9748f90e8c804d8d36d96878e7d356bfab3115cb8f01ca1cc35804d9f7531a2",
+    "build/obj-performance-ffmpeg-thinlto/libswscale/libswscale.a": "ff91fa355ac5d0555de41f64de7bbf5344ebf2c29ccb3537a9917fe10618b8c7"
+  },
+  "input": "build/hybrid-performance/sample.mp4",
+  "cycles": 2,
+  "trials": [
+    {
+      "variant": "baseline",
+      "build": "baseline",
+      "threads": 2,
+      "verify": false,
+      "warmup": true,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 3003.556,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 3055.179792,
+      "cpuMicroseconds": {
+        "user": 6176723,
+        "system": 55118
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "lto",
+      "threads": 2,
+      "verify": false,
+      "warmup": true,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 3063.497,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 3111.814208,
+      "cpuMicroseconds": {
+        "user": 6343697,
+        "system": 55634
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "baseline",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 3087.938,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 3100.703457999999,
+      "cpuMicroseconds": {
+        "user": 6189003,
+        "system": 71160
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "lto",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 3025.841,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 3041.546042,
+      "cpuMicroseconds": {
+        "user": 5987281,
+        "system": 51139
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "lto",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 2943.186,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 2955.122916999999,
+      "cpuMicroseconds": {
+        "user": 5763080,
+        "system": 44047
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "baseline",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 2768.909,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 2780.6210840000003,
+      "cpuMicroseconds": {
+        "user": 5279483,
+        "system": 43826
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "baseline",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 2622.585,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 2632.2530420000003,
+      "cpuMicroseconds": {
+        "user": 5069123,
+        "system": 37384
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "lto",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 2612.461,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 2624.154666999999,
+      "cpuMicroseconds": {
+        "user": 5059867,
+        "system": 32281
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "lto",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 2663.759,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 2674.7821250000015,
+      "cpuMicroseconds": {
+        "user": 5179134,
+        "system": 30462
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "baseline",
+      "threads": 2,
+      "verify": false,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 2985.566,
+        "verified": false,
+        "pixelMD5": "00000000000000000000000000000000",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 2996.8697089999987,
+      "cpuMicroseconds": {
+        "user": 5823158,
+        "system": 41625
+      }
+    },
+    {
+      "variant": "baseline",
+      "build": "baseline",
+      "threads": 2,
+      "verify": true,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 6531.28,
+        "verified": true,
+        "pixelMD5": "79f59cafdf345f4c308b281a7df6df73",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 6543.401249999999,
+      "cpuMicroseconds": {
+        "user": 11944142,
+        "system": 38175
+      }
+    },
+    {
+      "variant": "candidate",
+      "build": "lto",
+      "threads": 2,
+      "verify": true,
+      "warmup": false,
+      "measurement": {
+        "frames": 782,
+        "milliseconds": 5731.938,
+        "verified": true,
+        "pixelMD5": "79f59cafdf345f4c308b281a7df6df73",
+        "threads": 2,
+        "codec": "h264"
+      },
+      "wallMilliseconds": 5743.496915999996,
+      "cpuMicroseconds": {
+        "user": 10266869,
+        "system": 119971
+      }
+    }
+  ],
+  "hashesAfter": {
+    "tests/decode-performance.mjs": "04ff89b173b3e148c1647f3ea4d3bc47ca945c9cfd8e1482d4e360111ecadff6",
+    "experiments/playback-performance/decode-benchmark.c": "5db4a42c0ca31eb48fcb793ff8cfe60ccee23e919b8ba47a81ce4fba241649b9",
+    "build/hybrid-performance/sample.mp4": "cf07e7c5fe25d2b1e4ed1bb8a9f32ce59f428bc61eeea2222d858ae066399de7",
+    "build/playback-performance/decode-baseline/decoder.mjs": "633f7551b92783887daedfea9e42912d85a5c86c1348c4e41dba464c5b6cf4f5",
+    "build/playback-performance/decode-baseline/decoder.wasm": "f493ccae7601cce6eea739d859cd9b9d11178f76a9627dd9f44b17a73bd48d7f",
+    "build/playback-performance/decode-lto/decoder.mjs": "8b3d8bc2b69d7b05f0fa6143a6aacd2362c430aa4bd87590d61e75ef33e3abd9",
+    "build/playback-performance/decode-lto/decoder.wasm": "e56f8d9ec6f36df6dc789334ade621fad70b8f84125baf31b189dc0b2bb50ea9",
+    "build/playback-performance/decode-lto/manifest.json": "ed987a0d74a3933425754ebf6642d2171e4abae4be5f4fcd2a102b6515927058",
+    "experiments/playback-performance/link-decode.sh": "ca328ef2ae40faa2271b7aee3dc838b7cd99b04b2d14df84edca0d1833ce757f",
+    "experiments/playback-performance/simd/h264-biweight.c": "027f7da9f30e63a8680b05decf3e3b86668bd3a16c230f2e90566456ec827410",
+    "experiments/playback-performance/simd/h264-chroma.c": "aef6da01de0977579070e319bab406ae0f476be5df7e9b746bca395280bedc08",
+    "experiments/playback-performance/simd/test-biweight.c": "c24900a7cc7b5df1b310375e98bbbb5f4d81627c6ff8f61f39beef9d6b427ba6",
+    "experiments/playback-performance/simd/test-chroma.c": "b396dca7486d5488f202c39354c1706ac2ccec9ba1c4f630224c953189fa3d56",
+    "experiments/playback-performance/simd/test-yuv-rgb.c": "62f7d0281fb22ecf94d94e51ead78b4d98e15b233c73453d7c1fbe63a9dc49f4",
+    "experiments/playback-performance/simd/yuv-rgb.c": "ad80156e0a46c693e7db7bf50851ef822fa92513a8685dc5a107cd5c5978896c",
+    "build/obj-performance-ffmpeg-thinlto/libavcodec/libavcodec.a": "22c6b8375a0a829e0ad9d2929c3b225df7388faa9ea2f42e3e60a94a73c0bec4",
+    "build/obj-performance-ffmpeg-thinlto/libavfilter/libavfilter.a": "cfe06684e48edc8b9443bc53c5e3ee2573c8392502cf826f7a3a1f0049cc50a2",
+    "build/obj-performance-ffmpeg-thinlto/libavformat/libavformat.a": "58c6b1ca5c6cd8e97a856369d8c985bb88e1f3d30fd30e08eedb9fe2456fd601",
+    "build/obj-performance-ffmpeg-thinlto/libavutil/libavutil.a": "8fd845e5fa3ba0e368a6b6a7fd36cace0f90ceb7be3540a8a56b39a3f63a8363",
+    "build/obj-performance-ffmpeg-thinlto/libpostproc/libpostproc.a": "32fe7e44c190118afa6a8eee05dabd608fce0f4a22a6c65cd9bb56b8f3303a11",
+    "build/obj-performance-ffmpeg-thinlto/libswresample/libswresample.a": "f9748f90e8c804d8d36d96878e7d356bfab3115cb8f01ca1cc35804d9f7531a2",
+    "build/obj-performance-ffmpeg-thinlto/libswscale/libswscale.a": "ff91fa355ac5d0555de41f64de7bbf5344ebf2c29ccb3537a9917fe10618b8c7"
+  },
+  "assessment": {
+    "baseline": {
+      "milliseconds": 2866.2495,
+      "cpuMicroseconds": 5638690.5,
+      "trials": 4
+    },
+    "candidate": {
+      "milliseconds": 2811.31175,
+      "cpuMicroseconds": 5536822.75,
+      "trials": 4
+    },
+    "elapsedReductionPercent": 1.9167120657151426,
+    "cpuReductionPercent": 1.8065852346391464
+  },
+  "passed": true
+}
