@@ -12,11 +12,11 @@ const result={started:new Date().toISOString(),browser:browser.version(),scope:'
 const page=await browser.newPage();const requests=[];const pageErrors=[];page.on('pageerror',e=>{pageErrors.push(String(e));console.error('PAGE',String(e));});page.on('request',r=>requests.push(r.url()));
 const fixture=await readFile('fixtures/example.mp4');const tracks=await readFile('build/fixtures/tracks.mkv');
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const paths=['src/index.ts','src/types.ts','src/unified-player.ts','src/internal/native-player.ts','src/internal/wasm-player.ts','web/generated/index.js','web/generated/unified-player.js','web/generated/internal/native-player.js','web/generated/internal/wasm-player.js','web/engine-software-full/player.wasm','web/engine-retained-subs/player.wasm','web/player.html','tests/player-api.mjs'];
+const paths=['src/index.ts','src/types.ts','src/unified-player.ts','src/internal/native-player.ts','src/internal/wasm-player.ts','web/generated/index.js','web/generated/unified-player.js','web/generated/internal/native-player.js','web/generated/internal/wasm-player.js','web/engine-software-full/player.wasm','web/engine-retained-subs/player.wasm','web/player.html','tests/player-api.mjs','web/filter-retained-engine-worker.js','web/retained-video.js'];
 const hashes=async()=>Object.fromEntries(await Promise.all(paths.map(async p=>[p,hash(await readFile(p))])));
 result.hashes=await hashes();result.fixtures={mp4:hash(fixture),tracks:hash(tracks)};
 const only=process.env.ONLY?.split('|');result.selection=only||'full';
-const total=only?.length||15;
+const total=only?.length||19;
 async function setup(){
  await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await page.goto(origin+'/');
  await page.waitForFunction(()=>window.player);await page.evaluate(()=>player.destroy());
@@ -41,6 +41,33 @@ try{
  await check('hybrid actual retained frames and subtitles',async()=>{
   await page.evaluate(()=>make('hybrid'));await page.evaluate(()=>player.selectTrack('sub','1'));await open(tracks);await page.evaluate(()=>player.play());await page.waitForFunction(()=>player.diagnostics.backend?.presentation?.drawn>12);await page.evaluate(()=>player.pause());
   const d=await page.evaluate(()=>player.diagnostics);assert.equal(d.mode,'hybrid');assert.equal(d.backend.decoder,'webcodecs');assert.equal(d.backend.decoderStats.copyMs,0);assert.ok(d.backend.subtitles.parts>0);return d;
+ });
+ await check('hybrid seeks beyond the diagnostic sample budget',async()=>{
+  await page.route('**/filter-retained-engine-worker.js*',async route=>{
+   const response=await route.fetch();const original=await response.text();assert.ok(original.includes('pts:[]'));
+   await route.fulfill({response,body:original.replace('pts:[]','pts:Array(10000).fill(-1000000)')});
+  });
+  try {
+   await page.evaluate(()=>make('hybrid'));await open();await page.evaluate(()=>player.seek(3));
+   const d=await page.evaluate(()=>player.diagnostics.backend.presentation);assert.ok(Math.abs(d.position-3)<.15);assert.equal(d.pts.at(-1),-1000000);return d;
+  } finally {await page.unroute('**/filter-retained-engine-worker.js*');}
+ });
+ await check('hybrid letterboxes and redraws without stretching',async()=>{
+  await page.evaluate(()=>{make('hybrid');player.resize(640,480);});await open();await page.evaluate(()=>player.seek(2));
+  async function bars(){return page.evaluate(()=>{const c=document.createElement('canvas');c.width=640;c.height=480;const ctx=c.getContext('2d');ctx.drawImage(player.surface,0,0);const data=ctx.getImageData(0,0,640,480).data;let bars=0,center=0;for(let y=0;y<480;y++)for(let x=0;x<640;x++){const i=(y*640+x)*4,sum=data[i]+data[i+1]+data[i+2];if(y<40||y>=440)bars+=sum;else center+=sum;}return {bars,center};});}
+  const first=await bars();assert.equal(first.bars,0);assert.ok(first.center>100000);
+  await page.evaluate(async()=>{await player.subtitleVisible(false);player.resize(800,450);player.resize(640,480);});await page.waitForTimeout(300);
+  const redraw=await bars();assert.equal(redraw.bars,0);assert.ok(redraw.center>100000);return {first,redraw};
+ });
+ await check('destroy cancels the current native text-track request',async()=>{
+  await page.evaluate(()=>make('native'));await open();await page.route('**/api-hung.vtt',()=>{});
+  const d=await page.evaluate(async()=>{const track=player.addTextTrack({src:location.origin+'/api-hung.vtt',label:'Hung'}).then(()=>null,e=>e.message);await new Promise(r=>setTimeout(r,100));const start=performance.now();await player.destroy();return {elapsed:performance.now()-start,error:await track};});
+  await page.unroute('**/api-hung.vtt');assert.ok(d.elapsed<1500,JSON.stringify(d));assert.match(d.error,/destroyed/);return d;
+ });
+ await check('new source resets numeric subtitle and audio selections',async()=>{
+  await page.evaluate(()=>make('native'));await open();
+  const d=await page.evaluate(async()=>{const src=URL.createObjectURL(new Blob(['WEBVTT\n\n00:00:00.000 --> 00:00:10.000\nText\n'],{type:'text/vtt'}));await player.addTextTrack({src,label:'Track'});await player.selectTrack('sub','1');await player.selectTrack('audio','no');await player.volume(43);const old=player.surface;await player.open(await(await fetch('/fixtures/example.mp4')).arrayBuffer());URL.revokeObjectURL(src);return {changed:old!==player.surface,tracks:player.properties.get('track-list'),muted:player.surface.muted,volume:player.properties.get('volume')};});
+  assert.ok(d.changed);assert.equal(d.tracks.length,0);assert.equal(d.muted,false);assert.equal(d.volume,43);return d;
  });
  await check('software expanded decode and filters',async()=>{
   await page.evaluate(async()=>{make('software');await player.setVideoFilters('hflip');await player.setAudioFilters('volume=0.5');});await open(await readFile('build/fixtures/software-full/vp9-opus.webm'));await page.evaluate(()=>player.play());await page.waitForFunction(()=>player.audioDiagnostics().mediaFrames>24000);await page.evaluate(()=>player.pause());const d=await page.evaluate(()=>player.diagnostics);assert.equal(d.backend.decoder,'software');assert.equal(d.videoFilters,'hflip');assert.equal(d.audioFilters,'volume=0.5');assert.ok(d.backend.rendered>8);return d;

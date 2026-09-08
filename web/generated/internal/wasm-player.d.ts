@@ -23,6 +23,7 @@ export type RemoteSource = {
 export type PlayerDiagnostics = {
     path: 'wasm';
     presentation?: {
+        position?: number;
         pts?: number[];
         retained?: number;
         pending?: number;

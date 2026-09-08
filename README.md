@@ -31,8 +31,10 @@ software-only filters. Mode changes reopen playback and are not gapless. Automat
 fallback, broader Hybrid codecs and large local-file streaming are future work.
 See the [integration guide](docs/INTEGRATION.md) for the full support contract.
 
-The [three-mode API validation](results/player-api/README.md) records 15 API checks,
-main-demo controls, nine legacy regression checks and four AudioWorklet checks.
+The [three-mode API validation](results/player-api/README.md) records the original API and legacy regression checks. The
+[review-fix verification](results/player-api/REVIEW-FIXES.md) adds regressions for
+long-playback seeking, aspect ratio, cancellation and source replacement; the
+current API suite has 19 checks plus seven AudioWorklet/presentation unit checks.
 These are functional results; they do not constitute new performance or endurance
 qualification. Next is packaging a beta and testing it from a clean consumer app.
 

@@ -97,12 +97,12 @@ export class Player extends EventTarget {
     while (performance.now() < deadline) {
       if (this.destroyed) throw new Error('Player is destroyed');
       if (session.error) throw session.error;
-      const d = session.backend.diagnostics as {rendered?: number; seeking?: boolean; decoder?: string; presentation?: {pts?: number[]}; presentedPosition?: number} | undefined;
+      const d = session.backend.diagnostics as {rendered?: number; seeking?: boolean; decoder?: string; presentation?: {position?: number}; presentedPosition?: number} | undefined;
       const tracks = session.backend.properties.get('track-list') as Array<{type: string; codec?: string; selected?: boolean}> | undefined;
       const hasVideo = tracks?.some(t => t.type === 'video' && t.selected);
       if (hasVideo === false && tracks?.length) return;
       if (mode === 'hybrid' && tracks?.some(t => t.type === 'video' && t.selected && t.codec !== 'h264')) throw new Error('Hybrid mode requires supported WebCodecs H.264 decoding. Choose software mode for this source.');
-      const position = mode === 'hybrid' ? (d?.presentation?.pts?.at(-1) ?? NaN) / 1e6 : d?.presentedPosition;
+      const position = mode === 'hybrid' ? d?.presentation?.position : d?.presentedPosition;
       if (d?.rendered && (mode !== 'hybrid' || d.decoder === 'webcodecs') && !d.seeking && position !== undefined && Math.abs(position - target) < .15) return;
       await new Promise(resolve => setTimeout(resolve, 25));
     }
@@ -115,7 +115,7 @@ export class Player extends EventTarget {
     const wasPaused = this.settings.pause;
     const desired = {...settings, pause: preserve ? !!wasPaused : true};
     const target = preserve ? Math.max(0, Number(old?.backend.properties.get('time-pos')) || 0) : 0;
-    if (preserve && (mode === 'native') !== (this.mode === 'native')) {desired.aid = 'auto';desired.sid = 'auto';}
+    if ((!preserve && old) || (preserve && (mode === 'native') !== (this.mode === 'native'))) {desired.aid = 'auto';desired.sid = 'auto';}
     this.busy = true;this.emit('modechange', {phase: 'loading', mode});
     let candidate: Session | undefined;
     try {
@@ -228,7 +228,7 @@ export class Player extends EventTarget {
     if (this.destruction) return this.destruction;
     this.destroyed = true;clearInterval(this.monitor);
     this.destruction = (async () => {
-      await this.candidate?.backend.destroy().catch(() => {});
+      await Promise.all([this.candidate, this.current].map(session => session?.backend.destroy().catch(() => {})));
       await this.queue;
       try {await this.dispose(this.current);} finally {this.current = undefined;this.source = undefined;this.nativeTracks = [];this.root.remove();}
     })();return this.destruction;

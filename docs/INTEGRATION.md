@@ -48,7 +48,7 @@ leaving software mode. Filter changes reopen with filters configured before load
 Mode/filter changes preserve position, pause, volume and speed. Failed candidate
 opens/configuration restore the old player. Changes are not gapless; at most an
 old and candidate session coexist. Track IDs are mode-specific and reset to auto
-when crossing between native and mpv modes. External browser text tracks remain
+when replacing a source or crossing between native and mpv modes. External browser text tracks remain
 associated with the current source and are restored when returning to native.
 
 Use `player.capabilities` to enable controls. Observe `modechange` events with
@@ -62,7 +62,7 @@ mode-specific details. Native audio does not expose Wasm PCM counters.
 The host supplies a container element, not a canvas. Player owns its surface and
 worker tree. `ready` resolves without loading an engine; `open()`/`openRemote()`
 resolve once the selected backend has loaded. Source/control operations serialize
-through a bounded 32-operation queue. `destroy()` cancels an in-flight candidate,
+through a bounded 32-operation queue. `destroy()` cancels in-flight work on both current and candidate sessions,
 awaits cleanup, removes owned DOM and is idempotent. Await it before discarding a
 slot. New sources open paused; call `play()` explicitly.
 

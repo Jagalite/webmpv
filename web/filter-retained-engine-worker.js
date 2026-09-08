@@ -1,3 +1,5 @@
+import {drawRetainedVideo} from './retained-video.js';
+let videoTrack;
 let minFramePts=-Infinity;
 import {SubtitleOverlay} from './subtitle-overlay.js';
 const subtitles=new SubtitleOverlay();let frameGeneration=-1,minGeneration=-1;
@@ -5,9 +7,9 @@ const skipCanvas=true;const quality=new URL(self.location.href).searchParams.get
 let canvasSubmissions=0;
 let selectedSerial=0,heldFrame,closingFrames=false;
 const frames=new Map(),pendingFrames=new Map(),presentationTimers=new Set();
-const presentation={received:0,closed:0,drawn:0,redraws:0,peakRetained:0,peakPending:0,missing:0,lateMs:[],pts:[],pixelChecks:[]};
+const presentation={position:null,received:0,closed:0,drawn:0,redraws:0,peakRetained:0,peakPending:0,missing:0,lateMs:[],pts:[],pixelChecks:[]};
 function closeOwned(frame){frame.close();presentation.closed++;}
-function cleanupFrames(){closingFrames=true;for(const timer of presentationTimers)clearTimeout(timer);presentationTimers.clear();for(const frame of frames.values())closeOwned(frame);frames.clear();if(heldFrame)closeOwned(heldFrame);heldFrame=null;pendingFrames.clear();}
+function cleanupFrames(){presentation.position=null;closingFrames=true;for(const timer of presentationTimers)clearTimeout(timer);presentationTimers.clear();for(const frame of frames.values())closeOwned(frame);frames.clear();if(heldFrame)closeOwned(heldFrame);heldFrame=null;pendingFrames.clear();}
 function receiveFrame(message){
  presentation.received++;
  if(message.pts<minFramePts&&!pendingFrames.has(Math.round(message.pts))){closeOwned(message.retainedFrame);return;}
@@ -30,8 +32,9 @@ function presentReady(key){
   const frame=frames.get(key);if(!frame)throw Error('Scheduled retained frame missing');
   frames.delete(key);pendingFrames.delete(key);
   if(heldFrame)closeOwned(heldFrame);heldFrame=frame;
-  context.drawImage(frame,0,0,canvas.width,canvas.height);
+  drawRetainedVideo(context,frame,canvas,videoTrack);
   subtitles.draw(context,request.overlay);
+  presentation.position=key/1e6;
   presentation.drawn++;canvasSubmissions++;
   if(presentation.lateMs.length<10000)presentation.lateMs.push(performance.now()-request.deadline);
   if(presentation.pts.length<10000)presentation.pts.push(key);
@@ -50,7 +53,7 @@ function presentSelected(){
  const key=Math.round(engine._web_selected_pts()*1e6);minFramePts=Math.max(minFramePts,key);
  for(const [pts,frame] of frames)if(pts<minFramePts&&!pendingFrames.has(pts)){closeOwned(frame);frames.delete(pts);}
  const overlay=subtitles.read(engine);
- if(engine._web_selected_redraw()&&heldFrame&&Math.round(heldFrame.timestamp)===key){context.drawImage(heldFrame,0,0,canvas.width,canvas.height);subtitles.draw(context,overlay);presentation.redraws++;engine._web_presented();return;}
+ if(engine._web_selected_redraw()&&heldFrame&&Math.round(heldFrame.timestamp)===key){drawRetainedVideo(context,heldFrame,canvas,videoTrack);subtitles.draw(context,overlay);presentation.redraws++;engine._web_presented();return;}
  if(key<0)return;
  if(pendingFrames.has(key))return;
  pendingFrames.set(key,{overlay,deadline:performance.now()+engine._web_selected_delay(),scheduled:false});
@@ -144,6 +147,7 @@ function tick() {
         if(event.error)throw Error(`Playback configuration failed: ${event.error}`);
         done(event.result);continue;
       }
+      if(event.event==='property-change'&&event.name==='track-list')videoTrack=event.data?.find(t=>t.type==='video'&&t.selected);
       if(event.event==='file-loaded'){
         // Configure from mpv's detected format before resolving the host's open.
         internalCommand(['expand-text','${file-format}'],format=>{

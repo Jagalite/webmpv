@@ -7,7 +7,7 @@
     "build": "tsc",
     "build:engine": "bash scripts/build.sh",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test tests/audio-worklet.mjs && node tests/player-api.mjs",
+    "test": "node --test tests/audio-worklet.mjs tests/retained-video.mjs && node tests/player-api.mjs",
     "dev:media": "node scripts/media-server.mjs",
     "test:stream": "node --test tests/range-reader.mjs && node tests/m1.mjs",
     "test:qualify": "node tests/m2-functional.mjs && node tests/m2-supplemental.mjs",

@@ -129,7 +129,7 @@ export class Player extends EventTarget {
                 return;
             if (mode === 'hybrid' && tracks?.some(t => t.type === 'video' && t.selected && t.codec !== 'h264'))
                 throw new Error('Hybrid mode requires supported WebCodecs H.264 decoding. Choose software mode for this source.');
-            const position = mode === 'hybrid' ? (d?.presentation?.pts?.at(-1) ?? NaN) / 1e6 : d?.presentedPosition;
+            const position = mode === 'hybrid' ? d?.presentation?.position : d?.presentedPosition;
             if (d?.rendered && (mode !== 'hybrid' || d.decoder === 'webcodecs') && !d.seeking && position !== undefined && Math.abs(position - target) < .15)
                 return;
             await new Promise(resolve => setTimeout(resolve, 25));
@@ -144,7 +144,7 @@ export class Player extends EventTarget {
         const wasPaused = this.settings.pause;
         const desired = { ...settings, pause: preserve ? !!wasPaused : true };
         const target = preserve ? Math.max(0, Number(old?.backend.properties.get('time-pos')) || 0) : 0;
-        if (preserve && (mode === 'native') !== (this.mode === 'native')) {
+        if ((!preserve && old) || (preserve && (mode === 'native') !== (this.mode === 'native'))) {
             desired.aid = 'auto';
             desired.sid = 'auto';
         }
@@ -335,7 +335,7 @@ export class Player extends EventTarget {
         this.destroyed = true;
         clearInterval(this.monitor);
         this.destruction = (async () => {
-            await this.candidate?.backend.destroy().catch(() => { });
+            await Promise.all([this.candidate, this.current].map(session => session?.backend.destroy().catch(() => { })));
             await this.queue;
             try {
                 await this.dispose(this.current);
