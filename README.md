@@ -67,6 +67,20 @@ representative browser test matrix; it does not imply every format is qualified.
 See the [expanded-profile verification](results/software-full/README.md) for the
 21 passing checks, payload sizes and documented limitations.
 
+## Generated browser format matrix
+
+The [format matrix](results/format-matrix/README.md) tests 115 small generated
+sample configurations through the public Software API in Chrome: 112 decode,
+106 pass decode/seek/cleanup, and all 115 release their workers. Failures remain
+listed. There are also 47 generation/identification gaps and 334 decoder
+registrations without a matching local encoder; these are not coverage claims.
+
+Run `npm run fixtures:formats` with host FFmpeg/ffprobe, then
+`npm run test:formats`. Fixtures stay under `build/fixtures/format-matrix/`.
+The browser harness starts its own server, displays progress when headed, and
+returns a nonzero exit status if any sample fails. These two-second synthetic
+samples do not establish all-profile, all-container or performance support.
+
 ## Historical baseline build from upstream sources
 
 The accepted historical baseline build uses Docker and the stock Emscripten 4.0.14 SDK on a digest-pinned ARM64 Ubuntu image:
