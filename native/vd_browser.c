@@ -7,6 +7,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <libavcodec/avcodec.h>
+#include <libavutil/pixdesc.h>
 #include "mpv_talloc.h"
 #include "common/av_common.h"
 #include "common/codecs.h"
@@ -79,7 +80,7 @@ static void fallback(struct mp_filter *f) {
     MP_WARN(f,"Browser decode failed or reached its bound; replaying in software.\n");
     request(5);p->browser=false;p->replaying=true;p->replay_at=0;p->recovery_target=p->delivered;
     if(!p->software_open){
-        if(avcodec_open2(p->software,avcodec_find_decoder(AV_CODEC_ID_H264),NULL)<0){
+        if(avcodec_open2(p->software,avcodec_find_decoder(p->software->codec_id),NULL)<0){
             p->software_failed=true;mp_filter_internal_mark_failed(f);return;
         }
         p->software_open=true;
@@ -93,11 +94,15 @@ static int send(struct mp_filter *f,struct demux_packet *packet) {
     mp_set_av_packet(p->packet,packet,&p->timebase);
     if(!p->browser)return avcodec_send_packet(p->software,packet?p->packet:NULL);
     if(!packet){p->drained=true;return request(3);}
+    // Byte-oriented demuxers can return dependent preroll packets after a seek.
+    // They cannot initialize a fresh browser decoder; wait for random access.
+    if(!p->submitted_keyframe&&!(p->packet->flags&AV_PKT_FLAG_KEY))return 0;
+    size_t extra_size=0;
+    uint8_t *extra=av_packet_get_side_data(p->packet,AV_PKT_DATA_NEW_EXTRADATA,&extra_size);
     if(p->packet->size>WEB_DEC_PACKET_MAX ||
        (!p->retained_only&&(p->count>=256||p->bytes+p->packet->size>16*1024*1024)) ||
        p->packet->pts==AV_NOPTS_VALUE ||
-       av_packet_get_side_data(p->packet,AV_PKT_DATA_NEW_EXTRADATA,NULL) ||
-       (!p->submitted_keyframe&&!(p->packet->flags&AV_PKT_FLAG_KEY))) {
+       (extra&&(extra_size!=(size_t)p->software->extradata_size||memcmp(extra,p->software->extradata,extra_size)))) {
         fallback(f);return AVERROR(EAGAIN);
     }
     AVPacket *copy=p->retained_only?NULL:av_packet_clone(p->packet);
@@ -191,18 +196,26 @@ static void destroy(struct mp_filter *f){
 }
 static const struct mp_filter_info info={.name="vd_browser",.priv_size=sizeof(struct browser_priv),.process=process,.reset=reset,.destroy=destroy};
 static struct mp_decoder *create(struct mp_filter *parent,struct mp_codec_params *codec,const char *name){
-    if(!web_decoder_enabled()||!codec->codec||strcmp(codec->codec,"h264"))return NULL;
+    if(!web_decoder_enabled()||!codec->codec)return NULL;
+    int kind=!strcmp(codec->codec,"h264")?1:!strcmp(codec->codec,"hevc")?2:!strcmp(codec->codec,"vp8")?3:!strcmp(codec->codec,"vp9")?4:!strcmp(codec->codec,"av1")?5:0;
+    if(!kind)return NULL;
+    // Legacy copy-back clients retain their original H.264-only ABI.
+    if(atomic_load(&enabled)!=2&&kind!=1)return NULL;
     struct mp_filter *f=mp_filter_create(parent,&info);if(!f)return NULL;
     struct browser_priv *p=f->priv;p->public.f=f;p->delivered=p->recovery_target=AV_NOPTS_VALUE;
     p->retained_only=atomic_load(&enabled)==2;
-    const AVCodec *decoder=avcodec_find_decoder(AV_CODEC_ID_H264);
+    const AVCodec *decoder=avcodec_find_decoder(mp_codec_to_av_codec_id(codec->codec));
     p->software=avcodec_alloc_context3(decoder);p->packet=av_packet_alloc();p->frame=av_frame_alloc();
     if(!p->software||!p->packet||!p->frame||mp_set_avctx_codec_headers(p->software,codec)<0)goto fail;
     p->timebase=mp_get_codec_timebase(codec);p->software->pkt_timebase=p->timebase;p->software->thread_count=2;p->software->max_pixels=1920*1080;
     // Open the software codec only on recovery; eager decoder threads add
     // startup work to every successful browser configuration.
     int size=p->software->extradata_size;
-    if(size<7||size>65536||p->software->extradata[0]!=1)goto fail;
+    if(size<0||size>65536)goto fail;
+    if(!p->retained_only&&(size<7||p->software->extradata[0]!=1))goto fail;
+    web_decoder.reserved[0]=kind;web_decoder.reserved[1]=p->software->profile;web_decoder.reserved[2]=p->software->level;
+    const AVPixFmtDescriptor *format=av_pix_fmt_desc_get(p->software->pix_fmt);
+    web_decoder.format=format?format->comp[0].depth:p->software->bits_per_raw_sample;
     web_decoder.size=size;web_decoder.width=p->software->width;web_decoder.height=p->software->height;
     memcpy(web_decoder.packet,p->software->extradata,size);
     if(request(1)<0)goto fail;

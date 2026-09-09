@@ -35,12 +35,17 @@ await player.destroy();
 | Hybrid | WebCodecs video, mpv scheduling, retained browser frames | mpv/libass | Unavailable through this API |
 | Software | Expanded FFmpeg software decode and mpv software render | mpv/libass | FFmpeg video/audio filters |
 
-Hybrid currently admits supported H.264 avcC inputs; audio uses mpv/FFmpeg's
-existing retained-engine codec build. It does not inherit the expanded software
-codec inventory. Unsupported hybrid decoding fails with a software-mode action;
-it does not silently select a fourth playback mode. Native codec/container/track
-support depends on the browser. Native HLS/DASH is admitted only when the browser
-reports support; this library adds no native MSE playback engine.
+Hybrid bridges AVC (avcC or Annex B), HEVC, VP8, VP9 and AV1 using the actual
+browser decoder configuration and decoded-frame delivery. Its audio and demuxing
+use the expanded FFmpeg build. Decoder registration alone does not establish
+playback support. Unsupported decoding fails; select Software explicitly.
+
+Native defaults to `nativeRemux: 'auto'`: direct `<video>` first, then progressive
+H.264/AAC packet-copy remuxing on packaging/decode rejection. Sources requiring
+custom authentication go directly to the remux plan. `'never'` preserves direct-only
+behavior; `'always'` forces remux qualification. These are internal plans, not
+public modes. Native HLS/DASH still depends on browser manifest support.
+See [routing, qualification and remaining limits](MEDIA-ROUTING.md).
 
 `setVideoFilters()` and `setAudioFilters()` reject outside software mode, even
 for an empty chain. Select software explicitly first. Clear active filters before
@@ -82,8 +87,9 @@ await player.subtitleVisible(false);
 ```
 
 Keep caller-owned blob text-track URLs alive until the source is replaced or the
-player is destroyed. Native audio track switching requires the browser's audio
-track API. Unsupported requests reject instead of silently doing nothing.
+player is destroyed. Native direct audio track switching requires the browser's
+audio track API. Remux exposes demuxed audio IDs and reopens at the source position
+when selecting a qualified track. Unsupported requests reject.
 
 mpv modes accept `RemoteSource` headers, credentials, explicit origin allowlists,
 immutability assertions and authorization renewal:
@@ -97,23 +103,25 @@ await player.openRemote({
 });
 ```
 
-Native requests reject headers, renewal callbacks, explicit origin restrictions,
-immutability assertions and `credentials: 'omit'`, which `<video>` cannot enforce.
+Native routes headers, renewal callbacks, explicit origin restrictions,
+immutability assertions and `credentials: 'omit'` through its bounded remux source.
+With `nativeRemux: 'never'`, these requests reject because `<video>` cannot enforce them.
 Native credentialed CORS uses `credentials: 'include'`; the default is anonymous
-CORS. Range/redirect guarantees belong to mpv modes, not native requests.
+CORS. Range/redirect guarantees apply to the remux and mpv source adapters.
 
 Serve all `web/` assets and `fixtures/DejaVuSans.ttf` at the relative locations in
-the repository. Native mode lazily imports only its browser adapter and does not
-require cross-origin isolation. Hybrid/software require a secure isolated page:
+the repository. Native direct lazily imports only its browser adapter and does not
+require cross-origin isolation. Native remux and Hybrid/software require a secure isolated page:
 `Cross-Origin-Opener-Policy: same-origin` and
 `Cross-Origin-Embedder-Policy: require-corp`. The media server must satisfy CORS,
 CORP where applicable, range and representation requirements. The complete
 checkout is not yet a standalone published npm distribution.
 
 Build the JS/API with `npm run build`. Software uses `web/engine-software-full`
-from `npm run build:software-full`. Hybrid uses the retained subtitle engine in
-`web/engine-retained-subs`; its existing native build is described in
-`experiments/retained-subtitles/README.md`. Worker filenames are implementation
+from `npm run build:software-full`. Hybrid uses `web/engine-hybrid` from
+`npm run build:hybrid`; Native remux uses `web/engine-remux` from `npm run build:remux`.
+Both build scripts use the pinned local FFmpeg/Emscripten toolchain; see
+[build prerequisites and commands](MEDIA-ROUTING.md). Worker filenames are implementation
 details, not additional playback modes. FFmpeg build flags affect the bundled
 Wasm capabilities, not the public mode list.
 

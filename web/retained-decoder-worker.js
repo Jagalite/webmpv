@@ -1,3 +1,6 @@
+import {videoCodecConfig,vp9PacketConfig} from './video-codec-config.js';
+let pendingConfiguration;
+let packetPrefix,needsKey=true;
 const noCopy=true;
 // Dedicated service: native decoder pthread waits never block this event loop.
 let memory,pointer,header,view,decoder,configuration,queue=[],generation=0,busy=false;
@@ -17,10 +20,13 @@ function configure(){
  decoder=new VideoDecoder({error:error=>{if(current===generation){failure=String(error);stats.errors++;postMessage({wakeup:true});}},output:frame=>{
   stats.receivedFrames++;
   if(current!==generation){closeFrame(frame);return;}
-  if(queue.length>=8){closeFrame(frame);failure='Frame queue limit';stats.errors++;return;}
+  // Decode completion may release a reorder burst after decodeQueueSize falls.
+  // Stop submitting at eight queued frames; retain bounded burst headroom.
+  if(queue.length>=32){closeFrame(frame);failure='Frame queue limit';stats.errors++;return;}
   queue.push(frame);postMessage({wakeup:true});stats.peakFrames=Math.max(stats.peakFrames,queue.length);lastProgress=performance.now();
  }});
- decoder.configure(configuration);lastProgress=performance.now();
+ decoder.addEventListener('dequeue',()=>{if(current===generation)postMessage({wakeup:true});});
+ needsKey=true;decoder.configure(configuration);lastProgress=performance.now();
 }
 self.onmessage=({data})=>{
  if(data.type==='cancel'){
@@ -61,27 +67,43 @@ async function pump(){
   if(operation===1){
    clear();if(disabled||typeof VideoDecoder==='undefined')throw Error('VideoDecoder unavailable');
    const size=header[4],w=header[5],h=header[6];
-   if(size<7||size>65536||w<1||h<1||w>1920||h>1080||(w&1)||(h&1))throw Error(`Unsupported decoder dimensions/configuration: ${size} bytes, ${w}x${h}`);
+   if(size<0||size>65536)throw Error('Invalid decoder configuration size');
    const description=new Uint8Array(memory,pointer+packetOffset,size).slice();
-   const codec='avc1.'+Array.from(description.subarray(1,4),v=>v.toString(16).padStart(2,'0')).join('');
-   configuration={codec,description,codedWidth:w,codedHeight:h,hardwareAcceleration:'no-preference',optimizeForLatency:false};
+   stats.input={kind:header[13]||1,width:w,height:h,profile:header[14],level:header[15],depth:header[8],descriptionBytes:size};
+   pendingConfiguration=null;
+   if(stats.input.kind===4&&(stats.input.profile<0||!stats.input.depth)){
+    pendingConfiguration={...stats.input,description};configuration=null;return;
+   }
+   const adapted=videoCodecConfig({...stats.input,description,depth:header[8]||8});
+   configuration=adapted.configuration;packetPrefix=adapted.prefix;stats.codec=configuration.codec;
    const support=await VideoDecoder.isConfigSupported(configuration);
    if(!valid())return;if(!support.supported)throw Error('Unsupported browser configuration');
    configure();
   }else if(operation===5){clear();}
-  else if(operation===6){clear();configure();stats.resets++;}
+  else if(operation===6){clear();if(configuration)configure();stats.resets++;}
   else{
    if(failure)throw Error(failure);
+   if(!decoder&&pendingConfiguration){
+    if(operation===4){result=AGAIN;return;}
+    if(operation!==2)throw Error('VP9 source ended before initialization');
+    const bytes=new Uint8Array(memory,pointer+packetOffset,header[4]);
+    const adapted=videoCodecConfig({...pendingConfiguration,...vp9PacketConfig(bytes)});
+    configuration=adapted.configuration;packetPrefix=adapted.prefix;stats.codec=configuration.codec;
+    const support=await VideoDecoder.isConfigSupported(configuration);
+    if(!valid())return;if(!support.supported)throw Error('Unsupported browser configuration');
+    configure();pendingConfiguration=null;
+   }
    if(!decoder)throw Error('Decoder is closed');
    if(operation===2){
-    if(submitted-consumed>=8)result=AGAIN;
+    if(decoder.decodeQueueSize+queue.length>=8)result=AGAIN;
     else{
      const size=header[4];if(size<1||size>8*1024*1024)throw Error('Packet size limit');
-     const bytes=new Uint8Array(memory,pointer+packetOffset,size).slice();
+     let bytes=new Uint8Array(memory,pointer+packetOffset,size).slice();
+     if(needsKey&&header[7]&&packetPrefix?.length){const joined=new Uint8Array(packetPrefix.length+bytes.length);joined.set(packetPrefix);joined.set(bytes,packetPrefix.length);bytes=joined;}
      const timestamp=view.getFloat64(64,true),duration=view.getFloat64(72,true);
      if(!Number.isSafeInteger(timestamp)||!Number.isSafeInteger(duration)||duration<0)throw Error(`Invalid timestamps: ${timestamp}, duration ${duration}`);
      decoder.decode(new EncodedVideoChunk({type:header[7]?'key':'delta',timestamp,...(duration?{duration}:{}),data:bytes}));
-     submitted++;stats.submitted++;stats.peakOutstanding=Math.max(stats.peakOutstanding,submitted-consumed);
+     needsKey=false;submitted++;stats.submitted++;stats.peakOutstanding=Math.max(stats.peakOutstanding,decoder.decodeQueueSize);
     }
    }else if(operation===3){
     draining=true;const epoch=generation;
@@ -92,9 +114,9 @@ async function pump(){
      const frame=queue.shift();
      try{
       const actualWidth=frame.visibleRect.width,actualHeight=frame.visibleRect.height;
-      stats.actualWidth=actualWidth;stats.actualHeight=actualHeight;
+      stats.actualWidth=actualWidth;stats.actualHeight=actualHeight;stats.pixelFormat=frame.format;
       const w=noCopy?2:actualWidth,h=noCopy?2:actualHeight;
-      if(!['I420','NV12'].includes(frame.format)||w<1||h<1||w>1920||h>1080||(w&1)||(h&1))throw Error('Unsupported decoded frame');
+      if((!noCopy&&!['I420','NV12'].includes(frame.format))||actualWidth<1||actualHeight<1||actualWidth>1920||actualHeight>1080||w<1||h<1||w>1920||h>1080||(w&1)||(h&1))throw Error('Unsupported decoded frame');
       const nv12=frame.format==='NV12';
       const layout=nv12?[{offset:0,stride:w},{offset:w*h,stride:w}]:[{offset:0,stride:w},{offset:w*h,stride:w/2},{offset:w*h*5/4,stride:w/2}];
       if(!noCopy){
@@ -119,14 +141,14 @@ async function pump(){
       consumed++;stats.frames++;lastProgress=performance.now();result=1;
      }finally{closeFrame(frame);}
     }else if(draining)result=flushed?EOF:0;
-    else result=submitted-consumed>=8?0:AGAIN;
-    if(!queue.length&&(draining||submitted-consumed>=8)&&submitted>consumed&&performance.now()-lastProgress>3000)throw Error('Decoder output watchdog');
+    else result=decoder.decodeQueueSize+queue.length>=8?0:AGAIN;
+    if(!queue.length&&(draining||decoder.decodeQueueSize>=8)&&submitted>consumed&&performance.now()-lastProgress>3000)throw Error('Decoder output watchdog');
    }else throw Error('Unknown decoder operation');
   }
  }catch(error){failure=String(error);stats.errors++;result=IO;postMessage({error:failure});}
  finally{
   if(valid()){header[3]=result;Atomics.store(header,0,ticket+1);Atomics.notify(header,0);}
-  if(operation!==4||stats.frames%30===0)postMessage({stats:{...stats,outstanding:submitted-consumed,queued:queue.length,active:!!decoder}});
+  if(operation!==4||stats.frames%30===0)postMessage({stats:{...stats,outstanding:decoder?.decodeQueueSize??0,queued:queue.length,active:!!decoder}});
   busy=false;
  }
 }

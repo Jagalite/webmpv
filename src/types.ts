@@ -13,6 +13,8 @@ export type RemoteSource = {
 export type TextTrackSource = {src: string; label: string; language?: string; default?: boolean};
 export type PlayerOptions = {
   mode?: PlaybackMode;
+  /** Internal Native packaging plan; "never" disables the packet-copy fallback. */
+  nativeRemux?: 'auto' | 'never' | 'always';
   width?: number;
   height?: number;
   videoFilters?: string;

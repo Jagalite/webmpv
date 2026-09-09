@@ -1,17 +1,26 @@
 /** Browser media ownership, including listeners, pending loads and object URLs. */
 export class NativePlayer extends EventTarget {
     video;
+    remuxPolicy;
     ready = Promise.resolve();
     properties = new Map();
     stopped = false;
+    opening = false;
+    remux;
+    remuxSource;
+    directFailure;
+    shiftedCues = new WeakSet();
+    sourceTime() { return Math.max(0, this.video.currentTime - (this.remux?.timelineBias ?? 0)); }
+    sourceDuration() { return Number.isFinite(this.video.duration) ? Math.max(0, this.video.duration - (this.remux?.timelineBias ?? 0)) : 0; }
     objectURL;
     selectedSub = 'auto';
     subsVisible = true;
     cancelers = new Set();
     listeners = [];
-    constructor(video) {
+    constructor(video, remuxPolicy = 'auto') {
         super();
         this.video = video;
+        this.remuxPolicy = remuxPolicy;
         video.playsInline = true;
         video.preload = 'auto';
         for (const event of ['timeupdate', 'durationchange', 'loadedmetadata', 'play', 'pause', 'volumechange', 'ratechange', 'ended']) {
@@ -23,7 +32,8 @@ export class NativePlayer extends EventTarget {
             video.addEventListener(event, listener);
             this.listeners.push(() => video.removeEventListener(event, listener));
         }
-        const failed = () => this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`);
+        const failed = () => { if (!this.opening && !this.stopped)
+            this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`); };
         video.addEventListener('error', failed);
         this.listeners.push(() => video.removeEventListener('error', failed));
         const tracks = () => this.refresh();
@@ -63,9 +73,11 @@ export class NativePlayer extends EventTarget {
     refresh() {
         const tracks = Array.from(this.video.textTracks, (t, i) => ({ id: String(i + 1), type: 'sub', title: t.label, lang: t.language, selected: t.mode === 'showing' }));
         const audio = this.video.audioTracks;
-        if (audio)
+        if (this.remux?.tracks)
+            tracks.push(...this.remux.tracks.filter(t => t.type === 'audio').map(t => ({ ...t, selected: t.selected && !this.video.muted })));
+        else if (audio)
             tracks.push(...Array.from(audio, (t, i) => ({ id: String(i + 1), type: 'audio', title: t.label, lang: t.language, selected: t.enabled })));
-        const values = { 'time-pos': this.video.currentTime, duration: Number.isFinite(this.video.duration) ? this.video.duration : 0, pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks };
+        const values = { 'time-pos': this.sourceTime(), duration: this.sourceDuration(), pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks };
         for (const [name, data] of Object.entries(values)) {
             if (name !== 'track-list' && this.properties.get(name) === data)
                 continue;
@@ -73,17 +85,63 @@ export class NativePlayer extends EventTarget {
             this.emit('mpv', { event: 'property-change', name, data });
         }
     }
-    get diagnostics() { const q = this.video.getVideoPlaybackQuality(); return { path: 'native', position: this.video.currentTime, rendered: q.totalVideoFrames, dropped: q.droppedVideoFrames, readyState: this.video.readyState }; }
+    get diagnostics() { const q = this.video.getVideoPlaybackQuality(); return { path: 'native', plan: this.remux ? 'remux' : 'direct', directFailure: this.directFailure, remux: this.remux?.snapshot(), position: this.sourceTime(), rendered: q.totalVideoFrames, dropped: q.droppedVideoFrames, readyState: this.video.readyState }; }
     async load(url) {
         await this.wait('loadeddata', () => { this.video.src = url; this.video.load(); });
         this.refresh();
         this.emit('mpv', { event: 'file-loaded' });
     }
+    async startRemux(source, target = 0) {
+        this.assertActive();
+        if (!crossOriginIsolated || typeof MediaSource === 'undefined')
+            throw Error('Native remux requires MediaSource and cross-origin isolation');
+        if (source.options?.format && source.options.format !== 'file')
+            throw Error('Native remux currently requires a random-access file source; use Hybrid for this manifest');
+        const moduleURL = new URL('../../native-remux-player.js', import.meta.url).href;
+        const { RemuxPlayer } = await import(moduleURL);
+        this.assertActive();
+        this.remux ??= new RemuxPlayer(this.video);
+        this.remux.onError = message => { if (!this.opening && !this.stopped)
+            this.emit('error', message); };
+        const { refreshAuthorization, ...options } = source.options ?? {};
+        const transport = { ...source, ...(source.options ? { options: options } : {}), refreshAuthorization };
+        await this.remux.open(transport, target);
+        this.remuxSource = source;
+        if (this.video.seeking)
+            await this.wait('seeked', () => { });
+        this.refresh();
+        this.emit('source', { plan: 'remux', tracks: this.remux.tracks });
+        this.emit('mpv', { event: 'file-loaded' });
+    }
+    async loadPlan(source, direct, requiresRemux = false) {
+        this.assertActive();
+        this.opening = true;
+        try {
+            if (this.remuxPolicy !== 'always' && !requiresRemux) {
+                try {
+                    await direct();
+                    return;
+                }
+                catch (error) {
+                    if (this.stopped || this.remuxPolicy === 'never' || ![3, 4].includes(this.video.error?.code ?? 0))
+                        throw error;
+                    this.directFailure = String(error);
+                }
+            }
+            else if (this.remuxPolicy === 'never')
+                throw Error('Native direct cannot enforce these source permissions; enable native remux or choose Hybrid');
+            await this.startRemux(source);
+        }
+        finally {
+            this.opening = false;
+        }
+    }
     async open(file) {
         this.assertActive();
-        this.objectURL = URL.createObjectURL(file instanceof File ? file : new Blob([file]));
+        const local = file instanceof File ? file : new File([file], 'media');
+        this.objectURL = URL.createObjectURL(local);
         try {
-            await this.load(this.objectURL);
+            await this.loadPlan({ file: local }, () => this.load(this.objectURL));
         }
         catch (error) {
             URL.revokeObjectURL(this.objectURL);
@@ -93,23 +151,34 @@ export class NativePlayer extends EventTarget {
     }
     async openRemote(source) {
         this.assertActive();
-        if (source.headers || source.refreshAuthorization || source.allowedOrigins || source.immutable !== undefined || source.credentials === 'omit')
-            throw new Error('Native mode cannot enforce custom request headers, renewal, origin restrictions, immutability or omitted same-origin credentials; use an mpv mode.');
         const url = new URL(source.url, location.href);
         if (!['http:', 'https:'].includes(url.protocol))
-            throw new Error('Remote sources require HTTP or HTTPS');
-        if (source.format && source.format !== 'file') {
-            const mime = source.format === 'hls' ? 'application/vnd.apple.mpegurl' : 'application/dash+xml';
-            if (!this.video.canPlayType(mime))
-                throw new Error(`Native ${source.format.toUpperCase()} playback is not supported by this browser`);
-        }
+            throw Error('Remote sources require HTTP or HTTPS');
+        const requiresRemux = !!(source.headers || source.refreshAuthorization || source.allowedOrigins || source.immutable !== undefined || source.credentials === 'omit');
         this.video.crossOrigin = source.credentials === 'include' ? 'use-credentials' : 'anonymous';
-        await this.load(url.href);
+        await this.loadPlan({ options: { ...source, url: url.href } }, async () => {
+            if (source.format && source.format !== 'file') {
+                const mime = source.format === 'hls' ? 'application/vnd.apple.mpegurl' : 'application/dash+xml';
+                if (!this.video.canPlayType(mime))
+                    throw Error(`Native ${source.format.toUpperCase()} playback is not supported by this browser`);
+            }
+            await this.load(url.href);
+        }, requiresRemux);
     }
     async play() { this.assertActive(); await this.video.play(); this.refresh(); }
     async pause() { this.assertActive(); this.video.pause(); this.refresh(); }
     async seek(seconds) {
         this.assertActive();
+        if (this.remux) {
+            const paused = this.video.paused;
+            await this.remux.seek(seconds);
+            if (this.video.seeking)
+                await this.wait('seeked', () => { });
+            if (!paused)
+                await this.video.play();
+            this.refresh();
+            return;
+        }
         if (Math.abs(this.video.currentTime - seconds) < .001 && !this.video.seeking)
             return;
         await this.wait('seeked', () => { this.video.currentTime = seconds; });
@@ -127,6 +196,35 @@ export class NativePlayer extends EventTarget {
             }
             if (id === 'no') {
                 this.video.muted = true;
+                return;
+            }
+            if (this.remux && this.remuxSource) {
+                const track = this.remux.tracks?.find(t => t.type === 'audio' && t.id === id);
+                if (!track)
+                    throw Error('Unknown remux audio track');
+                if (!track.selected) {
+                    const previous = this.remuxSource, position = this.sourceTime(), paused = this.video.paused;
+                    this.opening = true;
+                    try {
+                        await this.startRemux({ ...previous, audioTrack: Number(id) - 1 }, position);
+                    }
+                    catch (error) {
+                        try {
+                            await this.startRemux(previous, position);
+                        }
+                        catch (recovery) {
+                            this.emit('error', String(recovery));
+                        }
+                        throw error;
+                    }
+                    finally {
+                        this.opening = false;
+                        if (!paused)
+                            await this.video.play();
+                    }
+                }
+                this.video.muted = false;
+                this.refresh();
                 return;
             }
             if (!audio || !audio[Number(id) - 1])
@@ -166,7 +264,7 @@ export class NativePlayer extends EventTarget {
             }
             else
                 resolve(); };
-            const loaded = () => finish();
+            const loaded = () => { this.shiftTextTrack(track); finish(); };
             const failed = () => finish(new Error('Native text track failed to load'));
             const cancel = (error) => finish(error);
             const timer = setTimeout(() => finish(new Error('Native text track load timed out')), 15000);
@@ -174,10 +272,21 @@ export class NativePlayer extends EventTarget {
             track.addEventListener('load', loaded);
             track.addEventListener('error', failed);
             this.video.append(track);
+            track.addEventListener('load', () => this.shiftTextTrack(track));
             track.track.mode = 'hidden';
         });
         this.applySubtitles();
         this.refresh();
+    }
+    shiftTextTrack(track) {
+        if (!this.remux)
+            return;
+        for (const cue of Array.from(track.track.cues ?? []))
+            if (!this.shiftedCues.has(cue)) {
+                cue.startTime += this.remux.timelineBias;
+                cue.endTime += this.remux.timelineBias;
+                this.shiftedCues.add(cue);
+            }
     }
     resize(width, height) { this.assertActive(); this.video.width = width; this.video.height = height; }
     audioDiagnostics() { return { state: this.stopped ? 'closed' : this.video.paused ? 'paused' : 'running', source: 'native', decodedSampleCountersAvailable: false }; }
@@ -187,6 +296,7 @@ export class NativePlayer extends EventTarget {
         this.stopped = true;
         for (const cancel of this.cancelers)
             cancel(new Error('Player is destroyed'));
+        await this.remux?.destroy();
         this.listeners.forEach(remove => remove());
         this.listeners = [];
         this.video.pause();

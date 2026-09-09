@@ -162,7 +162,7 @@ function tick() {
       if(event.event==='file-loaded'){
         // Configure from mpv's detected format before resolving the host's open.
         internalCommand(['expand-text','${file-format}'],format=>{
-          demuxFormat=String(format);seekPrerollSeconds=/^(mkv|matroska(?:,|$))/.test(demuxFormat)?0.5:0;
+          demuxFormat=String(format);seekPrerollSeconds=demuxFormat==='mpegts'?30:/^(mkv|matroska(?:,|$))/.test(demuxFormat)?0.5:0;
           internalCommand(['set','hr-seek-demuxer-offset',String(seekPrerollSeconds)],()=>post({type:'event',event}));
         });continue;
       }
@@ -201,7 +201,7 @@ self.onmessage = async ({data}) => {
       context = canvas.getContext('2d', {alpha:false});
       audio = new Int32Array(data.audio, 0, 16);
       pcm = new Float32Array(data.audio, 64);
-      const createEngine=(await import(data.decoder==='webcodecs'?'./engine-retained-subs/player.mjs':'./engine/player.mjs')).default;
+      const createEngine=(await import(data.decoder==='webcodecs'?'./engine-hybrid/player.mjs':'./engine/player.mjs')).default;
       engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});
       if (closing) return;
       engine.FS.mkdir('/fonts');
@@ -217,7 +217,7 @@ self.onmessage = async ({data}) => {
             if(message.ready){clearTimeout(deadline);resolve();}
             if(message.stats)decoderStats=message.stats;
             if(message.wakeup&&!closing)engine._web_decoder_wakeup();
-            if(message.error)post({type:'log',message:message.error});
+            if(message.error)post({type:'error',message:'Hybrid browser decoder: '+message.error});
           };
           decoderWorker.onerror=error=>{clearTimeout(deadline);reject(Error(error.message));};
           decoderWorker.postMessage({memory:engine.HEAPU8.buffer,pointer:engine._web_decoder_ptr(),disabled:data.disableBrowserCodecs,faultAfter:data.decoderFaultAfter});

@@ -1,6 +1,8 @@
 import {RangeReader} from './range-reader.js';
 let reader,resources,header,bytes,view,extra,urlBytes,busy=false,timer,stopped=false;
 const refreshes=new Map();
+let nativeEpoch;
+function synchronizeEpoch(){const current=Atomics.load(header,3);if(current!==nativeEpoch){nativeEpoch=current;reader?.beginEpoch();resources?.beginEpoch();}}
 self.onmessage=async({data})=>{
   try{
     if(data.type==='init'){
@@ -18,14 +20,14 @@ self.onmessage=async({data})=>{
       }
       reader=new RangeReader(data.options,refresh);
       const info=await reader.open();postMessage({type:'ready',info});startPump();
-    }else if(data.type==='epoch'){reader?.beginEpoch();resources?.beginEpoch();}
+    }else if(data.type==='epoch'){synchronizeEpoch();}
     else if(data.type==='close'){stopped=true;if(header)Atomics.notify(header,0);reader?.close();resources?.close();clearInterval(timer);for(const r of refreshes.values()){clearTimeout(r.timeout);r.reject(Error('Closed'));}refreshes.clear();postMessage({type:'closed'});}
     else if(data.type==='refreshed'){const r=refreshes.get(data.id);if(r){clearTimeout(r.timeout);refreshes.delete(data.id);data.error?r.reject(Error('Authorization refresh failed')):r.resolve(data.update);}}
   }catch(error){postMessage({type:'error',message:error.message});}
 };
 async function pump(){
   if(busy||(Atomics.load(header,0)&7)!==1)return;
-  busy=true;const requestState=Atomics.load(header,0);const serial=Atomics.load(header,1),epoch=Atomics.load(header,3);
+  synchronizeEpoch();busy=true;const requestState=Atomics.load(header,0);const serial=Atomics.load(header,1),epoch=Atomics.load(header,3);
   try{
     let output=new Uint8Array(),result=0,opened;
     if(resources){
@@ -48,6 +50,7 @@ async function pump(){
 }
 
 function startPump(){
+  nativeEpoch=Atomics.load(header,3);
   if(typeof Atomics.waitAsync!=='function'){timer=setInterval(pump,2);return;}
   void (async()=>{
     while(!stopped){

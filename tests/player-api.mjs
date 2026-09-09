@@ -14,7 +14,7 @@ if(performanceConfig)result.assetSnapshot=await(await fetch(origin+'/__metadata'
 const page=await browser.newPage();const requests=[];const pageErrors=[];page.on('pageerror',e=>{pageErrors.push(String(e));console.error('PAGE',String(e));});page.on('request',r=>requests.push(r.url()));
 const fixture=await readFile('fixtures/example.mp4');const tracks=await readFile('build/fixtures/tracks.mkv');
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const paths=['src/index.ts','src/types.ts','src/unified-player.ts','src/internal/native-player.ts','src/internal/wasm-player.ts','web/generated/index.js','web/generated/unified-player.js','web/generated/internal/native-player.js','web/generated/internal/wasm-player.js','web/engine-software-full/player.wasm','web/engine-retained-subs/player.wasm','web/player.html','tests/player-api.mjs','web/filter-retained-engine-worker.js','web/retained-video.js'];
+const paths=['src/index.ts','src/types.ts','src/unified-player.ts','src/internal/native-player.ts','src/internal/wasm-player.ts','web/generated/index.js','web/generated/unified-player.js','web/generated/internal/native-player.js','web/generated/internal/wasm-player.js','web/engine-software-full/player.wasm','web/engine-hybrid/player.wasm','web/player.html','tests/player-api.mjs','web/filter-retained-engine-worker.js','web/retained-video.js'];
 const hashes=async()=>Object.fromEntries(await Promise.all(paths.map(async p=>[p,hash(await readFile(p))])));
 result.hashes=await hashes();result.fixtures={mp4:hash(fixture),tracks:hash(tracks)};
 const only=process.env.ONLY?.split('|');result.selection=only||'full';
@@ -22,7 +22,7 @@ const total=only?.length||21;
 async function setup(){
  await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await page.goto(origin+'/');
  await page.waitForFunction(()=>window.player);await page.evaluate(()=>player.destroy());
- await page.evaluate(async()=>{const m=await import('/web/generated/index.js');window.API=m;window.errors=[];window.events=[];window.make=mode=>{window.player=new API.Player(document.querySelector('#surface'),{mode,width:640,height:360});player.addEventListener('error',e=>errors.push(e.detail));player.addEventListener('mpv',e=>events.push(e.detail));};});
+ await page.evaluate(async()=>{const m=await import('/web/generated/index.js');window.API=m;window.errors=[];window.events=[];window.make=(mode,options={})=>{window.player=new API.Player(document.querySelector('#surface'),{mode,width:640,height:360,...options});player.addEventListener('error',e=>errors.push(e.detail));player.addEventListener('mpv',e=>events.push(e.detail));};});
 }
 async function open(bytes=fixture){await page.evaluate(b=>player.open(Uint8Array.from(atob(b),c=>c.charCodeAt(0)).buffer),bytes.toString('base64'));}
 async function cleanup(){const frames=await page.evaluate(async()=>{const p=player.current?.backend;await player.destroy();return p?.diagnostics?.presentation;});if(frames){assert.equal(frames.received,frames.closed);assert.equal(frames.retained,0);assert.equal(frames.pending,0);}for(let i=0;i<40&&page.workers().length;i++)await page.waitForTimeout(100);assert.equal(page.workers().length,0);assert.equal(await page.locator('#surface video,#surface canvas,iframe').count(),0);}
@@ -100,11 +100,11 @@ try{
   await page.evaluate(()=>make('software'));await open();await page.evaluate(()=>player.play());const data=await page.evaluate(async()=>{const old=player.surface;let error;try{await player.setVideoFilters('no_such_filter_api_test');}catch(e){error=e.message;}return {error,same:old===player.surface,filters:player.diagnostics.videoFilters,pause:player.properties.get('pause')};});assert.ok(data.error);assert.equal(data.same,true);assert.equal(data.filters,'');assert.equal(data.pause,false);return data;
  });
  await check('native unsupported request policy rolls back',async()=>{
-  await page.evaluate(()=>make('native'));await open();const data=await page.evaluate(async()=>{const old=player.surface;let error;try{await player.openRemote({url:location.origin+'/fixtures/example.mp4',headers:{Authorization:'test'}});}catch(e){error=e.message;}return {error,same:old===player.surface};});assert.match(data.error,/Native mode cannot/);assert.equal(data.same,true);return data;
+  await page.evaluate(()=>make('native',{nativeRemux:'never'}));await open();const data=await page.evaluate(async()=>{const old=player.surface;let error;try{await player.openRemote({url:location.origin+'/fixtures/example.mp4',headers:{Authorization:'test'}});}catch(e){error=e.message;}return {error,same:old===player.surface};});assert.match(data.error,/Native direct cannot/);assert.equal(data.same,true);return data;
  });
  await check('unsupported hybrid source rolls back without a fourth mode',async()=>{
-  await page.evaluate(()=>make('native'));await open(await readFile('build/fixtures/software-full/vp9-opus.webm'));
-  const data=await page.evaluate(async()=>{const old=player.surface;let error;try{await player.setMode('hybrid');}catch(e){error=e.message;}return {error,same:old===player.surface,mode:player.mode};});assert.ok(data.error);assert.equal(data.same,true);assert.equal(data.mode,'native');return data;
+  await page.evaluate(()=>make('software'));await open(await readFile('build/fixtures/software-full/mpeg4-mp3.avi'));
+  const data=await page.evaluate(async()=>{const old=player.surface;let error;try{await player.setMode('hybrid');}catch(e){error=e.message;}return {error,same:old===player.surface,mode:player.mode};});assert.ok(data.error);assert.equal(data.same,true);assert.equal(data.mode,'software');return data;
  });
  await check('native remote playback',async()=>{
   await page.evaluate(async()=>{make('native');await player.openRemote({url:location.origin+'/fixtures/example.mp4'});await player.play();});await page.waitForFunction(()=>player.properties.get('time-pos')>.4);return page.evaluate(()=>player.diagnostics);

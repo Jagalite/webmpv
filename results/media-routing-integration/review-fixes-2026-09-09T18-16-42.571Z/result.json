@@ -1,0 +1,78 @@
+{
+  "tests": [
+    {
+      "name": "native-remux-source-worker.js: load failure rollback",
+      "passed": true,
+      "evidence": {
+        "error": "Error: Remux source worker failed: error",
+        "elapsedMs": 549,
+        "rolledBack": true
+      }
+    },
+    {
+      "name": "native-remux-worker.js: load failure rollback",
+      "passed": true,
+      "evidence": {
+        "error": "Error: Remux mux worker failed: error",
+        "elapsedMs": 565,
+        "rolledBack": true
+      }
+    },
+    {
+      "name": "native-remux-source-worker.js: silent initialization deadline",
+      "passed": true,
+      "evidence": {
+        "error": "Error: Remux source initialization timed out",
+        "elapsedMs": 10531,
+        "rolledBack": true
+      }
+    },
+    {
+      "name": "invalid seeks preserve the live session, including the end boundary",
+      "passed": true,
+      "evidence": {
+        "errors": [
+          "Error: Invalid seek time",
+          "Error: Invalid seek time",
+          "Error: Invalid seek time",
+          "Error: Seek target out of range",
+          "Error: Seek target out of range"
+        ],
+        "sameSource": true,
+        "sameGeneration": true,
+        "workers": 2,
+        "ready": 4
+      }
+    },
+    {
+      "name": "seek rejects changed remote etag",
+      "passed": true,
+      "evidence": {
+        "error": "Error: Error: Media representation changed",
+        "firstRequestAfterChange": {
+          "changed": true,
+          "ifRange": "\"review-v1\""
+        },
+        "newExplicitOpenAccepted": true
+      }
+    },
+    {
+      "name": "seek rejects changed remote length",
+      "passed": true,
+      "evidence": {
+        "error": "Error: Error: Incoherent media range or changed length",
+        "firstRequestAfterChange": {
+          "changed": true,
+          "ifRange": "\"review-v1\""
+        },
+        "newExplicitOpenAccepted": false
+      }
+    }
+  ],
+  "sources": {
+    "web/native-remux-player.js": "14b4cddddd105b8f8a5ba2610d1b088285524eeb73ab5bf533ffd398d6694f1d",
+    "web/native-remux-source-worker.js": "44cc2b91c1bb3b28d88ca5ebf5473c48326fa74330729b71e1a442586bd6b27a"
+  },
+  "browser": "152.0.7977.83",
+  "passed": true
+}

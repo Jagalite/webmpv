@@ -23,7 +23,11 @@
     "test:api": "node tests/player-api.mjs",
     "fixtures:formats": "python3 experiments/format-matrix/generate.py",
     "test:formats": "node tests/format-matrix.mjs",
-    "test:decoder-simd": "bash experiments/playback-performance/test-maintained-kernels.sh"
+    "test:decoder-simd": "bash experiments/playback-performance/test-maintained-kernels.sh",
+    "build:hybrid": "bash scripts/link-hybrid.sh",
+    "build:remux": "bash scripts/build-remux.sh",
+    "test:media-routing": "node --test tests/video-codec-config.mjs tests/retained-codec-worker.mjs && node tests/media-routing.mjs",
+    "test:remux-regressions": "node tests/remux-regressions.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",

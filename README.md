@@ -2,7 +2,7 @@
 
 A browser player with three explicit modes:
 
-1. **Native** — browser video playback.
+1. **Native** — browser video playback, with a progressive packet-copy remux fallback.
 2. **Hybrid** — browser video decoding with mpv timing and libass subtitles.
 3. **Software** — expanded FFmpeg software decoding, mpv subtitles, and filters.
 
@@ -25,10 +25,15 @@ not need another redesign before beta; release preparation still needs:
   loading, isolation headers, mode changes and cleanup.
 - A declared browser support matrix and qualification tied to the exact shipped artifacts.
 
-Current limits include H.264 avcC video in Hybrid, browser-dependent Native format
+Hybrid now bridges AVC, HEVC, VP8, VP9 and AV1 when the browser accepts the actual
+configuration and delivers frames. Native first tries direct playback, then uses
+bounded progressive remuxing for qualified H.264/AAC files when packaging prevents
+direct playback. Neither operation re-encodes media. See [media routing](docs/MEDIA-ROUTING.md).
+
+Current limits include 1920×1080 video in Hybrid, browser-dependent Native format
 support, 32 MiB local files in mpv modes (larger sources require HTTP ranges), and
 software-only filters. Mode changes reopen playback and are not gapless. Automatic
-fallback, broader Hybrid codecs and large local-file streaming are future work.
+switching between public modes and large local-file streaming in mpv modes are future work.
 See the [integration guide](docs/INTEGRATION.md) for the full support contract.
 
 The [three-mode API validation](results/player-api/README.md) records the original API and legacy regression checks. The
@@ -47,8 +52,8 @@ npm run dev
 ```
 
 Open <http://127.0.0.1:4179> or `/web/player.html`. The mode selector shows Native,
-Hybrid and Software in that order. Native playback needs no Wasm bundle; hybrid
-and software require their corresponding built engines and isolation headers.
+Hybrid and Software in that order. Native direct playback needs no Wasm bundle;
+Native remux, Hybrid and Software require their built engines and isolation headers.
 `web/example.html` is a minimal [integration example](web/example.html).
 
 `npm run test:api` starts its own local server and runs short headless Chrome

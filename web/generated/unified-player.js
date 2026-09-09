@@ -17,6 +17,7 @@ const dimensions = (width, height) => {
 export class Player extends EventTarget {
     ready = Promise.resolve();
     currentMode;
+    nativeRemux;
     settings;
     root;
     width;
@@ -37,6 +38,9 @@ export class Player extends EventTarget {
         if (!(container instanceof HTMLElement) || container instanceof HTMLCanvasElement || container instanceof HTMLVideoElement)
             throw new Error('Pass a container element; Player owns its video/canvas surface');
         this.currentMode = modeValue(options.mode ?? 'native');
+        this.nativeRemux = options.nativeRemux ?? 'auto';
+        if (!['auto', 'never', 'always'].includes(this.nativeRemux))
+            throw Error('Invalid native remux policy');
         this.width = options.width ?? 640;
         this.height = options.height ?? 360;
         dimensions(this.width, this.height);
@@ -50,7 +54,7 @@ export class Player extends EventTarget {
     get surface() { return this.current?.surface; }
     get properties() { return this.current?.backend.properties ?? this.empty; }
     get capabilities() {
-        return { videoFilters: this.mode === 'software', audioFilters: this.mode === 'software', mpvSubtitles: this.mode !== 'native', externalTextTracks: this.mode === 'native', customRequestHeaders: this.mode !== 'native' };
+        return { videoFilters: this.mode === 'software', audioFilters: this.mode === 'software', mpvSubtitles: this.mode !== 'native', externalTextTracks: this.mode === 'native', customRequestHeaders: this.mode !== 'native' || (this.nativeRemux !== 'never' && crossOriginIsolated && typeof MediaSource !== 'undefined') };
     }
     get diagnostics() {
         return { mode: this.mode, switching: this.busy, videoFilters: this.settings.vf, audioFilters: this.settings.af, backend: this.current?.backend.diagnostics };
@@ -94,7 +98,7 @@ export class Player extends EventTarget {
             throw new Error('Player is destroyed');
         this.root.append(surface);
         try {
-            backend = 'NativePlayer' in module ? new module.NativePlayer(surface) : new module.WasmPlayer(surface, { mode: mode });
+            backend = 'NativePlayer' in module ? new module.NativePlayer(surface, this.nativeRemux) : new module.WasmPlayer(surface, { mode: mode });
         }
         catch (error) {
             surface.remove();
@@ -124,11 +128,12 @@ export class Player extends EventTarget {
                 throw session.error;
             const d = session.backend.diagnostics;
             const tracks = session.backend.properties.get('track-list');
-            const hasVideo = tracks?.some(t => t.type === 'video' && t.selected);
+            // Selection is transiently empty while mpv initializes a video track.
+            const hasVideo = tracks?.some(t => t.type === 'video');
             if (hasVideo === false && tracks?.length)
                 return;
-            if (mode === 'hybrid' && tracks?.some(t => t.type === 'video' && t.selected && t.codec !== 'h264'))
-                throw new Error('Hybrid mode requires supported WebCodecs H.264 decoding. Choose software mode for this source.');
+            if (mode === 'hybrid' && tracks?.some(t => t.type === 'video' && t.selected && !['h264', 'hevc', 'vp8', 'vp9', 'av1'].includes(t.codec ?? '')))
+                throw new Error('Hybrid mode has no browser bridge for this video codec. Choose software mode for this source.');
             const position = mode === 'hybrid' ? d?.presentation?.position : d?.presentedPosition;
             if (d?.rendered && (mode !== 'hybrid' || d.decoder === 'webcodecs') && !d.seeking && position !== undefined && Math.abs(position - target) < .15)
                 return;

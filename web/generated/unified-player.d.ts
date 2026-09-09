@@ -3,6 +3,7 @@ import type { PlaybackMode, PlayerOptions, RemoteSource, TextTrackSource, Capabi
 export declare class Player extends EventTarget {
     readonly ready: Promise<void>;
     private currentMode;
+    private nativeRemux;
     private settings;
     private root;
     private width;

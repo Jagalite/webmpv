@@ -1,0 +1,42 @@
+✔ PCM ring wraps and handles actual output quantum length (1.188292ms)
+✔ underrun silence never advances media consumption (0.64ms)
+✔ pause and generation reset suppress queued stale PCM (0.772083ms)
+✔ closed output processor releases its processing lifetime (0.319459ms)
+✔ ordinary 200 resource, relative URL, bounded reads and close accounting (12.503584ms)
+✔ explicit range preserves absolute resource offsets and total size (0.712542ms)
+✔ requested ranges reject 200, malformed ranges and changed lengths (0.730583ms)
+✔ origin, protocol, embedded credentials and URL length are checked before fetch (1.011791ms)
+✔ nested authorization refresh receives resource URL and updates only that request (1.073916ms)
+✔ refresh cannot redirect credentials to an unapproved origin (0.371375ms)
+✔ bounded transient HTTP retry and truncation recovery (306.163042ms)
+✔ unknown-length bodies cannot exceed media resource cap (2.070292ms)
+✔ aggregate retention limit is enforced across handles and reclaimed on close (9.176208ms)
+✔ handle count is bounded independently of body size (2.610167ms)
+✔ destroy cancels pending authorization and rejects stale completion (0.327416ms)
+✔ epoch cancellation discards a response even if transport ignores abort (0.229167ms)
+✔ manifest admission rejects live, encrypted and adaptive HLS (0.534708ms)
+✔ DASH admission accepts fixed static and rejects live, adaptive, entities and multiple periods (0.685417ms)
+✔ HLS subtitle policy admits one full-timeline resource and rejects segmented subtitles (0.557875ms)
+✔ fixed HLS discontinuities remain native timeline input (0.049833ms)
+✔ DASH timeline and template resource counts are bounded (0.197291ms)
+✔ Invisible packets do not exhaust a fictitious one-packet/one-frame credit (73.51775ms)
+✔ 16:9 video is centered inside 4:3 canvas (0.717208ms)
+✔ anamorphic pixels use the demux sample aspect ratio (0.12575ms)
+✔ rotated video fits the canvas and restores subtitle coordinates (0.112334ms)
+✔ unchanged observations do not repeatedly wake the engine worker (0.753375ms)
+✔ changed latency and AudioContext state are delivered immediately (0.13575ms)
+✔ post-initialization handoff republishes state even if an early message was ignored (0.08125ms)
+✔ destroyed players ignore even a forced late timing observation (0.0575ms)
+✔ AVC distinguishes avcC packets from Annex B and preserves parameter bytes (0.534125ms)
+✔ HEVC profile compatibility bits and constraints generate the RFC codec string (0.203667ms)
+✔ VP8/VP9 and AV1 use their own configuration contracts (0.340958ms)
+✔ Unknown configurations and resource limits fail explicitly (0.229042ms)
+✔ VP9 packet metadata comes from the key header when container metadata is absent (0.571792ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 689.43375

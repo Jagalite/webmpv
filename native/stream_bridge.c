@@ -28,16 +28,21 @@ EMSCRIPTEN_KEEPALIVE void web_io_configure(int session,int64_t size){
     web_io.total=size;wake();
 }
 EMSCRIPTEN_KEEPALIVE int web_io_interrupt(int serial){
-    if((atomic_load(&web_io.state)&7)!=1||atomic_load(&web_io.serial)!=serial)return 0;
-    atomic_fetch_add(&web_io.epoch,1);atomic_store(&web_io.interrupt,1);wake();return 1;
+    int ticket=serial*8+1;
+    // Reserve this exact pending ticket before advancing its epoch. The demux
+    // thread must not publish its next request until the epoch is committed.
+    if(!atomic_compare_exchange_strong(&web_io.state,&ticket,serial*8+4))return 0;
+    atomic_fetch_add(&web_io.epoch,1);
+    atomic_fetch_add(&web_io.interruptions,1);
+    atomic_store(&web_io.state,serial*8+3);wake();return 1;
 }
 EMSCRIPTEN_KEEPALIVE void web_io_cancel(void){atomic_store(&web_io.cancelled,1);wake();}
 static int transact(int operation){
     atomic_store(&web_io.reserved,operation);
     int ticket=(atomic_fetch_add(&web_io.serial,1)+1)*8+1;
     atomic_store(&web_io.state,ticket);wake();
-    while(atomic_load(&web_io.state)==ticket){
-        if(atomic_load(&web_io.cancelled)||atomic_exchange(&web_io.interrupt,0)){
+    while(atomic_load(&web_io.state)==ticket||atomic_load(&web_io.state)==ticket+3){
+        if(atomic_load(&web_io.cancelled)){
             atomic_fetch_add(&web_io.interruptions,1);atomic_store(&web_io.state,0);wake();return -1;
         }
         emscripten_futex_wait((void*)&web_io.state,ticket,100);
@@ -48,7 +53,6 @@ static int transact(int operation){
 static int64_t read_locked(void *cookie,char *buffer,uint64_t capacity){
     struct source *source=cookie;
     if(atomic_load(&web_io.cancelled)||source->session!=atomic_load(&web_io.session))return -1;
-    if(atomic_exchange(&web_io.interrupt,0)){atomic_fetch_add(&web_io.interruptions,1);return -1;}
     if(source->position>=source->total)return 0;
     if(capacity>WEB_IO_CAPACITY)capacity=WEB_IO_CAPACITY;
     atomic_store(&web_io.capacity,capacity);web_io.offset=source->position;

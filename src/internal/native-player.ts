@@ -1,6 +1,14 @@
 import type {RemoteSource, TextTrackSource, TrackType} from '../types.js';
 import type {Backend} from './backend.js';
 
+type RemuxSource = {file?: File; options?: RemoteSource; audioTrack?: number};
+type RemuxTrack = {id: string; type: string; codec: string; selected: boolean};
+type RemuxController = {
+  timelineBias: number; tracks?: RemuxTrack[]; onError?: (message: string) => void;
+  open(source: RemuxSource, target?: number): Promise<unknown>;
+  seek(target: number): Promise<unknown>; play(): Promise<void>; pause(): void;
+  destroy(): Promise<void>; snapshot(): Record<string, unknown>;
+};
 type AudioTrack = {id: string; label?: string; language?: string; enabled: boolean};
 type VideoWithAudioTracks = HTMLVideoElement & {audioTracks?: ArrayLike<AudioTrack>};
 
@@ -9,13 +17,20 @@ export class NativePlayer extends EventTarget implements Backend {
   readonly ready = Promise.resolve();
   readonly properties = new Map<string, unknown>();
   private stopped = false;
+  private opening = false;
+  private remux?: RemuxController;
+  private remuxSource?: RemuxSource;
+  private directFailure?: string;
+  private shiftedCues = new WeakSet<TextTrackCue>();
+  private sourceTime() {return Math.max(0,this.video.currentTime-(this.remux?.timelineBias??0));}
+  private sourceDuration() {return Number.isFinite(this.video.duration)?Math.max(0,this.video.duration-(this.remux?.timelineBias??0)):0;}
   private objectURL?: string;
   private selectedSub = 'auto';
   private subsVisible = true;
   private cancelers = new Set<(error: Error) => void>();
   private listeners: Array<() => void> = [];
 
-  constructor(private video: HTMLVideoElement) {
+  constructor(private video: HTMLVideoElement, private remuxPolicy: 'auto' | 'never' | 'always' = 'auto') {
     super();
     video.playsInline = true;
     video.preload = 'auto';
@@ -27,7 +42,7 @@ export class NativePlayer extends EventTarget implements Backend {
       video.addEventListener(event, listener);
       this.listeners.push(() => video.removeEventListener(event, listener));
     }
-    const failed = () => this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`);
+    const failed = () => {if(!this.opening&&!this.stopped)this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`);};
     video.addEventListener('error', failed);
     this.listeners.push(() => video.removeEventListener('error', failed));
     const tracks = () => this.refresh();
@@ -56,40 +71,72 @@ export class NativePlayer extends EventTarget implements Backend {
   private refresh() {
     const tracks: object[] = Array.from(this.video.textTracks, (t, i) => ({id: String(i + 1), type: 'sub', title: t.label, lang: t.language, selected: t.mode === 'showing'}));
     const audio = (this.video as VideoWithAudioTracks).audioTracks;
-    if (audio) tracks.push(...Array.from(audio, (t, i) => ({id: String(i + 1), type: 'audio', title: t.label, lang: t.language, selected: t.enabled})));
-    const values: Record<string, unknown> = {'time-pos': this.video.currentTime, duration: Number.isFinite(this.video.duration) ? this.video.duration : 0, pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks};
+    if(this.remux?.tracks)tracks.push(...this.remux.tracks.filter(t=>t.type==='audio').map(t=>({...t,selected:t.selected&&!this.video.muted})));
+    else if (audio) tracks.push(...Array.from(audio, (t, i) => ({id: String(i + 1), type: 'audio', title: t.label, lang: t.language, selected: t.enabled})));
+    const values: Record<string, unknown> = {'time-pos': this.sourceTime(), duration: this.sourceDuration(), pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks};
     for (const [name, data] of Object.entries(values)) {
       if (name !== 'track-list' && this.properties.get(name) === data) continue;
       this.properties.set(name, data);this.emit('mpv', {event: 'property-change', name, data});
     }
   }
-  get diagnostics() {const q = this.video.getVideoPlaybackQuality();return {path: 'native', position: this.video.currentTime, rendered: q.totalVideoFrames, dropped: q.droppedVideoFrames, readyState: this.video.readyState};}
+  get diagnostics() {const q = this.video.getVideoPlaybackQuality();return {path: 'native', plan:this.remux?'remux':'direct', directFailure:this.directFailure, remux:this.remux?.snapshot(), position: this.sourceTime(), rendered: q.totalVideoFrames, dropped: q.droppedVideoFrames, readyState: this.video.readyState};}
   private async load(url: string) {
     await this.wait('loadeddata', () => {this.video.src = url;this.video.load();});
     this.refresh();this.emit('mpv', {event: 'file-loaded'});
   }
+  private async startRemux(source: RemuxSource, target=0) {
+    this.assertActive();
+    if(!crossOriginIsolated||typeof MediaSource==='undefined')throw Error('Native remux requires MediaSource and cross-origin isolation');
+    if(source.options?.format&&source.options.format!=='file')throw Error('Native remux currently requires a random-access file source; use Hybrid for this manifest');
+    const moduleURL=new URL('../../native-remux-player.js',import.meta.url).href;
+    const {RemuxPlayer}=await import(moduleURL);
+    this.assertActive();
+    this.remux??=new RemuxPlayer(this.video) as RemuxController;
+    this.remux.onError=message=>{if(!this.opening&&!this.stopped)this.emit('error',message);};
+    const {refreshAuthorization,...options}=source.options??{};
+    const transport={...source,...(source.options?{options:options as RemoteSource}:{}),refreshAuthorization};
+    await this.remux.open(transport,target);this.remuxSource=source;
+    if(this.video.seeking)await this.wait('seeked',()=>{});
+    this.refresh();this.emit('source',{plan:'remux',tracks:this.remux.tracks});this.emit('mpv',{event:'file-loaded'});
+  }
+  private async loadPlan(source: RemuxSource, direct: ()=>Promise<void>, requiresRemux=false) {
+    this.assertActive();this.opening=true;
+    try {
+      if(this.remuxPolicy!=='always'&&!requiresRemux){
+        try {await direct();return;}catch(error){
+          if(this.stopped||this.remuxPolicy==='never'||![3,4].includes(this.video.error?.code??0))throw error;
+          this.directFailure=String(error);
+        }
+      }else if(this.remuxPolicy==='never')throw Error('Native direct cannot enforce these source permissions; enable native remux or choose Hybrid');
+      await this.startRemux(source);
+    } finally {this.opening=false;}
+  }
   async open(file: File | ArrayBuffer) {
     this.assertActive();
-    this.objectURL = URL.createObjectURL(file instanceof File ? file : new Blob([file]));
-    try {await this.load(this.objectURL);} catch (error) {URL.revokeObjectURL(this.objectURL);this.objectURL = undefined;throw error;}
+    const local=file instanceof File?file:new File([file],'media');
+    this.objectURL=URL.createObjectURL(local);
+    try {await this.loadPlan({file:local},()=>this.load(this.objectURL!));}
+    catch(error){URL.revokeObjectURL(this.objectURL);this.objectURL=undefined;throw error;}
   }
   async openRemote(source: RemoteSource) {
     this.assertActive();
-    if (source.headers || source.refreshAuthorization || source.allowedOrigins || source.immutable !== undefined || source.credentials === 'omit')
-      throw new Error('Native mode cannot enforce custom request headers, renewal, origin restrictions, immutability or omitted same-origin credentials; use an mpv mode.');
-    const url = new URL(source.url, location.href);
-    if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Remote sources require HTTP or HTTPS');
-    if (source.format && source.format !== 'file') {
-      const mime = source.format === 'hls' ? 'application/vnd.apple.mpegurl' : 'application/dash+xml';
-      if (!this.video.canPlayType(mime)) throw new Error(`Native ${source.format.toUpperCase()} playback is not supported by this browser`);
-    }
-    this.video.crossOrigin = source.credentials === 'include' ? 'use-credentials' : 'anonymous';
-    await this.load(url.href);
+    const url=new URL(source.url,location.href);
+    if(!['http:','https:'].includes(url.protocol))throw Error('Remote sources require HTTP or HTTPS');
+    const requiresRemux=!!(source.headers||source.refreshAuthorization||source.allowedOrigins||source.immutable!==undefined||source.credentials==='omit');
+    this.video.crossOrigin=source.credentials==='include'?'use-credentials':'anonymous';
+    await this.loadPlan({options:{...source,url:url.href}},async()=>{
+      if(source.format&&source.format!=='file'){
+        const mime=source.format==='hls'?'application/vnd.apple.mpegurl':'application/dash+xml';
+        if(!this.video.canPlayType(mime))throw Error(`Native ${source.format.toUpperCase()} playback is not supported by this browser`);
+      }
+      await this.load(url.href);
+    },requiresRemux);
   }
   async play() {this.assertActive();await this.video.play();this.refresh();}
   async pause() {this.assertActive();this.video.pause();this.refresh();}
   async seek(seconds: number) {
     this.assertActive();
+    if(this.remux){const paused=this.video.paused;await this.remux.seek(seconds);if(this.video.seeking)await this.wait('seeked',()=>{});if(!paused)await this.video.play();this.refresh();return;}
     if (Math.abs(this.video.currentTime - seconds) < .001 && !this.video.seeking) return;
     await this.wait('seeked', () => {this.video.currentTime = seconds;});this.refresh();
   }
@@ -101,6 +148,17 @@ export class NativePlayer extends EventTarget implements Backend {
       const audio = (this.video as VideoWithAudioTracks).audioTracks;
       if (id === 'auto') {this.video.muted = false;return;}
       if (id === 'no') {this.video.muted = true;return;}
+      if(this.remux&&this.remuxSource){
+        const track=this.remux.tracks?.find(t=>t.type==='audio'&&t.id===id);
+        if(!track)throw Error('Unknown remux audio track');
+        if(!track.selected){
+          const previous=this.remuxSource,position=this.sourceTime(),paused=this.video.paused;this.opening=true;
+          try {await this.startRemux({...previous,audioTrack:Number(id)-1},position);}
+          catch(error){try{await this.startRemux(previous,position);}catch(recovery){this.emit('error',String(recovery));}throw error;}
+          finally{this.opening=false;if(!paused)await this.video.play();}
+        }
+        this.video.muted=false;this.refresh();return;
+      }
       if (!audio || !audio[Number(id) - 1]) throw new Error('Native audio track selection is not supported for this source/browser');
       this.video.muted = false;Array.from(audio).forEach((t, i) => {t.enabled = i === Number(id) - 1;});
     } else {
@@ -122,17 +180,22 @@ export class NativePlayer extends EventTarget implements Backend {
     const track = document.createElement('track');track.kind = 'subtitles';track.label = source.label;track.srclang = source.language || '';track.default = !!source.default;track.src = url.href;
     await new Promise<void>((resolve, reject) => {
       const finish = (error?: Error) => {clearTimeout(timer);track.removeEventListener('load', loaded);track.removeEventListener('error', failed);this.cancelers.delete(cancel);if (error) {track.remove();reject(error);} else resolve();};
-      const loaded = () => finish();const failed = () => finish(new Error('Native text track failed to load'));const cancel = (error: Error) => finish(error);
+      const loaded = () => {this.shiftTextTrack(track);finish();};const failed = () => finish(new Error('Native text track failed to load'));const cancel = (error: Error) => finish(error);
       const timer = setTimeout(() => finish(new Error('Native text track load timed out')),15000);
-      this.cancelers.add(cancel);track.addEventListener('load', loaded);track.addEventListener('error', failed);this.video.append(track);track.track.mode = 'hidden';
+      this.cancelers.add(cancel);track.addEventListener('load', loaded);track.addEventListener('error', failed);this.video.append(track);track.addEventListener('load',()=>this.shiftTextTrack(track));track.track.mode = 'hidden';
     });
     this.applySubtitles();this.refresh();
+  }
+  private shiftTextTrack(track: HTMLTrackElement) {
+    if(!this.remux)return;
+    for(const cue of Array.from(track.track.cues??[]))if(!this.shiftedCues.has(cue)){cue.startTime+=this.remux.timelineBias;cue.endTime+=this.remux.timelineBias;this.shiftedCues.add(cue);}
   }
   resize(width: number, height: number) {this.assertActive();this.video.width = width;this.video.height = height;}
   audioDiagnostics() {return {state: this.stopped ? 'closed' : this.video.paused ? 'paused' : 'running', source: 'native', decodedSampleCountersAvailable: false};}
   async destroy() {
     if (this.stopped) return;
     this.stopped = true;for (const cancel of this.cancelers) cancel(new Error('Player is destroyed'));
+    await this.remux?.destroy();
     this.listeners.forEach(remove => remove());this.listeners = [];
     this.video.pause();this.video.removeAttribute('src');this.video.replaceChildren();this.video.load();
     if (this.objectURL) URL.revokeObjectURL(this.objectURL);this.objectURL = undefined;
