@@ -1,0 +1,59 @@
+{
+  "engineBefore": {
+    "build/pipeline-qualification/remux/remux.wasm": "194a258ec6c1b819f459288668247e3c95ca3ad6edbe439f1f2daa39f80f3c0a",
+    "build/pipeline-qualification/yuv/player.wasm": "b693ba9819dda521d512faca0afa2614bca48e05e00eb33aed616a0b61342095"
+  },
+  "tests": [
+    {
+      "driver": "io-epoch.mjs",
+      "env": {},
+      "started": "2026-09-09T12:43:50.444Z",
+      "log": "results/pipeline-qualification/io-epoch-2026-09-09T12-43-50.510Z {\n  file: 'web/io-worker.js',\n  state: 19,\n  result: -1,\n  bytes: [ 0, 0, 0, 0 ],\n  aborts: 1\n} {\n  file: 'experiments/pipeline-qualification/io-worker.js',\n  state: 18,\n  result: 4,\n  bytes: [ 1, 2, 3, 4 ],\n  aborts: 0\n}\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:43:50.550Z"
+    },
+    {
+      "driver": "seek-stress.mjs",
+      "env": {},
+      "started": "2026-09-09T12:43:50.550Z",
+      "log": "results/pipeline-qualification/seek-stress-2026-09-09T12-43-55.085Z\nresults/pipeline-qualification/seek-stress-2026-09-09T12-43-55.085Z true\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:45:04.004Z"
+    },
+    {
+      "driver": "yuv-qualify.mjs",
+      "env": {},
+      "started": "2026-09-09T12:45:04.005Z",
+      "log": "results/pipeline-qualification/yuv-chrome-2026-09-09T12-45-06.546Z\nChecking color-bt709-0 \nChecking color-bt709-1 \nChecking color-smpte170m-0 \nChecking color-smpte170m-1 \nChecking tenbit \nChecking tenbit format=rotate=90\npage.evaluate: Error: Rotated fallback pixel format requires a qualified CPU transpose\nChecking rotation \nChecking animated \nChecking sample format=yuv444p\nChecking sample vflip\nChecking sample hflip,eq=brightness=0.1\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:45:50.311Z"
+    },
+    {
+      "driver": "yuv-qualify.mjs",
+      "env": {
+        "BROWSER": "firefox",
+        "CASES": "color-bt709-0,tenbit,animated"
+      },
+      "started": "2026-09-09T12:45:50.462Z",
+      "log": "results/pipeline-qualification/yuv-firefox-2026-09-09T12-45-56.116Z\nChecking color-bt709-0 \nChecking tenbit \nChecking tenbit format=rotate=90\npage.evaluate: Rotated fallback pixel format requires a qualified CPU transpose\nChecking animated \n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:46:34.043Z"
+    },
+    {
+      "driver": "yuv-qualify.mjs",
+      "env": {
+        "BROWSER": "webkit",
+        "CASES": "color-bt709-0,tenbit,animated"
+      },
+      "started": "2026-09-09T12:46:34.077Z",
+      "log": "results/pipeline-qualification/yuv-webkit-2026-09-09T12-46-35.470Z\nChecking color-bt709-0 \nChecking tenbit \nChecking tenbit format=rotate=90\npage.evaluate: Error: Rotated fallback pixel format requires a qualified CPU transpose\nChecking animated \n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:46:58.927Z"
+    }
+  ],
+  "engineAfter": {
+    "build/pipeline-qualification/remux/remux.wasm": "194a258ec6c1b819f459288668247e3c95ca3ad6edbe439f1f2daa39f80f3c0a",
+    "build/pipeline-qualification/yuv/player.wasm": "b693ba9819dda521d512faca0afa2614bca48e05e00eb33aed616a0b61342095"
+  },
+  "passed": true
+}

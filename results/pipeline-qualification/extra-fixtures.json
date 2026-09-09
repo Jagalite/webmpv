@@ -1,0 +1,313 @@
+{
+  "commands": [
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-stream_loop",
+      "-1",
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "yuv420p",
+      "-video_size",
+      "640x360",
+      "-framerate",
+      "30",
+      "-i",
+      "build/pipeline-qualification/fixtures/color-bt709-0-v2.yuv",
+      "-f",
+      "lavfi",
+      "-i",
+      "anullsrc=r=48000:cl=stereo",
+      "-t",
+      "6",
+      "-vf",
+      "setparams=range=limited:colorspace=bt709",
+      "-c:v",
+      "ffv1",
+      "-colorspace",
+      "bt709",
+      "-color_range",
+      "tv",
+      "-c:a",
+      "aac",
+      "build/pipeline-qualification/fixtures/color-bt709-0-v2.mkv"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-stream_loop",
+      "-1",
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "yuv420p",
+      "-video_size",
+      "640x360",
+      "-framerate",
+      "30",
+      "-i",
+      "build/pipeline-qualification/fixtures/color-bt709-1-v2.yuv",
+      "-f",
+      "lavfi",
+      "-i",
+      "anullsrc=r=48000:cl=stereo",
+      "-t",
+      "6",
+      "-vf",
+      "setparams=range=full:colorspace=bt709",
+      "-c:v",
+      "ffv1",
+      "-colorspace",
+      "bt709",
+      "-color_range",
+      "pc",
+      "-c:a",
+      "aac",
+      "build/pipeline-qualification/fixtures/color-bt709-1-v2.mkv"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-stream_loop",
+      "-1",
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "yuv420p",
+      "-video_size",
+      "640x360",
+      "-framerate",
+      "30",
+      "-i",
+      "build/pipeline-qualification/fixtures/color-smpte170m-0-v2.yuv",
+      "-f",
+      "lavfi",
+      "-i",
+      "anullsrc=r=48000:cl=stereo",
+      "-t",
+      "6",
+      "-vf",
+      "setparams=range=limited:colorspace=smpte170m",
+      "-c:v",
+      "ffv1",
+      "-colorspace",
+      "smpte170m",
+      "-color_range",
+      "tv",
+      "-c:a",
+      "aac",
+      "build/pipeline-qualification/fixtures/color-smpte170m-0-v2.mkv"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-stream_loop",
+      "-1",
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "yuv420p",
+      "-video_size",
+      "640x360",
+      "-framerate",
+      "30",
+      "-i",
+      "build/pipeline-qualification/fixtures/color-smpte170m-1-v2.yuv",
+      "-f",
+      "lavfi",
+      "-i",
+      "anullsrc=r=48000:cl=stereo",
+      "-t",
+      "6",
+      "-vf",
+      "setparams=range=full:colorspace=smpte170m",
+      "-c:v",
+      "ffv1",
+      "-colorspace",
+      "smpte170m",
+      "-color_range",
+      "pc",
+      "-c:a",
+      "aac",
+      "build/pipeline-qualification/fixtures/color-smpte170m-1-v2.mkv"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-f",
+      "lavfi",
+      "-i",
+      "color=black:s=640x360:r=30:d=12,drawbox=x=0:y=0:w=iw:h=ih:color=white:t=fill:enable='lt(mod(t,1),0.067)'",
+      "-f",
+      "lavfi",
+      "-i",
+      "aevalsrc=0.5*sin(2*PI*1000*t)*lt(mod(t\\,1)\\,0.04):s=48000:d=12",
+      "-c:v",
+      "libx264",
+      "-g",
+      "60",
+      "-bf",
+      "3",
+      "-c:a",
+      "aac",
+      "-ac",
+      "2",
+      "-movflags",
+      "+faststart",
+      "build/pipeline-qualification/fixtures/sync.mp4"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "build/pipeline-qualification/fixtures/sync.mp4",
+      "-c",
+      "copy",
+      "build/pipeline-qualification/fixtures/sync.mkv"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "build/pipeline-qualification/fixtures/sync.mp4",
+      "-itsoffset",
+      "0.25",
+      "-i",
+      "build/pipeline-qualification/fixtures/sync.mp4",
+      "-map",
+      "0:v:0",
+      "-map",
+      "1:a:0",
+      "-c",
+      "copy",
+      "build/pipeline-qualification/fixtures/offset.mp4"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "build/pipeline-separation/fixtures/long.mp4",
+      "-c",
+      "copy",
+      "-f",
+      "mpegts",
+      "build/pipeline-qualification/fixtures/long.ts"
+    ],
+    [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-ss",
+      "0.25",
+      "-i",
+      "build/pipeline-qualification/fixtures/sync.mp4",
+      "-c",
+      "copy",
+      "build/pipeline-qualification/fixtures/edit.mp4"
+    ]
+  ],
+  "files": {
+    "color-bt709-0-v2.mkv": {
+      "bytes": 224927,
+      "sha256": "e12c57f0c7a26b9f176bb755ac950d573a2cbe11595d89c1af276e12b83cf42a"
+    },
+    "color-bt709-0-v2.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-bt709-0.mkv": {
+      "bytes": 216137,
+      "sha256": "049d3820f1deecfd1568d4a4dd6056c015ee36c7587fa8681a98c1359fe6d44f"
+    },
+    "color-bt709-0.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-bt709-1-v2.mkv": {
+      "bytes": 224927,
+      "sha256": "9eebaff88312d6102bdfc20c7794ee1d7653d78001a2286067bb23a4fa11556d"
+    },
+    "color-bt709-1-v2.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-bt709-1.mkv": {
+      "bytes": 295233,
+      "sha256": "4de0d974ff2ac3f3d1614b7b7255c6cdb6c39a7dd9a9ac7b89c56b224d48faa4"
+    },
+    "color-bt709-1.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-smpte170m-0-v2.mkv": {
+      "bytes": 224927,
+      "sha256": "fafefb9b486b9084bc6cbd4f422798a4a1eeb6d4df7ab32f328582c6690ce159"
+    },
+    "color-smpte170m-0-v2.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-smpte170m-0.mkv": {
+      "bytes": 224927,
+      "sha256": "1970b44c1cbe85b91c0dd0caacf2ff7b3ebb5fd7324b513034d15f4eba75f189"
+    },
+    "color-smpte170m-0.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-smpte170m-1-v2.mkv": {
+      "bytes": 224927,
+      "sha256": "5b65b07235e54f7155a0aab24ffe2106c4df3dea0b6092f1b7d58ba7be761704"
+    },
+    "color-smpte170m-1-v2.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "color-smpte170m-1.mkv": {
+      "bytes": 210227,
+      "sha256": "02c3dc28a7e15b09b8aef54996fc19ae6e43bbcf0815f00e0b29a2ba921576d0"
+    },
+    "color-smpte170m-1.yuv": {
+      "bytes": 345600,
+      "sha256": "0e0284943b82991048fa1391be38f31cb93606bafe52cf6d39174cf26afb7ab4"
+    },
+    "edit.mp4": {
+      "bytes": 46163,
+      "sha256": "e54e5d1fc3181dc95df6d79d16d220d19502bddc02051891a0ffa2aa91411e98"
+    },
+    "long.ts": {
+      "bytes": 5113600,
+      "sha256": "eeea379578144fdab596a3965dc9ec2582a9f493b72baf392c909ff7eb9ec493"
+    },
+    "offset.mp4": {
+      "bytes": 46035,
+      "sha256": "fa9656627a5bc873764aeca160b9a5c74b2dec8971ac86f6d25d9f3ee5b1c07b"
+    },
+    "sync.mkv": {
+      "bytes": 38251,
+      "sha256": "3de0905162d4cbc86944b8323885d1fadf8a71b10d2c5d330add5e24f51072ab"
+    },
+    "sync.mp4": {
+      "bytes": 46163,
+      "sha256": "4c53de3f23b9b584c6b4f0c6cba1d7a5775749d7658c65caa1befa98ebf1c58b"
+    }
+  }
+}

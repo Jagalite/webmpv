@@ -1,0 +1,1389 @@
+diff --git a/experiments/pipeline-separation/README.md b/experiments/pipeline-qualification/README.md
+index edb21aa..36f1b7c 100644
+--- a/experiments/pipeline-separation/README.md
++++ b/experiments/pipeline-qualification/README.md
+@@ -1,52 +1,53 @@
+-# Experimental pipeline separation
++# Qualified pipeline experiments
+ 
+-Findings, routing decisions, raw results and limits: [results README](../../results/pipeline-separation/README.md).
++Continuation of `experiments/pipeline-separation`, kept in a new directory so the previous sources, builds and results remain reproducible. Public Native/Hybrid/Software modes and production defaults are unchanged. No commits or pushes.
+ 
+-Nothing here changes the public Native/Hybrid/Software API or production defaults. The test server selects isolated candidates through its URL mapping. Do not replace maintained engines with these prototypes.
+-
+-## Reproduce in this checkout
+-
+-Prerequisites: existing pinned Emscripten 4.0.14 (`build/emsdk-4.0.14`, `build/gap.emscripten`), FFmpeg 7.1.1/mpv 0.40 source trees, `build/prefix`, `build/obj-mpv`, and the already-built optimized Software FFmpeg archives. The normal repository build documentation supplies those prerequisites; these scripts intentionally reuse them rather than rebuilding/replacing production engines. Node dependencies, installed Chrome, Python and host FFmpeg/ffprobe are required. The exact current fixture/binary hashes are recorded with results.
+-
+-From `/Volumes/seed2/Projects/webmpv`:
++Prerequisites are the existing pinned FFmpeg 7.1.1/mpv 0.40 and Emscripten 4.0.14 build trees used by the prior experiment, Node/Playwright, Python, host FFmpeg/ffprobe and installed test browsers.
+ 
+ ```sh
+-python3 experiments/pipeline-separation/fixtures.py
+-bash experiments/pipeline-separation/build-remux.sh
+-bash experiments/pipeline-separation/build-yuv.sh
++python3 experiments/pipeline-qualification/extra-fixtures.py
++bash experiments/pipeline-qualification/build-remux.sh
++bash experiments/pipeline-qualification/build-yuv.sh
++node experiments/pipeline-qualification/suite.mjs
+ ```
+ 
+-Wait for each build to finish before testing. Output goes only to `build/pipeline-separation`; fixtures are created only if absent. Never run a build against an engine while a browser trial is loading it.
++The original `build/pipeline-separation/fixtures` and performance fixtures are read-only inputs. Extra fixtures go into `build/pipeline-qualification/fixtures`. Wait for builds to finish before opening test browsers. The suite runs sequentially and archives its sources and runtime binaries in `inputs.tgz`; an aggregate pass requires every driver and unchanged engine hashes. Chrome/Firefox/WebKit results are separately labeled. WebKit automation is not a Safari release certification.
+ 
+-Correctness and capability probes (headless, not CPU evidence):
++Targeted drivers:
+ 
+ ```sh
+-node experiments/pipeline-separation/qualify.mjs
+-node experiments/pipeline-separation/packet-check.mjs
+-node experiments/pipeline-separation/fidelity.mjs
+-node experiments/pipeline-separation/capabilities.mjs
+-SMOKE=1 VARIANTS=yuv MEDIA=movie TARGET=236.9 WARMUP=2 MEASURE=3 node experiments/pipeline-separation/run.mjs
++BROWSER=firefox CASES=single-ts,long-gop-ts node experiments/pipeline-qualification/qualify.mjs
++CASES=animated,tenbit node experiments/pipeline-qualification/yuv-qualify.mjs
++node experiments/pipeline-qualification/remux-faults.mjs
++node experiments/pipeline-qualification/remux-lifecycle.mjs
++node experiments/pipeline-qualification/io-epoch.mjs
++node experiments/pipeline-qualification/seek-stress.mjs
++MEDIA=offset TARGET=0 node experiments/pipeline-qualification/packet-check.mjs
++node experiments/pipeline-qualification/av-sync.mjs
++node experiments/pipeline-qualification/metadata.mjs
++node experiments/pipeline-qualification/audio-startup.mjs
++python3 experiments/pipeline-qualification/verify-preservation.py
+ ```
+ 
+-The remux matrix is expected to report known MKV/TS failures until those gaps are implemented. The fidelity driver records differences; it does not assert color parity. A failed run writes artifacts and returns nonzero where the driver has playback assertions.
+-
+-Run visible benchmarks sequentially, without another browser test/build workload, keeping Chrome foreground:
++Visible playback tests require Chrome to remain foreground and should run without another browser test/build workload:
+ 
+ ```sh
+-MEDIA=movie TARGET=236.9 WARMUP=10 MEASURE=30 node experiments/pipeline-separation/run.mjs
+-VARIANTS=software,yuv,yuv,software MEDIA=movie TARGET=236.9 WARMUP=10 MEASURE=30 node experiments/pipeline-separation/run.mjs
+-VARIANTS=software,yuv,yuv,software MEDIA=animated TARGET=2 SUBTITLES=1 WARMUP=1 MEASURE=7 node experiments/pipeline-separation/run.mjs
++VARIANTS=native,remux,remux,native MEDIA=movie TARGET=236.9 WARMUP=10 MEASURE=30 node experiments/pipeline-qualification/run.mjs
++VARIANTS=software,yuv,yuv,software MEDIA=movie TARGET=236.9 WARMUP=10 MEASURE=30 node experiments/pipeline-qualification/run.mjs
++VARIANTS=software,yuv,yuv,software MEDIA=animated TARGET=2 SUBTITLES=1 WARMUP=1 MEASURE=7 node experiments/pipeline-qualification/run.mjs
++VARIANTS=remux,yuv MEDIA=movie TARGET=0 WARMUP=10 MEASURE=300 node experiments/pipeline-qualification/run.mjs
+ ```
+ 
+-Useful experimental controls: `VARIANTS=native,remux,software,yuv,hybrid`, `MEDIA=movie|sample|tail|mkv|long|animated|ass`, `TARGET`, `SUBTITLES=1`, `FILTERS=hflip`, and `SEEKS=400,30,500,1`. Filters/subtitle overlays on the remux plan are explicitly unsupported. Every run creates a timestamped results directory; existing results are never replaced. These macOS CPU runs require localhost listening, Chrome launch and process inspection permissions.
++Every driver creates a timestamped results directory. Functional tests include positive playback assertions and explicit, reason-checked rejection of unsupported configurations; an expected rejection is not a claim of playback support. Browser-clock flash/beep timing is separate from performance and from physical display/speaker latency.
++
++Implementation boundaries:
+ 
+-## Exact changes
++- `remux.c`: packet-only AVC/AAC qualification, SPS/configuration validation, bounded MKV DTS reconstruction, AAC ADTS/configuration/timestamp adaptation, verified TS IDR seeking. No decoder or encoder is linked.
++- `remux-player.js` / workers: source identity, authorized header refresh, bounded buffering, cancellation, EOS and source-time mapping. MSE retains a one-second internal bias so decoder preroll before source time zero survives. Library positions remain source-based; raw native video controls expose the internal timeline and are outside this plan's qualified UI contract.
++- `yuv-backend.c` / `yuv.js`: software-decoded SDR 8-bit planes, GPU quarter-turn rotation, matrix/range conversion and dirty-region ASS composition; existing RGB renderer for qualified unsupported pixel formats. Rotated fallback formats are explicitly rejected until a qualified CPU transpose is selected.
++- `io-worker.js` / `stream-bridge.c`: isolated epoch synchronization and exact-ticket cancellation fix; the deterministic old-worker reproduction and 60 paused distant seeks cover the stale-frame failure. Baseline routes still use maintained IO.
++- `prepare-yuv.py`: isolates private backend linkage, GPU context restoration, paused redraw and error reporting that returns from Wasm before shutting down. JS rendering errors must not unwind through mpv's locked render call.
+ 
+-- `remux.c`, `build-remux.sh`: decoder/encoder-free FFmpeg AVIO and fragmented-MP4 build.
+-- `source-worker.js`, `remux-worker.js`, `remux-player.js`: bounded source mailbox, packet production credits, MSE ownership and cancellable seek generations.
+-- `yuv-backend.c`, `yuv.js`: private mpv software output replacement plus WebGL2 plane/overlay presentation.
+-- `prepare-yuv.py`, `build-yuv.sh`: isolated worker generation and link using the maintained optimized decoder libraries.
+-- `server.mjs`, `page.html`, `run.mjs`: experimental routing and equivalent visible benchmark harness; direct backend-worker cleanup observation handles the iframe-owned worker realm.
+-- `fixtures.py`, `qualify.mjs`, `packet-check.mjs`, `fidelity.mjs`, `capabilities.mjs`: bounded targeted fixtures and evidence drivers.
++The two private integration surfaces remain pinned to the current FFmpeg/mpv versions. These are opt-in experimental plans, not an automatic routing/default change.
+ 
+-No existing production source, generated engine or previous benchmark artifact is intentionally edited. The preservation manifest/check covers the pre-existing files selected at investigation start.
++Read the [qualification record](../../results/pipeline-qualification/README.md) and [findings](../../docs/PIPELINE-QUALIFICATION.md) for exact evidence and remaining production gates.
+diff --git a/experiments/pipeline-qualification/audio-startup.mjs b/experiments/pipeline-qualification/audio-startup.mjs
+new file mode 100644
+index 0000000..fa4bb78
+--- /dev/null
++++ b/experiments/pipeline-qualification/audio-startup.mjs
+@@ -0,0 +1,22 @@
++// First non-silent decoded audio callback, not physical speaker onset or CPU measurement.
++import {chromium} from 'playwright';
++import {mkdir,writeFile} from 'node:fs/promises';
++import assert from 'node:assert/strict';
++import {serve} from './server.mjs';
++const out=`results/pipeline-qualification/audio-startup-${new Date().toISOString().replaceAll(':','-')}`;
++await mkdir(out,{recursive:true});console.log(out);const server=await serve(),result={method:'First non-silent AudioWorklet message received after open begins; callback latency included; preloaded probe; headless; no acoustic claim',trials:[]};
++try{for(const variant of ['native','remux','software','yuv','yuv','software','remux','native']){
++ const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']}),r={variant,browserVersion:browser.version()};result.trials.push(r);
++ try{const page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');
++  await page.evaluate(async()=>{
++   window.firstAudio=null;window.firstVideoCallback=null;
++   const Original=AudioWorkletNode;
++   window.AudioWorkletNode=class extends Original{constructor(ctx,name,options){if(name==='webmpv-pcm')options={...options,processorOptions:{...options.processorOptions,measureOutput:true}};super(ctx,name,options);this.port.addEventListener('message',()=>{window.firstAudio??=performance.now();});this.port.start();}};
++   const ctx=window.probeContext=new AudioContext({latencyHint:'interactive'});await ctx.resume();
++   const url=URL.createObjectURL(new Blob([`class Probe extends AudioWorkletProcessor{constructor(){super();this.sent=false;}process(inputs,outputs){const a=inputs[0]?.[0];if(a){if(!this.sent&&a.some(x=>Math.abs(x)>.12)){this.sent=true;this.port.postMessage('onset');}for(let c=0;c<outputs[0].length;c++)outputs[0][c].set(inputs[0][c]||a);}return true;}}registerProcessor('onset',Probe);`],{type:'text/javascript'}));await ctx.audioWorklet.addModule(url);URL.revokeObjectURL(url);
++   const create=document.createElement.bind(document);document.createElement=(tag,...args)=>{const element=create(tag,...args);if(tag.toLowerCase()==='video'){const source=ctx.createMediaElementSource(element),node=new Original(ctx,'onset');node.port.onmessage=()=>{window.firstAudio??=performance.now();};source.connect(node).connect(ctx.destination);element.requestVideoFrameCallback(()=>{window.firstVideoCallback??=performance.now();});}return element;};
++  });
++  r.observed=await page.evaluate(async o=>{window.openBegun=performance.now();const opened=await start(o);const deadline=performance.now()+10000;while(window.firstAudio===null&&performance.now()<deadline)await new Promise(r=>setTimeout(r,10));return {firstAudioCallbackMs:window.firstAudio===null?null:window.firstAudio-window.openBegun,firstVideoCallbackMs:window.firstVideoCallback===null?null:window.firstVideoCallback-window.openBegun,firstFrameCounterMs:opened.firstFrameMs,state:snapshot()};},{variant,url:server.origin+'/media/sync'});
++  assert.ok(r.observed.firstAudioCallbackMs!==null&&r.observed.firstAudioCallbackMs>=0);assert.deepEqual(r.observed.state.errors,[]);await page.evaluate(async()=>{await stop();await probeContext.close();});await page.waitForTimeout(150);assert.equal(page.workers().length,0);r.passed=true;
++ }catch(e){r.error=String(e.stack);process.exitCode=1;}finally{await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
++}}finally{await server.close();result.passed=result.trials.every(t=>t.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');console.log(out,result.passed);}
+diff --git a/experiments/pipeline-qualification/av-sync.mjs b/experiments/pipeline-qualification/av-sync.mjs
+new file mode 100644
+index 0000000..001ec2e
+--- /dev/null
++++ b/experiments/pipeline-qualification/av-sync.mjs
+@@ -0,0 +1,14 @@
++// Independent decoded flash/beep timing, not a physical display/speaker measurement or CPU benchmark.
++import {chromium} from 'playwright';import {mkdir,writeFile} from 'node:fs/promises';import assert from 'node:assert/strict';import {serve} from './server.mjs';
++const server=await serve(),out=`results/pipeline-qualification/av-sync-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);const result={method:'AudioWorklet beep onset mapped through getOutputTimestamp, versus rVFC white-frame expectedDisplayTime; software-clock estimate only',trials:[]};
++try{for(const spec of [{variant:'native',media:'sync'},{variant:'remux',media:'sync'},{variant:'remux',media:'syncmkv'},{variant:'native',media:'edit'},{variant:'remux',media:'edit'},{variant:'native',media:'offsetmp4',offset:250},{variant:'remux',media:'offsetmp4',offset:250}]){
++ const r={...spec};result.trials.push(r);const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
++ try{const page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');await page.evaluate(o=>start(o),{...spec,url:server.origin+'/media/'+spec.media});r.timing=await page.evaluate(async()=>{
++  await player.pause();await player.seek(0);const v=document.querySelector('video'),ctx=new AudioContext({latencyHint:'interactive'});await ctx.resume();
++  const url=URL.createObjectURL(new Blob([`class Probe extends AudioWorkletProcessor{constructor(){super();this.last=-1;}process(inputs,outputs){const a=inputs[0]?.[0];if(a){for(let i=0;i<a.length;i++)if(Math.abs(a[i])>.15&&(currentFrame+i)/sampleRate-this.last>.5){this.last=(currentFrame+i)/sampleRate;this.port.postMessage(this.last);break;}for(let c=0;c<outputs[0].length;c++)outputs[0][c].set(inputs[0][c]||a);}return true;}}registerProcessor('probe',Probe);`],{type:'text/javascript'}));
++  await ctx.audioWorklet.addModule(url);URL.revokeObjectURL(url);const source=ctx.createMediaElementSource(v),node=new AudioWorkletNode(ctx,'probe');source.connect(node).connect(ctx.destination);const audio=[],video=[],c=document.createElement('canvas');c.width=c.height=1;const x=c.getContext('2d',{willReadFrequently:true});let last=-1,done=false;
++  node.port.onmessage=e=>{const stamp=ctx.getOutputTimestamp();audio.push({contextTime:e.data,perf:stamp.performanceTime+(e.data-stamp.contextTime)*1000});};
++  const frame=(now,m)=>{x.drawImage(v,0,0,1,1);if(x.getImageData(0,0,1,1).data[0]>200&&m.mediaTime-last>.5){last=m.mediaTime;video.push({mediaTime:m.mediaTime-(player.timelineBias||0),perf:m.expectedDisplayTime});}if(!done)v.requestVideoFrameCallback(frame);};v.requestVideoFrameCallback(frame);const begun=performance.now();await player.play();await new Promise(r=>setTimeout(r,6500));done=true;await player.pause();const state=snapshot();node.disconnect();source.disconnect();await ctx.close();return {begun,audio,video,state};
++ });r.deltas=r.timing.video.filter(v=>v.mediaTime>1&&v.mediaTime<5).map(v=>({mediaTime:v.mediaTime,ms:r.timing.audio.map(a=>a.perf-v.perf).filter(d=>Math.abs(d-(spec.offset||0))<400).sort((a,b)=>Math.abs(a-(spec.offset||0))-Math.abs(b-(spec.offset||0)))[0]}));assert.ok(r.deltas.length>=3);assert.ok(r.deltas.every(d=>Number.isFinite(d.ms)&&Math.abs(d.ms-(spec.offset||0))<100),'Flash/beep browser-clock alignment within 100ms');await page.evaluate(()=>stop());r.passed=true;
++ }catch(e){r.error=String(e.stack);r.passed=false;process.exitCode=1;console.log(r.error.split('\n')[0]);}finally{await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}}
++}finally{await server.close();result.passed=result.trials.every(t=>t.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');console.log(out);}
+diff --git a/experiments/pipeline-separation/build-remux.sh b/experiments/pipeline-qualification/build-remux.sh
+index 191d69a..8011f5f 100644
+--- a/experiments/pipeline-separation/build-remux.sh
++++ b/experiments/pipeline-qualification/build-remux.sh
+@@ -8,8 +8,8 @@ export EM_CONFIG="$ROOT/build/gap.emscripten"
+ export PATH="$SDK/upstream/emscripten:$SDK:$PATH"
+ export SOURCE_DATE_EPOCH=1740000000
+ export GIT_CEILING_DIRECTORIES="$ROOT/build/sources"
+-OBJ="$ROOT/build/pipeline-separation/ffmpeg-remux"
+-OUT="$ROOT/build/pipeline-separation/remux"
++OBJ="$ROOT/build/pipeline-qualification/ffmpeg-remux"
++OUT="$ROOT/build/pipeline-qualification/remux"
+ mkdir -p "$OBJ" "$OUT"
+ if [ ! -f "$OBJ/Makefile" ]; then
+  (cd "$OBJ"
+@@ -26,12 +26,12 @@ if [ ! -f "$OBJ/Makefile" ]; then
+  --extra-cflags='-O2 -pthread -msimd128' --extra-ldflags='-pthread')
+ fi
+ (cd "$OBJ"; emmake make -j 4)
+-emcc -O2 -pthread -msimd128 -Ibuild/sources/ffmpeg -I"$OBJ" \
+- experiments/pipeline-separation/remux.c \
++emcc -O2 -pthread -msimd128 -I"$OBJ" -Ibuild/sources/ffmpeg \
++ experiments/pipeline-qualification/remux.c \
+  "$OBJ/libavformat/libavformat.a" "$OBJ/libavcodec/libavcodec.a" "$OBJ/libavutil/libavutil.a" \
+  -sMODULARIZE=1 -sEXPORT_ES6=1 -sEXPORT_NAME=createRemux -sENVIRONMENT=worker \
+  -sINITIAL_MEMORY=67108864 -sMAXIMUM_MEMORY=134217728 -sALLOW_MEMORY_GROWTH=1 \
+  -sSTACK_SIZE=2097152 -sWASM_BIGINT=1 -sFILESYSTEM=0 \
+- -sEXPORTED_FUNCTIONS='["_rm_open","_rm_start","_rm_step","_rm_close","_rm_duration","_rm_video_codec","_rm_audio_codec","_malloc","_free"]' \
++ -sEXPORTED_FUNCTIONS='["_rm_error","_rm_open","_rm_start","_rm_step","_rm_close","_rm_duration","_rm_video_codec","_rm_audio_codec","_malloc","_free"]' \
+  -sEXPORTED_RUNTIME_METHODS='["HEAPU8","ccall","UTF8ToString"]' \
+  -o "$OUT/remux.mjs"
+diff --git a/experiments/pipeline-separation/build-yuv.sh b/experiments/pipeline-qualification/build-yuv.sh
+index 924cc9c..60cb582 100644
+--- a/experiments/pipeline-separation/build-yuv.sh
++++ b/experiments/pipeline-qualification/build-yuv.sh
+@@ -8,8 +8,8 @@ export EM_CONFIG="$ROOT/build/gap.emscripten"
+ export PATH="$SDK/upstream/emscripten:$SDK:$PATH"
+ export PKG_CONFIG_LIBDIR="$ROOT/build/prefix/lib/pkgconfig"
+ export PKG_CONFIG_PATH="$PKG_CONFIG_LIBDIR"
+-OUT="$ROOT/build/pipeline-separation/yuv"
+-python3 experiments/pipeline-separation/prepare-yuv.py
++OUT="$ROOT/build/pipeline-qualification/yuv"
++python3 experiments/pipeline-qualification/prepare-yuv.py
+ read -r -a LIBS <<< "$(pkg-config --cflags --libs --static mpv)"
+ for i in "${!LIBS[@]}"; do
+  case "${LIBS[$i]}" in
+@@ -19,7 +19,7 @@ for i in "${!LIBS[@]}"; do
+ done
+ source scripts/decoder-simd.sh
+ emcc -O2 -pthread -msimd128 -Inative -Ibuild/sources/mpv -Ibuild/obj-mpv \
+- "$OUT/yuv.o" native/player.c native/events.c native/stream_bridge.c \
++ "$OUT/yuv.o" "$OUT/rgb.o" native/player.c native/events.c experiments/pipeline-qualification/stream-bridge.c \
+  experiments/retained-subtitles/subtitles.c "${DECODER_SIMD_SOURCES[@]}" "${LIBS[@]}" \
+  "$ROOT/build/obj-software-full-ffmpeg/libpostproc/libpostproc.a" -lstdc++ \
+  -sMODULARIZE=1 -sEXPORT_ES6=1 -sEXPORT_NAME=createEngine -sENVIRONMENT=worker \
+diff --git a/experiments/pipeline-separation/capabilities.mjs b/experiments/pipeline-qualification/capabilities.mjs
+index c5c2aaa..8005076 100644
+--- a/experiments/pipeline-separation/capabilities.mjs
++++ b/experiments/pipeline-qualification/capabilities.mjs
+@@ -2,7 +2,7 @@
+ import {chromium} from 'playwright';
+ import {mkdir,writeFile} from 'node:fs/promises';
+ import {serve} from './server.mjs';
+-const out=`results/pipeline-separation/capabilities-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
++const out=`results/pipeline-qualification/capabilities-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
+ const server=await serve(),browser=await chromium.launch({channel:'chrome',headless:true});
+ try{const page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');
+ const result=await page.evaluate(async()=>{
+diff --git a/experiments/pipeline-qualification/extra-fixtures.py b/experiments/pipeline-qualification/extra-fixtures.py
+new file mode 100644
+index 0000000..1d36d3a
+--- /dev/null
++++ b/experiments/pipeline-qualification/extra-fixtures.py
+@@ -0,0 +1,24 @@
++from pathlib import Path
++import subprocess,json,hashlib
++out=Path('build/pipeline-qualification/fixtures');out.mkdir(parents=True,exist_ok=True)
++commands=[]
++def ff(name,args):
++ p=out/name;cmd=['ffmpeg','-hide_banner','-loglevel','error',*args,str(p)];commands.append(cmd)
++ if not p.exists():subprocess.run(cmd,check=True)
++for matrix in ['bt709','smpte170m']:
++ for full in [False,True]:
++  name=f'color-{matrix}-{int(full)}-v2';w,h=640,360
++  colors=[(16,128,128),(235,128,128),(81,90,240),(145,54,34),(41,240,110),(128,128,128),(64,160,180),(180,110,80),(100,80,80),(210,180,150),(30,130,124),(230,120,130)]
++  planes=[]
++  for i in range(3):
++   pw,ph=(w,h) if i==0 else(w//2,h//2)
++   planes.append(bytes(colors[min(2,y*3//ph)*4+min(3,x*4//pw)][i] for y in range(ph) for x in range(pw)))
++  raw=out/(name+'.yuv')
++  if not raw.exists():raw.write_bytes(b''.join(planes))
++  ff(name+'.mkv',['-stream_loop','-1','-f','rawvideo','-pixel_format','yuv420p','-video_size',f'{w}x{h}','-framerate','30','-i',str(raw),'-f','lavfi','-i','anullsrc=r=48000:cl=stereo','-t','6','-vf',f'setparams=range={"full" if full else "limited"}:colorspace={matrix}','-c:v','ffv1','-colorspace',matrix,'-color_range','pc' if full else 'tv','-c:a','aac'])
++ff('sync.mp4',['-f','lavfi','-i',"color=black:s=640x360:r=30:d=12,drawbox=x=0:y=0:w=iw:h=ih:color=white:t=fill:enable='lt(mod(t,1),0.067)'",'-f','lavfi','-i',"aevalsrc=0.5*sin(2*PI*1000*t)*lt(mod(t\\,1)\\,0.04):s=48000:d=12",'-c:v','libx264','-g','60','-bf','3','-c:a','aac','-ac','2','-movflags','+faststart'])
++ff('sync.mkv',['-i',str(out/'sync.mp4'),'-c','copy'])
++ff('offset.mp4',['-i',str(out/'sync.mp4'),'-itsoffset','0.25','-i',str(out/'sync.mp4'),'-map','0:v:0','-map','1:a:0','-c','copy'])
++ff('long.ts',['-i','build/pipeline-separation/fixtures/long.mp4','-c','copy','-f','mpegts'])
++ff('edit.mp4',['-ss','0.25','-i',str(out/'sync.mp4'),'-c','copy'])
++Path('results/pipeline-qualification/extra-fixtures.json').write_text(json.dumps({'commands':commands,'files':{p.name:{'bytes':p.stat().st_size,'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()} for p in out.iterdir()}},indent=2)+'\n')
+diff --git a/experiments/pipeline-separation/fidelity.mjs b/experiments/pipeline-qualification/fidelity.mjs
+index 04e58bf..3960f66 100644
+--- a/experiments/pipeline-separation/fidelity.mjs
++++ b/experiments/pipeline-qualification/fidelity.mjs
+@@ -2,7 +2,7 @@ import {chromium} from 'playwright';
+ import {writeFile,mkdir} from 'node:fs/promises';
+ import {PNG} from '../../node_modules/playwright-core/lib/utilsBundle.js';
+ import {serve} from './server.mjs';
+-const out=`results/pipeline-separation/fidelity-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
++const out=`results/pipeline-qualification/fidelity-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
+ const server=await serve(),result={scope:'Paused exact-seek RGB comparison; not performance or all-color qualification',cases:[]};
+ try{
+  for(const test of [{media:'bt709'},{media:'bt601'},{media:'ass',subtitles:true},{media:'ass',subtitles:true,filters:'hflip,eq=brightness=0.1'},{media:'sample',filters:'vflip'}]){
+diff --git a/experiments/pipeline-separation/fixtures.py b/experiments/pipeline-qualification/fixtures.py
+index 9b12695..b47b272 100644
+--- a/experiments/pipeline-separation/fixtures.py
++++ b/experiments/pipeline-qualification/fixtures.py
+@@ -1,6 +1,6 @@
+ from pathlib import Path
+ import subprocess,json,hashlib
+-out=Path('build/pipeline-separation/fixtures');out.mkdir(parents=True,exist_ok=True)
++out=Path('build/pipeline-qualification/fixtures');out.mkdir(parents=True,exist_ok=True)
+ commands=[]
+ def ff(name,args):
+  path=out/name;cmd=['ffmpeg','-hide_banner','-loglevel','error','-y',*args,str(path)];commands.append(cmd)
+@@ -16,5 +16,5 @@ for n,size in enumerate(['640x360','320x180']):
+  ff(f'config-{n}.ts',['-f','lavfi','-i',f'testsrc2=size={size}:rate=30:duration=6','-f','lavfi','-i','sine=sample_rate=48000:duration=6','-c:v','libx264','-preset','fast','-g','60','-c:a','aac','-ac','2','-f','mpegts'])
+ if not (out/'config.ts').exists():(out/'config.ts').write_bytes((out/'config-0.ts').read_bytes()+(out/'config-1.ts').read_bytes())
+ manifest={'commands':commands,'files':{p.name:{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in out.iterdir() if p.is_file()}}
+-Path('results/pipeline-separation/fixture-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
++Path('results/pipeline-qualification/fixture-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+ print('Fixtures ready')
+diff --git a/experiments/pipeline-qualification/io-epoch.mjs b/experiments/pipeline-qualification/io-epoch.mjs
+new file mode 100644
+index 0000000..c6a8a6c
+--- /dev/null
++++ b/experiments/pipeline-qualification/io-epoch.mjs
+@@ -0,0 +1,15 @@
++// Deterministic reproduction: an old epoch notification arrives after the next read starts.
++import vm from 'node:vm';import {readFile,mkdir,writeFile} from 'node:fs/promises';import assert from 'node:assert/strict';
++const out=`results/pipeline-qualification/io-epoch-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
++async function exercise(file){const pending=[],messages=[];let aborts=0;
++ class Reader{constructor(){this.stats={};this.total=16n;}async open(){return {size:'16'};}read(){return new Promise((resolve,reject)=>{const p={done:false,resolve:b=>{p.done=true;resolve(b);},reject:()=>{p.done=true;reject(new DOMException('Old epoch','AbortError'));}};pending.push(p);});}beginEpoch(){for(const p of pending)if(!p.done){aborts++;p.reject();}}}
++ const context=vm.createContext({self:{},RangeReader:Reader,postMessage:m=>messages.push(m),Uint8Array,Int32Array,DataView,TextDecoder,Atomics,DOMException,crypto:globalThis.crypto,setTimeout,clearTimeout,setInterval,clearInterval});
++ const code=(await readFile(file,'utf8')).replace(/^import .*?;\n/,'');vm.runInContext(code+'\nstartPump=()=>{nativeEpoch=Atomics.load(header,3);};',context);const memory=new SharedArrayBuffer(300000),h=new Int32Array(memory,0,16);await context.self.onmessage({data:{type:'init',memory,pointer:0,options:{}}});
++ h[1]=1;h[0]=9;h[4]=4;const old=context.pump();assert.equal(pending.length,1);
++ // Native cancellation has finished and the next exact ticket is now active.
++ h[3]=1;h[1]=2;h[0]=17;pending[0].resolve(new Uint8Array([9,9,9,9]));await old;
++ const next=context.pump();assert.equal(pending.length,2);await context.self.onmessage({data:{type:'epoch'}});if(!pending[1].done)pending[1].resolve(new Uint8Array([1,2,3,4]));await next;
++ return {file,state:h[0],result:h[5],bytes:[...new Uint8Array(memory,64,4)],aborts};
++}
++const baseline=await exercise('web/io-worker.js'),candidate=await exercise('experiments/pipeline-qualification/io-worker.js');assert.equal(baseline.state,19,'Baseline must reproduce aborted current request');assert.equal(candidate.state,18,'Candidate must complete the current request');assert.deepEqual(candidate.bytes,[1,2,3,4]);assert.equal(candidate.aborts,0);
++await writeFile(out+'/result.json',JSON.stringify({baseline,candidate,passed:true},null,2)+'\n');console.log(out,baseline,candidate);
+diff --git a/experiments/pipeline-qualification/io-worker.js b/experiments/pipeline-qualification/io-worker.js
+new file mode 100644
+index 0000000..0780c37
+--- /dev/null
++++ b/experiments/pipeline-qualification/io-worker.js
+@@ -0,0 +1,64 @@
++import {RangeReader} from './range-reader.js';
++let reader,resources,header,bytes,view,extra,urlBytes,busy=false,timer,stopped=false;
++const refreshes=new Map();
++let nativeEpoch;
++function synchronizeEpoch(){const current=Atomics.load(header,3);if(current!==nativeEpoch){nativeEpoch=current;reader?.beginEpoch();resources?.beginEpoch();}}
++self.onmessage=async({data})=>{
++  try{
++    if(data.type==='init'){
++      header=new Int32Array(data.memory,data.pointer,16);bytes=new Uint8Array(data.memory,data.pointer+64,262144);view=new DataView(data.memory,data.pointer,64);
++      const refresh=data.canRefresh?(resource)=>new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timeout=setTimeout(()=>{refreshes.delete(id);reject(Error('Authorization refresh timed out'));},5000);refreshes.set(id,{resolve,reject,timeout});postMessage({type:'refresh',id,resource});}):undefined;
++      if(data.options.format&&data.options.format!=='file'){
++        if(!['hls','dash'].includes(data.options.format))throw Error('Unknown remote source format');
++        const {ResourceLoader}=await import('./resource-loader.js');
++        if(stopped)return;
++        resources=new ResourceLoader(data.options,refresh);
++        extra=new DataView(data.memory,data.pointer+64+262144,24);
++        urlBytes=new Uint8Array(data.memory,data.pointer+64+262144+24,4096);
++        const info=await resources.open(data.options.url,{manifest:true});
++        postMessage({type:'ready',info:{...info,resource:info.id}});startPump();return;
++      }
++      reader=new RangeReader(data.options,refresh);
++      const info=await reader.open();postMessage({type:'ready',info});startPump();
++    }else if(data.type==='epoch'){synchronizeEpoch();}
++    else if(data.type==='close'){stopped=true;if(header)Atomics.notify(header,0);reader?.close();resources?.close();clearInterval(timer);for(const r of refreshes.values()){clearTimeout(r.timeout);r.reject(Error('Closed'));}refreshes.clear();postMessage({type:'closed'});}
++    else if(data.type==='refreshed'){const r=refreshes.get(data.id);if(r){clearTimeout(r.timeout);refreshes.delete(data.id);data.error?r.reject(Error('Authorization refresh failed')):r.resolve(data.update);}}
++  }catch(error){postMessage({type:'error',message:error.message});}
++};
++async function pump(){
++  if(busy||(Atomics.load(header,0)&7)!==1)return;
++  synchronizeEpoch();busy=true;const requestState=Atomics.load(header,0);const serial=Atomics.load(header,1),epoch=Atomics.load(header,3);
++  try{
++    let output=new Uint8Array(),result=0,opened;
++    if(resources){
++      const operation=Atomics.load(header,15),id=extra.getInt32(0,true);
++      if(operation===1){
++        const zero=urlBytes.indexOf(0);if(zero<0)throw Error('Resource URL exceeds mailbox capacity');
++        const url=new TextDecoder('utf-8',{fatal:true}).decode(urlBytes.slice(0,zero));
++        const start=extra.getBigInt64(8,true),end=extra.getBigInt64(16,true);
++        opened=await resources.open(url,start<0?{}:{start,end});result=opened.id;
++      }else if(operation===2){output=resources.read(id,view.getBigUint64(32,true),Atomics.load(header,4));result=output.length;}
++      else if(operation===3)resources.closeHandle(id);
++      else throw Error('Invalid resource operation');
++    }else{output=await reader.read(view.getBigUint64(32,true),Atomics.load(header,4));result=output.length;}
++    if((Atomics.load(header,0)&7)!==1||Atomics.load(header,1)!==serial||Atomics.load(header,3)!==epoch){if(opened)resources.closeHandle(opened.id);return;}
++    if(opened)view.setBigInt64(40,BigInt(opened.size),true);
++    bytes.set(output);Atomics.store(header,5,result);if(Atomics.compareExchange(header,0,requestState,requestState+1)===requestState)Atomics.notify(header,0);
++  }catch(error){
++    if(Atomics.load(header,0)===requestState&&Atomics.load(header,1)===serial&&Atomics.load(header,3)===epoch){Atomics.store(header,5,-1);if(Atomics.compareExchange(header,0,requestState,requestState+2)===requestState)Atomics.notify(header,0);if(error.name!=='AbortError')postMessage({type:'error',message:error.message});}
++  }finally{busy=false;postMessage({type:'stats',stats:{...(resources??reader).stats,size:String(reader?.total??0),reads:Atomics.load(header,12),seeks:Atomics.load(header,13),interruptions:Atomics.load(header,14)}});}
++}
++
++function startPump(){
++  nativeEpoch=Atomics.load(header,3);
++  if(typeof Atomics.waitAsync!=='function'){timer=setInterval(pump,2);return;}
++  void (async()=>{
++    while(!stopped){
++      await pump();
++      if(stopped)break;
++      const state=Atomics.load(header,0);
++      if((state&7)===1)continue;
++      await Atomics.waitAsync(header,0,state,1000).value;
++    }
++  })();
++}
+diff --git a/experiments/pipeline-qualification/metadata.mjs b/experiments/pipeline-qualification/metadata.mjs
+new file mode 100644
+index 0000000..e4adcdd
+--- /dev/null
++++ b/experiments/pipeline-qualification/metadata.mjs
+@@ -0,0 +1,18 @@
++import {chromium} from 'playwright';
++import {mkdir,writeFile} from 'node:fs/promises';
++import {execFileSync} from 'node:child_process';
++import assert from 'node:assert/strict';
++import {serve} from './server.mjs';
++const out=`results/pipeline-qualification/metadata-${new Date().toISOString().replaceAll(':','-')}`;
++await mkdir(out,{recursive:true});console.log(out);const server=await serve(),result={cases:[]};
++const probe=p=>JSON.parse(execFileSync('ffprobe',['-v','error','-select_streams','v:0','-show_streams','-of','json',p])).streams[0];
++try{for(const media of ['rotation','sar','bt709','bt601']){
++ const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']}),r={media,browserVersion:browser.version()};result.cases.push(r);
++ try{const page=await browser.newPage();await page.addInitScript(()=>{window.parts=[];let size=0;const append=SourceBuffer.prototype.appendBuffer;SourceBuffer.prototype.appendBuffer=function(b){size+=b.byteLength;if(size>16*1024*1024)throw Error('Capture bound');parts.push(b.slice(0));return append.call(this,b);};});
++  await page.goto(server.origin+'/experiment/page.html');await page.evaluate(o=>start(o),{variant:'remux',url:server.origin+'/media/'+media});await page.evaluate(()=>player.pause());await page.waitForTimeout(500);
++  const parts=await page.evaluate(()=>window.parts.map(b=>{let s='';for(const x of new Uint8Array(b))s+=String.fromCharCode(x);return btoa(s);}));const file=out+'/'+media+'.mp4';await writeFile(file,Buffer.concat(parts.map(p=>Buffer.from(p,'base64'))));r.source=probe(server.media[media]);r.output=probe(file);
++  for(const key of ['codec_name','profile','width','height','pix_fmt','sample_aspect_ratio','color_range','color_space','color_transfer','color_primaries'])assert.equal(r.output[key],r.source[key],key);
++  const rotation=s=>s.side_data_list?.find(d=>d.side_data_type==='Display Matrix')?.rotation??0;assert.equal(rotation(r.output),rotation(r.source),'rotation');
++  await page.evaluate(()=>stop());await page.waitForTimeout(150);assert.equal(page.workers().length,0);r.passed=true;
++ }catch(e){r.error=String(e.stack);process.exitCode=1;}finally{await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
++}}finally{await server.close();result.passed=result.cases.every(c=>c.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');console.log(out,result.passed);}
+diff --git a/experiments/pipeline-separation/packet-check.mjs b/experiments/pipeline-qualification/packet-check.mjs
+index 3b81752..1965818 100644
+--- a/experiments/pipeline-separation/packet-check.mjs
++++ b/experiments/pipeline-qualification/packet-check.mjs
+@@ -1,16 +1,19 @@
++import assert from 'node:assert/strict';
+ import {chromium} from 'playwright';
+ import {mkdir,writeFile} from 'node:fs/promises';
+ import {execFileSync} from 'node:child_process';
+ import {serve} from './server.mjs';
++const media=process.env.MEDIA||'movie',target=Number(process.env.TARGET??236.9);
+ const server=await serve(),browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+-const out=`results/pipeline-separation/packets-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
++const out=`results/pipeline-qualification/packets-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});
+ try{
+  const page=await browser.newPage();await page.addInitScript(()=>{window.captured=[];let total=0;const append=SourceBuffer.prototype.appendBuffer;SourceBuffer.prototype.appendBuffer=function(b){total+=b.byteLength;if(total>32*1024*1024)throw Error('Capture limit');captured.push(new Uint8Array(b).slice());return append.call(this,b);};});
+- await page.goto(server.origin+'/experiment/page.html');await page.evaluate(o=>start(o),{variant:'remux',url:server.origin+'/media/movie',target:236.9});await page.waitForTimeout(4000);await page.evaluate(()=>player.pause());
++ await page.goto(server.origin+'/experiment/page.html');await page.evaluate(o=>start(o),{variant:'remux',url:server.origin+'/media/'+media,target});await page.waitForTimeout(4000);await page.evaluate(()=>player.pause());
+  const capture=await page.evaluate(()=>({parts:captured.map(b=>{let s='';for(let i=0;i<b.length;i++)s+=String.fromCharCode(b[i]);return btoa(s);}),state:snapshot()}));
+  const file=out+'/capture.mp4';await writeFile(file,Buffer.concat(capture.parts.map(b=>Buffer.from(b,'base64'))));
+  const packets=(p,extra=[])=>JSON.parse(execFileSync('ffprobe',['-v','error',...extra,'-show_packets','-show_data_hash','sha256','-show_entries','packet=stream_index,pts_time,dts_time,duration_time,data_hash','-of','json',p],{maxBuffer:20*1024*1024})).packets;
+- const source=packets(server.media.movie,['-read_intervals','230%260']),output=packets(file);const map=new Map(source.map(p=>[p.data_hash,p]));
+- const comparison=output.map(p=>{const s=map.get(p.data_hash);return {stream:p.stream_index,pts:Number(p.pts_time)-1,dts:Number(p.dts_time)-1,sourcePts:s?Number(s.pts_time):null,sourceDts:s?Number(s.dts_time):null,ptsError:s?Number(p.pts_time)-1-Number(s.pts_time):null,dtsError:s?Number(p.dts_time)-1-Number(s.dts_time):null};});
+- await writeFile(out+'/result.json',JSON.stringify({state:capture.state,comparison},null,2)+'\n');await page.evaluate(()=>stop());console.log(out,comparison.slice(0,8));
++ let reference=server.media[media],referenceCommand=null;if(media==='ts'){reference=out+'/canonical-source.mp4';referenceCommand=['-v','error','-i',server.media[media],'-map','0:v:0','-map','0:a:0','-c','copy',reference];execFileSync('ffmpeg',referenceCommand);}
++ const format=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=start_time','-of','json',reference])).format;const origin=Number(format.start_time||0);const source=packets(reference,['-read_intervals',`${Math.max(0,target-10)}%${target+20}`]),output=packets(file);const map=new Map();for(const p of source){const key=p.stream_index+":"+p.data_hash;if(!map.has(key))map.set(key,[]);map.get(key).push(p);}
++ const comparison=output.map(p=>{const candidates=map.get(p.stream_index+":"+p.data_hash)||[];candidates.sort((a,b)=>Math.abs(Number(a.pts_time)-origin-(Number(p.pts_time)-1))-Math.abs(Number(b.pts_time)-origin-(Number(p.pts_time)-1)));const s=candidates.shift();return {stream:p.stream_index,pts:Number(p.pts_time)-1,dts:Number(p.dts_time)-1,sourcePts:s?Number(s.pts_time)-origin:null,sourceDts:s?Number(s.dts_time)-origin:null,ptsError:s?Number(p.pts_time)-1-Number(s.pts_time)+origin:null,dtsError:s?Number(p.dts_time)-1-Number(s.dts_time)+origin:null};});
++ const summary={packets:comparison.length,unmatched:comparison.filter(p=>p.sourcePts===null).length,maxPtsError:Math.max(...comparison.filter(p=>Number.isFinite(p.ptsError)).map(p=>Math.abs(p.ptsError))),maxKnownDtsError:Math.max(...comparison.filter(p=>Number.isFinite(p.dtsError)).map(p=>Math.abs(p.dtsError)))};const passed=summary.unmatched===0&&summary.maxPtsError<=.0011&&summary.maxKnownDtsError<=.0011;await writeFile(out+'/result.json',JSON.stringify({media,target,origin,referenceCommand,state:capture.state,comparison,summary,passed},null,2)+'\n');assert.ok(passed,'Compressed payload and timestamp preservation');await page.evaluate(()=>stop());console.log(out,comparison.slice(0,8));
+ }finally{await browser.close();await server.close();}
+diff --git a/experiments/pipeline-separation/page.html b/experiments/pipeline-qualification/page.html
+index 829980b..724f5ef 100644
+--- a/experiments/pipeline-separation/page.html
++++ b/experiments/pipeline-qualification/page.html
+@@ -4,12 +4,12 @@
+ <script type="module">
+ import {RemuxPlayer} from '/experiment/remux-player.js';
+ window.errors=[];window.outputs=[];
+-window.start=async({variant,url,file,target=0,subtitles=false,filters=''})=>{
++window.start=async({variant,url,file,target=0,subtitles=false,filters='',sourceOptions={},refresh=false,videoTrack,audioTrack})=>{
+  const begun=performance.now();window.variant=variant;
+  if(variant==='remux'){
+   if(subtitles||filters)throw Error('This packet-only remux prototype does not implement subtitle overlays or filters');
+   const video=document.createElement('video');video.playsInline=true;video.controls=false;document.querySelector('#surface').append(video);window.video=video;
+-  window.player=new RemuxPlayer(video);await player.open(file?{file}:{options:{url}},target);await player.play();
++  window.player=new RemuxPlayer(video);await player.open(file?{file}:{options:{url,...sourceOptions},videoTrack,audioTrack,...(refresh?{refreshAuthorization:async()=>({headers:{Authorization:'Bearer refreshed'}})}:{})},target);await player.play();
+  }else{
+   const mount=variant==='software'?'baseline':variant;const {Player}=await import(`/${mount}/web/generated/index.js`);
+   window.player=new Player(document.querySelector('#surface'),{mode:variant==='yuv'?'software':variant,width:1920,height:1080});
+@@ -18,11 +18,12 @@ window.start=async({variant,url,file,target=0,subtitles=false,filters=''})=>{
+   if(subtitles)await player.selectTrack('sub','1');if(target)await player.seek(target);await player.play();
+   window.video=document.querySelector('video');
+  }
++ if(window.video?.requestVideoFrameCallback){window.presentedCount=0;const observe=()=>{window.presentedCount++;video.requestVideoFrameCallback(observe);};video.requestVideoFrameCallback(observe);}
+  await new Promise((resolve,reject)=>{const until=performance.now()+20000;const check=()=>{const s=snapshot();if(s.frames>0){resolve();return;}if(errors.length||performance.now()>until){reject(Error(JSON.stringify(errors)||'No video'));return;}setTimeout(check,10);};check();});
+  return {firstFrameMs:performance.now()-begun,state:snapshot()};
+ };
+ window.snapshot=()=>{
+- if(variant==='remux'){const r=player.snapshot(),q=video.getVideoPlaybackQuality();return {position:r.position,frames:q.totalVideoFrames,drops:q.droppedVideoFrames,errors:[...errors,...r.stats.errors],remux:r,visibility:document.visibilityState};}
++ if(variant==='remux'){const r=player.snapshot(),q=video.getVideoPlaybackQuality();return {presented:window.presentedCount||0,position:r.position,frames:q.totalVideoFrames,drops:q.droppedVideoFrames,errors:[...errors,...r.stats.errors],remux:r,visibility:document.visibilityState};}
+  const d=player.diagnostics.backend,audio=player.audioDiagnostics();
+  return {position:player.properties.get('time-pos'),frames:d.yuv?.frames??d.rendered,drops:(player.properties.get('frame-drop-count')||0)+(player.properties.get('decoder-frame-drop-count')||0)+(d.dropped||0),decoderDrops:player.properties.get('decoder-frame-drop-count'),avsync:player.properties.get('avsync'),audio,diagnostics:d,errors,outputs,visibility:document.visibilityState};
+ };
+diff --git a/experiments/pipeline-separation/prepare-yuv.py b/experiments/pipeline-qualification/prepare-yuv.py
+index 859b48a..1cca43e 100644
+--- a/experiments/pipeline-separation/prepare-yuv.py
++++ b/experiments/pipeline-qualification/prepare-yuv.py
+@@ -1,6 +1,6 @@
+ import json,shlex,subprocess,os
+ from pathlib import Path
+-root=Path.cwd();out=root/'build/pipeline-separation/yuv';out.mkdir(parents=True,exist_ok=True)
++root=Path.cwd();out=root/'build/pipeline-qualification/yuv';out.mkdir(parents=True,exist_ok=True)
+ entry=next(e for e in json.loads(Path('build/obj-mpv/compile_commands.json').read_text()) if e['file'].endswith('/libmpv_sw.c'))
+ args=shlex.split(entry['command']);cmd=[];i=0
+ while i<len(args):
+@@ -8,21 +8,23 @@ while i<len(args):
+  if a in ('-MQ','-MF'):i+=2;continue
+  if a=='-MD':i+=1;continue
+  if a=='-o':cmd+=['-o',str(out/'yuv.o')];i+=2;continue
+- if a=='-c':cmd+=['-c',str(root/'experiments/pipeline-separation/yuv-backend.c')];i+=2;continue
++ if a=='-c':cmd+=['-c',str(root/'experiments/pipeline-qualification/yuv-backend.c')];i+=2;continue
+  cmd.append(a);i+=1
+ cmd.insert(1,'-I'+str(root/'build/sources/mpv'))
+ subprocess.run(cmd,cwd=entry['directory'],env={**os.environ,'EM_CONFIG':str(root/'build/gap.emscripten')},check=True)
++rgb=cmd.copy();rgb[rgb.index('-c')+1]=str(root/'build/sources/mpv/video/out/libmpv_sw.c');rgb[rgb.index('-o')+1]=str(out/'rgb.o');rgb.insert(1,'-Drender_backend_sw=render_backend_rgb');subprocess.run(rgb,cwd=entry['directory'],env={**os.environ,'EM_CONFIG':str(root/'build/gap.emscripten')},check=True)
+ s=Path('web/software-full-engine-worker.js').read_text()
+ def replace(a,b):
+  global s
+  assert s.count(a)==1,a
+  s=s.replace(a,b)
+-replace("      context = canvas.getContext('2d', {alpha:false});","      uploader=new YUVPresenter(canvas);")
++replace("      context = canvas.getContext('2d', {alpha:false});","      installPresenter(canvas);")
+ replace("      if(!frameImage||frameImage.width!==canvas.width||frameImage.height!==canvas.height)frameImage=new ImageData(canvas.width,canvas.height);\n      const bytes=frameImage.data;bytes.set(engine.HEAPU8.subarray(ptr,ptr+bytes.length));\n      for (let i = 3; i < bytes.length; i += 4) bytes[i] = 255;\n      context.putImageData(frameImage, 0, 0);","      const bytes=new Uint8Array(); // Video is already uploaded inside the render callback.")
+ replace("      const createEngine=(await import('./engine-software-full/player.mjs')).default;","      const createEngine=(await import('/experiment/yuv-engine/player.mjs')).default;")
+-replace("      engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});","      engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});engine.drawYUV=d=>uploader.draw(engine,d);")
++replace("      engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});","      engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});engine.failOutput=message=>{if(!closing){closing=true;post({type:'error',message});}};engine.drawYUV=d=>{try{uploader.draw(engine,d);}catch(e){engine.failOutput(String(e));}};engine.drawRGB=(...a)=>{try{uploader.drawRGB(engine,...a);}catch(e){engine.failOutput(String(e));}};")
+ replace("data:{pumpTicks:ticks,rendered", "data:{yuv:{...uploader.stats},pumpTicks:ticks,rendered")
+ replace("      engine?._web_destroy();", "      engine?._web_destroy();uploader?.destroy();post({type:'output',data:{kind:'yuv-cleanup',...uploader.stats}});")
+-s="import {YUVPresenter} from '/experiment/yuv.js';\nlet uploader;\n"+s
++replace("    } else if (data.type === 'timing' && engine) {", "    } else if(data.type==='experimental-context-loss'){const extension=uploader.gl.getExtension('WEBGL_lose_context');if(!extension)throw Error('Context loss test unavailable');extension.loseContext();setTimeout(()=>extension.restoreContext(),250);\n    } else if (data.type === 'timing' && engine) {")
++s="import {YUVPresenter} from '/experiment/yuv.js';\nlet uploader;\nfunction installPresenter(canvas,prior){uploader=new YUVPresenter(canvas);if(prior)uploader.stats={...prior,liveTextures:4,contextRestores:(prior.contextRestores||0)+1};let wasPaused;uploader.onLost=()=>{wasPaused=paused;internalCommand(['set','pause','yes'],()=>{});post({type:'output',data:{kind:'gpu-context-lost'}});};uploader.onRestore=()=>{const old=uploader,stats={...old.stats};old.destroy(true);installPresenter(canvas,stats);internalCommand(['set','pause',wasPaused?'yes':'no'],()=>{});force=true;schedulePump(0);post({type:'output',data:{kind:'gpu-context-restored'}});};}\n"+s
+ (out/'worker.js').write_text(s)
+ (out/'compile-command.json').write_text(json.dumps(cmd,indent=2)+'\n')
+diff --git a/experiments/pipeline-separation/qualify.mjs b/experiments/pipeline-qualification/qualify.mjs
+index 14aca7f..50f7d62 100644
+--- a/experiments/pipeline-separation/qualify.mjs
++++ b/experiments/pipeline-qualification/qualify.mjs
+@@ -1,16 +1,17 @@
+ // Correctness matrix, deliberately separate from visible CPU measurements.
+-import {chromium} from 'playwright';
++import {chromium,firefox,webkit} from 'playwright';
++const family=process.env.BROWSER||'chrome';
+ import {mkdir,writeFile} from 'node:fs/promises';
+ import {serve} from './server.mjs';
+ import assert from 'node:assert/strict';
+-const out=`results/pipeline-separation/qualification-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);
+-const server=await serve(),result={scope:'Headless targeted correctness; no performance claim',cases:[]};
++const out=`results/pipeline-qualification/qualification-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);
++const server=await serve(),result={browserFamily:family,scope:'Headless targeted correctness; no performance claim',cases:[]};
+ const bounded=async(p,ms=25000)=>{let timer;try{return await Promise.race([p,new Promise((_,reject)=>timer=setTimeout(()=>reject(Error('Case deadline exceeded')),ms))]);}finally{clearTimeout(timer);}};
+-const cases=[{name:'indexed-mkv',media:'mkv',target:236.9,seeks:[400,30,500,1]},{name:'tail-index-mp4',media:'tail',target:236.9,seeks:[500,30]},{name:'long-gop',media:'long',target:19,seeks:[35,1,18]},{name:'retry',media:'sample',retry:true},{name:'seek-storm',media:'movie',storm:true},{name:'paused-backpressure',media:'movie',pause:true},{name:'local-large-file',media:'mkv',local:true,target:236.9},{name:'local-large-mp4',media:'tail',local:true,target:236.9},{name:'audio-offset',media:'offset'},{name:'rotation',media:'rotation'},{name:'sample-aspect',media:'sar'},{name:'single-ts',media:'ts'},{name:'configuration-change',media:'config',target:7},{name:'unsupported-10bit',media:'tenbit',expectReject:true},{name:'subtitle-feature-rejection',media:'ass',subtitles:true,expectReject:true}];
++const cases=[{name:'indexed-mkv',media:'mkv',target:236.9,seeks:[400,30,500,1]},{name:'tail-index-mp4',media:'tail',target:236.9,seeks:[500,30]},{name:'long-gop',media:'long',target:19,seeks:[35,1,18]},{name:'retry',media:'sample',retry:true},{name:'seek-storm',media:'movie',storm:true},{name:'paused-backpressure',media:'movie',pause:true},{name:'local-large-file',media:'mkv',local:true,target:236.9},{name:'local-large-mp4',media:'tail',local:true,target:236.9},{name:'audio-offset',media:'offset'},{name:'edit-list-preroll',media:'edit',seeks:[3,0,8]},{name:'rotation',media:'rotation'},{name:'sample-aspect',media:'sar'},{name:'single-ts',media:'ts',seeks:[3,1]},{name:'long-gop-ts',media:'longts',target:19,seeks:[35,1,18]},{name:'configuration-change',media:'config',target:7,expectReject:true,reason:'configuration|discontinuity|range|seek'},{name:'unsupported-10bit',media:'tenbit',expectReject:true,reason:'Unsupported AVC pixel format'},{name:'subtitle-feature-rejection',media:'ass',subtitles:true,expectReject:true,reason:'subtitle overlays'}];
+ try{
+- for(const c of cases){
++ for(const c of cases.filter(c=>!process.env.CASES||process.env.CASES.split(',').includes(c.name))){
+   const record={...c};result.cases.push(record);console.log('Checking',c.name);
+-  const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});let page;
++  const browser=await ({chrome:chromium,firefox,webkit})[family].launch({...(family==='chrome'?{channel:'chrome',args:['--autoplay-policy=no-user-gesture-required']}:{ }),headless:true});record.browserVersion=browser.version();let page;
+   try{
+    page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');
+    const options={variant:'remux',url:server.origin+`/media/${c.media}?id=${c.name}${c.retry?'&retry=1':''}${c.storm?'&delay=40':''}`,target:c.target||0,subtitles:!!c.subtitles};
+@@ -21,9 +22,9 @@ try{
+    if(c.storm){record.storm=await bounded(page.evaluate(async()=>{const pending=[];for(const t of [400,10,500,50,300,40]){pending.push(player.seek(t).then(()=>({target:t,status:'ready'}),e=>({target:t,status:e.name,error:String(e)})));await new Promise(r=>setTimeout(r,20));}return Promise.all(pending);}));await bounded(page.evaluate(()=>player.play()));assert.equal(record.storm.at(-1).status,'ready');assert.ok(record.storm.slice(0,-1).every(r=>r.status==='AbortError'));}
+    await page.waitForTimeout(1000);record.before=await page.evaluate(()=>snapshot());
+    if(c.pause){await page.evaluate(()=>player.pause());await page.waitForTimeout(2000);record.pausedA=await page.evaluate(()=>snapshot());await page.waitForTimeout(3000);record.pausedB=await page.evaluate(()=>snapshot());assert.equal(record.pausedA.remux.source.fetchedBytes,record.pausedB.remux.source.fetchedBytes,'Paused source production must stop at forward budget');}
+-   else{await page.waitForTimeout(2000);record.after=await page.evaluate(()=>snapshot());assert.ok(record.after.position-record.before.position>1.5,'Playback must advance');assert.ok(record.after.frames-record.before.frames>45,'Decoded video must advance');assert.deepEqual(record.after.errors,[]);}
++   else{await page.waitForTimeout(2000);record.after=await page.evaluate(()=>snapshot());assert.ok(record.after.position-record.before.position>1.5,'Playback must advance');assert.ok(record.after.presented-record.before.presented>45,'Presented video callbacks must advance');assert.deepEqual(record.after.errors,[]);}
+    await page.screenshot({path:`${out}/${c.name}.png`});record.passed=true;
+-  }catch(e){record.error=String(e.stack);record.state=await page?.evaluate(()=>typeof snapshot==='function'?snapshot():null).catch(()=>null);record.passed=!!c.expectReject&&!record.open;console.log(c.name,record.error.split('\n')[0]);}
++  }catch(e){record.error=String(e.stack);record.state=await page?.evaluate(()=>typeof snapshot==='function'?snapshot():null).catch(()=>null);record.passed=!!c.expectReject&&!record.open&&new RegExp(c.reason,'i').test(record.error);console.log(c.name,record.error.split('\n')[0]);}
+   finally{await page?.evaluate(()=>window.player?.destroy()).catch(()=>{});await page?.waitForTimeout(150);record.workersAfter=page?.workers().length;record.passed=record.passed&&record.workersAfter===0;await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
+  }
+ }finally{result.origin=Object.fromEntries(server.states);await server.close();result.passed=result.cases.every(c=>c.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');console.log(out);if(!result.passed)process.exitCode=1;}
+diff --git a/experiments/pipeline-qualification/remux-faults.mjs b/experiments/pipeline-qualification/remux-faults.mjs
+new file mode 100644
+index 0000000..3231329
+--- /dev/null
++++ b/experiments/pipeline-qualification/remux-faults.mjs
+@@ -0,0 +1,12 @@
++import {chromium} from 'playwright';import {mkdir,writeFile} from 'node:fs/promises';import assert from 'node:assert/strict';import {serve} from './server.mjs';
++const server=await serve(),out=`results/pipeline-qualification/remux-faults-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);const result={cases:[]};
++const cases=[{name:'truncated-range',media:'sample',query:'truncate=12'},{name:'auth-refresh-cors',media:'sample',query:'auth=1&cors=allow',refresh:true,cors:true},{name:'changed-source',media:'sample',query:'changed=1',reason:'representation changed',recover:true},{name:'invalid-selected-track',media:'sample',audioTrack:42,reason:'Invalid selected tracks'},{name:'selected-alternate-audio',media:'animated',audioTrack:2},{name:'eos',media:'sync',target:10,eos:true},{name:'configuration-during-play',media:'config',reason:'configuration changed|discontinuity',wait:7000}];
++const bounded=async(p,ms=22000)=>{let timer;try{return await Promise.race([p,new Promise((_,reject)=>timer=setTimeout(()=>reject(Error('Fault case deadline')),ms))]);}finally{clearTimeout(timer);}};
++try{for(const c of cases){const r={...c};result.cases.push(r);console.log(c.name);const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});let page;
++try{page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');const url=(c.cors?server.origin.replace('127.0.0.1','localhost'):server.origin)+`/media/${c.media}?id=${c.name}&${c.query||''}`;
++try{r.open=await bounded(page.evaluate(o=>start(o),{variant:'remux',url,target:c.target||0,audioTrack:c.audioTrack,refresh:c.refresh,sourceOptions:c.refresh?{headers:{Authorization:'Bearer initial'}}:{}}));await page.waitForTimeout(c.wait||3000);r.state=await page.evaluate(()=>snapshot());if(r.state.errors.length)throw Error(r.state.errors.join('\n'));if(c.reason)throw Error('Expected explicit failure was absent');if(c.eos)assert.equal(await page.evaluate(()=>video.ended),true,'MSE end-of-stream');else assert.ok(r.state.position>(c.target||0)+1.5);}
++catch(e){r.failure=String(e.stack);if(!c.reason||!new RegExp(c.reason,'i').test(r.failure))throw e;r.expectedRejection=true;}
++if(c.recover){r.recovery=await bounded(page.evaluate(async url=>{await player.open({options:{url}},1);await player.play();await new Promise(r=>setTimeout(r,1500));return snapshot();},server.origin+'/media/sample?id=recovered'));assert.deepEqual(r.recovery.errors,[]);assert.ok(r.recovery.position>2);}
++r.cleanup=await page.evaluate(()=>stop());await page.waitForTimeout(150);r.workersAfter=page.workers().length;assert.equal(r.workersAfter,0);r.passed=true;
++}catch(e){r.error=String(e.stack);r.passed=false;process.exitCode=1;console.log(r.error.split('\n')[0]);}finally{await page?.evaluate(()=>window.player?.destroy()).catch(()=>{});await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}}
++}finally{result.origin=Object.fromEntries(server.states);await server.close();result.passed=result.cases.every(c=>c.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
+diff --git a/experiments/pipeline-qualification/remux-lifecycle.mjs b/experiments/pipeline-qualification/remux-lifecycle.mjs
+new file mode 100644
+index 0000000..bc17b3c
+--- /dev/null
++++ b/experiments/pipeline-qualification/remux-lifecycle.mjs
+@@ -0,0 +1,15 @@
++import {chromium,firefox,webkit} from 'playwright';
++import {mkdir,writeFile} from 'node:fs/promises';
++import assert from 'node:assert/strict';
++import {serve} from './server.mjs';
++const out=`results/pipeline-qualification/remux-lifecycle-${new Date().toISOString().replaceAll(':','-')}`;
++await mkdir(out,{recursive:true});console.log(out);const server=await serve(),result={scope:'Synthetic stale/current SourceBuffer error events, real seek/reopen, post-destroy rejection',cases:[]};
++try{for(const [family,type] of Object.entries({chrome:chromium,firefox,webkit})){
++ const browser=await type.launch({headless:true,...(family==='chrome'?{channel:'chrome',args:['--autoplay-policy=no-user-gesture-required']}:{})}),r={family,browserVersion:browser.version()};result.cases.push(r);
++ try{const page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');await page.evaluate(o=>start(o),{variant:'remux',url:server.origin+'/media/movie'});
++  r.stale=await page.evaluate(async()=>{const old=player.sb;await player.seek(40);old.dispatchEvent(new Event('error'));await player.play();await new Promise(r=>setTimeout(r,500));return snapshot();});assert.deepEqual(r.stale.errors,[]);assert.equal(r.stale.remux.stats.workers,2);assert.ok(r.stale.position>40.2);
++  r.current=await page.evaluate(()=>{player.sb.dispatchEvent(new Event('error'));return snapshot();});assert.equal(r.current.remux.stats.workers,0);assert.deepEqual(r.current.errors,['MSE SourceBuffer error']);
++  r.reopened=await page.evaluate(async url=>{await player.open({options:{url}},30);await player.play();await new Promise(r=>setTimeout(r,500));return snapshot();},server.origin+'/media/movie');assert.deepEqual(r.reopened.errors,[]);assert.ok(r.reopened.position>30.2);
++  r.afterDestroy=await page.evaluate(async()=>{await stop();const rejected=await player.seek(3).then(()=>false,e=>String(e).includes('destroyed'));return {rejected,state:snapshot()};});assert.equal(r.afterDestroy.rejected,true);await page.waitForTimeout(150);assert.equal(page.workers().length,0);r.passed=true;
++ }catch(e){r.error=String(e.stack);process.exitCode=1;}finally{await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
++}}finally{await server.close();result.passed=result.cases.every(c=>c.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');console.log(out,result.passed);}
+diff --git a/experiments/pipeline-separation/remux-player.js b/experiments/pipeline-qualification/remux-player.js
+index 26799a8..8841279 100644
+--- a/experiments/pipeline-separation/remux-player.js
++++ b/experiments/pipeline-qualification/remux-player.js
+@@ -3,21 +3,22 @@
+ // block the event loop responsible for completing its reads.
+ export class RemuxPlayer {
+  constructor(video){
+-  this.video=video;this.generation=0;this.stopped=false;this.stats={fragments:[],generatedBytes:0,discardedBytes:0,peakQueueDepth:0,bufferedBytesUpperBound:0,peakBufferedBytesUpperBound:0,peakBufferedSeconds:0,seeks:[],sessions:[],errors:[],workers:0};
++  this.video=video;this.timelineBias=1;this.generation=0;this.stopped=false;this.stats={fragments:[],generatedBytes:0,discardedBytes:0,peakQueueDepth:0,bufferedBytesUpperBound:0,peakBufferedBytesUpperBound:0,peakBufferedSeconds:0,seeks:[],sessions:[],errors:[],workers:0};
+   this.segments=[];this.sourceStats={};this.remuxStats={};this.timer=setInterval(()=>this.pump(),50);
+  }
+  async open(source,target=0){this.source=source;return this.restart(target);}
+  async restart(target){
++  if(this.stopped)throw Error('Remux player is destroyed');
+   const begun=performance.now(),generation=++this.generation;this.stopWorkers();
+-  this.stats.seeks.push({target,started:begun});if(this.stats.seeks.length>64)this.stats.seeks.shift();this.target=target;this.targetReady=false;this.lastEviction=-Infinity;this.raps=[];this.busy=true;this.eof=false;this.pending=null;this.segments=[];this.sourceStats={};this.remuxStats={};
++  this.stats.errors=[];this.stats.seeks.push({target,started:begun});if(this.stats.seeks.length>64)this.stats.seeks.shift();this.target=target;this.targetReady=false;this.lastEviction=-Infinity;this.raps=[];this.busy=true;this.eof=false;this.pending=null;this.receipt=null;this.segments=[];this.sourceStats={};this.remuxStats={};
+   this.video.pause();this.video.removeAttribute('src');this.video.load();if(this.objectURL)URL.revokeObjectURL(this.objectURL);
+   this.media=new MediaSource();this.objectURL=URL.createObjectURL(this.media);this.video.src=this.objectURL;
+-  await new Promise((resolve,reject)=>{this.cancelWait=reject;const timer=setTimeout(()=>reject(Error('MSE sourceopen timeout')),10000);this.media.addEventListener('sourceopen',()=>{clearTimeout(timer);resolve();},{once:true});});
++  await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('MSE sourceopen timeout')),10000);this.cancelWait=e=>{clearTimeout(timer);reject(e);};this.media.addEventListener('sourceopen',()=>{clearTimeout(timer);resolve();},{once:true});});
+   if(generation!==this.generation)throw new DOMException('Superseded','AbortError');
+   this.mailbox=new SharedArrayBuffer(64+262144);this.sourceWorker=new Worker('/experiment/source-worker.js',{type:'module'});this.stats.workers++;
+   const ready=await new Promise((resolve,reject)=>{
+-   this.cancelWait=reject;this.sourceWorker.onmessage=({data})=>{if(generation!==this.generation)return;if(data.type==='ready')resolve(data);if(data.type==='stats')this.sourceStats=data.stats;if(data.type==='error'){reject(Error(data.message));this.fail(data.message);}};
+-   this.sourceWorker.postMessage({type:'init',mailbox:this.mailbox,...this.source});
++   this.cancelWait=reject;this.sourceWorker.onmessage=({data})=>{if(generation!==this.generation)return;if(data.type==='refresh'){Promise.resolve().then(()=>{if(!this.source.refreshAuthorization)throw Error('Authorization refresh unavailable');return this.source.refreshAuthorization();}).then(update=>{if(generation===this.generation)this.sourceWorker?.postMessage({type:'refreshed',update});},error=>{if(generation===this.generation)this.sourceWorker?.postMessage({type:'refreshed',error:String(error)});});}if(data.type==='ready')resolve(data);if(data.type==='stats')this.sourceStats=data.stats;if(data.type==='error'){reject(Error(data.message));this.fail(data.message);}};
++   const {refreshAuthorization,...source}=this.source;this.sourceWorker.postMessage({type:'init',mailbox:this.mailbox,...source});
+   });
+   if(generation!==this.generation)throw new DOMException('Superseded','AbortError');
+   this.total=ready.size;this.worker=new Worker('/experiment/remux-worker.js',{type:'module'});this.stats.workers++;
+@@ -29,9 +30,10 @@ export class RemuxPlayer {
+    if(data.stats)this.remuxStats=data.stats;if(data.buffer)this.stats.generatedBytes+=data.buffer.byteLength;
+    if(data.type==='ready'){
+     try{
++     if(target<0||target>=data.duration)throw Error('Seek target out of range');
+      if(!MediaSource.isTypeSupported(data.mime))throw Error(`Unsupported MSE ${data.mime}`);
+-     this.mime=data.mime;this.media.duration=data.duration;this.sb=this.media.addSourceBuffer(data.mime);this.sb.mode='segments';this.sb.timestampOffset=-1;
+-     this.sb.addEventListener('updateend',()=>{if(generation!==this.generation)return;if(this.receipt){this.receipt.end=this.ranges().at(-1)?.[1]??Infinity;this.receipt=null;}this.busy=false;this.pump();});this.sb.addEventListener('error',()=>this.fail('MSE SourceBuffer error'));
++     this.mime=data.mime;this.media.duration=data.duration+this.timelineBias;this.sb=this.media.addSourceBuffer(data.mime);this.sb.mode='segments';this.sb.timestampOffset=0;
++     this.sb.addEventListener('updateend',()=>{if(generation!==this.generation)return;if(this.receipt){this.receipt.end=this.ranges().at(-1)?.[1]??Infinity;this.receipt=null;}this.busy=false;this.pump();});this.sb.addEventListener('error',()=>{if(generation===this.generation)this.fail('MSE SourceBuffer error');});
+      this.sb.appendBuffer(data.buffer);
+     }catch(e){this.fail(String(e));}
+    }else if(data.type==='fragment'){
+@@ -39,14 +41,14 @@ export class RemuxPlayer {
+     this.pending=data.buffer;this.eof=!data.more;this.busy=false;this.stats.peakQueueDepth=Math.max(this.stats.peakQueueDepth,1);this.pump();
+    }
+   };
+-  this.worker.postMessage({type:'init',mailbox:this.mailbox,size:ready.size,target});
++  this.worker.postMessage({type:'init',mailbox:this.mailbox,size:ready.size,target,videoTrack:this.source.videoTrack,audioTrack:this.source.audioTrack});
+   await new Promise((resolve,reject)=>{
+    const deadline=performance.now()+20000;const check=()=>{
+     if(generation!==this.generation){reject(new DOMException('Superseded','AbortError'));return;}
+     if(this.stats.errors.length){reject(Error(this.stats.errors.at(-1)));return;}
+     // Initial decoder preroll can leave a short leading gap in the playable range.
+-    if(this.contains(target+0.1)){
+-     this.targetReady=true;this.video.currentTime=target;
++    if(this.ranges().some(([a,b])=>a<=target+0.5&&b>target+0.02)){
++     this.targetReady=true;this.video.currentTime=target+this.timelineBias;
+      session.firstPlayableMs=performance.now()-begun;session.firstPlayableSourceBytes=this.sourceStats.fetchedBytes;
+      session.generatedBytes=this.remuxStats.generatedBytes;session.fullyConsumed=(this.sourceStats.fetchedBytes>=ready.size);
+      resolve();return;
+@@ -56,30 +58,32 @@ export class RemuxPlayer {
+   });
+   return session;
+  }
+- contains(t){const b=this.sb?.buffered;if(!b)return false;for(let i=0;i<b.length;i++)if(t>=b.start(i)&&t<b.end(i))return true;return false;}
+- ranges(){const b=this.sb?.buffered;return b?Array.from({length:b.length},(_,i)=>[b.start(i),b.end(i)]):[];}
++ contains(t){t+=this.timelineBias;const b=this.sb?.buffered;if(!b)return false;for(let i=0;i<b.length;i++)if(t>=b.start(i)&&t<b.end(i))return true;return false;}
++ ranges(){const b=this.sb?.buffered;return b?Array.from({length:b.length},(_,i)=>[b.start(i)-this.timelineBias,b.end(i)-this.timelineBias]):[];}
+  pump(){
+   if(this.stopped||!this.sb||this.busy||this.sb.updating||this.media.readyState!=='open')return;
+   try{
+-   const now=Math.max(this.video.currentTime,this.target),ranges=this.ranges();
++   const now=Math.max(this.video.currentTime-this.timelineBias,this.target),ranges=this.ranges();
+    const seconds=ranges.reduce((s,[a,b])=>s+b-a,0);this.stats.peakBufferedSeconds=Math.max(this.stats.peakBufferedSeconds,seconds);
+    // Evict old complete intervals. Retain three seconds behind playback; browser
+    // codec dependencies may keep internal resources beyond the coded ranges.
+    // MSE removal can extend through dependent frames to the next RAP. Never
+    // remove through the GOP currently decoding; evict at known source RAPs.
+    const cut=this.raps.filter(t=>t<=now-3).at(-1);
+-   if(this.targetReady&&cut!==undefined&&ranges.length&&ranges[0][0]<cut-.001&&cut>this.lastEviction){this.busy=true;this.lastEviction=cut;this.sb.remove(0,cut-.00001);this.segments=this.segments.filter(s=>s.end>cut);return;}
++   if(this.targetReady&&cut!==undefined&&ranges.length&&ranges[0][0]<cut-.001&&cut>this.lastEviction){this.busy=true;this.lastEviction=cut;this.sb.remove(0,cut+this.timelineBias-.00001);this.segments=this.segments.filter(s=>s.end>cut);return;}
+    const bufferedBytes=this.segments.reduce((s,v)=>s+v.bytes,0);this.stats.bufferedBytesUpperBound=bufferedBytes;this.stats.peakBufferedBytesUpperBound=Math.max(this.stats.peakBufferedBytesUpperBound,bufferedBytes);
+    if(this.pending){
+     const buffer=this.pending;this.pending=null;
+     if(buffer.byteLength){this.busy=true;this.receipt={bytes:buffer.byteLength,end:Infinity};this.segments.push(this.receipt);this.stats.fragments.push({bytes:buffer.byteLength,at:performance.now(),generation:this.generation});if(this.stats.fragments.length>256)this.stats.fragments.shift();this.sb.appendBuffer(buffer);return;}
+    }
+    const ahead=ranges.find(([a,b])=>now>=a&&now<=b)?.[1]-now||0;
++   if(this.eof&&!this.pending){this.media.endOfStream();return;}
+    if(!this.eof&&ahead<5&&bufferedBytes<12*1024*1024){this.busy=true;this.worker.postMessage({type:'next'});}
+   }catch(e){this.fail(String(e));}
+  }
+  fail(message){this.stats.errors.push(message);this.stopWorkers();}
+  stopWorkers(){
++  if(this.worker){(this.stats.cancellations??=[]).push({generatedBytes:this.remuxStats.generatedBytes||0,pendingBytes:this.pending?.byteLength||0,retainedCompressedBytesUpperBound:this.segments.reduce((n,s)=>n+s.bytes,0),sourceFetchedBytes:this.sourceStats.fetchedBytes||0,inFlightOutputUpperBound:8*1024*1024});if(this.stats.cancellations.length>64)this.stats.cancellations.shift();}
+   this.cancelWait?.(new DOMException('Superseded','AbortError'));this.cancelWait=null;
+   if(this.pending)this.stats.discardedBytes+=this.pending.byteLength;
+   if(this.mailbox){const h=new Int32Array(this.mailbox,0,16);Atomics.store(h,4,1);Atomics.store(h,0,3);Atomics.notify(h,0);}
+@@ -88,6 +92,6 @@ export class RemuxPlayer {
+  async seek(t){return this.restart(t);}
+  async play(){return this.video.play();}
+  pause(){this.video.pause();}
+- snapshot(){return {stats:structuredClone(this.stats),source:{...this.sourceStats},remux:{...this.remuxStats},ranges:this.ranges(),position:this.video.currentTime,quality:this.video.getVideoPlaybackQuality(),readyState:this.video.readyState,logs:this.logs,videoError:this.video.error?.message};}
++ snapshot(){return {stats:structuredClone(this.stats),source:{...this.sourceStats},remux:{...this.remuxStats},ranges:this.ranges(),timelineBias:this.timelineBias,position:Math.max(0,this.video.currentTime-this.timelineBias),quality:this.video.getVideoPlaybackQuality(),readyState:this.video.readyState,logs:this.logs,videoError:this.video.error?.message};}
+  async destroy(){this.stopped=true;++this.generation;clearInterval(this.timer);this.stopWorkers();this.video.pause();this.video.removeAttribute('src');this.video.load();if(this.objectURL)URL.revokeObjectURL(this.objectURL);}
+ }
+diff --git a/experiments/pipeline-separation/remux-worker.js b/experiments/pipeline-qualification/remux-worker.js
+index b13b9df..0fcb461 100644
+--- a/experiments/pipeline-separation/remux-worker.js
++++ b/experiments/pipeline-qualification/remux-worker.js
+@@ -2,14 +2,14 @@ import createRemux from '/experiment/remux-engine/remux.mjs';
+ let engine,chunks=[],bytes=0;
+ const stats={calls:0,remuxMs:0,generatedBytes:0,peakBatchBytes:0,heapBytes:0};
+ const flush=()=>{const output=new Uint8Array(bytes);let at=0;for(const b of chunks){output.set(b,at);at+=b.length;}chunks=[];bytes=0;stats.generatedBytes+=output.length;stats.peakBatchBytes=Math.max(stats.peakBatchBytes,output.length);return output;};
+-const check=n=>{if(n<0)throw Error(`FFmpeg error ${n}`);return n;};
++const check=n=>{if(n<0)throw Error(`FFmpeg error ${n}: ${engine.UTF8ToString(engine._rm_error())}`);return n;};
+ self.onmessage=async({data})=>{
+  try{
+   const start=performance.now();
+   if(data.type==='init'){
+    engine=await createRemux({printErr:message=>postMessage({type:'log',message})});engine.io=data.mailbox;engine.raps=[];
+    engine.emit=b=>{bytes+=b.length;if(bytes>8*1024*1024)throw Error('Fragment budget exceeded');chunks.push(b);};
+-   check(engine._rm_open(data.size));const duration=engine._rm_duration();
++   check(engine._rm_open(data.size,data.videoTrack??-1,data.audioTrack??-1));const duration=engine._rm_duration();
+    const mime=`video/mp4; codecs="${engine.UTF8ToString(engine._rm_video_codec())},${engine.UTF8ToString(engine._rm_audio_codec())}"`;
+    check(engine._rm_start(data.target||0));const buffer=flush().buffer;stats.remuxMs+=performance.now()-start;stats.heapBytes=engine.HEAPU8.byteLength;
+    postMessage({type:'ready',duration,mime,buffer,stats:{...stats}},[buffer]);
+@@ -17,5 +17,5 @@ self.onmessage=async({data})=>{
+    const more=check(engine._rm_step()),buffer=flush().buffer;stats.calls++;stats.remuxMs+=performance.now()-start;stats.heapBytes=engine.HEAPU8.byteLength;
+    const raps=engine.raps.splice(0);postMessage({type:'fragment',more,buffer,raps,stats:{...stats}},[buffer]);
+   }else if(data.type==='close'){engine?._rm_close();postMessage({type:'closed'});close();}
+- }catch(e){postMessage({type:'error',message:String(e.stack||e)});}
++ }catch(e){postMessage({type:'error',message:`${e.message||e}\n${e.stack||''}`});}
+ };
+diff --git a/experiments/pipeline-separation/remux.c b/experiments/pipeline-qualification/remux.c
+index 6fe69a7..fc46d2e 100644
+--- a/experiments/pipeline-separation/remux.c
++++ b/experiments/pipeline-qualification/remux.c
+@@ -6,14 +6,106 @@
+ #include <libavutil/mem.h>
+ #include <stdio.h>
+ #include <errno.h>
++#include <libavcodec/h264_parse.h>
++#include <libavutil/intreadwrite.h>
++static H264ParamSets ps;
++static int reorder,nal_size,is_avc,repair_dts;
++static int64_t pts_queue[17],last_dts[64];
++static uint8_t config_nals[64][4096];static int config_sizes[64],config_count;
++static char video_codec[32],audio_codec[32],failure[160];
++static int reject(const char *reason){snprintf(failure,sizeof(failure),"%s",reason);return AVERROR_INVALIDDATA;}
++EMSCRIPTEN_KEEPALIVE const char *rm_error(void){return failure;}
++static int visit_nal(const uint8_t*p,int n,int record){
++ if(n<=0)return 0;int type=p[0]&31;if(type!=7&&type!=8)return 0;
++ if(record){if(config_count>=64||n>4096)return reject("AVC parameter budget exceeded");memcpy(config_nals[config_count],p,n);config_sizes[config_count++]=n;return 0;}
++ for(int i=0;i<config_count;i++)if(config_sizes[i]==n&&!memcmp(p,config_nals[i],n))return 0;
++ return reject("Selected AVC configuration changed; new initialization required");
++}
++static int scan_nals(const uint8_t*p,int n,int length_size,int record){
++ if(length_size){for(int i=0;i<n;){if(n-i<length_size)return reject("Truncated AVC packet");unsigned len=0;for(int j=0;j<length_size;j++)len=(len<<8)|p[i++];if(len>(unsigned)(n-i))return reject("Invalid AVC packet framing");int r=visit_nal(p+i,len,record);if(r<0)return r;i+=len;}return 0;}
++ int start=-1;for(int i=0;i<n;i++){int prefix=i+3<n&&p[i]==0&&p[i+1]==0&&p[i+2]==0&&p[i+3]==1?4:i+2<n&&p[i]==0&&p[i+1]==0&&p[i+2]==1?3:0;if(prefix){if(start>=0){int r=visit_nal(p+start,i-start,record);if(r<0)return r;}start=i+prefix;i+=prefix-1;}}
++ return start>=0?visit_nal(p+start,n-start,record):0;
++}
++static int configure_video(AVCodecParameters*p){
++ if(!p->extradata_size)return reject("Missing AVC configuration");
++ ff_h264_ps_uninit(&ps);int r=ff_h264_decode_extradata(p->extradata,p->extradata_size,&ps,&is_avc,&nal_size,AV_EF_EXPLODE,NULL);if(r<0)return reject("Invalid AVC configuration");
++ const SPS*s=NULL;for(int i=0;i<MAX_SPS_COUNT;i++)if(ps.sps_list[i]){s=ps.sps_list[i];break;}
++ if(!s||s->bit_depth_luma!=8||s->chroma_format_idc!=1||!s->frame_mbs_only_flag)return reject("Unsupported AVC pixel format or interlacing");
++ if(s->profile_idc!=66&&s->profile_idc!=77&&s->profile_idc!=100)return reject("Unsupported AVC profile");
++ reorder=s->num_reorder_frames;if(reorder<0||reorder>16)return reject("AVC reorder budget exceeded");
++ if(repair_dts&&!s->bitstream_restriction_flag)return reject("MKV lacks explicit AVC reorder bound");
++ p->video_delay=reorder;
++ config_count=0;
++ if(is_avc){int i=6;for(int group=0;group<2;group++){if(group&&i>=p->extradata_size)return reject("Truncated avcC");int count=group?p->extradata[i++]:p->extradata[5]&31;while(count--){if(i+2>p->extradata_size)return reject("Truncated avcC");int n=AV_RB16(p->extradata+i);i+=2;if(i+n>p->extradata_size)return reject("Truncated avcC");r=visit_nal(p->extradata+i,n,1);if(r<0)return r;i+=n;}}}
++ else {r=scan_nals(p->extradata,p->extradata_size,0,1);if(r<0)return r;}
++ const uint8_t*header=NULL;for(int i=0;i<config_count;i++)if((config_nals[i][0]&31)==7&&config_sizes[i]>=4){header=config_nals[i];break;}
++ if(!header)return reject("AVC SPS unavailable");snprintf(video_codec,sizeof(video_codec),"avc1.%02X%02X%02X",header[1],header[2],header[3]);return 0;
++}
++static int configure_aac(AVCodecParameters*p,const uint8_t*adts,int n){
++ if(adts){
++  if(n<7||adts[0]!=255||(adts[1]&0xf6)!=0xf0)return reject("Invalid AAC ADTS framing");
++  int object=(adts[2]>>6)+1,freq=(adts[2]>>2)&15,channels=((adts[2]&1)<<2)|(adts[3]>>6);
++  if(object!=2||freq>=13||channels<1||channels>2||(adts[6]&3))return reject("Unsupported AAC ADTS configuration");
++  uint8_t asc[2]={(object<<3)|(freq>>1),((freq&1)<<7)|(channels<<3)};
++  if(p->extradata_size&&(p->extradata_size<2||memcmp(p->extradata,asc,2)))return reject("Selected AAC configuration changed");
++  if(!p->extradata_size){p->extradata=av_mallocz(2+AV_INPUT_BUFFER_PADDING_SIZE);if(!p->extradata)return AVERROR(ENOMEM);memcpy(p->extradata,asc,2);p->extradata_size=2;}
++ }
++ if(p->extradata_size<2)return reject("Missing AAC AudioSpecificConfig");
++ int object=p->extradata[0]>>3,freq=((p->extradata[0]&7)<<1)|(p->extradata[1]>>7),channels=(p->extradata[1]>>3)&15;
++ static const int rates[]={96000,88200,64000,48000,44100,32000,24000,22050,16000,12000,11025,8000,7350};
++ if(object!=2||freq>=13||channels<1||channels>2)return reject("Unsupported AAC profile or channel layout");
++ p->sample_rate=rates[freq];p->frame_size=1024;av_channel_layout_uninit(&p->ch_layout);av_channel_layout_default(&p->ch_layout,channels);snprintf(audio_codec,sizeof(audio_codec),"mp4a.40.%d",object);return 0;
++}
+ 
+ static AVFormatContext *in, *out;
+ static AVIOContext *input_io, *output_io;
+ static AVBSFContext *audio_bsf;
+ static AVPacket *packet;
+-static int video=-1,audio=-1,map[64],eof;
+-static int64_t position,total;
++static AVPacket *prefetch[256];static int prefetched,prefetch_at;
++static void clear_prefetch(void){for(int i=0;i<prefetched;i++)av_packet_free(&prefetch[i]);prefetched=prefetch_at=0;}
++static int video=-1,audio=-1,map[64],eof,is_ts,video_started;
++static int64_t position,total,aac_anchor,aac_count;
+ static double fragment_start,origin;
++static int idr(const AVPacket*q){
++ const uint8_t*p=q->data;int n=q->size;
++ if(is_avc){for(int i=0;i<n;){if(n-i<nal_size)return 0;unsigned size=0;for(int j=0;j<nal_size;j++)size=(size<<8)|p[i++];if(size>(unsigned)(n-i))return 0;if(size&&(p[i]&31)==5)return 1;i+=size;}}
++ else for(int i=0;i+3<n;i++)if(!p[i]&&!p[i+1]&&p[i+2]==1&&(p[i+3]&31)==5)return 1;
++ return 0;
++}
++static int repair_audio(AVPacket*q,int strict){
++ if(!strict&&q->pts!=AV_NOPTS_VALUE){aac_anchor=q->pts;aac_count=0;}
++ AVStream*src=in->streams[audio];
++ if(aac_anchor==AV_NOPTS_VALUE){if(q->pts==AV_NOPTS_VALUE)return reject("Missing initial AAC timestamp");aac_anchor=q->pts;}
++ int64_t expected=aac_anchor+av_rescale_q(aac_count*1024,(AVRational){1,src->codecpar->sample_rate},src->time_base);
++ if(q->pts==AV_NOPTS_VALUE)q->pts=expected;
++ else if(llabs(q->pts-expected)>av_rescale_q(2,(AVRational){1,1000},src->time_base))return reject("AAC timeline discontinuity");
++ q->dts=q->pts;q->duration=av_rescale_q(1024,(AVRational){1,src->codecpar->sample_rate},src->time_base);aac_count++;return 0;
++}
++// TS demux timestamp seeks can land after the desired IDR. Find and verify an
++// IDR at or before the target, with bounded backward retries and packet scanning.
++static int seek_ts(double target){
++ for(int back=2;back<=32;back*=2){
++  clear_prefetch();aac_anchor=AV_NOPTS_VALUE;aac_count=0;double point=target>back?target-back:0;
++  int r=point>0?av_seek_frame(in,video,(int64_t)((point+origin)/av_q2d(in->streams[video]->time_base)),AVSEEK_FLAG_BACKWARD):av_seek_frame(in,-1,0,AVSEEK_FLAG_BYTE|AVSEEK_FLAG_BACKWARD);
++  if(r<0)return reject("Source seek failed or discontinuous timeline");avformat_flush(in);
++  r=configure_aac(in->streams[audio]->codecpar,NULL,0);if(r<0)return r;
++  int bytes=0,found=0;
++  for(int count=0;count<4096;count++){
++   AVPacket*q=av_packet_alloc();r=av_read_frame(in,q);if(r<0){av_packet_free(&q);break;}bytes+=q->size;
++   if(bytes>16*1024*1024){av_packet_free(&q);return reject("TS random-access scan budget exceeded");}
++   if(q->stream_index==audio&&(aac_anchor!=AV_NOPTS_VALUE||q->pts!=AV_NOPTS_VALUE)){r=repair_audio(q,0);if(r<0){av_packet_free(&q);return r;}}
++   if(q->stream_index==video&&idr(q)){
++    double at=q->pts*av_q2d(in->streams[video]->time_base)-origin;found=1;
++    if(q->pts!=AV_NOPTS_VALUE&&at<=target+.001){prefetch[0]=q;prefetched=1;return 0;}
++    av_packet_free(&q);break;
++   }
++   av_packet_free(&q);
++  }
++  if(!point&&!found)break;
++ }
++ return reject("No preceding IDR within the bounded TS seek window");
++}
++
+ 
+ EM_JS(int, source_read, (uint8_t *dst, int count, double offset), {
+  const h=new Int32Array(Module.io,0,16),v=new DataView(Module.io);
+@@ -45,9 +137,9 @@ static void close_output(void){
+  if(output_io){av_freep(&output_io->buffer);avio_context_free(&output_io);}
+  av_bsf_free(&audio_bsf);
+ }
+-EMSCRIPTEN_KEEPALIVE void rm_close(void){close_output();if(in)avformat_close_input(&in);if(input_io){av_freep(&input_io->buffer);avio_context_free(&input_io);}av_packet_free(&packet);}
+-EMSCRIPTEN_KEEPALIVE int rm_open(double size){
+- rm_close();av_max_alloc(16*1024*1024);total=(int64_t)size;position=0;
++EMSCRIPTEN_KEEPALIVE void rm_close(void){clear_prefetch();ff_h264_ps_uninit(&ps);close_output();if(in)avformat_close_input(&in);if(input_io){av_freep(&input_io->buffer);avio_context_free(&input_io);}av_packet_free(&packet);}
++EMSCRIPTEN_KEEPALIVE int rm_open(double size,int selected_video,int selected_audio){
++ rm_close();failure[0]=0;av_max_alloc(16*1024*1024);total=(int64_t)size;position=0;
+  input_io=avio_alloc_context(av_malloc(65536),65536,0,NULL,read_cb,NULL,seek_cb);
+  if(!input_io)return AVERROR(ENOMEM);
+  in=avformat_alloc_context();in->pb=input_io;in->flags|=AVFMT_FLAG_CUSTOM_IO;
+@@ -57,25 +149,39 @@ EMSCRIPTEN_KEEPALIVE int rm_open(double size){
+  ret=avformat_find_stream_info(in,NULL);if(ret<0)return ret;
+  video=av_find_best_stream(in,AVMEDIA_TYPE_VIDEO,-1,-1,NULL,0);
+  audio=av_find_best_stream(in,AVMEDIA_TYPE_AUDIO,-1,-1,NULL,0);
+- if(video<0||audio<0)return AVERROR(EINVAL);
++ if(video<0)for(unsigned i=0;i<in->nb_streams;i++)if(in->streams[i]->codecpar->codec_type==AVMEDIA_TYPE_VIDEO){video=i;break;}
++ if(audio<0)for(unsigned i=0;i<in->nb_streams;i++)if(in->streams[i]->codecpar->codec_type==AVMEDIA_TYPE_AUDIO){audio=i;break;}
++ if(selected_video>=0)video=selected_video;if(selected_audio>=0)audio=selected_audio;
++ if(video<0||audio<0||video>=in->nb_streams||audio>=in->nb_streams)return reject("Invalid selected tracks");
+  // Narrow positive admission, rather than pretending every FFmpeg format is MSE-ready.
+- if(in->streams[video]->codecpar->codec_id!=AV_CODEC_ID_H264||in->streams[audio]->codecpar->codec_id!=AV_CODEC_ID_AAC)return AVERROR(ENOSYS);
++ if(in->streams[video]->codecpar->codec_id!=AV_CODEC_ID_H264||in->streams[audio]->codecpar->codec_id!=AV_CODEC_ID_AAC)return reject("Selected tracks require AVC and AAC");
++ repair_dts=strstr(in->iformat->name,"matroska")!=NULL;is_ts=strstr(in->iformat->name,"mpegts")!=NULL;
++ int r=configure_video(in->streams[video]->codecpar);if(r<0)return r;
++ AVCodecParameters*ap=in->streams[audio]->codecpar;
++ if(strstr(in->iformat->name,"mpegts")){
++  int bytes=0,found=0;
++  for(int i=0;i<256;i++){AVPacket*q=av_packet_alloc();r=av_read_frame(in,q);if(r<0){av_packet_free(&q);return r;}prefetch[prefetched++]=q;bytes+=q->size;if(bytes>2*1024*1024)return reject("AAC probe budget exceeded");if(q->stream_index==audio){r=configure_aac(ap,q->data,q->size);if(r<0)return r;found=1;break;}}
++  if(!found)return reject("AAC configuration probe exhausted");
++ }else {r=configure_aac(ap,NULL,0);if(r<0)return r;}
+  origin=in->start_time==AV_NOPTS_VALUE?0:in->start_time/(double)AV_TIME_BASE;
++ if(repair_dts){
++  int seen_v=0,seen_a=0,bytes=0;double first=1e30;
++  for(int i=0;i<256;i++){AVPacket*q=av_packet_alloc();r=av_read_frame(in,q);if(r<0){av_packet_free(&q);return r;}prefetch[prefetched++]=q;bytes+=q->size;if(bytes>2*1024*1024)return reject("Timeline probe budget exceeded");
++   if((q->stream_index==video||q->stream_index==audio)&&q->pts!=AV_NOPTS_VALUE){double t=q->pts*av_q2d(in->streams[q->stream_index]->time_base);if(t<first)first=t;if(q->stream_index==video)seen_v=1;else seen_a=1;}if(seen_v&&seen_a)break;
++  }
++  if(!seen_v||!seen_a)return reject("Selected timeline origin unavailable");origin=first;
++ }
+  packet=av_packet_alloc();return 0;
+ }
+ EMSCRIPTEN_KEEPALIVE double rm_duration(void){return in&&in->duration!=AV_NOPTS_VALUE?in->duration/(double)AV_TIME_BASE:0;}
+-EMSCRIPTEN_KEEPALIVE const char *rm_video_codec(void){
+- static char codec[64];AVCodecParameters *p=in->streams[video]->codecpar;
+- if(p->extradata_size>=4&&p->extradata[0]==1)snprintf(codec,sizeof(codec),"avc1.%02X%02X%02X",p->extradata[1],p->extradata[2],p->extradata[3]);
+- else snprintf(codec,sizeof(codec),"avc1.640028"); // TS fixture only; recorded experimental limit.
+- return codec;
+-}
+-EMSCRIPTEN_KEEPALIVE const char *rm_audio_codec(void){return "mp4a.40.2";}
++EMSCRIPTEN_KEEPALIVE const char *rm_video_codec(void){return video_codec;}
++EMSCRIPTEN_KEEPALIVE const char *rm_audio_codec(void){return audio_codec;}
+ EMSCRIPTEN_KEEPALIVE int rm_start(double target){
+- close_output();eof=0;fragment_start=-1;
+- if(target>0){int r=av_seek_frame(in,video,(int64_t)((target+origin)/av_q2d(in->streams[video]->time_base)),AVSEEK_FLAG_BACKWARD);if(r<0)return r;avformat_flush(in);}
+- else if(position>0&&target<0){int r=av_seek_frame(in,video,(int64_t)(origin/av_q2d(in->streams[video]->time_base)),AVSEEK_FLAG_BACKWARD);if(r<0)return r;avformat_flush(in);}
+- int r=avformat_alloc_output_context2(&out,NULL,"mp4",NULL);if(r<0)return r;
++ close_output();eof=0;video_started=0;fragment_start=-1;aac_anchor=AV_NOPTS_VALUE;aac_count=0;for(int i=0;i<17;i++)pts_queue[i]=AV_NOPTS_VALUE;for(int i=0;i<64;i++)last_dts[i]=AV_NOPTS_VALUE;
++ if(target>0){if(is_ts){int r=seek_ts(target);if(r<0)return r;}else{clear_prefetch();int r=av_seek_frame(in,video,(int64_t)((target+origin)/av_q2d(in->streams[video]->time_base)),AVSEEK_FLAG_BACKWARD);if(r<0)return reject("Source seek failed or discontinuous timeline");avformat_flush(in);}}
++ else if(position>0&&target<0){int r=av_seek_frame(in,video,(int64_t)(origin/av_q2d(in->streams[video]->time_base)),AVSEEK_FLAG_BACKWARD);if(r<0)return reject("Source seek failed or discontinuous timeline");avformat_flush(in);}
++ int r=configure_aac(in->streams[audio]->codecpar,NULL,0);if(r<0)return r;
++ r=avformat_alloc_output_context2(&out,NULL,"mp4",NULL);if(r<0)return r;
+  output_io=avio_alloc_context(av_malloc(65536),65536,1,NULL,NULL,write_cb,NULL);if(!output_io)return AVERROR(ENOMEM);
+  out->pb=output_io;out->flags|=AVFMT_FLAG_CUSTOM_IO;out->avoid_negative_ts=AVFMT_AVOID_NEG_TS_DISABLED;
+  for(int i=0;i<64;i++)map[i]=-1;
+@@ -99,14 +205,25 @@ EMSCRIPTEN_KEEPALIVE int rm_start(double target){
+ EMSCRIPTEN_KEEPALIVE int rm_step(void){
+  if(eof)return 0;
+  for(int count=0;count<20000;count++){
+-  int r=av_read_frame(in,packet);
+-  if(r==AVERROR_EOF){av_write_trailer(out);avio_flush(output_io);eof=1;return 0;}
++  int r;if(prefetch_at<prefetched){av_packet_move_ref(packet,prefetch[prefetch_at++]);r=0;}else r=av_read_frame(in,packet);
++  if(r==AVERROR_EOF){int t=av_write_trailer(out);if(t<0)return t;avio_flush(output_io);eof=1;return 0;}
+   if(r<0)return r;
+   int idx=packet->stream_index;
+   if(idx>=64||map[idx]<0){av_packet_unref(packet);continue;}
+-  if(idx==audio&&audio_bsf){r=av_bsf_send_packet(audio_bsf,packet);if(r<0)return r;r=av_bsf_receive_packet(audio_bsf,packet);if(r<0)return r;}
++  if(idx==audio&&audio_bsf){r=configure_aac(in->streams[audio]->codecpar,packet->data,packet->size);if(r<0)return r;r=av_bsf_send_packet(audio_bsf,packet);if(r<0)return r;r=av_bsf_receive_packet(audio_bsf,packet);if(r<0)return r;}
+   AVStream *src=in->streams[idx],*dst=out->streams[map[idx]];
+-  if(idx==video&&(packet->flags&AV_PKT_FLAG_KEY)&&packet->pts!=AV_NOPTS_VALUE)note_rap(packet->pts*av_q2d(src->time_base)-origin);
++  if(idx==audio&&audio_bsf){r=repair_audio(packet,1);if(r<0)return r;}
++  if(packet->pts==AV_NOPTS_VALUE)return reject("Missing selected packet PTS");
++  if(idx==video){if(!video_started&&!idr(packet))return reject("Selected video must begin at an IDR");video_started=1;r=scan_nals(packet->data,packet->size,is_avc?nal_size:0,0);if(r<0)return r;
++   if(repair_dts){
++    if(pts_queue[0]==AV_NOPTS_VALUE){if(packet->duration<=0)return reject("Missing initial MKV packet duration");for(int j=0;j<reorder;j++)pts_queue[j]=packet->pts-(reorder-j)*packet->duration;}
++    pts_queue[reorder]=packet->pts;for(int j=reorder;j>0&&pts_queue[j]<pts_queue[j-1];j--){int64_t t=pts_queue[j];pts_queue[j]=pts_queue[j-1];pts_queue[j-1]=t;}
++    packet->dts=pts_queue[0];for(int j=0;j<reorder;j++)pts_queue[j]=pts_queue[j+1];
++   }
++  }
++  if(packet->dts==AV_NOPTS_VALUE)return reject("Missing selected packet DTS");
++  if(last_dts[idx]!=AV_NOPTS_VALUE&&packet->dts<=last_dts[idx])return reject("Selected timeline discontinuity");last_dts[idx]=packet->dts;
++  if(idx==video&&idr(packet)&&packet->pts!=AV_NOPTS_VALUE)note_rap(packet->pts*av_q2d(src->time_base)-origin);
+   double time=packet->dts==AV_NOPTS_VALUE?0:packet->dts*av_q2d(src->time_base)-origin;
+   if(fragment_start<0)fragment_start=time;
+   // Preserve the source timeline, including PTS-DTS reordering and A/V offsets.
+diff --git a/experiments/pipeline-separation/run.mjs b/experiments/pipeline-qualification/run.mjs
+index 5d9302e..7a00bbe 100644
+--- a/experiments/pipeline-separation/run.mjs
++++ b/experiments/pipeline-qualification/run.mjs
+@@ -7,7 +7,7 @@ import {serve} from './server.mjs';
+ import {focusForQualification,observeForeground} from '../../scripts/qualification-foreground.mjs';
+ const smoke=process.env.SMOKE==='1',variants=(process.env.VARIANTS||'native,remux,software,yuv,yuv,software,remux,native').split(',');
+ const media=process.env.MEDIA||'movie',target=Number(process.env.TARGET||0),measure=Number(process.env.MEASURE||30),warmup=Number(process.env.WARMUP||8);
+-const out=`results/pipeline-separation/${smoke?'smoke':'visible'}-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);
++const out=`results/pipeline-qualification/${smoke?'smoke':'visible'}-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);
+ const host={platform:os.platform(),arch:os.arch(),cpu:os.cpus()[0].model,memory:os.totalmem(),power:execFileSync('pmset',['-g','batt'],{encoding:'utf8'})};
+ const result={scope:smoke?'headless correctness only':'foreground visible playback; CDP browser process CPU excludes WindowServer/VideoToolbox/HTTP origin',host,variants,media,target,warmup,measure,trials:[]};
+ const server=await serve();
+@@ -17,6 +17,7 @@ try{
+  for(const [index,variant] of variants.entries()){
+   const t={variant,index,samples:[]};result.trials.push(t);console.log('Starting',index,variant);
+   const browser=await chromium.launch({channel:'chrome',headless:smoke,ignoreDefaultArgs:['--mute-audio'],args:['--autoplay-policy=no-user-gesture-required','--disable-background-timer-throttling','--disable-renderer-backgrounding','--disable-backgrounding-occluded-windows']});
++  t.browserVersion=browser.version();
+   let page;
+   try{
+    page=await browser.newPage({viewport:{width:1100,height:700},deviceScaleFactor:1});page.setDefaultTimeout(30000);page.on('pageerror',e=>(t.pageErrors??=[]).push(String(e)));
+@@ -31,7 +32,7 @@ try{
+    const sample=async()=>{
+     const processes=(await cdp.send('SystemInfo.getProcessInfo')).processInfo;
+     const rss=execFileSync('/bin/ps',['-o','rss=','-p',processes.map(p=>p.id).join(',')],{encoding:'utf8'}).trim().split(/\s+/).map(Number).reduce((a,b)=>a+b,0)*1024;
+-    const s={at:Date.now(),processes,rss,state:await page.evaluate(()=>snapshot())};if(!smoke)s.foreground=await observeForeground(page,browser);t.samples.push(s);return s;
++    const s={at:Date.now(),processes,rss,state:await page.evaluate(()=>snapshot())};if(!smoke)s.foreground=await observeForeground(page,browser);t.samples.push(s);if(measure>=60&&t.samples.length%30===0)console.log('Progress',variant,JSON.stringify({position:s.state.position,rssMiB:rss/1048576,frames:s.state.frames,drops:s.state.drops,bufferedSeconds:s.state.remux?.stats.peakBufferedSeconds,bufferedBytes:s.state.remux?.stats.bufferedBytesUpperBound}));return s;
+    };
+    const first=await sample();let last=first;while(last.at-first.at<measure*1000){await page.waitForTimeout(Math.max(1,Math.min(1000,measure*1000-(Date.now()-first.at))));last=await sample();}
+    let cpu=0;t.churn=[];for(let i=1;i<t.samples.length;i++){const a=new Map(t.samples[i-1].processes.map(p=>[p.id,p.cpuTime])),b=new Map(t.samples[i].processes.map(p=>[p.id,p.cpuTime]));for(const[id,v]of b){if(a.has(id))cpu+=v-a.get(id);else t.churn.push(id);}for(const id of a.keys())if(!b.has(id))t.churn.push(id);}
+diff --git a/experiments/pipeline-qualification/seek-stress.mjs b/experiments/pipeline-qualification/seek-stress.mjs
+new file mode 100644
+index 0000000..ed7cbf9
+--- /dev/null
++++ b/experiments/pipeline-qualification/seek-stress.mjs
+@@ -0,0 +1,28 @@
++import {chromium} from 'playwright';
++import {mkdir,writeFile} from 'node:fs/promises';
++import assert from 'node:assert/strict';
++import {serve} from './server.mjs';
++const out=`results/pipeline-qualification/seek-stress-${new Date().toISOString().replaceAll(':','-')}`;
++await mkdir(out,{recursive:true});console.log(out);
++const server=await serve(),result={cases:[]};
++try {
++ for(const filters of ['format=yuv444p','hflip,eq=brightness=0.1','']) {
++  const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
++  const r={filters,browserVersion:browser.version(),seeks:[]};result.cases.push(r);
++  const page=await browser.newPage();page.setDefaultTimeout(30000);
++  try {
++   await page.goto(server.origin+'/experiment/page.html');
++   await page.evaluate(o=>start(o),{variant:'yuv',url:server.origin+'/media/movie?delay=15',filters});
++   await page.evaluate(()=>player.pause());
++   for(const target of [3,400,1,237,500,30,2,480,7,236,1,350,5,400,2,238,8,510,3,450]) {
++    const begun=Date.now();await page.evaluate(t=>player.seek(t),target);
++    await page.waitForFunction(t=>Math.abs(snapshot().diagnostics.yuv.lastPts-t)<.15,target);
++    const state=await page.evaluate(()=>snapshot());assert.deepEqual(state.errors,[]);
++    r.seeks.push({target,ms:Date.now()-begun,state});
++   }
++   await page.evaluate(()=>stop());await page.waitForTimeout(200);r.workersAfter=page.workers().length;
++   assert.equal(r.workersAfter,0);r.passed=true;
++  }catch(e){r.error=String(e.stack);r.failureState=await page.evaluate(()=>snapshot()).catch(()=>null);process.exitCode=1;}
++  finally{await browser.close();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
++ }
++}finally{await server.close();result.passed=result.cases.every(c=>c.passed);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');console.log(out,result.passed);}
+diff --git a/experiments/pipeline-separation/server.mjs b/experiments/pipeline-qualification/server.mjs
+index dfab16a..e2af09e 100644
+--- a/experiments/pipeline-separation/server.mjs
++++ b/experiments/pipeline-qualification/server.mjs
+@@ -5,10 +5,12 @@ import {createReadStream} from 'node:fs';
+ export async function serve(){
+  const root=process.cwd(),cache=new Map(),states=new Map();
+  const media={movie:'build/fixtures/playback-performance/bbb-stream.mp4',mkv:'build/pipeline-separation/fixtures/movie.mkv',tail:'build/pipeline-separation/fixtures/tail.mp4',sample:'build/hybrid-performance/sample.mp4',animated:'build/fixtures/tracks.mkv',ass:'build/fixtures/playback-performance/sample-ass.mkv',long:'build/pipeline-separation/fixtures/long.mp4',ts:'build/pipeline-separation/fixtures/config-0.ts',config:'build/pipeline-separation/fixtures/config.ts',offset:'build/pipeline-separation/fixtures/offset.mkv',rotation:'build/pipeline-separation/fixtures/rotation.mp4',sar:'build/pipeline-separation/fixtures/sar.mp4',tenbit:'build/fixtures/playback-performance/h264-10bit.mkv',bt601:'build/fixtures/playback-performance/h264-consistent-601.mp4',bt709:'build/fixtures/playback-performance/h264-consistent-709.mp4'};
++ for(const name of ['color-bt709-0','color-bt709-1','color-smpte170m-0','color-smpte170m-1','sync'])media[name]='build/pipeline-qualification/fixtures/'+name+(name==='sync'?'.mp4':'-v2.mkv');
++ media.longts='build/pipeline-qualification/fixtures/long.ts';media.edit='build/pipeline-qualification/fixtures/edit.mp4';media.syncmkv='build/pipeline-qualification/fixtures/sync.mkv';media.offsetmp4='build/pipeline-qualification/fixtures/offset.mp4';
+  const server=http.createServer(async(req,res)=>{
+   res.setHeader('Cross-Origin-Opener-Policy','same-origin');res.setHeader('Cross-Origin-Embedder-Policy','require-corp');res.setHeader('Cross-Origin-Resource-Policy','same-origin');res.setHeader('Cache-Control','no-store');
+   try{
+-   const u=new URL(req.url,'http://localhost');
++   const u=new URL(req.url,'http://localhost');if(u.searchParams.get('cors')==='allow'){res.setHeader('Access-Control-Allow-Origin',req.headers.origin||'*');res.setHeader('Access-Control-Allow-Headers','Authorization, Range, If-Range');res.setHeader('Access-Control-Expose-Headers','Content-Range, ETag, Content-Length');if(req.method==='OPTIONS'){res.writeHead(204).end();return;}}
+    if(u.pathname==='/stats'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify(Object.fromEntries(states)));return;}
+    if(u.pathname.startsWith('/media/')){
+     const name=u.pathname.split('/')[2],f=media[name];if(!f){res.writeHead(404).end();return;}
+@@ -17,19 +19,21 @@ export async function serve(){
+     if(req.headers.range){const m=/^bytes=(\d+)-(\d*)$/.exec(req.headers.range);if(!m){res.writeHead(416).end();return;}a=Number(m[1]);if(m[2])b=Math.min(b,Number(m[2]));if(a>b){res.writeHead(416).end();return;}code=206;res.setHeader('Content-Range',`bytes ${a}-${b}/${info.size}`);}
+     state.requests++;state.ranges.push({a,b});state.active++;let done=false;
+     res.on('close',()=>{state.active--;if(!done)state.aborted++;});
++    if(u.searchParams.has('auth')&&state.requests>1&&req.headers.authorization!=='Bearer refreshed'){res.writeHead(401).end();return;}
+     if(u.searchParams.get('retry')==='1'&&state.requests===2){res.writeHead(503).end();return;}
+     if(u.searchParams.has('delay'))await new Promise(r=>setTimeout(r,Number(u.searchParams.get('delay'))));
+-    res.writeHead(code,{'Content-Type':f.endsWith('.mkv')?'video/x-matroska':f.endsWith('.ts')?'video/mp2t':'video/mp4','Content-Length':b-a+1,'Accept-Ranges':'bytes','ETag':`"${info.size}-${info.mtimeMs}"`});
++    res.writeHead(code,{'Content-Type':f.endsWith('.mkv')?'video/x-matroska':f.endsWith('.ts')?'video/mp2t':'video/mp4','Content-Length':b-a+1,'Accept-Ranges':'bytes','ETag':u.searchParams.has('changed')&&state.requests>2?'"changed-source"':`"${info.size}-${info.mtimeMs}"`});
++    if(u.searchParams.has('truncate')&&state.requests===Number(u.searchParams.get('truncate')||2)){const bytes=(await readFile(f)).subarray(a,a+Math.min(4096,b-a+1));res.write(bytes);setTimeout(()=>res.destroy(),20);return;}
+     const stream=createReadStream(f,{start:a,end:b,highWaterMark:65536});res.on('close',()=>stream.destroy());stream.on('data',v=>state.bytes+=v.length);stream.on('end',()=>done=true);stream.pipe(res);return;
+    }
+    let file;
+-   if(u.pathname==='/experiment/page.html')file='experiments/pipeline-separation/page.html';
+-   else if(u.pathname.startsWith('/experiment/remux-engine/'))file='build/pipeline-separation/remux/'+u.pathname.split('/').at(-1);
+-   else if(u.pathname.startsWith('/experiment/yuv-engine/'))file='build/pipeline-separation/yuv/'+u.pathname.split('/').at(-1);
+-   else if(u.pathname.startsWith('/experiment/'))file='experiments/pipeline-separation/'+u.pathname.slice('/experiment/'.length);
++   if(u.pathname==='/experiment/page.html')file='experiments/pipeline-qualification/page.html';
++   else if(u.pathname.startsWith('/experiment/remux-engine/'))file='build/pipeline-qualification/remux/'+u.pathname.split('/').at(-1);
++   else if(u.pathname.startsWith('/experiment/yuv-engine/'))file='build/pipeline-qualification/yuv/'+u.pathname.split('/').at(-1);
++   else if(u.pathname.startsWith('/experiment/'))file='experiments/pipeline-qualification/'+u.pathname.slice('/experiment/'.length);
+    else{
+     const match=/^\/(baseline|yuv|native|hybrid)\/(web|fixtures)\/(.*)$/.exec(u.pathname);
+-    if(match){file=match[2]+'/'+match[3];if(match[1]==='yuv'&&file==='web/software-full-engine-worker.js')file='build/pipeline-separation/yuv/worker.js';}
++    if(match){file=match[2]+'/'+match[3];if(match[1]==='yuv'&&file==='web/io-worker.js')file='experiments/pipeline-qualification/io-worker.js';if(match[1]==='yuv'&&file==='web/software-full-engine-worker.js')file='build/pipeline-qualification/yuv/worker.js';}
+     else if(u.pathname.startsWith('/web/')||u.pathname.startsWith('/fixtures/'))file=u.pathname.slice(1);
+     else {res.writeHead(404).end();return;}
+    }
+diff --git a/experiments/pipeline-separation/source-worker.js b/experiments/pipeline-qualification/source-worker.js
+index e74467d..7fb5bdf 100644
+--- a/experiments/pipeline-separation/source-worker.js
++++ b/experiments/pipeline-qualification/source-worker.js
+@@ -1,7 +1,9 @@
+ import {RangeReader} from '/web/range-reader.js';
+ let reader,file,h,view,buffer,stopped=false;
++let refreshPending;
+ let localStats={fetchedBytes:0,requests:0,cacheBytes:0,peakCacheBytes:0,peakActiveBytes:0};
+ self.onmessage=async({data})=>{
++ if(data.type==='refreshed'){const p=refreshPending;refreshPending=null;clearTimeout(p?.timer);if(p)data.error?p.reject(Error(data.error)):p.resolve(data.update);return;}
+  if(data.type==='close'){stopped=true;reader?.close();if(h){Atomics.store(h,4,1);Atomics.store(h,0,3);Atomics.notify(h,0);}return;}
+  if(data.type!=='init')return;
+  try{
+@@ -9,10 +11,10 @@ self.onmessage=async({data})=>{
+   file=data.file;
+   let size;
+   if(file)size=file.size;
+-  else{reader=new RangeReader({...data.options,cacheBytes:2*1024*1024,blockBytes:65536});size=Number((await reader.open()).size);}
++  else{reader=new RangeReader({...data.options,cacheBytes:2*1024*1024,blockBytes:65536},()=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Authorization refresh timeout')),5000);refreshPending={resolve,reject,timer};postMessage({type:'refresh'});}));size=Number((await reader.open()).size);}
+   postMessage({type:'ready',size});
+   while(!stopped){
+-   if(Atomics.load(h,0)!==1){await Atomics.waitAsync(h,0,Atomics.load(h,0),100).value;continue;}
++   if(Atomics.load(h,0)!==1){if(Atomics.waitAsync)await Atomics.waitAsync(h,0,Atomics.load(h,0),100).value;else await new Promise(r=>setTimeout(r,4));continue;}
+    const offset=view.getFloat64(32,true),n=Atomics.load(h,2);let bytes;
+    if(file){bytes=new Uint8Array(await file.slice(offset,offset+n).arrayBuffer());localStats.fetchedBytes+=bytes.length;localStats.requests++;localStats.peakActiveBytes=Math.max(localStats.peakActiveBytes,bytes.length);}
+    else bytes=await reader.read(BigInt(offset),n);
+diff --git a/experiments/pipeline-qualification/stream-bridge.c b/experiments/pipeline-qualification/stream-bridge.c
+new file mode 100644
+index 0000000..baa9f30
+--- /dev/null
++++ b/experiments/pipeline-qualification/stream-bridge.c
+@@ -0,0 +1,135 @@
++#include "stream_bridge.h"
++#include <mpv/stream_cb.h>
++#include <emscripten.h>
++#include <emscripten/threading.h>
++#include <stdlib.h>
++#include <string.h>
++#include <stddef.h>
++#include <pthread.h>
++#include <libavformat/avformat.h>
++#include <libavutil/mem.h>
++#include <errno.h>
++#include <stdio.h>
++struct web_io_mailbox web_io;
++_Static_assert(offsetof(struct web_io_mailbox,data)==64,"IO mailbox ABI");
++_Static_assert(offsetof(struct web_io_mailbox,resource)==262208,"Resource mailbox ABI");
++_Static_assert(offsetof(struct web_io_mailbox,url)==262232,"Resource URL mailbox ABI");
++struct source {int session,resource;int64_t position,total,start,end;};
++static pthread_mutex_t mailbox_lock=PTHREAD_MUTEX_INITIALIZER;
++static int root_resource;
++static char root_url[4096];
++EMSCRIPTEN_KEEPALIVE void web_io_root(int id,const char *url){root_resource=id;snprintf(root_url,sizeof(root_url),"%s",url?url:"");}
++const char *web_resource_url(void){return root_resource?root_url:NULL;}
++static void wake(void){emscripten_futex_wake((void*)&web_io.state,100);}
++EMSCRIPTEN_KEEPALIVE uintptr_t web_io_ptr(void){return (uintptr_t)&web_io;}
++EMSCRIPTEN_KEEPALIVE void web_io_configure(int session,int64_t size){
++    atomic_store(&web_io.cancelled,0);atomic_store(&web_io.interrupt,0);
++    atomic_store(&web_io.state,0);atomic_store(&web_io.session,session);
++    web_io.total=size;wake();
++}
++EMSCRIPTEN_KEEPALIVE int web_io_interrupt(int serial){
++    int ticket=serial*8+1;
++    // Reserve this exact pending ticket before advancing its epoch. The demux
++    // thread must not publish its next request until the epoch is committed.
++    if(!atomic_compare_exchange_strong(&web_io.state,&ticket,serial*8+4))return 0;
++    atomic_fetch_add(&web_io.epoch,1);
++    atomic_fetch_add(&web_io.interruptions,1);
++    atomic_store(&web_io.state,serial*8+3);wake();return 1;
++}
++EMSCRIPTEN_KEEPALIVE void web_io_cancel(void){atomic_store(&web_io.cancelled,1);wake();}
++static int transact(int operation){
++    atomic_store(&web_io.reserved,operation);
++    int ticket=(atomic_fetch_add(&web_io.serial,1)+1)*8+1;
++    atomic_store(&web_io.state,ticket);wake();
++    while(atomic_load(&web_io.state)==ticket||atomic_load(&web_io.state)==ticket+3){
++        if(atomic_load(&web_io.cancelled)){
++            atomic_fetch_add(&web_io.interruptions,1);atomic_store(&web_io.state,0);wake();return -1;
++        }
++        emscripten_futex_wait((void*)&web_io.state,ticket,100);
++    }
++    int result=atomic_load(&web_io.state)==ticket+1?atomic_load(&web_io.result):-1;
++    atomic_store(&web_io.state,0);wake();return result;
++}
++static int64_t read_locked(void *cookie,char *buffer,uint64_t capacity){
++    struct source *source=cookie;
++    if(atomic_load(&web_io.cancelled)||source->session!=atomic_load(&web_io.session))return -1;
++    if(source->position>=source->total)return 0;
++    if(capacity>WEB_IO_CAPACITY)capacity=WEB_IO_CAPACITY;
++    atomic_store(&web_io.capacity,capacity);web_io.offset=source->position;
++    web_io.resource=source->resource;atomic_fetch_add(&web_io.reads,1);
++    if(source->end>=0&&source->position>=source->end)return 0;
++    int result=transact(source->resource?2:0);
++    if(result<0||result>(int)capacity)result=-1;
++    if(result>0){memcpy(buffer,web_io.data,result);source->position+=result;}
++    atomic_store(&web_io.state,0);wake();return result;
++}
++static int64_t read_data(void *cookie,char *buffer,uint64_t capacity){
++    pthread_mutex_lock(&mailbox_lock);int64_t r=read_locked(cookie,buffer,capacity);
++    pthread_mutex_unlock(&mailbox_lock);return r;
++}
++static int64_t seek_data(void *cookie,int64_t position){
++    struct source *source=cookie;
++    if(position<source->start||atomic_load(&web_io.cancelled))return MPV_ERROR_GENERIC;
++    atomic_store(&web_io.interrupt,0);atomic_fetch_add(&web_io.seeks,1);
++    source->position=position;return position;
++}
++static int64_t size_data(void *cookie){return ((struct source*)cookie)->total;}
++static void cancel_data(void *cookie){web_io_cancel();}
++static void close_data(void *cookie){
++    struct source *source=cookie;
++    if(source->resource&&!atomic_load(&web_io.cancelled)&&source->session==atomic_load(&web_io.session)){
++        pthread_mutex_lock(&mailbox_lock);web_io.resource=source->resource;transact(3);pthread_mutex_unlock(&mailbox_lock);
++    }
++    free(cookie);
++}
++static int open_data(void *unused,char *uri,mpv_stream_cb_info *info){
++    if(strcmp(uri,"brange://source")||web_io.total<=0)return MPV_ERROR_LOADING_FAILED;
++    struct source *source=calloc(1,sizeof(*source));if(!source)return MPV_ERROR_NOMEM;
++    source->session=atomic_load(&web_io.session);source->total=web_io.total;source->resource=root_resource;source->end=-1;
++    *info=(mpv_stream_cb_info){.cookie=source,.read_fn=read_data,.seek_fn=seek_data,.size_fn=size_data,.cancel_fn=cancel_data,.close_fn=close_data};return 0;
++}
++int web_register_stream(mpv_handle *player){return mpv_stream_cb_add_ro(player,"brange",NULL,open_data);}
++
++// Called exclusively from mpv's nested AVIO seam, on its demux pthread.
++static int avio_read_resource(void *cookie,uint8_t *buffer,int size){
++    int n=read_data(cookie,(char*)buffer,size);return n>0?n:n==0?AVERROR_EOF:AVERROR(EIO);
++}
++static int64_t avio_seek_resource(void *cookie,int64_t offset,int whence){
++    struct source *source=cookie;
++    if(whence==AVSEEK_SIZE)return source->total;
++    whence &= ~AVSEEK_FORCE;
++    int64_t base=whence==SEEK_SET?0:whence==SEEK_CUR?source->position:whence==SEEK_END?source->total:-1;
++    if(base<0||(offset>0&&base>INT64_MAX-offset)||(offset<0&&offset< -base))return AVERROR(EINVAL);
++    int64_t position=base+offset;
++    if(position<source->start||(source->end>=0&&position>source->end))return AVERROR(EINVAL);
++    source->position=position;return position;
++}
++int web_resource_avio_open(AVFormatContext *s,AVIOContext **pb,const char *url,int flags,AVDictionary **options){
++    if(!root_resource||flags!=AVIO_FLAG_READ||strlen(url)>=sizeof(web_io.url)||atomic_load(&web_io.cancelled))return AVERROR(EACCES);
++    struct source *source=calloc(1,sizeof(*source));if(!source)return AVERROR(ENOMEM);
++    source->session=atomic_load(&web_io.session);source->start=-1;source->end=-1;
++    AVDictionaryEntry *start=options?av_dict_get(*options,"offset",NULL,0):NULL;
++    AVDictionaryEntry *end=options?av_dict_get(*options,"end_offset",NULL,0):NULL;
++    if(start||end){
++        char *tail;
++        errno=0;source->start=start?strtoll(start->value,&tail,10):0;
++        if(start&&(errno||tail==start->value||*tail||source->start<0)){free(source);return AVERROR(EINVAL);}
++        errno=0;source->end=end?strtoll(end->value,&tail,10):-1;
++        if(!end||errno||tail==end->value||*tail||source->end<=source->start){free(source);return AVERROR(EINVAL);}
++    }
++    pthread_mutex_lock(&mailbox_lock);
++    snprintf(web_io.url,sizeof(web_io.url),"%s",url);
++    web_io.range_start=source->start;web_io.range_end=source->end;
++    int id=transact(1);source->total=web_io.total;
++    pthread_mutex_unlock(&mailbox_lock);
++    if(id<=0){free(source);return AVERROR(EIO);}
++    source->resource=id;source->position=source->start=source->start<0?0:source->start;
++    unsigned char *buffer=av_malloc(32768);
++    *pb=buffer?avio_alloc_context(buffer,32768,0,source,avio_read_resource,NULL,avio_seek_resource):NULL;
++    if(!*pb){av_free(buffer);close_data(source);return AVERROR(ENOMEM);}
++    (*pb)->pos=source->position;(*pb)->seekable=AVIO_SEEKABLE_NORMAL;
++    return 0;
++}
++int web_resource_avio_close(AVFormatContext *s,AVIOContext *pb){
++    close_data(pb->opaque);av_freep(&pb->buffer);avio_context_free(&pb);return 0;
++}
+diff --git a/experiments/pipeline-qualification/suite.mjs b/experiments/pipeline-qualification/suite.mjs
+new file mode 100644
+index 0000000..af1ed69
+--- /dev/null
++++ b/experiments/pipeline-qualification/suite.mjs
+@@ -0,0 +1,9 @@
++// Qualification is sequential: do not mix browser timing or resource-pressure conditions.
++import {spawn,execFileSync} from 'node:child_process';import {mkdir,writeFile,readFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
++const out=`results/pipeline-qualification/suite-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});console.log(out);
++const tests=[['io-epoch.mjs',{}],['seek-stress.mjs',{}],['qualify.mjs',{}],['remux-faults.mjs',{}],['remux-lifecycle.mjs',{}],['yuv-qualify.mjs',{}],['qualify.mjs',{BROWSER:'firefox',CASES:'indexed-mkv,tail-index-mp4,single-ts,long-gop-ts,seek-storm'}],['yuv-qualify.mjs',{BROWSER:'firefox',CASES:'color-bt709-0,tenbit,animated'}],['qualify.mjs',{BROWSER:'webkit',CASES:'indexed-mkv,tail-index-mp4,single-ts,long-gop-ts,seek-storm'}],['yuv-qualify.mjs',{BROWSER:'webkit',CASES:'color-bt709-0,tenbit,animated'}],...['movie','mkv','offset','ts'].map(media=>['packet-check.mjs',{MEDIA:media,TARGET:media==='movie'||media==='mkv'?'236.9':'0'}]),['av-sync.mjs',{}],['metadata.mjs',{}],['audio-startup.mjs',{}]];
++const engines=['build/pipeline-qualification/remux/remux.wasm','build/pipeline-qualification/yuv/player.wasm'];const hashes=async()=>Object.fromEntries(await Promise.all(engines.map(async p=>[p,createHash('sha256').update(await readFile(p)).digest('hex')])));
++execFileSync('tar',['-czf',out+'/inputs.tgz','experiments/pipeline-qualification',...engines,'build/pipeline-qualification/remux/remux.mjs','build/pipeline-qualification/yuv/player.mjs','build/pipeline-qualification/yuv/worker.js']);
++const result={engineBefore:await hashes(),tests:[]};
++for(const [driver,env]of tests){if(process.env.DRIVERS&&!process.env.DRIVERS.split(',').includes(driver))continue;console.log('QUALIFY',driver,env);const r={driver,env,started:new Date().toISOString()};result.tests.push(r);r.exitCode=await new Promise(resolve=>{const child=spawn(process.execPath,['experiments/pipeline-qualification/'+driver],{env:{...process.env,...env},stdio:['ignore','pipe','pipe']});let log='';for(const stream of [child.stdout,child.stderr])stream.on('data',b=>{process.stdout.write(b);log+=b;});child.on('close',code=>{r.log=log;resolve(code);});});r.ended=new Date().toISOString();await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');}
++result.engineAfter=await hashes();result.passed=result.tests.every(t=>t.exitCode===0)&&JSON.stringify(result.engineBefore)===JSON.stringify(result.engineAfter);await writeFile(out+'/result.json',JSON.stringify(result,null,2)+'\n');if(!result.passed)process.exitCode=1;
+diff --git a/experiments/pipeline-qualification/verify-preservation.py b/experiments/pipeline-qualification/verify-preservation.py
+new file mode 100644
+index 0000000..cf94047
+--- /dev/null
++++ b/experiments/pipeline-qualification/verify-preservation.py
+@@ -0,0 +1,19 @@
++"""Verify both pre-existing artifact sets without modifying their manifests."""
++import hashlib,json
++from pathlib import Path
++from datetime import datetime,timezone
++out=Path('results/pipeline-qualification')
++result={'checkedAt':datetime.now(timezone.utc).isoformat(),'sets':[]}
++for name in ['results/pipeline-separation/preservation-before.json','results/pipeline-qualification/preservation-before.json']:
++    original=json.loads(Path(name).read_text()); mismatches=[]
++    for path,expected in original.items():
++        p=Path(path)
++        actual=None
++        if p.is_file():
++            with p.open('rb') as stream:actual=hashlib.file_digest(stream,'sha256').hexdigest()
++        if actual!=expected:mismatches.append({'path':path,'expected':expected,'actual':actual})
++    result['sets'].append({'manifest':name,'files':len(original),'mismatches':mismatches})
++result['passed']=all(not s['mismatches'] for s in result['sets'])
++(out/'preservation-check.json').write_text(json.dumps(result,indent=2)+'\n')
++print(json.dumps(result,indent=2))
++raise SystemExit(0 if result['passed'] else 1)
+diff --git a/experiments/pipeline-qualification/webkit-cadence.mjs b/experiments/pipeline-qualification/webkit-cadence.mjs
+new file mode 100644
+index 0000000..3fa2248
+--- /dev/null
++++ b/experiments/pipeline-qualification/webkit-cadence.mjs
+@@ -0,0 +1,3 @@
++import {webkit} from 'playwright';import {serve} from './server.mjs';import {mkdir,writeFile} from 'node:fs/promises';
++const out=`results/pipeline-qualification/webkit-cadence-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});const server=await serve(),results=[];
++try{for(const variant of ['native','remux','remux','native']){const browser=await webkit.launch({headless:true});try{const page=await browser.newPage();await page.goto(server.origin+'/experiment/page.html');await page.evaluate(o=>start(o),{variant,url:server.origin+'/media/movie',target:40});await page.waitForTimeout(1000);const r=await page.evaluate(async()=>{const video=document.querySelector('video'),frames=[];let done=false;const cb=(now,m)=>{frames.push({at:now,pts:m.mediaTime,presented:m.presentedFrames});if(!done)video.requestVideoFrameCallback(cb);};video.requestVideoFrameCallback(cb);const start=snapshot(),at=performance.now();await new Promise(r=>setTimeout(r,3000));done=true;return {start,end:snapshot(),elapsed:performance.now()-at,frames};});results.push({variant,...r});await page.evaluate(()=>stop());console.log(variant,r.end.frames-r.start.frames,r.frames.length);}finally{await browser.close();}}}finally{await server.close();await writeFile(out+'/result.json',JSON.stringify(results,null,2)+'\n');console.log(out);}
+diff --git a/experiments/pipeline-separation/yuv-backend.c b/experiments/pipeline-qualification/yuv-backend.c
+index ff1fd77..befcbea 100644
+--- a/experiments/pipeline-separation/yuv-backend.c
++++ b/experiments/pipeline-qualification/yuv-backend.c
+@@ -5,34 +5,38 @@
+ #include "sub/osd.h"
+ #include "video/mp_image.h"
+ 
+-struct priv {struct mp_rect src,dst;struct mp_osd_res osd_rc;struct osd_state *osd;};
++struct priv {struct mp_rect src,dst;struct mp_osd_res osd_rc;struct osd_state *osd;struct render_backend rgb;};
++extern const struct render_backend_fns render_backend_rgb;
+ extern void web_subtitle_size(int,int);
+ extern void web_subtitle_render(struct osd_state*,double);
+-EM_JS(void, draw_yuv,(int w,int h,int y,int u,int v,int ys,int us,int vs,int system,int full,int sx,int sy,int sw,int sh,int dx,int dy,int dw,int dh,double pts),{
+- Module.drawYUV({w,h,planes:[y,u,v],strides:[ys,us,vs],system,full,src:[sx,sy,sw,sh],dst:[dx,dy,dw,dh],pts});
++EM_JS(void, draw_yuv,(int w,int h,int y,int u,int v,int ys,int us,int vs,int system,int full,int sx,int sy,int sw,int sh,int dx,int dy,int dw,int dh,double pts,int rotate),{
++ Module.drawYUV({w,h,planes:[y,u,v],strides:[ys,us,vs],system,full,src:[sx,sy,sw,sh],dst:[dx,dy,dw,dh],pts,rotate});
+ });
+-EM_JS(void, fail_yuv,(void),{throw Error('Experimental YUV output accepts only unrotated SDR 8-bit YUV420P with BT.601/709 color');});
++EM_JS(void, output_error,(void),{Module.failOutput("Rotated fallback pixel format requires a qualified CPU transpose");});
++EM_JS(void, draw_rgb,(int ptr,int w,int h,int stride,double pts),{Module.drawRGB(ptr,w,h,stride,pts);});
+ static int init(struct render_backend *ctx,mpv_render_param *params){
+  char *api=get_mpv_render_param(params,MPV_RENDER_PARAM_API_TYPE,NULL);
+  if(!api||strcmp(api,MPV_RENDER_API_TYPE_SW))return MPV_ERROR_NOT_IMPLEMENTED;
+- ctx->priv=talloc_zero(NULL,struct priv);return 0;
++ ctx->priv=talloc_zero(NULL,struct priv);struct priv*p=ctx->priv;p->rgb=(struct render_backend){.global=ctx->global,.log=ctx->log,.fns=&render_backend_rgb};return render_backend_rgb.init(&p->rgb,params);
+ }
+-static bool check_format(struct render_backend *ctx,int fmt){return !(mp_imgfmt_get_desc(fmt).flags&MP_IMGFLAG_HWACCEL);}
+-static void reconfig(struct render_backend *ctx,struct mp_image_params *p){}
+-static void reset(struct render_backend *ctx){}
+-static void update_external(struct render_backend *ctx,struct vo *vo){((struct priv*)ctx->priv)->osd=vo?vo->osd:NULL;}
+-static void resize(struct render_backend *ctx,struct mp_rect *src,struct mp_rect *dst,struct mp_osd_res *osd){struct priv*p=ctx->priv;p->src=*src;p->dst=*dst;p->osd_rc=*osd;}
++static bool check_format(struct render_backend *ctx,int fmt){return render_backend_rgb.check_format(&((struct priv*)ctx->priv)->rgb,fmt);}
++static void reconfig(struct render_backend *ctx,struct mp_image_params *p){render_backend_rgb.reconfig(&((struct priv*)ctx->priv)->rgb,p);}
++static void reset(struct render_backend *ctx){render_backend_rgb.reset(&((struct priv*)ctx->priv)->rgb);}
++static void update_external(struct render_backend *ctx,struct vo *vo){((struct priv*)ctx->priv)->osd=vo?vo->osd:NULL;render_backend_rgb.update_external(&((struct priv*)ctx->priv)->rgb,vo);}
++static void resize(struct render_backend *ctx,struct mp_rect *src,struct mp_rect *dst,struct mp_osd_res *osd){struct priv*p=ctx->priv;p->src=*src;p->dst=*dst;p->osd_rc=*osd;render_backend_rgb.resize(&p->rgb,src,dst,osd);}
+ static int target(struct render_backend *ctx,mpv_render_param *params,int*w,int*h){int*s=get_mpv_render_param(params,MPV_RENDER_PARAM_SW_SIZE,NULL);if(!s)return MPV_ERROR_INVALID_PARAMETER;*w=s[0];*h=s[1];return 0;}
+ static int render(struct render_backend *ctx,mpv_render_param *params,struct vo_frame *frame){
+  struct priv*p=ctx->priv;struct mp_image*i=frame->current;if(!i)return 0;
+  int sys=i->params.repr.sys;
+- if(i->imgfmt!=IMGFMT_420P||i->params.rotate||
++ if(i->imgfmt!=IMGFMT_420P||i->params.rotate%90||
+    (sys!=PL_COLOR_SYSTEM_BT_601&&sys!=PL_COLOR_SYSTEM_BT_709)||
+-   i->params.color.transfer==PL_COLOR_TRC_PQ||i->params.color.transfer==PL_COLOR_TRC_HLG){fail_yuv();return MPV_ERROR_UNSUPPORTED;}
++   i->params.color.transfer==PL_COLOR_TRC_PQ||i->params.color.transfer==PL_COLOR_TRC_HLG){if(i->params.rotate){output_error();return MPV_ERROR_UNSUPPORTED;}int r=render_backend_rgb.render(&p->rgb,params,frame);if(r<0)return r;
++   int*sz=get_mpv_render_param(params,MPV_RENDER_PARAM_SW_SIZE,NULL);size_t*stride=get_mpv_render_param(params,MPV_RENDER_PARAM_SW_STRIDE,NULL);void*ptr=get_mpv_render_param(params,MPV_RENDER_PARAM_SW_POINTER,NULL);
++   draw_rgb((intptr_t)ptr,sz[0],sz[1],*stride,i->pts);return 0;}
+  web_subtitle_size(p->osd_rc.w,p->osd_rc.h);web_subtitle_render(p->osd,i->pts);
+  draw_yuv(i->w,i->h,(intptr_t)i->planes[0],(intptr_t)i->planes[1],(intptr_t)i->planes[2],i->stride[0],i->stride[1],i->stride[2],sys==PL_COLOR_SYSTEM_BT_709,i->params.repr.levels==PL_COLOR_LEVELS_FULL,
+- p->src.x0,p->src.y0,mp_rect_w(p->src),mp_rect_h(p->src),p->dst.x0,p->dst.y0,mp_rect_w(p->dst),mp_rect_h(p->dst),i->pts);
++ p->src.x0,p->src.y0,mp_rect_w(p->src),mp_rect_h(p->src),p->dst.x0,p->dst.y0,mp_rect_w(p->dst),mp_rect_h(p->dst),i->pts,i->params.rotate);
+  return 0;
+ }
+-static void destroy(struct render_backend *ctx){}
++static void destroy(struct render_backend *ctx){struct priv*p=ctx->priv;if(p){render_backend_rgb.destroy(&p->rgb);talloc_free(p->rgb.priv);}}
+ const struct render_backend_fns render_backend_sw={.init=init,.check_format=check_format,.reconfig=reconfig,.reset=reset,.update_external=update_external,.resize=resize,.get_target_size=target,.render=render,.destroy=destroy};
+diff --git a/experiments/pipeline-qualification/yuv-qualify.mjs b/experiments/pipeline-qualification/yuv-qualify.mjs
+new file mode 100644
+index 0000000..58bf5f0
+--- /dev/null
++++ b/experiments/pipeline-qualification/yuv-qualify.mjs
+@@ -0,0 +1,10 @@
++import {chromium,firefox,webkit} from 'playwright';import {mkdir,writeFile} from 'node:fs/promises';import assert from 'node:assert/strict';import {serve} from './server.mjs';
++const family=process.env.BROWSER||'chrome',server=await serve(),out=`results/pipeline-qualification/yuv-${family}-${new Date().toISOString().replaceAll(':','-')}`;await mkdir(out,{recursive:true});const results={family,cases:[]};console.log(out);
++const tests=[...['bt709','smpte170m'].flatMap(m=>[0,1].map(f=>({media:`color-${m}-${f}`,color:true,matrix:m,full:f}))),{media:'tenbit',fallback:true},{media:'tenbit',filters:'format=rotate=90',reject:'Rotated fallback pixel format'},{media:'rotation'},{media:'animated',subtitles:true,lifecycle:true},{media:'sample',filters:'format=yuv444p',fallback:true},{media:'sample',filters:'vflip'},{media:'sample',filters:'hflip,eq=brightness=0.1'}];
++try{for(const test of tests.filter(t=>!process.env.CASES||process.env.CASES.split(',').includes(t.media))){const r={...test};results.cases.push(r);console.log('Checking',test.media,test.filters||'');const browser=await ({chrome:chromium,firefox,webkit})[family].launch({headless:true,...(family==='chrome'?{channel:'chrome',args:['--autoplay-policy=no-user-gesture-required']}:{})});r.browserVersion=browser.version();let page;
++try{page=await browser.newPage();page.setDefaultTimeout(25000);await page.goto(server.origin+'/experiment/page.html');r.start=await page.evaluate(o=>start(o),{variant:'yuv',url:server.origin+'/media/'+test.media,subtitles:!!test.subtitles,filters:test.filters||''});await page.evaluate(async()=>{await player.pause();await player.seek(3);});await page.waitForTimeout(400);r.state=await page.evaluate(()=>snapshot());if(test.reject)throw Error('Expected qualified rejection missing');assert.deepEqual(r.state.errors,[]);assert.ok(test.fallback?r.state.diagnostics.yuv.fallbackFrames>0:r.state.diagnostics.yuv.fallbackFrames===0);
++if(test.color){r.colors=await page.evaluate(()=>{const source=document.querySelector('canvas'),c=document.createElement('canvas');c.width=source.width;c.height=source.height;const x=c.getContext('2d');x.drawImage(source,0,0);const values=[];for(let row=0;row<3;row++)for(let col=0;col<4;col++)values.push([...x.getImageData((col+.5)*c.width/4,(row+.5)*c.height/3,1,1).data].slice(0,3));return values;});const patches=[[16,128,128],[235,128,128],[81,90,240],[145,54,34],[41,240,110],[128,128,128],[64,160,180],[180,110,80],[100,80,80],[210,180,150],[30,130,124],[230,120,130]];r.expected=patches.map(([y,u,v])=>{u-=128;v-=128;if(!test.full){y=(y-16)*255/219;u*=255/224;v*=255/224;}return(test.matrix==='bt709'?[y+1.5748*v,y-.187324*u-.468124*v,y+1.8556*u]:[y+1.402*v,y-.344136*u-.714136*v,y+1.772*u]).map(v=>Math.max(0,Math.min(255,Math.round(v))));});r.maxColorError=Math.max(...r.colors.flatMap((c,i)=>c.map((v,j)=>Math.abs(v-r.expected[i][j]))));assert.ok(r.maxColorError<=3,'Analytic color patch tolerance <=3/255');}
++if(test.lifecycle){r.lifecycle=await page.evaluate(async()=>{const checks=[];for(const t of [7,1,5,3]){await player.seek(t);await new Promise(r=>setTimeout(r,200));checks.push(snapshot());}await player.resize(960,540);await new Promise(r=>setTimeout(r,300));await player.selectTrack('sub','no');await new Promise(r=>setTimeout(r,300));checks.push(snapshot());await player.selectTrack('sub','1');await player.setVideoFilters('format=yuv444p');await new Promise(r=>setTimeout(r,300));checks.push(snapshot());await player.setVideoFilters('');await player.resize(1920,1080);await new Promise(r=>setTimeout(r,300));checks.push(snapshot());await player.play();player.current.backend.worker.postMessage({type:'experimental-context-loss'});await new Promise(r=>setTimeout(r,1500));await player.pause();checks.push(snapshot());await new Promise(r=>setTimeout(r,250));const before=document.querySelector('canvas').toDataURL();player.current.backend.worker.postMessage({type:'experimental-context-loss'});await new Promise(r=>setTimeout(r,1000));const redraw=snapshot();redraw.redrawIdentical=before===document.querySelector('canvas').toDataURL();checks.push(redraw);return checks;});for(const c of r.lifecycle)assert.deepEqual(c.errors,[]);assert.ok(r.lifecycle.at(-1).diagnostics.yuv.contextRestores>=2,'Graphics context restored twice');assert.equal(r.lifecycle.at(-1).redrawIdentical,true,'Paused redraw pixels preserved');}
++await page.screenshot({path:out+'/'+results.cases.length+'.png'});r.cleanup=await page.evaluate(()=>stop());await page.waitForTimeout(200);r.workers=page.workers().length;r.resources=await page.evaluate(()=>workerCleanup);assert.equal(r.workers,0);assert.equal(r.resources.at(-1).liveTextures,0);r.passed=true;
++}catch(e){r.error=String(e.stack);console.log(r.error.split('\n')[0]);r.state=await page?.evaluate(()=>snapshot()).catch(()=>null);r.passed=!!test.reject&&r.error.includes(test.reject);if(!r.passed)process.exitCode=1;}finally{await page?.evaluate(()=>window.player?stop():null).catch(()=>{});await page?.waitForTimeout(150);r.workersAfter=page?.workers().length;if(r.workersAfter!==0){r.passed=false;process.exitCode=1;}await browser.close();await writeFile(out+'/result.json',JSON.stringify(results,null,2)+'\n');}}
++}finally{await server.close();results.passed=results.cases.every(c=>c.passed);await writeFile(out+'/result.json',JSON.stringify(results,null,2)+'\n');}
+diff --git a/experiments/pipeline-separation/yuv.js b/experiments/pipeline-qualification/yuv.js
+index d35d3ec..a1ad842 100644
+--- a/experiments/pipeline-separation/yuv.js
++++ b/experiments/pipeline-qualification/yuv.js
+@@ -3,28 +3,30 @@ export class YUVPresenter {
+  constructor(canvas){
+   this.canvas=canvas;this.gl=canvas.getContext('webgl2',{alpha:false,antialias:false,depth:false,stencil:false,preserveDrawingBuffer:true});
+   if(!this.gl)throw Error('WebGL2 unavailable');const gl=this.gl;
+-  this.stats={frames:0,videoUploads:0,videoUploadBytes:0,planeCopyBytes:0,subtitleUploads:0,subtitleUploadBytes:0,videoReadbacks:0,liveTextures:4,peakStagingBytes:0,drawMs:0,lastPts:0};
++  this.lossHandler=e=>{e.preventDefault();this.lost=true;this.onLost?.();};this.restoreHandler=()=>this.onRestore?.();canvas.addEventListener('webglcontextlost',this.lossHandler);canvas.addEventListener('webglcontextrestored',this.restoreHandler);
++  this.stats={fallbackFrames:0,rgbCopyBytes:0,frames:0,videoUploads:0,videoUploadBytes:0,planeCopyBytes:0,subtitleUploads:0,subtitleUploadBytes:0,videoReadbacks:0,liveTextures:4,peakStagingBytes:0,drawMs:0,lastPts:0};
+   const shader=(type,source)=>{const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;};
+   const vs=shader(gl.VERTEX_SHADER,`#version 300 es
+   out vec2 uv;void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);uv=vec2(p.x,1.-p.y);gl_Position=vec4(p*2.-1.,0,1);}`);
+   const fs=shader(gl.FRAGMENT_SHADER,`#version 300 es
+   precision highp float;in vec2 uv;out vec4 color;
+   uniform sampler2D Y;uniform sampler2D U;uniform sampler2D V;uniform sampler2D overlay;
+-  uniform vec4 crop;uniform int is709;uniform int fullRange;uniform int overlayPass;
+-  void main(){if(overlayPass==1){color=texture(overlay,uv);return;}
++  uniform vec4 crop;uniform int rotation;uniform int is709;uniform int fullRange;uniform int overlayPass;
++  void main(){if(overlayPass!=0){color=texture(overlay,uv);if(overlayPass==2)color.a=1.;return;}
+    vec2 c=crop.xy+uv*crop.zw;
++   if(rotation==90)c=vec2(c.y,1.-c.x);else if(rotation==180)c=1.-c;else if(rotation==270)c=vec2(1.-c.y,c.x);
+    float y=texture(Y,c).r,u=texture(U,c).r-128./255.,v=texture(V,c).r-128./255.;
+    if(fullRange==0){y=(y-16./255.)*255./219.;u*=255./224.;v*=255./224.;}
+    vec3 rgb=is709==1?vec3(y+1.5748*v,y-.187324*u-.468124*v,y+1.8556*u):vec3(y+1.402*v,y-.344136*u-.714136*v,y+1.772*u);
+    color=vec4(rgb,1);}`);
+   this.program=gl.createProgram();gl.attachShader(this.program,vs);gl.attachShader(this.program,fs);gl.linkProgram(this.program);gl.deleteShader(vs);gl.deleteShader(fs);
+   if(!gl.getProgramParameter(this.program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(this.program));gl.useProgram(this.program);
+-  this.loc=Object.fromEntries(['crop','is709','fullRange','overlayPass'].map(k=>[k,gl.getUniformLocation(this.program,k)]));
++  this.loc=Object.fromEntries(['crop','rotation','is709','fullRange','overlayPass'].map(k=>[k,gl.getUniformLocation(this.program,k)]));
+   this.textures=Array.from({length:4},(_,i)=>{const t=gl.createTexture();gl.activeTexture(gl.TEXTURE0+i);gl.bindTexture(gl.TEXTURE_2D,t);for(const p of [gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER])gl.texParameteri(gl.TEXTURE_2D,p,gl.LINEAR);for(const p of [gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T])gl.texParameteri(gl.TEXTURE_2D,p,gl.CLAMP_TO_EDGE);gl.uniform1i(gl.getUniformLocation(this.program,['Y','U','V','overlay'][i]),i);return t;});
+   this.staging=[];this.sizes=[];this.subtitles=new SubtitleOverlay();this.overlay=new OffscreenCanvas(canvas.width,canvas.height);this.overlayContext=this.overlay.getContext('2d');
+  }
+  draw(engine,d){
+-  const begin=performance.now(),gl=this.gl;if(gl.isContextLost())throw Error('YUV graphics context lost');
++  const begin=performance.now(),gl=this.gl;if(this.lost||gl.isContextLost())return;
+   gl.useProgram(this.program);gl.disable(gl.BLEND);gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);
+   for(let i=0;i<3;i++){
+    const w=i?Math.ceil(d.w/2):d.w,h=i?Math.ceil(d.h/2):d.h;
+@@ -37,16 +39,31 @@ export class YUVPresenter {
+   this.stats.peakStagingBytes=Math.max(this.stats.peakStagingBytes,this.staging.reduce((s,b)=>s+b.length,0));
+   gl.viewport(0,0,this.canvas.width,this.canvas.height);gl.clearColor(0,0,0,1);gl.clear(gl.COLOR_BUFFER_BIT);
+   const [x,y,w,h]=d.dst;gl.viewport(x,this.canvas.height-y-h,w,h);gl.uniform1i(this.loc.overlayPass,0);gl.uniform1i(this.loc.is709,d.system);gl.uniform1i(this.loc.fullRange,d.full);
+-  gl.uniform4f(this.loc.crop,d.src[0]/d.w,d.src[1]/d.h,d.src[2]/d.w,d.src[3]/d.h);gl.drawArrays(gl.TRIANGLES,0,3);
++  const rotated=d.rotate%180!==0,rw=rotated?d.h:d.w,rh=rotated?d.w:d.h;gl.uniform1i(this.loc.rotation,d.rotate);gl.uniform4f(this.loc.crop,d.src[0]/rw,d.src[1]/rh,d.src[2]/rw,d.src[3]/rh);gl.drawArrays(gl.TRIANGLES,0,3);
+   const snapshot=this.subtitles.read(engine);
+-  if(this.lastSnapshot!==snapshot||this.overlay.width!==this.canvas.width||this.overlay.height!==this.canvas.height){
+-   this.overlay.width=this.canvas.width;this.overlay.height=this.canvas.height;this.subtitles.draw(this.overlayContext,snapshot);
+-   gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,this.textures[3]);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,this.overlay);
+-   this.stats.subtitleUploads++;this.stats.subtitleUploadBytes+=this.canvas.width*this.canvas.height*4;this.lastSnapshot=snapshot;
++  const shape=`${this.canvas.width}x${this.canvas.height}`;
++  gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,this.textures[3]);
++  if(this.overlayShape!==shape){gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,this.canvas.width,this.canvas.height,0,gl.RGBA,gl.UNSIGNED_BYTE,null);this.overlayShape=shape;this.lastSnapshot=null;this.lastBounds=null;}
++  if(this.lastSnapshot!==snapshot){
++   const bounds=parts=>parts.length?[Math.max(0,Math.floor(Math.min(...parts.map(p=>p.x)))),Math.max(0,Math.floor(Math.min(...parts.map(p=>p.y)))),Math.min(this.canvas.width,Math.ceil(Math.max(...parts.map(p=>p.x+p.dw)))),Math.min(this.canvas.height,Math.ceil(Math.max(...parts.map(p=>p.y+p.dh))))]:null;
++   const current=bounds(snapshot.parts),both=[current,this.lastBounds].filter(Boolean);
++   if(both.length){const x=Math.min(...both.map(b=>b[0])),y=Math.min(...both.map(b=>b[1])),w=Math.max(...both.map(b=>b[2]))-x,h=Math.max(...both.map(b=>b[3]))-y;
++    if(w>0&&h>0){this.overlay.width=w;this.overlay.height=h;this.overlayContext.setTransform(1,0,0,1,-x,-y);this.subtitles.draw(this.overlayContext,snapshot);gl.texSubImage2D(gl.TEXTURE_2D,0,x,y,gl.RGBA,gl.UNSIGNED_BYTE,this.overlay);this.stats.subtitleUploads++;this.stats.subtitleUploadBytes+=w*h*4;}
++   }
++   this.lastSnapshot=snapshot;this.lastBounds=current;
+   }
+   if(snapshot.parts.length){gl.viewport(0,0,this.canvas.width,this.canvas.height);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.uniform1i(this.loc.overlayPass,1);gl.drawArrays(gl.TRIANGLES,0,3);}
+   const error=gl.getError();if(error)throw Error(`YUV GL error ${error}`);
+   this.stats.frames++;this.stats.lastPts=d.pts;this.stats.drawMs+=performance.now()-begin;
+  }
+- destroy(){for(const t of this.textures)this.gl.deleteTexture(t);this.gl.deleteProgram(this.program);this.stats.liveTextures=0;this.staging=[];this.subtitles.clear();}
++ drawRGB(engine,ptr,w,h,stride,pts){
++  const gl=this.gl;if(this.lost||gl.isContextLost())return;
++  if(this.rgb?.length!==w*h*4)this.rgb=new Uint8Array(w*h*4);
++  for(let row=0;row<h;row++)this.rgb.set(engine.HEAPU8.subarray(ptr+row*stride,ptr+row*stride+w*4),row*w*4);
++  gl.useProgram(this.program);gl.disable(gl.BLEND);gl.viewport(0,0,w,h);gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,this.textures[3]);
++  if(this.overlayShape!==`rgb:${w}x${h}`){gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,null);this.overlayShape=`rgb:${w}x${h}`;}
++  gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,this.rgb);gl.uniform1i(this.loc.overlayPass,2);gl.drawArrays(gl.TRIANGLES,0,3);
++  this.stats.frames++;this.stats.fallbackFrames++;this.stats.rgbCopyBytes+=this.rgb.length;this.stats.videoUploads++;this.stats.videoUploadBytes+=this.rgb.length;this.stats.lastPts=pts;
++ }
++ destroy(contextReset=false){this.canvas.removeEventListener('webglcontextlost',this.lossHandler);this.canvas.removeEventListener('webglcontextrestored',this.restoreHandler);if(!contextReset){for(const t of this.textures)this.gl.deleteTexture(t);this.gl.deleteProgram(this.program);}this.textures=[];this.program=null;this.stats.liveTextures=0;this.staging=[];this.rgb=null;this.subtitles.clear();}
+ }

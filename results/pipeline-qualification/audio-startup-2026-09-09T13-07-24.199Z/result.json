@@ -1,0 +1,646 @@
+{
+  "method": "First non-silent AudioWorklet message received after open begins; callback latency included; preloaded probe; headless; no acoustic claim",
+  "trials": [
+    {
+      "variant": "native",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 137.85499999672174,
+        "firstVideoCallbackMs": 135.3449999988079,
+        "firstFrameCounterMs": 136.4100000038743,
+        "state": {
+          "position": 0,
+          "frames": 5,
+          "drops": 0,
+          "audio": {
+            "state": "running",
+            "source": "native",
+            "decodedSampleCountersAvailable": false
+          },
+          "diagnostics": {
+            "path": "native",
+            "position": 0.010667,
+            "rendered": 5,
+            "dropped": 0,
+            "readyState": 4
+          },
+          "errors": [],
+          "outputs": [],
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "remux",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 122.30499999970198,
+        "firstVideoCallbackMs": 111.68999999761581,
+        "firstFrameCounterMs": 111.50499999523163,
+        "state": {
+          "presented": 1,
+          "position": 0.025694000000000106,
+          "frames": 4,
+          "drops": 0,
+          "errors": [],
+          "remux": {
+            "stats": {
+              "fragments": [
+                {
+                  "bytes": 2704,
+                  "at": 215.4050000011921,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1543,
+                  "at": 215.73499999940395,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1933,
+                  "at": 215.94999999552965,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1627,
+                  "at": 216.12999999523163,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1833,
+                  "at": 216.35000000149012,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1747,
+                  "at": 216.52499999850988,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1716,
+                  "at": 216.71000000089407,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1862,
+                  "at": 216.8699999973178,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1539,
+                  "at": 217.01500000059605,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1978,
+                  "at": 217.15999999642372,
+                  "generation": 1
+                }
+              ],
+              "generatedBytes": 19744,
+              "discardedBytes": 0,
+              "peakQueueDepth": 1,
+              "bufferedBytesUpperBound": 18482,
+              "peakBufferedBytesUpperBound": 18482,
+              "peakBufferedSeconds": 5.013333,
+              "seeks": [
+                {
+                  "target": 0,
+                  "started": 168.0949999988079
+                }
+              ],
+              "sessions": [
+                {
+                  "generation": 1,
+                  "target": 0,
+                  "sourceSize": 46163,
+                  "firstPlayableMs": 56.15999999642372,
+                  "firstPlayableSourceBytes": 46163,
+                  "generatedBytes": 19744,
+                  "fullyConsumed": true
+                }
+              ],
+              "errors": [],
+              "workers": 2
+            },
+            "source": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 65536,
+              "peakCacheBytes": 65536,
+              "activeBytes": 0,
+              "peakActiveBytes": 65536
+            },
+            "remux": {
+              "calls": 10,
+              "remuxMs": 19.144999988377094,
+              "generatedBytes": 19744,
+              "peakBatchBytes": 2704,
+              "heapBytes": 67108864
+            },
+            "ranges": [
+              [
+                0,
+                5.013333
+              ]
+            ],
+            "timelineBias": 1,
+            "position": 0.025694000000000106,
+            "quality": {},
+            "readyState": 4,
+            "logs": [
+              "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf310] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+            ]
+          },
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "software",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 451.304999999702,
+        "firstVideoCallbackMs": null,
+        "firstFrameCounterMs": 450.1650000065565,
+        "state": {
+          "position": 0,
+          "frames": 3,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 768,
+            "underruns": 0,
+            "rms": 0.146870081399145,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "pumpTicks": 23,
+            "rendered": 3,
+            "renderMs": 17.375,
+            "copyMs": 11.100000001490116,
+            "maxRenderMs": 9.899999998509884,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 262144,
+              "peakCacheBytes": 262144,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "46163",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "click",
+              "audioFrame": 19715,
+              "sampleRate": 48000,
+              "wallTime": 1788959247500.4175,
+              "stamp": {
+                "contextTime": 0.3769716666666667,
+                "performanceTime": 618.9900000020862
+              }
+            }
+          ],
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "yuv",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 221.09999999403954,
+        "firstVideoCallbackMs": null,
+        "firstFrameCounterMs": 218.4399999976158,
+        "state": {
+          "position": 0,
+          "frames": 2,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0.12083492118818014,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 2,
+              "videoUploads": 6,
+              "videoUploadBytes": 691200,
+              "planeCopyBytes": 691200,
+              "subtitleUploads": 0,
+              "subtitleUploadBytes": 0,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 345600,
+              "drawMs": 4.274999998509884,
+              "lastPts": 0
+            },
+            "pumpTicks": 21,
+            "rendered": 3,
+            "renderMs": 5.060000002384186,
+            "copyMs": 0.005000002682209015,
+            "maxRenderMs": 3.774999998509884,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 262144,
+              "peakCacheBytes": 262144,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "46163",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "click",
+              "audioFrame": 8707,
+              "sampleRate": 48000,
+              "wallTime": 1788959248638.6985,
+              "stamp": {
+                "contextTime": 0.14766233333333334,
+                "performanceTime": 391.7799999937415
+              }
+            }
+          ],
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "yuv",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 190.77499999850988,
+        "firstVideoCallbackMs": null,
+        "firstFrameCounterMs": 186.4700000062585,
+        "state": {
+          "position": 0,
+          "frames": 1,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0.12083492118818014,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 1,
+              "videoUploads": 3,
+              "videoUploadBytes": 345600,
+              "planeCopyBytes": 345600,
+              "subtitleUploads": 0,
+              "subtitleUploadBytes": 0,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 345600,
+              "drawMs": 1.6150000020861626,
+              "lastPts": 0
+            },
+            "pumpTicks": 20,
+            "rendered": 2,
+            "renderMs": 2.3299999982118607,
+            "copyMs": 0,
+            "maxRenderMs": 2.219999998807907,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 262144,
+              "peakCacheBytes": 262144,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "46163",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "click",
+              "audioFrame": 7171,
+              "sampleRate": 48000,
+              "wallTime": 1788959249730.0435,
+              "stamp": {
+                "contextTime": 0.11563733333333334,
+                "performanceTime": 359.7800000011921
+              }
+            }
+          ],
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "software",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 208.64000000059605,
+        "firstVideoCallbackMs": null,
+        "firstFrameCounterMs": 204.61500000208616,
+        "state": {
+          "position": 0,
+          "frames": 3,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0.12083492118818014,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "pumpTicks": 21,
+            "rendered": 3,
+            "renderMs": 17.864999994635582,
+            "copyMs": 10.509999997913837,
+            "maxRenderMs": 10.109999999403954,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 262144,
+              "peakCacheBytes": 262144,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "46163",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "click",
+              "audioFrame": 7939,
+              "sampleRate": 48000,
+              "wallTime": 1788959250846.0317,
+              "stamp": {
+                "contextTime": 0.13158433333333333,
+                "performanceTime": 380.1200000047684
+              }
+            }
+          ],
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "remux",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 129,
+        "firstVideoCallbackMs": 127.48000000417233,
+        "firstFrameCounterMs": 114.83500000089407,
+        "state": {
+          "presented": 1,
+          "position": 0.021333000000000046,
+          "frames": 5,
+          "drops": 0,
+          "errors": [],
+          "remux": {
+            "stats": {
+              "fragments": [
+                {
+                  "bytes": 2704,
+                  "at": 210.96000000089407,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1543,
+                  "at": 211.25999999791384,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1933,
+                  "at": 211.44500000029802,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1627,
+                  "at": 211.5899999961257,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1833,
+                  "at": 211.82500000298023,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1747,
+                  "at": 212,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1716,
+                  "at": 212.1850000023842,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1862,
+                  "at": 212.33500000089407,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1539,
+                  "at": 212.47500000149012,
+                  "generation": 1
+                },
+                {
+                  "bytes": 1978,
+                  "at": 212.625,
+                  "generation": 1
+                }
+              ],
+              "generatedBytes": 19744,
+              "discardedBytes": 0,
+              "peakQueueDepth": 1,
+              "bufferedBytesUpperBound": 18482,
+              "peakBufferedBytesUpperBound": 18482,
+              "peakBufferedSeconds": 5.013333,
+              "seeks": [
+                {
+                  "target": 0,
+                  "started": 172.45499999821186
+                }
+              ],
+              "sessions": [
+                {
+                  "generation": 1,
+                  "target": 0,
+                  "sourceSize": 46163,
+                  "firstPlayableMs": 58.07000000029802,
+                  "firstPlayableSourceBytes": 46163,
+                  "generatedBytes": 19744,
+                  "fullyConsumed": true
+                }
+              ],
+              "errors": [],
+              "workers": 2
+            },
+            "source": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 65536,
+              "peakCacheBytes": 65536,
+              "activeBytes": 0,
+              "peakActiveBytes": 65536
+            },
+            "remux": {
+              "calls": 10,
+              "remuxMs": 18.775000013411045,
+              "generatedBytes": 19744,
+              "peakBatchBytes": 2704,
+              "heapBytes": 67108864
+            },
+            "ranges": [
+              [
+                0,
+                5.013333
+              ]
+            ],
+            "timelineBias": 1,
+            "position": 0.021333000000000046,
+            "quality": {},
+            "readyState": 4,
+            "logs": [
+              "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf310] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+            ]
+          },
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "native",
+      "browserVersion": "152.0.7977.83",
+      "observed": {
+        "firstAudioCallbackMs": 79.25,
+        "firstVideoCallbackMs": 76.15999999642372,
+        "firstFrameCounterMs": 77.25999999791384,
+        "state": {
+          "position": 0,
+          "frames": 5,
+          "drops": 0,
+          "audio": {
+            "state": "running",
+            "source": "native",
+            "decodedSampleCountersAvailable": false
+          },
+          "diagnostics": {
+            "path": "native",
+            "position": 0.010667,
+            "rendered": 5,
+            "dropped": 0,
+            "readyState": 4
+          },
+          "errors": [],
+          "outputs": [],
+          "visibility": "visible"
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

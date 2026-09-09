@@ -1,0 +1,945 @@
+{
+  "family": "chrome",
+  "cases": [
+    {
+      "media": "tenbit",
+      "fallback": true,
+      "start": {
+        "firstFrameMs": 934.3350000008941,
+        "state": {
+          "position": 0,
+          "frames": 2,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 0,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 2,
+              "rgbCopyBytes": 16588800,
+              "frames": 2,
+              "videoUploads": 2,
+              "videoUploadBytes": 16588800,
+              "planeCopyBytes": 0,
+              "subtitleUploads": 0,
+              "subtitleUploadBytes": 0,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 0,
+              "drawMs": 0,
+              "lastPts": 0
+            },
+            "pumpTicks": 42,
+            "rendered": 3,
+            "renderMs": 21.924999997019768,
+            "copyMs": 0,
+            "maxRenderMs": 13.730000000447035,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 262144,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 262144,
+              "peakCacheBytes": 262144,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "2487338",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [],
+          "visibility": "visible"
+        }
+      },
+      "state": {
+        "position": 3,
+        "frames": 6,
+        "drops": 0,
+        "decoderDrops": 0,
+        "avsync": 0,
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 512,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "diagnostics": {
+          "yuv": {
+            "fallbackFrames": 6,
+            "rgbCopyBytes": 49766400,
+            "frames": 6,
+            "videoUploads": 6,
+            "videoUploadBytes": 49766400,
+            "planeCopyBytes": 0,
+            "subtitleUploads": 0,
+            "subtitleUploadBytes": 0,
+            "videoReadbacks": 0,
+            "liveTextures": 4,
+            "peakStagingBytes": 0,
+            "drawMs": 0,
+            "lastPts": 3
+          },
+          "pumpTicks": 91,
+          "rendered": 5,
+          "renderMs": 36.74999999627471,
+          "copyMs": 0.005000002682209015,
+          "maxRenderMs": 13.730000000447035,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 3,
+          "ioPending": false,
+          "ioSerial": 7,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 524555,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "2487338",
+            "reads": 7,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 3,
+          "queuedFrames": 0
+        },
+        "errors": [],
+        "outputs": [],
+        "visibility": "visible"
+      },
+      "cleanup": {
+        "outputs": []
+      },
+      "workers": 0,
+      "resources": [
+        {
+          "kind": "yuv-cleanup",
+          "fallbackFrames": 6,
+          "rgbCopyBytes": 49766400,
+          "frames": 6,
+          "videoUploads": 6,
+          "videoUploadBytes": 49766400,
+          "planeCopyBytes": 0,
+          "subtitleUploads": 0,
+          "subtitleUploadBytes": 0,
+          "videoReadbacks": 0,
+          "liveTextures": 0,
+          "peakStagingBytes": 0,
+          "drawMs": 0,
+          "lastPts": 3
+        }
+      ],
+      "passed": true
+    },
+    {
+      "media": "tenbit",
+      "filters": "format=rotate=90",
+      "reject": "Rotated fallback pixel format",
+      "error": "page.evaluate: Error: Rotated fallback pixel format requires a qualified CPU transpose\n    at WasmPlayer.<anonymous> (http://127.0.0.1:63687/yuv/web/generated/unified-player.js:108:37)\n    at WasmPlayer.fail (http://127.0.0.1:63687/yuv/web/generated/internal/wasm-player.js:150:18)\n    at worker.onmessage (http://127.0.0.1:63687/yuv/web/generated/internal/wasm-player.js:64:26)\n    at /Volumes/seed2/Projects/webmpv/experiments/pipeline-qualification/yuv-qualify.mjs:5:138",
+      "state": null,
+      "passed": true
+    },
+    {
+      "media": "animated",
+      "subtitles": true,
+      "lifecycle": [
+        {
+          "position": 7,
+          "frames": 9,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 9,
+              "videoUploads": 27,
+              "videoUploadBytes": 27993600,
+              "planeCopyBytes": 27993600,
+              "subtitleUploads": 3,
+              "subtitleUploadBytes": 9584400,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 36.87999999150634,
+              "lastPts": 7
+            },
+            "pumpTicks": 134,
+            "rendered": 6,
+            "renderMs": 32.61999999731779,
+            "copyMs": 0.01499999687075615,
+            "maxRenderMs": 24.695000000298023,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 7,
+            "ioPending": false,
+            "ioSerial": 194,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 6553883,
+              "requests": 26,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 6815744,
+              "peakCacheBytes": 6815744,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 194,
+              "seeks": 4,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 7,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 1,
+          "frames": 12,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 12,
+              "videoUploads": 36,
+              "videoUploadBytes": 37324800,
+              "planeCopyBytes": 37324800,
+              "subtitleUploads": 4,
+              "subtitleUploadBytes": 14136500,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 42.814999993890524,
+              "lastPts": 1
+            },
+            "pumpTicks": 185,
+            "rendered": 7,
+            "renderMs": 34.03999999538064,
+            "copyMs": 0.01499999687075615,
+            "maxRenderMs": 24.695000000298023,
+            "heapBytes": 134217728,
+            "epoch": 8,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 1,
+            "ioPending": false,
+            "ioSerial": 227,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 6553883,
+              "requests": 26,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 6815744,
+              "peakCacheBytes": 6815744,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 227,
+              "seeks": 5,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 1,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 5,
+          "frames": 15,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 15,
+              "videoUploads": 45,
+              "videoUploadBytes": 46656000,
+              "planeCopyBytes": 46656000,
+              "subtitleUploads": 5,
+              "subtitleUploadBytes": 18688600,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 51.67499999329448,
+              "lastPts": 5
+            },
+            "pumpTicks": 231,
+            "rendered": 8,
+            "renderMs": 35.42499999701977,
+            "copyMs": 0.01499999687075615,
+            "maxRenderMs": 24.695000000298023,
+            "heapBytes": 134217728,
+            "epoch": 10,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 5,
+            "ioPending": false,
+            "ioSerial": 311,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 6553883,
+              "requests": 26,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 6815744,
+              "peakCacheBytes": 6815744,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 311,
+              "seeks": 6,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 5,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 3,
+          "frames": 18,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 18,
+              "videoUploads": 54,
+              "videoUploadBytes": 55987200,
+              "planeCopyBytes": 55987200,
+              "subtitleUploads": 6,
+              "subtitleUploadBytes": 23240700,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 61.98499999567866,
+              "lastPts": 3
+            },
+            "pumpTicks": 279,
+            "rendered": 9,
+            "renderMs": 37.38499999791384,
+            "copyMs": 0.01499999687075615,
+            "maxRenderMs": 24.695000000298023,
+            "heapBytes": 134217728,
+            "epoch": 12,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 3,
+            "ioPending": false,
+            "ioSerial": 369,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 6553883,
+              "requests": 26,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 6815744,
+              "peakCacheBytes": 6815744,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 369,
+              "seeks": 7,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 3,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 3,
+          "frames": 20,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 512,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 20,
+              "videoUploads": 60,
+              "videoUploadBytes": 62208000,
+              "planeCopyBytes": 62208000,
+              "subtitleUploads": 8,
+              "subtitleUploadBytes": 25585596,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 72.72499999776483,
+              "lastPts": 3
+            },
+            "pumpTicks": 354,
+            "rendered": 11,
+            "renderMs": 51.92999999597669,
+            "copyMs": 0.019999999552965164,
+            "maxRenderMs": 24.695000000298023,
+            "heapBytes": 134217728,
+            "epoch": 12,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 3,
+            "ioPending": false,
+            "ioSerial": 369,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 6553883,
+              "requests": 26,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 6815744,
+              "peakCacheBytes": 6815744,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 369,
+              "seeks": 7,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 3,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 3,
+          "frames": 5,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 0,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 5,
+              "rgbCopyBytes": 10368000,
+              "frames": 5,
+              "videoUploads": 5,
+              "videoUploadBytes": 10368000,
+              "planeCopyBytes": 0,
+              "subtitleUploads": 0,
+              "subtitleUploadBytes": 0,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 0,
+              "drawMs": 0,
+              "lastPts": 3
+            },
+            "pumpTicks": 121,
+            "rendered": 4,
+            "renderMs": 44.310000006109476,
+            "copyMs": 0.004999998956918716,
+            "maxRenderMs": 19.50500000268221,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 3,
+            "ioPending": false,
+            "ioSerial": 82,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 3932443,
+              "requests": 16,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 4194304,
+              "peakCacheBytes": 4194304,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 82,
+              "seeks": 3,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 3,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 3,
+          "frames": 5,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 0,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 5,
+              "videoUploads": 15,
+              "videoUploadBytes": 15552000,
+              "planeCopyBytes": 15552000,
+              "subtitleUploads": 3,
+              "subtitleUploadBytes": 5866136,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 25.634999997913837,
+              "lastPts": 3
+            },
+            "pumpTicks": 95,
+            "rendered": 4,
+            "renderMs": 23.145000003278255,
+            "copyMs": 0.009999997913837433,
+            "maxRenderMs": 12.109999999403954,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 3,
+            "ioPending": false,
+            "ioSerial": 82,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 3932443,
+              "requests": 16,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 4194304,
+              "peakCacheBytes": 4194304,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 82,
+              "seeks": 3,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 3,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        },
+        {
+          "position": 4.167,
+          "frames": 37,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0.0009798333333295162,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 59904,
+            "underruns": 0,
+            "rms": 0.06294018919296097,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 37,
+              "videoUploads": 111,
+              "videoUploadBytes": 115084800,
+              "planeCopyBytes": 115084800,
+              "subtitleUploads": 6,
+              "subtitleUploadBytes": 19522436,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 117.94999999925494,
+              "lastPts": 4.0329999999999995,
+              "contextRestores": 1
+            },
+            "pumpTicks": 302,
+            "rendered": 37,
+            "renderMs": 127.28000000491738,
+            "copyMs": 0.05999999865889549,
+            "maxRenderMs": 15.20499999821186,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 4.0329999999999995,
+            "ioPending": false,
+            "ioSerial": 98,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 4718875,
+              "requests": 19,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 4980736,
+              "peakCacheBytes": 4980736,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 98,
+              "seeks": 3,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 4.0329999999999995,
+            "queuedFrames": 6400
+          },
+          "errors": [],
+          "outputs": [
+            {
+              "kind": "gpu-context-lost"
+            },
+            {
+              "kind": "gpu-context-restored"
+            }
+          ],
+          "visibility": "visible"
+        }
+      ],
+      "start": {
+        "firstFrameMs": 438.4699999988079,
+        "state": {
+          "position": 0,
+          "frames": 2,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 256,
+            "underruns": 0,
+            "rms": 0.022841260041123652,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 2,
+              "videoUploads": 6,
+              "videoUploadBytes": 6220800,
+              "planeCopyBytes": 6220800,
+              "subtitleUploads": 1,
+              "subtitleUploadBytes": 480200,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 12.429999999701977,
+              "lastPts": 0
+            },
+            "pumpTicks": 28,
+            "rendered": 3,
+            "renderMs": 26.969999998807907,
+            "copyMs": 0.009999997913837433,
+            "maxRenderMs": 24.695000000298023,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 23,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1835008,
+              "requests": 7,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 1835008,
+              "peakCacheBytes": 1835008,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 22,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [],
+          "visibility": "visible"
+        }
+      },
+      "state": {
+        "position": 3,
+        "frames": 6,
+        "drops": 0,
+        "decoderDrops": 0,
+        "avsync": 0,
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 512,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "diagnostics": {
+          "yuv": {
+            "fallbackFrames": 0,
+            "rgbCopyBytes": 0,
+            "frames": 6,
+            "videoUploads": 18,
+            "videoUploadBytes": 18662400,
+            "planeCopyBytes": 18662400,
+            "subtitleUploads": 2,
+            "subtitleUploadBytes": 5032300,
+            "videoReadbacks": 0,
+            "liveTextures": 4,
+            "peakStagingBytes": 3110400,
+            "drawMs": 27.519999995827675,
+            "lastPts": 3
+          },
+          "pumpTicks": 82,
+          "rendered": 5,
+          "renderMs": 30.529999997466803,
+          "copyMs": 0.01499999687075615,
+          "maxRenderMs": 24.695000000298023,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 3,
+          "ioPending": false,
+          "ioSerial": 84,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 3932443,
+            "requests": 16,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 4194304,
+            "peakCacheBytes": 4194304,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "9039757",
+            "reads": 84,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 3,
+          "queuedFrames": 0
+        },
+        "errors": [],
+        "outputs": [],
+        "visibility": "visible"
+      },
+      "cleanup": {
+        "outputs": [
+          {
+            "kind": "gpu-context-lost"
+          },
+          {
+            "kind": "gpu-context-restored"
+          }
+        ]
+      },
+      "workers": 0,
+      "resources": [
+        {
+          "kind": "yuv-cleanup",
+          "fallbackFrames": 0,
+          "rgbCopyBytes": 0,
+          "frames": 42,
+          "videoUploads": 126,
+          "videoUploadBytes": 130636800,
+          "planeCopyBytes": 130636800,
+          "subtitleUploads": 10,
+          "subtitleUploadBytes": 37730836,
+          "videoReadbacks": 0,
+          "liveTextures": 0,
+          "peakStagingBytes": 3110400,
+          "drawMs": 148.4299999959767,
+          "lastPts": 4.167,
+          "contextRestores": 1
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,1342 @@
+{
+  "scope": "Short headless Chrome, local unthrottled source, host FFmpeg remux; not browser-Wasm remux or independent acoustic A/V qualification",
+  "trials": [
+    {
+      "variant": "native-source",
+      "index": 0,
+      "samples": [],
+      "error": "page.evaluate: Error: Native media operation failed: PipelineStatus::DEMUXER_ERROR_COULD_NOT_OPEN: FFmpegDemuxer: open context failed\n    at HTMLVideoElement.failed (http://127.0.0.1:51793/web/generated/internal/native-player.js:49:41)\n    at /Volumes/seed2/Projects/webmpv/experiments/remux-native/test.mjs:61:29"
+    },
+    {
+      "variant": "remux",
+      "index": 1,
+      "samples": [
+        {
+          "at": 1788925851469,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 0.773972
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064459
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.104891
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.191399
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.239038
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083604
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036121
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.106445
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217408,
+              "cpu": 0.78
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 150672,
+              "cpu": 0.24
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102144,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81280,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178544,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154608,
+              "cpu": 0.1
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100608,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95632,
+              "cpu": 0.11
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925852476,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.010912
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064459
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.106234
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.192103
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.242734
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083658
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036121
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.112669
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217632,
+              "cpu": 1.01
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 150688,
+              "cpu": 0.24
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81280,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178624,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154672,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100608,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95632,
+              "cpu": 0.11
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925853483,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.012092
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064459
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.107285
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.192567
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.244797
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083658
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036121
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.117775
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217664,
+              "cpu": 1.01
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 150624,
+              "cpu": 0.24
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81280,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178560,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154688,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100608,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95632,
+              "cpu": 0.12
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925854490,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.014961
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064601
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.108849
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.192799
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.246793
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083658
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036151
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.122916
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217664,
+              "cpu": 1.02
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 146240,
+              "cpu": 0.25
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81264,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178528,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154720,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100592,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95632,
+              "cpu": 0.12
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925855497,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.016046
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064745
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.110186
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.192869
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.247442
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083658
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036151
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.128247
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217696,
+              "cpu": 1.02
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 146000,
+              "cpu": 0.25
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81264,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178528,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154704,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100560,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95488,
+              "cpu": 0.13
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925856503,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.016628
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064745
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.111366
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.192959
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.247595
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083658
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036151
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.133489
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217696,
+              "cpu": 1.02
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 146000,
+              "cpu": 0.25
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81264,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178560,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154736,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100560,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95488,
+              "cpu": 0.13
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925857510,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.01908
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064745
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.112238
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.193051
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.247614
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083676
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036151
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.138195
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217680,
+              "cpu": 1.02
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 146000,
+              "cpu": 0.25
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81264,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178560,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154768,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100560,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95488,
+              "cpu": 0.14
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925858517,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.019727
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.064745
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.113577
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.193051
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.250051
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.083676
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036151
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.143002
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217680,
+              "cpu": 1.02
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 146000,
+              "cpu": 0.25
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102176,
+              "cpu": 0.08
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81264,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178560,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154816,
+              "cpu": 0.11
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100560,
+              "cpu": 0.06
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95488,
+              "cpu": 0.14
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        },
+        {
+          "at": 1788925859523,
+          "processes": [
+            {
+              "type": "browser",
+              "id": 12393,
+              "cpuTime": 1.021738
+            },
+            {
+              "type": "renderer",
+              "id": 12449,
+              "cpuTime": 0.065553
+            },
+            {
+              "type": "renderer",
+              "id": 12403,
+              "cpuTime": 0.115184
+            },
+            {
+              "type": "renderer",
+              "id": 12402,
+              "cpuTime": 0.193747
+            },
+            {
+              "type": "GPU",
+              "id": 12398,
+              "cpuTime": 0.250051
+            },
+            {
+              "type": "network.mojom.NetworkService",
+              "id": 12399,
+              "cpuTime": 0.085183
+            },
+            {
+              "type": "storage.mojom.StorageService",
+              "id": 12400,
+              "cpuTime": 0.036174
+            },
+            {
+              "type": "audio.mojom.AudioService",
+              "id": 12523,
+              "cpuTime": 0.147482
+            }
+          ],
+          "host": [
+            {
+              "pid": 12393,
+              "rssKiB": 217680,
+              "cpu": 1.02
+            },
+            {
+              "pid": 12398,
+              "rssKiB": 146000,
+              "cpu": 0.25
+            },
+            {
+              "pid": 12399,
+              "rssKiB": 102240,
+              "cpu": 0.09
+            },
+            {
+              "pid": 12400,
+              "rssKiB": 81280,
+              "cpu": 0.04
+            },
+            {
+              "pid": 12402,
+              "rssKiB": 178640,
+              "cpu": 0.19
+            },
+            {
+              "pid": 12403,
+              "rssKiB": 154928,
+              "cpu": 0.12
+            },
+            {
+              "pid": 12449,
+              "rssKiB": 100672,
+              "cpu": 0.07
+            },
+            {
+              "pid": 12523,
+              "rssKiB": 95488,
+              "cpu": 0.15
+            }
+          ],
+          "state": {
+            "mode": "native",
+            "position": 0.433333,
+            "quality": {},
+            "diagnostics": {
+              "mode": "native",
+              "switching": false,
+              "videoFilters": "",
+              "audioFilters": "",
+              "backend": {
+                "path": "native",
+                "position": 0.433333,
+                "rendered": 11,
+                "dropped": 0,
+                "readyState": 4
+              }
+            },
+            "audio": {
+              "state": "paused",
+              "source": "native",
+              "decodedSampleCountersAvailable": false
+            },
+            "errors": []
+          }
+        }
+      ],
+      "startup": {
+        "firstFrameMs": 366.35000000009313,
+        "state": {
+          "mode": "native",
+          "position": 0.066667,
+          "quality": {},
+          "diagnostics": {
+            "mode": "native",
+            "switching": false,
+            "videoFilters": "",
+            "audioFilters": "",
+            "backend": {
+              "path": "native",
+              "position": 0.066667,
+              "rendered": 4,
+              "dropped": 0,
+              "readyState": 4
+            }
+          },
+          "audio": {
+            "state": "running",
+            "source": "native",
+            "decodedSampleCountersAvailable": false
+          },
+          "errors": []
+        }
+      },
+      "atFirstFrame": 1788925849466,
+      "remuxAtFirstFrame": [
+        {
+          "id": "1",
+          "start": 0,
+          "pid": 12478,
+          "started": 1788925849105,
+          "bytes": 370049,
+          "args": [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-readrate",
+            "1",
+            "-readrate_initial_burst",
+            "3",
+            "-i",
+            "/private/tmp/webmpv-remux-test/build/remux-native/sample.ts",
+            "-map",
+            "0:v:0",
+            "-map",
+            "0:a:0",
+            "-c",
+            "copy",
+            "-avoid_negative_ts",
+            "make_zero",
+            "-movflags",
+            "empty_moov+default_base_moof+frag_keyframe",
+            "-frag_duration",
+            "500000",
+            "-flush_packets",
+            "1",
+            "-f",
+            "mp4",
+            "pipe:1"
+          ],
+          "stderr": "[mp4 @ 0x9db01aa80] Malformed AAC bitstream detected: use the audio bitstream filter 'aac_adtstoasc' to fix it ('-bsf:a aac_adtstoasc' option with ffmpeg)\n[aost#0:1/copy @ 0x9dac58300] Error submitting a packet to the muxer: Operation not permitted\n    Last message repeated 1 times\n[out#0/mp4 @ 0x9db048780] Error muxing a packet\n[out#0/mp4 @ 0x9db048780] Task finished with error code: -1 (Operation not permitted)\n[out#0/mp4 @ 0x9db048780] Terminating thread with return code -1 (Operation not permitted)\n",
+          "firstByteAt": 1788925849209,
+          "code": 255,
+          "signal": null,
+          "closed": 1788925849215
+        }
+      ],
+      "processChurn": [],
+      "summary": {
+        "firstFrameMs": 366.35000000009313,
+        "browserCpuPercent": 3.9133722373975672,
+        "browserRssMeanMiB": 1052.8559027777778,
+        "ffmpegCpuPercent": null,
+        "ffmpegRssPeakMiB": null,
+        "elapsed": 8.054,
+        "positionAdvance": 0,
+        "fps": 0,
+        "mpvAvsyncMax": null
+      },
+      "seek": {
+        "readyMs": 355,
+        "kind": "restart at source 18s, timestamps reset; keyframe accurate only",
+        "state": {
+          "mode": "native",
+          "position": 0.263917,
+          "quality": {},
+          "diagnostics": {
+            "mode": "native",
+            "switching": false,
+            "videoFilters": "",
+            "audioFilters": "",
+            "backend": {
+              "path": "native",
+              "position": 0.269837,
+              "rendered": 4,
+              "dropped": 0,
+              "readyState": 4
+            }
+          },
+          "audio": {
+            "state": "running",
+            "source": "native",
+            "decodedSampleCountersAvailable": false
+          },
+          "errors": []
+        }
+      },
+      "workersAfterDestroy": 0,
+      "error": "AssertionError [ERR_ASSERTION]: Frame throughput\n    at file:///Volumes/seed2/Projects/webmpv/experiments/remux-native/test.mjs:94:11"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "1",
+      "start": 0,
+      "pid": 12478,
+      "started": 1788925849105,
+      "bytes": 370049,
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-readrate",
+        "1",
+        "-readrate_initial_burst",
+        "3",
+        "-i",
+        "/private/tmp/webmpv-remux-test/build/remux-native/sample.ts",
+        "-map",
+        "0:v:0",
+        "-map",
+        "0:a:0",
+        "-c",
+        "copy",
+        "-avoid_negative_ts",
+        "make_zero",
+        "-movflags",
+        "empty_moov+default_base_moof+frag_keyframe",
+        "-frag_duration",
+        "500000",
+        "-flush_packets",
+        "1",
+        "-f",
+        "mp4",
+        "pipe:1"
+      ],
+      "stderr": "[mp4 @ 0x9db01aa80] Malformed AAC bitstream detected: use the audio bitstream filter 'aac_adtstoasc' to fix it ('-bsf:a aac_adtstoasc' option with ffmpeg)\n[aost#0:1/copy @ 0x9dac58300] Error submitting a packet to the muxer: Operation not permitted\n    Last message repeated 1 times\n[out#0/mp4 @ 0x9db048780] Error muxing a packet\n[out#0/mp4 @ 0x9db048780] Task finished with error code: -1 (Operation not permitted)\n[out#0/mp4 @ 0x9db048780] Terminating thread with return code -1 (Operation not permitted)\n",
+      "firstByteAt": 1788925849209,
+      "code": 255,
+      "signal": null,
+      "closed": 1788925849215
+    },
+    {
+      "id": "1-seek",
+      "start": 18,
+      "pid": 12590,
+      "started": 1788925859532,
+      "bytes": 116489,
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-readrate",
+        "1",
+        "-readrate_initial_burst",
+        "3",
+        "-ss",
+        "18",
+        "-i",
+        "/private/tmp/webmpv-remux-test/build/remux-native/sample.ts",
+        "-map",
+        "0:v:0",
+        "-map",
+        "0:a:0",
+        "-c",
+        "copy",
+        "-avoid_negative_ts",
+        "make_zero",
+        "-movflags",
+        "empty_moov+default_base_moof+frag_keyframe",
+        "-frag_duration",
+        "500000",
+        "-flush_packets",
+        "1",
+        "-f",
+        "mp4",
+        "pipe:1"
+      ],
+      "stderr": "[mp4 @ 0x7aac26a80] Malformed AAC bitstream detected: use the audio bitstream filter 'aac_adtstoasc' to fix it ('-bsf:a aac_adtstoasc' option with ffmpeg)\n[aost#0:1/copy @ 0x7aac54300] Error submitting a packet to the muxer: Operation not permitted\n    Last message repeated 1 times\n[out#0/mp4 @ 0x7aac4c780] Error muxing a packet\n[out#0/mp4 @ 0x7aac4c780] Task finished with error code: -1 (Operation not permitted)\n[out#0/mp4 @ 0x7aac4c780] Terminating thread with return code -1 (Operation not permitted)\n",
+      "firstByteAt": 1788925859597,
+      "code": 255,
+      "signal": null,
+      "closed": 1788925859600
+    }
+  ],
+  "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "commit": "41e3ba2d3b85a7520ded73be4c51bc8e2a31a496",
+  "mediaRoot": "/private/tmp/webmpv-remux-test",
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "[27][0][0][0]",
+        "codec_tag": "0x001b",
+        "mime_codec_string": "avc1.640028",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "is_avc": "false",
+        "nal_length_size": "0",
+        "ts_id": "1",
+        "ts_packetsize": "188",
+        "id": "0x100",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/90000",
+        "start_pts": 132000,
+        "start_time": "1.466667",
+        "duration_ts": 2349000,
+        "duration": "26.100000",
+        "bits_per_raw_sample": "8",
+        "extradata_size": 50,
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "[15][0][0][0]",
+        "codec_tag": "0x000f",
+        "mime_codec_string": "mp4a.40.2",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "ts_id": "1",
+        "ts_packetsize": "188",
+        "id": "0x101",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/90000",
+        "start_pts": 130080,
+        "start_time": "1.445333",
+        "duration_ts": 2319360,
+        "duration": "25.770667",
+        "bit_rate": "19462",
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/private/tmp/webmpv-remux-test/build/remux-native/sample.ts",
+      "nb_streams": 2,
+      "nb_programs": 1,
+      "nb_stream_groups": 0,
+      "format_name": "mpegts",
+      "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+      "start_time": "1.445333",
+      "duration": "26.121334",
+      "size": "17410304",
+      "bit_rate": "5332133",
+      "probe_score": 50
+    }
+  },
+  "browser": "152.0.7977.83",
+  "passed": false,
+  "activeFfmpegAfter": 0
+}

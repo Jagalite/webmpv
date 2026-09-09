@@ -1,0 +1,85 @@
+{
+  "scope": "headless correctness only",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M1",
+    "memory": 8589934592,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=24510563)\t100%; charged; 0:00 remaining present: true\n"
+  },
+  "variants": [
+    "remux"
+  ],
+  "media": "movie",
+  "target": 236.9,
+  "warmup": 1,
+  "measure": 4,
+  "trials": [
+    {
+      "variant": "remux",
+      "index": 0,
+      "samples": [],
+      "error": "page.evaluate: Error: RuntimeError: Aborted(CompileError: WebAssembly.instantiate(): section (code 10, \"Code\") extends past end of the module (length 956060, remaining bytes 69143) @+4581). Build with -sASSERTIONS for more info.\n    at abort (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:4214)\n    at instantiateArrayBuffer (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:5052)\n    at async createWasm (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:6311)\n    at async createRemux (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:32157)\n    at async self.onmessage (http://127.0.0.1:55235/experiment/remux-worker.js:10:11)\n    at abort (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:4214)\n    at instantiateArrayBuffer (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:5052)\n    at async createWasm (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:6311)\n    at async createRemux (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:32157)\n    at async self.onmessage (http://127.0.0.1:55235/experiment/remux-worker.js:10:11)\n    at check (http://127.0.0.1:55235/experiment/remux-player.js:45:41)\n    at /Volumes/seed2/Projects/webmpv/experiments/pipeline-separation/run.mjs:26:25",
+      "failureState": {
+        "position": 0,
+        "frames": 0,
+        "drops": 0,
+        "errors": [
+          "RuntimeError: Aborted(CompileError: WebAssembly.instantiate(): section (code 10, \"Code\") extends past end of the module (length 956060, remaining bytes 69143) @+4581). Build with -sASSERTIONS for more info.\n    at abort (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:4214)\n    at instantiateArrayBuffer (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:5052)\n    at async createWasm (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:6311)\n    at async createRemux (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:32157)\n    at async self.onmessage (http://127.0.0.1:55235/experiment/remux-worker.js:10:11)"
+        ],
+        "remux": {
+          "stats": {
+            "fragments": [],
+            "generatedBytes": 0,
+            "discardedBytes": 0,
+            "peakQueueDepth": 0,
+            "bufferedBytesUpperBound": 0,
+            "peakBufferedBytesUpperBound": 0,
+            "peakBufferedSeconds": 0,
+            "seeks": [
+              {
+                "target": 236.9,
+                "started": 417.31499999947846
+              }
+            ],
+            "sessions": [
+              {
+                "generation": 1,
+                "target": 236.9,
+                "sourceSize": 248805945,
+                "firstPlayableMs": null,
+                "firstPlayableSourceBytes": null
+              }
+            ],
+            "errors": [
+              "RuntimeError: Aborted(CompileError: WebAssembly.instantiate(): section (code 10, \"Code\") extends past end of the module (length 956060, remaining bytes 69143) @+4581). Build with -sASSERTIONS for more info.\n    at abort (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:4214)\n    at instantiateArrayBuffer (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:5052)\n    at async createWasm (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:6311)\n    at async createRemux (http://127.0.0.1:55235/experiment/remux-engine/remux.mjs:1:32157)\n    at async self.onmessage (http://127.0.0.1:55235/experiment/remux-worker.js:10:11)"
+            ],
+            "workers": 0
+          },
+          "source": {},
+          "remux": {},
+          "ranges": [],
+          "position": 0,
+          "quality": {},
+          "readyState": 0
+        },
+        "visibility": "visible"
+      }
+    }
+  ],
+  "origin": {
+    "0-remux": {
+      "bytes": 65536,
+      "requests": 1,
+      "active": 0,
+      "aborted": 0,
+      "ranges": [
+        {
+          "a": 0,
+          "b": 65535
+        }
+      ]
+    }
+  },
+  "passed": false
+}

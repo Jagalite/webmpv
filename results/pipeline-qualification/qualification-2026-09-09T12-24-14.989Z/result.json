@@ -1,0 +1,2527 @@
+{
+  "browserFamily": "chrome",
+  "scope": "Headless targeted correctness; no performance claim",
+  "cases": [
+    {
+      "name": "seek-storm",
+      "media": "movie",
+      "storm": [
+        {
+          "target": 400,
+          "status": "AbortError",
+          "error": "AbortError: Superseded"
+        },
+        {
+          "target": 10,
+          "status": "AbortError",
+          "error": "AbortError: Superseded"
+        },
+        {
+          "target": 500,
+          "status": "AbortError",
+          "error": "AbortError: Superseded"
+        },
+        {
+          "target": 50,
+          "status": "AbortError",
+          "error": "AbortError: Superseded"
+        },
+        {
+          "target": 300,
+          "status": "AbortError",
+          "error": "AbortError: Superseded"
+        },
+        {
+          "target": 40,
+          "status": "ready"
+        }
+      ],
+      "open": {
+        "firstFrameMs": 806.234999999404,
+        "state": {
+          "presented": 0,
+          "position": 0,
+          "frames": 1,
+          "drops": 0,
+          "errors": [],
+          "remux": {
+            "stats": {
+              "fragments": [
+                {
+                  "bytes": 65756,
+                  "at": 674.7550000026822,
+                  "generation": 1
+                },
+                {
+                  "bytes": 18748,
+                  "at": 675.195000000298,
+                  "generation": 1
+                },
+                {
+                  "bytes": 19143,
+                  "at": 675.4200000017881,
+                  "generation": 1
+                },
+                {
+                  "bytes": 13858,
+                  "at": 719.4750000014901,
+                  "generation": 1
+                },
+                {
+                  "bytes": 16000,
+                  "at": 719.7200000025332,
+                  "generation": 1
+                },
+                {
+                  "bytes": 11137,
+                  "at": 719.9050000011921,
+                  "generation": 1
+                },
+                {
+                  "bytes": 17504,
+                  "at": 720.125,
+                  "generation": 1
+                },
+                {
+                  "bytes": 48258,
+                  "at": 763.410000000149,
+                  "generation": 1
+                }
+              ],
+              "generatedBytes": 211662,
+              "discardedBytes": 0,
+              "peakQueueDepth": 1,
+              "bufferedBytesUpperBound": 210404,
+              "peakBufferedBytesUpperBound": 210404,
+              "peakBufferedSeconds": 4.138667,
+              "seeks": [
+                {
+                  "target": 0,
+                  "started": 33.61500000208616
+                }
+              ],
+              "sessions": [
+                {
+                  "generation": 1,
+                  "target": 0,
+                  "sourceSize": 248805945,
+                  "firstPlayableMs": 653.2100000008941,
+                  "firstPlayableSourceBytes": 786432,
+                  "generatedBytes": 104905,
+                  "fullyConsumed": false
+                }
+              ],
+              "errors": [],
+              "workers": 2
+            },
+            "source": {
+              "fetchedBytes": 983040,
+              "requests": 15,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 983040,
+              "peakCacheBytes": 983040,
+              "activeBytes": 0,
+              "peakActiveBytes": 65536
+            },
+            "remux": {
+              "calls": 8,
+              "remuxMs": 617.9600000046194,
+              "generatedBytes": 211662,
+              "peakBatchBytes": 65756,
+              "heapBytes": 67108864
+            },
+            "ranges": [
+              [
+                -0.021333999999999964,
+                4.117333
+              ]
+            ],
+            "timelineBias": 1,
+            "position": 0,
+            "quality": {},
+            "readyState": 4,
+            "logs": [
+              "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+            ]
+          },
+          "visibility": "visible"
+        }
+      },
+      "before": {
+        "presented": 29,
+        "position": 40.94026,
+        "frames": 33,
+        "drops": 0,
+        "errors": [],
+        "remux": {
+          "stats": {
+            "fragments": [
+              {
+                "bytes": 65756,
+                "at": 674.7550000026822,
+                "generation": 1
+              },
+              {
+                "bytes": 18748,
+                "at": 675.195000000298,
+                "generation": 1
+              },
+              {
+                "bytes": 19143,
+                "at": 675.4200000017881,
+                "generation": 1
+              },
+              {
+                "bytes": 13858,
+                "at": 719.4750000014901,
+                "generation": 1
+              },
+              {
+                "bytes": 16000,
+                "at": 719.7200000025332,
+                "generation": 1
+              },
+              {
+                "bytes": 11137,
+                "at": 719.9050000011921,
+                "generation": 1
+              },
+              {
+                "bytes": 17504,
+                "at": 720.125,
+                "generation": 1
+              },
+              {
+                "bytes": 48258,
+                "at": 763.410000000149,
+                "generation": 1
+              },
+              {
+                "bytes": 130374,
+                "at": 847.9950000010431,
+                "generation": 1
+              },
+              {
+                "bytes": 458386,
+                "at": 1852.8100000023842,
+                "generation": 7
+              },
+              {
+                "bytes": 147547,
+                "at": 1990.464999999851,
+                "generation": 7
+              },
+              {
+                "bytes": 116485,
+                "at": 2080.275000002235,
+                "generation": 7
+              },
+              {
+                "bytes": 145905,
+                "at": 2168.75,
+                "generation": 7
+              },
+              {
+                "bytes": 147169,
+                "at": 2257.010000001639,
+                "generation": 7
+              },
+              {
+                "bytes": 143994,
+                "at": 2347.785000000149,
+                "generation": 7
+              },
+              {
+                "bytes": 117429,
+                "at": 2437.580000001937,
+                "generation": 7
+              },
+              {
+                "bytes": 125464,
+                "at": 2527.960000000894,
+                "generation": 7
+              },
+              {
+                "bytes": 122684,
+                "at": 2621.295000001788,
+                "generation": 7
+              },
+              {
+                "bytes": 83372,
+                "at": 2670.595000002533,
+                "generation": 7
+              },
+              {
+                "bytes": 106636,
+                "at": 2763.955000001937,
+                "generation": 7
+              },
+              {
+                "bytes": 81099,
+                "at": 2811.97500000149,
+                "generation": 7
+              },
+              {
+                "bytes": 104894,
+                "at": 2858.585000000894,
+                "generation": 7
+              }
+            ],
+            "generatedBytes": 2244358,
+            "discardedBytes": 0,
+            "peakQueueDepth": 1,
+            "bufferedBytesUpperBound": 1901064,
+            "peakBufferedBytesUpperBound": 1901064,
+            "peakBufferedSeconds": 6.527999000000001,
+            "seeks": [
+              {
+                "target": 0,
+                "started": 33.61500000208616
+              },
+              {
+                "target": 400,
+                "started": 850.1200000010431
+              },
+              {
+                "target": 10,
+                "started": 873.0850000008941
+              },
+              {
+                "target": 500,
+                "started": 896.2800000011921
+              },
+              {
+                "target": 50,
+                "started": 918.980000000447
+              },
+              {
+                "target": 300,
+                "started": 942.0200000032783
+              },
+              {
+                "target": 40,
+                "started": 964.9750000014901
+              }
+            ],
+            "sessions": [
+              {
+                "generation": 1,
+                "target": 0,
+                "sourceSize": 248805945,
+                "firstPlayableMs": 653.2100000008941,
+                "firstPlayableSourceBytes": 786432,
+                "generatedBytes": 104905,
+                "fullyConsumed": false
+              },
+              {
+                "generation": 7,
+                "target": 40,
+                "sourceSize": 248805945,
+                "firstPlayableMs": 904.5799999982119,
+                "firstPlayableSourceBytes": 1179648,
+                "generatedBytes": 459644,
+                "fullyConsumed": false
+              }
+            ],
+            "errors": [],
+            "workers": 2,
+            "cancellations": [
+              {
+                "generatedBytes": 342036,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 340778,
+                "sourceFetchedBytes": 1048576,
+                "inFlightOutputUpperBound": 8388608
+              }
+            ]
+          },
+          "source": {
+            "fetchedBytes": 2621440,
+            "requests": 40,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 2097152,
+            "peakCacheBytes": 2097152,
+            "activeBytes": 0,
+            "peakActiveBytes": 65536
+          },
+          "remux": {
+            "calls": 13,
+            "remuxMs": 1830.5150000043213,
+            "generatedBytes": 1902322,
+            "peakBatchBytes": 458386,
+            "heapBytes": 67108864
+          },
+          "ranges": [
+            [
+              39.68,
+              46.207999
+            ]
+          ],
+          "timelineBias": 1,
+          "position": 40.94026,
+          "quality": {},
+          "readyState": 4,
+          "logs": [
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+          ]
+        },
+        "visibility": "visible"
+      },
+      "after": {
+        "presented": 89,
+        "position": 42.948705,
+        "frames": 93,
+        "drops": 0,
+        "errors": [],
+        "remux": {
+          "stats": {
+            "fragments": [
+              {
+                "bytes": 65756,
+                "at": 674.7550000026822,
+                "generation": 1
+              },
+              {
+                "bytes": 18748,
+                "at": 675.195000000298,
+                "generation": 1
+              },
+              {
+                "bytes": 19143,
+                "at": 675.4200000017881,
+                "generation": 1
+              },
+              {
+                "bytes": 13858,
+                "at": 719.4750000014901,
+                "generation": 1
+              },
+              {
+                "bytes": 16000,
+                "at": 719.7200000025332,
+                "generation": 1
+              },
+              {
+                "bytes": 11137,
+                "at": 719.9050000011921,
+                "generation": 1
+              },
+              {
+                "bytes": 17504,
+                "at": 720.125,
+                "generation": 1
+              },
+              {
+                "bytes": 48258,
+                "at": 763.410000000149,
+                "generation": 1
+              },
+              {
+                "bytes": 130374,
+                "at": 847.9950000010431,
+                "generation": 1
+              },
+              {
+                "bytes": 458386,
+                "at": 1852.8100000023842,
+                "generation": 7
+              },
+              {
+                "bytes": 147547,
+                "at": 1990.464999999851,
+                "generation": 7
+              },
+              {
+                "bytes": 116485,
+                "at": 2080.275000002235,
+                "generation": 7
+              },
+              {
+                "bytes": 145905,
+                "at": 2168.75,
+                "generation": 7
+              },
+              {
+                "bytes": 147169,
+                "at": 2257.010000001639,
+                "generation": 7
+              },
+              {
+                "bytes": 143994,
+                "at": 2347.785000000149,
+                "generation": 7
+              },
+              {
+                "bytes": 117429,
+                "at": 2437.580000001937,
+                "generation": 7
+              },
+              {
+                "bytes": 125464,
+                "at": 2527.960000000894,
+                "generation": 7
+              },
+              {
+                "bytes": 122684,
+                "at": 2621.295000001788,
+                "generation": 7
+              },
+              {
+                "bytes": 83372,
+                "at": 2670.595000002533,
+                "generation": 7
+              },
+              {
+                "bytes": 106636,
+                "at": 2763.955000001937,
+                "generation": 7
+              },
+              {
+                "bytes": 81099,
+                "at": 2811.97500000149,
+                "generation": 7
+              },
+              {
+                "bytes": 104894,
+                "at": 2858.585000000894,
+                "generation": 7
+              },
+              {
+                "bytes": 77244,
+                "at": 3282.97500000149,
+                "generation": 7
+              },
+              {
+                "bytes": 92731,
+                "at": 3735.720000002533,
+                "generation": 7
+              },
+              {
+                "bytes": 62247,
+                "at": 4231.165000002831,
+                "generation": 7
+              }
+            ],
+            "generatedBytes": 2476580,
+            "discardedBytes": 0,
+            "peakQueueDepth": 1,
+            "bufferedBytesUpperBound": 2133286,
+            "peakBufferedBytesUpperBound": 2133286,
+            "peakBufferedSeconds": 8.021332999999998,
+            "seeks": [
+              {
+                "target": 0,
+                "started": 33.61500000208616
+              },
+              {
+                "target": 400,
+                "started": 850.1200000010431
+              },
+              {
+                "target": 10,
+                "started": 873.0850000008941
+              },
+              {
+                "target": 500,
+                "started": 896.2800000011921
+              },
+              {
+                "target": 50,
+                "started": 918.980000000447
+              },
+              {
+                "target": 300,
+                "started": 942.0200000032783
+              },
+              {
+                "target": 40,
+                "started": 964.9750000014901
+              }
+            ],
+            "sessions": [
+              {
+                "generation": 1,
+                "target": 0,
+                "sourceSize": 248805945,
+                "firstPlayableMs": 653.2100000008941,
+                "firstPlayableSourceBytes": 786432,
+                "generatedBytes": 104905,
+                "fullyConsumed": false
+              },
+              {
+                "generation": 7,
+                "target": 40,
+                "sourceSize": 248805945,
+                "firstPlayableMs": 904.5799999982119,
+                "firstPlayableSourceBytes": 1179648,
+                "generatedBytes": 459644,
+                "fullyConsumed": false
+              }
+            ],
+            "errors": [],
+            "workers": 2,
+            "cancellations": [
+              {
+                "generatedBytes": 342036,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 340778,
+                "sourceFetchedBytes": 1048576,
+                "inFlightOutputUpperBound": 8388608
+              }
+            ]
+          },
+          "source": {
+            "fetchedBytes": 3145728,
+            "requests": 48,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 2097152,
+            "peakCacheBytes": 2097152,
+            "activeBytes": 0,
+            "peakActiveBytes": 65536
+          },
+          "remux": {
+            "calls": 16,
+            "remuxMs": 2025.5500000081956,
+            "generatedBytes": 2134544,
+            "peakBatchBytes": 458386,
+            "heapBytes": 67108864
+          },
+          "ranges": [
+            [
+              39.68,
+              47.701333
+            ]
+          ],
+          "timelineBias": 1,
+          "position": 42.948705,
+          "quality": {},
+          "readyState": 4,
+          "logs": [
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+          ]
+        },
+        "visibility": "visible"
+      },
+      "passed": true,
+      "workersAfter": 0
+    },
+    {
+      "name": "edit-list-preroll",
+      "media": "edit",
+      "seeks": [
+        {
+          "target": 3,
+          "ms": 65.39499999955297,
+          "state": {
+            "presented": 0,
+            "position": 3,
+            "frames": 2,
+            "drops": 0,
+            "errors": [],
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 3098,
+                    "at": 73.06499999761581,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2679,
+                    "at": 73.4049999974668,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 745,
+                    "at": 73.61999999731779,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2665,
+                    "at": 73.82499999925494,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 74.01999999955297,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2608,
+                    "at": 74.23999999836087,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 74.42999999970198,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2606,
+                    "at": 75.12999999895692,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 753,
+                    "at": 75.57999999821186,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2576,
+                    "at": 75.86499999836087,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2598,
+                    "at": 312.42499999701977,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 895,
+                    "at": 312.69499999657273,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2420,
+                    "at": 312.85499999672174,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 895,
+                    "at": 313.0349999964237,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2486,
+                    "at": 313.19499999657273,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 1008,
+                    "at": 313.3449999988079,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2498,
+                    "at": 313.51999999955297,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 313.67499999701977,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2538,
+                    "at": 314.01999999955297,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 314.19999999925494,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2568,
+                    "at": 314.4099999964237,
+                    "generation": 2
+                  }
+                ],
+                "generatedBytes": 41456,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 19684,
+                "peakBufferedBytesUpperBound": 19684,
+                "peakBufferedSeconds": 5.5680000000000005,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 26.91499999910593
+                  },
+                  {
+                    "target": 3,
+                    "started": 273.1199999973178
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 54.1549999974668,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20510,
+                    "fullyConsumed": true
+                  },
+                  {
+                    "generation": 2,
+                    "target": 3,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 57.53500000014901,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20946,
+                    "fullyConsumed": true
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 20510,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 19248,
+                    "sourceFetchedBytes": 46163,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 46163,
+                "requests": 1,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 65536,
+                "peakCacheBytes": 65536,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536
+              },
+              "remux": {
+                "calls": 11,
+                "remuxMs": 21.554999999701977,
+                "generatedBytes": 20946,
+                "peakBatchBytes": 2598,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  2.651333,
+                  8.219333
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 3,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+              ]
+            },
+            "visibility": "visible"
+          }
+        },
+        {
+          "target": 0,
+          "ms": 53.40500000119209,
+          "state": {
+            "presented": 2,
+            "position": 0,
+            "frames": 8,
+            "drops": 0,
+            "errors": [],
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 3098,
+                    "at": 73.06499999761581,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2679,
+                    "at": 73.4049999974668,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 745,
+                    "at": 73.61999999731779,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2665,
+                    "at": 73.82499999925494,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 74.01999999955297,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2608,
+                    "at": 74.23999999836087,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 74.42999999970198,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2606,
+                    "at": 75.12999999895692,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 753,
+                    "at": 75.57999999821186,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2576,
+                    "at": 75.86499999836087,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2598,
+                    "at": 312.42499999701977,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 895,
+                    "at": 312.69499999657273,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2420,
+                    "at": 312.85499999672174,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 895,
+                    "at": 313.0349999964237,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2486,
+                    "at": 313.19499999657273,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 1008,
+                    "at": 313.3449999988079,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2498,
+                    "at": 313.51999999955297,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 313.67499999701977,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2538,
+                    "at": 314.01999999955297,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 314.19999999925494,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2568,
+                    "at": 314.4099999964237,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 3098,
+                    "at": 373.29499999806285,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2679,
+                    "at": 373.5949999988079,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 745,
+                    "at": 373.78999999910593,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2665,
+                    "at": 373.98499999940395,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 374.14499999955297,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2608,
+                    "at": 374.3649999983609,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 374.7549999989569,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2606,
+                    "at": 374.94999999925494,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 753,
+                    "at": 375.13499999791384,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2576,
+                    "at": 375.6849999986589,
+                    "generation": 3
+                  }
+                ],
+                "generatedBytes": 61966,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 19248,
+                "peakBufferedBytesUpperBound": 19684,
+                "peakBufferedSeconds": 5.5680000000000005,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 26.91499999910593
+                  },
+                  {
+                    "target": 3,
+                    "started": 273.1199999973178
+                  },
+                  {
+                    "target": 0,
+                    "started": 343.10499999672174
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 54.1549999974668,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20510,
+                    "fullyConsumed": true
+                  },
+                  {
+                    "generation": 2,
+                    "target": 3,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 57.53500000014901,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20946,
+                    "fullyConsumed": true
+                  },
+                  {
+                    "generation": 3,
+                    "target": 0,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 49.08999999985099,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20510,
+                    "fullyConsumed": true
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 20510,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 19248,
+                    "sourceFetchedBytes": 46163,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 20946,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 19684,
+                    "sourceFetchedBytes": 46163,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 46163,
+                "requests": 1,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 65536,
+                "peakCacheBytes": 65536,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536
+              },
+              "remux": {
+                "calls": 10,
+                "remuxMs": 18.21000000461936,
+                "generatedBytes": 20510,
+                "peakBatchBytes": 3098,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  -0.266667,
+                  5.168666
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 0,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+              ]
+            },
+            "visibility": "visible"
+          }
+        },
+        {
+          "target": 8,
+          "ms": 59.09499999880791,
+          "state": {
+            "presented": 2,
+            "position": 8,
+            "frames": 4,
+            "drops": 0,
+            "errors": [],
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 3098,
+                    "at": 73.06499999761581,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2679,
+                    "at": 73.4049999974668,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 745,
+                    "at": 73.61999999731779,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2665,
+                    "at": 73.82499999925494,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 74.01999999955297,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2608,
+                    "at": 74.23999999836087,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 74.42999999970198,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2606,
+                    "at": 75.12999999895692,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 753,
+                    "at": 75.57999999821186,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2576,
+                    "at": 75.86499999836087,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 2598,
+                    "at": 312.42499999701977,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 895,
+                    "at": 312.69499999657273,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2420,
+                    "at": 312.85499999672174,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 895,
+                    "at": 313.0349999964237,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2486,
+                    "at": 313.19499999657273,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 1008,
+                    "at": 313.3449999988079,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2498,
+                    "at": 313.51999999955297,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 313.67499999701977,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2538,
+                    "at": 314.01999999955297,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 314.19999999925494,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 2568,
+                    "at": 314.4099999964237,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 3098,
+                    "at": 373.29499999806285,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2679,
+                    "at": 373.5949999988079,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 745,
+                    "at": 373.78999999910593,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2665,
+                    "at": 373.98499999940395,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 374.14499999955297,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2608,
+                    "at": 374.3649999983609,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 759,
+                    "at": 374.7549999989569,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2606,
+                    "at": 374.94999999925494,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 753,
+                    "at": 375.13499999791384,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2576,
+                    "at": 375.6849999986589,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 2649,
+                    "at": 428.5599999986589,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 428.76499999687076,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 2495,
+                    "at": 428.94999999925494,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 889,
+                    "at": 429.13999999687076,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 2479,
+                    "at": 429.35499999672174,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 998,
+                    "at": 429.51999999955297,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 2472,
+                    "at": 429.7399999983609,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 1235,
+                    "at": 430.0599999986589,
+                    "generation": 4
+                  }
+                ],
+                "generatedBytes": 77334,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 14106,
+                "peakBufferedBytesUpperBound": 19684,
+                "peakBufferedSeconds": 5.5680000000000005,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 26.91499999910593
+                  },
+                  {
+                    "target": 3,
+                    "started": 273.1199999973178
+                  },
+                  {
+                    "target": 0,
+                    "started": 343.10499999672174
+                  },
+                  {
+                    "target": 8,
+                    "started": 399.01999999955297
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 54.1549999974668,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20510,
+                    "fullyConsumed": true
+                  },
+                  {
+                    "generation": 2,
+                    "target": 3,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 57.53500000014901,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20946,
+                    "fullyConsumed": true
+                  },
+                  {
+                    "generation": 3,
+                    "target": 0,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 49.08999999985099,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 20510,
+                    "fullyConsumed": true
+                  },
+                  {
+                    "generation": 4,
+                    "target": 8,
+                    "sourceSize": 46163,
+                    "firstPlayableMs": 50.849999997764826,
+                    "firstPlayableSourceBytes": 46163,
+                    "generatedBytes": 15368,
+                    "fullyConsumed": true
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 20510,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 19248,
+                    "sourceFetchedBytes": 46163,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 20946,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 19684,
+                    "sourceFetchedBytes": 46163,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 20510,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 19248,
+                    "sourceFetchedBytes": 46163,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 46163,
+                "requests": 1,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 65536,
+                "peakCacheBytes": 65536,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536
+              },
+              "remux": {
+                "calls": 8,
+                "remuxMs": 17.375,
+                "generatedBytes": 15368,
+                "peakBatchBytes": 2649,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  7.643333,
+                  11.749999
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 8,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+              ]
+            },
+            "visibility": "visible"
+          }
+        }
+      ],
+      "open": {
+        "firstFrameMs": 243.17500000074506,
+        "state": {
+          "presented": 0,
+          "position": 0,
+          "frames": 4,
+          "drops": 0,
+          "errors": [],
+          "remux": {
+            "stats": {
+              "fragments": [
+                {
+                  "bytes": 3098,
+                  "at": 73.06499999761581,
+                  "generation": 1
+                },
+                {
+                  "bytes": 2679,
+                  "at": 73.4049999974668,
+                  "generation": 1
+                },
+                {
+                  "bytes": 745,
+                  "at": 73.61999999731779,
+                  "generation": 1
+                },
+                {
+                  "bytes": 2665,
+                  "at": 73.82499999925494,
+                  "generation": 1
+                },
+                {
+                  "bytes": 759,
+                  "at": 74.01999999955297,
+                  "generation": 1
+                },
+                {
+                  "bytes": 2608,
+                  "at": 74.23999999836087,
+                  "generation": 1
+                },
+                {
+                  "bytes": 759,
+                  "at": 74.42999999970198,
+                  "generation": 1
+                },
+                {
+                  "bytes": 2606,
+                  "at": 75.12999999895692,
+                  "generation": 1
+                },
+                {
+                  "bytes": 753,
+                  "at": 75.57999999821186,
+                  "generation": 1
+                },
+                {
+                  "bytes": 2576,
+                  "at": 75.86499999836087,
+                  "generation": 1
+                }
+              ],
+              "generatedBytes": 20510,
+              "discardedBytes": 0,
+              "peakQueueDepth": 1,
+              "bufferedBytesUpperBound": 19248,
+              "peakBufferedBytesUpperBound": 19248,
+              "peakBufferedSeconds": 5.435333,
+              "seeks": [
+                {
+                  "target": 0,
+                  "started": 26.91499999910593
+                }
+              ],
+              "sessions": [
+                {
+                  "generation": 1,
+                  "target": 0,
+                  "sourceSize": 46163,
+                  "firstPlayableMs": 54.1549999974668,
+                  "firstPlayableSourceBytes": 46163,
+                  "generatedBytes": 20510,
+                  "fullyConsumed": true
+                }
+              ],
+              "errors": [],
+              "workers": 2
+            },
+            "source": {
+              "fetchedBytes": 46163,
+              "requests": 1,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 65536,
+              "peakCacheBytes": 65536,
+              "activeBytes": 0,
+              "peakActiveBytes": 65536
+            },
+            "remux": {
+              "calls": 10,
+              "remuxMs": 28.79499999433756,
+              "generatedBytes": 20510,
+              "peakBatchBytes": 3098,
+              "heapBytes": 67108864
+            },
+            "ranges": [
+              [
+                -0.266667,
+                5.168666
+              ]
+            ],
+            "timelineBias": 1,
+            "position": 0,
+            "quality": {},
+            "readyState": 4,
+            "logs": [
+              "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+            ]
+          },
+          "visibility": "visible"
+        }
+      },
+      "before": {
+        "presented": 30,
+        "position": 8.925718,
+        "frames": 33,
+        "drops": 0,
+        "errors": [],
+        "remux": {
+          "stats": {
+            "fragments": [
+              {
+                "bytes": 3098,
+                "at": 73.06499999761581,
+                "generation": 1
+              },
+              {
+                "bytes": 2679,
+                "at": 73.4049999974668,
+                "generation": 1
+              },
+              {
+                "bytes": 745,
+                "at": 73.61999999731779,
+                "generation": 1
+              },
+              {
+                "bytes": 2665,
+                "at": 73.82499999925494,
+                "generation": 1
+              },
+              {
+                "bytes": 759,
+                "at": 74.01999999955297,
+                "generation": 1
+              },
+              {
+                "bytes": 2608,
+                "at": 74.23999999836087,
+                "generation": 1
+              },
+              {
+                "bytes": 759,
+                "at": 74.42999999970198,
+                "generation": 1
+              },
+              {
+                "bytes": 2606,
+                "at": 75.12999999895692,
+                "generation": 1
+              },
+              {
+                "bytes": 753,
+                "at": 75.57999999821186,
+                "generation": 1
+              },
+              {
+                "bytes": 2576,
+                "at": 75.86499999836087,
+                "generation": 1
+              },
+              {
+                "bytes": 2598,
+                "at": 312.42499999701977,
+                "generation": 2
+              },
+              {
+                "bytes": 895,
+                "at": 312.69499999657273,
+                "generation": 2
+              },
+              {
+                "bytes": 2420,
+                "at": 312.85499999672174,
+                "generation": 2
+              },
+              {
+                "bytes": 895,
+                "at": 313.0349999964237,
+                "generation": 2
+              },
+              {
+                "bytes": 2486,
+                "at": 313.19499999657273,
+                "generation": 2
+              },
+              {
+                "bytes": 1008,
+                "at": 313.3449999988079,
+                "generation": 2
+              },
+              {
+                "bytes": 2498,
+                "at": 313.51999999955297,
+                "generation": 2
+              },
+              {
+                "bytes": 889,
+                "at": 313.67499999701977,
+                "generation": 2
+              },
+              {
+                "bytes": 2538,
+                "at": 314.01999999955297,
+                "generation": 2
+              },
+              {
+                "bytes": 889,
+                "at": 314.19999999925494,
+                "generation": 2
+              },
+              {
+                "bytes": 2568,
+                "at": 314.4099999964237,
+                "generation": 2
+              },
+              {
+                "bytes": 3098,
+                "at": 373.29499999806285,
+                "generation": 3
+              },
+              {
+                "bytes": 2679,
+                "at": 373.5949999988079,
+                "generation": 3
+              },
+              {
+                "bytes": 745,
+                "at": 373.78999999910593,
+                "generation": 3
+              },
+              {
+                "bytes": 2665,
+                "at": 373.98499999940395,
+                "generation": 3
+              },
+              {
+                "bytes": 759,
+                "at": 374.14499999955297,
+                "generation": 3
+              },
+              {
+                "bytes": 2608,
+                "at": 374.3649999983609,
+                "generation": 3
+              },
+              {
+                "bytes": 759,
+                "at": 374.7549999989569,
+                "generation": 3
+              },
+              {
+                "bytes": 2606,
+                "at": 374.94999999925494,
+                "generation": 3
+              },
+              {
+                "bytes": 753,
+                "at": 375.13499999791384,
+                "generation": 3
+              },
+              {
+                "bytes": 2576,
+                "at": 375.6849999986589,
+                "generation": 3
+              },
+              {
+                "bytes": 2649,
+                "at": 428.5599999986589,
+                "generation": 4
+              },
+              {
+                "bytes": 889,
+                "at": 428.76499999687076,
+                "generation": 4
+              },
+              {
+                "bytes": 2495,
+                "at": 428.94999999925494,
+                "generation": 4
+              },
+              {
+                "bytes": 889,
+                "at": 429.13999999687076,
+                "generation": 4
+              },
+              {
+                "bytes": 2479,
+                "at": 429.35499999672174,
+                "generation": 4
+              },
+              {
+                "bytes": 998,
+                "at": 429.51999999955297,
+                "generation": 4
+              },
+              {
+                "bytes": 2472,
+                "at": 429.7399999983609,
+                "generation": 4
+              },
+              {
+                "bytes": 1235,
+                "at": 430.0599999986589,
+                "generation": 4
+              }
+            ],
+            "generatedBytes": 77334,
+            "discardedBytes": 0,
+            "peakQueueDepth": 1,
+            "bufferedBytesUpperBound": 14106,
+            "peakBufferedBytesUpperBound": 19684,
+            "peakBufferedSeconds": 5.5680000000000005,
+            "seeks": [
+              {
+                "target": 0,
+                "started": 26.91499999910593
+              },
+              {
+                "target": 3,
+                "started": 273.1199999973178
+              },
+              {
+                "target": 0,
+                "started": 343.10499999672174
+              },
+              {
+                "target": 8,
+                "started": 399.01999999955297
+              }
+            ],
+            "sessions": [
+              {
+                "generation": 1,
+                "target": 0,
+                "sourceSize": 46163,
+                "firstPlayableMs": 54.1549999974668,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 20510,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 2,
+                "target": 3,
+                "sourceSize": 46163,
+                "firstPlayableMs": 57.53500000014901,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 20946,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 3,
+                "target": 0,
+                "sourceSize": 46163,
+                "firstPlayableMs": 49.08999999985099,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 20510,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 4,
+                "target": 8,
+                "sourceSize": 46163,
+                "firstPlayableMs": 50.849999997764826,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 15368,
+                "fullyConsumed": true
+              }
+            ],
+            "errors": [],
+            "workers": 2,
+            "cancellations": [
+              {
+                "generatedBytes": 20510,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 19248,
+                "sourceFetchedBytes": 46163,
+                "inFlightOutputUpperBound": 8388608
+              },
+              {
+                "generatedBytes": 20946,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 19684,
+                "sourceFetchedBytes": 46163,
+                "inFlightOutputUpperBound": 8388608
+              },
+              {
+                "generatedBytes": 20510,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 19248,
+                "sourceFetchedBytes": 46163,
+                "inFlightOutputUpperBound": 8388608
+              }
+            ]
+          },
+          "source": {
+            "fetchedBytes": 46163,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 65536,
+            "peakCacheBytes": 65536,
+            "activeBytes": 0,
+            "peakActiveBytes": 65536
+          },
+          "remux": {
+            "calls": 8,
+            "remuxMs": 17.375,
+            "generatedBytes": 15368,
+            "peakBatchBytes": 2649,
+            "heapBytes": 67108864
+          },
+          "ranges": [
+            [
+              7.643333,
+              11.749999
+            ]
+          ],
+          "timelineBias": 1,
+          "position": 8.925718,
+          "quality": {},
+          "readyState": 4,
+          "logs": [
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+          ]
+        },
+        "visibility": "visible"
+      },
+      "after": {
+        "presented": 90,
+        "position": 10.935957,
+        "frames": 93,
+        "drops": 0,
+        "errors": [],
+        "remux": {
+          "stats": {
+            "fragments": [
+              {
+                "bytes": 3098,
+                "at": 73.06499999761581,
+                "generation": 1
+              },
+              {
+                "bytes": 2679,
+                "at": 73.4049999974668,
+                "generation": 1
+              },
+              {
+                "bytes": 745,
+                "at": 73.61999999731779,
+                "generation": 1
+              },
+              {
+                "bytes": 2665,
+                "at": 73.82499999925494,
+                "generation": 1
+              },
+              {
+                "bytes": 759,
+                "at": 74.01999999955297,
+                "generation": 1
+              },
+              {
+                "bytes": 2608,
+                "at": 74.23999999836087,
+                "generation": 1
+              },
+              {
+                "bytes": 759,
+                "at": 74.42999999970198,
+                "generation": 1
+              },
+              {
+                "bytes": 2606,
+                "at": 75.12999999895692,
+                "generation": 1
+              },
+              {
+                "bytes": 753,
+                "at": 75.57999999821186,
+                "generation": 1
+              },
+              {
+                "bytes": 2576,
+                "at": 75.86499999836087,
+                "generation": 1
+              },
+              {
+                "bytes": 2598,
+                "at": 312.42499999701977,
+                "generation": 2
+              },
+              {
+                "bytes": 895,
+                "at": 312.69499999657273,
+                "generation": 2
+              },
+              {
+                "bytes": 2420,
+                "at": 312.85499999672174,
+                "generation": 2
+              },
+              {
+                "bytes": 895,
+                "at": 313.0349999964237,
+                "generation": 2
+              },
+              {
+                "bytes": 2486,
+                "at": 313.19499999657273,
+                "generation": 2
+              },
+              {
+                "bytes": 1008,
+                "at": 313.3449999988079,
+                "generation": 2
+              },
+              {
+                "bytes": 2498,
+                "at": 313.51999999955297,
+                "generation": 2
+              },
+              {
+                "bytes": 889,
+                "at": 313.67499999701977,
+                "generation": 2
+              },
+              {
+                "bytes": 2538,
+                "at": 314.01999999955297,
+                "generation": 2
+              },
+              {
+                "bytes": 889,
+                "at": 314.19999999925494,
+                "generation": 2
+              },
+              {
+                "bytes": 2568,
+                "at": 314.4099999964237,
+                "generation": 2
+              },
+              {
+                "bytes": 3098,
+                "at": 373.29499999806285,
+                "generation": 3
+              },
+              {
+                "bytes": 2679,
+                "at": 373.5949999988079,
+                "generation": 3
+              },
+              {
+                "bytes": 745,
+                "at": 373.78999999910593,
+                "generation": 3
+              },
+              {
+                "bytes": 2665,
+                "at": 373.98499999940395,
+                "generation": 3
+              },
+              {
+                "bytes": 759,
+                "at": 374.14499999955297,
+                "generation": 3
+              },
+              {
+                "bytes": 2608,
+                "at": 374.3649999983609,
+                "generation": 3
+              },
+              {
+                "bytes": 759,
+                "at": 374.7549999989569,
+                "generation": 3
+              },
+              {
+                "bytes": 2606,
+                "at": 374.94999999925494,
+                "generation": 3
+              },
+              {
+                "bytes": 753,
+                "at": 375.13499999791384,
+                "generation": 3
+              },
+              {
+                "bytes": 2576,
+                "at": 375.6849999986589,
+                "generation": 3
+              },
+              {
+                "bytes": 2649,
+                "at": 428.5599999986589,
+                "generation": 4
+              },
+              {
+                "bytes": 889,
+                "at": 428.76499999687076,
+                "generation": 4
+              },
+              {
+                "bytes": 2495,
+                "at": 428.94999999925494,
+                "generation": 4
+              },
+              {
+                "bytes": 889,
+                "at": 429.13999999687076,
+                "generation": 4
+              },
+              {
+                "bytes": 2479,
+                "at": 429.35499999672174,
+                "generation": 4
+              },
+              {
+                "bytes": 998,
+                "at": 429.51999999955297,
+                "generation": 4
+              },
+              {
+                "bytes": 2472,
+                "at": 429.7399999983609,
+                "generation": 4
+              },
+              {
+                "bytes": 1235,
+                "at": 430.0599999986589,
+                "generation": 4
+              }
+            ],
+            "generatedBytes": 77334,
+            "discardedBytes": 0,
+            "peakQueueDepth": 1,
+            "bufferedBytesUpperBound": 14106,
+            "peakBufferedBytesUpperBound": 19684,
+            "peakBufferedSeconds": 5.5680000000000005,
+            "seeks": [
+              {
+                "target": 0,
+                "started": 26.91499999910593
+              },
+              {
+                "target": 3,
+                "started": 273.1199999973178
+              },
+              {
+                "target": 0,
+                "started": 343.10499999672174
+              },
+              {
+                "target": 8,
+                "started": 399.01999999955297
+              }
+            ],
+            "sessions": [
+              {
+                "generation": 1,
+                "target": 0,
+                "sourceSize": 46163,
+                "firstPlayableMs": 54.1549999974668,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 20510,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 2,
+                "target": 3,
+                "sourceSize": 46163,
+                "firstPlayableMs": 57.53500000014901,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 20946,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 3,
+                "target": 0,
+                "sourceSize": 46163,
+                "firstPlayableMs": 49.08999999985099,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 20510,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 4,
+                "target": 8,
+                "sourceSize": 46163,
+                "firstPlayableMs": 50.849999997764826,
+                "firstPlayableSourceBytes": 46163,
+                "generatedBytes": 15368,
+                "fullyConsumed": true
+              }
+            ],
+            "errors": [],
+            "workers": 2,
+            "cancellations": [
+              {
+                "generatedBytes": 20510,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 19248,
+                "sourceFetchedBytes": 46163,
+                "inFlightOutputUpperBound": 8388608
+              },
+              {
+                "generatedBytes": 20946,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 19684,
+                "sourceFetchedBytes": 46163,
+                "inFlightOutputUpperBound": 8388608
+              },
+              {
+                "generatedBytes": 20510,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 19248,
+                "sourceFetchedBytes": 46163,
+                "inFlightOutputUpperBound": 8388608
+              }
+            ]
+          },
+          "source": {
+            "fetchedBytes": 46163,
+            "requests": 1,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 65536,
+            "peakCacheBytes": 65536,
+            "activeBytes": 0,
+            "peakActiveBytes": 65536
+          },
+          "remux": {
+            "calls": 8,
+            "remuxMs": 17.375,
+            "generatedBytes": 15368,
+            "peakBatchBytes": 2649,
+            "heapBytes": 67108864
+          },
+          "ranges": [
+            [
+              7.643333,
+              11.749999
+            ]
+          ],
+          "timelineBias": 1,
+          "position": 10.935957,
+          "quality": {},
+          "readyState": 4,
+          "logs": [
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+            "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x2bf350] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+          ]
+        },
+        "visibility": "visible"
+      },
+      "passed": true,
+      "workersAfter": 0
+    }
+  ],
+  "origin": {
+    "seek-storm": {
+      "bytes": 4653056,
+      "requests": 71,
+      "active": 0,
+      "aborted": 6,
+      "ranges": [
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 65536,
+          "b": 131071
+        },
+        {
+          "a": 131072,
+          "b": 196607
+        },
+        {
+          "a": 196608,
+          "b": 262143
+        },
+        {
+          "a": 262144,
+          "b": 327679
+        },
+        {
+          "a": 327680,
+          "b": 393215
+        },
+        {
+          "a": 393216,
+          "b": 458751
+        },
+        {
+          "a": 458752,
+          "b": 524287
+        },
+        {
+          "a": 524288,
+          "b": 589823
+        },
+        {
+          "a": 589824,
+          "b": 655359
+        },
+        {
+          "a": 655360,
+          "b": 720895
+        },
+        {
+          "a": 720896,
+          "b": 786431
+        },
+        {
+          "a": 786432,
+          "b": 851967
+        },
+        {
+          "a": 851968,
+          "b": 917503
+        },
+        {
+          "a": 917504,
+          "b": 983039
+        },
+        {
+          "a": 983040,
+          "b": 1048575
+        },
+        {
+          "a": 1048576,
+          "b": 1114111
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 65536,
+          "b": 131071
+        },
+        {
+          "a": 131072,
+          "b": 196607
+        },
+        {
+          "a": 196608,
+          "b": 262143
+        },
+        {
+          "a": 262144,
+          "b": 327679
+        },
+        {
+          "a": 327680,
+          "b": 393215
+        },
+        {
+          "a": 393216,
+          "b": 458751
+        },
+        {
+          "a": 458752,
+          "b": 524287
+        },
+        {
+          "a": 524288,
+          "b": 589823
+        },
+        {
+          "a": 589824,
+          "b": 655359
+        },
+        {
+          "a": 655360,
+          "b": 720895
+        },
+        {
+          "a": 18582503,
+          "b": 18648038
+        },
+        {
+          "a": 18648039,
+          "b": 18713574
+        },
+        {
+          "a": 18713575,
+          "b": 18779110
+        },
+        {
+          "a": 18779111,
+          "b": 18844646
+        },
+        {
+          "a": 18844647,
+          "b": 18910182
+        },
+        {
+          "a": 18910183,
+          "b": 18975718
+        },
+        {
+          "a": 18975719,
+          "b": 19041254
+        },
+        {
+          "a": 19041255,
+          "b": 19106790
+        },
+        {
+          "a": 19106791,
+          "b": 19172326
+        },
+        {
+          "a": 19172327,
+          "b": 19237862
+        },
+        {
+          "a": 19237863,
+          "b": 19303398
+        },
+        {
+          "a": 19303399,
+          "b": 19368934
+        },
+        {
+          "a": 19368935,
+          "b": 19434470
+        },
+        {
+          "a": 19434471,
+          "b": 19500006
+        },
+        {
+          "a": 19500007,
+          "b": 19565542
+        },
+        {
+          "a": 19565543,
+          "b": 19631078
+        },
+        {
+          "a": 19631079,
+          "b": 19696614
+        },
+        {
+          "a": 19696615,
+          "b": 19762150
+        },
+        {
+          "a": 19762151,
+          "b": 19827686
+        },
+        {
+          "a": 19827687,
+          "b": 19893222
+        },
+        {
+          "a": 19893223,
+          "b": 19958758
+        },
+        {
+          "a": 19958759,
+          "b": 20024294
+        },
+        {
+          "a": 20024295,
+          "b": 20089830
+        },
+        {
+          "a": 20089831,
+          "b": 20155366
+        },
+        {
+          "a": 20155367,
+          "b": 20220902
+        },
+        {
+          "a": 20220903,
+          "b": 20286438
+        },
+        {
+          "a": 20286439,
+          "b": 20351974
+        },
+        {
+          "a": 20351975,
+          "b": 20417510
+        },
+        {
+          "a": 20417511,
+          "b": 20483046
+        },
+        {
+          "a": 20483047,
+          "b": 20548582
+        },
+        {
+          "a": 20548583,
+          "b": 20614118
+        },
+        {
+          "a": 20614119,
+          "b": 20679654
+        },
+        {
+          "a": 20679655,
+          "b": 20745190
+        },
+        {
+          "a": 20745191,
+          "b": 20810726
+        },
+        {
+          "a": 20810727,
+          "b": 20876262
+        },
+        {
+          "a": 20876263,
+          "b": 20941798
+        },
+        {
+          "a": 20941799,
+          "b": 21007334
+        },
+        {
+          "a": 21007335,
+          "b": 21072870
+        }
+      ]
+    },
+    "edit-list-preroll": {
+      "bytes": 184652,
+      "requests": 4,
+      "active": 0,
+      "aborted": 0,
+      "ranges": [
+        {
+          "a": 0,
+          "b": 46162
+        },
+        {
+          "a": 0,
+          "b": 46162
+        },
+        {
+          "a": 0,
+          "b": 46162
+        },
+        {
+          "a": 0,
+          "b": 46162
+        }
+      ]
+    }
+  },
+  "passed": true
+}

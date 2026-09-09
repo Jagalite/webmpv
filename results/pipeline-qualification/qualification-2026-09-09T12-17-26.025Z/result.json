@@ -1,0 +1,404 @@
+{
+  "browserFamily": "chrome",
+  "scope": "Headless targeted correctness; no performance claim",
+  "cases": [
+    {
+      "name": "single-ts",
+      "media": "ts",
+      "seeks": [],
+      "open": {
+        "firstFrameMs": 341.28999999910593,
+        "state": {
+          "presented": 0,
+          "position": 0,
+          "frames": 1,
+          "drops": 0,
+          "errors": [],
+          "remux": {
+            "stats": {
+              "fragments": [
+                {
+                  "bytes": 71824,
+                  "at": 199.67999999970198,
+                  "generation": 1
+                },
+                {
+                  "bytes": 58357,
+                  "at": 200.4949999973178,
+                  "generation": 1
+                },
+                {
+                  "bytes": 55580,
+                  "at": 201.02499999850988,
+                  "generation": 1
+                },
+                {
+                  "bytes": 66833,
+                  "at": 201.5649999976158,
+                  "generation": 1
+                },
+                {
+                  "bytes": 60097,
+                  "at": 201.9949999973178,
+                  "generation": 1
+                },
+                {
+                  "bytes": 61676,
+                  "at": 202.42499999701977,
+                  "generation": 1
+                },
+                {
+                  "bytes": 61009,
+                  "at": 202.89000000059605,
+                  "generation": 1
+                },
+                {
+                  "bytes": 66097,
+                  "at": 203.39000000059605,
+                  "generation": 1
+                },
+                {
+                  "bytes": 56120,
+                  "at": 203.7799999974668,
+                  "generation": 1
+                },
+                {
+                  "bytes": 55477,
+                  "at": 204.1849999986589,
+                  "generation": 1
+                },
+                {
+                  "bytes": 55191,
+                  "at": 204.53999999910593,
+                  "generation": 1
+                },
+                {
+                  "bytes": 45231,
+                  "at": 205.0599999986589,
+                  "generation": 1
+                }
+              ],
+              "generatedBytes": 714731,
+              "discardedBytes": 0,
+              "peakQueueDepth": 1,
+              "bufferedBytesUpperBound": 713492,
+              "peakBufferedBytesUpperBound": 713492,
+              "peakBufferedSeconds": 6,
+              "seeks": [
+                {
+                  "target": 0,
+                  "started": 59.46999999880791
+                }
+              ],
+              "sessions": [
+                {
+                  "generation": 1,
+                  "target": 0,
+                  "sourceSize": 778320,
+                  "firstPlayableMs": 156.88500000163913,
+                  "firstPlayableSourceBytes": 778320,
+                  "generatedBytes": 714731,
+                  "fullyConsumed": true
+                }
+              ],
+              "errors": [],
+              "workers": 2
+            },
+            "source": {
+              "fetchedBytes": 778320,
+              "requests": 12,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 786432,
+              "peakCacheBytes": 786432,
+              "activeBytes": 0,
+              "peakActiveBytes": 65536
+            },
+            "remux": {
+              "calls": 12,
+              "remuxMs": 68.08500000834465,
+              "generatedBytes": 714731,
+              "peakBatchBytes": 71824,
+              "heapBytes": 67108864
+            },
+            "ranges": [
+              [
+                0.021344,
+                6.037353
+              ]
+            ],
+            "position": 0,
+            "quality": {},
+            "readyState": 4,
+            "logs": [
+              "[mpegts @ 0x2bf310] Could not find codec parameters for stream 1 (Audio: aac (LC) ([15][0][0][0] / 0x000F), 0 channels, 129 kb/s): unspecified sample rate",
+              "Consider increasing the value for the 'analyzeduration' (1000000) and 'probesize' (1048576) options"
+            ]
+          },
+          "visibility": "visible"
+        }
+      },
+      "error": "page.evaluate: Error: FFmpeg error -1094995529: AAC timeline discontinuity\nError: FFmpeg error -1094995529: AAC timeline discontinuity\n    at check (http://127.0.0.1:63655/experiment/remux-worker.js:5:30)\n    at self.onmessage (http://127.0.0.1:63655/experiment/remux-worker.js:14:4)\n    at check (http://127.0.0.1:63655/experiment/remux-worker.js:5:30)\n    at self.onmessage (http://127.0.0.1:63655/experiment/remux-worker.js:14:4)\n    at check (http://127.0.0.1:63655/experiment/remux-player.js:47:41)\n    at /Volumes/seed2/Projects/webmpv/experiments/pipeline-qualification/qualify.mjs:21:92",
+      "state": {
+        "presented": 0,
+        "position": 0,
+        "frames": 0,
+        "drops": 0,
+        "errors": [
+          "FFmpeg error -1094995529: AAC timeline discontinuity\nError: FFmpeg error -1094995529: AAC timeline discontinuity\n    at check (http://127.0.0.1:63655/experiment/remux-worker.js:5:30)\n    at self.onmessage (http://127.0.0.1:63655/experiment/remux-worker.js:14:4)"
+        ],
+        "remux": {
+          "stats": {
+            "fragments": [
+              {
+                "bytes": 71824,
+                "at": 199.67999999970198,
+                "generation": 1
+              },
+              {
+                "bytes": 58357,
+                "at": 200.4949999973178,
+                "generation": 1
+              },
+              {
+                "bytes": 55580,
+                "at": 201.02499999850988,
+                "generation": 1
+              },
+              {
+                "bytes": 66833,
+                "at": 201.5649999976158,
+                "generation": 1
+              },
+              {
+                "bytes": 60097,
+                "at": 201.9949999973178,
+                "generation": 1
+              },
+              {
+                "bytes": 61676,
+                "at": 202.42499999701977,
+                "generation": 1
+              },
+              {
+                "bytes": 61009,
+                "at": 202.89000000059605,
+                "generation": 1
+              },
+              {
+                "bytes": 66097,
+                "at": 203.39000000059605,
+                "generation": 1
+              },
+              {
+                "bytes": 56120,
+                "at": 203.7799999974668,
+                "generation": 1
+              },
+              {
+                "bytes": 55477,
+                "at": 204.1849999986589,
+                "generation": 1
+              },
+              {
+                "bytes": 55191,
+                "at": 204.53999999910593,
+                "generation": 1
+              },
+              {
+                "bytes": 45231,
+                "at": 205.0599999986589,
+                "generation": 1
+              }
+            ],
+            "generatedBytes": 714731,
+            "discardedBytes": 0,
+            "peakQueueDepth": 1,
+            "bufferedBytesUpperBound": 713492,
+            "peakBufferedBytesUpperBound": 713492,
+            "peakBufferedSeconds": 6,
+            "seeks": [
+              {
+                "target": 0,
+                "started": 59.46999999880791
+              },
+              {
+                "target": 3,
+                "started": 404.57499999925494
+              }
+            ],
+            "sessions": [
+              {
+                "generation": 1,
+                "target": 0,
+                "sourceSize": 778320,
+                "firstPlayableMs": 156.88500000163913,
+                "firstPlayableSourceBytes": 778320,
+                "generatedBytes": 714731,
+                "fullyConsumed": true
+              },
+              {
+                "generation": 2,
+                "target": 3,
+                "sourceSize": 778320,
+                "firstPlayableMs": null,
+                "firstPlayableSourceBytes": null
+              }
+            ],
+            "errors": [
+              "FFmpeg error -1094995529: AAC timeline discontinuity\nError: FFmpeg error -1094995529: AAC timeline discontinuity\n    at check (http://127.0.0.1:63655/experiment/remux-worker.js:5:30)\n    at self.onmessage (http://127.0.0.1:63655/experiment/remux-worker.js:14:4)"
+            ],
+            "workers": 0,
+            "cancellations": [
+              {
+                "generatedBytes": 714731,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 713492,
+                "sourceFetchedBytes": 778320,
+                "inFlightOutputUpperBound": 8388608
+              },
+              {
+                "generatedBytes": 0,
+                "pendingBytes": 0,
+                "retainedCompressedBytesUpperBound": 0,
+                "sourceFetchedBytes": 778320,
+                "inFlightOutputUpperBound": 8388608
+              }
+            ]
+          },
+          "source": {
+            "fetchedBytes": 778320,
+            "requests": 12,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 65536
+          },
+          "remux": {},
+          "ranges": [],
+          "position": 0,
+          "quality": {},
+          "readyState": 0,
+          "logs": [
+            "[mpegts @ 0x2bf310] Could not find codec parameters for stream 1 (Audio: aac (LC) ([15][0][0][0] / 0x000F), 0 channels, 129 kb/s): unspecified sample rate",
+            "Consider increasing the value for the 'analyzeduration' (1000000) and 'probesize' (1048576) options",
+            "[mpegts @ 0x2bf310] Could not find codec parameters for stream 1 (Audio: aac (LC) ([15][0][0][0] / 0x000F), 0 channels, 129 kb/s): unspecified sample rate",
+            "Consider increasing the value for the 'analyzeduration' (1000000) and 'probesize' (1048576) options"
+          ]
+        },
+        "visibility": "visible"
+      },
+      "passed": false,
+      "workersAfter": 0
+    }
+  ],
+  "origin": {
+    "single-ts": {
+      "bytes": 1556640,
+      "requests": 24,
+      "active": 0,
+      "aborted": 0,
+      "ranges": [
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 65536,
+          "b": 131071
+        },
+        {
+          "a": 131072,
+          "b": 196607
+        },
+        {
+          "a": 196608,
+          "b": 262143
+        },
+        {
+          "a": 262144,
+          "b": 327679
+        },
+        {
+          "a": 327680,
+          "b": 393215
+        },
+        {
+          "a": 393216,
+          "b": 458751
+        },
+        {
+          "a": 458752,
+          "b": 524287
+        },
+        {
+          "a": 524288,
+          "b": 589823
+        },
+        {
+          "a": 589824,
+          "b": 655359
+        },
+        {
+          "a": 655360,
+          "b": 720895
+        },
+        {
+          "a": 720896,
+          "b": 778319
+        },
+        {
+          "a": 0,
+          "b": 65535
+        },
+        {
+          "a": 65536,
+          "b": 131071
+        },
+        {
+          "a": 131072,
+          "b": 196607
+        },
+        {
+          "a": 196608,
+          "b": 262143
+        },
+        {
+          "a": 262144,
+          "b": 327679
+        },
+        {
+          "a": 327680,
+          "b": 393215
+        },
+        {
+          "a": 393216,
+          "b": 458751
+        },
+        {
+          "a": 458752,
+          "b": 524287
+        },
+        {
+          "a": 524288,
+          "b": 589823
+        },
+        {
+          "a": 589824,
+          "b": 655359
+        },
+        {
+          "a": 655360,
+          "b": 720895
+        },
+        {
+          "a": 720896,
+          "b": 778319
+        }
+      ]
+    }
+  },
+  "passed": false
+}

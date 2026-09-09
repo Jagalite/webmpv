@@ -1,0 +1,159 @@
+{
+  "family": "chrome",
+  "cases": [
+    {
+      "media": "animated",
+      "subtitles": true,
+      "lifecycle": true,
+      "start": {
+        "firstFrameMs": 1056.484999999404,
+        "state": {
+          "position": 0,
+          "frames": 2,
+          "drops": 0,
+          "decoderDrops": 0,
+          "avsync": 0,
+          "audio": {
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 256,
+            "underruns": 0,
+            "rms": 0.022841260041123652,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "diagnostics": {
+            "yuv": {
+              "fallbackFrames": 0,
+              "rgbCopyBytes": 0,
+              "frames": 2,
+              "videoUploads": 6,
+              "videoUploadBytes": 6220800,
+              "planeCopyBytes": 6220800,
+              "subtitleUploads": 1,
+              "subtitleUploadBytes": 480200,
+              "videoReadbacks": 0,
+              "liveTextures": 4,
+              "peakStagingBytes": 3110400,
+              "drawMs": 23.15999999642372,
+              "lastPts": 0
+            },
+            "pumpTicks": 30,
+            "rendered": 3,
+            "renderMs": 37.79000000283122,
+            "copyMs": 0,
+            "maxRenderMs": 35.20499999821186,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 23,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1835008,
+              "requests": 7,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 1835008,
+              "peakCacheBytes": 1835008,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "9039757",
+              "reads": 22,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          },
+          "errors": [],
+          "outputs": [],
+          "visibility": "visible"
+        }
+      },
+      "state": {
+        "position": 3,
+        "frames": 5,
+        "drops": 0,
+        "decoderDrops": 0,
+        "avsync": 0,
+        "audio": {
+          "state": "running",
+          "sampleRate": 48000,
+          "mediaFrames": 512,
+          "underruns": 0,
+          "rms": 0,
+          "latencyConfidence": "reported-latency estimate"
+        },
+        "diagnostics": {
+          "yuv": {
+            "fallbackFrames": 0,
+            "rgbCopyBytes": 0,
+            "frames": 5,
+            "videoUploads": 15,
+            "videoUploadBytes": 15552000,
+            "planeCopyBytes": 15552000,
+            "subtitleUploads": 3,
+            "subtitleUploadBytes": 5866136,
+            "videoReadbacks": 0,
+            "liveTextures": 4,
+            "peakStagingBytes": 3110400,
+            "drawMs": 21.16000000014901,
+            "lastPts": 3
+          },
+          "pumpTicks": 99,
+          "rendered": 4,
+          "renderMs": 18.679999999701977,
+          "copyMs": 0.01499999687075615,
+          "maxRenderMs": 8.965000003576279,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 3,
+          "ioPending": false,
+          "ioSerial": 82,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 3932443,
+            "requests": 16,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 4194304,
+            "peakCacheBytes": 4194304,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "9039757",
+            "reads": 82,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 3,
+          "queuedFrames": 0
+        },
+        "errors": [
+          "TypeError: done is not a function\n    at tick (http://127.0.0.1:62702/yuv/web/software-full-engine-worker.js:96:9)\n    at http://127.0.0.1:62702/yuv/web/software-full-engine-worker.js:20:3"
+        ],
+        "outputs": [
+          {
+            "kind": "gpu-context-lost"
+          },
+          {
+            "kind": "gpu-context-restored"
+          }
+        ],
+        "visibility": "visible"
+      },
+      "error": "page.evaluate: Error: Command timed out\n    at http://127.0.0.1:62702/yuv/web/generated/internal/wasm-player.js:159:78\n    at /Volumes/seed2/Projects/webmpv/experiments/pipeline-qualification/yuv-qualify.mjs:7:43",
+      "passed": false
+    }
+  ],
+  "passed": false
+}

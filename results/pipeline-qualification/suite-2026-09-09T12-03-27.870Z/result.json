@@ -1,0 +1,133 @@
+{
+  "engineBefore": {
+    "build/pipeline-qualification/remux/remux.wasm": "8063fba4b88a14ea6fbd860a794a2506d8cad4a7701de9b54b694a2de35b4ebe",
+    "build/pipeline-qualification/yuv/player.wasm": "047dfec24d507f4d20701d5407b608c8a1c8125efa674729d2c30959443783b4"
+  },
+  "tests": [
+    {
+      "driver": "qualify.mjs",
+      "env": {},
+      "started": "2026-09-09T12:03:27.941Z",
+      "log": "results/pipeline-qualification/qualification-2026-09-09T12-03-29.671Z\nChecking indexed-mkv\nChecking tail-index-mp4\nChecking long-gop\nChecking retry\nChecking seek-storm\nChecking paused-backpressure\nChecking local-large-file\nChecking local-large-mp4\nChecking audio-offset\nChecking rotation\nChecking sample-aspect\nChecking single-ts\nChecking configuration-change\nconfiguration-change page.evaluate: Error: Error: Seek target out of range\nChecking unsupported-10bit\nunsupported-10bit page.evaluate: Error: Error: FFmpeg error -1094995529: Unsupported AVC pixel format or interlacing\nChecking subtitle-feature-rejection\nsubtitle-feature-rejection page.evaluate: Error: This packet-only remux prototype does not implement subtitle overlays or filters\nresults/pipeline-qualification/qualification-2026-09-09T12-03-29.671Z\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:04:33.610Z"
+    },
+    {
+      "driver": "remux-faults.mjs",
+      "env": {},
+      "started": "2026-09-09T12:04:33.610Z",
+      "log": "results/pipeline-qualification/remux-faults-2026-09-09T12-04-43.743Z\ntruncated-range\nauth-refresh-cors\nchanged-source\ninvalid-selected-track\nselected-alternate-audio\neos\nconfiguration-during-play\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:05:04.779Z"
+    },
+    {
+      "driver": "yuv-qualify.mjs",
+      "env": {},
+      "started": "2026-09-09T12:05:04.780Z",
+      "log": "results/pipeline-qualification/yuv-chrome-2026-09-09T12-05-07.004Z\nChecking color-bt709-0 \nChecking color-bt709-1 \nChecking color-smpte170m-0 \nChecking color-smpte170m-1 \nChecking tenbit \nChecking rotation \nChecking animated \npage.evaluate: Error: Command timed out\nChecking sample format=yuv444p\nChecking sample vflip\nChecking sample hflip,eq=brightness=0.1\n",
+      "exitCode": 1,
+      "ended": "2026-09-09T12:06:12.960Z"
+    },
+    {
+      "driver": "qualify.mjs",
+      "env": {
+        "BROWSER": "firefox",
+        "CASES": "indexed-mkv,tail-index-mp4,single-ts,seek-storm"
+      },
+      "started": "2026-09-09T12:06:12.961Z",
+      "log": "results/pipeline-qualification/qualification-2026-09-09T12-06-13.505Z\nChecking indexed-mkv\nChecking tail-index-mp4\nChecking seek-storm\nChecking single-ts\nsingle-ts page.evaluate: Remux target buffer timeout\nresults/pipeline-qualification/qualification-2026-09-09T12-06-13.505Z\n",
+      "exitCode": 1,
+      "ended": "2026-09-09T12:06:56.728Z"
+    },
+    {
+      "driver": "yuv-qualify.mjs",
+      "env": {
+        "BROWSER": "firefox",
+        "CASES": "color-bt709-0,tenbit,animated"
+      },
+      "started": "2026-09-09T12:06:56.729Z",
+      "log": "results/pipeline-qualification/yuv-firefox-2026-09-09T12-06-56.973Z\nChecking color-bt709-0 \nChecking tenbit \nChecking animated \npage.evaluate: Command timed out\n",
+      "exitCode": 1,
+      "ended": "2026-09-09T12:07:40.099Z"
+    },
+    {
+      "driver": "qualify.mjs",
+      "env": {
+        "BROWSER": "webkit",
+        "CASES": "indexed-mkv,tail-index-mp4,single-ts,seek-storm"
+      },
+      "started": "2026-09-09T12:07:40.100Z",
+      "log": "results/pipeline-qualification/qualification-2026-09-09T12-07-40.674Z\nChecking indexed-mkv\nChecking tail-index-mp4\nChecking seek-storm\nseek-storm AssertionError [ERR_ASSERTION]: Decoded video must advance\nChecking single-ts\nsingle-ts page.evaluate: Error: Remux target buffer timeout\nresults/pipeline-qualification/qualification-2026-09-09T12-07-40.674Z\n",
+      "exitCode": 1,
+      "ended": "2026-09-09T12:08:20.402Z"
+    },
+    {
+      "driver": "yuv-qualify.mjs",
+      "env": {
+        "BROWSER": "webkit",
+        "CASES": "color-bt709-0,tenbit,animated"
+      },
+      "started": "2026-09-09T12:08:20.403Z",
+      "log": "results/pipeline-qualification/yuv-webkit-2026-09-09T12-08-20.926Z\nChecking color-bt709-0 \nChecking tenbit \nChecking animated \npage.evaluate: Error: Command timed out\n",
+      "exitCode": 1,
+      "ended": "2026-09-09T12:08:48.588Z"
+    },
+    {
+      "driver": "packet-check.mjs",
+      "env": {
+        "MEDIA": "movie",
+        "TARGET": "236.9"
+      },
+      "started": "2026-09-09T12:08:48.589Z",
+      "log": "results/pipeline-qualification/packets-2026-09-09T12-08-49.539Z [\n  {\n    stream: 0,\n    pts: 236.899333,\n    dts: 236.832667,\n    sourcePts: 236.899333,\n    sourceDts: 236.832667,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 237.099333,\n    dts: 236.866,\n    sourcePts: 237.099333,\n    sourceDts: 236.866,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 236.999333,\n    dts: 236.899333,\n    sourcePts: 236.999333,\n    sourceDts: 236.899333,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 236.932667,\n    dts: 236.932667,\n    sourcePts: 236.932667,\n    sourceDts: 236.932667,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 236.966,\n    dts: 236.966,\n    sourcePts: 236.966,\n    sourceDts: 236.966,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 237.032667,\n    dts: 236.999333,\n    sourcePts: 237.032667,\n    sourceDts: 236.999333,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 237.066,\n    dts: 237.032667,\n    sourcePts: 237.066,\n    sourceDts: 237.032667,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 237.266,\n    dts: 237.066,\n    sourcePts: 237.266,\n    sourceDts: 237.066,\n    ptsError: 0,\n    dtsError: 0\n  }\n]\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:08:54.808Z"
+    },
+    {
+      "driver": "packet-check.mjs",
+      "env": {
+        "MEDIA": "mkv",
+        "TARGET": "236.9"
+      },
+      "started": "2026-09-09T12:08:54.809Z",
+      "log": "results/pipeline-qualification/packets-2026-09-09T12-08-55.554Z [\n  {\n    stream: 0,\n    pts: 234.387,\n    dts: 234.321,\n    sourcePts: 234.387,\n    sourceDts: 234.32,\n    ptsError: 0,\n    dtsError: 0.0010000000000047748\n  },\n  {\n    stream: 0,\n    pts: 234.487,\n    dts: 234.354,\n    sourcePts: 234.487,\n    sourceDts: 234.354,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 234.454,\n    dts: 234.387,\n    sourcePts: 234.454,\n    sourceDts: 234.387,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 234.42,\n    dts: 234.42,\n    sourcePts: 234.42,\n    sourceDts: 234.42,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 234.687,\n    dts: 234.454,\n    sourcePts: 234.687,\n    sourceDts: 234.454,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 234.587,\n    dts: 234.487,\n    sourcePts: 234.587,\n    sourceDts: 234.487,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 234.52,\n    dts: 234.52,\n    sourcePts: 234.52,\n    sourceDts: 234.52,\n    ptsError: 0,\n    dtsError: 0\n  },\n  {\n    stream: 0,\n    pts: 234.554,\n    dts: 234.554,\n    sourcePts: 234.554,\n    sourceDts: 234.554,\n    ptsError: 0,\n    dtsError: 0\n  }\n]\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:09:00.727Z"
+    },
+    {
+      "driver": "packet-check.mjs",
+      "env": {
+        "MEDIA": "offset",
+        "TARGET": "0"
+      },
+      "started": "2026-09-09T12:09:00.727Z",
+      "log": "node:internal/modules/run_main:104\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Compressed payload and timestamp preservation\n    at file:///Volumes/seed2/Projects/webmpv/experiments/pipeline-qualification/packet-check.mjs:18:567 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '=='\n}\n\nNode.js v23.5.0\n",
+      "exitCode": 1,
+      "ended": "2026-09-09T12:09:06.622Z"
+    },
+    {
+      "driver": "packet-check.mjs",
+      "env": {
+        "MEDIA": "ts",
+        "TARGET": "0"
+      },
+      "started": "2026-09-09T12:09:06.623Z",
+      "log": "results/pipeline-qualification/packets-2026-09-09T12-09-07.332Z [\n  {\n    stream: 0,\n    pts: 0.02134400000000003,\n    dts: -0.04532199999999997,\n    sourcePts: 0.021,\n    sourceDts: -0.045667,\n    ptsError: 0.0003440000000000283,\n    dtsError: 0.00034500000000002584\n  },\n  {\n    stream: 0,\n    pts: 0.1213439999999999,\n    dts: -0.011989000000000027,\n    sourcePts: 0.121,\n    sourceDts: -0.012333,\n    ptsError: 0.00034399999999989994,\n    dtsError: 0.0003439999999999728\n  },\n  {\n    stream: 0,\n    pts: 0.054678000000000004,\n    dts: 0.02134400000000003,\n    sourcePts: 0.054333,\n    sourceDts: 0.021,\n    ptsError: 0.000345000000000005,\n    dtsError: 0.0003440000000000283\n  },\n  {\n    stream: 0,\n    pts: 0.08801100000000006,\n    dts: 0.054678000000000004,\n    sourcePts: 0.087667,\n    sourceDts: 0.054333,\n    ptsError: 0.0003440000000000665,\n    dtsError: 0.000345000000000005\n  },\n  {\n    stream: 0,\n    pts: 0.25467799999999996,\n    dts: 0.08801100000000006,\n    sourcePts: 0.254333,\n    sourceDts: 0.087667,\n    ptsError: 0.0003449999999999842,\n    dtsError: 0.0003440000000000665\n  },\n  {\n    stream: 0,\n    pts: 0.18801099999999993,\n    dts: 0.1213439999999999,\n    sourcePts: 0.187667,\n    sourceDts: 0.121,\n    ptsError: 0.0003439999999999277,\n    dtsError: 0.00034399999999989994\n  },\n  {\n    stream: 0,\n    pts: 0.1546780000000001,\n    dts: 0.1546780000000001,\n    sourcePts: 0.154333,\n    sourceDts: 0.154333,\n    ptsError: 0.00034500000000009523,\n    dtsError: 0.00034500000000009523\n  },\n  {\n    stream: 0,\n    pts: 0.22134399999999999,\n    dts: 0.18801099999999993,\n    sourcePts: 0.221,\n    sourceDts: 0.187667,\n    ptsError: 0.0003439999999999832,\n    dtsError: 0.0003439999999999277\n  }\n]\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:09:12.266Z"
+    },
+    {
+      "driver": "av-sync.mjs",
+      "env": {},
+      "started": "2026-09-09T12:09:12.266Z",
+      "log": "results/pipeline-qualification/av-sync-2026-09-09T12-09-12.504Z\nresults/pipeline-qualification/av-sync-2026-09-09T12-09-12.504Z\n",
+      "exitCode": 0,
+      "ended": "2026-09-09T12:09:49.463Z"
+    }
+  ],
+  "engineAfter": {
+    "build/pipeline-qualification/remux/remux.wasm": "8063fba4b88a14ea6fbd860a794a2506d8cad4a7701de9b54b694a2de35b4ebe",
+    "build/pipeline-qualification/yuv/player.wasm": "047dfec24d507f4d20701d5407b608c8a1c8125efa674729d2c30959443783b4"
+  },
+  "passed": false
+}
