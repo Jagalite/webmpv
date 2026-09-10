@@ -24,7 +24,9 @@ example expose a separate Automatic selection checkbox alongside the three modes
 flowchart TD
     S[Open source or reevaluate requirements] --> F{CPU filters requested?}
     F -->|Yes| SW[Software]
-    F -->|No| P[Bounded FFmpeg metadata inspection]
+    F -->|No| C{Simple immutable local MP4?}
+    C -->|Bounded metadata and browser admission| N
+    C -->|Unknown or remote| P[Bounded FFmpeg metadata inspection]
     P --> N{Native satisfies selected features?}
     N -->|Yes| D[Native direct]
     D -->|Packaging/decode rejection| R[Qualified Native remux]
@@ -72,11 +74,12 @@ that requesting a filter can trigger an engine change.
 
 ## Costs and limits
 
-Automatic inspection loads the small remux FFmpeg Wasm module and uses two temporary
+Deep automatic inspection loads the remux FFmpeg Wasm module and uses two temporary
 workers even when Native direct eventually wins. It performs no audio/video decoding
 or encoding and terminates those workers after inspection. This adds startup work;
-no new CPU-performance advantage is claimed. **Explicit Native mode still has the
-Wasm-free direct path.** Full automatic inspection requires cross-origin isolation,
+no new CPU-performance advantage is claimed. The local MP4 fast path below avoids
+this work when its bounded metadata checks pass. **Explicit Native mode retains
+the Wasm-free direct path.** Deep inspection requires cross-origin isolation,
 source permissions and the existing bounded HTTP Range contract (or a local File).
 A server that cannot satisfy range inspection may require explicit Native playback.
 
@@ -122,3 +125,19 @@ npm run test:remux-regressions
 
 [Recorded checks](../results/automatic-selection/README.md) distinguish successful
 playback tests, injected runtime-error policy tests, and remaining qualification limits.
+
+## Beta startup fast path
+
+Simple local MP4 files first undergo bounded JavaScript box inspection (at most
+256 KiB movie metadata plus 2 KiB headers, 64 top-level boxes). Filename/MIME are
+ignored. A single AVC video track and optional AAC-LC mono/stereo track must have
+self-contained data references, known sample entries and browser codec admission.
+Additional tracks, encryption, multiple sample descriptions, unfamiliar metadata or larger
+indexes retain FFmpeg inspection. Actual Native playback still gates selection.
+Remote sources retain the existing FFmpeg/source-identity path; no permission or
+authentication handling is bypassed. Explicit Native direct already avoids both
+inspectors and Wasm, and is checked separately in the clean consumer test.
+
+This optimizes a deliberately narrow implemented case, not every MP4 or every
+automatic Native selection. See `web/cheap-mp4-probe.js` and
+`tests/cheap-mp4-probe.mjs`. No additional public mode or codec transformation is added.

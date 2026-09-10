@@ -34,7 +34,9 @@
     "test:automatic-selection": "npm run build && node --test tests/native-selection.mjs && node tests/automatic-selection.mjs",
     "test:broad-routing": "npm run build && node --test tests/video-codec-config.mjs tests/native-selection.mjs && node tests/broad-routing.mjs",
     "test:large-files": "npm run build && node --test tests/file-reader.mjs && node tests/large-files.mjs",
-    "test:remux-packaging": "npm run build && node --test tests/remux-buffering.mjs && node tests/remux-packaging.mjs"
+    "test:remux-packaging": "npm run build && node --test tests/remux-buffering.mjs && node tests/remux-packaging.mjs",
+    "build:beta": "npm run build && python3 scripts/package-beta.py",
+    "test:beta": "npm run build:beta && node tests/beta-consumer.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",

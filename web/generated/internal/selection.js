@@ -19,7 +19,7 @@ export function nativeRejection(probe, settings, video) {
     }
     // Try each relevant packaging contract. A WebM rejection does not rule out MP4
     // (for example VP9 plus AAC). Actual remux configuration and playback still gate.
-    const mimes = ['mp4', 'webm'].map(container => `${v ? 'video' : 'audio'}/${container}; codecs="${[v, a].filter(Boolean).map(t => container === 'webm' && t.codec === 'vp9' ? 'vp9' : codecs[t.codec]).join(',')}"`);
+    const mimes = ['mp4', 'webm'].map(container => `${v ? 'video' : 'audio'}/${container}; codecs="${[v, a].filter(Boolean).map(t => container === 'webm' && t.codec === 'vp9' ? 'vp9' : t.codecString ?? codecs[t.codec]).join(',')}"`);
     if (!mimes.some(mime => video.canPlayType(mime)))
         return `Browser does not report support for ${mimes.join(' or ')}`;
 }

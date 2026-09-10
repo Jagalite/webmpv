@@ -1,0 +1,26 @@
+✔ simple MP4 uses bounded actual metadata despite misleading name/type (2.170583ms)
+✔ unsupported browser, non-MP4 and malformed box sizes require deep inspection (1.011416ms)
+✔ extra subtitle tracks, encrypted entries and unknown AAC extensions are not admitted (1.637917ms)
+✔ abort and oversize metadata do not trigger unbounded allocation (0.710667ms)
+✔ 64-bit local slices stay bounded and never materialize the complete file (3.414667ms)
+✔ epoch cancellation releases a blocked read and permits the next bounded read (0.494708ms)
+✔ destroy cancels reads; truncated and oversized sources fail explicitly (0.621125ms)
+✔ an epoch change during asynchronous reader cleanup cannot publish old bytes (0.147625ms)
+✔ Native checks the selected audio, not every available track (0.537167ms)
+✔ Disabled subtitles do not disqualify Native; enabled embedded subtitles do (0.085417ms)
+✔ Unknown audio profiles and unsupported browser MIME fail qualification (0.120625ms)
+✔ Native packaging checks include MP4 for VP9 with AAC and platform Dolby audio (0.132959ms)
+✔ AAC ASC profiles are probed with their actual object type (0.421375ms)
+✔ exact inspected codec strings avoid Firefox generic AVC false rejection (0.103459ms)
+✔ paused Opus leading gap does not drain the source (0.728917ms)
+✔ fragmented future ranges fail before full-source remuxing (0.121166ms)
+✔ useful short contiguous buffering permits one further batch (0.083625ms)
+✔ only common selected-track packaging is offered (0.844125ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 460.309083

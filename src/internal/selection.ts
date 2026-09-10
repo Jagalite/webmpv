@@ -1,5 +1,5 @@
 import type {PlaybackMode} from '../types.js';
-export type ProbeTrack = {id: string; index: number; type: string; codec: string; default?: boolean; forced?: boolean; channels?: number; aacObject?: number; attachedPicture?: boolean};
+export type ProbeTrack = {id: string; index: number; type: string; codec: string; codecString?: string; default?: boolean; forced?: boolean; channels?: number; aacObject?: number; attachedPicture?: boolean};
 export type Probe = {tracks: ProbeTrack[]; duration: number; identity?: {size: string; etag?: string}};
 export type SelectionAttempt = {mode: PlaybackMode | 'probe'; outcome: 'skipped' | 'failed' | 'selected'; reason: string};
 export function nativeRejection(probe: Probe, settings: {aid: string; sid: string; subtitles: boolean}, video: HTMLVideoElement): string | undefined {
@@ -14,6 +14,6 @@ export function nativeRejection(probe: Probe, settings: {aid: string; sid: strin
  if(a?.codec==='aac'){if(!a.aacObject||a.aacObject<1||a.aacObject>=31)return 'Native AAC profile is unavailable';codecs.aac=`mp4a.40.${a.aacObject}`;}
  // Try each relevant packaging contract. A WebM rejection does not rule out MP4
  // (for example VP9 plus AAC). Actual remux configuration and playback still gate.
- const mimes=['mp4','webm'].map(container=>`${v?'video':'audio'}/${container}; codecs="${[v,a].filter(Boolean).map(t=>container==='webm'&&t!.codec==='vp9'?'vp9':codecs[t!.codec]).join(',')}"`);
+ const mimes=['mp4','webm'].map(container=>`${v?'video':'audio'}/${container}; codecs="${[v,a].filter(Boolean).map(t=>container==='webm'&&t!.codec==='vp9'?'vp9':t!.codecString??codecs[t!.codec]).join(',')}"`);
  if(!mimes.some(mime=>video.canPlayType(mime)))return `Browser does not report support for ${mimes.join(' or ')}`;
 }

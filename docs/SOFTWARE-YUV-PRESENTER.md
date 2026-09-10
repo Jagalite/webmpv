@@ -20,9 +20,12 @@ reaches Software if explicitly requested. It does not change Native or Hybrid an
 requires no WebCodecs. The optional engine assets must be served with the library.
 No production default is changed and no broad qualification is asserted.
 
-Current release blocker: filtered seeks intermittently time out in the integrated
-presenter. A passing repeat does not resolve the earlier failures. Use this option
-for experiments only until the source/seek interaction is isolated and fixed.
+Beta follow-up isolated a shared RGB/YUV seek-read failure: interrupting a bounded
+stream read could feed a partial packet to FFmpeg. The maintained workers now let
+that read complete. Controlled legacy-worker failures and new exact-target checks
+are recorded in [beta results](../results/beta/README.md). This scoped correction
+does not establish broad seek/endurance or performance qualification. Keep the
+presenter experimental and retain every earlier failed run.
 
 The native backend keeps mpv's decoding, audio, clock, filters and rendering lock.
 SDR 8-bit YUV420P with BT.601/709 matrix/range and quarter-turn rotation uses three

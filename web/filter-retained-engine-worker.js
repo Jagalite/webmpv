@@ -68,7 +68,7 @@ let decoderWorker,decoderStats;
 let engine, canvas, context, timer, audio, pcm, nativeAudio, epoch = -1, forwarded = 0;
 let renderMs=0,copyMs=0,maxRenderMs=0;
 let rendered = 0, sourceRendered = 0, ticks = 0, force = true, closing = false, presentedPosition=0, frameImage, measureOutput=false, wasWhite=false;
-let ioWorker,ioStats,ioReady,ioClose,ioSession=0,pendingTarget=null,seekSerial=0,restarted=false,position=0;
+let ioWorker,ioStats,ioReady,ioClose,ioSession=0,pendingTarget=null,restarted=false,position=0;
 let internalId=0x80000000,demuxFormat='',seekPrerollSeconds=0;
 const internalCommands=new Map();
 function internalCommand(args,done){const id=internalId++;internalCommands.set(id,done);submit(id,args);}
@@ -166,7 +166,9 @@ function tick() {
           internalCommand(['set','hr-seek-demuxer-offset',String(seekPrerollSeconds)],()=>post({type:'event',event}));
         });continue;
       }
-      if(event.event==='seek'&&ioWorker&&seekSerial){if(engine._web_io_interrupt(seekSerial))ioWorker.postMessage({type:'epoch'});seekSerial=0;}
+      // Let mpv discard obsolete demux packets after this bounded read completes.
+      // Interrupting stream_cb read_fn mid-packet returns a truncated packet to FFmpeg.
+      // Source replacement/destroy still cancel I/O through closeIO().
       if(event.event==='property-change'&&event.name==='time-pos'){position=event.data;releaseSeek();}
       if(event.event==='playback-restart'){restarted=true;releaseSeek();}
       post({type:'event', event});
@@ -235,7 +237,7 @@ self.onmessage = async ({data}) => {
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 6, +data.running);
     } else if (data.type === 'open-remote' || data.type === 'open-file') {await openRemote(data);
     } else if(data.type==='refreshed'){ioWorker?.postMessage(data);
-    } else if(data.type==='seek'){minFramePts=data.seconds*1e6-150000;cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();sourceRendered=0;pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);seekSerial=engine.HEAPU32[(engine._web_io_ptr()>>>2)+1];submit(data.id,['seek',String(data.seconds),'absolute+exact']);
+    } else if(data.type==='seek'){minFramePts=data.seconds*1e6-150000;cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();sourceRendered=0;pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);submit(data.id,['seek',String(data.seconds),'absolute+exact']);
     } else if (data.type === 'open') {minFramePts=-Infinity;cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();
       sourceRendered=0;
       await closeIO();

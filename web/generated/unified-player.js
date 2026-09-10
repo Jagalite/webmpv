@@ -330,11 +330,25 @@ export class Player extends EventTarget {
             else {
                 const controller = this.inspection = new AbortController();
                 try {
-                    const { probeSource } = await this.interruptible(import(new URL('../source-probe.js', import.meta.url).href));
+                    let probe;
+                    // Immutable local bytes permit bounded inspection without an engine download.
+                    // Remote identity/permission enforcement continues through the existing inspector.
+                    if (source.kind === 'local' && this.nativeRemux !== 'always') {
+                        const { cheapMP4Probe } = await this.interruptible(import(new URL('../cheap-mp4-probe.js', import.meta.url).href));
+                        const local = source.file instanceof File ? source.file : new File([source.file], 'media');
+                        const cheap = await cheapMP4Probe(local, controller.signal, document.createElement('video'));
+                        probe = cheap.probe;
+                        this.record({ mode: 'probe', outcome: probe ? 'selected' : 'skipped', reason: `Local MP4 metadata: ${cheap.bytesRead} bytes; ${probe ? 'no inspector Wasm required' : cheap.reason}` });
+                    }
                     if (this.destroyed)
                         throw Error('Player is destroyed');
                     const transport = source.kind === 'local' ? { file: source.file instanceof File ? source.file : new File([source.file], 'media') } : (() => { const { refreshAuthorization, ...options } = source.options; return { options: { ...options, url: new URL(options.url, location.href).href }, refreshAuthorization }; })();
-                    const probe = await probeSource(transport, controller.signal);
+                    if (!probe) {
+                        const { probeSource } = await this.interruptible(import(new URL('../source-probe.js', import.meta.url).href));
+                        probe = await probeSource(transport, controller.signal);
+                    }
+                    if (!probe)
+                        throw Error('Source inspection returned no metadata');
                     if (source.kind === 'remote' && probe.identity)
                         source.options.identity ??= probe.identity;
                     // Cross-mode track IDs reset to auto in replace(); preflight that same selection.

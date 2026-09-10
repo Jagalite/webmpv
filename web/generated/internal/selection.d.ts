@@ -4,6 +4,7 @@ export type ProbeTrack = {
     index: number;
     type: string;
     codec: string;
+    codecString?: string;
     default?: boolean;
     forced?: boolean;
     channels?: number;

@@ -31,3 +31,8 @@ test('AAC ASC profiles are probed with their actual object type',()=>{
  assert.equal(nativeRejection({tracks:[v,{...a,aacObject:5}],duration:10},settings,{canPlayType:mime=>{mimes.push(mime);return 'probably';}}),undefined);
  assert.ok(mimes[0].includes('mp4a.40.5'));
 });
+
+test('exact inspected codec strings avoid Firefox generic AVC false rejection',()=>{
+ const exact={canPlayType:m=>m==='video/mp4; codecs="avc1.64001e,mp4a.40.2"'?'probably':''};
+ assert.equal(nativeRejection({tracks:[{...v,codecString:'avc1.64001e'},a],duration:1},settings,exact),undefined);
+});

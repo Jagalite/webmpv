@@ -1,6 +1,6 @@
 # webmpv
 
-A browser player with automatic selection across three playback modes:
+A browser media compatibility runtime that selects the cheapest correct path across three playback modes:
 
 1. **Native** — browser video playback, with a progressive packet-copy remux fallback.
 2. **Hybrid** — browser video decoding with mpv timing and libass subtitles.
@@ -17,15 +17,15 @@ source restrictions and migration from the older decoder API.
 ## Release status
 
 The three-mode architecture is the target for a scoped beta. The current checkout
-is a development integration, not yet a standalone library release. The core does
-not need another redesign before beta; release preparation still needs:
+is a development integration with a standalone beta-candidate packager, not a
+production-qualified release. See [beta installation and gates](docs/BETA.md). The package preserves relative paths for JS, workers, Wasm, AudioWorklet and fonts,
+and includes a three-mode asset manifest. `scripts/package-beta.py` produces an
+offline-installable candidate; `tests/beta-consumer.mjs` checks a clean installation.
 
-- A standalone asset layout for JavaScript, workers, Wasm, the audio worklet and fonts.
-- A three-mode release manifest and reproducible engine build instructions, separate
-  from the historical software-baseline packager.
-- Validation of the packaged artifacts in a clean consumer application, including
-  loading, isolation headers, mode changes and cleanup.
-- A declared browser support matrix and qualification tied to the exact shipped artifacts.
+Release gates remain: independent clean engine builds, exact A/V and audio-layout
+qualification, sustained memory/resource stability, remux recovery/configuration
+edges, and a declared browser/device matrix tied to shipped hashes. Software YUV
+stays opt-in; its seek and movie-performance blockers are not closed by retries.
 
 Hybrid now bridges AVC, HEVC, VP8, VP9 and AV1 when the browser accepts the actual
 configuration and delivers frames. Native first tries direct playback, then uses
@@ -35,7 +35,10 @@ direct playback. Neither operation re-encodes media. See [media routing](docs/ME
 Current limits include bounded Hybrid source-frame size (4K tested), browser-dependent Native format
 support, 32 MiB ArrayBuffer inputs (larger Files use bounded local reads), and
 software-only filter execution. Mode changes reopen playback and are not gapless.
-Large local-file streaming in mpv modes remains future work. Automatic inspection
+Bounded local File reads in both mpv modes are implemented and functionally tested,
+including >4 GiB sparse offsets, a 259 MB movie, seeking, fallback and cleanup.
+Long-duration memory stability and broader device qualification remain open; see
+[local-file evidence](results/routing-completion/LOCAL-FILES.md). Deep automatic inspection
 requires isolation and random-access sources; see [automatic selection](docs/AUTOMATIC-SELECTION.md).
 See the [integration guide](docs/INTEGRATION.md) for the full support contract.
 
@@ -44,7 +47,7 @@ The [three-mode API validation](results/player-api/README.md) records the origin
 long-playback seeking, aspect ratio, cancellation and source replacement; the
 current API suite has 21 checks plus AudioWorklet, presentation and timing unit checks.
 These are functional results; they do not constitute new performance or endurance
-qualification. Next is packaging a beta and testing it from a clean consumer app.
+qualification. See [beta preparation and consumer evidence](results/beta/README.md).
 
 ## Run the demo
 
@@ -211,7 +214,7 @@ S1 fixed HLS/DASH VOD passes its declared functional profile, including TS/fMP4
 timestamp-reset seeks and worker cleanup. See [S1 validation](docs/validation/S1.md).
 The optional M4 browser copy-back decoder is accepted with an explicit
 user-approved 57:38 endurance exception; software was the default in that candidate.
-The current three-mode API defaults to Native. See
+The current three-mode API selects automatically unless a mode is pinned. See
 [clean candidate acceptance](docs/validation/CANDIDATE.md). See [M4 validation](docs/validation/M4.md) and
 [integration instructions](docs/INTEGRATION.md). The accepted 0.2.0 archive is
 unchanged.

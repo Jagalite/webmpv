@@ -1,5 +1,9 @@
 # Optional Software YUV integration
 
+Later beta work isolated and corrected a shared read-interruption failure. See
+[the beta follow-up](../beta/README.md) for new controlled tests and measurements.
+The following original runs and limitations remain preserved as historical evidence.
+
 Decision: **experiment further; do not promote to the default renderer**. The
 integration is available only through `softwarePresenter: 'experimental-yuv'`.
 Default Software remains RGB. Native and Hybrid retain their existing presenters.

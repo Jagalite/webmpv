@@ -2,11 +2,12 @@ import http from 'node:http';
 import path from 'node:path';
 import {readFile,stat} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
-export async function serve({pagePath='experiments/pipeline-qualification/page.html'}={}){
+export async function serve({pagePath='experiments/pipeline-qualification/page.html',mediaPaths={}}={}){
  const root=process.cwd(),cache=new Map(),states=new Map();
  const media={movie:'build/fixtures/playback-performance/bbb-stream.mp4',mkv:'build/pipeline-separation/fixtures/movie.mkv',tail:'build/pipeline-separation/fixtures/tail.mp4',sample:'build/hybrid-performance/sample.mp4',animated:'build/fixtures/tracks.mkv',ass:'build/fixtures/playback-performance/sample-ass.mkv',long:'build/pipeline-separation/fixtures/long.mp4',ts:'build/pipeline-separation/fixtures/config-0.ts',config:'build/pipeline-separation/fixtures/config.ts',offset:'build/pipeline-separation/fixtures/offset.mkv',rotation:'build/pipeline-separation/fixtures/rotation.mp4',sar:'build/pipeline-separation/fixtures/sar.mp4',tenbit:'build/fixtures/playback-performance/h264-10bit.mkv',bt601:'build/fixtures/playback-performance/h264-consistent-601.mp4',bt709:'build/fixtures/playback-performance/h264-consistent-709.mp4'};
  for(const name of ['color-bt709-0','color-bt709-1','color-smpte170m-0','color-smpte170m-1','sync'])media[name]='build/pipeline-qualification/fixtures/'+name+(name==='sync'?'.mp4':'-v2.mkv');
  media.longts='build/pipeline-qualification/fixtures/long.ts';media.edit='build/pipeline-qualification/fixtures/edit.mp4';media.syncmkv='build/pipeline-qualification/fixtures/sync.mkv';media.offsetmp4='build/pipeline-qualification/fixtures/offset.mp4';
+ Object.assign(media,mediaPaths);
  const server=http.createServer(async(req,res)=>{
   res.setHeader('Cross-Origin-Opener-Policy','same-origin');res.setHeader('Cross-Origin-Embedder-Policy','require-corp');res.setHeader('Cross-Origin-Resource-Policy','same-origin');res.setHeader('Cache-Control','no-store');
   try{

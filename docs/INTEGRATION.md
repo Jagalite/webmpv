@@ -121,12 +121,13 @@ require cross-origin isolation. Native remux and Hybrid/software require a secur
 `Cross-Origin-Opener-Policy: same-origin` and
 `Cross-Origin-Embedder-Policy: require-corp`. The media server must satisfy CORS,
 CORP where applicable, range and representation requirements. The complete
-checkout is not yet a standalone published npm distribution.
+checkout is not a published npm distribution. A standalone, offline-installable
+beta candidate and clean-consumer instructions are available in [BETA.md](BETA.md).
 
 Build the JS/API with `npm run build`. Software uses `web/engine-software-full`
 from `npm run build:software-full`. Hybrid uses `web/engine-hybrid` from
 `npm run build:hybrid`; Native remux uses `web/engine-remux` from `npm run build:remux`.
-Both build scripts use the pinned local FFmpeg/Emscripten toolchain; see
+These engine build scripts use the pinned local FFmpeg/Emscripten toolchain; see
 [build prerequisites and commands](MEDIA-ROUTING.md). Worker filenames are implementation
 details, not additional playback modes. FFmpeg build flags affect the bundled
 Wasm capabilities, not the public mode list.
@@ -153,3 +154,9 @@ those explicit pages because `/` serves the three-mode demo. The new maintained 
 is shared by hybrid/software in `src/internal/wasm-player.ts`; native resource
 ownership lives in `src/internal/native-player.ts`, and transaction/state ownership
 lives in `src/unified-player.ts`.
+
+Beta output scope: Hybrid and Software currently feed a stereo AudioWorklet output.
+Source multichannel metadata or FFmpeg codec registration does not establish
+multichannel output fidelity. HDR/color fidelity, Safari/mobile coverage and
+hour-long stability remain separate qualification gates. Exactly three public
+modes are preserved; the optional Software YUV presenter is experimental.

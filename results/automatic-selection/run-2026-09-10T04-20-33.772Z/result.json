@@ -1,0 +1,3708 @@
+{
+  "cases": [
+    {
+      "name": "native-direct",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "selected",
+                "reason": "Local MP4 metadata: 3492 bytes; no inspector Wasm required"
+              },
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "direct",
+            "position": 0.439416,
+            "rendered": 15,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0.439416,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": []
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "native-remux",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "directFailure": "Error: Native media operation failed: PipelineStatus::DEMUXER_ERROR_COULD_NOT_OPEN: FFmpegDemuxer: open context failed",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 71824,
+                    "at": 719.6000000000931,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 58357,
+                    "at": 720.8449999997392,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55580,
+                    "at": 722.0099999997765,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 66833,
+                    "at": 722.7999999998137,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 60097,
+                    "at": 724.3950000000186,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 61676,
+                    "at": 725.9899999997579,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 61009,
+                    "at": 727.0849999999627,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 66097,
+                    "at": 728,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 56120,
+                    "at": 728.8100000000559,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55477,
+                    "at": 729.4699999997392,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55191,
+                    "at": 730.0849999999627,
+                    "generation": 1
+                  }
+                ],
+                "generatedBytes": 669500,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 668261,
+                "peakBufferedBytesUpperBound": 668261,
+                "peakBufferedSeconds": 5.440009,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 675.7250000000931
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 778320,
+                    "firstPlayableMs": 46.94499999983236,
+                    "firstPlayableSourceBytes": 774288,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"avc1.64001E,mp4a.40.2\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 187000,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2
+              },
+              "source": {
+                "fetchedBytes": 1224928,
+                "requests": 19,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 65536,
+                "peakOwnedBytes": 131072
+              },
+              "remux": {
+                "calls": 11,
+                "remuxMs": 38.205000000074506,
+                "generatedBytes": 669500,
+                "peakBatchBytes": 71824,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  0.02134400000000003,
+                  5.461353
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 0.4610160000000001,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mpegts @ 0x303440] Could not find codec parameters for stream 1 (Audio: aac (LC) ([15][0][0][0] / 0x000F), 0 channels, 129 kb/s): unspecified sample rate",
+                "Consider increasing the value for the 'analyzeduration' (1000000) and 'probesize' (1048576) options"
+              ]
+            },
+            "position": 0.4610160000000001,
+            "rendered": 19,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0.4610160000000001,
+          "duration": 6.021334,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": [
+            {
+              "id": "2",
+              "type": "audio",
+              "codec": "aac",
+              "selected": true
+            }
+          ]
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "embedded-ass",
+      "evidence": {
+        "mode": "hybrid",
+        "auto": true,
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "Embedded subtitles require mpv rendering"
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 50,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 45251,
+              "peakBytes": 45251,
+              "parts": 3,
+              "renders": 12
+            },
+            "presentation": {
+              "position": 0.3,
+              "received": 12,
+              "closed": 9,
+              "drawn": 10,
+              "redraws": 1,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                27.914072000204897,
+                21.535838999888256,
+                7.43659199992544,
+                14.917167999962658,
+                26.56393700027934,
+                5.659822000242002,
+                13.240842000186149,
+                19.643141000260584,
+                27.461448999702043,
+                7.492600999683418
+              ],
+              "pts": [
+                0,
+                33000,
+                67000,
+                100000,
+                133000,
+                167000,
+                200000,
+                233000,
+                267000,
+                300000
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 10,
+            "rendered": 12,
+            "renderMs": 13.930000000167638,
+            "copyMs": 0,
+            "maxRenderMs": 12.359999999869615,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 16,
+              "frames": 10,
+              "receivedFrames": 10,
+              "closedFrames": 10,
+              "peakOutstanding": 8,
+              "peakFrames": 8,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 58
+              },
+              "codec": "avc1.640028",
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "pixelFormat": "NV12",
+              "placeholderFrames": 10,
+              "transferredFrames": 10,
+              "outstanding": 0,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.3,
+            "ioPending": false,
+            "ioSerial": 24,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 2135316,
+              "requests": 24,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "peakChunkBytes": 196608,
+              "peakOwnedBytes": 458752,
+              "size": "9039757",
+              "reads": 24,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.3,
+            "queuedFrames": 5888
+          }
+        },
+        "properties": {
+          "time-pos": 0.367,
+          "duration": 12.066,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "h264",
+              "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec": "h264",
+              "demux-w": 1920,
+              "demux-h": 1080,
+              "demux-fps": 30.000000300000004,
+              "demux-par": 1,
+              "metadata": {
+                "HANDLER_NAME": "VideoHandler",
+                "ENCODER": "Lavc62.28.102 libx264",
+                "DURATION": "00:00:12.066000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "lang": "eng",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "aac",
+              "decoder-desc": "AAC (Advanced Audio Coding)",
+              "codec": "aac",
+              "codec-desc": "AAC (Advanced Audio Coding)",
+              "codec-profile": "LC",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 aac",
+                "DURATION": "00:00:12.021000000"
+              }
+            },
+            {
+              "id": "2",
+              "type": "audio",
+              "src-id": 3,
+              "lang": "jpn",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": false,
+              "ff-index": 2,
+              "codec": "aac",
+              "demux-channel-count": 2,
+              "demux-channels": "unknown2",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 aac",
+                "DURATION": "00:00:12.021000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "sub",
+              "src-id": 4,
+              "lang": "eng",
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 3,
+              "codec": "ass",
+              "codec-desc": "Advanced Sub Station Alpha",
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ass",
+                "DURATION": "00:00:12.000000000"
+              }
+            },
+            {
+              "id": "2",
+              "type": "sub",
+              "src-id": 5,
+              "lang": "ara",
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": false,
+              "ff-index": 4,
+              "codec": "ass",
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ass",
+                "DURATION": "00:00:12.000000000"
+              }
+            }
+          ],
+          "audio-codec-name": "aac",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.492666667,
+            "reader-pts": 0.490666667,
+            "cache-duration": 1.002,
+            "eof": false,
+            "underrun": false,
+            "idle": false,
+            "total-bytes": 829744,
+            "fw-bytes": 829744,
+            "raw-input-rate": 3126677,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 1.492666667,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.2,
+                "reader-pts": 0.333,
+                "cache-end": 1.533
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.002,
+                "reader-pts": 0.490666667,
+                "cache-end": 1.492666667
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0.0009798333333329579,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 2,
+            "h": 2,
+            "dw": 2,
+            "dh": 2,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 2,
+            "crop-h": 2,
+            "aspect": 1,
+            "aspect-name": "Square",
+            "par": 1,
+            "sar": 1,
+            "sar-name": "Square",
+            "colormatrix": "bt.709",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "incompatible-native-audio",
+      "evidence": {
+        "mode": "hybrid",
+        "auto": true,
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "Browser does not report support for video/mp4; codecs=\"hev1,ac-3\" or video/webm; codecs=\"hev1,ac-3\""
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 47,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 11
+            },
+            "presentation": {
+              "position": 0.333,
+              "received": 11,
+              "closed": 8,
+              "drawn": 9,
+              "redraws": 1,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                11.734064000242142,
+                26.962650000223505,
+                7.321543999925495,
+                22.738891000204887,
+                18.489849000409777,
+                10.296783999944125,
+                11.388452999925448,
+                6.479229000000032,
+                24.956600999739294
+              ],
+              "pts": [
+                0,
+                42000,
+                83000,
+                125000,
+                167000,
+                208000,
+                250000,
+                292000,
+                333000
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 9,
+            "rendered": 11,
+            "renderMs": 0.4499999997206032,
+            "copyMs": 0,
+            "maxRenderMs": 0.22999999998137355,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 17,
+              "frames": 10,
+              "receivedFrames": 10,
+              "closedFrames": 10,
+              "peakOutstanding": 8,
+              "peakFrames": 9,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 2,
+                "width": 320,
+                "height": 180,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 2450
+              },
+              "codec": "hev1.1.6.L60.90",
+              "actualWidth": 320,
+              "actualHeight": 180,
+              "pixelFormat": "NV12",
+              "placeholderFrames": 10,
+              "transferredFrames": 10,
+              "outstanding": 1,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.33299999999999996,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 131072,
+              "requests": 1,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 131072,
+              "peakChunkBytes": 65536,
+              "peakOwnedBytes": 196608,
+              "size": "227424",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.33299999999999996,
+            "queuedFrames": 5632
+          }
+        },
+        "properties": {
+          "time-pos": 0.33299999999999996,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "hevc",
+              "decoder-desc": "HEVC (High Efficiency Video Coding)",
+              "codec": "hevc",
+              "demux-w": 320,
+              "demux-h": 180,
+              "demux-fps": 24.000000384000007,
+              "demux-par": 1,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 libx265",
+                "DURATION": "00:00:04.000000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "ac3",
+              "decoder-desc": "ATSC A/52A (AC-3)",
+              "codec": "ac3",
+              "codec-desc": "ATSC A/52A (AC-3)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ac3",
+                "DURATION": "00:00:04.000000000"
+              }
+            }
+          ],
+          "audio-codec-name": "ac3",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.562666667,
+            "reader-pts": 0.538666667,
+            "cache-duration": 1.024,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 78936,
+            "fw-bytes": 78936,
+            "raw-input-rate": 720213,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 1.562666667,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.209,
+                "reader-pts": 0.458,
+                "cache-end": 1.667
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.538666667,
+                "cache-end": 1.562666667
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0.01364650000000045,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 2,
+            "h": 2,
+            "dw": 2,
+            "dh": 2,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 2,
+            "crop-h": 2,
+            "aspect": 1,
+            "aspect-name": "Square",
+            "par": 1,
+            "sar": 1,
+            "sar-name": "Square",
+            "colormatrix": "bt.601",
+            "colorlevels": "limited",
+            "primaries": "bt.601-525",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "software-codec",
+      "evidence": {
+        "mode": "software",
+        "auto": true,
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "Native has no qualified video mapping for mpeg4"
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "failed",
+                "reason": "Error: Hybrid mode has no browser bridge for this video codec. Choose software mode for this source."
+              },
+              {
+                "mode": "software",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 53,
+            "rendered": 6,
+            "renderMs": 7.794999999459833,
+            "copyMs": 3.5949999997392297,
+            "maxRenderMs": 3.984999999869615,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "avi",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.16666666666666666,
+            "ioPending": false,
+            "ioSerial": 7,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 638836,
+              "requests": 7,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 131072,
+              "peakChunkBytes": 65536,
+              "peakOwnedBytes": 196608,
+              "size": "258880",
+              "reads": 7,
+              "seeks": 3,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.16666666666666666,
+            "queuedFrames": 6656
+          }
+        },
+        "properties": {
+          "time-pos": 0.3333333333333333,
+          "duration": 4.041666666666666,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 0,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "mpeg4",
+              "decoder-desc": "MPEG-4 part 2",
+              "codec": "mpeg4",
+              "codec-desc": "MPEG-4 part 2",
+              "codec-profile": "Simple Profile",
+              "demux-w": 320,
+              "demux-h": 180,
+              "demux-fps": 24,
+              "demux-par": 1,
+              "format-name": "yuv420p"
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 1,
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "mp3float",
+              "decoder-desc": "MP3 (MPEG audio layer 3)",
+              "codec": "mp3",
+              "codec-desc": "MP3 (MPEG audio layer 3)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 128766,
+              "format-name": "fltp"
+            }
+          ],
+          "audio-codec-name": "mp3",
+          "video-codec": "MPEG-4 part 2",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.68,
+            "reader-pts": 0.6960000000000001,
+            "cache-duration": 0.9839999999999999,
+            "eof": false,
+            "underrun": false,
+            "idle": false,
+            "total-bytes": 97456,
+            "fw-bytes": 97456,
+            "raw-input-rate": 4154490,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.7083333333333333,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.2916666666666665,
+                "reader-pts": 0.41666666666666663,
+                "cache-end": 1.7083333333333333
+              },
+              {
+                "type": "audio",
+                "cache-duration": 0.9839999999999999,
+                "reader-pts": 0.6960000000000001,
+                "cache-end": 1.68
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0.008000333333333665,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 320,
+            "h": 180,
+            "dw": 320,
+            "dh": 180,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 320,
+            "crop-h": 180,
+            "aspect": 1.7777777777777777,
+            "aspect-name": "16:9",
+            "par": 1,
+            "sar": 1.7777777777777777,
+            "sar-name": "16:9",
+            "colormatrix": "bt.601",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "browser-rejection",
+      "evidence": {
+        "mode": "software",
+        "auto": true,
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "Browser does not report support for video/mp4; codecs=\"hev1,ac-3\" or video/webm; codecs=\"hev1,ac-3\""
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "failed",
+                "reason": "Error: Hybrid browser decoder: Error: Unsupported browser configuration"
+              },
+              {
+                "mode": "software",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 72,
+            "rendered": 11,
+            "renderMs": 112.25999999999999,
+            "copyMs": 7.400000000000091,
+            "maxRenderMs": 11.840000000000032,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.33299999999999996,
+            "ioPending": false,
+            "ioSerial": 1,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 131072,
+              "requests": 1,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 131072,
+              "peakChunkBytes": 131072,
+              "peakOwnedBytes": 262144,
+              "size": "227424",
+              "reads": 1,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.33299999999999996,
+            "queuedFrames": 7168
+          }
+        },
+        "properties": {
+          "time-pos": 0.33299999999999996,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "hevc",
+              "decoder-desc": "HEVC (High Efficiency Video Coding)",
+              "codec": "hevc",
+              "codec-desc": "H.265 / HEVC (High Efficiency Video Coding)",
+              "codec-profile": "Main",
+              "demux-w": 320,
+              "demux-h": 180,
+              "demux-fps": 24.000000384000007,
+              "demux-par": 1,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 libx265",
+                "DURATION": "00:00:04.000000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "ac3",
+              "decoder-desc": "ATSC A/52A (AC-3)",
+              "codec": "ac3",
+              "codec-desc": "ATSC A/52A (AC-3)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ac3",
+                "DURATION": "00:00:04.000000000"
+              }
+            }
+          ],
+          "audio-codec-name": "ac3",
+          "video-codec": "H.265 / HEVC (High Efficiency Video Coding)",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.530666667,
+            "reader-pts": 0.506666667,
+            "cache-duration": 1.024,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 86128,
+            "fw-bytes": 86128,
+            "raw-input-rate": 1025283,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 1.530666667,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.375,
+                "reader-pts": 0.292,
+                "cache-end": 1.667
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.506666667,
+                "cache-end": 1.530666667
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0.006645833333333739,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 320,
+            "h": 180,
+            "dw": 320,
+            "dh": 180,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 320,
+            "crop-h": 180,
+            "aspect": 1.7777777777777777,
+            "aspect-name": "16:9",
+            "par": 1,
+            "sar": 1.7777777777777777,
+            "sar-name": "16:9",
+            "colormatrix": "bt.601",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "reselect-new-source",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "selected",
+                "reason": "Local MP4 metadata: 3492 bytes; no inspector Wasm required"
+              },
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "direct",
+            "position": 0.487759,
+            "rendered": 16,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0.487759,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": []
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "automatic-filters",
+      "evidence": {
+        "mode": "software",
+        "auto": true,
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "CPU filters require Software"
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "skipped",
+                "reason": "CPU filters require Software"
+              },
+              {
+                "mode": "software",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "hflip",
+          "audioFilters": "",
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 53,
+            "rendered": 4,
+            "renderMs": 6.289999999571592,
+            "copyMs": 3.0000000009313226,
+            "maxRenderMs": 4.029999999795109,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.5,
+            "ioPending": false,
+            "ioSerial": 3,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 361924,
+              "requests": 3,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 227440,
+              "peakChunkBytes": 161904,
+              "peakOwnedBytes": 389344,
+              "size": "403010",
+              "reads": 3,
+              "seeks": 3,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.5,
+            "queuedFrames": 0
+          }
+        },
+        "properties": {
+          "time-pos": 0.5,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "h264",
+              "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec": "h264",
+              "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec-profile": "Constrained Baseline",
+              "demux-w": 320,
+              "demux-h": 180,
+              "demux-fps": 24,
+              "demux-par": 1,
+              "metadata": {
+                "language": "und",
+                "handler_name": "VideoHandler",
+                "vendor_id": "[0][0][0][0]",
+                "encoder": "Lavc62.28.102 libx264"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "aac",
+              "decoder-desc": "AAC (Advanced Audio Coding)",
+              "codec": "aac",
+              "codec-desc": "AAC (Advanced Audio Coding)",
+              "codec-profile": "LC",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 128232,
+              "metadata": {
+                "language": "und",
+                "handler_name": "SoundHandler",
+                "vendor_id": "[0][0][0][0]"
+              }
+            }
+          ],
+          "audio-codec-name": "aac",
+          "video-codec": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "volume": 37,
+          "speed": 1.25,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.9413333333333334,
+            "reader-pts": 0.9386666666666666,
+            "cache-duration": 1.0026666666666668,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 146272,
+            "fw-bytes": 146272,
+            "raw-input-rate": 885813,
+            "debug-low-level-seeks": 1,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.9413333333333334,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.2916666666666665,
+                "reader-pts": 0.625,
+                "cache-end": 1.9166666666666665
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.0026666666666668,
+                "reader-pts": 0.9386666666666666,
+                "cache-end": 1.9413333333333334
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 320,
+            "h": 180,
+            "dw": 320,
+            "dh": 180,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 320,
+            "crop-h": 180,
+            "aspect": 1.7777777777777777,
+            "aspect-name": "16:9",
+            "par": 1,
+            "sar": 1.7777777777777777,
+            "sar-name": "16:9",
+            "colormatrix": "bt.601",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "explicit-mode-pins",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "selected",
+                "reason": "Local MP4 metadata: 3492 bytes; no inspector Wasm required"
+              },
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "direct",
+            "position": 0.482846,
+            "rendered": 16,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0.482846,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": []
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "runtime-recovery",
+      "evidence": {
+        "mode": "software",
+        "auto": true,
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": true,
+            "attempts": []
+          },
+          "switching": true,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 51,
+            "rendered": 3,
+            "renderMs": 5.309999999590218,
+            "copyMs": 2.5649999999441206,
+            "maxRenderMs": 3.934999999590218,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.5419999999999999,
+            "ioPending": false,
+            "ioSerial": 4,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 358496,
+              "requests": 4,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 131072,
+              "peakChunkBytes": 131072,
+              "peakOwnedBytes": 262144,
+              "size": "227424",
+              "reads": 4,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.5419999999999999,
+            "queuedFrames": 0
+          }
+        },
+        "properties": {
+          "time-pos": 0.5419999999999999,
+          "duration": 4,
+          "pause": false,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "hevc",
+              "decoder-desc": "HEVC (High Efficiency Video Coding)",
+              "codec": "hevc",
+              "codec-desc": "H.265 / HEVC (High Efficiency Video Coding)",
+              "codec-profile": "Main",
+              "demux-w": 320,
+              "demux-h": 180,
+              "demux-fps": 24.000000384000007,
+              "demux-par": 1,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 libx265",
+                "DURATION": "00:00:04.000000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "ac3",
+              "decoder-desc": "ATSC A/52A (AC-3)",
+              "codec": "ac3",
+              "codec-desc": "ATSC A/52A (AC-3)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ac3",
+                "DURATION": "00:00:04.000000000"
+              }
+            }
+          ],
+          "audio-codec-name": "ac3",
+          "video-codec": "H.265 / HEVC (High Efficiency Video Coding)",
+          "volume": 37,
+          "speed": 1.25,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.833,
+            "reader-pts": 0.833,
+            "cache-duration": 1,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 77592,
+            "fw-bytes": 77592,
+            "raw-input-rate": 1089088,
+            "debug-low-level-seeks": 1,
+            "debug-byte-level-seeks": 1,
+            "debug-ts-last": 1.786666667,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1,
+                "reader-pts": 0.833,
+                "cache-end": 1.833
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.024,
+                "reader-pts": 0.762666667,
+                "cache-end": 1.786666667
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 320,
+            "h": 180,
+            "dw": 320,
+            "dh": 180,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 320,
+            "crop-h": 180,
+            "aspect": 1.7777777777777777,
+            "aspect-name": "16:9",
+            "par": 1,
+            "sar": 1.7777777777777777,
+            "sar-name": "16:9",
+            "colormatrix": "bt.601",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "native-runtime-remux",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 56323,
+                    "at": 709.8650000002235,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 47812,
+                    "at": 710.2099999999627,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 47692,
+                    "at": 710.4500000001863,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 49017,
+                    "at": 710.660000000149,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 51519,
+                    "at": 711.4150000000373,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 51802,
+                    "at": 711.660000000149,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 53392,
+                    "at": 711.9399999999441,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 45413,
+                    "at": 712.375,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 56031,
+                    "at": 759.1400000001304,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 47812,
+                    "at": 759.4799999999814,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 47692,
+                    "at": 759.6800000001676,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 49017,
+                    "at": 759.8700000001118,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 51519,
+                    "at": 760.5150000001304,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 51802,
+                    "at": 760.75,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 53392,
+                    "at": 760.9700000002049,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 45413,
+                    "at": 761.3500000000931,
+                    "generation": 2
+                  }
+                ],
+                "generatedBytes": 808154,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 402678,
+                "peakBufferedBytesUpperBound": 402970,
+                "peakBufferedSeconds": 4.021333,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 674.1650000000373
+                  },
+                  {
+                    "target": 0.465245,
+                    "started": 721.7949999999255
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 403010,
+                    "firstPlayableMs": 45.87999999988824,
+                    "firstPlayableSourceBytes": 471910,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"avc1.42C00C,mp4a.40.2\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 404223,
+                    "fetchedBytesAtLeastSourceSize": true
+                  },
+                  {
+                    "generation": 2,
+                    "target": 0.465245,
+                    "sourceSize": 403010,
+                    "firstPlayableMs": 48.700000000186265,
+                    "firstPlayableSourceBytes": 471910,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"avc1.42C00C,mp4a.40.2\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 403931,
+                    "fetchedBytesAtLeastSourceSize": true
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 404223,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 402970,
+                    "sourceFetchedBytes": 471910,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 471910,
+                "requests": 4,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 227440,
+                "peakChunkBytes": 175522,
+                "peakOwnedBytes": 389344
+              },
+              "remux": {
+                "calls": 8,
+                "remuxMs": 25.959999999497086,
+                "generatedBytes": 403931,
+                "peakBatchBytes": 56031,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  0,
+                  3.999999
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 0.47032699999999994,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x303440] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol",
+                "[mov,mp4,m4a,3gp,3g2,mj2 @ 0x303440] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol"
+              ]
+            },
+            "position": 0.47032699999999994,
+            "rendered": 4,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0.4652449999999999,
+          "duration": 3.999999,
+          "pause": false,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": [
+            {
+              "id": "2",
+              "type": "audio",
+              "codec": "aac",
+              "selected": true
+            }
+          ]
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "subtitle-enable-reselect",
+      "evidence": {
+        "mode": "hybrid",
+        "auto": true,
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "Embedded subtitles require mpv rendering"
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 46,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 45251,
+              "peakBytes": 45251,
+              "parts": 3,
+              "renders": 12
+            },
+            "presentation": {
+              "position": 0.3,
+              "received": 12,
+              "closed": 9,
+              "drawn": 10,
+              "redraws": 1,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                24.57863999990687,
+                30.714364999981342,
+                24.083274999701985,
+                13.194714999813755,
+                22.079704999925525,
+                28.136751999832313,
+                20.82704999994411,
+                7.8361379999440715,
+                13.278083000018569,
+                24.827086999813787
+              ],
+              "pts": [
+                0,
+                33000,
+                67000,
+                100000,
+                133000,
+                167000,
+                200000,
+                233000,
+                267000,
+                300000
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 10,
+            "rendered": 12,
+            "renderMs": 14.424999999813735,
+            "copyMs": 0,
+            "maxRenderMs": 12.629999999888241,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 17,
+              "frames": 10,
+              "receivedFrames": 11,
+              "closedFrames": 10,
+              "peakOutstanding": 8,
+              "peakFrames": 8,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 58
+              },
+              "codec": "avc1.640028",
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "pixelFormat": "NV12",
+              "placeholderFrames": 10,
+              "transferredFrames": 10,
+              "outstanding": 1,
+              "queued": 1,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0.3,
+            "ioPending": false,
+            "ioSerial": 24,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 2135316,
+              "requests": 24,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "peakChunkBytes": 196608,
+              "peakOwnedBytes": 458752,
+              "size": "9039757",
+              "reads": 24,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.3,
+            "queuedFrames": 6912
+          }
+        },
+        "properties": {
+          "time-pos": 0.33299999999999996,
+          "duration": 12.066,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "h264",
+              "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec": "h264",
+              "demux-w": 1920,
+              "demux-h": 1080,
+              "demux-fps": 30.000000300000004,
+              "demux-par": 1,
+              "metadata": {
+                "HANDLER_NAME": "VideoHandler",
+                "ENCODER": "Lavc62.28.102 libx264",
+                "DURATION": "00:00:12.066000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "lang": "eng",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "aac",
+              "decoder-desc": "AAC (Advanced Audio Coding)",
+              "codec": "aac",
+              "codec-desc": "AAC (Advanced Audio Coding)",
+              "codec-profile": "LC",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 aac",
+                "DURATION": "00:00:12.021000000"
+              }
+            },
+            {
+              "id": "2",
+              "type": "audio",
+              "src-id": 3,
+              "lang": "jpn",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": false,
+              "ff-index": 2,
+              "codec": "aac",
+              "demux-channel-count": 2,
+              "demux-channels": "unknown2",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 aac",
+                "DURATION": "00:00:12.021000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "sub",
+              "src-id": 4,
+              "lang": "eng",
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 3,
+              "codec": "ass",
+              "codec-desc": "Advanced Sub Station Alpha",
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ass",
+                "DURATION": "00:00:12.000000000"
+              }
+            },
+            {
+              "id": "2",
+              "type": "sub",
+              "src-id": 5,
+              "lang": "ara",
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": false,
+              "ff-index": 4,
+              "codec": "ass",
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ass",
+                "DURATION": "00:00:12.000000000"
+              }
+            }
+          ],
+          "audio-codec-name": "aac",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.514666667,
+            "reader-pts": 0.5116666670000001,
+            "cache-duration": 1.003,
+            "eof": false,
+            "underrun": false,
+            "idle": false,
+            "total-bytes": 826768,
+            "fw-bytes": 826768,
+            "raw-input-rate": 4619977,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 1.514666667,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.166,
+                "reader-pts": 0.467,
+                "cache-end": 1.633
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.003,
+                "reader-pts": 0.5116666670000001,
+                "cache-end": 1.514666667
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0.0029798333333330707,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 2,
+            "h": 2,
+            "dw": 2,
+            "dh": 2,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 2,
+            "crop-h": 2,
+            "aspect": 1,
+            "aspect-name": "Square",
+            "par": 1,
+            "sar": 1,
+            "sar-name": "Square",
+            "colormatrix": "bt.709",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "source-identity-is-terminal",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "skipped",
+                "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+              },
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "directFailure": "Error: Native media operation failed: PipelineStatus::DEMUXER_ERROR_COULD_NOT_OPEN: FFmpegDemuxer: open context failed",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 71824,
+                    "at": 237.410000000149,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 58357,
+                    "at": 238.660000000149,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55580,
+                    "at": 240.44500000029802,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 66833,
+                    "at": 242.05500000016764,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 60097,
+                    "at": 242.90000000037253,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 61676,
+                    "at": 243.75,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 61009,
+                    "at": 244.64000000013039,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 66097,
+                    "at": 245.41500000003725,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 56120,
+                    "at": 246.06499999994412,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55477,
+                    "at": 247.02000000001863,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55191,
+                    "at": 247.72500000009313,
+                    "generation": 1
+                  }
+                ],
+                "generatedBytes": 669500,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 668261,
+                "peakBufferedBytesUpperBound": 668261,
+                "peakBufferedSeconds": 5.440009,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 199.31499999994412
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 778320,
+                    "firstPlayableMs": 46.64500000001863,
+                    "firstPlayableSourceBytes": 1101968,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"avc1.64001E,mp4a.40.2\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 502712,
+                    "fetchedBytesAtLeastSourceSize": true
+                  }
+                ],
+                "errors": [],
+                "workers": 2
+              },
+              "source": {
+                "fetchedBytes": 1224928,
+                "requests": 19,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 65536,
+                "peakOwnedBytes": 131072
+              },
+              "remux": {
+                "calls": 11,
+                "remuxMs": 36.3699999996461,
+                "generatedBytes": 669500,
+                "peakBatchBytes": 71824,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  0.02134400000000003,
+                  5.461353
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 0,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mpegts @ 0x303440] Could not find codec parameters for stream 1 (Audio: aac (LC) ([15][0][0][0] / 0x000F), 0 channels, 129 kb/s): unspecified sample rate",
+                "Consider increasing the value for the 'analyzeduration' (1000000) and 'probesize' (1048576) options"
+              ]
+            },
+            "position": 0,
+            "rendered": 4,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0,
+          "duration": 6.021334,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": [
+            {
+              "id": "2",
+              "type": "audio",
+              "codec": "aac",
+              "selected": true
+            }
+          ]
+        },
+        "errors": [
+          "Error: Media representation changed"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "range-change-does-not-fallback",
+      "evidence": {
+        "error": "Error: Source transport: Error: Expected HTTP 206; received 200",
+        "requests": [
+          {
+            "changed": false
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"original-version\""
+          },
+          {
+            "changed": true,
+            "ifRange": "\"original-version\""
+          }
+        ],
+        "state": {
+          "mode": "native",
+          "auto": true,
+          "diagnostics": {
+            "mode": "native",
+            "selection": {
+              "automatic": true,
+              "attempts": [
+                {
+                  "mode": "native",
+                  "outcome": "selected",
+                  "reason": "Playback requirements and actual presentation accepted"
+                }
+              ]
+            },
+            "switching": false,
+            "videoFilters": "",
+            "audioFilters": "",
+            "backend": {
+              "path": "native",
+              "plan": "remux",
+              "remux": {
+                "stats": {
+                  "fragments": [
+                    {
+                      "bytes": 65159,
+                      "at": 267.3900000001304,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 17233,
+                      "at": 267.9900000002235,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 19599,
+                      "at": 268.29000000003725,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 13443,
+                      "at": 268.5600000000559,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 16793,
+                      "at": 273.5200000000186,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 11457,
+                      "at": 273.80500000016764,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 13294,
+                      "at": 274.0950000002049,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 44604,
+                      "at": 279.85000000009313,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 108269,
+                      "at": 284.27500000037253,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 84607,
+                      "at": 288.6400000001304,
+                      "generation": 1
+                    }
+                  ],
+                  "generatedBytes": 395676,
+                  "discardedBytes": 0,
+                  "peakQueueDepth": 1,
+                  "bufferedBytesUpperBound": 394458,
+                  "peakBufferedBytesUpperBound": 394458,
+                  "peakBufferedSeconds": 5.034,
+                  "seeks": [
+                    {
+                      "target": 0,
+                      "started": 206.535000000149
+                    },
+                    {
+                      "target": 120,
+                      "started": 600.6400000001304
+                    }
+                  ],
+                  "sessions": [
+                    {
+                      "generation": 1,
+                      "target": 0,
+                      "sourceSize": 248479294,
+                      "firstPlayableMs": 81.79000000003725,
+                      "firstPlayableSourceBytes": 327680,
+                      "packaging": [
+                        {
+                          "container": "mp4",
+                          "mime": "video/mp4; codecs=\"avc1.640029,mp4a.40.2\"",
+                          "selected": true
+                        }
+                      ],
+                      "generatedBytes": 311069,
+                      "fetchedBytesAtLeastSourceSize": false
+                    }
+                  ],
+                  "errors": [
+                    "Source transport: Error: Expected HTTP 206; received 200"
+                  ],
+                  "workers": 0,
+                  "cancellations": [
+                    {
+                      "generatedBytes": 395676,
+                      "pendingBytes": 0,
+                      "retainedCompressedBytesUpperBound": 394458,
+                      "sourceFetchedBytes": 393216,
+                      "inFlightOutputUpperBound": 8388608
+                    }
+                  ]
+                },
+                "source": {},
+                "remux": {},
+                "ranges": [],
+                "timelineBias": 1,
+                "position": 0,
+                "quality": {},
+                "readyState": 0,
+                "logs": [
+                  "[mp4 @ 0x378bb0] Packet duration: -16 / dts: 73584 is out of range",
+                  "[mp4 @ 0x378bb0] pts has no value"
+                ]
+              },
+              "position": 0,
+              "rendered": 0,
+              "dropped": 0,
+              "readyState": 0
+            }
+          },
+          "properties": {
+            "time-pos": 0,
+            "duration": 634.62,
+            "pause": true,
+            "eof-reached": false,
+            "volume": 100,
+            "speed": 1,
+            "track-list": [
+              {
+                "id": "2",
+                "type": "audio",
+                "codec": "aac",
+                "selected": true
+              }
+            ]
+          },
+          "errors": []
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "remote-authorization",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 65159,
+                    "at": 134.61000000033528,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 17233,
+                    "at": 135.21500000031665,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 19599,
+                    "at": 135.4700000002049,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 13443,
+                    "at": 135.7200000002049,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 16793,
+                    "at": 137.85499999998137,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 11457,
+                    "at": 138.125,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 13294,
+                    "at": 138.3450000002049,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 44604,
+                    "at": 140.38500000024214,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 108269,
+                    "at": 142.285000000149,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 84607,
+                    "at": 144.04000000003725,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 55495,
+                    "at": 298.3650000002235,
+                    "generation": 1
+                  }
+                ],
+                "generatedBytes": 451171,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 449953,
+                "peakBufferedBytesUpperBound": 449953,
+                "peakBufferedSeconds": 5.525,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 93.53500000014901
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 248479294,
+                    "firstPlayableMs": 51.955000000074506,
+                    "firstPlayableSourceBytes": 393216,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"avc1.640029,mp4a.40.2\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 395676,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2
+              },
+              "source": {
+                "fetchedBytes": 458752,
+                "requests": 8,
+                "retries": 0,
+                "aborts": 0,
+                "cacheBytes": 458752,
+                "peakCacheBytes": 458752,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536
+              },
+              "remux": {
+                "calls": 11,
+                "remuxMs": 35.325000000186265,
+                "generatedBytes": 451171,
+                "peakBatchBytes": 108269,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  0,
+                  5.525
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 0.4848570000000001,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mp4 @ 0x378bb0] Packet duration: -16 / dts: 73584 is out of range",
+                "[mp4 @ 0x378bb0] pts has no value"
+              ]
+            },
+            "position": 0.4848570000000001,
+            "rendered": 17,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0.4848570000000001,
+          "duration": 634.62,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": [
+            {
+              "id": "2",
+              "type": "audio",
+              "codec": "aac",
+              "selected": true
+            }
+          ]
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "disabled-tracks-survive-reselection",
+      "evidence": {
+        "mode": "native",
+        "auto": true,
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "probe",
+                "outcome": "selected",
+                "reason": "Local MP4 metadata: 3492 bytes; no inspector Wasm required"
+              },
+              {
+                "mode": "native",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "direct",
+            "position": 0,
+            "rendered": 4,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "properties": {
+          "time-pos": 0,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "volume": 100,
+          "speed": 1,
+          "track-list": []
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "all-routes-fail-rollback",
+      "evidence": {
+        "error": "Error: No playback route satisfied the source: hybrid: Error: unrecognized file format; software: Error: unrecognized file format",
+        "same": true
+      },
+      "passed": true
+    },
+    {
+      "name": "selected-language-survives-filters",
+      "evidence": {
+        "mode": "software",
+        "auto": true,
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "native",
+                "outcome": "skipped",
+                "reason": "CPU filters require Software"
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "skipped",
+                "reason": "CPU filters require Software"
+              },
+              {
+                "mode": "software",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "hflip",
+          "audioFilters": "",
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 29,
+            "rendered": 3,
+            "renderMs": 11.515000000130385,
+            "copyMs": 2.700000000651926,
+            "maxRenderMs": 7.660000000149012,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 0,
+            "ioPending": false,
+            "ioSerial": 19,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1807636,
+              "requests": 19,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "peakChunkBytes": 262144,
+              "peakOwnedBytes": 524288,
+              "size": "9039757",
+              "reads": 19,
+              "seeks": 1,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0,
+            "queuedFrames": 0
+          }
+        },
+        "properties": {
+          "time-pos": 0,
+          "duration": 12.066,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "h264",
+              "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec": "h264",
+              "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec-profile": "High",
+              "demux-w": 1920,
+              "demux-h": 1080,
+              "demux-fps": 30.000000300000004,
+              "demux-par": 1,
+              "metadata": {
+                "HANDLER_NAME": "VideoHandler",
+                "ENCODER": "Lavc62.28.102 libx264",
+                "DURATION": "00:00:12.066000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "lang": "eng",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": false,
+              "ff-index": 1,
+              "codec": "aac",
+              "codec-desc": "AAC (Advanced Audio Coding)",
+              "codec-profile": "LC",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 aac",
+                "DURATION": "00:00:12.021000000"
+              }
+            },
+            {
+              "id": "2",
+              "type": "audio",
+              "src-id": 3,
+              "lang": "jpn",
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 2,
+              "decoder": "aac",
+              "decoder-desc": "AAC (Advanced Audio Coding)",
+              "codec": "aac",
+              "codec-desc": "AAC (Advanced Audio Coding)",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 aac",
+                "DURATION": "00:00:12.021000000"
+              }
+            },
+            {
+              "id": "1",
+              "type": "sub",
+              "src-id": 4,
+              "lang": "eng",
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 3,
+              "codec": "ass",
+              "codec-desc": "Advanced Sub Station Alpha",
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ass",
+                "DURATION": "00:00:12.000000000"
+              }
+            },
+            {
+              "id": "2",
+              "type": "sub",
+              "src-id": 5,
+              "lang": "ara",
+              "image": false,
+              "albumart": false,
+              "default": false,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": false,
+              "ff-index": 4,
+              "codec": "ass",
+              "metadata": {
+                "ENCODER": "Lavc62.28.102 ass",
+                "DURATION": "00:00:12.000000000"
+              }
+            }
+          ],
+          "audio-codec-name": "aac",
+          "video-codec": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.1306666669999998,
+            "reader-pts": 0.148666667,
+            "cache-duration": 0.9819999999999999,
+            "eof": false,
+            "underrun": false,
+            "idle": false,
+            "total-bytes": 781800,
+            "fw-bytes": 781800,
+            "raw-input-rate": 6137565,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 0,
+            "debug-ts-last": 1.1306666669999998,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.133,
+                "reader-pts": 0.1,
+                "cache-end": 1.233
+              },
+              {
+                "type": "audio",
+                "cache-duration": 0.9819999999999999,
+                "reader-pts": 0.148666667,
+                "cache-end": 1.1306666669999998
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 1920,
+            "h": 1080,
+            "dw": 1920,
+            "dh": 1080,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 1920,
+            "crop-h": 1080,
+            "aspect": 1.7777777777777777,
+            "aspect-name": "16:9",
+            "par": 1,
+            "sar": 1.7777777777777777,
+            "sar-name": "16:9",
+            "colormatrix": "bt.709",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "second-failure-during-recovery",
+      "evidence": {
+        "mode": "hybrid",
+        "auto": true,
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "hybrid",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 48,
+            "subtitles": {
+              "updates": 1,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 11
+            },
+            "presentation": {
+              "position": 0.333333,
+              "received": 11,
+              "closed": 8,
+              "drawn": 9,
+              "redraws": 1,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                8.71462399994411,
+                11.845125000279381,
+                22.22183100037256,
+                29.246534999906828,
+                28.91643899990686,
+                25.913338000037243,
+                24.038337999906844,
+                19.650037000130396,
+                23.939925000037306
+              ],
+              "pts": [
+                0,
+                41667,
+                83333,
+                125000,
+                166667,
+                208333,
+                250000,
+                291667,
+                333333
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 9,
+            "rendered": 11,
+            "renderMs": 0.4900000002235174,
+            "copyMs": 0,
+            "maxRenderMs": 0.21999999973922968,
+            "heapBytes": 134217728,
+            "epoch": 2,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 12,
+              "frames": 10,
+              "receivedFrames": 10,
+              "closedFrames": 10,
+              "peakOutstanding": 7,
+              "peakFrames": 7,
+              "resets": 0,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 1,
+                "width": 320,
+                "height": 180,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 38
+              },
+              "codec": "avc1.42c00c",
+              "actualWidth": 320,
+              "actualHeight": 180,
+              "pixelFormat": "I420",
+              "placeholderFrames": 10,
+              "transferredFrames": 10,
+              "outstanding": 0,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 0.3333333333333333,
+            "ioPending": false,
+            "ioSerial": 3,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 361924,
+              "requests": 3,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 227440,
+              "peakChunkBytes": 227440,
+              "peakOwnedBytes": 454880,
+              "size": "403010",
+              "reads": 3,
+              "seeks": 3,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 0.3333333333333333,
+            "queuedFrames": 7424
+          }
+        },
+        "properties": {
+          "time-pos": 0.3333333333333333,
+          "duration": 4,
+          "pause": true,
+          "eof-reached": false,
+          "track-list": [
+            {
+              "id": "1",
+              "type": "video",
+              "src-id": 1,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 0,
+              "decoder": "h264",
+              "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "codec": "h264",
+              "demux-w": 320,
+              "demux-h": 180,
+              "demux-fps": 24,
+              "demux-par": 1,
+              "metadata": {
+                "language": "und",
+                "handler_name": "VideoHandler",
+                "vendor_id": "[0][0][0][0]",
+                "encoder": "Lavc62.28.102 libx264"
+              }
+            },
+            {
+              "id": "1",
+              "type": "audio",
+              "src-id": 2,
+              "audio-channels": 2,
+              "image": false,
+              "albumart": false,
+              "default": true,
+              "forced": false,
+              "dependent": false,
+              "visual-impaired": false,
+              "hearing-impaired": false,
+              "external": false,
+              "selected": true,
+              "main-selection": 0,
+              "ff-index": 1,
+              "decoder": "aac",
+              "decoder-desc": "AAC (Advanced Audio Coding)",
+              "codec": "aac",
+              "codec-desc": "AAC (Advanced Audio Coding)",
+              "codec-profile": "LC",
+              "demux-channel-count": 2,
+              "demux-channels": "stereo",
+              "demux-samplerate": 48000,
+              "demux-bitrate": 128232,
+              "metadata": {
+                "language": "und",
+                "handler_name": "SoundHandler",
+                "vendor_id": "[0][0][0][0]"
+              }
+            }
+          ],
+          "audio-codec-name": "aac",
+          "volume": 100,
+          "speed": 1,
+          "paused-for-cache": false,
+          "cache-buffering-state": 100,
+          "demuxer-cache-state": {
+            "cache-end": 1.5146666666666666,
+            "reader-pts": 0.512,
+            "cache-duration": 1.0026666666666666,
+            "eof": false,
+            "underrun": false,
+            "idle": true,
+            "total-bytes": 140120,
+            "fw-bytes": 140120,
+            "raw-input-rate": 705839,
+            "debug-low-level-seeks": 0,
+            "debug-byte-level-seeks": 2,
+            "debug-ts-last": 1.5146666666666666,
+            "ts-per-stream": [
+              {
+                "type": "video",
+                "cache-duration": 1.1666666666666667,
+                "reader-pts": 0.3333333333333333,
+                "cache-end": 1.5
+              },
+              {
+                "type": "audio",
+                "cache-duration": 1.0026666666666666,
+                "reader-pts": 0.512,
+                "cache-end": 1.5146666666666666
+              }
+            ],
+            "bof-cached": false,
+            "eof-cached": false,
+            "seekable-ranges": []
+          },
+          "decoder-frame-drop-count": 0,
+          "frame-drop-count": 0,
+          "avsync": 0.00800033333333311,
+          "video-params": {
+            "pixelformat": "yuv420p",
+            "average-bpp": 12,
+            "w": 2,
+            "h": 2,
+            "dw": 2,
+            "dh": 2,
+            "crop-x": 0,
+            "crop-y": 0,
+            "crop-w": 2,
+            "crop-h": 2,
+            "aspect": 1,
+            "aspect-name": "Square",
+            "par": 1,
+            "sar": 1,
+            "sar-name": "Square",
+            "colormatrix": "bt.709",
+            "colorlevels": "limited",
+            "primaries": "bt.709",
+            "gamma": "bt.1886",
+            "sig-peak": 0,
+            "light": "display",
+            "chroma-location": "mpeg2/4/h264",
+            "stereo-in": "mono",
+            "rotate": 0
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "identity-survives-decoder-fallback",
+      "evidence": {
+        "requests": [
+          {
+            "changed": false
+          },
+          {
+            "changed": false,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": false,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": true,
+            "ifRange": "\"version-one\""
+          },
+          {
+            "changed": true,
+            "ifRange": "\"version-one\""
+          }
+        ],
+        "state": {
+          "mode": "native",
+          "auto": true,
+          "diagnostics": {
+            "mode": "native",
+            "selection": {
+              "automatic": true,
+              "attempts": []
+            },
+            "switching": false,
+            "videoFilters": "",
+            "audioFilters": "",
+            "backend": {
+              "path": "native",
+              "plan": "remux",
+              "remux": {
+                "stats": {
+                  "fragments": [
+                    {
+                      "bytes": 65159,
+                      "at": 158.74500000011176,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 17233,
+                      "at": 159.30500000016764,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 19599,
+                      "at": 159.54000000003725,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 13443,
+                      "at": 159.785000000149,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 16793,
+                      "at": 165.19500000029802,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 11457,
+                      "at": 165.45999999996275,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 13294,
+                      "at": 165.93000000016764,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 44604,
+                      "at": 169.90500000026077,
+                      "generation": 1
+                    },
+                    {
+                      "bytes": 108269,
+                      "at": 174.93000000016764,
+                      "generation": 1
+                    }
+                  ],
+                  "generatedBytes": 311069,
+                  "discardedBytes": 0,
+                  "peakQueueDepth": 1,
+                  "bufferedBytesUpperBound": 309851,
+                  "peakBufferedBytesUpperBound": 309851,
+                  "peakBufferedSeconds": 4.522,
+                  "seeks": [
+                    {
+                      "target": 0,
+                      "started": 113.94500000029802
+                    }
+                  ],
+                  "sessions": [
+                    {
+                      "generation": 1,
+                      "target": 0,
+                      "sourceSize": 248479294,
+                      "firstPlayableMs": 51.58999999985099,
+                      "firstPlayableSourceBytes": 196608,
+                      "packaging": [
+                        {
+                          "container": "mp4",
+                          "mime": "video/mp4; codecs=\"avc1.640029,mp4a.40.2\"",
+                          "selected": true
+                        }
+                      ],
+                      "generatedBytes": 144902,
+                      "fetchedBytesAtLeastSourceSize": false
+                    }
+                  ],
+                  "errors": [
+                    "Source transport: Error: Media representation changed"
+                  ],
+                  "workers": 0,
+                  "cancellations": [
+                    {
+                      "generatedBytes": 311069,
+                      "pendingBytes": 0,
+                      "retainedCompressedBytesUpperBound": 309851,
+                      "sourceFetchedBytes": 327680,
+                      "inFlightOutputUpperBound": 8388608
+                    }
+                  ]
+                },
+                "source": {
+                  "fetchedBytes": 327680,
+                  "requests": 5,
+                  "retries": 0,
+                  "aborts": 0,
+                  "cacheBytes": 327680,
+                  "peakCacheBytes": 327680,
+                  "activeBytes": 0,
+                  "peakActiveBytes": 65536
+                },
+                "remux": {
+                  "calls": 9,
+                  "remuxMs": 41.94499999983236,
+                  "generatedBytes": 311069,
+                  "peakBatchBytes": 108269,
+                  "heapBytes": 67108864
+                },
+                "ranges": [],
+                "timelineBias": 1,
+                "position": 0,
+                "quality": {},
+                "readyState": 4,
+                "logs": [
+                  "[mp4 @ 0x378bb0] Packet duration: -16 / dts: 73584 is out of range",
+                  "[mp4 @ 0x378bb0] pts has no value"
+                ]
+              },
+              "position": 0,
+              "rendered": 4,
+              "dropped": 0,
+              "readyState": 4
+            }
+          },
+          "properties": {
+            "time-pos": 0,
+            "duration": 634.62,
+            "pause": true,
+            "eof-reached": false,
+            "volume": 100,
+            "speed": 1,
+            "track-list": [
+              {
+                "id": "2",
+                "type": "audio",
+                "codec": "aac",
+                "selected": true
+              }
+            ]
+          },
+          "errors": [
+            "Error: Source transport: Media representation changed"
+          ]
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "destroy-during-stalled-probe-import",
+      "evidence": {
+        "destroyed": true,
+        "rejected": true
+      },
+      "passed": true
+    },
+    {
+      "name": "destroy-during-probe",
+      "evidence": {
+        "rejected": true
+      },
+      "passed": true
+    }
+  ],
+  "browser": "152.0.7977.83",
+  "fallbackBrowser": "146.0.1",
+  "passed": true
+}
