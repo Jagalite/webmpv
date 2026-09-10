@@ -1,14 +1,16 @@
 # webmpv
 
-A browser player with three explicit modes:
+A browser player with automatic selection across three playback modes:
 
 1. **Native** — browser video playback, with a progressive packet-copy remux fallback.
 2. **Hybrid** — browser video decoding with mpv timing and libass subtitles.
 3. **Software** — expanded FFmpeg software decoding, mpv subtitles, and filters.
 
 The public TypeScript API exports `Player` and `PLAYBACK_MODES` from
-`web/generated/index.js`. Native is the default. Mode changes are explicit;
-video/audio filters require software mode. See the
+`web/generated/index.js`. With no mode specified, the library automatically selects
+Native direct/remux, Hybrid or Software. An explicit `mode` pins that engine;
+`setAutomaticSelection()` restores automatic routing. CPU filters select Software
+automatically when automatic selection is enabled. See the
 [integration guide](docs/INTEGRATION.md) for capabilities, state preservation,
 source restrictions and migration from the older decoder API.
 
@@ -27,13 +29,14 @@ not need another redesign before beta; release preparation still needs:
 
 Hybrid now bridges AVC, HEVC, VP8, VP9 and AV1 when the browser accepts the actual
 configuration and delivers frames. Native first tries direct playback, then uses
-bounded progressive remuxing for qualified H.264/AAC files when packaging prevents
+bounded progressive remuxing for browser-compatible packet contracts when packaging prevents
 direct playback. Neither operation re-encodes media. See [media routing](docs/MEDIA-ROUTING.md).
 
-Current limits include 1920×1080 video in Hybrid, browser-dependent Native format
-support, 32 MiB local files in mpv modes (larger sources require HTTP ranges), and
-software-only filters. Mode changes reopen playback and are not gapless. Automatic
-switching between public modes and large local-file streaming in mpv modes are future work.
+Current limits include bounded Hybrid source-frame size (4K tested), browser-dependent Native format
+support, 32 MiB ArrayBuffer inputs (larger Files use bounded local reads), and
+software-only filter execution. Mode changes reopen playback and are not gapless.
+Large local-file streaming in mpv modes remains future work. Automatic inspection
+requires isolation and random-access sources; see [automatic selection](docs/AUTOMATIC-SELECTION.md).
 See the [integration guide](docs/INTEGRATION.md) for the full support contract.
 
 The [three-mode API validation](results/player-api/README.md) records the original API and legacy regression checks. The
@@ -91,8 +94,8 @@ additional replacements. See the [kernel notes](native/simd/README.md).
 Software keeps a 5 ms active service cadence and slows its worker pump after
 paused work settles. Both mpv modes suppress unchanged audio-timing messages.
 Hybrid omits the software replay cache that its retained-frame renderer cannot
-use, fixing long-GOP playback beyond the old cache bound. Decoder failures remain explicit
-and can be recovered by reopening in Software mode.
+use, fixing long-GOP playback beyond the old cache bound. Automatic selection can
+recover decoder failures by reopening in Software; pinned modes report the failure.
 
 The [performance work record](results/playback-performance/README.md) separates
 accepted changes, experimental renderers, CPU measurements and functional checks.
@@ -235,3 +238,5 @@ The measured run takes about 15 minutes. Leave its Chrome window foreground and
 avoid concurrent heavy work. The short headless smoke only checks plumbing.
 Results are saved under `results/benchmark/`; the validation report includes the
 raw-sample assessment command. Use the local toolchain; Docker is not required.
+
+See [broad routing](docs/BROAD-ROUTING.md) for current remux codecs, Hybrid limits and fallback evidence.

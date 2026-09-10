@@ -2,7 +2,7 @@ import http from 'node:http';
 import path from 'node:path';
 import {readFile,stat} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
-export async function serve(){
+export async function serve({pagePath='experiments/pipeline-qualification/page.html'}={}){
  const root=process.cwd(),cache=new Map(),states=new Map();
  const media={movie:'build/fixtures/playback-performance/bbb-stream.mp4',mkv:'build/pipeline-separation/fixtures/movie.mkv',tail:'build/pipeline-separation/fixtures/tail.mp4',sample:'build/hybrid-performance/sample.mp4',animated:'build/fixtures/tracks.mkv',ass:'build/fixtures/playback-performance/sample-ass.mkv',long:'build/pipeline-separation/fixtures/long.mp4',ts:'build/pipeline-separation/fixtures/config-0.ts',config:'build/pipeline-separation/fixtures/config.ts',offset:'build/pipeline-separation/fixtures/offset.mkv',rotation:'build/pipeline-separation/fixtures/rotation.mp4',sar:'build/pipeline-separation/fixtures/sar.mp4',tenbit:'build/fixtures/playback-performance/h264-10bit.mkv',bt601:'build/fixtures/playback-performance/h264-consistent-601.mp4',bt709:'build/fixtures/playback-performance/h264-consistent-709.mp4'};
  for(const name of ['color-bt709-0','color-bt709-1','color-smpte170m-0','color-smpte170m-1','sync'])media[name]='build/pipeline-qualification/fixtures/'+name+(name==='sync'?'.mp4':'-v2.mkv');
@@ -27,7 +27,7 @@ export async function serve(){
     const stream=createReadStream(f,{start:a,end:b,highWaterMark:65536});res.on('close',()=>stream.destroy());stream.on('data',v=>state.bytes+=v.length);stream.on('end',()=>done=true);stream.pipe(res);return;
    }
    let file;
-   if(u.pathname==='/experiment/page.html')file='experiments/pipeline-qualification/page.html';
+   if(u.pathname==='/experiment/page.html')file=pagePath;
    else if(u.pathname.startsWith('/experiment/remux-engine/'))file='build/pipeline-qualification/remux/'+u.pathname.split('/').at(-1);
    else if(u.pathname.startsWith('/experiment/yuv-engine/'))file='build/pipeline-qualification/yuv/'+u.pathname.split('/').at(-1);
    else if(u.pathname.startsWith('/experiment/'))file='experiments/pipeline-qualification/'+u.pathname.slice('/experiment/'.length);

@@ -100,7 +100,7 @@ async function openRemote(data){minFramePts=-Infinity;cleanupFrames();closingFra
       else if(message.type==='closed')ioClose?.();
     };
     ioWorker.onerror=event=>{clearTimeout(timeout);reject(Error(event.message));};
-    ioWorker.postMessage({type:'init',memory:engine.HEAPU8.buffer,pointer,options:data.options,canRefresh:data.canRefresh});
+    ioWorker.postMessage({type:'init',memory:engine.HEAPU8.buffer,pointer,options:data.options??{},file:data.file,canRefresh:data.canRefresh});
   });
   if(closing)throw Error('Player closed');
   engine._web_io_configure(++ioSession,BigInt(info.size));
@@ -233,7 +233,7 @@ self.onmessage = async ({data}) => {
     } else if (data.type === 'timing' && engine) {
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 5, data.latencyUs);
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 6, +data.running);
-    } else if (data.type === 'open-remote') {await openRemote(data);
+    } else if (data.type === 'open-remote' || data.type === 'open-file') {await openRemote(data);
     } else if(data.type==='refreshed'){ioWorker?.postMessage(data);
     } else if(data.type==='seek'){minFramePts=data.seconds*1e6-150000;cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();sourceRendered=0;pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);seekSerial=engine.HEAPU32[(engine._web_io_ptr()>>>2)+1];submit(data.id,['seek',String(data.seconds),'absolute+exact']);
     } else if (data.type === 'open') {minFramePts=-Infinity;cleanupFrames();closingFrames=false;minGeneration=frameGeneration+1;subtitles.clear();

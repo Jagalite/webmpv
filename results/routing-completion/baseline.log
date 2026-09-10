@@ -1,0 +1,94 @@
+
+> webmpv@0.2.0 test:automatic-selection
+> npm run build && node --test tests/native-selection.mjs && node tests/automatic-selection.mjs
+
+
+> webmpv@0.2.0 build
+> tsc
+
+✔ Native checks the selected audio, not every available track (1.3035ms)
+✔ Disabled subtitles do not disqualify Native; enabled embedded subtitles do (0.091167ms)
+✔ Unknown audio profiles and unsupported browser MIME fail qualification (0.07975ms)
+✔ Native packaging checks include MP4 for VP9 with AAC and platform Dolby audio (0.146417ms)
+✔ AAC ASC profiles are probed with their actual object type (0.097083ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.33325
+results/automatic-selection/run-2026-09-10T00-25-42.511Z
+PASS native-direct
+PASS native-remux
+PASS embedded-ass
+PASS incompatible-native-audio
+PASS software-codec
+PASS browser-rejection
+PASS reselect-new-source
+PASS automatic-filters
+PASS explicit-mode-pins
+PASS runtime-recovery
+PASS native-runtime-remux
+PASS subtitle-enable-reselect
+PASS source-identity-is-terminal
+PASS range-change-does-not-fallback
+PASS remote-authorization
+PASS disabled-tracks-survive-reselection
+PASS all-routes-fail-rollback
+PASS selected-language-survives-filters
+PASS second-failure-during-recovery
+PASS identity-survives-decoder-fallback
+PASS destroy-during-stalled-probe-import
+PASS destroy-during-probe
+PASS native-remux-source-worker.js: load failure rollback
+PASS native-remux-worker.js: load failure rollback
+PASS native-remux-source-worker.js: silent initialization deadline
+PASS invalid seeks preserve the live session, including the end boundary
+PASS seek rejects changed remote etag
+PASS seek rejects changed remote length
+results/media-routing-integration/review-fixes-2026-09-10T00-26-42.212Z
+results/player-api/functional-2026-09-10T00-27-15.963Z
+PASS exactly three modes and native default
+PASS native local playback loads no Wasm
+PASS native text tracks and capability rejection
+PASS hybrid actual retained frames and subtitles
+PASS hybrid idle polling wakes for seek and resume
+PASS hybrid audio timing survives delayed worker initialization
+PASS hybrid seeks beyond the diagnostic sample budget
+PASS hybrid letterboxes and redraws without stretching
+PASS destroy cancels the current native text-track request
+PASS new source resets numeric subtitle and audio selections
+PASS software expanded decode and filters
+PASS explicit mode changes preserve playback state
+PASS filter reopens preserve state and reject leaving software
+PASS invalid filter rolls back to old playback
+PASS native unsupported request policy rolls back
+PASS unsupported hybrid source rolls back without a fourth mode
+PASS native remote playback
+PASS source replacement resets position and preserves controls
+PASS destroy interrupts native candidate load
+PASS explicit mode change recovers a terminated backend
+PASS queued changes and destroy release all workers
+✔ Native checks the selected audio, not every available track (0.664791ms)
+✔ Disabled subtitles do not disqualify Native; enabled embedded subtitles do (0.089125ms)
+✔ Unknown audio profiles and unsupported browser MIME fail qualification (0.075125ms)
+✔ Native packaging checks include MP4 for VP9 with AAC and platform Dolby audio (0.14575ms)
+✔ AAC ASC profiles are probed with their actual object type (0.092125ms)
+✔ Invisible packets do not exhaust a fictitious one-packet/one-frame credit (198.476542ms)
+✔ AVC distinguishes avcC packets from Annex B and preserves parameter bytes (1.070208ms)
+✔ HEVC profile compatibility bits and constraints generate the RFC codec string (0.215792ms)
+✔ VP8/VP9 and AV1 use their own configuration contracts (0.362709ms)
+✔ Unknown configurations and resource limits fail explicitly (0.243375ms)
+✔ VP9 packet metadata comes from the key header when container metadata is absent (0.6045ms)
+✔ Retained configurations admit 4K and odd dimensions within a bounded pixel budget (0.149583ms)
+✔ VP9 remux derives actual chroma and depth for the MP4 configuration box (0.283084ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 807.744584

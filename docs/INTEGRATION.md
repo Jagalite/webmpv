@@ -3,14 +3,15 @@
 The public entry point is `web/generated/index.js` (with matching TypeScript
 declarations). It exports `Player`, `PLAYBACK_MODES`, and public types. Exactly
 three modes are accepted, in this order: `native`, `hybrid`, `software`.
-`native` is the default. Copy-back and experimental decoder controls are not
+Omitting `mode` enables automatic selection; `player.mode` reports the actual engine
+(initially `native` before opening). An explicit mode pins selection. Copy-back and experimental decoder controls are not
 public modes or constructor options.
 
 ```ts
 import {Player, PLAYBACK_MODES} from './web/generated/index.js';
 
 const player = new Player(document.querySelector<HTMLElement>('#surface')!, {
-  mode: 'native', width: 1280, height: 720,
+  width: 1280, height: 720, // Automatic selection; pass mode to pin an engine.
 });
 await player.openRemote({url: mediaURL});
 await player.play(); // Use a user gesture when autoplay is restricted.
@@ -38,25 +39,30 @@ await player.destroy();
 Hybrid bridges AVC (avcC or Annex B), HEVC, VP8, VP9 and AV1 using the actual
 browser decoder configuration and decoded-frame delivery. Its audio and demuxing
 use the expanded FFmpeg build. Decoder registration alone does not establish
-playback support. Unsupported decoding fails; select Software explicitly.
+playback support. Automatic selection falls back to Software when Hybrid fails;
+manual Hybrid reports the failure.
 
 Native defaults to `nativeRemux: 'auto'`: direct `<video>` first, then progressive
-H.264/AAC packet-copy remuxing on packaging/decode rejection. Sources requiring
+[browser-compatible packet-copy remuxing](BROAD-ROUTING.md) on packaging/decode rejection. Sources requiring
 custom authentication go directly to the remux plan. `'never'` preserves direct-only
 behavior; `'always'` forces remux qualification. These are internal plans, not
 public modes. Native HLS/DASH still depends on browser manifest support.
 See [routing, qualification and remaining limits](MEDIA-ROUTING.md).
 
-`setVideoFilters()` and `setAudioFilters()` reject outside software mode, even
-for an empty chain. Select software explicitly first. Clear active filters before
+`setVideoFilters()` and `setAudioFilters()` automatically select Software when
+automatic selection is enabled. In manual mode they reject outside software, even
+for an empty chain. In manual mode, select software explicitly first. Clear active filters before
 leaving software mode. Filter changes reopen with filters configured before load.
 Mode/filter changes preserve position, pause, volume and speed. Failed candidate
 opens/configuration restore the old player. Changes are not gapless; at most an
 old and candidate session coexist. Track IDs are mode-specific and reset to auto
-when replacing a source or crossing between native and mpv modes. External browser text tracks remain
+when replacing a source or crossing between native and mpv modes. Disabled (`no`)
+track selections remain disabled across mode changes. External browser text tracks remain
 associated with the current source and are restored when returning to native.
 
-Use `player.capabilities` to enable controls. Observe `modechange` events with
+See [automatic selection](AUTOMATIC-SELECTION.md) for source preflight, fallback,
+runtime recovery and policy controls. Use `player.capabilities` to enable controls;
+filter capabilities include automatic switching when enabled. Observe `modechange` events with
 `phase: 'loading' | 'ready' | 'failed'`, and `mpv` events for normalized properties
 (`time-pos`, `duration`, `pause`, `track-list`, volume and speed). Native events are
 adapted to these common property names; they do not imply mpv is running.
@@ -74,8 +80,8 @@ slot. New sources open paused; call `play()` explicitly.
 ## Sources and deployment
 
 `open(File | ArrayBuffer)` supports native browser File playback, including files
-larger than 32 MiB. ArrayBuffer sources and local files in mpv modes are limited to
-32 MiB. Large mpv sources need HTTP ranges. Arrays are copied for reopen ownership;
+larger than 32 MiB. ArrayBuffer sources remain limited to 32 MiB. Local Files use bounded worker
+reads in Hybrid and Software as well as Native remux; an HTTP server is not required. Arrays are copied for reopen ownership;
 Files are immutable references.
 
 Native external subtitles:

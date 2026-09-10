@@ -1,0 +1,155 @@
+{
+  "browser": "152.0.7977.83",
+  "cases": [
+    {
+      "file": "vp8-vorbis.mkv",
+      "mime": "video/webm",
+      "mediaEvents": [
+        {
+          "name": "playerEventsAdded",
+          "data": {
+            "playerId": "9064ED646EBC4690E6DD0FBA3C7A0A53",
+            "events": [
+              {
+                "timestamp": 77672.833163,
+                "value": "{\"created\":\"2026-09-10 00:58:46.580191 UTC\",\"event\":\"kMediaLogCreated\"}"
+              },
+              {
+                "timestamp": 77672.833707,
+                "value": "{\"event\":\"kWebMediaPlayerCreated\",\"origin_url\":\"http://127.0.0.1:53165/\"}"
+              },
+              {
+                "timestamp": 77672.833774,
+                "value": "{\"event\":\"kLoad\",\"url\":\"blob:http://127.0.0.1:53165/7f5915c8-9f29-41dd-af56-d26570dca559\"}"
+              },
+              {
+                "timestamp": 77672.834042,
+                "value": "{\"event\":\"kPipelineStateChange\",\"pipeline_state\":\"kStarting\"}"
+              },
+              {
+                "timestamp": 77673.341399,
+                "value": "{\"event\":\"kPipelineStateChange\",\"pipeline_state\":\"kStopping\"}"
+              },
+              {
+                "timestamp": 77673.341464,
+                "value": "{\"event\":\"kPipelineStateChange\",\"pipeline_state\":\"kStopped\"}"
+              },
+              {
+                "timestamp": 77673.36142,
+                "value": "{\"event\":\"kWebMediaPlayerDestroyed\"}"
+              },
+              {
+                "timestamp": 77673.339943,
+                "value": "{\"duration\":65.495999,\"event\":\"kDurationChanged\"}"
+              },
+              {
+                "timestamp": 77673.361315,
+                "value": "{\"event\":\"kPause\"}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "playerMessagesLogged",
+          "data": {
+            "playerId": "9064ED646EBC4690E6DD0FBA3C7A0A53",
+            "messages": [
+              {
+                "level": "info",
+                "message": "ChunkDemuxer"
+              },
+              {
+                "level": "error",
+                "message": "Got a block with a timecode before the previous block."
+              },
+              {
+                "level": "error",
+                "message": "RunSegmentParserLoop: stream parsing failed. append_window_start=0 append_window_end=inf"
+              }
+            ]
+          }
+        },
+        {
+          "name": "playerErrorsRaised",
+          "data": {
+            "playerId": "9064ED646EBC4690E6DD0FBA3C7A0A53",
+            "errors": [
+              {
+                "errorType": "PipelineStatus::CHUNK_DEMUXER_ERROR_APPEND_FAILED",
+                "code": 16,
+                "stack": [
+                  {
+                    "file": "media/filters/chunk_demuxer.cc",
+                    "line": 1003
+                  }
+                ],
+                "cause": [],
+                "data": {}
+              }
+            ]
+          }
+        }
+      ],
+      "error": "page.evaluate: Error: MSE SourceBuffer error\n    at check (http://127.0.0.1:53165/web/native-remux-player.js:59:41)\n    at /Volumes/seed2/Projects/webmpv/tests/remux-packaging.mjs:9:116",
+      "state": {
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": ""
+        },
+        "errors": [],
+        "candidateStates": [
+          {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [],
+                "generatedBytes": 0,
+                "discardedBytes": 0,
+                "peakQueueDepth": 0,
+                "bufferedBytesUpperBound": 0,
+                "peakBufferedBytesUpperBound": 0,
+                "peakBufferedSeconds": 0,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 526.625
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 2317378,
+                    "firstPlayableMs": null,
+                    "firstPlayableSourceBytes": null
+                  }
+                ],
+                "errors": [],
+                "workers": 2
+              },
+              "source": {},
+              "remux": {},
+              "ranges": [],
+              "timelineBias": 1,
+              "position": 0,
+              "quality": {},
+              "readyState": 0
+            },
+            "position": 0,
+            "rendered": 0,
+            "dropped": 0,
+            "readyState": 0
+          }
+        ]
+      }
+    }
+  ],
+  "passed": false
+}

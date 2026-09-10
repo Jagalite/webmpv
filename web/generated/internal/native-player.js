@@ -32,7 +32,7 @@ export class NativePlayer extends EventTarget {
             video.addEventListener(event, listener);
             this.listeners.push(() => video.removeEventListener(event, listener));
         }
-        const failed = () => { if (!this.opening && !this.stopped)
+        const failed = () => { if (!this.opening && !this.remux?.starting && !this.stopped)
             this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`); };
         video.addEventListener('error', failed);
         this.listeners.push(() => video.removeEventListener('error', failed));

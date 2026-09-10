@@ -45,7 +45,7 @@ export type PlayerDiagnostics = {
     renderMs?: number;
     copyMs?: number;
 };
-/** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
+/** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export declare class WasmPlayer extends EventTarget {
     private worker;
     private workerOwner;
@@ -70,10 +70,11 @@ export declare class WasmPlayer extends EventTarget {
     browserCodecsAbsent: boolean;
     properties: Map<string, unknown>;
     readonly ready: Promise<void>;
-    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, mode }?: {
+    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, mode, softwarePresenter }?: {
         disableBrowserCodecs?: boolean;
         measureOutput?: boolean;
         mode?: 'hybrid' | 'software';
+        softwarePresenter?: 'rgb' | 'experimental-yuv';
     });
     private sendTiming;
     private fail;

@@ -1,9 +1,10 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><title>webmpv integration example</title>
 <style>body{font:16px system-ui;max-width:900px;margin:40px auto}video,canvas{width:100%}button,input,select{font:inherit;padding:8px}</style>
-<h1>Video player</h1><select id="mode"><option value="native">Native</option><option value="hybrid">Hybrid</option><option value="software">Software</option></select><input id="file" type="file"><button id="play">Play</button><button id="pause">Pause</button><button id="close">Close</button><div id="surface"></div><p role="status">Ready.</p>
+<h1>Video player</h1><label><input id="automatic" type="checkbox" checked>Automatic selection</label><select id="mode"><option value="native">Native</option><option value="hybrid">Hybrid</option><option value="software">Software</option></select><input id="file" type="file"><button id="play">Play</button><button id="pause">Pause</button><button id="close">Close</button><div id="surface"></div><p role="status">Ready.</p>
 <script type="module">
 import {Player} from './generated/index.js';
 const mode=document.querySelector('#mode'),status=document.querySelector('[role=status]');let player=new Player(document.querySelector('#surface'));
-async function run(action){try{await action();status.textContent='Ready.';}catch(error){status.textContent=error.message;}mode.value=player.mode;}
-mode.onchange=()=>run(()=>player.setMode(mode.value));document.querySelector('#file').onchange=e=>{const file=e.target.files[0];if(file)run(async()=>{await player.open(file);await player.play();});};document.querySelector('#play').onclick=()=>run(()=>player.play());document.querySelector('#pause').onclick=()=>run(()=>player.pause());document.querySelector('#close').onclick=()=>run(async()=>{await player.destroy();player=new Player(document.querySelector('#surface'),{mode:mode.value});});
+async function run(action){try{await action();status.textContent='Ready.';}catch(error){status.textContent=error.message;}mode.value=player.mode;document.querySelector('#automatic').checked=player.automaticSelection;}
+document.querySelector('#automatic').onchange=e=>run(()=>player.setAutomaticSelection(e.target.checked));
+mode.onchange=()=>run(()=>player.setMode(mode.value));document.querySelector('#file').onchange=e=>{const file=e.target.files[0];if(file)run(async()=>{await player.open(file);await player.play();});};document.querySelector('#play').onclick=()=>run(()=>player.play());document.querySelector('#pause').onclick=()=>run(()=>player.pause());document.querySelector('#close').onclick=()=>run(async()=>{await player.destroy();player=new Player(document.querySelector('#surface'),{mode:mode.value,automaticSelection:document.querySelector('#automatic').checked});});
 </script></html>

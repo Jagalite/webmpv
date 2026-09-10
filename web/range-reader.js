@@ -5,6 +5,7 @@ export class RangeReader {
     this.allow=new Set(options.allowedOrigins || [new URL(options.url).origin]);
     this.refresh=refresh;this.cache=new Map();this.epoch=0;this.closed=false;this.busy=false;
     this.stats={fetchedBytes:0,requests:0,retries:0,aborts:0,cacheBytes:0,peakCacheBytes:0,activeBytes:0,peakActiveBytes:0};
+    if(options.identity){this.etag=options.identity.etag;this.total=BigInt(options.identity.size);}
     this.checkURL(this.options.url);
     if(!Number.isInteger(this.options.blockBytes)||this.options.blockBytes<1024||this.options.blockBytes>262144||!Number.isInteger(this.options.cacheBytes)||this.options.cacheBytes<this.options.blockBytes||this.options.cacheBytes>16777216)throw Error('Invalid range budgets');
   }

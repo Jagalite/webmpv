@@ -1,0 +1,25 @@
+✔ 64-bit local slices stay bounded and never materialize the complete file (4.055458ms)
+✔ epoch cancellation releases a blocked read and permits the next bounded read (0.496417ms)
+✔ destroy cancels reads; truncated and oversized sources fail explicitly (0.614958ms)
+✔ an epoch change during asynchronous reader cleanup cannot publish old bytes (0.147875ms)
+✔ Native checks the selected audio, not every available track (0.590083ms)
+✔ Disabled subtitles do not disqualify Native; enabled embedded subtitles do (0.08325ms)
+✔ Unknown audio profiles and unsupported browser MIME fail qualification (0.074167ms)
+✔ Native packaging checks include MP4 for VP9 with AAC and platform Dolby audio (0.13825ms)
+✔ AAC ASC profiles are probed with their actual object type (0.090208ms)
+✔ Invisible packets do not exhaust a fictitious one-packet/one-frame credit (41.242208ms)
+✔ AVC distinguishes avcC packets from Annex B and preserves parameter bytes (0.551791ms)
+✔ HEVC profile compatibility bits and constraints generate the RFC codec string (0.201125ms)
+✔ VP8/VP9 and AV1 use their own configuration contracts (0.351ms)
+✔ Unknown configurations and resource limits fail explicitly (0.234834ms)
+✔ VP9 packet metadata comes from the key header when container metadata is absent (0.5235ms)
+✔ Retained configurations admit 4K and odd dimensions within a bounded pixel budget (0.126208ms)
+✔ VP9 remux derives actual chroma and depth for the MP4 configuration box (0.251458ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 634.515709

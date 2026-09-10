@@ -23,8 +23,12 @@ export type TextTrackSource = {
 };
 export type PlayerOptions = {
     mode?: PlaybackMode;
+    /** Defaults to true when mode is omitted. Explicit modes remain pinned. */
+    automaticSelection?: boolean;
     /** Internal Native packaging plan; "never" disables the packet-copy fallback. */
     nativeRemux?: 'auto' | 'never' | 'always';
+    /** Optional Software presenter; RGB remains the default. */
+    softwarePresenter?: 'rgb' | 'experimental-yuv';
     width?: number;
     height?: number;
     videoFilters?: string;
@@ -48,5 +52,13 @@ export type Diagnostics = {
     switching: boolean;
     videoFilters: string;
     audioFilters: string;
+    selection?: {
+        automatic: boolean;
+        attempts: Array<{
+            mode: PlaybackMode | 'probe';
+            outcome: 'skipped' | 'failed' | 'selected';
+            reason: string;
+        }>;
+    };
     backend?: Record<string, unknown>;
 };

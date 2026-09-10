@@ -4,7 +4,7 @@ import type {Backend} from './backend.js';
 type RemuxSource = {file?: File; options?: RemoteSource; audioTrack?: number};
 type RemuxTrack = {id: string; type: string; codec: string; selected: boolean};
 type RemuxController = {
-  timelineBias: number; tracks?: RemuxTrack[]; onError?: (message: string) => void;
+  starting?: boolean; timelineBias: number; tracks?: RemuxTrack[]; onError?: (message: string) => void;
   open(source: RemuxSource, target?: number): Promise<unknown>;
   seek(target: number): Promise<unknown>; play(): Promise<void>; pause(): void;
   destroy(): Promise<void>; snapshot(): Record<string, unknown>;
@@ -42,7 +42,7 @@ export class NativePlayer extends EventTarget implements Backend {
       video.addEventListener(event, listener);
       this.listeners.push(() => video.removeEventListener(event, listener));
     }
-    const failed = () => {if(!this.opening&&!this.stopped)this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`);};
+    const failed = () => {if(!this.opening&&!this.remux?.starting&&!this.stopped)this.emit('error', `Native playback failed (${video.error?.code ?? 'unknown'}): ${video.error?.message ?? 'unsupported media or network failure'}`);};
     video.addEventListener('error', failed);
     this.listeners.push(() => video.removeEventListener('error', failed));
     const tracks = () => this.refresh();

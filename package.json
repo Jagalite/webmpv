@@ -25,9 +25,16 @@
     "test:formats": "node tests/format-matrix.mjs",
     "test:decoder-simd": "bash experiments/playback-performance/test-maintained-kernels.sh",
     "build:hybrid": "bash scripts/link-hybrid.sh",
+    "build:software-yuv": "bash scripts/build-software-yuv.sh",
+    "test:remux-negotiation": "npm run build && node --test tests/remux-packaging-contracts.mjs && node tests/remux-negotiation.mjs",
+    "test:software-yuv": "npm run build && node experiments/software-yuv-integration/qualify.mjs",
     "build:remux": "bash scripts/build-remux.sh",
     "test:media-routing": "node --test tests/video-codec-config.mjs tests/retained-codec-worker.mjs && node tests/media-routing.mjs",
-    "test:remux-regressions": "node tests/remux-regressions.mjs"
+    "test:remux-regressions": "node tests/remux-regressions.mjs",
+    "test:automatic-selection": "npm run build && node --test tests/native-selection.mjs && node tests/automatic-selection.mjs",
+    "test:broad-routing": "npm run build && node --test tests/video-codec-config.mjs tests/native-selection.mjs && node tests/broad-routing.mjs",
+    "test:large-files": "npm run build && node --test tests/file-reader.mjs && node tests/large-files.mjs",
+    "test:remux-packaging": "npm run build && node --test tests/remux-buffering.mjs && node tests/remux-packaging.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",

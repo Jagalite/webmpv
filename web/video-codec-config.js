@@ -11,6 +11,17 @@ export function vp9PacketConfig(data){
  bits(2);if(bits(24)!==0x498342)throw Error('Invalid VP9 sync code');
  return {profile,depth:profile>=2?(bits(1)?12:10):8};
 }
+// Full key-frame color config is needed when packet-only demuxing leaves pix_fmt unset.
+export function vp9RemuxConfig(data){
+ const basic=vp9PacketConfig(data);let at=0;
+ const bits=n=>{if(at+n>data.length*8)throw Error('Truncated VP9 color config');let v=0;while(n--)v=v*2+((data[at>>3]>>(7-(at++&7)))&1);return v;};
+ bits(2);bits(2);if(basic.profile===3)bits(1);bits(4);bits(24);if(basic.profile>=2)bits(1);
+ const color=bits(3);let fullRange=1,sx=0,sy=0;
+ if(color!==7){fullRange=bits(1);if(basic.profile===1||basic.profile===3){sx=bits(1);sy=bits(1);bits(1);}else{sx=sy=1;}}
+ else if(basic.profile===1||basic.profile===3)bits(1);else throw Error('Invalid VP9 RGB profile');
+ const base=color===7?'gbrp':sx?(sy?'yuv420p':'yuv422p'):sy?'yuv440p':'yuv444p';
+ return {...basic,pixelFormat:base+(basic.depth===8?'':basic.depth+'le'),fullRange};
+}
 function nal(data,type,hevc=false){
  for(let i=0;i+4<data.length;i++)if(data[i]===0&&data[i+1]===0&&(data[i+2]===1||(data[i+2]===0&&data[i+3]===1))){
   const start=i+(data[i+2]===1?3:4);if((hevc?(data[start]>>1)&63:data[start]&31)!==type)continue;
@@ -25,8 +36,8 @@ function hevcString(ptl){
  const constraints=[...ptl.subarray(5,11)];while(constraints.length&&constraints.at(-1)===0)constraints.pop();
  return `hev1.${['','A','B','C'][ptl[0]>>6]}${ptl[0]&31}.${compatibility.toString(16)}.${ptl[0]&32?'H':'L'}${ptl[11]}${constraints.map(x=>'.'+hex(x)).join('')}`;
 }
-export function videoCodecConfig({kind,description=new Uint8Array(),width,height,profile=-1,level=-1,depth=8}){
- if(width<1||height<1||width>1920||height>1080||description.length>65536)throw Error('Video configuration exceeds current resource bounds');
+export function videoCodecConfig({kind,description=new Uint8Array(),width,height,profile=-1,level=-1,depth=8,maxWidth=8192,maxHeight=8192}){
+ if(width<1||height<1||width>maxWidth||height>maxHeight||width*height>33554432||description.length>65536)throw Error('Video configuration exceeds current resource bounds');
  let codec,extra,prefix;
  if(kind===1){
   if(description[0]===1&&description.length>=7){codec='avc1.'+[...description.subarray(1,4)].map(hex).join('');extra=description;}

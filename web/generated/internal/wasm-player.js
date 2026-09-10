@@ -1,4 +1,4 @@
-/** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
+/** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export class WasmPlayer extends EventTarget {
     worker;
     workerOwner;
@@ -23,7 +23,7 @@ export class WasmPlayer extends EventTarget {
     browserCodecsAbsent = false;
     properties = new Map();
     ready;
-    constructor(canvas, { disableBrowserCodecs = false, measureOutput = false, mode = 'software' } = {}) {
+    constructor(canvas, { disableBrowserCodecs = false, measureOutput = false, mode = 'software', softwarePresenter = 'rgb' } = {}) {
         super();
         const decoder = mode === 'hybrid' ? 'webcodecs' : 'software';
         if (!crossOriginIsolated)
@@ -119,7 +119,7 @@ export class WasmPlayer extends EventTarget {
                 if (this.destroyed)
                     throw new Error('Player destroyed during initialization');
                 const offscreen = canvas.transferControlToOffscreen();
-                this.worker.postMessage({ type: 'init', canvas: offscreen, audio, font, sampleRate: this.audioContext.sampleRate, disableBrowserCodecs, measureOutput, decoder, decoderFaultAfter: 0 }, [offscreen, font]);
+                this.worker.postMessage({ type: 'init', canvas: offscreen, audio, font, sampleRate: this.audioContext.sampleRate, disableBrowserCodecs, measureOutput, decoder, softwarePresenter, decoderFaultAfter: 0 }, [offscreen, font]);
                 this.timing = setInterval(() => this.sendTiming(), 20);
                 this.sendTiming();
             })().catch(error => { clearTimeout(timeout); reject(error); });
@@ -209,15 +209,19 @@ export class WasmPlayer extends EventTarget {
     async openLocal(file) {
         await this.ready;
         const size = file instanceof File ? file.size : file.byteLength;
-        if (size > 32 * 1024 * 1024)
-            throw new Error('Local files in mpv modes are limited to 32 MiB');
+        if (!(file instanceof File) && size > 32 * 1024 * 1024)
+            throw new Error('ArrayBuffer sources are limited to 32 MiB');
         if (this.hasFile)
             await Promise.all([this.waitForEvent(event => event.event === 'end-file'), this.command('stop')]);
         else
             await this.command('stop');
-        const bytes = file instanceof File ? await file.arrayBuffer() : file.slice(0);
         const loaded = this.waitForEvent(event => event.event === 'file-loaded' || (event.event === 'end-file' && event.reason === 'error' ? new Error(String(event.file_error)) : false));
-        await Promise.all([loaded, this.request({ type: 'open', bytes }, [bytes])]);
+        if (file instanceof File)
+            await Promise.all([loaded, this.request({ type: 'open-file', file })]);
+        else {
+            const bytes = file.slice(0);
+            await Promise.all([loaded, this.request({ type: 'open', bytes }, [bytes])]);
+        }
     }
     async command(...args) { await this.ready; return this.request({ type: 'command', args }); }
     async setPause(paused) {

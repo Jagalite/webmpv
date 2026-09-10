@@ -1,8 +1,12 @@
 # Media routing integration
 
+The subsequent [broad routing expansion](BROAD-ROUTING.md) supersedes the original
+AVC/AAC remux and 1080p retained-source admission limits described below. Original
+qualification results retain their original scope.
+
 Native, Hybrid and Software remain the only public modes. This integration removes
-Hybrid's H.264-only admission rule and adds a Native progressive remux plan. It does
-not automatically change the caller's public mode. This is a development integration;
+Hybrid's H.264-only admission rule and adds a Native progressive remux plan. The subsequent [automatic selection policy](AUTOMATIC-SELECTION.md) now chooses
+between those modes when the caller does not pin one. This is a development integration;
 short functional playback checks do not constitute release or performance qualification.
 
 ```mermaid
@@ -80,7 +84,8 @@ enforce route immediately through the remux source. Generic network failures do
 not trigger speculative remux. `never` opts out; `always` forces remux qualification.
 A successful direct file still loads no Wasm. This is not a complete media probe:
 a browser that silently omits an unsupported track may not report a direct error.
-Applications must use selected-track/feature requirements and explicit mode choice;
+The automatic policy now preflights selected-track requirements; explicit Native
+still leaves those requirements to the caller.
 Native does not promise mpv subtitle, HDR or multichannel behavior.
 
 [Remux C](../native/remux/remux.c), [controller](../web/native-remux-player.js),

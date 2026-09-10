@@ -3,7 +3,14 @@ import type { PlaybackMode, PlayerOptions, RemoteSource, TextTrackSource, Capabi
 export declare class Player extends EventTarget {
     readonly ready: Promise<void>;
     private currentMode;
+    private automatic;
+    private attempts;
+    private inspection?;
+    private recovering;
+    private lifetime;
+    private recoveredSessions;
     private nativeRemux;
+    private softwarePresenter;
     private settings;
     private root;
     private width;
@@ -21,7 +28,8 @@ export declare class Player extends EventTarget {
     private monitor?;
     constructor(container: HTMLElement, options?: PlayerOptions);
     get mode(): "native" | "hybrid" | "software";
-    get surface(): HTMLCanvasElement | HTMLVideoElement | undefined;
+    get automaticSelection(): boolean;
+    get surface(): HTMLVideoElement | HTMLCanvasElement | undefined;
     get properties(): ReadonlyMap<string, unknown>;
     get capabilities(): Capabilities;
     get diagnostics(): Diagnostics;
@@ -29,10 +37,15 @@ export declare class Player extends EventTarget {
     private emit;
     private validateFilters;
     private enqueue;
+    private interruptible;
     private dispose;
     private create;
     private settled;
     private replace;
+    private record;
+    private select;
+    private recover;
+    setAutomaticSelection(enabled?: boolean): Promise<void>;
     open(file: File | ArrayBuffer): Promise<void>;
     openRemote(options: RemoteSource): Promise<void>;
     setMode(mode: PlaybackMode): Promise<void>;

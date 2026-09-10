@@ -1,0 +1,1646 @@
+{
+  "browser": "146.0.1",
+  "cases": [
+    {
+      "name": "mp4-probe-rejection",
+      "file": "vp9-opus.mkv",
+      "deny": "mp4",
+      "expect": "webm",
+      "seeks": [
+        {
+          "t": 40,
+          "pos": 40,
+          "ms": 943
+        },
+        {
+          "t": 2,
+          "pos": 2,
+          "ms": 820
+        }
+      ],
+      "state": {
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 33178,
+                    "at": 1553.24,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 1557.4,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 1559.58,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 1581.18,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 1582.84,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 1585.66,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 1665,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 40358,
+                    "at": 1667.04,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33153,
+                    "at": 1668.8,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 1671.12,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 1673.8,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 2453.56,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 72906,
+                    "at": 3194.36,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 3194.98,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 3213.9,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 3214.74,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3216.4,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 3217.08,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 3218.72,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 73511,
+                    "at": 3220.06,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 3220.94,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 3415.48,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 34265,
+                    "at": 3721.5,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3723.12,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 3724.08,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 3727.02,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 73511,
+                    "at": 3731.24,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 3735.62,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 3738.58,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 3750.78,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3752.44,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 3770.32,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 3775.36,
+                    "generation": 3
+                  }
+                ],
+                "generatedBytes": 1300380,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 441195,
+                "peakBufferedBytesUpperBound": 441195,
+                "peakBufferedSeconds": 5.989,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 977.04
+                  },
+                  {
+                    "target": 40,
+                    "started": 2567.82
+                  },
+                  {
+                    "target": 2,
+                    "started": 3501.82
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 591.3600000000001,
+                    "firstPlayableSourceBytes": 131072,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "MSE type unsupported"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 100818,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 2,
+                    "target": 40,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 629.54,
+                    "firstPlayableSourceBytes": 199177,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "MSE type unsupported"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 107059,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 3,
+                    "target": 2,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 227.15999999999985,
+                    "firstPlayableSourceBytes": 264713,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "MSE type unsupported"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 150342,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 426956,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 426541,
+                    "sourceFetchedBytes": 458752,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 431814,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 431399,
+                    "sourceFetchedBytes": 526857,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 526857,
+                "requests": 9,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 65536,
+                "peakOwnedBytes": 131072
+              },
+              "remux": {
+                "calls": 12,
+                "remuxMs": 225.71999999999994,
+                "generatedBytes": 441610,
+                "peakBatchBytes": 73511,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  1.5270000000000001,
+                  7.494999999999999
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 2.386041,
+              "quality": {},
+              "readyState": 4
+            },
+            "position": 2.386041,
+            "rendered": 10,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "mp4-buffer-rejection",
+      "file": "vp9-opus.mkv",
+      "rejectAdd": "mp4",
+      "expect": "webm",
+      "seeks": [
+        {
+          "t": 40,
+          "pos": 40,
+          "ms": 1002
+        },
+        {
+          "t": 2,
+          "pos": 2,
+          "ms": 417
+        }
+      ],
+      "state": {
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 33178,
+                    "at": 902.8,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 905.1,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 907.52,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 911.02,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 914.52,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 926.18,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 929.64,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 40358,
+                    "at": 934.58,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33153,
+                    "at": 956.16,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 1003.76,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 1030.74,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 1692.72,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 72906,
+                    "at": 2550.86,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 2551.76,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 2662.06,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 2662.88,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 2664.62,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 2665.32,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 2714.26,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 73511,
+                    "at": 2716.4,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 2718.28,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 2760.06,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 34265,
+                    "at": 2999.38,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3000.42,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 3001.06,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 3002.34,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 73511,
+                    "at": 3003.7,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 3004.62,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 3005.16,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 3146.94,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3147.5,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 3231.2,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 3231.74,
+                    "generation": 3
+                  }
+                ],
+                "generatedBytes": 1300380,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 441195,
+                "peakBufferedBytesUpperBound": 441195,
+                "peakBufferedSeconds": 5.989,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 610.88
+                  },
+                  {
+                    "target": 40,
+                    "started": 1874.08
+                  },
+                  {
+                    "target": 2,
+                    "started": 2869.4
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 312.41999999999996,
+                    "firstPlayableSourceBytes": 196608,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "NotSupportedError: Injected packaging rejection"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 172501,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 2,
+                    "target": 40,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 678.0799999999999,
+                    "firstPlayableSourceBytes": 199177,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "NotSupportedError: Injected packaging rejection"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 107059,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 3,
+                    "target": 2,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 132.23999999999978,
+                    "firstPlayableSourceBytes": 199177,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "NotSupportedError: Injected packaging rejection"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 110275,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 426956,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 426541,
+                    "sourceFetchedBytes": 458752,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 431814,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 431399,
+                    "sourceFetchedBytes": 526857,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 526857,
+                "requests": 9,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 65536,
+                "peakOwnedBytes": 131072
+              },
+              "remux": {
+                "calls": 12,
+                "remuxMs": 329.79999999999995,
+                "generatedBytes": 441610,
+                "peakBatchBytes": 73511,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  1.5270000000000001,
+                  7.494999999999999
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 2.208458,
+              "quality": {},
+              "readyState": 4
+            },
+            "position": 2.208458,
+            "rendered": 5,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "mp4-initialization-rejection",
+      "file": "vp9-opus.mkv",
+      "rejectAppend": "mp4",
+      "expect": "webm",
+      "seeks": [
+        {
+          "t": 40,
+          "pos": 40,
+          "ms": 1299
+        },
+        {
+          "t": 2,
+          "pos": 2,
+          "ms": 644
+        }
+      ],
+      "state": {
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 33178,
+                    "at": 605.76,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 658,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 682.04,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 685.52,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 686.42,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 687.92,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 689.06,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 40358,
+                    "at": 689.82,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33153,
+                    "at": 690.88,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 691.6,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 692.52,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 1239.28,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 72906,
+                    "at": 2392.2,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 2392.96,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 2393.8,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 2394.3,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 2395.18,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 2395.7,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 2396.44,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 73511,
+                    "at": 2398.1,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 2398.98,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 2600.46,
+                    "generation": 4
+                  },
+                  {
+                    "bytes": 34265,
+                    "at": 3062.16,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3063.54,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 38782,
+                    "at": 3064.32,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 40067,
+                    "at": 3065.4,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 73511,
+                    "at": 3066.92,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 33738,
+                    "at": 3067.96,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 33487,
+                    "at": 3068.52,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 34870,
+                    "at": 3314.56,
+                    "generation": 6
+                  },
+                  {
+                    "bytes": 36813,
+                    "at": 3317.98,
+                    "generation": 6
+                  }
+                ],
+                "generatedBytes": 1225017,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 362346,
+                "peakBufferedBytesUpperBound": 431399,
+                "peakBufferedSeconds": 5.989,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 256.32
+                  },
+                  {
+                    "target": 0,
+                    "started": 424.98
+                  },
+                  {
+                    "target": 40,
+                    "started": 1438.96
+                  },
+                  {
+                    "target": 40,
+                    "started": 1966.74
+                  },
+                  {
+                    "target": 2,
+                    "started": 2741.34
+                  },
+                  {
+                    "target": 2,
+                    "started": 2920.92
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": null,
+                    "firstPlayableSourceBytes": null,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ]
+                  },
+                  {
+                    "generation": 2,
+                    "target": 0,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 191.46000000000004,
+                    "firstPlayableSourceBytes": 65536,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "Initialization append failed"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 33593,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 3,
+                    "target": 40,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": null,
+                    "firstPlayableSourceBytes": null,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ]
+                  },
+                  {
+                    "generation": 4,
+                    "target": 40,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 450.31999999999994,
+                    "firstPlayableSourceBytes": 526857,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "Initialization append failed"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 398327,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 5,
+                    "target": 2,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": null,
+                    "firstPlayableSourceBytes": null,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ]
+                  },
+                  {
+                    "generation": 6,
+                    "target": 2,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 148.57999999999993,
+                    "firstPlayableSourceBytes": 395785,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "rejected": "Initialization append failed"
+                      },
+                      {
+                        "container": "webm",
+                        "mime": "video/webm; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 291078,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 1162,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 0,
+                    "sourceFetchedBytes": 65536,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 426956,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 426541,
+                    "sourceFetchedBytes": 458752,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 1162,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 0,
+                    "sourceFetchedBytes": 68105,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 431814,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 431399,
+                    "sourceFetchedBytes": 526857,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 1162,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 0,
+                    "sourceFetchedBytes": 68105,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 461321,
+                "requests": 8,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 49152,
+                "peakOwnedBytes": 114688
+              },
+              "remux": {
+                "calls": 10,
+                "remuxMs": 369.06000000000006,
+                "generatedBytes": 362761,
+                "peakBatchBytes": 73511,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  1.5270000000000001,
+                  6.495
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 2.220895,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mp4 @ 0x2f7e40] track 1: codec frame size is not set",
+                "[mp4 @ 0x2f5c00] track 1: codec frame size is not set",
+                "[mp4 @ 0x2f5c00] track 1: codec frame size is not set"
+              ]
+            },
+            "position": 2.220895,
+            "rendered": 6,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "opus-mp4-alternative",
+      "file": "audio-opus.ogg",
+      "deny": "webm",
+      "expect": "mp4",
+      "seeks": [
+        {
+          "t": 40,
+          "pos": 40,
+          "ms": 765
+        },
+        {
+          "t": 2,
+          "pos": 2,
+          "ms": 483
+        }
+      ],
+      "state": {
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 5601,
+                    "at": 1049.5,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5168,
+                    "at": 1050.74,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 4971,
+                    "at": 1051.42,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5065,
+                    "at": 1052.28,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5310,
+                    "at": 1052.74,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5470,
+                    "at": 1053.8,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5568,
+                    "at": 1054.68,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5853,
+                    "at": 1056.2,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5665,
+                    "at": 1057.64,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5684,
+                    "at": 1058.66,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5700,
+                    "at": 1287.42,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5708,
+                    "at": 1775.88,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 5935,
+                    "at": 2365.14,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2365.5,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2365.86,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2366.18,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2366.42,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2367.1,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2367.34,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2367.62,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2367.94,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2368.24,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5715,
+                    "at": 2510.68,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 5481,
+                    "at": 2835.74,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5455,
+                    "at": 2836.1,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5559,
+                    "at": 2836.4,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5622,
+                    "at": 2836.74,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5660,
+                    "at": 2837.12,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5682,
+                    "at": 2837.42,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5697,
+                    "at": 2837.68,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5707,
+                    "at": 2838.38,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5711,
+                    "at": 2838.74,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5711,
+                    "at": 2839.02,
+                    "generation": 3
+                  },
+                  {
+                    "bytes": 5713,
+                    "at": 2988.76,
+                    "generation": 3
+                  }
+                ],
+                "generatedBytes": 192865,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 61998,
+                "peakBufferedBytesUpperBound": 65763,
+                "peakBufferedSeconds": 6.1,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 548.28
+                  },
+                  {
+                    "target": 40,
+                    "started": 1899.84
+                  },
+                  {
+                    "target": 2,
+                    "started": 2665.66
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 706345,
+                    "firstPlayableMs": 510.55999999999995,
+                    "firstPlayableSourceBytes": 196379,
+                    "packaging": [
+                      {
+                        "container": "webm",
+                        "mime": "audio/webm; codecs=\"opus\"",
+                        "rejected": "MSE type unsupported"
+                      },
+                      {
+                        "container": "mp4",
+                        "mime": "audio/mp4; codecs=\"opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 55028,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 2,
+                    "target": 40,
+                    "sourceSize": 706345,
+                    "firstPlayableMs": 470.5200000000002,
+                    "firstPlayableSourceBytes": 426108,
+                    "packaging": [
+                      {
+                        "container": "webm",
+                        "mime": "audio/webm; codecs=\"opus\"",
+                        "rejected": "MSE type unsupported"
+                      },
+                      {
+                        "container": "mp4",
+                        "mime": "audio/mp4; codecs=\"opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 58043,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 3,
+                    "target": 2,
+                    "sourceSize": 706345,
+                    "firstPlayableMs": 185.64000000000033,
+                    "firstPlayableSourceBytes": 426108,
+                    "packaging": [
+                      {
+                        "container": "webm",
+                        "mime": "audio/webm; codecs=\"opus\"",
+                        "rejected": "MSE type unsupported"
+                      },
+                      {
+                        "container": "mp4",
+                        "mime": "audio/mp4; codecs=\"opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 56958,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 66436,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 65763,
+                    "sourceFetchedBytes": 261915,
+                    "inFlightOutputUpperBound": 8388608
+                  },
+                  {
+                    "generatedBytes": 63758,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 63085,
+                    "sourceFetchedBytes": 426108,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 426108,
+                "requests": 11,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 53248,
+                "peakOwnedBytes": 118784
+              },
+              "remux": {
+                "calls": 11,
+                "remuxMs": 134.43999999999994,
+                "generatedBytes": 62671,
+                "peakBatchBytes": 5713,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  1.9935,
+                  7.5135000000000005
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 2.225229,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mp4 @ 0x3147c0] track 0: codec frame size is not set",
+                "[mp4 @ 0x314240] track 0: codec frame size is not set",
+                "[mp4 @ 0x314240] track 0: codec frame size is not set"
+              ]
+            },
+            "position": 2.225229,
+            "rendered": 0,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "both-rejected-fallback",
+      "file": "vp9-opus.mkv",
+      "deny": "both",
+      "automatic": true,
+      "expectMode": "hybrid",
+      "seeks": [
+        {
+          "t": 40,
+          "pos": 40.03,
+          "ms": 971
+        },
+        {
+          "t": 2,
+          "pos": 2,
+          "ms": 625
+        }
+      ],
+      "state": {
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": true,
+            "attempts": [
+              {
+                "mode": "native",
+                "outcome": "failed",
+                "reason": "Error: Unsupported MSE packaging for selected codecs"
+              },
+              {
+                "mode": "hybrid",
+                "outcome": "selected",
+                "reason": "Playback requirements and actual presentation accepted"
+              }
+            ]
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "pumpTicks": 206,
+            "subtitles": {
+              "updates": 3,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 34
+            },
+            "presentation": {
+              "position": 2.167,
+              "received": 67,
+              "closed": 64,
+              "drawn": 26,
+              "redraws": 3,
+              "peakRetained": 6,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                15.01890400000002,
+                19.36423700000023,
+                12.924332999999933,
+                4.761320000000069,
+                12.348729999999705,
+                15.389552999999978,
+                14.560509999999795,
+                14.206545000000006,
+                20.026228000000174,
+                19.600819999999658,
+                28.591437999999926,
+                23.955781999999544,
+                26.157220999999936,
+                6.269729999999981,
+                15.843736000000263,
+                275.8391279999996,
+                32.83228799999961,
+                27.765935000000354,
+                15.418868000000657,
+                24.106378999999833,
+                14.192114000000402,
+                1.800000000000182,
+                32.0111280000001,
+                4.76250600000003,
+                5.147233000000597,
+                5.813019999999597
+              ],
+              "pts": [
+                0,
+                42000,
+                83000,
+                125000,
+                167000,
+                208000,
+                250000,
+                292000,
+                333000,
+                375000,
+                417000,
+                458000,
+                500000,
+                542000,
+                583000,
+                40030000,
+                40080000,
+                40122000,
+                40163000,
+                40205000,
+                40247000,
+                2000000,
+                2042000,
+                2083000,
+                2125000,
+                2167000
+              ],
+              "pixelChecks": [],
+              "retained": 3,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 26,
+            "rendered": 30,
+            "renderMs": 1.4399999999986903,
+            "copyMs": 0,
+            "maxRenderMs": 0.11999999999989086,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 77,
+              "frames": 61,
+              "receivedFrames": 68,
+              "closedFrames": 68,
+              "peakOutstanding": 8,
+              "peakFrames": 8,
+              "resets": 4,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 4,
+                "width": 320,
+                "height": 180,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 0
+              },
+              "codec": "vp09.00.10.08",
+              "actualWidth": 320,
+              "actualHeight": 180,
+              "pixelFormat": "BGRX",
+              "placeholderFrames": 61,
+              "transferredFrames": 61,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mkv",
+            "seekPrerollSeconds": 0.5,
+            "presentedPosition": 2.167,
+            "ioPending": false,
+            "ioSerial": 7,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 592393,
+              "requests": 7,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 131072,
+              "peakChunkBytes": 65536,
+              "peakOwnedBytes": 196608,
+              "size": "4664858",
+              "reads": 7,
+              "seeks": 4,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 2.167,
+            "queuedFrames": 6144
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -116,7 +116,7 @@ async function pump(){
       const actualWidth=frame.visibleRect.width,actualHeight=frame.visibleRect.height;
       stats.actualWidth=actualWidth;stats.actualHeight=actualHeight;stats.pixelFormat=frame.format;
       const w=noCopy?2:actualWidth,h=noCopy?2:actualHeight;
-      if((!noCopy&&!['I420','NV12'].includes(frame.format))||actualWidth<1||actualHeight<1||actualWidth>1920||actualHeight>1080||w<1||h<1||w>1920||h>1080||(w&1)||(h&1))throw Error('Unsupported decoded frame');
+      if((!noCopy&&!['I420','NV12'].includes(frame.format))||actualWidth<1||actualHeight<1||actualWidth>(noCopy?8192:1920)||actualHeight>(noCopy?8192:1080)||actualWidth*actualHeight>33554432||w<1||h<1||w>1920||h>1080||(w&1)||(h&1))throw Error('Unsupported decoded frame');
       const nv12=frame.format==='NV12';
       const layout=nv12?[{offset:0,stride:w},{offset:w*h,stride:w}]:[{offset:0,stride:w},{offset:w*h,stride:w/2},{offset:w*h*5/4,stride:w/2}];
       if(!noCopy){

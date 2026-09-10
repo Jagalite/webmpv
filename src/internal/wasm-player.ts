@@ -2,7 +2,7 @@ export type PlayerEvent = {event:string; id?:number; name?:string; data?:unknown
 export type RemoteSource = {url:string;format?:'file'|'hls'|'dash';headers?:Record<string,string>;credentials?:RequestCredentials;allowedOrigins?:string[];immutable?:boolean;refreshAuthorization?:(resource?:{url:string})=>Promise<{url?:string;headers?:Record<string,string>}>};
 export type PlayerDiagnostics = {path:'wasm';presentation?:{position?:number;pts?:number[];retained?:number;pending?:number;received?:number;closed?:number};decoder?:'software'|'webcodecs';decoderStats?:Record<string,number|boolean>; rendered:number; heapBytes:number; queuedFrames:number; epoch:number;io?:Record<string,number|string>;seeking?:boolean;position?:number;presentedPosition?:number;ioPending?:boolean;interruptions?:number;renderMs?:number;copyMs?:number};
 
-/** One isolated software engine per player; bounded remote ranges or local files up to 32 MiB. */
+/** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export class WasmPlayer extends EventTarget {
   private worker: Worker;
   private workerOwner: HTMLIFrameElement;
@@ -28,7 +28,7 @@ export class WasmPlayer extends EventTarget {
   properties = new Map<string, unknown>();
   readonly ready: Promise<void>;
 
-  constructor(canvas:HTMLCanvasElement, {disableBrowserCodecs=false,measureOutput=false,mode='software'}:{disableBrowserCodecs?:boolean;measureOutput?:boolean;mode?:'hybrid'|'software'}={}) {
+  constructor(canvas:HTMLCanvasElement, {disableBrowserCodecs=false,measureOutput=false,mode='software',softwarePresenter='rgb'}:{disableBrowserCodecs?:boolean;measureOutput?:boolean;mode?:'hybrid'|'software';softwarePresenter?:'rgb'|'experimental-yuv'}={}) {
     super();
     const decoder=mode==='hybrid'?'webcodecs':'software';
     if(!crossOriginIsolated) throw new Error('This player requires a secure, cross-origin isolated page.');
@@ -82,7 +82,7 @@ export class WasmPlayer extends EventTarget {
         const font=await response.arrayBuffer();
         if(this.destroyed) throw new Error('Player destroyed during initialization');
         const offscreen=canvas.transferControlToOffscreen();
-        this.worker.postMessage({type:'init',canvas:offscreen,audio,font,sampleRate:this.audioContext.sampleRate,disableBrowserCodecs,measureOutput,decoder,decoderFaultAfter:0},[offscreen,font]);
+        this.worker.postMessage({type:'init',canvas:offscreen,audio,font,sampleRate:this.audioContext.sampleRate,disableBrowserCodecs,measureOutput,decoder,softwarePresenter,decoderFaultAfter:0},[offscreen,font]);
         this.timing=setInterval(()=>this.sendTiming(),20);
         this.sendTiming();
       })().catch(error=>{clearTimeout(timeout);reject(error);});
@@ -143,12 +143,12 @@ export class WasmPlayer extends EventTarget {
   private async openLocal(file:File|ArrayBuffer):Promise<void> {
     await this.ready;
     const size=file instanceof File?file.size:file.byteLength;
-    if(size>32*1024*1024) throw new Error('Local files in mpv modes are limited to 32 MiB');
+    if(!(file instanceof File)&&size>32*1024*1024) throw new Error('ArrayBuffer sources are limited to 32 MiB');
     if(this.hasFile) await Promise.all([this.waitForEvent(event=>event.event==='end-file'),this.command('stop')]);
     else await this.command('stop');
-    const bytes=file instanceof File?await file.arrayBuffer():file.slice(0);
     const loaded=this.waitForEvent(event=>event.event==='file-loaded'||(event.event==='end-file'&&event.reason==='error'?new Error(String(event.file_error)):false));
-    await Promise.all([loaded,this.request({type:'open',bytes},[bytes])]);
+    if(file instanceof File)await Promise.all([loaded,this.request({type:'open-file',file})]);
+    else {const bytes=file.slice(0);await Promise.all([loaded,this.request({type:'open',bytes},[bytes])]);}
   }
   async command(...args:string[]):Promise<void> {await this.ready;return this.request({type:'command',args});}
   private async setPause(paused:boolean) {

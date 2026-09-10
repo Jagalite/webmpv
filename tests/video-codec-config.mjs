@@ -17,7 +17,7 @@ test('VP8/VP9 and AV1 use their own configuration contracts',()=>{
  const c=config(5,[0x81,8,0x40,0,0x0a,1,0]);assert.equal(c.configuration.codec,'av01.0.08M.10');assert.equal(c.configuration.description,undefined);assert.deepEqual([...c.prefix],[0x0a,1,0]);
 });
 test('Unknown configurations and resource limits fail explicitly',()=>{
- assert.throws(()=>config(99),/no WebCodecs/);assert.throws(()=>config(1),/SPS/);assert.throws(()=>config(4),/profile/);assert.throws(()=>config(5),/profile/);assert.throws(()=>config(3,[],{width:4096}),/bounds/);
+ assert.throws(()=>config(99),/no WebCodecs/);assert.throws(()=>config(1),/SPS/);assert.throws(()=>config(4),/profile/);assert.throws(()=>config(5),/profile/);assert.throws(()=>config(3,[],{width:16384}),/bounds/);
 });
 test('VP9 packet metadata comes from the key header when container metadata is absent',async()=>{
  const {vp9PacketConfig}=await import('../web/video-codec-config.js');
@@ -25,4 +25,16 @@ test('VP9 packet metadata comes from the key header when container metadata is a
  assert.deepEqual(vp9PacketConfig(Uint8Array.from([0x92,0x49,0x83,0x42,0x80])),{profile:2,depth:12});
  assert.throws(()=>vp9PacketConfig(Uint8Array.from([0x86,0x49,0x83,0x42])),/key frame/);
  assert.throws(()=>vp9PacketConfig(Uint8Array.from([0x82,0x49])),/Truncated/);
+});
+
+test('Retained configurations admit 4K and odd dimensions within a bounded pixel budget',()=>{
+ assert.equal(config(3,[],{width:3840,height:2160}).configuration.codedWidth,3840);
+ assert.equal(config(3,[],{width:641,height:361}).configuration.codedWidth,641);
+ assert.throws(()=>config(3,[],{width:8192,height:8192}),/bounds/);
+});
+test('VP9 remux derives actual chroma and depth for the MP4 configuration box',async()=>{
+ const {vp9RemuxConfig}=await import('../web/video-codec-config.js');
+ assert.deepEqual(vp9RemuxConfig(Uint8Array.from([0x82,0x49,0x83,0x42,0])),{profile:0,depth:8,pixelFormat:'yuv420p',fullRange:0});
+ assert.deepEqual(vp9RemuxConfig(Uint8Array.from([0x92,0x49,0x83,0x42,0x80])),{profile:2,depth:12,pixelFormat:'yuv420p12le',fullRange:0});
+ assert.throws(()=>vp9RemuxConfig(Uint8Array.from([0x82,0x49,0x83,0x42])),/Truncated/);
 });

@@ -1,0 +1,201 @@
+{
+  "cases": [
+    {
+      "kind": "eof",
+      "state": {
+        "diagnostics": {
+          "mode": "native",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "backend": {
+            "path": "native",
+            "plan": "remux",
+            "remux": {
+              "stats": {
+                "fragments": [
+                  {
+                    "bytes": 42159,
+                    "at": 1256.6850000023842,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 35706,
+                    "at": 1262.065000012517,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 34067,
+                    "at": 1262.6500000059605,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 35456,
+                    "at": 1264.5100000053644,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 37232,
+                    "at": 1265.3350000083447,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 39253,
+                    "at": 1268.9200000017881,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 39933,
+                    "at": 1270.5700000077486,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 38828,
+                    "at": 1270.9350000023842,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 34232,
+                    "at": 1272.5450000017881,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 33621,
+                    "at": 1272.8350000083447,
+                    "generation": 1
+                  },
+                  {
+                    "bytes": 47891,
+                    "at": 1908.1650000065565,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 39842,
+                    "at": 1952.0350000113249,
+                    "generation": 2
+                  },
+                  {
+                    "bytes": 31908,
+                    "at": 1953.2150000035763,
+                    "generation": 2
+                  }
+                ],
+                "generatedBytes": 492452,
+                "discardedBytes": 0,
+                "peakQueueDepth": 1,
+                "bufferedBytesUpperBound": 119641,
+                "peakBufferedBytesUpperBound": 370487,
+                "peakBufferedSeconds": 5.069,
+                "seeks": [
+                  {
+                    "target": 0,
+                    "started": 647.1150000095367
+                  },
+                  {
+                    "target": 62.628,
+                    "started": 1750.300000011921
+                  }
+                ],
+                "sessions": [
+                  {
+                    "generation": 1,
+                    "target": 0,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 618.7899999916553,
+                    "firstPlayableSourceBytes": 196608,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 185782,
+                    "fetchedBytesAtLeastSourceSize": false
+                  },
+                  {
+                    "generation": 2,
+                    "target": 62.628,
+                    "sourceSize": 4664858,
+                    "firstPlayableMs": 168.14000000059605,
+                    "firstPlayableSourceBytes": 133641,
+                    "packaging": [
+                      {
+                        "container": "mp4",
+                        "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                        "selected": true
+                      }
+                    ],
+                    "generatedBytes": 49053,
+                    "fetchedBytesAtLeastSourceSize": false
+                  }
+                ],
+                "errors": [],
+                "workers": 2,
+                "cancellations": [
+                  {
+                    "generatedBytes": 371649,
+                    "pendingBytes": 0,
+                    "retainedCompressedBytesUpperBound": 370487,
+                    "sourceFetchedBytes": 393216,
+                    "inFlightOutputUpperBound": 8388608
+                  }
+                ]
+              },
+              "source": {
+                "fetchedBytes": 190031,
+                "requests": 4,
+                "aborts": 0,
+                "discardedBytes": 0,
+                "cacheBytes": 0,
+                "peakCacheBytes": 0,
+                "activeBytes": 0,
+                "peakActiveBytes": 65536,
+                "peakChunkBytes": 65536,
+                "peakOwnedBytes": 131072
+              },
+              "remux": {
+                "calls": 3,
+                "remuxMs": 164.82999999821186,
+                "generatedBytes": 120803,
+                "peakBatchBytes": 47891,
+                "heapBytes": 67108864
+              },
+              "ranges": [
+                [
+                  62.626,
+                  64.14
+                ]
+              ],
+              "timelineBias": 1,
+              "position": 64.14,
+              "quality": {},
+              "readyState": 4,
+              "logs": [
+                "[mp4 @ 0x2f7e40] track 1: codec frame size is not set",
+                "[mp4 @ 0x2f5c00] track 1: codec frame size is not set"
+              ]
+            },
+            "position": 64.14,
+            "rendered": 36,
+            "dropped": 0,
+            "readyState": 4
+          }
+        },
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "kind": "cancel-negotiation",
+      "destroyMs": 20,
+      "opened": "AbortError: Superseded",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

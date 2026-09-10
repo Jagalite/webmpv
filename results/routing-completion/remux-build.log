@@ -1,0 +1,1074 @@
+Setting up EMSDK environment (suppress these messages with EMSDK_QUIET=1)
+Adding directories to PATH:
+PATH += /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+
+Setting environment variables:
+PATH = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14:/Users/jagatranvo/.nvm/versions/node/v23.5.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/jagatranvo/.codex_ss/tmp/arg0/codex-arg0wJdW17:/Users/jagatranvo/.grok/bin:/Users/jagatranvo/.bun/bin:/Users/jagatranvo/.antigravity/antigravity/bin:/Users/jagatranvo/.opencode/bin:/Users/jagatranvo/.local/share/mise/installs/ruby/3.4.2/bin:/opt/homebrew/bin:/Users/jagatranvo/.nvm/versions/node/v23.5.0/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/go/bin:/Users/jagatranvo/.local/bin:/Users/jagatranvo/.cargo/bin
+EMSDK = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14
+EMSDK_PYTHON = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/bin/python3
+SSL_CERT_FILE = /Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/python/3.13.3_64bit/lib/python3.13/site-packages/certifi/cacert.pem
+configure: /Volumes/seed2/Projects/webmpv/build/sources/ffmpeg/configure --target-os=none --arch=wasm32 --enable-cross-compile --cc=emcc --cxx=em++ --ar=emar --ranlib=emranlib --nm=emnm --enable-static --disable-shared --disable-programs --disable-doc --disable-debug --disable-autodetect --disable-network --disable-asm --disable-everything --disable-avdevice --disable-avfilter --disable-swscale --disable-swresample --disable-postproc --enable-avformat --enable-avcodec --enable-avutil --enable-pthreads --enable-demuxers --enable-muxer=mp4,webm --enable-parsers --enable-bsfs '--extra-cflags=-O2 -pthread -msimd128' --extra-ldflags=-pthread
+install prefix            /usr/local
+source path               src
+C compiler                emcc
+C library                 
+host C compiler           gcc
+host C library            
+ARCH                      c (generic)
+big-endian                no
+runtime cpu detection     yes
+debug symbols             no
+strip symbols             yes
+optimize for size         no
+optimizations             yes
+static                    yes
+shared                    no
+postprocessing support    no
+network support           no
+threading support         pthreads
+safe bitstream reader     yes
+texi2html enabled         no
+perl enabled              yes
+pod2man enabled           yes
+makeinfo enabled          no
+makeinfo supports HTML    no
+xmllint enabled           yes
+
+External libraries:
+iconv
+
+External libraries providing hardware acceleration:
+
+Libraries:
+avcodec                 avformat                avutil
+
+Programs:
+
+Enabled decoders:
+
+Enabled encoders:
+
+Enabled hwaccels:
+
+Enabled parsers:
+aac                     dvdsub                  mpegaudio
+aac_latm                evc                     mpegvideo
+ac3                     flac                    opus
+adx                     ftr                     png
+amr                     g723_1                  pnm
+av1                     g729                    qoi
+avs2                    gif                     rv34
+avs3                    gsm                     sbc
+bmp                     h261                    sipr
+cavsvideo               h263                    tak
+cook                    h264                    vc1
+cri                     hdr                     vorbis
+dca                     hevc                    vp3
+dirac                   ipu                     vp8
+dnxhd                   jpeg2000                vp9
+dolby_e                 jpegxl                  vvc
+dpx                     misc4                   webp
+dvaudio                 mjpeg                   xbm
+dvbsub                  mlp                     xma
+dvd_nav                 mpeg4video              xwd
+
+Enabled demuxers:
+aa                      idcin                   pcm_f64le
+aac                     idf                     pcm_mulaw
+aax                     iff                     pcm_s16be
+ac3                     ifv                     pcm_s16le
+ac4                     ilbc                    pcm_s24be
+ace                     image2                  pcm_s24le
+acm                     image2_alias_pix        pcm_s32be
+act                     image2_brender_pix      pcm_s32le
+adf                     image2pipe              pcm_s8
+adp                     image_bmp_pipe          pcm_u16be
+ads                     image_cri_pipe          pcm_u16le
+adx                     image_dds_pipe          pcm_u24be
+aea                     image_dpx_pipe          pcm_u24le
+afc                     image_exr_pipe          pcm_u32be
+aiff                    image_gem_pipe          pcm_u32le
+aix                     image_gif_pipe          pcm_u8
+alp                     image_hdr_pipe          pcm_vidc
+amr                     image_j2k_pipe          pdv
+amrnb                   image_jpeg_pipe         pjs
+amrwb                   image_jpegls_pipe       pmp
+anm                     image_jpegxl_pipe       pp_bnk
+apac                    image_pam_pipe          pva
+apc                     image_pbm_pipe          pvf
+ape                     image_pcx_pipe          qcp
+apm                     image_pfm_pipe          qoa
+apng                    image_pgm_pipe          r3d
+aptx                    image_pgmyuv_pipe       rawvideo
+aptx_hd                 image_pgx_pipe          rcwt
+aqtitle                 image_phm_pipe          realtext
+argo_asf                image_photocd_pipe      redspark
+argo_brp                image_pictor_pipe       rka
+argo_cvg                image_png_pipe          rl2
+asf                     image_ppm_pipe          rm
+asf_o                   image_psd_pipe          roq
+ass                     image_qdraw_pipe        rpl
+ast                     image_qoi_pipe          rsd
+au                      image_sgi_pipe          rso
+av1                     image_sunrast_pipe      s337m
+avi                     image_svg_pipe          sami
+avr                     image_tiff_pipe         sbc
+avs                     image_vbn_pipe          sbg
+avs2                    image_webp_pipe         scc
+avs3                    image_xbm_pipe          scd
+bethsoftvid             image_xpm_pipe          sdns
+bfi                     image_xwd_pipe          sdr2
+bfstm                   ingenient               sds
+bink                    ipmovie                 sdx
+binka                   ipu                     segafilm
+bintext                 ircam                   ser
+bit                     iss                     sga
+bitpacked               iv8                     shorten
+bmv                     ivf                     siff
+boa                     ivr                     simbiosis_imx
+bonk                    jacosub                 sln
+brstm                   jpegxl_anim             smacker
+c93                     jv                      smjpeg
+caf                     kux                     smush
+cavsvideo               kvag                    sol
+cdg                     laf                     sox
+cdxl                    lc3                     spdif
+cine                    live_flv                srt
+codec2                  lmlm4                   stl
+codec2raw               loas                    str
+concat                  lrc                     subviewer
+data                    luodat                  subviewer1
+daud                    lvf                     sup
+dcstr                   lxf                     svag
+derf                    m4v                     svs
+dfa                     matroska                swf
+dfpwm                   mca                     tak
+dhav                    mcc                     tedcaptions
+dirac                   mgsts                   thp
+dnxhd                   microdvd                threedostr
+dsf                     mjpeg                   tiertexseq
+dsicin                  mjpeg_2000              tmv
+dss                     mlp                     truehd
+dts                     mlv                     tta
+dtshd                   mm                      tty
+dv                      mmf                     txd
+dvbsub                  mods                    ty
+dvbtxt                  moflex                  usm
+dxa                     mov                     v210
+ea                      mp3                     v210x
+ea_cdata                mpc                     vag
+eac3                    mpc8                    vc1
+epaf                    mpegps                  vc1t
+evc                     mpegts                  vividas
+ffmetadata              mpegtsraw               vivo
+filmstrip               mpegvideo               vmd
+fits                    mpjpeg                  vobsub
+flac                    mpl2                    voc
+flic                    mpsub                   vpk
+flv                     msf                     vplayer
+fourxm                  msnwc_tcp               vqf
+frm                     msp                     vvc
+fsb                     mtaf                    w64
+fwse                    mtv                     wady
+g722                    musx                    wav
+g723_1                  mv                      wavarc
+g726                    mvi                     wc3
+g726le                  mxf                     webm_dash_manifest
+g729                    mxg                     webvtt
+gdv                     nc                      wsaud
+genh                    nistsphere              wsd
+gif                     nsp                     wsvqa
+gsm                     nsv                     wtv
+gxf                     nut                     wv
+h261                    nuv                     wve
+h263                    obu                     xa
+h264                    ogg                     xbin
+hca                     oma                     xmd
+hcom                    osq                     xmv
+hevc                    paf                     xvag
+hls                     pcm_alaw                xwma
+hnm                     pcm_f32be               yop
+iamf                    pcm_f32le               yuv4mpegpipe
+ico                     pcm_f64be
+
+Enabled muxers:
+mov                     mp4                     webm
+
+Enabled protocols:
+
+Enabled filters:
+
+Enabled bsfs:
+aac_adtstoasc           h264_mp4toannexb        pcm_rechunk
+av1_frame_merge         h264_redundant_pps      pgs_frame_merge
+av1_frame_split         hapqa_extract           prores_metadata
+av1_metadata            hevc_metadata           remove_extradata
+chomp                   hevc_mp4toannexb        setts
+dca_core                imx_dump_header         showinfo
+dovi_rpu                media100_to_mjpegb      text2movsub
+dts2pts                 mjpeg2jpeg              trace_headers
+dump_extradata          mjpega_dump_header      truehd_core
+dv_error_marker         mov2textsub             vp9_metadata
+eac3_core               mpeg2_metadata          vp9_raw_reorder
+evc_frame_merge         mpeg4_unpack_bframes    vp9_superframe
+extract_extradata       noise                   vp9_superframe_split
+filter_units            null                    vvc_metadata
+h264_metadata           opus_metadata           vvc_mp4toannexb
+
+Enabled indevs:
+
+Enabled outdevs:
+
+License: LGPL version 2.1 or later
+
+WARNING: unknown architecture wasm32
+libavutil/avconfig.h is unchanged
+libavfilter/filter_list.c is unchanged
+libavcodec/codec_list.c is unchanged
+libavcodec/parser_list.c is unchanged
+libavcodec/bsf_list.c is unchanged
+libavformat/demuxer_list.c is unchanged
+libavdevice/indev_list.c is unchanged
+libavdevice/outdev_list.c is unchanged
+libavformat/protocol_list.c is unchanged
+make: make -j 4
+CC	libavformat/4xm.o
+CC	libavformat/aacdec.o
+CC	libavformat/3dostr.o
+CC	libavformat/aadec.o
+CC	libavformat/ac4dec.o
+CC	libavformat/aaxdec.o
+CC	libavformat/ac3dec.o
+CC	libavformat/acedec.o
+CC	libavformat/acm.o
+CC	libavformat/act.o
+CC	libavformat/adp.o
+CC	libavformat/ads.o
+CC	libavformat/adxdec.o
+CC	libavformat/aeadec.o
+CC	libavformat/afc.o
+CC	libavformat/aiff.o
+CC	libavformat/aiffdec.o
+CC	libavformat/aixdec.o
+CC	libavformat/allformats.o
+CC	libavformat/alp.o
+CC	libavformat/amr.o
+CC	libavformat/anm.o
+CC	libavformat/apac.o
+CC	libavformat/apc.o
+CC	libavformat/ape.o
+CC	libavformat/apetag.o
+CC	libavformat/apm.o
+CC	libavformat/apngdec.o
+CC	libavformat/aptxdec.o
+CC	libavformat/aqtitledec.o
+CC	libavformat/argo_asf.o
+CC	libavformat/argo_brp.o
+CC	libavformat/argo_cvg.o
+CC	libavformat/asf.o
+CC	libavformat/asf_tags.o
+CC	libavformat/asfcrypt.o
+CC	libavformat/asfdec_f.o
+CC	libavformat/asfdec_o.o
+CC	libavformat/assdec.o
+CC	libavformat/ast.o
+CC	libavformat/astdec.o
+CC	libavformat/au.o
+CC	libavformat/av1.o
+CC	libavformat/av1dec.o
+CC	libavformat/avc.o
+CC	libavformat/avformat.o
+CC	libavformat/avidec.o
+CC	libavformat/avio.o
+CC	libavformat/aviobuf.o
+CC	libavformat/avr.o
+CC	libavformat/avs.o
+CC	libavformat/avs2dec.o
+src/libavformat/avio.c:63:137: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   63 |     {"rw_timeout", "Timeout for IO operations (in microseconds)", offsetof(URLContext, rw_timeout), AV_OPT_TYPE_INT64, { .i64 = 0 }, 0, INT64_MAX, AV_OPT_FLAG_ENCODING_PARAM | AV_OPT_FLAG_DECODING_PARAM },
+      |     ~                                                                                                                                   ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+CC	libavformat/avs3dec.o
+CC	libavformat/bethsoftvid.o
+CC	libavformat/bfi.o
+CC	libavformat/bink.o
+CC	libavformat/binka.o
+CC	libavformat/bintext.o
+CC	libavformat/bit.o
+CC	libavformat/bmv.o
+CC	libavformat/boadec.o
+CC	libavformat/bonk.o
+CC	libavformat/brstm.o
+CC	libavformat/c93.o
+CC	libavformat/caf.o
+CC	libavformat/cafdec.o
+CC	libavformat/cavsvideodec.o
+CC	libavformat/cdg.o
+CC	libavformat/cdxl.o
+CC	libavformat/cinedec.o
+CC	libavformat/codec2.o
+CC	libavformat/concatdec.o
+CC	libavformat/dauddec.o
+src/libavformat/codec2.c:215:12: warning: unused function 'codec2_write_header' [-Wunused-function]
+  215 | static int codec2_write_header(AVFormatContext *s)
+      |            ^~~~~~~~~~~~~~~~~~~
+1 warning generated.
+CC	libavformat/dcstr.o
+CC	libavformat/demux.o
+CC	libavformat/demux_utils.o
+CC	libavformat/derf.o
+CC	libavformat/dfa.o
+src/libavformat/demux.c:1744:40: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+ 1744 |         if (bitrate >= 0 && bitrate <= INT64_MAX)
+      |                                     ~~ ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+CC	libavformat/dfpwmdec.o
+CC	libavformat/dhav.o
+CC	libavformat/diracdec.o
+CC	libavformat/dnxhddec.o
+CC	libavformat/dovi_isom.o
+CC	libavformat/dsfdec.o
+1 warning generated.
+CC	libavformat/dsicin.o
+CC	libavformat/dss.o
+CC	libavformat/dtsdec.o
+CC	libavformat/dtshddec.o
+CC	libavformat/dump.o
+CC	libavformat/dv.o
+CC	libavformat/dvbsub.o
+CC	libavformat/dvbtxt.o
+src/libavformat/dump.c:231:53: warning: implicit conversion from 'unsigned int' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+  231 |         av_log(ctx, log_level, "%f", (float) peak / UINT32_MAX);
+      |                                                   ~ ^~~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:50:21: note: expanded from macro 'UINT32_MAX'
+   50 | #define UINT32_MAX (0xffffffffu)
+      |                     ^~~~~~~~~~~
+CC	libavformat/dxa.o
+1 warning generated.
+CC	libavformat/eacdata.o
+CC	libavformat/electronicarts.o
+CC	libavformat/epafdec.o
+CC	libavformat/evc.o
+CC	libavformat/evcdec.o
+CC	libavformat/ffmetadec.o
+CC	libavformat/filmstripdec.o
+CC	libavformat/fitsdec.o
+CC	libavformat/flac_picture.o
+CC	libavformat/flacdec.o
+CC	libavformat/flic.o
+CC	libavformat/flvdec.o
+CC	libavformat/format.o
+CC	libavformat/frmdec.o
+CC	libavformat/fsb.o
+src/libavformat/flvdec.c:507:50: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+  507 |             if (isnan(d) || d < INT64_MIN || d > INT64_MAX)
+      |                                                ~ ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+src/libavformat/flvdec.c:771:52: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775 to 9223372036854776 [-Wimplicit-const-int-float-conversion]
+  771 |                    && date.milliseconds < INT64_MAX/1000
+      |                                         ~ ~~~~~~~~~^~~~~
+src/libavformat/flvdec.c:770:52: warning: implicit conversion from 'long long' to 'double' changes value from -9223372036854775 to -9223372036854776 [-Wimplicit-const-int-float-conversion]
+  770 |                    && date.milliseconds > INT64_MIN/1000
+      |                                         ~ ~~~~~~~~~^~~~~
+CC	libavformat/fwse.o
+CC	libavformat/g722.o
+CC	libavformat/g723_1.o
+3 warnings generated.
+CC	libavformat/g726.o
+CC	libavformat/g729dec.o
+CC	libavformat/gdv.o
+CC	libavformat/genh.o
+CC	libavformat/gifdec.o
+CC	libavformat/gsmdec.o
+CC	libavformat/gxf.o
+CC	libavformat/h261dec.o
+CC	libavformat/h263dec.o
+CC	libavformat/h264dec.o
+CC	libavformat/hca.o
+CC	libavformat/hcom.o
+CC	libavformat/hevc.o
+CC	libavformat/hevcdec.o
+CC	libavformat/hls.o
+CC	libavformat/hls_sample_encryption.o
+CC	libavformat/hnm.o
+CC	libavformat/iamf.o
+src/libavformat/hls.c:2424:37: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+ 2424 |                             int64_t offset = av_rescale_q(period->timestamp_offset,
+      |                                     ^
+CC	libavformat/iamf_parse.o
+CC	libavformat/iamf_reader.o
+CC	libavformat/iamf_writer.o
+1 warning generated.
+CC	libavformat/iamfdec.o
+CC	libavformat/icodec.o
+CC	libavformat/id3v1.o
+CC	libavformat/id3v2.o
+CC	libavformat/idcin.o
+CC	libavformat/idroqdec.o
+CC	libavformat/iff.o
+CC	libavformat/ifv.o
+CC	libavformat/img2.o
+CC	libavformat/ilbc.o
+CC	libavformat/img2_alias_pix.o
+src/libavformat/ilbc.c:33:12: warning: unused function 'ilbc_write_header' [-Wunused-function]
+   33 | static int ilbc_write_header(AVFormatContext *s)
+      |            ^~~~~~~~~~~~~~~~~
+1 warning generated.
+CC	libavformat/img2_brender_pix.o
+CC	libavformat/img2dec.o
+CC	libavformat/imx.o
+CC	libavformat/ingenientdec.o
+CC	libavformat/ipmovie.o
+CC	libavformat/ipudec.o
+CC	libavformat/ircam.o
+CC	libavformat/ircamdec.o
+CC	libavformat/isom.o
+CC	libavformat/isom_tags.o
+CC	libavformat/iss.o
+CC	libavformat/iv8.o
+CC	libavformat/ivfdec.o
+CC	libavformat/jacosubdec.o
+CC	libavformat/jpegxl_anim_dec.o
+CC	libavformat/jvdec.o
+CC	libavformat/kvag.o
+CC	libavformat/lafdec.o
+CC	libavformat/lc3.o
+CC	libavformat/lmlm4.o
+CC	libavformat/loasdec.o
+CC	libavformat/lrc.o
+CC	libavformat/lrcdec.o
+CC	libavformat/luodatdec.o
+CC	libavformat/lvfdec.o
+CC	libavformat/lxfdec.o
+CC	libavformat/m4vdec.o
+CC	libavformat/matroska.o
+CC	libavformat/matroskadec.o
+CC	libavformat/matroskaenc.o
+CC	libavformat/mca.o
+CC	libavformat/mccdec.o
+CC	libavformat/metadata.o
+CC	libavformat/mgsts.o
+CC	libavformat/microdvddec.o
+src/libavformat/matroskadec.c:3157:40: warning: implicit conversion from 'unsigned long long' to 'double' changes value from 18446744073709551615 to 18446744073709551616 [-Wimplicit-const-int-float-conversion]
+ 3157 |                 if (default_duration > UINT64_MAX || default_duration < 0) {
+      |                                      ~ ^~~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:51:21: note: expanded from macro 'UINT64_MAX'
+   51 | #define UINT64_MAX (0xffffffffffffffffu)
+      |                     ^~~~~~~~~~~~~~~~~~~
+src/libavformat/matroskaenc.c:3543:192: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+ 3543 |     { "cluster_time_limit",  "store at most the provided number of milliseconds in a cluster",                               OFFSET(cluster_time_limit), AV_OPT_TYPE_INT64, { .i64 = -1 }, -1, INT64_MAX, FLAGS },
+      |     ~                                                                                                                                                                                          ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+CC	libavformat/mj2kdec.o
+CC	libavformat/mlpdec.o
+CC	libavformat/mlvdec.o
+CC	libavformat/mm.o
+1 warning generated.
+CC	libavformat/mmf.o
+1 warning generated.
+CC	libavformat/mods.o
+CC	libavformat/moflex.o
+CC	libavformat/mov.o
+CC	libavformat/mov_chan.o
+CC	libavformat/mov_esds.o
+CC	libavformat/movenc.o
+CC	libavformat/movenc_ttml.o
+CC	libavformat/movenccenc.o
+CC	libavformat/mp3dec.o
+CC	libavformat/movenchint.o
+CC	libavformat/mpc.o
+CC	libavformat/mpc8.o
+CC	libavformat/mpeg.o
+CC	libavformat/mpegts.o
+CC	libavformat/mpegvideodec.o
+CC	libavformat/mpjpegdec.o
+CC	libavformat/mpl2dec.o
+CC	libavformat/mpsubdec.o
+CC	libavformat/msf.o
+CC	libavformat/msnwc_tcp.o
+CC	libavformat/mspdec.o
+CC	libavformat/mtaf.o
+CC	libavformat/mtv.o
+CC	libavformat/musx.o
+CC	libavformat/mux.o
+CC	libavformat/mux_utils.o
+CC	libavformat/mvdec.o
+CC	libavformat/mvi.o
+CC	libavformat/mxf.o
+CC	libavformat/mxfdec.o
+CC	libavformat/mxg.o
+CC	libavformat/ncdec.o
+CC	libavformat/nistspheredec.o
+CC	libavformat/nspdec.o
+CC	libavformat/nsvdec.o
+CC	libavformat/nut.o
+CC	libavformat/nutdec.o
+CC	libavformat/nuv.o
+CC	libavformat/oggdec.o
+CC	libavformat/oggparsecelt.o
+CC	libavformat/oggparsedirac.o
+CC	libavformat/oggparseflac.o
+CC	libavformat/oggparseogm.o
+CC	libavformat/oggparseopus.o
+CC	libavformat/oggparseskeleton.o
+CC	libavformat/oggparsespeex.o
+CC	libavformat/oggparsetheora.o
+CC	libavformat/oggparsevorbis.o
+CC	libavformat/oggparsevp8.o
+CC	libavformat/oma.o
+CC	libavformat/omadec.o
+CC	libavformat/options.o
+CC	libavformat/os_support.o
+CC	libavformat/osq.o
+CC	libavformat/paf.o
+In file included from src/libavformat/options.c:41:
+src/libavformat/options_table.h:111:181: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+  111 | {"duration_probesize", "Maximum number of bytes to probe the durations of the streams in estimate_timings_from_pts", OFFSET(duration_probesize), AV_OPT_TYPE_INT64, {.i64 = 0 }, 0, INT64_MAX, D},
+      | ~                                                                                                                                                                                   ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+In file included from src/libavformat/options.c:41:
+src/libavformat/options_table.h:89:146: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   89 | {"max_interleave_delta", "maximum buffering duration for interleaving", OFFSET(max_interleave_delta), AV_OPT_TYPE_INT64, { .i64 = 10000000 }, 0, INT64_MAX, E },
+      | ~                                                                                                                                                ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+In file included from src/libavformat/options.c:41:
+src/libavformat/options_table.h:88:125: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   88 | {"output_ts_offset", "set output timestamp offset", OFFSET(output_ts_offset), AV_OPT_TYPE_DURATION, {.i64 = 0}, -INT64_MAX, INT64_MAX, E},
+      | ~                                                                                                                           ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+In file included from src/libavformat/options.c:41:
+src/libavformat/options_table.h:88:113: warning: implicit conversion from 'long long' to 'double' changes value from -9223372036854775807 to -9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   88 | {"output_ts_offset", "set output timestamp offset", OFFSET(output_ts_offset), AV_OPT_TYPE_DURATION, {.i64 = 0}, -INT64_MAX, INT64_MAX, E},
+      | ~                                                                                                               ^~~~~~~~~~
+src/libavformat/options_table.h:84:159: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775806 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   84 | {"skip_initial_bytes", "set number of bytes to skip before reading header and frames", OFFSET(skip_initial_bytes), AV_OPT_TYPE_INT64, {.i64 = 0}, 0, INT64_MAX-1, D},
+      | ~                                                                                                                                                    ~~~~~~~~~^~
+src/libavformat/options_table.h:66:156: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   66 | {"start_time_realtime", "wall-clock time when stream begins (PTS==0)", OFFSET(start_time_realtime), AV_OPT_TYPE_INT64, {.i64 = AV_NOPTS_VALUE}, INT64_MIN, INT64_MAX, E},
+      | ~                                                                                                                                                          ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+In file included from src/libavformat/options.c:41:
+src/libavformat/options_table.h:59:151: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   59 | {"analyzeduration", "specify how many microseconds are analyzed to probe the input", OFFSET(max_analyze_duration), AV_OPT_TYPE_INT64, {.i64 = 0 }, 0, INT64_MAX, D},
+      | ~                                                                                                                                                     ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+In file included from src/libavformat/options.c:41:
+src/libavformat/options_table.h:39:96: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   39 | {"probesize", "set probing size", OFFSET(probesize), AV_OPT_TYPE_INT64, {.i64 = 5000000 }, 32, INT64_MAX, D},
+      | ~                                                                                              ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+src/libavformat/options.c:427:91: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+  427 |     {"id", "Set group id", offsetof(AVStreamGroup, id), AV_OPT_TYPE_INT64, {.i64 = 0}, 0, INT64_MAX, AV_OPT_FLAG_ENCODING_PARAM },
+      |     ~                                                                                     ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+9 warnings generated.
+CC	libavformat/pcm.o
+CC	libavformat/pcmdec.o
+CC	libavformat/pdvdec.o
+CC	libavformat/pjsdec.o
+CC	libavformat/pmpdec.o
+CC	libavformat/pp_bnk.o
+CC	libavformat/pva.o
+CC	libavformat/psxstr.o
+CC	libavformat/pvfdec.o
+CC	libavformat/qcp.o
+CC	libavformat/qoadec.o
+CC	libavformat/qtpalette.o
+CC	libavformat/r3d.o
+CC	libavformat/rawdec.o
+CC	libavformat/rawvideodec.o
+CC	libavformat/rawutils.o
+CC	libavformat/rcwtdec.o
+CC	libavformat/realtextdec.o
+CC	libavformat/redspark.o
+CC	libavformat/replaygain.o
+CC	libavformat/riff.o
+CC	libavformat/riffdec.o
+CC	libavformat/riffenc.o
+CC	libavformat/rka.o
+CC	libavformat/rl2.o
+CC	libavformat/rm.o
+CC	libavformat/rmdec.o
+CC	libavformat/rpl.o
+CC	libavformat/rsd.o
+CC	libavformat/rso.o
+CC	libavformat/rsodec.o
+CC	libavformat/rtp.o
+CC	libavformat/rtpenc_chain.o
+CC	libavformat/s337m.o
+CC	libavformat/samidec.o
+CC	libavformat/sauce.o
+CC	libavformat/sbcdec.o
+CC	libavformat/sbgdec.o
+CC	libavformat/sccdec.o
+CC	libavformat/scd.o
+src/libavformat/sbgdec.c:204:69: warning: implicit conversion from 'long long' to 'double' changes value from 4611686018427387903 to 4611686018427387904 [-Wimplicit-const-int-float-conversion]
+  204 |         ts = av_clipd(seconds * AV_TIME_BASE, INT64_MIN/2, INT64_MAX/2);
+      |              ~~~~~~~~                                      ~~~~~~~~~^~
+CC	libavformat/sdns.o
+CC	libavformat/sdp.o
+CC	libavformat/sdr2.o
+CC	libavformat/sdsdec.o
+1 warning generated.
+CC	libavformat/sdxdec.o
+CC	libavformat/seek.o
+CC	libavformat/segafilm.o
+CC	libavformat/serdec.o
+CC	libavformat/sga.o
+CC	libavformat/shortendec.o
+CC	libavformat/siff.o
+CC	libavformat/sierravmd.o
+CC	libavformat/smacker.o
+CC	libavformat/smjpeg.o
+CC	libavformat/smjpegdec.o
+CC	libavformat/smush.o
+CC	libavformat/sol.o
+CC	libavformat/soxdec.o
+CC	libavformat/spdifdec.o
+CC	libavformat/spdif.o
+CC	libavformat/srtdec.o
+CC	libavformat/stldec.o
+CC	libavformat/subtitles.o
+CC	libavformat/subviewer1dec.o
+CC	libavformat/subviewerdec.o
+CC	libavformat/supdec.o
+CC	libavformat/svag.o
+CC	libavformat/svs.o
+CC	libavformat/swf.o
+CC	libavformat/swfdec.o
+CC	libavformat/takdec.o
+CC	libavformat/tedcaptionsdec.o
+CC	libavformat/thp.o
+src/libavformat/tedcaptionsdec.c:39:36: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   37 |     { "start_time", "set the start time (offset) of the subtitles, in ms",
+      |     ~
+   38 |       offsetof(TEDCaptionsDemuxer, start_time), AV_OPT_TYPE_INT64,
+   39 |       { .i64 = 15000 }, INT64_MIN, INT64_MAX,
+      |                                    ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+CC	libavformat/tiertexseq.o
+CC	libavformat/tmv.o
+CC	libavformat/tta.o
+CC	libavformat/tty.o
+CC	libavformat/txd.o
+CC	libavformat/ty.o
+CC	libavformat/url.o
+CC	libavformat/usmdec.o
+CC	libavformat/utils.o
+CC	libavformat/vag.o
+CC	libavformat/vc1dec.o
+CC	libavformat/vc1test.o
+CC	libavformat/version.o
+CC	libavformat/vividas.o
+CC	libavformat/vivo.o
+CC	libavformat/voc.o
+CC	libavformat/voc_packet.o
+CC	libavformat/vocdec.o
+CC	libavformat/vorbiscomment.o
+CC	libavformat/vpk.o
+CC	libavformat/vpcc.o
+CC	libavformat/vplayerdec.o
+CC	libavformat/vqf.o
+CC	libavformat/vvc.o
+CC	libavformat/vvcdec.o
+CC	libavformat/wady.o
+CC	libavformat/wavarc.o
+CC	libavformat/wavdec.o
+CC	libavformat/wc3movie.o
+CC	libavformat/webvttdec.o
+CC	libavformat/westwood_aud.o
+CC	libavformat/westwood_vqa.o
+CC	libavformat/wsddec.o
+CC	libavformat/wtv_common.o
+CC	libavformat/wtvdec.o
+CC	libavformat/wv.o
+CC	libavformat/wvdec.o
+CC	libavformat/wvedec.o
+CC	libavformat/xa.o
+CC	libavformat/xmd.o
+CC	libavformat/xmv.o
+CC	libavformat/xvag.o
+CC	libavformat/xwma.o
+CC	libavformat/yop.o
+CC	libavformat/yuv4mpegdec.o
+GEN	libavformat/libavformat.pc
+CC	libavcodec/aac_ac3_parser.o
+CC	libavcodec/aac_parser.o
+CC	libavcodec/ac3_parser.o
+CC	libavcodec/adts_header.o
+src/libavcodec/aac_ac3_parser.c:151:17: warning: unused variable 'profile' [-Wunused-variable]
+  151 |             int profile;
+      |                 ^~~~~~~
+1 warning generated.
+CC	libavcodec/adts_parser.o
+CC	libavcodec/adx_parser.o
+CC	libavcodec/allcodecs.o
+CC	libavcodec/amr_parser.o
+CC	libavcodec/aom_film_grain.o
+CC	libavcodec/atsc_a53.o
+CC	libavcodec/av1_parse.o
+CC	libavcodec/av1_parser.o
+CC	libavcodec/avcodec.o
+CC	libavcodec/avdct.o
+CC	libavcodec/avs2_parser.o
+CC	libavcodec/avs3_parser.o
+CC	libavcodec/bitstream.o
+CC	libavcodec/bitstream_filters.o
+CC	libavcodec/bmp_parser.o
+CC	libavcodec/blockdsp.o
+CC	libavcodec/bsf.o
+CC	libavcodec/bsf/aac_adtstoasc.o
+CC	libavcodec/bsf/av1_frame_merge.o
+CC	libavcodec/bsf/av1_frame_split.o
+CC	libavcodec/bsf/av1_metadata.o
+CC	libavcodec/bsf/chomp.o
+CC	libavcodec/bsf/dca_core.o
+CC	libavcodec/bsf/dovi_rpu.o
+CC	libavcodec/bsf/dts2pts.o
+CC	libavcodec/bsf/dump_extradata.o
+CC	libavcodec/bsf/dv_error_marker.o
+CC	libavcodec/bsf/eac3_core.o
+CC	libavcodec/bsf/evc_frame_merge.o
+CC	libavcodec/bsf/extract_extradata.o
+CC	libavcodec/bsf/filter_units.o
+CC	libavcodec/bsf/h264_metadata.o
+CC	libavcodec/bsf/h264_mp4toannexb.o
+CC	libavcodec/bsf/h264_redundant_pps.o
+CC	libavcodec/bsf/h265_metadata.o
+CC	libavcodec/bsf/h266_metadata.o
+CC	libavcodec/bsf/hapqa_extract.o
+CC	libavcodec/bsf/hevc_mp4toannexb.o
+CC	libavcodec/bsf/imx_dump_header.o
+CC	libavcodec/bsf/media100_to_mjpegb.o
+CC	libavcodec/bsf/mjpeg2jpeg.o
+CC	libavcodec/bsf/mjpega_dump_header.o
+CC	libavcodec/bsf/movsub.o
+CC	libavcodec/bsf/mpeg2_metadata.o
+CC	libavcodec/bsf/mpeg4_unpack_bframes.o
+CC	libavcodec/bsf/noise.o
+CC	libavcodec/bsf/null.o
+CC	libavcodec/bsf/opus_metadata.o
+CC	libavcodec/bsf/pcm_rechunk.o
+CC	libavcodec/bsf/pgs_frame_merge.o
+CC	libavcodec/bsf/prores_metadata.o
+CC	libavcodec/bsf/remove_extradata.o
+CC	libavcodec/bsf/setts.o
+CC	libavcodec/bsf/trace_headers.o
+CC	libavcodec/bsf/showinfo.o
+CC	libavcodec/bsf/truehd_core.o
+CC	libavcodec/bsf/vp9_metadata.o
+CC	libavcodec/bsf/vp9_raw_reorder.o
+CC	libavcodec/bsf/vp9_superframe.o
+CC	libavcodec/bsf/vp9_superframe_split.o
+CC	libavcodec/bsf/vvc_mp4toannexb.o
+CC	libavcodec/cavs_parser.o
+CC	libavcodec/cbs.o
+CC	libavcodec/cbs_av1.o
+CC	libavcodec/cbs_bsf.o
+CC	libavcodec/cbs_h2645.o
+CC	libavcodec/cbs_mpeg2.o
+CC	libavcodec/cbs_sei.o
+CC	libavcodec/cbs_vp9.o
+CC	libavcodec/cbs_vp8.o
+CC	libavcodec/codec_desc.o
+CC	libavcodec/codec_par.o
+CC	libavcodec/cook_parser.o
+CC	libavcodec/cri_parser.o
+CC	libavcodec/d3d11va.o
+CC	libavcodec/dca.o
+CC	libavcodec/dca_exss.o
+CC	libavcodec/dca_parser.o
+CC	libavcodec/decode.o
+CC	libavcodec/dirac.o
+CC	libavcodec/dirac_parser.o
+CC	libavcodec/dnxhd_parser.o
+CC	libavcodec/dnxhddata.o
+CC	libavcodec/dolby_e_parse.o
+CC	libavcodec/dolby_e_parser.o
+CC	libavcodec/dovi_rpu.o
+CC	libavcodec/dovi_rpudec.o
+CC	libavcodec/dovi_rpuenc.o
+CC	libavcodec/dpx_parser.o
+CC	libavcodec/dv_profile.o
+CC	libavcodec/dvaudio_parser.o
+CC	libavcodec/dvbsub_parser.o
+CC	libavcodec/dvd_nav_parser.o
+CC	libavcodec/dvdsub_parser.o
+CC	libavcodec/dynamic_hdr_vivid.o
+CC	libavcodec/encode.o
+CC	libavcodec/evc_parse.o
+CC	libavcodec/error_resilience.o
+CC	libavcodec/evc_parser.o
+CC	libavcodec/evc_ps.o
+CC	libavcodec/exif.o
+CC	libavcodec/faandct.o
+CC	libavcodec/faanidct.o
+CC	libavcodec/fdctdsp.o
+CC	libavcodec/flac.o
+CC	libavcodec/flac_parser.o
+CC	libavcodec/ftr_parser.o
+CC	libavcodec/g723_1_parser.o
+CC	libavcodec/g729_parser.o
+CC	libavcodec/get_buffer.o
+CC	libavcodec/gif_parser.o
+CC	libavcodec/gsm_parser.o
+CC	libavcodec/h261_parser.o
+CC	libavcodec/h263.o
+CC	libavcodec/h263_parser.o
+CC	libavcodec/h263dec.o
+CC	libavcodec/h263dsp.o
+CC	libavcodec/h2645_parse.o
+CC	libavcodec/h2645_sei.o
+CC	libavcodec/h2645_vui.o
+src/libavcodec/h263dec.c:649:1: warning: unused label 'frame_end' [-Wunused-label]
+  649 | frame_end:
+      | ^~~~~~~~~~
+1 warning generated.
+CC	libavcodec/h264_parse.o
+CC	libavcodec/h264_parser.o
+CC	libavcodec/h264_ps.o
+CC	libavcodec/h264_sei.o
+CC	libavcodec/h264chroma.o
+CC	libavcodec/h264data.o
+CC	libavcodec/h264dsp.o
+CC	libavcodec/h264idct.o
+CC	libavcodec/h265_profile_level.o
+CC	libavcodec/hap.o
+CC	libavcodec/hdr_parser.o
+CC	libavcodec/hevc/parse.o
+CC	libavcodec/hevc/parser.o
+CC	libavcodec/hevc/ps.o
+CC	libavcodec/hevc/sei.o
+CC	libavcodec/hpeldsp.o
+CC	libavcodec/idctdsp.o
+CC	libavcodec/imgconvert.o
+CC	libavcodec/ipu_parser.o
+CC	libavcodec/ituh263dec.o
+CC	libavcodec/jfdctint.o
+CC	libavcodec/jni.o
+CC	libavcodec/jpeg2000_parser.o
+CC	libavcodec/jpegxl_parse.o
+CC	libavcodec/jpegxl_parser.o
+CC	libavcodec/jrevdct.o
+CC	libavcodec/latm_parser.o
+CC	libavcodec/lcevcdec.o
+CC	libavcodec/mathtables.o
+CC	libavcodec/me_cmp.o
+CC	libavcodec/mediacodec.o
+CC	libavcodec/misc4_parser.o
+CC	libavcodec/mjpeg_parser.o
+CC	libavcodec/mlp.o
+CC	libavcodec/mlp_parse.o
+CC	libavcodec/mlp_parser.o
+CC	libavcodec/mpeg12.o
+CC	libavcodec/mpeg4audio.o
+CC	libavcodec/mpeg4video.o
+CC	libavcodec/mpeg4video_parser.o
+CC	libavcodec/mpeg4videodec.o
+CC	libavcodec/mpeg_er.o
+CC	libavcodec/mpegaudiodecheader.o
+CC	libavcodec/mpegaudio_parser.o
+src/libavcodec/mpeg4videodec.c:3563:22: warning: variable 'name' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+ 3563 |             else if (startcode <= 0x1FF)
+      |                      ^~~~~~~~~~~~~~~~~~
+src/libavcodec/mpeg4videodec.c:3566:31: note: uninitialized use occurs here
+ 3566 |                    startcode, name, get_bits_count(gb));
+      |                               ^~~~
+src/libavcodec/mpeg4videodec.c:3563:18: note: remove the 'if' if its condition is always true
+ 3563 |             else if (startcode <= 0x1FF)
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~
+ 3564 |                 name = "System start";
+src/libavcodec/mpeg4videodec.c:3510:29: note: initialize the variable 'name' to silence this warning
+ 3510 |             const char *name;
+      |                             ^
+      |                              = NULL
+1 warning generated.
+CC	libavcodec/mpegpicture.o
+CC	libavcodec/mpegutils.o
+CC	libavcodec/mpegvideo.o
+CC	libavcodec/mpegvideo_dec.o
+CC	libavcodec/mpegvideo_motion.o
+CC	libavcodec/mpegvideo_parser.o
+CC	libavcodec/options.o
+CC	libavcodec/opus/parse.o
+In file included from src/libavcodec/options.c:39:
+src/libavcodec/options_table.h:50:110: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+   50 | {"b", "set bitrate (in bits/s)", OFFSET(bit_rate), AV_OPT_TYPE_INT64, {.i64 = AV_CODEC_DEFAULT_BITRATE }, 0, INT64_MAX, A|V|E},
+      | ~                                                                                                            ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+CC	libavcodec/opus/parser.o
+CC	libavcodec/packet.o
+CC	libavcodec/parser.o
+CC	libavcodec/parsers.o
+CC	libavcodec/png_parser.o
+CC	libavcodec/pnm.o
+CC	libavcodec/pnm_parser.o
+CC	libavcodec/profiles.o
+CC	libavcodec/pthread.o
+CC	libavcodec/pthread_frame.o
+CC	libavcodec/pthread_slice.o
+CC	libavcodec/qoi_parser.o
+CC	libavcodec/qpeldsp.o
+CC	libavcodec/qsv_api.o
+CC	libavcodec/raw.o
+CC	libavcodec/refstruct.o
+CC	libavcodec/rl.o
+CC	libavcodec/rv34_parser.o
+CC	libavcodec/sbc_parser.o
+CC	libavcodec/simple_idct.o
+CC	libavcodec/sipr_parser.o
+CC	libavcodec/startcode.o
+CC	libavcodec/tak.o
+CC	libavcodec/tak_parser.o
+CC	libavcodec/threadprogress.o
+CC	libavcodec/tiff_common.o
+CC	libavcodec/to_upper4.o
+CC	libavcodec/utils.o
+CC	libavcodec/vc1.o
+CC	libavcodec/vc1_parser.o
+CC	libavcodec/vc1data.o
+CC	libavcodec/vc1dsp.o
+CC	libavcodec/version.o
+CC	libavcodec/videodsp.o
+CC	libavcodec/vlc.o
+CC	libavcodec/vorbis_data.o
+CC	libavcodec/vorbis_parser.o
+CC	libavcodec/vp3_parser.o
+CC	libavcodec/vp8_parser.o
+CC	libavcodec/vp9_parser.o
+CC	libavcodec/vvc_parser.o
+CC	libavcodec/webp_parser.o
+CC	libavcodec/xbm_parser.o
+CC	libavcodec/xiph.o
+CC	libavcodec/xma_parser.o
+GEN	libavcodec/libavcodec.pc
+CC	libavcodec/xwd_parser.o
+CC	libavutil/adler32.o
+CC	libavutil/aes.o
+CC	libavutil/aes_ctr.o
+CC	libavutil/avsscanf.o
+CC	libavutil/ambient_viewing_environment.o
+CC	libavutil/avstring.o
+CC	libavutil/base64.o
+CC	libavutil/blowfish.o
+CC	libavutil/buffer.o
+CC	libavutil/camellia.o
+CC	libavutil/cast5.o
+CC	libavutil/channel_layout.o
+CC	libavutil/cpu.o
+CC	libavutil/crc.o
+CC	libavutil/des.o
+CC	libavutil/detection_bbox.o
+CC	libavutil/dict.o
+src/libavutil/cpu.c:120:76: warning: implicit conversion from 'long long' to 'double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+  120 |         { "flags"   , NULL, 0, AV_OPT_TYPE_FLAGS, { .i64 = 0 }, INT64_MIN, INT64_MAX, .unit = "flags" },
+      |         ~                                                                  ^~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:46:21: note: expanded from macro 'INT64_MAX'
+   46 | #define INT64_MAX  (0x7fffffffffffffff)
+      |                     ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+CC	libavutil/display.o
+CC	libavutil/downmix_info.o
+CC	libavutil/encryption_info.o
+CC	libavutil/error.o
+CC	libavutil/eval.o
+CC	libavutil/executor.o
+CC	libavutil/file.o
+CC	libavutil/fifo.o
+CC	libavutil/file_open.o
+src/libavutil/eval.c:249:29: warning: implicit conversion from 'unsigned long long' to 'double' changes value from 18446744073709551615 to 18446744073709551616 [-Wimplicit-const-int-float-conversion]
+  249 |             return r * (1.0/UINT64_MAX);
+      |                            ~^~~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:51:21: note: expanded from macro 'UINT64_MAX'
+   51 | #define UINT64_MAX (0xffffffffffffffffu)
+      |                     ^~~~~~~~~~~~~~~~~~~
+src/libavutil/eval.c:255:44: warning: implicit conversion from 'unsigned long long' to 'double' changes value from 18446744073709551615 to 18446744073709551616 [-Wimplicit-const-int-float-conversion]
+  255 |             return min + (max - min) * r / UINT64_MAX;
+      |                                          ~ ^~~~~~~~~~
+/Volumes/seed2/Projects/webmpv/build/emsdk-4.0.14/upstream/emscripten/cache/sysroot/include/stdint.h:51:21: note: expanded from macro 'UINT64_MAX'
+   51 | #define UINT64_MAX (0xffffffffffffffffu)
+      |                     ^~~~~~~~~~~~~~~~~~~
+2 warnings generated.
+CC	libavutil/film_grain_params.o
+CC	libavutil/fixed_dsp.o
+CC	libavutil/frame.o
+CC	libavutil/float_dsp.o
+CC	libavutil/hash.o
+CC	libavutil/hdr_dynamic_metadata.o
+CC	libavutil/hdr_dynamic_vivid_metadata.o
+CC	libavutil/hwcontext.o
+CC	libavutil/hwcontext_stub.o
+CC	libavutil/iamf.o
+CC	libavutil/imgutils.o
+CC	libavutil/integer.o
+CC	libavutil/intmath.o
+CC	libavutil/lfg.o
+CC	libavutil/log.o
+CC	libavutil/lzo.o
+CC	libavutil/lls.o
+CC	libavutil/mastering_display_metadata.o
+CC	libavutil/mathematics.o
+CC	libavutil/md5.o
+CC	libavutil/mem.o
+CC	libavutil/murmur3.o
+CC	libavutil/opt.o
+CC	libavutil/parseutils.o
+CC	libavutil/pixdesc.o
+CC	libavutil/pixelutils.o
+CC	libavutil/random_seed.o
+CC	libavutil/rational.o
+CC	libavutil/ripemd.o
+CC	libavutil/sha.o
+CC	libavutil/sha512.o
+CC	libavutil/slicethread.o
+CC	libavutil/stereo3d.o
+CC	libavutil/tea.o
+CC	libavutil/threadmessage.o
+CC	libavutil/time.o
+CC	libavutil/timecode.o
+CC	libavutil/timestamp.o
+CC	libavutil/twofish.o
+CC	libavutil/tx.o
+CC	libavutil/tx_double.o
+CC	libavutil/tx_float.o
+CC	libavutil/tx_int32.o
+CC	libavutil/utils.o
+CC	libavutil/version.o
+CC	libavutil/video_enc_params.o
+CC	libavutil/video_hint.o
+CC	libavutil/xga_font_data.o
+CC	libavutil/xtea.o
+GEN	libavutil/libavutil.pc
+AR	libavcodec/libavcodec.a
+AR	libavformat/libavformat.a
+AR	libavutil/libavutil.a
+emcc: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]

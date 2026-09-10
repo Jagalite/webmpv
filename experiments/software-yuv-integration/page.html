@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Playback pipeline experiment</title>
+<style>body{background:#171717;color:#eee;font:18px system-ui;margin:20px}#surface{width:960px;height:540px;background:black}canvas,video{width:960px;height:540px;object-fit:contain}#phase{margin-bottom:12px}</style>
+<div id="phase">Preparing playback pipeline experiment…</div><div id="surface"></div>
+<script type="module">
+import {RemuxPlayer} from '/experiment/remux-player.js';
+window.errors=[];window.outputs=[];
+window.start=async({variant,url,file,target=0,subtitles=false,filters='',sourceOptions={},refresh=false,videoTrack,audioTrack})=>{
+ const begun=performance.now();window.variant=variant;
+ if(variant==='remux'){
+  if(subtitles||filters)throw Error('This packet-only remux prototype does not implement subtitle overlays or filters');
+  const video=document.createElement('video');video.playsInline=true;video.controls=false;document.querySelector('#surface').append(video);window.video=video;
+  window.player=new RemuxPlayer(video);await player.open(file?{file}:{options:{url,...sourceOptions},videoTrack,audioTrack,...(refresh?{refreshAuthorization:async()=>({headers:{Authorization:'Bearer refreshed'}})}:{})},target);await player.play();
+ }else{
+  const {Player}=await import('/web/generated/index.js');
+  window.player=new Player(document.querySelector('#surface'),{mode:variant==='yuv'?'software':variant,width:1920,height:1080,softwarePresenter:variant==='yuv'?'experimental-yuv':'rgb'});
+  player.addEventListener('error',e=>errors.push(e.detail));player.addEventListener('output',e=>outputs.push(e.detail));
+  if(filters)await player.setVideoFilters(filters);await player.openRemote({url});
+  if(subtitles)await player.selectTrack('sub','1');if(target)await player.seek(target);await player.play();
+  window.video=document.querySelector('video');
+ }
+ if(window.video?.requestVideoFrameCallback){window.presentedCount=0;const observe=()=>{window.presentedCount++;video.requestVideoFrameCallback(observe);};video.requestVideoFrameCallback(observe);}
+ await new Promise((resolve,reject)=>{const until=performance.now()+20000;const check=()=>{const s=snapshot();if(s.frames>0){resolve();return;}if(errors.length||performance.now()>until){reject(Error(JSON.stringify(errors)||'No video'));return;}setTimeout(check,10);};check();});
+ return {firstFrameMs:performance.now()-begun,state:snapshot()};
+};
+window.snapshot=()=>{
+ if(variant==='remux'){const r=player.snapshot(),q=video.getVideoPlaybackQuality();return {presented:window.presentedCount||0,position:r.position,frames:q.totalVideoFrames,drops:q.droppedVideoFrames,errors:[...errors,...r.stats.errors],remux:r,visibility:document.visibilityState};}
+ const d=player.diagnostics.backend,audio=player.audioDiagnostics();
+ return {position:player.properties.get('time-pos'),frames:d.yuv?.frames??d.rendered,drops:(player.properties.get('frame-drop-count')||0)+(player.properties.get('decoder-frame-drop-count')||0)+(d.dropped||0),decoderDrops:player.properties.get('decoder-frame-drop-count'),avsync:player.properties.get('avsync'),audio,diagnostics:d,errors,outputs,visibility:document.visibilityState};
+};
+window.seek=async t=>{const begun=performance.now();await player.seek(t);await player.play();await new Promise((resolve,reject)=>{const until=performance.now()+15000;const check=()=>{const s=snapshot();if(Math.abs(s.position-t)<.5&&s.frames>0){resolve();return;}if(performance.now()>until){reject(Error('Seek target not recovered'));return;}setTimeout(check,20);};check();});return {target:t,ms:performance.now()-begun,state:snapshot()};};
+window.stop=async()=>{player.current?.backend.worker?.addEventListener('message',({data})=>{if(data.type==='output'&&data.data?.kind==='yuv-cleanup')(window.workerCleanup??=[]).push(data.data);});await player.destroy();return {outputs,...(variant==='remux'?{remux:player.snapshot()}: {})};};
+</script></html>

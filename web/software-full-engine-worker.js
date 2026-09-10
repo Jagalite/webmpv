@@ -1,3 +1,10 @@
+let YUVPresenter,uploader,gpuPauseIntent;
+function installPresenter(canvas,prior){
+ uploader=new YUVPresenter(canvas);
+ if(prior)uploader.stats={...prior,liveTextures:4,contextRestores:(prior.contextRestores||0)+1};
+ uploader.onLost=()=>{gpuPauseIntent=paused;internalCommand(['set','pause','yes'],()=>{});post({type:'output',data:{kind:'gpu-context-lost'}});};
+ uploader.onRestore=()=>{if(closing)return;const old=uploader,stats={...old.stats};old.destroy(true);const intent=gpuPauseIntent;gpuPauseIntent=undefined;installPresenter(canvas,stats);internalCommand(['set','pause',intent?'yes':'no'],()=>{});force=true;schedulePump(0);post({type:'output',data:{kind:'gpu-context-restored'}});};
+}
 let decoderWorker,decoderStats;
 
 
@@ -35,7 +42,7 @@ async function openRemote(data){
       else if(message.type==='closed')ioClose?.();
     };
     ioWorker.onerror=event=>{clearTimeout(timeout);reject(Error(event.message));};
-    ioWorker.postMessage({type:'init',memory:engine.HEAPU8.buffer,pointer,options:data.options,canRefresh:data.canRefresh});
+    ioWorker.postMessage({type:'init',memory:engine.HEAPU8.buffer,pointer,options:data.options??{},file:data.file,canRefresh:data.canRefresh});
   });
   if(closing)throw Error('Player closed');
   engine._web_io_configure(++ioSession,BigInt(info.size));
@@ -105,22 +112,25 @@ function tick() {
       if(event.event==='playback-restart'){restarted=true;releaseSeek();}
       post({type:'event', event});
     }
+    if(uploader?.lost)return;
     const renderStart=performance.now();
     const ptr = engine._web_render(canvas.width, canvas.height, +force);
     const renderDuration=performance.now()-renderStart;
     force = false;
     if (ptr && pendingTarget===null) {
       renderMs+=renderDuration;maxRenderMs=Math.max(maxRenderMs,renderDuration);const copyStart=performance.now();
+      if(!uploader){
       if(!frameImage||frameImage.width!==canvas.width||frameImage.height!==canvas.height)frameImage=new ImageData(canvas.width,canvas.height);
       const bytes=frameImage.data;bytes.set(engine.HEAPU8.subarray(ptr,ptr+bytes.length));
       for (let i = 3; i < bytes.length; i += 4) bytes[i] = 255;
       context.putImageData(frameImage, 0, 0);
       if(measureOutput){const at=(8*canvas.width+8)*4;const white=bytes[at]>225&&bytes[at+1]>225&&bytes[at+2]>225;if(white&&!wasWhite)post({type:'output',data:{kind:'flash',wallTime:performance.timeOrigin+performance.now(),position}});wasWhite=white;}
+      }
       copyMs+=performance.now()-copyStart;engine._web_presented();
       rendered++;sourceRendered++;presentedPosition=position;
     }
     ticks++;
-    if(performance.now()>=nextDiagnostics||(ptr&&sourceRendered<=5)){nextDiagnostics=performance.now()+200;post({type:'diagnostics', data:{pumpTicks:ticks,rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', decoder:decoderStats?.active?'webcodecs':'software',decoderStats, demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});}
+    if(performance.now()>=nextDiagnostics||(ptr&&sourceRendered<=5)){nextDiagnostics=performance.now()+200;post({type:'diagnostics', data:{softwarePresenter:uploader?'experimental-yuv':'rgb',yuv:uploader?{...uploader.stats}:undefined,pumpTicks:ticks,rendered,renderMs,copyMs,maxRenderMs, heapBytes:engine.HEAPU8.byteLength, epoch, path:'wasm', decoder:decoderStats?.active?'webcodecs':'software',decoderStats, demuxFormat,seekPrerollSeconds,presentedPosition, ioPending:(Atomics.load(engine.HEAPU32,engine._web_io_ptr()>>>2)&7)===1, ioSerial:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+1), interruptions:Atomics.load(engine.HEAPU32,(engine._web_io_ptr()>>>2)+14), io:ioStats, seeking:pendingTarget!==null, position, queuedFrames:(Atomics.load(audio,0)-Atomics.load(audio,1))>>>0}});}
   } catch (error) {pumpFailed=true;clearInterval(timer);post({type:'error',message:String(error.stack || error)}); }
 }
 self.onmessage = async ({data}) => {
@@ -129,12 +139,13 @@ self.onmessage = async ({data}) => {
       if (data.disableBrowserCodecs) for (const name of ['VideoDecoder','AudioDecoder','VideoFrame']) Object.defineProperty(globalThis,name,{value:undefined, configurable:true});
       measureOutput=!!data.measureOutput;
       canvas = data.canvas;
-      context = canvas.getContext('2d', {alpha:false});
+      if(data.softwarePresenter==='experimental-yuv'){({YUVPresenter}=await import('./yuv-presenter.js'));installPresenter(canvas);}else context=canvas.getContext('2d',{alpha:false});
       audio = new Int32Array(data.audio, 0, 16);
       pcm = new Float32Array(data.audio, 64);
       if(data.decoder!=='software')throw Error('This build supports software decoding only');
-      const createEngine=(await import('./engine-software-full/player.mjs')).default;
+      const createEngine=(await import(uploader?'./engine-software-yuv/player.mjs':'./engine-software-full/player.mjs')).default;
       engine = await createEngine({printErr:message=>post({type:'log',message}),print:message=>post({type:'log',message})});
+      if(uploader){engine.failOutput=message=>{pumpFailed=true;post({type:'error',message});};engine.drawYUV=d=>{try{uploader.draw(engine,d);}catch(e){engine.failOutput(String(e));}};engine.drawRGB=(...a)=>{try{uploader.drawRGB(engine,...a);}catch(e){engine.failOutput(String(e));}};}
       if (closing) return;
       engine.FS.mkdir('/fonts');
       engine.FS.writeFile('/fonts/DejaVuSans.ttf', new Uint8Array(data.font));
@@ -160,10 +171,11 @@ self.onmessage = async ({data}) => {
       nativeAudio = engine._web_audio_ptr();
       schedulePump();
       post({type:'ready', browserCodecsAbsent:['VideoDecoder','AudioDecoder','VideoFrame'].every(name=>typeof globalThis[name]==='undefined')});
+    } else if(data.type==='experimental-context-loss'&&uploader){const ext=uploader.gl.getExtension('WEBGL_lose_context');if(!ext)throw Error('Context loss test unavailable');ext.loseContext();setTimeout(()=>{if(!closing)ext.restoreContext();},250);
     } else if (data.type === 'timing' && engine) {
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 5, data.latencyUs);
       Atomics.store(engine.HEAPU32, (nativeAudio >>> 2) + 6, +data.running);
-    } else if (data.type === 'open-remote') {await openRemote(data);
+    } else if (data.type === 'open-remote' || data.type === 'open-file') {await openRemote(data);
     } else if(data.type==='refreshed'){ioWorker?.postMessage(data);
     } else if(data.type==='seek'){sourceRendered=0;pendingTarget=data.seconds;restarted=false;Atomics.store(audio,2,0);seekSerial=engine.HEAPU32[(engine._web_io_ptr()>>>2)+1];submit(data.id,['seek',String(data.seconds),'absolute+exact']);
     } else if (data.type === 'open') {
@@ -174,7 +186,7 @@ self.onmessage = async ({data}) => {
       engine.FS.writeFile('/media.mkv', new Uint8Array(data.bytes));
       if(Number(engine.FS.stat('/media.mkv').size) !== data.bytes.byteLength) throw new Error('Local media write failed');
       submit(data.id, ['loadfile','/media.mkv','replace']);
-    } else if (data.type === 'command') submit(data.id,data.args);
+    } else if (data.type === 'command') {if(uploader?.lost&&data.args[0]==='set'&&data.args[1]==='pause')gpuPauseIntent=data.args[2]==='yes';submit(data.id,data.args);}
     else if (data.type === 'resize') {busyUntil=performance.now()+300;schedulePump(0);canvas.width=data.width;canvas.height=data.height;force=true;}
     else if (data.type === 'destroy') {
       closing = true;
@@ -183,7 +195,7 @@ self.onmessage = async ({data}) => {
       if (audio) Atomics.store(audio,2,0);
       await closeIO();
       decoderWorker?.postMessage({type:'cancel'});
-      engine?._web_destroy();
+      engine?._web_destroy();if(uploader){uploader.destroy();post({type:'output',data:{kind:'yuv-cleanup',...uploader.stats}});}
       // Native joins precede the queued pthread pool-return messages.
       const deadline=performance.now()+2000;
       while(engine?.PThread.runningWorkers.length&&performance.now()<deadline)

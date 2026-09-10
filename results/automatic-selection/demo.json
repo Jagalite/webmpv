@@ -1,0 +1,60 @@
+{
+  "before": {
+    "automatic": true,
+    "filters": true,
+    "modeDisabled": true
+  },
+  "after": {
+    "automatic": true,
+    "mode": "software",
+    "errors": [],
+    "diagnostics": {
+      "mode": "software",
+      "selection": {
+        "automatic": true,
+        "attempts": [
+          {
+            "mode": "native",
+            "outcome": "skipped",
+            "reason": "CPU filters require Software"
+          },
+          {
+            "mode": "hybrid",
+            "outcome": "skipped",
+            "reason": "CPU filters require Software"
+          },
+          {
+            "mode": "software",
+            "outcome": "selected",
+            "reason": "Playback requirements and actual presentation accepted"
+          }
+        ]
+      },
+      "switching": false,
+      "videoFilters": "hflip",
+      "audioFilters": "",
+      "backend": {
+        "pumpTicks": 58,
+        "rendered": 4,
+        "renderMs": 4.2750000059604645,
+        "copyMs": 3.3700000047683716,
+        "maxRenderMs": 3.065000005066395,
+        "heapBytes": 134217728,
+        "epoch": 4,
+        "path": "wasm",
+        "decoder": "software",
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 0,
+        "presentedPosition": 0.533,
+        "ioPending": false,
+        "ioSerial": 0,
+        "interruptions": 0,
+        "seeking": false,
+        "position": 0.533,
+        "queuedFrames": 0
+      }
+    }
+  },
+  "workers": 0,
+  "passed": true
+}
