@@ -165,8 +165,14 @@ export class NativePlayer extends EventTarget {
             await this.load(url.href);
         }, requiresRemux);
     }
-    async play() { this.assertActive(); await this.video.play(); this.refresh(); }
-    async pause() { this.assertActive(); this.video.pause(); this.refresh(); }
+    async play() { this.assertActive(); if (this.remux)
+        await this.remux.play();
+    else
+        await this.video.play(); this.refresh(); }
+    async pause() { this.assertActive(); if (this.remux)
+        this.remux.pause();
+    else
+        this.video.pause(); this.refresh(); }
     async seek(seconds) {
         this.assertActive();
         if (this.remux) {

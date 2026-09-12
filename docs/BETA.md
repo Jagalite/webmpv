@@ -13,7 +13,7 @@ From a checkout with the three current engine builds available:
 npm ci
 npm run build
 python3 scripts/package-beta.py
-npm install --offline /absolute/path/build/beta/webmpv-0.3.0-beta.0.tgz
+npm install --offline /absolute/path/build/beta/webmpv-0.3.0-beta.2.tgz
 ```
 
 Copy the entire installed `node_modules/webmpv` directory to your application's
@@ -53,21 +53,18 @@ Without that asset, requesting the experimental option fails explicitly.
 
 ## Engine build recipe and reproducibility boundary
 
-Use the pinned sources and toolchain in `sources.lock.json` and `toolchain.lock.json`.
-Run `bash scripts/build-beta-engines.sh` from the repository root. This recipe
-establishes the shared SDK config if absent, starts from `bash scripts/build.sh`, then builds the full
-Software profile with `npm run build:software-full`. Hybrid additionally needs the
-retained-subtitle mpv output object before `npm run build:hybrid`; follow
-`python3 experiments/retained-subtitles/compile-hook.py`. Build the independent packet-only remux
-engine with `npm run build:remux`. Optional YUV uses `npm run build:software-yuv`.
-The scripts require the pinned Emscripten SDK, native build tools, dependency prefix
-and configured mpv tree. Review the scripts' explicit input paths before rebuilding.
+Follow [the clean release recipe](RELEASE.md) to build all three engines from the
+locked inputs, package a clean tagged revision, include matching source/build
+materials, and test the exact archive. One independent clean engine build is a
+required developer-beta gate. Deterministic archive assembly and historical
+baseline builds do not close it.
 
-The historical container/baseline reproducibility results do not certify these three
-current engines. The beta packager assembles existing artifacts deterministically;
-independent clean builds of all three engines remain a release gate. Retain engine
-build logs and compare hashes from two clean toolchain/source directories. Do not
-substitute the historical `package-baseline.py` archive for this package.
+## Licensing
+
+Read [the licensing contract](LICENSING.md) before embedding or redistributing this
+package. Hybrid and Software ship GPL-enabled mpv/FFmpeg; Remux uses an independent
+LGPL FFmpeg build. The original bindings' license does not override engine terms.
+The release must include its matching source companion, notices and build materials.
 
 ## Qualification boundaries
 
@@ -79,15 +76,16 @@ at 32 MiB. Sparse files establish offset/allocation behavior, not endurance.
 Chrome and Firefox have recorded functional coverage on the reference macOS host.
 Safari, mobile and wider device support remain unqualified. Browser codec probes are
 admission hints; actual frames and audio must work. No hardware-acceleration,
-zero-copy, HDR-fidelity or multichannel-output guarantee is made. The current mpv
-AudioWorklet output is stereo; preserving source channels is not a promise of
-multichannel output. Mode changes reopen sources and are not gapless.
+zero-copy or physical output-fidelity guarantee is made. Hybrid/Software support
+stereo, 5.1 and 7.1 PCM with device negotiation. Software offers explicit HDR-to-SDR
+tone mapping. The [compatibility expansion](COMPATIBILITY-EXPANSION.md) defines
+input limits, subtitle APIs and streaming support. Mode changes reopen sources and are not gapless.
 
 Software YUV stays experimental. Keep intermittent filtered-seek failures and failed
 movie comparisons visible. A passing retry or short ASS CPU improvement cannot close
 those blockers. Before release, prioritize physical A/V/priming, long-duration
-memory/resource stability, repeated seeks and remux recovery, multiple sample descriptions,
-HDR/audio-layout policy, browser/device qualification and lifecycle cleanup against
+memory/resource stability, repeated seeks, broader sample-description transitions,
+physical HDR/audio-layout measurements, browser/device qualification and lifecycle cleanup against
 the exact packaged hashes. No additional public mode is needed for this work.
 
 ## Seek-read correction
@@ -96,5 +94,9 @@ The beta worker lets an in-flight bounded read finish when mpv seeks. Previously
 seek hook interrupted `stream_cb` in the middle of a packet, allowing FFmpeg to
 receive truncated data; controlled RGB and YUV tests reproduced this. Source
 replacement and destruction still cancel I/O. A seek may now wait for the active
-read, so slow-source latency remains a separate qualification gate. This correction
+read, and each uncached range-read operation has an absolute 15-second deadline across
+headers, body progress, retries and credential refresh. The 1.2-second idle watchdog
+is separate and cannot extend that deadline. A deadline fails the read with an
+explicit transport error; it never returns a partial packet or a false EOF. This
+is a per-read bound, not a 15-second bound on an entire seek or open operation. This correction
 does not promote YUV or establish physical A/V/endurance qualification.

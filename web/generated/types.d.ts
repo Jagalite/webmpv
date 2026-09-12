@@ -1,7 +1,17 @@
 export declare const PLAYBACK_MODES: readonly ["native", "hybrid", "software"];
 export type PlaybackMode = typeof PLAYBACK_MODES[number];
 export type TrackType = 'audio' | 'sub';
-export type RemoteSource = {
+export type MediaInputOptions = {
+    demuxer?: string;
+};
+/** Select one rendition for the session; this is not automatic bitrate switching. */
+export type StreamingOptions = {
+    maxBandwidth?: number;
+    representation?: string;
+    live?: boolean;
+};
+export type RemoteSource = MediaInputOptions & {
+    streaming?: StreamingOptions;
     url: string;
     format?: 'file' | 'hls' | 'dash';
     headers?: Record<string, string>;
@@ -21,7 +31,34 @@ export type TextTrackSource = {
     language?: string;
     default?: boolean;
 };
+export type SubtitleOptions = {
+    label?: string;
+    language?: string;
+    select?: boolean;
+};
+export type SubtitleAsset = {
+    bytes: ArrayBuffer;
+    format: 'srt' | 'ass' | 'ssa' | 'vtt';
+    label: string;
+    language?: string;
+    select: boolean;
+};
+export type FontAsset = {
+    name: string;
+    bytes: ArrayBuffer;
+};
+export type AudioOutput = 'stereo' | '5.1' | '7.1' | 'auto';
+export type ToneMapping = 'off' | 'hdr-to-sdr';
+/** Software decode pixels (up to 4K), and mpv's individual FFmpeg allocation cap. */
+export type ResourceLimits = {
+    maxDecodePixels?: number;
+    maxAllocationBytes?: number;
+};
 export type PlayerOptions = {
+    audioOutput?: AudioOutput;
+    audioFallback?: 'stereo' | 'reject';
+    toneMapping?: ToneMapping;
+    resourceLimits?: ResourceLimits;
     mode?: PlaybackMode;
     /** Defaults to true when mode is omitted. Explicit modes remain pinned. */
     automaticSelection?: boolean;
@@ -39,6 +76,8 @@ export type Capabilities = {
     audioFilters: boolean;
     mpvSubtitles: boolean;
     externalTextTracks: boolean;
+    externalSubtitles: boolean;
+    customFonts: boolean;
     customRequestHeaders: boolean;
 };
 export type PlaybackEvent = {
@@ -52,6 +91,8 @@ export type Diagnostics = {
     switching: boolean;
     videoFilters: string;
     audioFilters: string;
+    toneMapping?: ToneMapping;
+    resourceLimits?: ResourceLimits;
     selection?: {
         automatic: boolean;
         attempts: Array<{

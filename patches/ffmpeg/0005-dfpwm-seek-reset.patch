@@ -1,0 +1,22 @@
+--- a/libavcodec/dfpwmdec.c
++++ b/libavcodec/dfpwmdec.c
+@@ -96,6 +96,11 @@
+     return 0;
+ }
+ 
++static void dfpwm_dec_flush(AVCodecContext *ctx)
++{
++    dfpwm_dec_init(ctx);
++}
++
+ static int dfpwm_dec_frame(struct AVCodecContext *ctx, AVFrame *frame,
+                            int *got_frame, struct AVPacket *packet)
+ {
+@@ -127,6 +132,7 @@
+     .p.id           = AV_CODEC_ID_DFPWM,
+     .priv_data_size = sizeof(DFPWMState),
+     .init           = dfpwm_dec_init,
++    .flush          = dfpwm_dec_flush,
+     FF_CODEC_DECODE_CB(dfpwm_dec_frame),
+     .p.capabilities = AV_CODEC_CAP_DR1,
+ };

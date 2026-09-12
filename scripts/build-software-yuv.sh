@@ -21,10 +21,10 @@ source scripts/decoder-simd.sh
 emcc -O2 -pthread -msimd128 -Inative -Ibuild/sources/mpv -Ibuild/obj-mpv \
  "$OUT/yuv.o" "$OUT/rgb.o" native/player.c native/events.c native/stream_bridge.c \
  experiments/retained-subtitles/subtitles.c "${DECODER_SIMD_SOURCES[@]}" "${LIBS[@]}" \
- "$ROOT/build/obj-software-full-ffmpeg/libpostproc/libpostproc.a" -lstdc++ \
+ "$ROOT/build/obj-software-full-ffmpeg/libpostproc/libpostproc.a" "$ROOT/build/prefix-playback/lib/libdav1d.a" "$ROOT/build/prefix-playback/lib/libzimg.a" -lstdc++ -fexceptions \
  -sMODULARIZE=1 -sEXPORT_ES6=1 -sEXPORT_NAME=createEngine -sENVIRONMENT=worker \
  -sPTHREAD_POOL_SIZE=8 -sPTHREAD_POOL_SIZE_STRICT=2 \
- -sINITIAL_MEMORY=134217728 -sMAXIMUM_MEMORY=536870912 -sALLOW_MEMORY_GROWTH=1 \
+ -sINITIAL_MEMORY=134217728 -sMAXIMUM_MEMORY=1073741824 -sALLOW_MEMORY_GROWTH=1 \
  -sSTACK_SIZE=2097152 -sDEFAULT_PTHREAD_STACK_SIZE=2097152 -sWASM_BIGINT=1 \
  -sWASMFS=1 -sFORCE_FILESYSTEM=1 -sEXIT_RUNTIME=0 \
  -sEXPORTED_FUNCTIONS='["_web_create","_web_command_args","_web_event","_web_render","_web_presented","_web_destroy","_web_audio_ptr","_malloc","_free"]' \

@@ -132,8 +132,8 @@ export class NativePlayer extends EventTarget implements Backend {
       await this.load(url.href);
     },requiresRemux);
   }
-  async play() {this.assertActive();await this.video.play();this.refresh();}
-  async pause() {this.assertActive();this.video.pause();this.refresh();}
+  async play() {this.assertActive();if(this.remux)await this.remux.play();else await this.video.play();this.refresh();}
+  async pause() {this.assertActive();if(this.remux)this.remux.pause();else this.video.pause();this.refresh();}
   async seek(seconds: number) {
     this.assertActive();
     if(this.remux){const paused=this.video.paused;await this.remux.seek(seconds);if(this.video.seeking)await this.wait('seeked',()=>{});if(!paused)await this.video.play();this.refresh();return;}

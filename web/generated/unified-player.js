@@ -28,6 +28,12 @@ export class Player extends EventTarget {
     nativeRemux;
     softwarePresenter;
     settings;
+    audioOutput;
+    audioFallback;
+    toneMapping;
+    resourceLimits;
+    fonts = [];
+    subtitleAssets = [];
     root;
     width;
     height;
@@ -50,6 +56,16 @@ export class Player extends EventTarget {
         this.automatic = options.automaticSelection ?? options.mode === undefined;
         if (typeof this.automatic !== 'boolean')
             throw Error('Invalid automatic selection policy');
+        this.audioOutput = options.audioOutput ?? 'stereo';
+        this.audioFallback = options.audioFallback ?? 'stereo';
+        this.toneMapping = options.toneMapping ?? 'off';
+        if (!['stereo', '5.1', '7.1', 'auto'].includes(this.audioOutput) || !['stereo', 'reject'].includes(this.audioFallback))
+            throw Error('Invalid audio output policy');
+        if (!['off', 'hdr-to-sdr'].includes(this.toneMapping))
+            throw Error('Invalid tone mapping policy');
+        this.resourceLimits = { maxDecodePixels: options.resourceLimits?.maxDecodePixels ?? 8294400, maxAllocationBytes: options.resourceLimits?.maxAllocationBytes ?? 134217728 };
+        if (!Number.isInteger(this.resourceLimits.maxDecodePixels) || this.resourceLimits.maxDecodePixels < 1 || this.resourceLimits.maxDecodePixels > 8294400 || !Number.isInteger(this.resourceLimits.maxAllocationBytes) || this.resourceLimits.maxAllocationBytes < 33554432 || this.resourceLimits.maxAllocationBytes > 268435456)
+            throw Error('Invalid decode resource limits');
         this.nativeRemux = options.nativeRemux ?? 'auto';
         this.softwarePresenter = options.softwarePresenter ?? 'rgb';
         if (!['rgb', 'experimental-yuv'].includes(this.softwarePresenter))
@@ -60,7 +76,7 @@ export class Player extends EventTarget {
         this.height = options.height ?? 360;
         dimensions(this.width, this.height);
         this.settings = { pause: true, volume: 100, speed: 1, aid: 'auto', sid: 'auto', subtitles: true, vf: filterChain(options.videoFilters ?? ''), af: filterChain(options.audioFilters ?? '') };
-        if (this.automatic && (this.settings.vf || this.settings.af))
+        if (this.automatic && (this.settings.vf || this.settings.af || this.toneMapping !== 'off'))
             this.currentMode = 'software';
         this.validateFilters(this.currentMode, this.settings);
         this.root = document.createElement('div');
@@ -72,15 +88,15 @@ export class Player extends EventTarget {
     get surface() { return this.current?.surface; }
     get properties() { return this.current?.backend.properties ?? this.empty; }
     get capabilities() {
-        return { videoFilters: this.automatic || this.mode === 'software', audioFilters: this.automatic || this.mode === 'software', mpvSubtitles: this.mode !== 'native', externalTextTracks: this.mode === 'native', customRequestHeaders: this.mode !== 'native' || (this.nativeRemux !== 'never' && crossOriginIsolated && typeof MediaSource !== 'undefined') };
+        return { videoFilters: this.automatic || this.mode === 'software', audioFilters: this.automatic || this.mode === 'software', mpvSubtitles: this.mode !== 'native', externalTextTracks: this.mode === 'native', externalSubtitles: this.automatic || this.mode !== 'native', customFonts: this.automatic || this.mode !== 'native', customRequestHeaders: this.mode !== 'native' || (this.nativeRemux !== 'never' && crossOriginIsolated && typeof MediaSource !== 'undefined') };
     }
     get diagnostics() {
-        return { mode: this.mode, selection: { automatic: this.automatic, attempts: this.attempts.map(a => ({ ...a })) }, switching: this.busy, videoFilters: this.settings.vf, audioFilters: this.settings.af, backend: this.current?.backend.diagnostics };
+        return { mode: this.mode, selection: { automatic: this.automatic, attempts: this.attempts.map(a => ({ ...a })) }, switching: this.busy, videoFilters: this.settings.vf, audioFilters: this.settings.af, toneMapping: this.toneMapping, resourceLimits: { ...this.resourceLimits }, backend: this.current?.backend.diagnostics };
     }
     audioDiagnostics() { return this.current?.backend.audioDiagnostics(); }
     emit(type, detail) { this.dispatchEvent(new CustomEvent(type, { detail })); }
     validateFilters(mode, settings) {
-        if (mode !== 'software' && (settings.vf || settings.af))
+        if (mode !== 'software' && (settings.vf || settings.af || this.toneMapping !== 'off'))
             throw new Error('Filters require software mode. Clear filters before leaving software mode.');
     }
     enqueue(operation) {
@@ -131,7 +147,7 @@ export class Player extends EventTarget {
             throw new Error('Player is destroyed');
         this.root.append(surface);
         try {
-            backend = 'NativePlayer' in module ? new module.NativePlayer(surface, this.nativeRemux) : new module.WasmPlayer(surface, { mode: mode, softwarePresenter: this.softwarePresenter });
+            backend = 'NativePlayer' in module ? new module.NativePlayer(surface, this.nativeRemux) : new module.WasmPlayer(surface, { mode: mode, softwarePresenter: this.softwarePresenter, audioOutput: this.audioOutput, audioFallback: this.audioFallback, resourceLimits: this.resourceLimits, fonts: this.fonts });
         }
         catch (error) {
             surface.remove();
@@ -181,6 +197,11 @@ export class Player extends EventTarget {
     }
     async replace(source, mode, settings, preserve, nativeTracks, requestedTarget) {
         this.validateFilters(mode, settings);
+        const attachments = preserve ? this.subtitleAssets : [];
+        if (mode === 'native' && attachments.length)
+            throw Error('External mpv subtitles require Hybrid or Software');
+        if (mode === 'native' && this.audioOutput !== 'stereo')
+            throw Error('Explicit PCM output layout requires Hybrid or Software');
         if (source.kind === 'local' && source.file instanceof ArrayBuffer && source.file.byteLength > 32 * 1024 * 1024)
             throw new Error('ArrayBuffer sources are limited to 32 MiB');
         const old = this.current;
@@ -217,8 +238,10 @@ export class Player extends EventTarget {
             await p.ready;
             if (this.destroyed)
                 throw new Error('Player is destroyed');
-            if (desired.vf)
-                await p.command('set', 'vf', desired.vf);
+            const tone = this.toneMapping === 'hdr-to-sdr' ? 'zscale=transfer=linear:npl=100,format=gbrpf32le,zscale=primaries=bt709,tonemap=tonemap=mobius:desat=0,zscale=transfer=bt709:matrix=bt709:range=limited,format=yuv420p' : '';
+            const vf = [tone ? `lavfi=[${tone}]` : '', desired.vf].filter(Boolean).join(',');
+            if (vf)
+                await p.command('set', 'vf', vf);
             if (desired.af)
                 await p.command('set', 'af', desired.af);
             await p.volume(desired.volume);
@@ -230,9 +253,15 @@ export class Player extends EventTarget {
                 await p.subtitleVisible(desired.subtitles);
             }
             if (source.kind === 'local')
-                await p.open(source.file);
+                await p.open(source.file, source.input);
             else
                 await p.openRemote(source.options);
+            if (mode !== 'native') {
+                for (const subtitle of attachments)
+                    await p.addSubtitle(subtitle);
+                if (attachments.length && desired.sid !== 'auto')
+                    await p.selectTrack('sub', desired.sid);
+            }
             if (mode === 'native') {
                 for (const track of nativeTracks)
                     await p.addTextTrack(track);
@@ -266,6 +295,8 @@ export class Player extends EventTarget {
             this.currentMode = mode;
             this.settings = desired;
             this.nativeTracks = nativeTracks;
+            if (!preserve)
+                this.subtitleAssets = [];
             candidate.surface.style.display = 'block';
             if (old)
                 old.surface.style.display = 'none';
@@ -279,6 +310,7 @@ export class Player extends EventTarget {
                     if (inactiveSamples >= 4) {
                         clearInterval(this.monitor);
                         if (this.automatic) {
+                            candidate.error = new Error('Hybrid browser decoder became inactive for four consecutive checks');
                             this.recover(candidate);
                             return;
                         }
@@ -318,13 +350,15 @@ export class Player extends EventTarget {
             this.attempts.shift();
         this.emit('selectionchange', { ...attempt });
     }
-    async select(source, settings, preserve, tracks, start = 0, target) {
+    async select(source, settings, preserve, tracks, start = 0, target, priorAttempts = []) {
         if (!this.automatic)
             return this.replace(source, this.mode, settings, preserve, tracks, target);
         this.attempts = [];
+        for (const attempt of priorAttempts)
+            this.record(attempt);
         let nativeReason;
-        if (start === 0 && !(settings.vf || settings.af)) {
-            if (source.kind === 'remote' && source.options.format && source.options.format !== 'file') {
+        if (start === 0 && !(settings.vf || settings.af || this.toneMapping !== 'off')) {
+            if ((source.kind === 'local' && source.input?.demuxer) || (source.kind === 'remote' && (source.options.demuxer || (source.options.format && source.options.format !== 'file')))) {
                 nativeReason = 'Manifest track requirements require mpv inspection';
             }
             else {
@@ -375,7 +409,7 @@ export class Player extends EventTarget {
         for (const mode of PLAYBACK_MODES.slice(start)) {
             if (this.destroyed)
                 throw Error('Player is destroyed');
-            const reason = (settings.vf || settings.af) && mode !== 'software' ? 'CPU filters require Software' : mode === 'native' ? nativeReason : tracks.length ? 'External browser text tracks cannot be silently discarded' : undefined;
+            const reason = (settings.vf || settings.af || this.toneMapping !== 'off') && mode !== 'software' ? 'CPU filters or tone mapping require Software' : mode === 'native' ? (preserve && this.subtitleAssets.length ? 'External mpv subtitles require mpv' : this.audioOutput !== 'stereo' ? 'Explicit PCM layout requires mpv' : nativeReason) : tracks.length ? 'External browser text tracks cannot be silently discarded' : undefined;
             if (reason) {
                 this.record({ mode, outcome: 'skipped', reason });
                 continue;
@@ -412,10 +446,11 @@ export class Player extends EventTarget {
             await session.backend.pause().catch(() => { });
             const policy = this.nativeRemux;
             const tryRemux = this.mode === 'native' && session.backend.diagnostics?.plan === 'direct' && policy !== 'never';
+            const priorAttempts = [...this.attempts.filter(attempt => attempt.outcome !== 'selected'), { mode: this.mode, outcome: 'failed', reason: `Runtime playback failure: ${session.error?.message ?? 'Playback backend became unavailable'}` }];
             try {
                 if (tryRemux)
                     this.nativeRemux = 'always';
-                await this.select(this.source, this.settings, true, this.nativeTracks, tryRemux ? 0 : PLAYBACK_MODES.indexOf(this.mode) + 1);
+                await this.select(this.source, this.settings, true, this.nativeTracks, tryRemux ? 0 : PLAYBACK_MODES.indexOf(this.mode) + 1, undefined, priorAttempts);
             }
             finally {
                 this.nativeRemux = policy;
@@ -440,16 +475,16 @@ export class Player extends EventTarget {
             }
         });
     }
-    open(file) {
+    open(file, input = {}) {
         if (!(file instanceof File) && !(file instanceof ArrayBuffer))
             return Promise.reject(new Error('Expected File or ArrayBuffer'));
         if (file instanceof ArrayBuffer && file.byteLength > 32 * 1024 * 1024)
             return Promise.reject(new Error('ArrayBuffer sources are limited to 32 MiB; use File for larger sources'));
-        const source = { kind: 'local', file: file instanceof File ? file : file.slice(0) };
+        const source = { kind: 'local', file: file instanceof File ? file : file.slice(0), input: { ...input } };
         return this.enqueue(() => this.select(source, this.settings, false, []));
     }
     openRemote(options) {
-        const source = { kind: 'remote', options: { ...options, headers: options.headers ? { ...options.headers } : undefined, allowedOrigins: options.allowedOrigins?.slice() } };
+        const source = { kind: 'remote', options: { ...options, streaming: options.streaming ? { ...options.streaming } : undefined, headers: options.headers ? { ...options.headers } : undefined, allowedOrigins: options.allowedOrigins?.slice() } };
         return this.enqueue(() => this.select(source, this.settings, false, []));
     }
     setMode(mode) {
@@ -538,6 +573,63 @@ export class Player extends EventTarget {
             }
         });
     }
+    addSubtitle(file, options = {}) {
+        if (!(file instanceof File))
+            return Promise.reject(Error('Expected a subtitle File'));
+        const format = file.name.split('.').at(-1)?.toLowerCase();
+        if (!['ass', 'ssa', 'srt', 'vtt'].includes(format ?? '') || file.size > 8 * 1024 * 1024)
+            return Promise.reject(Error('Expected an SRT, ASS, SSA or WebVTT file up to 8 MiB'));
+        return this.enqueue(async () => {
+            if (!this.source)
+                throw Error('Open a movie before adding subtitles');
+            if (this.subtitleAssets.length >= 16 || this.subtitleAssets.reduce((n, a) => n + a.bytes.byteLength, 0) + file.size > 16 * 1024 * 1024)
+                throw Error('Subtitle budget exceeded');
+            const bytes = await this.interruptible(file.arrayBuffer());
+            const old = this.subtitleAssets;
+            this.subtitleAssets = [...old, { bytes, format: format, label: options.label ?? file.name, language: options.language, select: options.select ?? true }];
+            try {
+                await this.select(this.source, { ...this.settings, sid: options.select === false ? this.settings.sid : 'auto' }, true, this.nativeTracks);
+            }
+            catch (error) {
+                this.subtitleAssets = old;
+                throw error;
+            }
+        });
+    }
+    addFont(file) {
+        if (!(file instanceof File) || !/\.(ttf|otf)$/i.test(file.name) || file.size > 8 * 1024 * 1024)
+            return Promise.reject(Error('Expected a TTF/OTF font up to 8 MiB'));
+        return this.enqueue(async () => {
+            if (this.fonts.length >= 16 || this.fonts.reduce((n, a) => n + a.bytes.byteLength, 0) + file.size > 32 * 1024 * 1024)
+                throw Error('Font budget exceeded');
+            const bytes = await this.interruptible(file.arrayBuffer()), old = this.fonts;
+            this.fonts = [...old, { name: 'user-' + old.length + '.' + file.name.split('.').at(-1).toLowerCase(), bytes }];
+            try {
+                if (this.source && this.mode !== 'native')
+                    await this.replace(this.source, this.mode, this.settings, true, this.nativeTracks);
+            }
+            catch (error) {
+                this.fonts = old;
+                throw error;
+            }
+        });
+    }
+    setToneMapping(value) {
+        if (!['off', 'hdr-to-sdr'].includes(value))
+            throw Error('Invalid tone mapping policy');
+        return this.enqueue(async () => { const old = this.toneMapping; this.toneMapping = value; try {
+            if (this.source)
+                await this.select(this.source, this.settings, true, this.nativeTracks);
+            else if (this.automatic && value !== 'off')
+                this.currentMode = 'software';
+            else
+                this.validateFilters(this.mode, this.settings);
+        }
+        catch (error) {
+            this.toneMapping = old;
+            throw error;
+        } });
+    }
     addTextTrack(track) {
         const source = { ...track };
         return this.enqueue(async () => {
@@ -573,6 +665,8 @@ export class Player extends EventTarget {
                 this.current = undefined;
                 this.source = undefined;
                 this.nativeTracks = [];
+                this.subtitleAssets = [];
+                this.fonts = [];
                 this.root.remove();
             }
         })();

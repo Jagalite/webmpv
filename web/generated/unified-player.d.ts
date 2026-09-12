@@ -1,4 +1,4 @@
-import type { PlaybackMode, PlayerOptions, RemoteSource, TextTrackSource, Capabilities, Diagnostics, TrackType } from './types.js';
+import type { ToneMapping, SubtitleOptions, MediaInputOptions, PlaybackMode, PlayerOptions, RemoteSource, TextTrackSource, Capabilities, Diagnostics, TrackType } from './types.js';
 /** Three explicit playback modes. Mode/filter changes reopen transactionally. */
 export declare class Player extends EventTarget {
     readonly ready: Promise<void>;
@@ -12,6 +12,12 @@ export declare class Player extends EventTarget {
     private nativeRemux;
     private softwarePresenter;
     private settings;
+    private audioOutput;
+    private audioFallback;
+    private toneMapping;
+    private resourceLimits;
+    private fonts;
+    private subtitleAssets;
     private root;
     private width;
     private height;
@@ -46,7 +52,7 @@ export declare class Player extends EventTarget {
     private select;
     private recover;
     setAutomaticSelection(enabled?: boolean): Promise<void>;
-    open(file: File | ArrayBuffer): Promise<void>;
+    open(file: File | ArrayBuffer, input?: MediaInputOptions): Promise<void>;
     openRemote(options: RemoteSource): Promise<void>;
     setMode(mode: PlaybackMode): Promise<void>;
     private filters;
@@ -60,6 +66,9 @@ export declare class Player extends EventTarget {
     rate(value: number): Promise<void>;
     selectTrack(type: TrackType, id: string): Promise<void>;
     subtitleVisible(visible: boolean): Promise<void>;
+    addSubtitle(file: File, options?: SubtitleOptions): Promise<void>;
+    addFont(file: File): Promise<void>;
+    setToneMapping(value: ToneMapping): Promise<void>;
     addTextTrack(track: TextTrackSource): Promise<void>;
     resize(width: number, height: number): void;
     destroy(): Promise<void>;

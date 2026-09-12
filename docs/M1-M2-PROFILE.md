@@ -20,7 +20,7 @@ Inputs:
   fonts and styles. Fixture recipes and hashes are recorded with results.
 
 Transport budgets: one active callback/read per instance, 256 KiB range block,
-16 MiB LRU cache, one 256 KiB native mailbox, bounded retries (15-second deadline),
+16 MiB LRU cache, one 256 KiB native mailbox, bounded retries (absolute 15-second operation deadline, including successful body progress and authorization refresh),
 terminal close and separate seek interruption. No whole-file materialization for
 remote media. Signed URLs/headers remain in the browser broker; logs use opaque
 stream identifiers. Strong ETag/If-Range or an explicit immutable asset contract.

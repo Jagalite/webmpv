@@ -3,12 +3,12 @@
 // block the event loop responsible for completing its reads.
 export class RemuxPlayer {
  constructor(video){
-  this.video=video;this.timelineBias=1;this.generation=0;this.stopped=false;this.stats={fragments:[],generatedBytes:0,discardedBytes:0,peakQueueDepth:0,bufferedBytesUpperBound:0,peakBufferedBytesUpperBound:0,peakBufferedSeconds:0,seeks:[],sessions:[],errors:[],workers:0};
+  this.video=video;this.timelineBias=1;this.generation=0;this.stopped=false;this.stats={fragments:[],generatedBytes:0,discardedBytes:0,peakQueueDepth:0,bufferedBytesUpperBound:0,peakBufferedBytesUpperBound:0,peakBufferedSeconds:0,seeks:[],sessions:[],errors:[],workers:0,recoveries:[],gapSkips:[]};
   this.segments=[];this.sourceStats={};this.remuxStats={};this.timer=setInterval(()=>this.pump(),50);
  }
  async open(source,target=0){
   if(this.source&&(this.source.file!==source.file||this.source.options?.url!==source.options?.url)){this.identity=undefined;this.duration=undefined;}
-  this.source=source;return this.restart(target);
+  this.recoveryAttempts=0;this.source=source;return this.restart(target);
  }
  async restart(target){
   if(this.stopped)throw Error('Remux player is destroyed');
@@ -30,7 +30,7 @@ export class RemuxPlayer {
  async start(target,rejected=new Set()){
   if(this.stopped)throw Error('Remux player is destroyed');
   const begun=performance.now(),generation=++this.generation;this.stopWorkers();
-  this.stats.errors=[];this.stats.seeks.push({target,started:begun});if(this.stats.seeks.length>64)this.stats.seeks.shift();this.target=target;this.targetReady=false;this.lastEviction=-Infinity;this.raps=[];this.busy=true;this.eof=false;this.pending=null;this.receipt=null;this.segments=[];this.sourceStats={};this.remuxStats={};
+  this.failedGeneration=undefined;this.stats.errors=[];this.stats.seeks.push({target,started:begun});if(this.stats.seeks.length>64)this.stats.seeks.shift();this.target=target;this.targetReady=false;this.lastEviction=-Infinity;this.raps=[];this.busy=true;this.eof=false;this.pending=null;this.receipt=null;this.segments=[];this.sourceStats={};this.remuxStats={};
   this.video.pause();this.video.removeAttribute('src');this.video.load();if(this.objectURL)URL.revokeObjectURL(this.objectURL);
   this.media=new MediaSource();this.objectURL=URL.createObjectURL(this.media);this.video.src=this.objectURL;
   await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('MSE sourceopen timeout')),10000);this.cancelWait=e=>{clearTimeout(timer);reject(e);};this.media.addEventListener('sourceopen',()=>{clearTimeout(timer);resolve();},{once:true});});
@@ -114,6 +114,13 @@ export class RemuxPlayer {
    // Account for the same short leading codec-preroll gap admitted by start().
    // Otherwise a sub-millisecond gap can look like zero buffered data while paused
    // and drain the entire source before the media element advances into the range.
+   // Some valid edits leave a short hole between MSE coded ranges. Advance
+   // only while playing at the end of a range, within a half-second budget.
+   const next=ranges.find(([a])=>a>now+.001);
+   if(this.targetReady&&!this.video.paused&&this.video.readyState<3&&next&&next[0]-now<=.5){
+    this.stats.gapSkips.push({from:now,to:next[0]});if(this.stats.gapSkips.length>64)this.stats.gapSkips.shift();
+    this.video.currentTime=next[0]+this.timelineBias;
+   }
    const ahead=ranges.find(([a,b])=>a<=now+0.5&&now<=b)?.[1]-now||0;
    if(ahead<5&&ranges.at(-1)?.[1]>now+12){this.fail('Remux timeline gap exceeds forward buffer budget');return;}
    if(this.eof&&!this.pending){this.media.endOfStream();return;}
@@ -124,7 +131,22 @@ export class RemuxPlayer {
   const failed=event=>{if(generation!==this.generation||this.stopped)return;event.preventDefault?.();this.fail(`Remux ${label} worker failed: ${event.message||event.type}`);};
   worker.onerror=failed;worker.onmessageerror=failed;
  }
- fail(message){this.stats.errors.push(message);this.cancelWait?.(Error(message));this.cancelWait=null;this.stopWorkers();if(!this.starting)this.onError?.(message);}
+ fail(message){
+  if(this.stopped||this.failedGeneration===this.generation)return;
+  this.failedGeneration=this.generation;
+  const target=Math.max(0,this.video.currentTime-this.timelineBias),playing=!this.video.paused;
+  this.stats.errors.push(message);this.cancelWait?.(Error(message));this.cancelWait=null;this.stopWorkers();
+  if(this.starting)return;
+  // One transient worker/MSE restart per explicit open. Codec changes and
+  // source-identity failures go directly to the owner's compatibility fallback.
+  if((this.recoveryAttempts??0)<1&&/worker failed|MSE SourceBuffer error|QuotaExceededError/.test(message)){
+   this.recoveryAttempts=(this.recoveryAttempts??0)+1;
+   const recovery={target,reason:message,attempt:this.recoveryAttempts,restored:false};this.stats.recoveries.push(recovery);if(this.stats.recoveries.length>64)this.stats.recoveries.shift();
+   this.recoveryPlaying=playing;
+   void this.restart(target).then(async()=>{if(this.stopped)return;if(this.recoveryPlaying)await this.video.play();recovery.restored=true;},error=>{if(!this.stopped)this.onError?.(String(error));}).catch(error=>{if(!this.stopped)this.onError?.(String(error));});
+  }else this.onError?.(message);
+ }
+
  stopWorkers(){
   if(this.worker){(this.stats.cancellations??=[]).push({generatedBytes:this.remuxStats.generatedBytes||0,pendingBytes:this.pending?.byteLength||0,retainedCompressedBytesUpperBound:this.segments.reduce((n,s)=>n+s.bytes,0),sourceFetchedBytes:this.sourceStats.fetchedBytes||0,inFlightOutputUpperBound:8*1024*1024});if(this.stats.cancellations.length>64)this.stats.cancellations.shift();}
   this.cancelWait?.(new DOMException('Superseded','AbortError'));this.cancelWait=null;
@@ -133,8 +155,8 @@ export class RemuxPlayer {
   this.sourceWorker?.postMessage({type:'close'});this.sourceWorker?.terminate();this.worker?.terminate();this.sourceWorker=this.worker=null;this.stats.workers=0;this.sb=null;
  }
  async seek(t){return this.restart(t);}
- async play(){return this.video.play();}
- pause(){this.video.pause();}
+ async play(){this.recoveryPlaying=true;if(this.starting)return;return this.video.play();}
+ pause(){this.recoveryPlaying=false;this.video.pause();}
  snapshot(){return {stats:structuredClone(this.stats),source:{...this.sourceStats},remux:{...this.remuxStats},ranges:this.ranges(),timelineBias:this.timelineBias,position:Math.max(0,this.video.currentTime-this.timelineBias),quality:this.video.getVideoPlaybackQuality(),readyState:this.video.readyState,logs:this.logs,videoError:this.video.error?.message};}
  async destroy(){this.stopped=true;++this.generation;clearInterval(this.timer);this.stopWorkers();this.video.pause();this.video.removeAttribute('src');this.video.load();if(this.objectURL)URL.revokeObjectURL(this.objectURL);}
 }

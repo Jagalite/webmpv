@@ -14,6 +14,31 @@ const stats={submitted:0,frames:0,receivedFrames:0,closedFrames:0,peakOutstandin
 const color={bt709:1,bt470bg:5,smpte170m:6,bt2020:9,'bt2020-ncl':9,smpte2084:16,'iec61966-2-1':13};
 function closeFrame(frame){if(closed.has(frame))return;closed.add(frame);frame.close();stats.closedFrames++;}
 function clear(){generation++;if(decoder&&decoder.state!=='closed')decoder.close();decoder=null;for(const frame of queue)closeFrame(frame);for(const frame of copying)closeFrame(frame);queue=[];draining=flushed=false;submitted=consumed=0;failure=null;}
+async function checkConfiguration(valid){
+ // Keep only descriptive fields: initialization bytes can be large and are not
+ // useful in a UI error. Retain the exact codec string passed to WebCodecs.
+ const describe=config=>({codec:config.codec,codedWidth:config.codedWidth,codedHeight:config.codedHeight,descriptionBytes:config.description?.byteLength??0,hardwareAcceleration:config.hardwareAcceleration,optimizeForLatency:config.optimizeForLatency});
+ const requested=describe(configuration);
+ stats.supportCheck={requested,source:{...stats.input}};
+ let support;
+ try{support=await VideoDecoder.isConfigSupported(configuration);}
+ catch(error){
+  if(!valid())return false;
+  stats.supportCheck.error=String(error);
+  throw Error(`Browser decoder configuration check failed: ${String(error)}\nRequested configuration: ${JSON.stringify(requested)}`);
+ }
+ if(!valid())return false;
+ stats.supportCheck.supported=support.supported;
+ if(support.config)stats.supportCheck.recognized=describe(support.config);
+ if(!support.supported){
+  const family=({1:'H.264 / AVC',2:'H.265 / HEVC',3:'VP8',4:'VP9',5:'AV1'})[stats.input.kind]??'video';
+  const depth=stats.input.depth>0?`${stats.input.depth}-bit`:'not reported by the source';
+  const profile=stats.input.profile>=0?stats.input.profile:'unknown';
+  const level=stats.input.level>=0?stats.input.level:'unknown';
+  throw Error(`Unsupported browser configuration (${family}).\nCodec string: ${requested.codec}\nResolution: ${requested.codedWidth} × ${requested.codedHeight}\nSource bit depth: ${depth}\nSource profile / level IDs: ${profile} / ${level}\nDecoder initialization data: ${requested.descriptionBytes} bytes\nHardware acceleration policy: ${requested.hardwareAcceleration}\nWebCodecs reported supported=false without a specific rejection reason. These details do not establish whether browser support or webmpv's configuration mapping caused the rejection.`);
+ }
+ return true;
+}
 function configure(){
  if(copiesInFlight)throw Error('Previous copy still pending; use software');
  const current=generation;
@@ -76,8 +101,7 @@ async function pump(){
    }
    const adapted=videoCodecConfig({...stats.input,description,depth:header[8]||8});
    configuration=adapted.configuration;packetPrefix=adapted.prefix;stats.codec=configuration.codec;
-   const support=await VideoDecoder.isConfigSupported(configuration);
-   if(!valid())return;if(!support.supported)throw Error('Unsupported browser configuration');
+   if(!await checkConfiguration(valid)||!valid())return;
    configure();
   }else if(operation===5){clear();}
   else if(operation===6){clear();if(configuration)configure();stats.resets++;}
@@ -87,10 +111,11 @@ async function pump(){
     if(operation===4){result=AGAIN;return;}
     if(operation!==2)throw Error('VP9 source ended before initialization');
     const bytes=new Uint8Array(memory,pointer+packetOffset,header[4]);
-    const adapted=videoCodecConfig({...pendingConfiguration,...vp9PacketConfig(bytes)});
+    const packetConfig=vp9PacketConfig(bytes);
+    stats.input={...stats.input,...packetConfig};
+    const adapted=videoCodecConfig({...pendingConfiguration,...packetConfig});
     configuration=adapted.configuration;packetPrefix=adapted.prefix;stats.codec=configuration.codec;
-    const support=await VideoDecoder.isConfigSupported(configuration);
-    if(!valid())return;if(!support.supported)throw Error('Unsupported browser configuration');
+    if(!await checkConfiguration(valid)||!valid())return;
     configure();pendingConfiguration=null;
    }
    if(!decoder)throw Error('Decoder is closed');
