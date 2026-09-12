@@ -1,0 +1,260 @@
+{
+  "status": "local-api-component-candidate",
+  "publicReleaseQualified": false,
+  "archive": "build/public-api-release-candidate/webmpv-0.3.0-beta.2.tgz",
+  "archiveSHA256": "2b7d99731bb05c33d8d24648550fafda90c4ad13968d2dbbdb777ef48421bb4a",
+  "runtimeManifestSHA256": "866c26391d2728a32b85ba06da6e90c96973b9fe0045f1b6556f9a10b09db39a",
+  "baseMainCommit": "f9a8f9ccab1c2fa753ca1deaef401648ca32051b",
+  "implementationBaseline": "8bb451be513c80247d8eb97ce93bd0c8607770bf",
+  "workingSource": true,
+  "runtimeMatchesWorkingGeneratedCode": true,
+  "engines": {
+    "web/engine-hybrid/player.wasm": {
+      "bytes": 22064467,
+      "sha256": "f3fe4d81d9b38a57bd40f2e1692055f9344ba4c10ec1a2166dc893cb542b3c4a"
+    },
+    "web/engine-remux/remux.wasm": {
+      "bytes": 3011812,
+      "sha256": "9d619b2038722175811ba538b249af1d4868950a5cd55d22fa8dc4bfe274d315"
+    },
+    "web/engine-software-full/player.wasm": {
+      "bytes": 21427704,
+      "sha256": "beda71fb5dbc56b5e0a6cb7ac2c060c1cc010fee7ed446d5dce0b2db1fb611ef"
+    }
+  },
+  "tests": {
+    "exactArchiveConsumers": [
+      {
+        "path": "results/public-api-consumer/chrome-2026-09-12T14-02-33.660Z/result.json",
+        "sha256": "adff8d483af41b6b0e000f16001de71ce0908effdd1b7efd709757cf9f443db7",
+        "passed": true,
+        "checks": 8,
+        "browser": "152.0.7977.83",
+        "archiveSHA256": "2b7d99731bb05c33d8d24648550fafda90c4ad13968d2dbbdb777ef48421bb4a"
+      },
+      {
+        "path": "results/public-api-consumer/firefox-2026-09-12T14-02-33.660Z/result.json",
+        "sha256": "1b7f1f43a6e4f53e99dd22e05193f48d1e34d801b72e4058b64014421b58c0ef",
+        "passed": true,
+        "checks": 8,
+        "browser": "146.0.1",
+        "archiveSHA256": "2b7d99731bb05c33d8d24648550fafda90c4ad13968d2dbbdb777ef48421bb4a"
+      }
+    ],
+    "exactArchiveStreaming": [
+      {
+        "path": "results/beta/streaming-chrome-2026-09-12T14-06-25.737Z/result.json",
+        "sha256": "ee73812e78e90777ea259f75d2e9f408f0860b2ccf1cc7a55dadc2bbca40d28b",
+        "passed": true,
+        "checks": 6,
+        "browser": "152.0.7977.83",
+        "archiveSHA256": "2b7d99731bb05c33d8d24648550fafda90c4ad13968d2dbbdb777ef48421bb4a"
+      },
+      {
+        "path": "results/beta/streaming-firefox-2026-09-12T14-06-19.274Z/result.json",
+        "sha256": "02ecd374f8f5bcbe2a3cd5ff484d7e5bfccae09dc09e5a6c42fc56af4a3bca55",
+        "passed": true,
+        "checks": 6,
+        "browser": "146.0.1",
+        "archiveSHA256": "2b7d99731bb05c33d8d24648550fafda90c4ad13968d2dbbdb777ef48421bb4a"
+      }
+    ],
+    "normalizedCore": [
+      {
+        "path": "results/public-api/chrome-2026-09-12T13-44-21.601Z/result.json",
+        "sha256": "2f59c85e69e891c107782286ebf28ec87864d6790140d58ea9f02472b6d7d851",
+        "passed": true,
+        "checks": 14,
+        "browser": "152.0.7977.83"
+      },
+      {
+        "path": "results/public-api/firefox-2026-09-12T13-47-31.393Z/result.json",
+        "sha256": "e90dad03608b733da142f0af7cd98906f22a070274c10453264871d3de8698ec",
+        "passed": true,
+        "checks": 14,
+        "browser": "146.0.1"
+      }
+    ],
+    "component": [
+      {
+        "path": "results/player-component/chrome-2026-09-12T14-08-00.025Z/result.json",
+        "sha256": "efb2858a74e716d0300e3d3f228e2a2ffa0bd44dc71b59246b08ea57c2b60d10",
+        "passed": true,
+        "checks": 14,
+        "browser": "152.0.7977.83"
+      },
+      {
+        "path": "results/player-component/firefox-2026-09-12T14-08-00.028Z/result.json",
+        "sha256": "3a8e157c99cf085bd674ed5020ee0b1b9bcdfa91904535ec937e1218ec185650",
+        "passed": true,
+        "checks": 14,
+        "browser": "146.0.1"
+      }
+    ],
+    "pages": [
+      {
+        "path": "results/pages/chrome-2026-09-12T14-09-27.861Z/result.json",
+        "sha256": "e081291497f7df175a4cf6aa89f534d8af12db9fccd4eb807f1618cc1d028272",
+        "passed": true,
+        "checks": 8,
+        "browser": "chrome",
+        "runtimeManifestSHA256": "866c26391d2728a32b85ba06da6e90c96973b9fe0045f1b6556f9a10b09db39a"
+      },
+      {
+        "path": "results/pages/firefox-2026-09-12T14-09-15.557Z/result.json",
+        "sha256": "735932a265247f6bed6b9910a2f55161b51306894218bf21fd85c5438c2c62a9",
+        "passed": true,
+        "checks": 8,
+        "browser": "firefox",
+        "runtimeManifestSHA256": "866c26391d2728a32b85ba06da6e90c96973b9fe0045f1b6556f9a10b09db39a"
+      }
+    ],
+    "autoplay": [
+      {
+        "path": "results/public-api/autoplay-chrome-2026-09-12T13-13-05.146Z/result.json",
+        "sha256": "0c4cfbbee45a0f4e575596e2f860253978d7aaaac87975b6fbaf1c938b12798e",
+        "passed": true,
+        "checks": 2,
+        "browser": "152.0.7977.83"
+      },
+      {
+        "path": "results/public-api/autoplay-firefox-2026-09-12T13-34-34.123Z/result.json",
+        "sha256": "4b18c6941ea47d7084ea852b43becbc403af7a904cf3982ce4514e3c720f0e4b",
+        "passed": true,
+        "checks": 2,
+        "browser": "146.0.1"
+      }
+    ],
+    "earlierRegressionChecks": [
+      {
+        "path": "results/player-api/functional-2026-09-12T13-05-27.789Z/result.json",
+        "sha256": "b73befeb4bc8924c37e608971d62073ee3ca4989702475951c4e01d2e553c003",
+        "passed": true,
+        "checks": 21,
+        "browser": "152.0.7977.83"
+      },
+      {
+        "path": "results/compatibility-expansion/2026-09-12T13-20-46.253Z/result.json",
+        "sha256": "87a84114fdef0a30f290888c8db18873141df8eeb2040727fffa62abaae90bec",
+        "passed": true,
+        "checks": 7,
+        "browser": "152.0.7977.83"
+      }
+    ]
+  },
+  "unitLogs": {
+    "build/copy-assets-release-candidate.log": {
+      "sha256": "64611ee64c0839916cf13075fcedbd456cc330c8dd9daf4dbe20f1a7e0830fef",
+      "passed": 4
+    },
+    "build/public-api-state-delivery.log": {
+      "sha256": "90ed7497ed93485b1d918fb14dd02dc28b3dd98479516a9844f3f83e60d09df3",
+      "passed": 5
+    },
+    "build/public-api-unit-2.log": {
+      "sha256": "f8c38440889564ee8e015678d13c6cdb557323487fad54aecd0485c92b2f3c63",
+      "passed": 73
+    }
+  },
+  "cli": {
+    "command": [
+      "npx",
+      "--offline",
+      "webmpv",
+      "copy-assets",
+      "npx-runtime"
+    ],
+    "cwd": "/Volumes/seed2/Projects/webmpv/build/public-api-consumer-OwasAI",
+    "archiveSHA256": "2b7d99731bb05c33d8d24648550fafda90c4ad13968d2dbbdb777ef48421bb4a",
+    "exitCode": 0,
+    "stdout": "Copied 96 verified webmpv 0.3.0-beta.2 assets to /Volumes/seed2/Projects/webmpv/build/public-api-consumer-OwasAI/npx-runtime. Unrelated files were retained.\n",
+    "stderr": "",
+    "passed": true
+  },
+  "sources": {
+    "build/pages-api-release-candidate/source/build-materials.tar.gz": {
+      "sha256": "84c748607779465edd39bf2802194bd7ec8726f4119f7f62b1c93626898be5b6",
+      "bytes": 114724
+    },
+    "build/pages-api-release-candidate/source/dav1d.tar.gz": {
+      "sha256": "fa635e2bdb25147b1384007c83e15de44c589582bb3b9a53fc1579cb9d74b695",
+      "bytes": 1710628
+    },
+    "build/pages-api-release-candidate/source/emscripten-source.tar.gz": {
+      "sha256": "dda2bed89d0c09f24bc33e2e749a3db230484960efb6249edf92d6dc9cd9d97a",
+      "bytes": 18132272
+    },
+    "build/pages-api-release-candidate/source/emsdk.tar.gz": {
+      "sha256": "24142f5506a99dab75b18ccecf2e3a23b4e243fa6fac1b6c20b2081bb4fbc8c5",
+      "bytes": 202897
+    },
+    "build/pages-api-release-candidate/source/ffmpeg.tar.gz": {
+      "sha256": "f117507dc501f2a6c11f9241d8d0c3213846cfad91764361af37befd6b6c523d",
+      "bytes": 15898141
+    },
+    "build/pages-api-release-candidate/source/freetype.tar.gz": {
+      "sha256": "bc5c898e4756d373e0d991bab053036c5eb2aa7c0d5c67e8662ddc6da40c4103",
+      "bytes": 2482495
+    },
+    "build/pages-api-release-candidate/source/fribidi.tar.gz": {
+      "sha256": "5a1d187a33daa58fcee2ad77f0eb9d136dd6fa4096239199ba31e850d397e8a8",
+      "bytes": 2144176
+    },
+    "build/pages-api-release-candidate/source/harfbuzz.tar.gz": {
+      "sha256": "0d25a3f74af4e8744700ac19050af5a80ae330378a5802a5cd71e523bb6fda1f",
+      "bytes": 36671212
+    },
+    "build/pages-api-release-candidate/source/libass.tar.gz": {
+      "sha256": "26fbfb7a7bd3e6d5c713f8a65a12b36084d1dde6efaed8a9996489054c4aeca0",
+      "bytes": 329536
+    },
+    "build/pages-api-release-candidate/source/libplacebo.tar.gz": {
+      "sha256": "627e32439a0b3d2b90368ead7e919f470ee7446c87cc0f7841bbe319b23aa8b1",
+      "bytes": 846196
+    },
+    "build/pages-api-release-candidate/source/libxml2.tar.gz": {
+      "sha256": "f33a6353a80ccdb483abc3f895d4283f799b8ee9fae778da7a97b73604929138",
+      "bytes": 3716385
+    },
+    "build/pages-api-release-candidate/source/mpv.tar.gz": {
+      "sha256": "10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3",
+      "bytes": 3561474
+    },
+    "build/pages-api-release-candidate/source/vulkan-headers.tar.gz": {
+      "sha256": "570f9ae1e65466dbaf5fcab667abd079dd0a61c4ab86cf535efd492bf70a5b74",
+      "bytes": 1841582
+    },
+    "build/pages-api-release-candidate/source/webmpv-source.tar.gz": {
+      "sha256": "8b83c31a97adf3f20c7c6456372ce6ef84c123173b0b5281566b2c5e36821b62",
+      "bytes": 4295377
+    },
+    "build/pages-api-release-candidate/source/zimg.tar.gz": {
+      "sha256": "be89390f13a5c9b2388ce0f44a5e89364a20c1c57ce46d382b1fcc3967057577",
+      "bytes": 326725
+    },
+    "build/pages-api-release-candidate/source/zlib.tar.gz": {
+      "sha256": "17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c",
+      "bytes": 1572744
+    }
+  },
+  "overhead": {
+    "path": "results/player-component/overhead-2026-09-12T13-13-10.286Z/result.json",
+    "sha256": "ab307cf51a94f65a0b6fc4456c52d07af755b07c620b28695d3720e4ccc4f790",
+    "scope": "Earlier four-second matched workload main-thread samples; not engine performance qualification"
+  },
+  "remainingGates": [
+    "Manual screen-reader and physical touch sessions",
+    "Safari/mobile browser coverage",
+    "Independent clean builds of all three engines and tagged release/source qualification",
+    "Physical HDR/surround, PiP/casting and sustained output qualification"
+  ],
+  "publication": "No commit, push, merge or publication performed in this task",
+  "finalReport": {
+    "path": "docs/PUBLIC-API-VALIDATION.md",
+    "sha256": "0121ad120d626fbf975f998d77ba752bc7135148fb1c3b2098f40e4f87f259c0"
+  },
+  "preservedFailure": {
+    "path": "results/pages/firefox-2026-09-12T14-06-43.067Z/result.json",
+    "reason": "Test harness raced the example fetch; final harness waits for a new accepted source identity"
+  }
+}
