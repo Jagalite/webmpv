@@ -4,8 +4,15 @@
 #include "audio/out/internal.h"
 #include "audio_bridge.h"
 #include <string.h>
+#include <emscripten.h>
 
 struct web_audio_ring web_audio;
+unsigned web_audio_channels = 2;
+EMSCRIPTEN_KEEPALIVE int web_audio_configure(int channels) {
+    if (channels != 2 && channels != 6 && channels != 8) return -1;
+    web_audio_channels = channels;
+    return 0;
+}
 static void reset(struct ao *ao)
 {
     atomic_fetch_add(&web_audio.epoch, 1); // odd: reset in progress
@@ -24,7 +31,7 @@ static int init(struct ao *ao)
     ao->format = AF_FORMAT_FLOAT;
     ao->samplerate = atomic_load(&web_audio.rate);
     if (ao->samplerate < 8000 || ao->samplerate > 192000) return -1;
-    mp_chmap_from_channels(&ao->channels, 2);
+    mp_chmap_from_channels(&ao->channels, web_audio_channels);
     ao->device_buffer = WEB_AUDIO_CAPACITY;
     reset(ao);
     return 0;
@@ -43,9 +50,8 @@ static bool write_audio(struct ao *ao, void **data, int samples)
     if (samples < 0 || queued > WEB_AUDIO_CAPACITY || (uint32_t)samples > WEB_AUDIO_CAPACITY - queued) return false;
     float *src = data[0];
     for (int n=0; n<samples; n++) {
-        unsigned at = ((w+n) % WEB_AUDIO_CAPACITY)*2;
-        web_audio.pcm[at] = src[n*2];
-        web_audio.pcm[at+1] = src[n*2+1];
+        unsigned at = ((w+n) % WEB_AUDIO_CAPACITY)*web_audio_channels;
+        memcpy(web_audio.pcm + at, src + n*web_audio_channels, web_audio_channels*sizeof(float));
     }
     atomic_store(&web_audio.written, w+samples);
     return true;

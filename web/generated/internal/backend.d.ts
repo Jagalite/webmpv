@@ -1,9 +1,9 @@
-import type { RemoteSource, TextTrackSource, TrackType } from '../types.js';
+import type { RemoteSource, TextTrackSource, TrackType, SubtitleAsset, MediaInputOptions } from '../types.js';
 export interface Backend extends EventTarget {
     readonly ready: Promise<void>;
     readonly properties: Map<string, unknown>;
     readonly diagnostics?: object;
-    open(file: File | ArrayBuffer): Promise<void>;
+    open(file: File | ArrayBuffer, options?: MediaInputOptions): Promise<void>;
     openRemote(source: RemoteSource): Promise<void>;
     play(): Promise<void>;
     pause(): Promise<void>;
@@ -15,6 +15,7 @@ export interface Backend extends EventTarget {
     resize(width: number, height: number): void;
     command?(...args: string[]): Promise<void>;
     addTextTrack?(track: TextTrackSource): Promise<void>;
+    addSubtitle?(subtitle: SubtitleAsset): Promise<void>;
     audioDiagnostics(): object;
     destroy(): Promise<void>;
 }

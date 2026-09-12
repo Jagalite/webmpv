@@ -1,0 +1,71 @@
+{
+  "family": "chrome",
+  "browser": "152.0.7977.83",
+  "checks": [
+    {
+      "name": "two idle instances, lazy engines and idempotent registration",
+      "passed": true
+    },
+    {
+      "name": "same public core and independent playback",
+      "passed": true
+    },
+    {
+      "name": "keyboard shortcuts scoped and focused controls retain native behavior",
+      "passed": true
+    },
+    {
+      "name": "volume, rate, subtitle and percentage shortcuts use public state",
+      "passed": true
+    },
+    {
+      "name": "timeline previews locally and commits once",
+      "passed": true
+    },
+    {
+      "name": "settings focus restoration and accessible controls",
+      "passed": true
+    },
+    {
+      "name": "fullscreen contains controls and keeps settings inside",
+      "passed": true
+    },
+    {
+      "name": "synchronous DOM moves keep the same core",
+      "passed": true
+    },
+    {
+      "name": "removal releases resources and reconnect waits for cleanup",
+      "passed": true
+    },
+    {
+      "name": "src changes cancel stale opens; property reflection and pre-upgrade properties",
+      "passed": true
+    },
+    {
+      "name": "close cancels an open waiting for initial connection",
+      "passed": true
+    },
+    {
+      "name": "terminal destruction before connection settles ready",
+      "passed": true
+    },
+    {
+      "name": "mobile, reduced motion, high contrast and no uncaught errors",
+      "passed": true
+    },
+    {
+      "name": "migrated playground uses the shipped component and core",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/player/index.ts": "bae526f4aa805dc8caf7b5af60c69df1c64836c069ba1cebf8fde9ec7597fdd4",
+    "src/player/styles.ts": "49e5b86447508c6256507108a9bda34c3c4e4c95f565baa9d80794d5762a3ee1",
+    "src/unified-player.ts": "d900b1b942c02febcdb832cd77b54a2bff096ac1c3896fef299dc144103ef446",
+    "tests/player-component.mjs": "191f8e6595af0bb0073eb407142b5d7ac658a25a86e21e3b5d2a7d861ae4a187"
+  },
+  "screenReader": "Semantic accessibility tree and keyboard checks; no physical screen-reader session",
+  "accessibility": "- region \"Media player\":\n  - slider \"Playback position\": \"3\"\n  - button \"Play\"\n  - text: 0:03 / 0:12\n  - button \"Mute\"\n  - slider \"Volume\": \"0.95\"\n  - button \"Playback settings\"\n  - button \"Fullscreen\"",
+  "passed": true
+}

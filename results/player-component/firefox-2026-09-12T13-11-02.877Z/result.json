@@ -1,0 +1,61 @@
+{
+  "family": "firefox",
+  "browser": "146.0.1",
+  "checks": [
+    {
+      "name": "two idle instances, lazy engines and idempotent registration",
+      "passed": true
+    },
+    {
+      "name": "same public core and independent playback",
+      "passed": true
+    },
+    {
+      "name": "keyboard shortcuts scoped and focused controls retain native behavior",
+      "passed": true
+    },
+    {
+      "name": "timeline previews locally and commits once",
+      "passed": true
+    },
+    {
+      "name": "settings focus restoration and accessible controls",
+      "passed": true
+    },
+    {
+      "name": "fullscreen contains controls and keeps settings inside",
+      "passed": false,
+      "error": "page.evaluate: Not in fullscreen mode\n@debugger eval code line 290 > eval:1:14\nevaluate@debugger eval code:292:16\n@debugger eval code:1:44\n\n    at /Volumes/seed2/Projects/webmpv/tests/player-component.mjs:13:429\n    at async check (/Volumes/seed2/Projects/webmpv/tests/player-component.mjs:6:35)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/player-component.mjs:13:1"
+    },
+    {
+      "name": "synchronous DOM moves keep the same core",
+      "passed": true
+    },
+    {
+      "name": "removal releases resources and reconnect waits for cleanup",
+      "passed": true
+    },
+    {
+      "name": "src changes cancel stale opens; property reflection and pre-upgrade properties",
+      "passed": true
+    },
+    {
+      "name": "terminal destruction before connection settles ready",
+      "passed": true
+    },
+    {
+      "name": "mobile, reduced motion, high contrast and no uncaught errors",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'TypeError: Not in fullscreen mode'\n+ ]\n- []\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/player-component.mjs:19:385\n    at async check (file:///Volumes/seed2/Projects/webmpv/tests/player-component.mjs:6:35)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/player-component.mjs:19:1"
+    }
+  ],
+  "hashes": {
+    "src/player/index.ts": "667f76e1ed2bc757f14071a2394df1c9a3ac1f277de6aac1e4295c4385d29da7",
+    "src/player/styles.ts": "49e5b86447508c6256507108a9bda34c3c4e4c95f565baa9d80794d5762a3ee1",
+    "src/unified-player.ts": "ba1af55a63454969cd72fe66547abaec0adaafc1ca663d6a981e91c00ea1af4a",
+    "tests/player-component.mjs": "a8c4af24d4d10ca7e97bdf8fca8cae84ce92cec3547d09a53303cb6602807386"
+  },
+  "screenReader": "Semantic accessibility tree and keyboard checks; no physical screen-reader session",
+  "accessibility": "- region \"Media player\":\n  - slider \"Playback position\": \"3\"\n  - button \"Play\"\n  - text: 0:03 / 0:12\n  - button \"Mute\"\n  - slider \"Volume\": \"1\"\n  - button \"Playback settings\"\n  - button \"Fullscreen\"",
+  "passed": false
+}

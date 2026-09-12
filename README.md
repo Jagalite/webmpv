@@ -16,6 +16,31 @@ automatically when automatic selection is enabled. See the
 [integration guide](docs/INTEGRATION.md) for capabilities, state preservation,
 source restrictions and migration from the older decoder API.
 
+## Embed a player or build custom controls
+
+The working API candidate adds normalized state, typed events, transactional
+cancellation and a reusable `<webmpv-player>` component using the same playback
+core. It is not yet an npm release. Install the locally assembled archive and
+copy its verified runtime assets:
+
+```sh
+npm install /path/to/webmpv-0.3.0-beta.2.tgz
+npx webmpv copy-assets public/assets/webmpv
+```
+
+```js
+import {Player} from 'webmpv';
+const player = new Player(container, {assetBase: '/assets/webmpv/'});
+const unsubscribe = player.subscribe(state => render(state));
+await player.open(file);
+```
+
+For ready-made controls, import `definePlayerElement` from `webmpv/player`, call
+it, and use `<webmpv-player controls asset-base="/assets/webmpv/"></webmpv-player>`.
+See the [API contract](docs/PUBLIC-API.md), [component guide](docs/PLAYER-COMPONENT.md),
+[migration notes](docs/API-MIGRATION.md), [runtime installation](docs/RUNTIME-ASSETS.md)
+and [exact validation evidence](docs/PUBLIC-API-VALIDATION.md).
+
 ## Release status
 
 The three-mode architecture is the target for a scoped beta. The current checkout
@@ -28,6 +53,12 @@ Release gates remain: independent clean engine builds, exact A/V and audio-layou
 qualification, sustained memory/resource stability, remux recovery/configuration
 edges, and a declared browser/device matrix tied to shipped hashes. Software YUV
 stays opt-in; its seek and movie-performance blockers are not closed by retries.
+
+The compatibility expansion adds Software AV1 (8/10-bit), bounded 4K input,
+external SRT/ASS/WebVTT files and fonts, explicit HDR-to-SDR tone mapping,
+negotiated 5.1/7.1 PCM, streaming variant selection and finite DASH periods.
+See [supported inputs and APIs](docs/COMPATIBILITY-EXPANSION.md) for exact limits
+and current qualification evidence.
 
 Hybrid now bridges AVC, HEVC, VP8, VP9 and AV1 when the browser accepts the actual
 configuration and delivers frames. Native first tries direct playback, then uses
@@ -59,8 +90,43 @@ npm run build
 npm run dev
 ```
 
-Open <http://127.0.0.1:4179> or `/web/player.html`. The mode selector shows Native,
-Hybrid and Software in that order. Native direct playback needs no Wasm bundle;
+Open <http://127.0.0.1:4179> or `/web/player.html` for the player playground. Drop a video
+or audio file onto the player, or click **Open media**. Local files stay in the
+browser; the page does not upload them. You can add subtitles and fonts, compare
+Native/Hybrid/Software, apply filters or HDR-to-SDR tone mapping, and export session
+diagnostics. Choose surround output before opening media; **Close media** releases
+the session and lets you change it. The URL panel also accepts HLS/DASH streams
+from servers permitting browser access. Diagnostic downloads include media names
+and backend session details.
+
+`npm run test:demo` checks the page with real local files in Chrome. Run
+`BROWSER=firefox npm run test:demo` for Firefox. These checks use the compatibility
+fixtures from `npm run fixtures:compatibility`.
+
+The demo uses the media's display aspect ratio (including pixel aspect ratio and
+rotation), with height limited to the viewport. Hybrid and Software canvas output
+follows that ratio within the 1920×1080 output limit. Audio and unloaded media use
+a neutral stage size. Geometry changes during playback update the layout. The
+Software build clears the GPU-only rotation capability on its libmpv VO so mpv
+autorotates before RGB rendering; Hybrid retains its browser frame rotation.
+
+Press **Space/K** to play or pause, **←/→** to seek 5 seconds, **J/L** to seek
+10 seconds, **↑/↓** for volume, **M** to mute, **C** for subtitle visibility,
+**[/]** for speed, and **0–9** to jump to 0–90%. **F** or a double-click on the
+video requests browser fullscreen; **Esc** exits. **?** opens the shortcut list
+in playback settings. Shortcuts respect text fields, focused controls and settings.
+Fullscreen retains the transport and settings. Embedded hosts can deny fullscreen;
+the demo then offers a link to open it in a browser tab. Local files must be reopened
+in that tab. Older Safari can use native video fullscreen when element fullscreen
+is unavailable; canvas playback requires element fullscreen support.
+
+With the dev server running, generate small synthetic geometry fixtures using
+`python3 scripts/player-ui-fixtures.py`, run `node --test tests/player-geometry.mjs`,
+then `node tests/player-interaction.mjs` (or `BROWSER=firefox node tests/player-interaction.mjs`).
+These checks cover actual media geometry in all engines, shortcuts and fullscreen.
+
+
+Native direct playback needs no Wasm bundle;
 Native remux, Hybrid and Software require their built engines and isolation headers.
 `web/example.html` is a minimal [integration example](web/example.html).
 
@@ -245,3 +311,30 @@ Results are saved under `results/benchmark/`; the validation report includes the
 raw-sample assessment command. Use the local toolchain; Docker is not required.
 
 See [broad routing](docs/BROAD-ROUTING.md) for current remux codecs, Hybrid limits and fallback evidence.
+
+## Release and license status
+
+See [the release recipe](docs/RELEASE.md) for a clean three-engine build, tagged
+candidate assembly, matching source materials and tests against the exact archive.
+See [the licensing contract](docs/LICENSING.md) before embedding or redistributing
+the package. Original webmpv code and the combined package use GPL-2.0-or-later;
+dependency notices and matching source/build materials accompany the engines.
+
+## GitHub Pages demo
+
+The published demo is served from the `gh-pages` branch. Its matching development
+source is on `demo-source`; `main` is not modified by a demo deployment.
+
+Run `python3 scripts/build-pages.py --output build/pages-site` after building the
+engines and TypeScript. Use a fresh output directory. The builder packages the
+runtime, demo, scoped isolation service worker, licenses, preferred project source,
+locked upstream source archives, SDK library sources and engine build materials.
+The first visit reloads once to enable cross-origin isolation on GitHub Pages;
+subsequent visits start directly. Local media is never uploaded or cached by the
+service worker. Remote media still needs CORS permission from its origin.
+
+Run `node tests/pages-demo.mjs` and `BROWSER=firefox node tests/pages-demo.mjs` to
+verify the site under `/webmpv/` on a local server without isolation headers.
+Set `PAGES_DIR` for a different output directory, or `PAGES_URL` to test the live
+site. The deployment manifest hashes the actual site assets and source downloads.
+This hosted development demo does not certify the separate clean-build beta gate.

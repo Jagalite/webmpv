@@ -1,0 +1,87 @@
+{
+  "passed": false,
+  "url": "http://127.0.0.1:52447/webmpv/",
+  "browser": "chrome",
+  "checks": [
+    "Fresh visit becomes cross-origin isolated through the scoped service worker"
+  ],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:52447/webmpv/",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/player.css",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/pages-boot.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/player.css",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/pages-boot.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/player-demo.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/player/index.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/unified-player.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/types.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/internal/errors.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/player/interaction.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/player/styles.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/internal/assets.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/internal/state.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/internal/selection.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/fixtures/example.mp4",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:52447/webmpv/web/generated/internal/native-player.js",
+      "method": "GET"
+    }
+  ],
+  "failure": "page.waitForFunction: Timeout 60000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/pages-demo.mjs:58:15",
+  "state": {
+    "isolated": true,
+    "status": ""
+  }
+}

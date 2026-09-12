@@ -1,4 +1,6 @@
 import {validateVODManifest} from './vod-manifest.js';
+import {prepareDASH,selectHLS} from './streaming-manifest.js';
+import {subtitleSegments,mergeWebVTT} from './segmented-subtitles.js';
 // Bounded resource transport. FFmpeg, not this loader, interprets media timelines.
 const MiB=1024*1024;
 const abort=()=>new DOMException('Resource request cancelled','AbortError');
@@ -6,7 +8,7 @@ export class ResourceLoader {
   constructor(options,refresh){
     this.options={credentials:'omit',...options};this.refresh=refresh;
     this.allow=new Set(options.allowedOrigins??[new URL(options.url).origin]);
-    this.subtitlePlaylists=new Set();this.subtitleMedia=new Set();
+    this.virtual=new Map();this.subtitlePlaylists=new Set();this.subtitleMedia=new Set();
     this.handles=new Map();this.nextId=1;this.epoch=0;this.closed=false;this.busy=false;
     this.stats={opens:0,requests:0,retries:0,aborts:0,handles:0,retainedBytes:0,peakRetainedBytes:0,fetchedBytes:0};
     this.resolve(options.url);
@@ -16,9 +18,14 @@ export class ResourceLoader {
     if(u.href.length>4095||!['http:','https:'].includes(u.protocol)||u.username||u.password||!this.allow.has(u.origin))throw Error('Resource URL is not allowed');
     u.hash='';return u.href;
   }
+  storeVirtual(additions){
+    const next=new Map([...this.virtual,...additions]);
+    if(next.size>1024||[...next.values()].reduce((n,b)=>n+b.byteLength,0)>4*MiB)throw Error('Virtual resource budget exceeded');
+    this.virtual=next;
+  }
   beginEpoch(){this.epoch++;this.controller?.abort();this.retryWake?.();this.stats.aborts++;}
   closeHandle(id){const item=this.handles.get(id);if(!item)return;this.stats.retainedBytes-=item.bytes.byteLength;this.handles.delete(id);this.stats.handles=this.handles.size;}
-  close(){this.closed=true;this.beginEpoch();for(const id of this.handles.keys())this.closeHandle(id);this.subtitlePlaylists.clear();this.subtitleMedia.clear();}
+  close(){this.closed=true;this.beginEpoch();for(const id of this.handles.keys())this.closeHandle(id);this.subtitlePlaylists.clear();this.subtitleMedia.clear();this.virtual.clear();}
   read(id,offset,capacity){
     if(this.closed)throw Error('Resource loader closed');
     const item=this.handles.get(id);
@@ -29,9 +36,19 @@ export class ResourceLoader {
   async open(value,{start,end,manifest=false,base}={}){
     if(this.closed)throw Error('Resource loader closed');
     if(this.busy)throw Error('Concurrent resource opens are not allowed');
-    if(this.handles.size>=16||this.stats.opens>=10000)throw Error('Resource count limit exceeded');
+    if(this.handles.size>=16||(!this.options.streaming?.live&&this.stats.opens>=10000))throw Error('Resource count limit exceeded');
     if(start!==undefined&&(typeof start!=='bigint'||start<0n||typeof end!=='bigint'||end<=start))throw Error('Invalid resource range');
     if(start===undefined&&end!==undefined)throw Error('Invalid resource range');
+    const virtual=this.virtual.get(this.resolve(value,base));
+    if(virtual){
+      const total=BigInt(virtual.byteLength),offset=start??0n;
+      if(offset>=total||(end!==undefined&&end>total))throw Error('Invalid virtual resource range');
+      const bytes=start===undefined?virtual:virtual.subarray(Number(start),Number(end));
+      if(this.stats.retainedBytes+bytes.byteLength>16*MiB)throw Error('Resource memory budget exceeded');
+      const id=this.nextId++,url=this.resolve(value,base);this.handles.set(id,{id,url,bytes,start:offset,total});
+      this.stats.opens++;this.stats.retainedBytes+=bytes.byteLength;this.stats.handles=this.handles.size;this.stats.peakRetainedBytes=Math.max(this.stats.peakRetainedBytes,this.stats.retainedBytes);
+      return {id,url,size:String(total),start:String(offset),length:bytes.byteLength};
+    }
     manifest=manifest||/\.(m3u8?|mpd)$/i.test(new URL(this.resolve(value,base)).pathname);
     const isSubtitlePlaylist=this.subtitlePlaylists.has(this.resolve(value,base));
     const isSubtitleMedia=this.subtitleMedia.has(this.resolve(value,base));
@@ -96,20 +113,39 @@ export class ResourceLoader {
           if(!count)throw Error('Empty resource body');
           if(this.closed||epoch!==this.epoch||controller.signal.aborted)throw abort();
           if(this.stats.retainedBytes+count>16*MiB)throw Error('Resource memory budget exceeded');
-          const bytes=new Uint8Array(count);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
+          let bytes=new Uint8Array(count);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
           const prefix=new TextDecoder().decode(bytes.subarray(0,512)).trimStart();
           const looksManifest=prefix.startsWith('#EXTM3U')||/^<\?xml\b|^<MPD\b/.test(prefix);
           if(manifest||looksManifest){
             if(count>MiB)throw Error('Manifest size limit exceeded');
-            const policy=validateVODManifest(bytes,this.options.format);
+            const format=prefix.startsWith('#EXTM3U')?'hls':'dash';
+            if(format==='dash'){
+              const prepared=prepareDASH(new TextDecoder().decode(bytes),url,this.options.streaming);
+              bytes=prepared.bytes;if(prepared.url)url=prepared.url;
+              this.storeVirtual(prepared.resources);
+            }else bytes=new TextEncoder().encode(selectHLS(new TextDecoder().decode(bytes),this.options.streaming));
+            count=bytes.byteLength;if(count>MiB||this.stats.retainedBytes+count>16*MiB)throw Error('Manifest memory budget exceeded');
+            const preparedFormat=new TextDecoder().decode(bytes.subarray(0,7))==='#EXTM3U'?'hls':'dash';
+            const policy=validateVODManifest(bytes,preparedFormat,this.options.streaming);
             if(policy){
               const additions=policy.subtitlePlaylists.map(uri=>this.resolve(uri,url));
               if(new Set([...this.subtitlePlaylists,...additions]).size>16)throw Error('HLS subtitle track limit exceeded');
               for(const uri of additions)this.subtitlePlaylists.add(uri);
               if(isSubtitlePlaylist){
-                if(policy.segmentCount!==1||policy.segments.length!==1)throw Error('Segmented HLS subtitles are unsupported; use one full-timeline WebVTT resource');
-                this.subtitleMedia.add(this.resolve(policy.segments[0],url));
-                if(this.subtitleMedia.size>16)throw Error('HLS subtitle resource limit exceeded');
+                const parsed=subtitleSegments(new TextDecoder().decode(bytes),url);
+                const parts=[];let totalBytes=0;
+                const nested=new ResourceLoader({...this.options,format:'file'},this.refresh);
+                const cancelled=()=>nested.close();controller.signal.addEventListener('abort',cancelled,{once:true});
+                try{
+                  for(const segment of parsed.segments){
+                    const info=await nested.open(this.resolve(segment.url));const body=nested.handles.get(info.id).bytes;
+                    totalBytes+=body.byteLength;if(totalBytes>MiB)throw Error('Subtitle window exceeds 1 MiB');
+                    parts.push({...segment,text:new TextDecoder('utf-8',{fatal:true}).decode(body)});nested.closeHandle(info.id);
+                  }
+                }finally{controller.signal.removeEventListener('abort',cancelled);nested.close();this.stats.requests+=nested.stats.requests;this.stats.fetchedBytes+=nested.stats.fetchedBytes;}
+                const subtitle=mergeWebVTT(parts),virtualURL=new URL(url);virtualURL.searchParams.set('__webmpv_subtitles','1');
+                const uri=virtualURL.href;this.storeVirtual([[uri,new TextEncoder().encode(subtitle)]]);
+                bytes=new TextEncoder().encode(`#EXTM3U\n#EXT-X-TARGETDURATION:${Math.ceil(parsed.duration)}\n#EXTINF:${parsed.duration},\n${uri}\n#EXT-X-ENDLIST\n`);count=bytes.byteLength;
               }
             }
           }
@@ -117,6 +153,7 @@ export class ResourceLoader {
             const subtitle=new TextDecoder('utf-8',{fatal:true}).decode(bytes);
             if(!subtitle.startsWith('WEBVTT')||subtitle.includes('X-TIMESTAMP-MAP'))throw Error('Only full-timeline WebVTT without timestamp maps is supported');
           }
+          if(this.closed||epoch!==this.epoch||controller.signal.aborted)throw abort();
           const id=this.nextId++;const item={id,url,bytes,start:start??0n,total:total??BigInt(count)};
           this.handles.set(id,item);this.stats.handles=this.handles.size;this.stats.retainedBytes+=count;
           this.stats.peakRetainedBytes=Math.max(this.stats.peakRetainedBytes,this.stats.retainedBytes);

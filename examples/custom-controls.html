@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>webmpv · Custom controls</title>
+<style>body{max-width:900px;margin:3rem auto;padding:1rem;font:16px system-ui;background:#15161a;color:#eee}#surface{background:black}button,input{margin:8px}button:focus-visible,input:focus-visible{outline:3px solid #ba9cff}</style>
+<h1>Custom controls</h1><p>This example uses only normalized public state and commands.</p><input type="file" aria-label="Open media"><div id="surface"></div><button id="play">Play</button><input id="seek" type="range" min="0" max="1" value="0" step=".1" aria-label="Seek"><output id="time">No media</output><p id="status" role="status"></p>
+<script type="module">
+import {Player} from '../web/generated/index.js';
+const player=window.player=new Player(document.querySelector('#surface'));
+let preview=false;
+const seek=document.querySelector('#seek'),play=document.querySelector('#play');
+const run=work=>work.catch(error=>document.querySelector('#status').textContent=error.message);
+document.querySelector('[type=file]').onchange=e=>{if(e.target.files[0])run(player.open(e.target.files[0]));};
+play.onclick=()=>run(player.state.playbackIntent==='play'?player.pause():player.play());
+seek.oninput=()=>{preview=true;};seek.onchange=()=>{preview=false;run(player.seek(Number(seek.value)));};
+player.subscribe(state=>{play.textContent=state.playbackIntent==='play'?'Pause':'Play';play.disabled=!state.sourceId;const ranges=state.seekable;seek.disabled=!ranges?.length;if(ranges?.length){seek.min=ranges[0].start;seek.max=ranges.at(-1).end;}if(!preview)seek.value=state.currentTime;document.querySelector('#time').textContent=`${state.currentTime.toFixed(1)} / ${state.streamType==='live'?'LIVE':state.duration?.toFixed(1)??'unknown'}`;});
+</script></html>

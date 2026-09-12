@@ -1,0 +1,50 @@
+{
+  "browser": "146.0.1",
+  "family": "firefox",
+  "checks": [
+    {
+      "name": "immutable state, stable identity and no core UI import",
+      "passed": true
+    },
+    {
+      "name": "native state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "hybrid state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "software state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "canceled replacement preserves accepted state and bounded close",
+      "passed": true
+    },
+    {
+      "name": "failed replacement stays usable and redacts signed URL",
+      "passed": true
+    },
+    {
+      "name": "stable source-scoped tracks and explicit transition preservation",
+      "passed": true
+    },
+    {
+      "name": "idempotent destroy settles queue and removes workers",
+      "passed": true
+    },
+    {
+      "name": "no uncaught errors",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/unified-player.ts": "b4fe86b53929d7a523373a057a03a64f7f1e06b392baf0314438b70c12d7124a",
+    "src/types.ts": "fd9959449062fdb377b3da3924957fe1d1e3c21b6f1a0b98f1005f8a0426eea1",
+    "src/internal/wasm-player.ts": "e54c4a905366970bfb9f75d9834dbe842b715080a9673206adbd947e5be9c0c5",
+    "src/internal/native-player.ts": "433b755e0aee9e68dc32ff891fc9cd1eb7cf1138f176d3b8fac39de236ad1296",
+    "tests/public-api.mjs": "8648a34a9fec4e71423c47e5f71ef5683da353111586d49fca3e46f5dff5e3b8"
+  },
+  "passed": true
+}

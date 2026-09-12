@@ -1,3 +1,10 @@
+/*
+ * Derived from mpv v0.40.0, video/out/vo_libmpv.c.
+ * Upstream portions are LGPL-2.1-or-later as specified by mpv's Copyright
+ * inventory for C source without an individual license header.
+ * webmpv modifies the retained subtitle output hooks (2026-09-11).
+ * See third_party/notices/mpv/ and docs/LICENSING.md.
+ */
 #include <assert.h>
 #include <limits.h>
 #include <math.h>

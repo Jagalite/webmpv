@@ -1,5 +1,10 @@
 # Browser integration
 
+The additive normalized API and optional component are documented in
+[PUBLIC-API.md](PUBLIC-API.md), [PLAYER-COMPONENT.md](PLAYER-COMPONENT.md),
+[API-MIGRATION.md](API-MIGRATION.md) and [RUNTIME-ASSETS.md](RUNTIME-ASSETS.md).
+[Validation](PUBLIC-API-VALIDATION.md) separates implementation from qualification.
+
 The public entry point is `web/generated/index.js` (with matching TypeScript
 declarations). It exports `Player`, `PLAYBACK_MODES`, and public types. Exactly
 three modes are accepted, in this order: `native`, `hybrid`, `software`.
@@ -55,8 +60,10 @@ for an empty chain. In manual mode, select software explicitly first. Clear acti
 leaving software mode. Filter changes reopen with filters configured before load.
 Mode/filter changes preserve position, pause, volume and speed. Failed candidate
 opens/configuration restore the old player. Changes are not gapless; at most an
-old and candidate session coexist. Track IDs are mode-specific and reset to auto
-when replacing a source or crossing between native and mpv modes. Disabled (`no`)
+old and candidate session coexist. Legacy backend track IDs are mode-specific and reset to auto
+when replacing a source or crossing between native and mpv modes. New public
+source-scoped IDs preserve explicit selection across routes where identity can
+be established; transitions reject instead of guessing when it cannot. Disabled (`no`)
 track selections remain disabled across mode changes. External browser text tracks remain
 associated with the current source and are restored when returning to native.
 
@@ -132,9 +139,9 @@ These engine build scripts use the pinned local FFmpeg/Emscripten toolchain; see
 details, not additional playback modes. FFmpeg build flags affect the bundled
 Wasm capabilities, not the public mode list.
 
-Software's existing 1080p/memory limits and paused audio-only time-reporting offset
-remain; see [software verification](../results/software-full/README.md).
-Segmented mpv VOD retains the S1 constraints in [S1 validation](validation/S1.md).
+Software now admits input up to 3840×2160 under configurable pixel/allocation limits,
+while canvas output remains bounded to 1920×1080. The [compatibility expansion](COMPATIBILITY-EXPANSION.md)
+supersedes the older Software and S1 profiles for the new APIs and streaming cases.
 No new performance or long foreground qualification is implied by API tests.
 
 ## Migration and historical experiments
@@ -143,7 +150,7 @@ Replace `BrowserPlayer(canvas, {decoder: ...})` with `Player(container, {mode: .
 from `index.js`. Replace raw mpv `command('set', 'vf', ...)` calls with
 `setVideoFilters()` in software mode. There is no arbitrary public `command()`;
 use typed controls so state survives a reopen. The package export map exposes
-only this entry point.
+the core and optional `webmpv/player` entry points.
 
 The old `src/player.ts`, generated clients, `/web/index.html`,
 `/web/legacy-example.html`, filter router and
@@ -155,8 +162,8 @@ is shared by hybrid/software in `src/internal/wasm-player.ts`; native resource
 ownership lives in `src/internal/native-player.ts`, and transaction/state ownership
 lives in `src/unified-player.ts`.
 
-Beta output scope: Hybrid and Software currently feed a stereo AudioWorklet output.
-Source multichannel metadata or FFmpeg codec registration does not establish
-multichannel output fidelity. HDR/color fidelity, Safari/mobile coverage and
+Beta output scope: Hybrid and Software negotiate stereo, 5.1 or 7.1 PCM with an
+explicit stereo fallback or rejection policy. Software can tone-map tagged HDR
+to SDR. Physical surround/HDR fidelity, Safari/mobile coverage and
 hour-long stability remain separate qualification gates. Exactly three public
 modes are preserved; the optional Software YUV presenter is experimental.

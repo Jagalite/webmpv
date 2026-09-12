@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFile} from 'node:fs/promises';
 const source=await readFile(new URL('../web/audio-worklet.js',import.meta.url),'utf8');
-function setup(capacity=512) {
+function setup(capacity=512,channels=2) {
   let Processor;
   vm.runInNewContext(source,{AudioWorkletProcessor:class {port={};},registerProcessor:(_name,type)=>Processor=type,Int32Array,Float32Array,Atomics,Math});
-  const buffer=new SharedArrayBuffer(64+capacity*8);
+  const buffer=new SharedArrayBuffer(64+capacity*channels*4);
   const h=new Int32Array(buffer,0,16),pcm=new Float32Array(buffer,64);
-  const processor=new Processor({processorOptions:{buffer,capacity}});
-  const render=(size=128)=>{const out=[new Float32Array(size),new Float32Array(size)];const active=processor.process([], [out]);return {out,active};};
+  const processor=new Processor({processorOptions:{buffer,capacity,channels}});
+  const render=(size=128)=>{const out=Array.from({length:channels},()=>new Float32Array(size));const active=processor.process([], [out]);return {out,active};};
   render();
   return {h,pcm,processor,render};
 }
@@ -39,4 +39,12 @@ test('pause and generation reset suppress queued stale PCM',()=>{
 });
 test('closed output processor releases its processing lifetime',()=>{
   const {processor,render}=setup();processor.port.onmessage({data:'close'});assert.equal(render().active,false);
+});
+
+for(const channels of [6,8])test(`${channels}-channel PCM preserves order across wrap, pause and epoch reset`,()=>{
+ const {h,pcm,render}=setup(512,channels);h[1]=500;h[0]=580;h[2]=1;
+ for(let i=0;i<80;i++)for(let c=0;c<channels;c++)pcm[((500+i)%512)*channels+c]=(c+1)/10;
+ const {out}=render(80);for(let c=0;c<channels;c++)assert.ok(out[c].every(v=>v===Math.fround((c+1)/10)));
+ h[2]=0;assert.ok(render().out.every(a=>a.every(v=>v===0)));h[3]=2;h[0]=0;render();assert.equal(h[1],0);assert.equal(h[4],2);
+ pcm.fill(-.25);h[0]=32;h[2]=1;assert.ok(render(32).out.every(a=>a.every(v=>v===-.25)));
 });

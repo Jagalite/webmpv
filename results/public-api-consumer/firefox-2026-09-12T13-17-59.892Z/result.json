@@ -1,0 +1,138 @@
+{
+  "family": "firefox",
+  "browser": "146.0.1",
+  "archiveSHA256": "f839a2812523fed7a1758b8bb7e9260c90f60a41f9b90cfed1c17c4057f3dc71",
+  "archive": "/Volumes/seed2/Projects/webmpv/build/public-api-candidate-3/webmpv-0.3.0-beta.2.tgz",
+  "root": "/Volumes/seed2/Projects/webmpv/build/public-api-consumer-ByfStI",
+  "ssr": true,
+  "typecheck": true,
+  "copyPreservesUnrelated": true,
+  "bundler": "esbuild 0.28.2",
+  "checks": [
+    {
+      "name": "static application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "static application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "missing assets have structured errors",
+      "passed": false,
+      "error": "TypeError: Cannot read properties of undefined (reading 'code')\n    at file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:28:469\n    at async check (file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:21:70)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:28:1",
+      "state": {
+        "status": "paused",
+        "playbackIntent": "pause",
+        "pendingOperation": null,
+        "sourceId": 1,
+        "currentTime": 0,
+        "duration": 12.011,
+        "streamType": "vod",
+        "volume": 1,
+        "muted": false,
+        "playbackRate": 1,
+        "activeMode": "hybrid",
+        "automaticSelection": false,
+        "buffered": null,
+        "seekable": [
+          {
+            "start": 0,
+            "end": 12.011
+          }
+        ],
+        "audioTracks": [
+          {
+            "id": "1:audio:stream:1",
+            "type": "audio",
+            "label": "Audio 1",
+            "language": null,
+            "codec": "aac",
+            "selected": true,
+            "external": false
+          }
+        ],
+        "subtitleTracks": [],
+        "mediaInfo": {
+          "displayWidth": 640,
+          "displayHeight": 360,
+          "aspectRatio": 1.7777777777777777,
+          "rotation": null,
+          "video": {
+            "id": "1:video:stream:0",
+            "type": "video",
+            "label": "Video 1",
+            "language": null,
+            "codec": "h264",
+            "selected": true,
+            "external": false
+          },
+          "audio": {
+            "id": "1:audio:stream:1",
+            "type": "audio",
+            "label": "Audio 1",
+            "language": null,
+            "codec": "aac",
+            "selected": true,
+            "external": false
+          },
+          "subtitle": null
+        },
+        "capabilities": {
+          "videoFilters": false,
+          "audioFilters": false,
+          "mpvSubtitles": true,
+          "externalTextTracks": false,
+          "externalSubtitles": true,
+          "customFonts": true,
+          "customRequestHeaders": true,
+          "deployment": {
+            "isolated": true,
+            "webCodecs": true,
+            "mediaSource": true
+          },
+          "features": {
+            "seek": {
+              "availability": "available"
+            },
+            "audioTracks": {
+              "availability": "available"
+            },
+            "subtitleTracks": {
+              "availability": "unavailable",
+              "reason": "No subtitle tracks are available"
+            },
+            "externalSubtitles": {
+              "availability": "available"
+            },
+            "customFonts": {
+              "availability": "available"
+            },
+            "videoFilters": {
+              "availability": "unavailable",
+              "reason": "Select software mode first"
+            },
+            "audioFilters": {
+              "availability": "unavailable",
+              "reason": "Select software mode first"
+            }
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "name": "isolation failure is distinct from unsupported media",
+      "passed": true
+    }
+  ],
+  "passed": false
+}

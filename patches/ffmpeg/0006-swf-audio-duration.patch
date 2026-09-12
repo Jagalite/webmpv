@@ -1,0 +1,19 @@
+--- a/libavcodec/utils.c
++++ b/libavcodec/utils.c
+@@ -720,6 +720,16 @@
+                 int blocks = frame_bytes / ba;
+                 int64_t tmp = 0;
+                 switch (id) {
++                case AV_CODEC_ID_ADPCM_SWF:
++                    // Each byte-aligned SWF block has a two-bit code size,
++                    // then a 16-bit predictor and six-bit step index/channel.
++                    if (ch > 2 || bps < 2 || bps > 5 || ba * 8LL < 2 + 22 * ch)
++                        return 0;
++                    tmp = 1 + (ba * 8LL - 2 - 22 * ch) / (bps * ch);
++                    if (tmp > 4096)
++                        return 0;
++                    tmp *= blocks;
++                    break;
+                 case AV_CODEC_ID_ADPCM_IMA_WAV:
+                     if (bps < 2 || bps > 5)
+                         return 0;

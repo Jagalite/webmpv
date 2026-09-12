@@ -1,0 +1,81 @@
+
+> webmpv@0.3.0-beta.1 test:compatibility
+> npm run build && node --test tests/audio-worklet.mjs tests/resource-loader.mjs tests/streaming-expansion.mjs tests/remux-buffering.mjs && node tests/compatibility-expansion.mjs
+
+
+> webmpv@0.3.0-beta.1 build
+> tsc
+
+✔ PCM ring wraps and handles actual output quantum length (1.344792ms)
+✔ underrun silence never advances media consumption (0.706875ms)
+✔ pause and generation reset suppress queued stale PCM (0.772833ms)
+✔ closed output processor releases its processing lifetime (0.304333ms)
+✔ 6-channel PCM preserves order across wrap, pause and epoch reset (0.50925ms)
+✔ 8-channel PCM preserves order across wrap, pause and epoch reset (0.397917ms)
+✔ paused Opus leading gap does not drain the source (0.784625ms)
+✔ fragmented future ranges fail before full-source remuxing (0.123ms)
+✔ useful short contiguous buffering permits one further batch (0.084375ms)
+✔ small MSE holes advance only a playing stalled output (0.174458ms)
+✔ ordinary 200 resource, relative URL, bounded reads and close accounting (12.960958ms)
+✔ explicit range preserves absolute resource offsets and total size (0.790375ms)
+✔ requested ranges reject 200, malformed ranges and changed lengths (0.802625ms)
+✔ origin, protocol, embedded credentials and URL length are checked before fetch (0.59975ms)
+✔ nested authorization refresh receives resource URL and updates only that request (1.063167ms)
+✔ refresh cannot redirect credentials to an unapproved origin (0.389667ms)
+✔ bounded transient HTTP retry and truncation recovery (303.688333ms)
+✔ unknown-length bodies cannot exceed media resource cap (1.938709ms)
+✔ aggregate retention limit is enforced across handles and reclaimed on close (8.698209ms)
+✔ handle count is bounded independently of body size (1.358042ms)
+✔ destroy cancels pending authorization and rejects stale completion (0.333875ms)
+✔ epoch cancellation discards a response even if transport ignores abort (0.283167ms)
+✔ manifest admission rejects live, encrypted and adaptive HLS (0.656708ms)
+✔ DASH admission accepts fixed static and rejects live, adaptive, entities and multiple periods (0.688791ms)
+✔ HLS subtitles combine multiple segments into a bounded virtual resource (2.521333ms)
+✔ fixed HLS discontinuities remain native timeline input (0.061166ms)
+✔ DASH timeline and template resource counts are bounded (0.207541ms)
+✔ virtual resources retain range offsets and reject over-budget mutation atomically (0.174ms)
+✔ live sessions keep per-open budgets without a finite lifetime request cap (0.171666ms)
+✔ HLS chooses one bounded variant without dropping audio or subtitles (1.930083ms)
+✔ standard live manifests require explicit admission (0.5415ms)
+✔ all finite DASH periods become indexed discontinuity playlists (1.529125ms)
+✔ single DASH period keeps FFmpeg parsing and prunes representations (0.281333ms)
+✔ segmented WebVTT preserves payload, maps timestamps and deduplicates cues (0.55425ms)
+✔ unselected HLS rendition groups are not opened (0.090959ms)
+✔ DASH SegmentTemplate attributes inherit across period, adaptation and representation (0.317542ms)
+✔ malformed XML and unsafe period metadata are rejected before creating resources (0.291583ms)
+✔ WebVTT timestamp discontinuities align the new period without resetting media origin (0.453709ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 591.431292
+PASS AV1 8-bit Software pixels, seek and filter
+PASS AV1 10-bit Software pixels, seek and filter
+PASS Recorded format sbc.sbc
+PASS Recorded format dfpwm.nut
+PASS Recorded format adpcm_swf.wav
+PASS Recorded format comfortnoise.nut
+PASS Recorded format ra_144.mkv
+PASS Recorded format dirac.nut
+PASS Recorded format mpeg1video.mpg
+PASS Recorded format mpeg2video.ts
+PASS 4K Software input and lower pixel budget rollback
+PASS hdr to SDR reference colors and filter composition
+PASS hlg to SDR reference colors and filter composition
+PASS External SRT and ASS fonts, seek, selection and Hybrid transition
+PASS Audio device negotiation, stereo fallback and reject policy
+PASS 6-channel native PCM to Web Audio graph
+PASS 8-channel native PCM to Web Audio graph
+PASS HLS low variant with segmented subtitles
+PASS HLS explicit high variant
+PASS Finite DASH periods.mpd, transition and forward/backward seek
+PASS Finite DASH periods-av.mpd, transition and forward/backward seek
+PASS Remux video-only transport stream, playback and seek
+PASS Remux transient restart, bounded retry and automatic recovery
+PASS Remux configuration change continues through automatic fallback
+PASS Standard dynamic DASH open, playback and cancellation
+PASS Standard HLS live refresh, pause/resume, finish and cleanup
+results/compatibility-expansion/2026-09-11T16-52-40.192Z

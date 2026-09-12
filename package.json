@@ -1,15 +1,16 @@
 {
   "name": "webmpv",
-  "version": "0.2.0",
+  "version": "0.3.0-beta.2",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "tsc",
     "build:engine": "bash scripts/build.sh",
     "dev": "node scripts/serve.mjs",
+    "test:demo": "node tests/player-component.mjs",
     "test": "node --test tests/audio-worklet.mjs tests/retained-video.mjs tests/timing-coalescing.mjs && node tests/player-api.mjs",
     "dev:media": "node scripts/media-server.mjs",
-    "test:stream": "node --test tests/range-reader.mjs && node tests/m1.mjs",
+    "test:stream": "node --test tests/range-reader-deadline.mjs tests/range-reader.mjs && node tests/m1.mjs",
     "test:qualify": "node tests/m2-functional.mjs && node tests/m2-supplemental.mjs",
     "test:long": "node tests/m2-long.mjs",
     "test:resources": "node --test tests/resource-loader.mjs",
@@ -36,7 +37,11 @@
     "test:large-files": "npm run build && node --test tests/file-reader.mjs && node tests/large-files.mjs",
     "test:remux-packaging": "npm run build && node --test tests/remux-buffering.mjs && node tests/remux-packaging.mjs",
     "build:beta": "npm run build && python3 scripts/package-beta.py",
-    "test:beta": "npm run build:beta && node tests/beta-consumer.mjs"
+    "test:beta": "npm run build:beta && node tests/beta-consumer.mjs",
+    "fixtures:compatibility": "python3 scripts/compatibility-fixtures.py",
+    "test:compatibility": "npm run build && node --test tests/audio-worklet.mjs tests/resource-loader.mjs tests/streaming-expansion.mjs tests/remux-buffering.mjs && node tests/compatibility-expansion.mjs",
+    "test:public-api": "npm run build && node tests/public-api.mjs",
+    "test:component": "node tests/player-component.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2",
@@ -46,7 +51,15 @@
     ".": {
       "types": "./web/generated/index.d.ts",
       "import": "./web/generated/index.js"
+    },
+    "./player": {
+      "types": "./web/generated/player/index.d.ts",
+      "import": "./web/generated/player/index.js"
     }
   },
-  "types": "./web/generated/index.d.ts"
+  "types": "./web/generated/index.d.ts",
+  "license": "GPL-2.0-or-later",
+  "bin": {
+    "webmpv": "./bin/webmpv.mjs"
+  }
 }

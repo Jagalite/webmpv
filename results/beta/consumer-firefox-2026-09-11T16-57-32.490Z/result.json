@@ -1,0 +1,1830 @@
+{
+  "typecheck": true,
+  "family": "firefox",
+  "consumerRoot": "/var/folders/p2/hs2582qs5672qbvtm4z5_9840000gn/T/webmpv-consumer-xQMwzv",
+  "archiveSHA256": "cc9c336b4ff535df5907d77ceed17cf400dd65de9315916dda5a37eecc86096d",
+  "manifest": {
+    "schema": 1,
+    "version": "0.3.0-beta.1",
+    "status": "beta-candidate-not-production-qualified",
+    "sourceCommit": "fd210e81379d1f71d59db61e8160853846d09f3c",
+    "dirtySource": true,
+    "publicModes": [
+      "native",
+      "hybrid",
+      "software"
+    ],
+    "automaticOrder": [
+      "native-direct",
+      "native-remux",
+      "hybrid",
+      "software"
+    ],
+    "engines": {
+      "remux": [
+        "engine-remux",
+        "remux"
+      ],
+      "hybrid": [
+        "engine-hybrid",
+        "player"
+      ],
+      "software": [
+        "engine-software-full",
+        "player"
+      ]
+    },
+    "defaultSoftwarePresenter": "rgb",
+    "qualification": {
+      "functional": "See repository results and clean-consumer results for exact hashes",
+      "performance": "Workload-specific; no universal performance claim",
+      "production": false,
+      "experimentalYUV": "Seek endurance and sustained-movie qualification remain open"
+    },
+    "files": {
+      "README.md": {
+        "bytes": 5748,
+        "sha256": "5e2c8db8a2f1d50fc3481068c6c8224b26913cb213ee2093725653dfb6ffa2bc"
+      },
+      "docs/BETA.md": {
+        "bytes": 5748,
+        "sha256": "5e2c8db8a2f1d50fc3481068c6c8224b26913cb213ee2093725653dfb6ffa2bc"
+      },
+      "docs/COMPATIBILITY-EXPANSION.md": {
+        "bytes": 10449,
+        "sha256": "9100b7129bbb72923a8066db103d9d67ce6c3ee5220dbbaf34d502e80508dfec"
+      },
+      "fixtures/DejaVuSans.ttf": {
+        "bytes": 757076,
+        "sha256": "7da195a74c55bef988d0d48f9508bd5d849425c1770dba5d7bfc6ce9ed848954"
+      },
+      "fixtures/FONT-LICENSE.txt": {
+        "bytes": 8816,
+        "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93"
+      },
+      "index.d.ts": {
+        "bytes": 42,
+        "sha256": "422f642c2ce881bd6ad92ca867df0092da34fa22165018345324f033781e89df"
+      },
+      "index.js": {
+        "bytes": 42,
+        "sha256": "422f642c2ce881bd6ad92ca867df0092da34fa22165018345324f033781e89df"
+      },
+      "package.json": {
+        "bytes": 360,
+        "sha256": "9a73e9b5bf271baa491744615395e548a1fbb1437076a74185cfca377696ba28"
+      },
+      "sources.lock.json": {
+        "bytes": 3900,
+        "sha256": "ceaeb1bf1ae0d0079d5fd7955894a7330cd20348972993ae14367415948145c0"
+      },
+      "third_party/notices.json": {
+        "bytes": 5022,
+        "sha256": "099acee6a45a76ef7913f126d926930ac9f9dd704287c1f39d34f4871963e837"
+      },
+      "third_party/notices/dav1d/COPYING": {
+        "bytes": 1317,
+        "sha256": "b327887de263238deaa80c34cdd2ff3e0ba1d35db585ce14a37ce3e74ee389e9"
+      },
+      "third_party/notices/emscripten/LICENSE": {
+        "bytes": 5093,
+        "sha256": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86"
+      },
+      "third_party/notices/emscripten/system/lib/compiler-rt/LICENSE.TXT": {
+        "bytes": 16708,
+        "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+      },
+      "third_party/notices/emscripten/system/lib/libc/musl/COPYRIGHT": {
+        "bytes": 6204,
+        "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+      },
+      "third_party/notices/emscripten/system/lib/libcxx/LICENSE.TXT": {
+        "bytes": 16703,
+        "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+      },
+      "third_party/notices/emscripten/system/lib/libcxxabi/LICENSE.TXT": {
+        "bytes": 16706,
+        "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c"
+      },
+      "third_party/notices/emsdk/LICENSE": {
+        "bytes": 1326,
+        "sha256": "99d9a9616fbde3f5ee22a71d8645799a8522d48526130c5ba6dc27ad15ce01f1"
+      },
+      "third_party/notices/ffmpeg/COPYING.GPLv2": {
+        "bytes": 18092,
+        "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+      },
+      "third_party/notices/ffmpeg/COPYING.GPLv3": {
+        "bytes": 35147,
+        "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+      },
+      "third_party/notices/ffmpeg/COPYING.LGPLv2.1": {
+        "bytes": 26526,
+        "sha256": "b634ab5640e258563c536e658cad87080553df6f34f62269a21d554844e58bfe"
+      },
+      "third_party/notices/ffmpeg/LICENSE.md": {
+        "bytes": 4376,
+        "sha256": "cb48bf09a11f5fb576cddb0431c8f5ed0a60157a9ec942adffc13907cbe083f2"
+      },
+      "third_party/notices/freetype/LICENSE.TXT": {
+        "bytes": 2074,
+        "sha256": "2e3bbb7d7c5c396368dd0853a790ec29ce5b8647163dde42a0493fb0d6556b2b"
+      },
+      "third_party/notices/freetype/docs/FTL.TXT": {
+        "bytes": 6743,
+        "sha256": "08c135755dd589039470f1fdbb400daaabaaa50d0b366d19cebff4d22986baa1"
+      },
+      "third_party/notices/fribidi/COPYING": {
+        "bytes": 26440,
+        "sha256": "32434afcc8666ba060e111d715bfdb6c2d5dd8a35fa4d3ab8ad67d8f850d2f2b"
+      },
+      "third_party/notices/harfbuzz/COPYING": {
+        "bytes": 1971,
+        "sha256": "ba8f810f2455c2f08e2d56bb49b72f37fcf68f1f4fade38977cfd7372050ad64"
+      },
+      "third_party/notices/libass/COPYING": {
+        "bytes": 755,
+        "sha256": "f7e30699d02798351e7f839e3d3bfeb29ce65e44efa7735c225464c4fd7dfe9c"
+      },
+      "third_party/notices/libplacebo/LICENSE": {
+        "bytes": 24478,
+        "sha256": "b3aa400aca6d2ba1f0bd03bd98d03d1fe7489a3bbb26969d72016360af8a5c9d"
+      },
+      "third_party/notices/libxml2/Copyright": {
+        "bytes": 1273,
+        "sha256": "c99aae1afe013e50b8b3701e089222b351258043c3025b64053a233fd25b4be7"
+      },
+      "third_party/notices/mpv/Copyright": {
+        "bytes": 4096,
+        "sha256": "bfe9ee4cceabcb8ecbfadf208d04156f73d801e6a57369a5606bb8341e204a23"
+      },
+      "third_party/notices/mpv/LICENSE.GPL": {
+        "bytes": 17984,
+        "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+      },
+      "third_party/notices/mpv/LICENSE.LGPL": {
+        "bytes": 26410,
+        "sha256": "72b672113d642cbb8ef5dcc76938db801983c56e50b1400ab930f1a64d6dc8d9"
+      },
+      "third_party/notices/vulkan-headers/LICENSE.txt": {
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "third_party/notices/zimg/COPYING": {
+        "bytes": 484,
+        "sha256": "7637386b5f81e8a719ca336233149005e5fa28b5e6054ea7b67de49355b0ad40"
+      },
+      "third_party/notices/zlib/LICENSE": {
+        "bytes": 1002,
+        "sha256": "845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243"
+      },
+      "toolchain.lock.json": {
+        "bytes": 8515,
+        "sha256": "160b8c7090ff9406cd649ad223d59d675ea345b984a54b276624082ed49762c6"
+      },
+      "web/audio-worklet.js": {
+        "bytes": 2045,
+        "sha256": "7e9bab53911f10f6e05822ceffaa1136670835088d0da3285a5f05c617aad590"
+      },
+      "web/cheap-mp4-probe.js": {
+        "bytes": 6345,
+        "sha256": "a7cf42d3bf21052f1d2d00087f34d569de01b9d96ec232dfb11de975f037cb7b"
+      },
+      "web/engine-hybrid/player.mjs": {
+        "bytes": 61488,
+        "sha256": "13e280d8a4662304fdb0512744a554eb63ae44c0bb4935c276ca1ba11c02d33a"
+      },
+      "web/engine-hybrid/player.wasm": {
+        "bytes": 22064467,
+        "sha256": "f3fe4d81d9b38a57bd40f2e1692055f9344ba4c10ec1a2166dc893cb542b3c4a"
+      },
+      "web/engine-remux/remux.mjs": {
+        "bytes": 35641,
+        "sha256": "0050ccdf4e5ef6812cf86c33c2ac0e02b862b931d78ba10149dd451916cfc67b"
+      },
+      "web/engine-remux/remux.wasm": {
+        "bytes": 3011812,
+        "sha256": "9d619b2038722175811ba538b249af1d4868950a5cd55d22fa8dc4bfe274d315"
+      },
+      "web/engine-software-full/player.mjs": {
+        "bytes": 60540,
+        "sha256": "55c27ae72029052975f9222a7125ed5aea98c6d0ae9775fd0ecd798f4932a06c"
+      },
+      "web/engine-software-full/player.wasm": {
+        "bytes": 21427624,
+        "sha256": "982f1c231e60dcd686d21d3343240ea19258d429ca10a8c1d11179f78ab9b688"
+      },
+      "web/file-reader.js": {
+        "bytes": 2496,
+        "sha256": "c8dbb823c07dc0431acee9176a875dc9d9fad0324a392246e8d9ddf5c73ccd2a"
+      },
+      "web/filter-retained-engine-worker.js": {
+        "bytes": 19576,
+        "sha256": "a850fb64d4764c51871775dbb18d887002f3c9d8b7c3c2d46e80105a75f5e8cd"
+      },
+      "web/generated/ablation-player.js": {
+        "bytes": 14553,
+        "sha256": "c47ec8a883ba430a1bb863f0602b0cca9b73429715072bddad997711abb03ca3"
+      },
+      "web/generated/filter-copyback-player.js": {
+        "bytes": 14493,
+        "sha256": "4e704c1771c786ad784a39a787608d1d1e7f8331381d02a93df1f5e7dc959938"
+      },
+      "web/generated/filter-retained-player.js": {
+        "bytes": 14618,
+        "sha256": "f705ee99d047c98fb7b90acc71b9d336903e9d60b060a72595e98c326813a8fd"
+      },
+      "web/generated/gap-player.js": {
+        "bytes": 14536,
+        "sha256": "a5598bbc42cfadd9e5583236d3f9abcf78cf5addaf04c80f829ad0bd42f8b5ce"
+      },
+      "web/generated/index.d.ts": {
+        "bytes": 334,
+        "sha256": "688042342ef13af28dd359bcf66492ed782073a30b97e6988f6f8db81eb8afed"
+      },
+      "web/generated/index.js": {
+        "bytes": 91,
+        "sha256": "863d16a28f20be70fb13cefe9ceb8d96870c64eab7e8f56e7c8d10cf4ae29a46"
+      },
+      "web/generated/internal/backend.d.ts": {
+        "bytes": 1098,
+        "sha256": "fb5f21d034113086abe0df01f03ee2717bedd40c8d611fa32930069b47a85809"
+      },
+      "web/generated/internal/backend.js": {
+        "bytes": 11,
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      "web/generated/internal/native-player.d.ts": {
+        "bytes": 1950,
+        "sha256": "d2e08007e009c879a85ab57a079415ad2238b285b34c56a1d3a809ee4db801f6"
+      },
+      "web/generated/internal/native-player.js": {
+        "bytes": 15305,
+        "sha256": "3b973e2c614cb5de9078e0731167393ed5d8c80c8a108e9b29d300e2383ffa10"
+      },
+      "web/generated/internal/selection.d.ts": {
+        "bytes": 753,
+        "sha256": "127309875b3677fd8f4da030b008f7dc3ae64e2e5157c20b3115fea3f4bcf66b"
+      },
+      "web/generated/internal/selection.js": {
+        "bytes": 1854,
+        "sha256": "207b5cc1f52da34250ea69cbcf4880a471678a2b2e27d78f48ac5163ed3b54e9"
+      },
+      "web/generated/internal/wasm-player.d.ts": {
+        "bytes": 3796,
+        "sha256": "f2c70ac561f879c7bc60b46ebeaa3ee4c07f03af77c84f1ce8c2334e9681a966"
+      },
+      "web/generated/internal/wasm-player.js": {
+        "bytes": 17902,
+        "sha256": "5df4c62a40f332402a8c48ef6e4feffbb3ad13efa973bfc372ccee7922f8bd55"
+      },
+      "web/generated/player.d.ts": {
+        "bytes": 2844,
+        "sha256": "e17fe778fb0e86d6c4b4fecf958a68ad461eaaaf64af2ff1a5e513e229bde83f"
+      },
+      "web/generated/player.js": {
+        "bytes": 14477,
+        "sha256": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4"
+      },
+      "web/generated/retained-player.js": {
+        "bytes": 14609,
+        "sha256": "a86ad3b6acc446e3654a0c104ad843dbfe5a52abedfe830404475ce3ea305fd0"
+      },
+      "web/generated/software-full-player.js": {
+        "bytes": 14491,
+        "sha256": "2208b32d8aaa47570696f2a1ccb087b2bb42960d6d7789d454ef33d0ca439a68"
+      },
+      "web/generated/subtitle-perf-player.js": {
+        "bytes": 14616,
+        "sha256": "1ba4e0270456c85873d76002a8099121f2ea643c8e9b09df188d93f9092ef5ef"
+      },
+      "web/generated/subtitled-player.js": {
+        "bytes": 14612,
+        "sha256": "8863421c512540669982b2894ac4ecde3a5bc81b2532bd6ee286f7f4f281b72f"
+      },
+      "web/generated/types.d.ts": {
+        "bytes": 3076,
+        "sha256": "1d6008b5acd6a314746934a22e80a3b28861d134217d8006d01239fc7059eb8b"
+      },
+      "web/generated/types.js": {
+        "bytes": 79,
+        "sha256": "5c682f2da4e65c82054fd06daa64bfee05296bb9bd12fe2f19512f98acd991ea"
+      },
+      "web/generated/unified-player.d.ts": {
+        "bytes": 2663,
+        "sha256": "562f0bd3f26ba28fbc7bfcde321ba748b80feaa70f755f2d6bff4edbf35c9d62"
+      },
+      "web/generated/unified-player.js": {
+        "bytes": 35206,
+        "sha256": "dc1335fb13b8d4de146e42860768f6ccebb72d4e62887346ed8fdc10a47a4521"
+      },
+      "web/io-worker.js": {
+        "bytes": 4793,
+        "sha256": "cc82ed68dd38d72a037e0491aaec99991cfb2be1238237e51f5f4e2f0d406bbd"
+      },
+      "web/native-remux-player.js": {
+        "bytes": 14220,
+        "sha256": "68b2ced7924e1eeb496162120f3655652a6798bd708c234a890527a0c8b9f270"
+      },
+      "web/native-remux-source-worker.js": {
+        "bytes": 1853,
+        "sha256": "db0da78fb07c81fbbebbaa1b75443c1c6f305920a5ea8ac6df1536cb64a211dd"
+      },
+      "web/native-remux-worker.js": {
+        "bytes": 3109,
+        "sha256": "1ad2f455b138eaa3ed584a4dcefd02e5be3df17e61e702f2d2c90e36b43d815a"
+      },
+      "web/range-reader.js": {
+        "bytes": 8030,
+        "sha256": "1a8ce252d973e7b8e39103841da65cbf728e3c02e9db036e61aba3f29c929b04"
+      },
+      "web/remux-packaging.js": {
+        "bytes": 730,
+        "sha256": "ecfb3cfcf6136ce8202eeb086e68eb51679f75aa64d6848cce760f66a00b757f"
+      },
+      "web/resource-loader.js": {
+        "bytes": 12447,
+        "sha256": "146edc9f32f6cbff9c36c534fc51a941272971189be4bb28ecd0ea4b1524d25e"
+      },
+      "web/retained-decoder-worker.js": {
+        "bytes": 9478,
+        "sha256": "4f788895a42983280567643098932ff615c64a9c8fef959503f5de5960acf52c"
+      },
+      "web/retained-video.js": {
+        "bytes": 1019,
+        "sha256": "9bf519899d422b9e2e949817f0eb2d97296090ad31b6bf51b0c2d1bbd0898824"
+      },
+      "web/segmented-subtitles.js": {
+        "bytes": 2905,
+        "sha256": "7417266d8f4f586f3ec356edfeb84ba8a08827103d7ac80e7a7019027d5a59cb"
+      },
+      "web/software-full-engine-worker.js": {
+        "bytes": 15381,
+        "sha256": "1e1b447a8229f9d3a46fff23bac8770879bcfb9811065619c4cc1eec63975292"
+      },
+      "web/source-probe.js": {
+        "bytes": 2218,
+        "sha256": "0ba5571ad6c7173f3ec8aada90869b4b74d135d4e3cb22c799e6f26cfd71e5cb"
+      },
+      "web/streaming-manifest.js": {
+        "bytes": 11493,
+        "sha256": "a82d5c4eb6a6ba0b002665d3c7fa4bb4c7aaba7f77caf8833b3b06bb96445a63"
+      },
+      "web/subtitle-overlay.js": {
+        "bytes": 1894,
+        "sha256": "8f9b6c4789fe799081c6e3d5058383ef1735f1e0c4830c1f898d88770fc3c7c0"
+      },
+      "web/video-codec-config.js": {
+        "bytes": 4734,
+        "sha256": "da96e89181be7127a1e7b40076f7ea8688fc063f342d72fdf31038ed49a118f7"
+      },
+      "web/vod-manifest.js": {
+        "bytes": 4262,
+        "sha256": "309380e05021e2c146a22ca522b3fe7ad2fafb97582421668275685e74db7a44"
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "automatic-local",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/cheap-mp4-probe.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/file-reader.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/native-player.js"
+      ],
+      "openError": null,
+      "openMs": 395,
+      "mode": "native",
+      "diagnostics": {
+        "mode": "native",
+        "selection": {
+          "automatic": true,
+          "attempts": [
+            {
+              "mode": "probe",
+              "outcome": "selected",
+              "reason": "Local MP4 metadata: 16329 bytes; no inspector Wasm required"
+            },
+            {
+              "mode": "native",
+              "outcome": "selected",
+              "reason": "Playback requirements and actual presentation accepted"
+            }
+          ]
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "path": "native",
+          "plan": "direct",
+          "position": 1.165354,
+          "rendered": 14,
+          "dropped": 0,
+          "readyState": 4
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "native-no-isolation",
+      "requests": [
+        "http://127.0.0.1:55027/?noisolation",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/native-player.js"
+      ],
+      "openError": null,
+      "openMs": 47,
+      "mode": "native",
+      "diagnostics": {
+        "mode": "native",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "path": "native",
+          "plan": "direct",
+          "position": 1.383375,
+          "rendered": 28,
+          "dropped": 0,
+          "readyState": 4
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "hybrid-pin",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 2929,
+      "mode": "hybrid",
+      "diagnostics": {
+        "mode": "hybrid",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "pumpTicks": 100,
+          "subtitles": {
+            "updates": 2,
+            "bytes": 0,
+            "peakBytes": 0,
+            "parts": 0,
+            "renders": 21
+          },
+          "presentation": {
+            "position": 1.133,
+            "received": 50,
+            "closed": 47,
+            "drawn": 16,
+            "redraws": 2,
+            "peakRetained": 6,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              17.959223999999722,
+              20.758601999999883,
+              17.09869800000024,
+              10.159697999999935,
+              14.858793999999762,
+              27.066237000000456,
+              21.01972999999998,
+              25.706333000000086,
+              12.586493000000246,
+              32.966460999999526,
+              27.91293500000029,
+              0.6599999999998545,
+              30.506268999999975,
+              12.418986000000132,
+              13.658570000000509,
+              14.479953999999907
+            ],
+            "pts": [
+              0,
+              33000,
+              67000,
+              100000,
+              133000,
+              167000,
+              200000,
+              233000,
+              267000,
+              300000,
+              333000,
+              1000000,
+              1033000,
+              1067000,
+              1100000,
+              1133000
+            ],
+            "pixelChecks": [],
+            "retained": 3,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 16,
+          "rendered": 19,
+          "renderMs": 1.3200000000006185,
+          "copyMs": 0,
+          "maxRenderMs": 0.40000000000009095,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 66,
+            "frames": 44,
+            "receivedFrames": 47,
+            "closedFrames": 47,
+            "peakOutstanding": 8,
+            "peakFrames": 7,
+            "resets": 2,
+            "errors": 0,
+            "copyMs": 0,
+            "input": {
+              "kind": 1,
+              "width": 640,
+              "height": 360,
+              "profile": -99,
+              "level": -99,
+              "depth": 0,
+              "descriptionBytes": 47
+            },
+            "codec": "avc1.64001e",
+            "actualWidth": 640,
+            "actualHeight": 360,
+            "pixelFormat": "BGRX",
+            "placeholderFrames": 44,
+            "transferredFrames": 44,
+            "outstanding": 8,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 1.133,
+          "ioPending": false,
+          "ioSerial": 4,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 652457,
+            "requests": 4,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 252568,
+            "peakChunkBytes": 65536,
+            "peakOwnedBytes": 318104,
+            "size": "1372304",
+            "reads": 4,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.133,
+          "queuedFrames": 7680
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "software-pin",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 1861,
+      "mode": "software",
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 208,
+          "rendered": 19,
+          "renderMs": 134.89999999999964,
+          "copyMs": 32.83999999999992,
+          "maxRenderMs": 12.179999999999836,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1.133,
+          "ioPending": false,
+          "ioSerial": 4,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 652457,
+            "requests": 4,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 252568,
+            "peakChunkBytes": 65536,
+            "peakOwnedBytes": 318104,
+            "size": "1372304",
+            "reads": 4,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.133,
+          "queuedFrames": 7680
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "automatic-ass",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/cheap-mp4-probe.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/file-reader.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/source-probe.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-source-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-remux/remux.wasm",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 2463,
+      "mode": "hybrid",
+      "diagnostics": {
+        "mode": "hybrid",
+        "selection": {
+          "automatic": true,
+          "attempts": [
+            {
+              "mode": "probe",
+              "outcome": "skipped",
+              "reason": "Local MP4 metadata: 16 bytes; Error: Box bounds"
+            },
+            {
+              "mode": "native",
+              "outcome": "skipped",
+              "reason": "Embedded subtitles require mpv rendering"
+            },
+            {
+              "mode": "hybrid",
+              "outcome": "selected",
+              "reason": "Playback requirements and actual presentation accepted"
+            }
+          ]
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "pumpTicks": 103,
+          "subtitles": {
+            "updates": 2,
+            "bytes": 90502,
+            "peakBytes": 45251,
+            "parts": 3,
+            "renders": 22
+          },
+          "presentation": {
+            "position": 1.133,
+            "received": 51,
+            "closed": 48,
+            "drawn": 17,
+            "redraws": 2,
+            "peakRetained": 6,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              35.779615999999805,
+              31.31869800000004,
+              19.75629600000002,
+              34.301534000000174,
+              45.05201500000021,
+              46.26375800000005,
+              22.230270999999902,
+              36.15543899999966,
+              40.52108099999987,
+              40.9590360000002,
+              32.17912200000001,
+              45.95162900000014,
+              230.81961600000022,
+              34.18433300000015,
+              18.776616000000104,
+              18.75341900000012,
+              16.77217500000006
+            ],
+            "pts": [
+              0,
+              33000,
+              67000,
+              100000,
+              133000,
+              167000,
+              200000,
+              233000,
+              267000,
+              300000,
+              333000,
+              367000,
+              1000000,
+              1033000,
+              1067000,
+              1100000,
+              1133000
+            ],
+            "pixelChecks": [],
+            "retained": 3,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 17,
+          "rendered": 20,
+          "renderMs": 39.8199999999988,
+          "copyMs": 0,
+          "maxRenderMs": 20.360000000000127,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 70,
+            "frames": 45,
+            "receivedFrames": 51,
+            "closedFrames": 51,
+            "peakOutstanding": 8,
+            "peakFrames": 7,
+            "resets": 2,
+            "errors": 0,
+            "copyMs": 0,
+            "input": {
+              "kind": 1,
+              "width": 1920,
+              "height": 1080,
+              "profile": -99,
+              "level": -99,
+              "depth": 0,
+              "descriptionBytes": 58
+            },
+            "codec": "avc1.640028",
+            "actualWidth": 1920,
+            "actualHeight": 1080,
+            "pixelFormat": "BGRX",
+            "placeholderFrames": 45,
+            "transferredFrames": 45,
+            "outstanding": 8,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 0.5,
+          "presentedPosition": 1.133,
+          "ioPending": false,
+          "ioSerial": 55,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 4167215,
+            "requests": 55,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "peakChunkBytes": 65536,
+            "peakOwnedBytes": 327680,
+            "size": "9039757",
+            "reads": 55,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.133,
+          "queuedFrames": 7168
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "native-remux",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/native-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-source-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-remux/remux.wasm",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-source-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-remux/remux.wasm"
+      ],
+      "openError": null,
+      "openMs": 522,
+      "mode": "native",
+      "diagnostics": {
+        "mode": "native",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "path": "native",
+          "plan": "remux",
+          "remux": {
+            "stats": {
+              "fragments": [
+                {
+                  "bytes": 42159,
+                  "at": 860.9,
+                  "generation": 1
+                },
+                {
+                  "bytes": 35706,
+                  "at": 863.02,
+                  "generation": 1
+                },
+                {
+                  "bytes": 34067,
+                  "at": 864.26,
+                  "generation": 1
+                },
+                {
+                  "bytes": 35456,
+                  "at": 866.86,
+                  "generation": 1
+                },
+                {
+                  "bytes": 37232,
+                  "at": 868.6,
+                  "generation": 1
+                },
+                {
+                  "bytes": 39253,
+                  "at": 871.42,
+                  "generation": 1
+                },
+                {
+                  "bytes": 39933,
+                  "at": 876.44,
+                  "generation": 1
+                },
+                {
+                  "bytes": 38828,
+                  "at": 884.1,
+                  "generation": 1
+                },
+                {
+                  "bytes": 34232,
+                  "at": 893.64,
+                  "generation": 1
+                },
+                {
+                  "bytes": 33621,
+                  "at": 894.72,
+                  "generation": 1
+                },
+                {
+                  "bytes": 34067,
+                  "at": 1051.04,
+                  "generation": 1
+                },
+                {
+                  "bytes": 43823,
+                  "at": 1576.94,
+                  "generation": 2
+                },
+                {
+                  "bytes": 34067,
+                  "at": 1577.64,
+                  "generation": 2
+                },
+                {
+                  "bytes": 35456,
+                  "at": 1578.74,
+                  "generation": 2
+                },
+                {
+                  "bytes": 37232,
+                  "at": 1579.64,
+                  "generation": 2
+                },
+                {
+                  "bytes": 39253,
+                  "at": 1580.44,
+                  "generation": 2
+                },
+                {
+                  "bytes": 39933,
+                  "at": 1581.02,
+                  "generation": 2
+                },
+                {
+                  "bytes": 38828,
+                  "at": 1581.92,
+                  "generation": 2
+                },
+                {
+                  "bytes": 34232,
+                  "at": 1582.56,
+                  "generation": 2
+                },
+                {
+                  "bytes": 33621,
+                  "at": 1583.64,
+                  "generation": 2
+                },
+                {
+                  "bytes": 34067,
+                  "at": 1584.62,
+                  "generation": 2
+                },
+                {
+                  "bytes": 35456,
+                  "at": 1585.22,
+                  "generation": 2
+                },
+                {
+                  "bytes": 37232,
+                  "at": 1790.48,
+                  "generation": 2
+                }
+              ],
+              "generatedBytes": 850078,
+              "discardedBytes": 0,
+              "peakQueueDepth": 1,
+              "bufferedBytesUpperBound": 443200,
+              "peakBufferedBytesUpperBound": 443200,
+              "peakBufferedSeconds": 6.048,
+              "seeks": [
+                {
+                  "target": 0,
+                  "started": 457.32
+                },
+                {
+                  "target": 1,
+                  "started": 1391.92
+                }
+              ],
+              "sessions": [
+                {
+                  "generation": 1,
+                  "target": 0,
+                  "sourceSize": 4664858,
+                  "firstPlayableMs": 407.56,
+                  "firstPlayableSourceBytes": 131072,
+                  "packaging": [
+                    {
+                      "container": "mp4",
+                      "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                      "selected": true
+                    }
+                  ],
+                  "generatedBytes": 113094,
+                  "fetchedBytesAtLeastSourceSize": false
+                },
+                {
+                  "generation": 2,
+                  "target": 1,
+                  "sourceSize": 4664858,
+                  "firstPlayableMs": 203.22000000000003,
+                  "firstPlayableSourceBytes": 526857,
+                  "packaging": [
+                    {
+                      "container": "mp4",
+                      "mime": "video/mp4; codecs=\"vp09.00.10.08,opus\"",
+                      "selected": true
+                    }
+                  ],
+                  "generatedBytes": 407130,
+                  "fetchedBytesAtLeastSourceSize": false
+                }
+              ],
+              "errors": [],
+              "workers": 2,
+              "recoveries": [],
+              "gapSkips": [],
+              "cancellations": [
+                {
+                  "generatedBytes": 405716,
+                  "pendingBytes": 0,
+                  "retainedCompressedBytesUpperBound": 404554,
+                  "sourceFetchedBytes": 458752,
+                  "inFlightOutputUpperBound": 8388608
+                }
+              ]
+            },
+            "source": {
+              "fetchedBytes": 592393,
+              "requests": 10,
+              "aborts": 0,
+              "discardedBytes": 0,
+              "cacheBytes": 0,
+              "peakCacheBytes": 0,
+              "activeBytes": 0,
+              "peakActiveBytes": 65536,
+              "peakChunkBytes": 65536,
+              "peakOwnedBytes": 131072
+            },
+            "remux": {
+              "calls": 12,
+              "remuxMs": 134.48000000000002,
+              "generatedBytes": 444362,
+              "peakBatchBytes": 43823,
+              "heapBytes": 67108864
+            },
+            "ranges": [
+              [
+                0.52,
+                6.568
+              ]
+            ],
+            "timelineBias": 1,
+            "position": 1.2217500000000001,
+            "quality": {},
+            "readyState": 4,
+            "logs": [
+              "[mp4 @ 0x2f7e40] track 1: codec frame size is not set",
+              "[mp4 @ 0x2f5c00] track 1: codec frame size is not set"
+            ]
+          },
+          "position": 1.2217500000000001,
+          "rendered": 6,
+          "dropped": 0,
+          "readyState": 4
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "transitions",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/cheap-mp4-probe.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/file-reader.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/native-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.wasm",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 60,
+      "mode": "native",
+      "transitions": [
+        "hybrid",
+        "software",
+        "native"
+      ],
+      "diagnostics": {
+        "mode": "native",
+        "selection": {
+          "automatic": true,
+          "attempts": [
+            {
+              "mode": "probe",
+              "outcome": "selected",
+              "reason": "Local MP4 metadata: 16329 bytes; no inspector Wasm required"
+            },
+            {
+              "mode": "native",
+              "outcome": "selected",
+              "reason": "Playback requirements and actual presentation accepted"
+            }
+          ]
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "path": "native",
+          "plan": "direct",
+          "position": 1.211229,
+          "rendered": 6,
+          "dropped": 0,
+          "readyState": 4
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "rollback",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/cheap-mp4-probe.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/file-reader.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/native-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/source-probe.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-source-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-remux/remux.wasm",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.wasm",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 42,
+      "mode": "native",
+      "rollback": {
+        "error": "Error: No playback route satisfied the source: hybrid: Error: unrecognized file format; software: Error: unrecognized file format",
+        "same": true
+      },
+      "diagnostics": {
+        "mode": "native",
+        "selection": {
+          "automatic": true,
+          "attempts": [
+            {
+              "mode": "probe",
+              "outcome": "skipped",
+              "reason": "Local MP4 metadata: 3 bytes; Error: Short header"
+            },
+            {
+              "mode": "probe",
+              "outcome": "failed",
+              "reason": "Error: FFmpeg error -1094995529: \ncheck@http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js:7:30\nself.onmessage@http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js:13:33\nasync*@http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js:8:1\n"
+            },
+            {
+              "mode": "native",
+              "outcome": "skipped",
+              "reason": "Native eligibility could not be established: Error: FFmpeg error -1094995529: \ncheck@http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js:7:30\nself.onmessage@http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js:13:33\nasync*@http://127.0.0.1:55027/vendor/webmpv/web/native-remux-worker.js:8:1\n"
+            },
+            {
+              "mode": "hybrid",
+              "outcome": "failed",
+              "reason": "Error: unrecognized file format"
+            },
+            {
+              "mode": "software",
+              "outcome": "failed",
+              "reason": "Error: unrecognized file format"
+            }
+          ]
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "path": "native",
+          "plan": "direct",
+          "position": 1.212458,
+          "rendered": 28,
+          "dropped": 0,
+          "readyState": 4
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "missing-engine",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.wasm",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.wasm"
+      ],
+      "openError": "Error: abort@http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.mjs:1:4253\ninstantiateArrayBuffer@http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.mjs:1:5098\nasync*instantiateAsync@http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.mjs:1:5469\nasync*createWasm@http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.mjs:1:6358\ncreateEngine@http://127.0.0.1:55027/vendor/webmpv/web/engine-hybrid/player.mjs:1:61191\nself.onmessage@http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained:208:22\nasync*@http://127.0.0.1:55027/vendor/webmpv/web/filter-retained-engine-worker.js?mode=retained:198:1\n",
+      "openMs": 166,
+      "passed": true
+    },
+    {
+      "name": "isolation-error",
+      "requests": [
+        "http://127.0.0.1:55027/?noisolation",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js"
+      ],
+      "openError": "Error: This player requires a secure, cross-origin isolated page.",
+      "openMs": 7,
+      "passed": true
+    },
+    {
+      "name": "omitted-yuv",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf"
+      ],
+      "openError": "Error: TypeError: error loading dynamically imported module: http://127.0.0.1:55027/vendor/webmpv/web/yuv-presenter.js",
+      "openMs": 214,
+      "passed": true
+    },
+    {
+      "name": "av1-software",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 1823,
+      "mode": "software",
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 182,
+          "rendered": 10,
+          "renderMs": 269.3799999999992,
+          "copyMs": 15.840000000000828,
+          "maxRenderMs": 42.319999999999936,
+          "heapBytes": 134217728,
+          "epoch": 0,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1.083,
+          "ioPending": false,
+          "ioSerial": 1,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 80830,
+            "requests": 1,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 80830,
+            "peakChunkBytes": 28672,
+            "peakOwnedBytes": 109502,
+            "size": "80830",
+            "reads": 1,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.083,
+          "queuedFrames": 0
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "hdr-software",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 2571,
+      "mode": "software",
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "hdr-to-sdr",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 1099,
+          "rendered": 10,
+          "renderMs": 235.61999999999966,
+          "copyMs": 17.59999999999968,
+          "maxRenderMs": 38.14000000000033,
+          "heapBytes": 134217728,
+          "epoch": 0,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mkv",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1.083,
+          "ioPending": false,
+          "ioSerial": 4,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 346824,
+            "requests": 4,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 131072,
+            "peakChunkBytes": 57344,
+            "peakOwnedBytes": 188416,
+            "size": "173784",
+            "reads": 4,
+            "seeks": 2,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.083,
+          "queuedFrames": 0
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "external-subtitles",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm",
+        "http://127.0.0.1:55027/media/compat/custom.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm",
+        "http://127.0.0.1:55027/media/compat/subtitle.ass",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 1393,
+      "mode": "software",
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 142,
+          "rendered": 8,
+          "renderMs": 183.63999999999987,
+          "copyMs": 12.02000000000021,
+          "maxRenderMs": 42.56000000000017,
+          "heapBytes": 134217728,
+          "epoch": 6,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1.0833333333333333,
+          "ioPending": false,
+          "ioSerial": 1,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 58355,
+            "requests": 1,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 58355,
+            "peakChunkBytes": 58355,
+            "peakOwnedBytes": 116710,
+            "size": "58355",
+            "reads": 1,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.0833333333333333,
+          "queuedFrames": 5120
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "surround-output",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm"
+      ],
+      "openError": null,
+      "openMs": 1516,
+      "mode": "software",
+      "audio": {
+        "requestedOutput": "7.1",
+        "outputChannels": 2,
+        "deviceChannels": 2,
+        "channelLayout": "stereo",
+        "state": "running",
+        "sampleRate": 48000,
+        "mediaFrames": 18432,
+        "underruns": 0,
+        "rms": 0.06296446623056941,
+        "latencyConfidence": "reported-latency estimate"
+      },
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 206,
+          "rendered": 19,
+          "renderMs": 76.03999999999974,
+          "copyMs": 14.620000000000346,
+          "maxRenderMs": 9.3599999999999,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1.133,
+          "ioPending": false,
+          "ioSerial": 4,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 652457,
+            "requests": 4,
+            "aborts": 0,
+            "discardedBytes": 0,
+            "cacheBytes": 0,
+            "peakCacheBytes": 0,
+            "activeBytes": 0,
+            "peakActiveBytes": 252568,
+            "peakChunkBytes": 65536,
+            "peakOwnedBytes": 318104,
+            "size": "1372304",
+            "reads": 4,
+            "seeks": 3,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.133,
+          "queuedFrames": 5632
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "hls-expanded",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm",
+        "http://127.0.0.1:55027/media/compat/master.m3u8",
+        "http://127.0.0.1:55027/media/compat/subs.m3u8",
+        "http://127.0.0.1:55027/media/compat/sub-0.vtt",
+        "http://127.0.0.1:55027/media/compat/sub-1.vtt",
+        "http://127.0.0.1:55027/media/compat/sub-2.vtt",
+        "http://127.0.0.1:55027/media/compat/low/index.m3u8",
+        "http://127.0.0.1:55027/media/compat/low/000.ts",
+        "http://127.0.0.1:55027/media/compat/low/001.ts",
+        "http://127.0.0.1:55027/media/compat/low/002.ts",
+        "http://127.0.0.1:55027/media/compat/low/003.ts"
+      ],
+      "openError": null,
+      "openMs": 1424,
+      "mode": "software",
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 132,
+          "rendered": 9,
+          "renderMs": 158.5600000000004,
+          "copyMs": 11.139999999999645,
+          "maxRenderMs": 29.559999999999945,
+          "heapBytes": 134217728,
+          "epoch": 4,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "hls",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1,
+          "ioPending": false,
+          "ioSerial": 21,
+          "interruptions": 0,
+          "io": {
+            "opens": 8,
+            "requests": 10,
+            "retries": 0,
+            "aborts": 0,
+            "handles": 2,
+            "retainedBytes": 12787,
+            "peakRetainedBytes": 13915,
+            "fetchedBytes": 52410,
+            "size": "0",
+            "reads": 8,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1,
+          "queuedFrames": 0
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "dash-periods",
+      "requests": [
+        "http://127.0.0.1:55027/",
+        "http://127.0.0.1:55027/vendor/webmpv/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/index.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/unified-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/types.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/selection.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/generated/internal/wasm-player.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/audio-worklet.js",
+        "http://127.0.0.1:55027/vendor/webmpv/web/software-full-engine-worker.js",
+        "http://127.0.0.1:55027/vendor/webmpv/fixtures/DejaVuSans.ttf",
+        "http://127.0.0.1:55027/vendor/webmpv/web/engine-software-full/player.wasm",
+        "http://127.0.0.1:55027/media/compat/periods.mpd",
+        "http://127.0.0.1:55027/media/compat/period0/init-stream0.m4s",
+        "http://127.0.0.1:55027/media/compat/period0/chunk-stream0-00001.m4s",
+        "http://127.0.0.1:55027/media/compat/period0/chunk-stream0-00002.m4s",
+        "http://127.0.0.1:55027/media/compat/period0/init-stream0.m4s",
+        "http://127.0.0.1:55027/media/compat/period0/chunk-stream0-00001.m4s",
+        "http://127.0.0.1:55027/media/compat/period0/chunk-stream0-00002.m4s",
+        "http://127.0.0.1:55027/media/compat/period0/chunk-stream0-00003.m4s"
+      ],
+      "openError": null,
+      "openMs": 2049,
+      "mode": "software",
+      "diagnostics": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 125,
+          "rendered": 10,
+          "renderMs": 279.32000000000016,
+          "copyMs": 14.379999999999882,
+          "maxRenderMs": 109.7199999999998,
+          "heapBytes": 134217728,
+          "epoch": 0,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "hls",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 1.0833333333333333,
+          "ioPending": false,
+          "ioSerial": 24,
+          "interruptions": 0,
+          "io": {
+            "opens": 9,
+            "requests": 8,
+            "retries": 0,
+            "aborts": 0,
+            "handles": 2,
+            "retainedBytes": 676,
+            "peakRetainedBytes": 1273,
+            "fetchedBytes": 7053,
+            "size": "0",
+            "reads": 9,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 1.0833333333333333,
+          "queuedFrames": 0
+        }
+      },
+      "passed": true
+    }
+  ],
+  "browser": "146.0.1",
+  "passed": true
+}

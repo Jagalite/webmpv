@@ -1,0 +1,1273 @@
+{
+  "archiveSHA256": "aa9a8fe3bff7c2521413c6c84a6250edcac13ee66e02ea5036bc86839e444456",
+  "sourceCommit": "fd210e81379d1f71d59db61e8160853846d09f3c",
+  "browser": "152.0.7977.83",
+  "family": "chrome",
+  "fixture": {
+    "bytes": 248805945
+  },
+  "cases": [
+    {
+      "name": "hybrid:seek-completes-packet",
+      "server": {
+        "mode": "slow",
+        "requests": 7,
+        "slowRequests": 4,
+        "progress": 1048576,
+        "aborts": 0,
+        "completed": 4,
+        "startedAt": 1789175629357
+      },
+      "before": {
+        "mode": "hybrid",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "pumpTicks": 64,
+          "subtitles": {
+            "updates": 1,
+            "bytes": 0,
+            "peakBytes": 0,
+            "parts": 0,
+            "renders": 6
+          },
+          "presentation": {
+            "position": 0.166,
+            "received": 6,
+            "closed": 3,
+            "drawn": 4,
+            "redraws": 1,
+            "peakRetained": 4,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              12.833904001490055,
+              23.25872999940384,
+              13.79190299701986,
+              5.130468995529782
+            ],
+            "pts": [
+              66000,
+              99333,
+              132667,
+              166000
+            ],
+            "pixelChecks": [],
+            "retained": 3,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 4,
+          "rendered": 6,
+          "renderMs": 2.064999997615814,
+          "copyMs": 0,
+          "maxRenderMs": 1.2950000017881393,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 12,
+            "frames": 0,
+            "receivedFrames": 0,
+            "closedFrames": 0,
+            "peakOutstanding": 8,
+            "peakFrames": 0,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 0,
+            "input": {
+              "kind": 1,
+              "width": 1920,
+              "height": 1080,
+              "profile": -99,
+              "level": -99,
+              "depth": 0,
+              "descriptionBytes": 43
+            },
+            "codec": "avc1.640029",
+            "supportCheck": {
+              "requested": {
+                "codec": "avc1.640029",
+                "codedWidth": 1920,
+                "codedHeight": 1080,
+                "descriptionBytes": 43,
+                "hardwareAcceleration": "no-preference",
+                "optimizeForLatency": false
+              },
+              "source": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 43
+              },
+              "supported": true,
+              "recognized": {
+                "codec": "avc1.640029",
+                "codedWidth": 1920,
+                "codedHeight": 1080,
+                "descriptionBytes": 43,
+                "hardwareAcceleration": "no-preference",
+                "optimizeForLatency": false
+              }
+            },
+            "outstanding": 7,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.166,
+          "ioPending": false,
+          "ioSerial": 10,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 786432,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "248805945",
+            "reads": 10,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 0.166,
+          "queuedFrames": 6912
+        }
+      },
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/beta-streaming.mjs:60:49",
+      "state": {
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "toneMapping": "off",
+          "resourceLimits": {
+            "maxDecodePixels": 8294400,
+            "maxAllocationBytes": 134217728
+          },
+          "backend": {
+            "pumpTicks": 837,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 13
+            },
+            "presentation": {
+              "position": 499.999333,
+              "received": 162,
+              "closed": 160,
+              "drawn": 8,
+              "redraws": 2,
+              "peakRetained": 6,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                12.833904001490055,
+                23.25872999940384,
+                13.79190299701986,
+                5.130468995529782,
+                18.113530000000083,
+                22.758657999105935,
+                9.346959000596144,
+                238.4250080032789
+              ],
+              "pts": [
+                66000,
+                99333,
+                132667,
+                166000,
+                199333,
+                232667,
+                266000,
+                499999333
+              ],
+              "pixelChecks": [],
+              "retained": 2,
+              "pending": 0
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 8,
+            "rendered": 11,
+            "renderMs": 2.225000001490116,
+            "copyMs": 0,
+            "maxRenderMs": 1.2950000017881393,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 175,
+              "frames": 160,
+              "receivedFrames": 161,
+              "closedFrames": 161,
+              "peakOutstanding": 8,
+              "peakFrames": 8,
+              "resets": 2,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 43
+              },
+              "codec": "avc1.640029",
+              "supportCheck": {
+                "requested": {
+                  "codec": "avc1.640029",
+                  "codedWidth": 1920,
+                  "codedHeight": 1080,
+                  "descriptionBytes": 43,
+                  "hardwareAcceleration": "no-preference",
+                  "optimizeForLatency": false
+                },
+                "source": {
+                  "kind": 1,
+                  "width": 1920,
+                  "height": 1080,
+                  "profile": -99,
+                  "level": -99,
+                  "depth": 0,
+                  "descriptionBytes": 43
+                },
+                "supported": true,
+                "recognized": {
+                  "codec": "avc1.640029",
+                  "codedWidth": 1920,
+                  "codedHeight": 1080,
+                  "descriptionBytes": 43,
+                  "hardwareAcceleration": "no-preference",
+                  "optimizeForLatency": false
+                }
+              },
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "pixelFormat": "NV12",
+              "placeholderFrames": 160,
+              "transferredFrames": 160,
+              "outstanding": 8,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 500,
+            "ioPending": false,
+            "ioSerial": 14,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1835008,
+              "requests": 7,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 1835008,
+              "peakCacheBytes": 1835008,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "248805945",
+              "reads": 14,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 499.99933333333337,
+            "queuedFrames": 0
+          }
+        },
+        "errors": []
+      }
+    },
+    {
+      "name": "hybrid:seek-deadline",
+      "server": {
+        "mode": "deadline",
+        "requests": 6,
+        "slowRequests": 3,
+        "progress": 303104,
+        "aborts": 3,
+        "completed": 0,
+        "startedAt": 1789175661768
+      },
+      "before": {
+        "mode": "hybrid",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "pumpTicks": 44,
+          "subtitles": {
+            "updates": 1,
+            "bytes": 0,
+            "peakBytes": 0,
+            "parts": 0,
+            "renders": 6
+          },
+          "presentation": {
+            "position": 0.166,
+            "received": 6,
+            "closed": 3,
+            "drawn": 4,
+            "redraws": 1,
+            "peakRetained": 4,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              10.80005599821186,
+              26.415990995529683,
+              13.855349003278207,
+              15.62676699850988
+            ],
+            "pts": [
+              66000,
+              99333,
+              132667,
+              166000
+            ],
+            "pixelChecks": [],
+            "retained": 3,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 4,
+          "rendered": 6,
+          "renderMs": 0.7950000017881393,
+          "copyMs": 0,
+          "maxRenderMs": 0.3799999952316284,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 12,
+            "frames": 0,
+            "receivedFrames": 0,
+            "closedFrames": 0,
+            "peakOutstanding": 8,
+            "peakFrames": 0,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 0,
+            "input": {
+              "kind": 1,
+              "width": 1920,
+              "height": 1080,
+              "profile": -99,
+              "level": -99,
+              "depth": 0,
+              "descriptionBytes": 43
+            },
+            "codec": "avc1.640029",
+            "supportCheck": {
+              "requested": {
+                "codec": "avc1.640029",
+                "codedWidth": 1920,
+                "codedHeight": 1080,
+                "descriptionBytes": 43,
+                "hardwareAcceleration": "no-preference",
+                "optimizeForLatency": false
+              },
+              "source": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 43
+              },
+              "supported": true,
+              "recognized": {
+                "codec": "avc1.640029",
+                "codedWidth": 1920,
+                "codedHeight": 1080,
+                "descriptionBytes": 43,
+                "hardwareAcceleration": "no-preference",
+                "optimizeForLatency": false
+              }
+            },
+            "outstanding": 7,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.166,
+          "ioPending": false,
+          "ioSerial": 10,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 786432,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "248805945",
+            "reads": 10,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 0.166,
+          "queuedFrames": 6656
+        }
+      },
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/beta-streaming.mjs:60:49",
+      "state": {
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "toneMapping": "off",
+          "resourceLimits": {
+            "maxDecodePixels": 8294400,
+            "maxAllocationBytes": 134217728
+          },
+          "backend": {
+            "pumpTicks": 2522,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 11
+            },
+            "presentation": {
+              "position": null,
+              "received": 8,
+              "closed": 8,
+              "drawn": 6,
+              "redraws": 2,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                10.80005599821186,
+                26.415990995529683,
+                13.855349003278207,
+                15.62676699850988,
+                6.555252998807987,
+                10.319348999105955
+              ],
+              "pts": [
+                66000,
+                99333,
+                132667,
+                166000,
+                199333,
+                232667
+              ],
+              "pixelChecks": [],
+              "retained": 0,
+              "pending": 1
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 6,
+            "rendered": 10,
+            "renderMs": 0.9849999994039536,
+            "copyMs": 0,
+            "maxRenderMs": 0.3799999952316284,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 12,
+              "frames": 8,
+              "receivedFrames": 10,
+              "closedFrames": 10,
+              "peakOutstanding": 8,
+              "peakFrames": 8,
+              "resets": 3,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 43
+              },
+              "codec": "avc1.640029",
+              "supportCheck": {
+                "requested": {
+                  "codec": "avc1.640029",
+                  "codedWidth": 1920,
+                  "codedHeight": 1080,
+                  "descriptionBytes": 43,
+                  "hardwareAcceleration": "no-preference",
+                  "optimizeForLatency": false
+                },
+                "source": {
+                  "kind": 1,
+                  "width": 1920,
+                  "height": 1080,
+                  "profile": -99,
+                  "level": -99,
+                  "depth": 0,
+                  "descriptionBytes": 43
+                },
+                "supported": true,
+                "recognized": {
+                  "codec": "avc1.640029",
+                  "codedWidth": 1920,
+                  "codedHeight": 1080,
+                  "descriptionBytes": 43,
+                  "hardwareAcceleration": "no-preference",
+                  "optimizeForLatency": false
+                }
+              },
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "pixelFormat": "NV12",
+              "placeholderFrames": 8,
+              "transferredFrames": 8,
+              "outstanding": 0,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 500,
+            "ioPending": false,
+            "ioSerial": 12,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1088512,
+              "requests": 5,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 786432,
+              "peakCacheBytes": 786432,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "248805945",
+              "reads": 12,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 500,
+            "queuedFrames": 0
+          }
+        },
+        "errors": [
+          "Source transport: Media read retry deadline exceeded",
+          "Error: Source transport: Media read retry deadline exceeded",
+          "Source transport: Media read retry deadline exceeded"
+        ]
+      }
+    },
+    {
+      "name": "hybrid:destroy-progress",
+      "server": {
+        "mode": "deadline",
+        "requests": 6,
+        "slowRequests": 3,
+        "progress": 304128,
+        "aborts": 3,
+        "completed": 0,
+        "startedAt": 1789175693918
+      },
+      "before": {
+        "mode": "hybrid",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "pumpTicks": 45,
+          "subtitles": {
+            "updates": 1,
+            "bytes": 0,
+            "peakBytes": 0,
+            "parts": 0,
+            "renders": 6
+          },
+          "presentation": {
+            "position": 0.166,
+            "received": 6,
+            "closed": 3,
+            "drawn": 4,
+            "redraws": 1,
+            "peakRetained": 4,
+            "peakPending": 1,
+            "missing": 0,
+            "lateMs": [
+              3.8241040020861874,
+              23.733041996125735,
+              10.250645002980264,
+              22.595476997913806
+            ],
+            "pts": [
+              66000,
+              99333,
+              132667,
+              166000
+            ],
+            "pixelChecks": [],
+            "retained": 3,
+            "pending": 0
+          },
+          "mode": "retained",
+          "skipCanvas": true,
+          "canvasSubmissions": 4,
+          "rendered": 6,
+          "renderMs": 0.8049999997019768,
+          "copyMs": 0,
+          "maxRenderMs": 0.39000000059604645,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "webcodecs",
+          "decoderStats": {
+            "submitted": 12,
+            "frames": 0,
+            "receivedFrames": 0,
+            "closedFrames": 0,
+            "peakOutstanding": 8,
+            "peakFrames": 0,
+            "resets": 0,
+            "errors": 0,
+            "copyMs": 0,
+            "input": {
+              "kind": 1,
+              "width": 1920,
+              "height": 1080,
+              "profile": -99,
+              "level": -99,
+              "depth": 0,
+              "descriptionBytes": 43
+            },
+            "codec": "avc1.640029",
+            "supportCheck": {
+              "requested": {
+                "codec": "avc1.640029",
+                "codedWidth": 1920,
+                "codedHeight": 1080,
+                "descriptionBytes": 43,
+                "hardwareAcceleration": "no-preference",
+                "optimizeForLatency": false
+              },
+              "source": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 43
+              },
+              "supported": true,
+              "recognized": {
+                "codec": "avc1.640029",
+                "codedWidth": 1920,
+                "codedHeight": 1080,
+                "descriptionBytes": 43,
+                "hardwareAcceleration": "no-preference",
+                "optimizeForLatency": false
+              }
+            },
+            "outstanding": 7,
+            "queued": 0,
+            "active": true
+          },
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 0,
+          "presentedPosition": 0.166,
+          "ioPending": false,
+          "ioSerial": 10,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 786432,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "248805945",
+            "reads": 10,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 0.166,
+          "queuedFrames": 6400
+        }
+      },
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/beta-streaming.mjs:60:49",
+      "state": {
+        "diagnostics": {
+          "mode": "hybrid",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "toneMapping": "off",
+          "resourceLimits": {
+            "maxDecodePixels": 8294400,
+            "maxAllocationBytes": 134217728
+          },
+          "backend": {
+            "pumpTicks": 2538,
+            "subtitles": {
+              "updates": 2,
+              "bytes": 0,
+              "peakBytes": 0,
+              "parts": 0,
+              "renders": 13
+            },
+            "presentation": {
+              "position": null,
+              "received": 9,
+              "closed": 9,
+              "drawn": 7,
+              "redraws": 2,
+              "peakRetained": 4,
+              "peakPending": 1,
+              "missing": 0,
+              "lateMs": [
+                3.8241040020861874,
+                23.733041996125735,
+                10.250645002980264,
+                22.595476997913806,
+                12.514365003576245,
+                15.639676997317792,
+                17.250421002086114
+              ],
+              "pts": [
+                66000,
+                99333,
+                132667,
+                166000,
+                199333,
+                232667,
+                266000
+              ],
+              "pixelChecks": [],
+              "retained": 0,
+              "pending": 1
+            },
+            "mode": "retained",
+            "skipCanvas": true,
+            "canvasSubmissions": 7,
+            "rendered": 12,
+            "renderMs": 0.9650000035762787,
+            "copyMs": 0,
+            "maxRenderMs": 0.39000000059604645,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "decoder": "webcodecs",
+            "decoderStats": {
+              "submitted": 12,
+              "frames": 9,
+              "receivedFrames": 10,
+              "closedFrames": 10,
+              "peakOutstanding": 8,
+              "peakFrames": 8,
+              "resets": 4,
+              "errors": 0,
+              "copyMs": 0,
+              "input": {
+                "kind": 1,
+                "width": 1920,
+                "height": 1080,
+                "profile": -99,
+                "level": -99,
+                "depth": 0,
+                "descriptionBytes": 43
+              },
+              "codec": "avc1.640029",
+              "supportCheck": {
+                "requested": {
+                  "codec": "avc1.640029",
+                  "codedWidth": 1920,
+                  "codedHeight": 1080,
+                  "descriptionBytes": 43,
+                  "hardwareAcceleration": "no-preference",
+                  "optimizeForLatency": false
+                },
+                "source": {
+                  "kind": 1,
+                  "width": 1920,
+                  "height": 1080,
+                  "profile": -99,
+                  "level": -99,
+                  "depth": 0,
+                  "descriptionBytes": 43
+                },
+                "supported": true,
+                "recognized": {
+                  "codec": "avc1.640029",
+                  "codedWidth": 1920,
+                  "codedHeight": 1080,
+                  "descriptionBytes": 43,
+                  "hardwareAcceleration": "no-preference",
+                  "optimizeForLatency": false
+                }
+              },
+              "actualWidth": 1920,
+              "actualHeight": 1080,
+              "pixelFormat": "NV12",
+              "placeholderFrames": 9,
+              "transferredFrames": 9,
+              "outstanding": 0,
+              "queued": 0,
+              "active": true
+            },
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 0,
+            "presentedPosition": 634.5333333333334,
+            "ioPending": true,
+            "ioSerial": 13,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1089536,
+              "requests": 5,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 786432,
+              "peakCacheBytes": 786432,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "248805945",
+              "reads": 12,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 634.5333333333334,
+            "queuedFrames": 0
+          }
+        },
+        "errors": [
+          "Source transport: Media read retry deadline exceeded",
+          "Error: Source transport: Media read retry deadline exceeded",
+          "Source transport: Media read retry deadline exceeded"
+        ]
+      }
+    },
+    {
+      "name": "software:seek-completes-packet",
+      "server": {
+        "mode": "slow",
+        "requests": 7,
+        "slowRequests": 4,
+        "progress": 1048576,
+        "aborts": 0,
+        "completed": 4,
+        "startedAt": 1789175725609
+      },
+      "before": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 80,
+          "rendered": 6,
+          "renderMs": 44.37999998778105,
+          "copyMs": 10.50000000745058,
+          "maxRenderMs": 16.69999999552965,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 0.166,
+          "ioPending": false,
+          "ioSerial": 10,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 786432,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "248805945",
+            "reads": 10,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 0.166,
+          "queuedFrames": 6912
+        }
+      },
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/beta-streaming.mjs:60:49",
+      "state": {
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "toneMapping": "off",
+          "resourceLimits": {
+            "maxDecodePixels": 8294400,
+            "maxAllocationBytes": 134217728
+          },
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 1379,
+            "rendered": 10,
+            "renderMs": 75.08999998867512,
+            "copyMs": 13.125000014901161,
+            "maxRenderMs": 16.69999999552965,
+            "heapBytes": 134217728,
+            "epoch": 4,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 1,
+            "presentedPosition": 500,
+            "ioPending": false,
+            "ioSerial": 14,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1835008,
+              "requests": 7,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 1835008,
+              "peakCacheBytes": 1835008,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "248805945",
+              "reads": 14,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 499.99933333333337,
+            "queuedFrames": 0
+          }
+        },
+        "errors": []
+      }
+    },
+    {
+      "name": "software:seek-deadline",
+      "server": {
+        "mode": "deadline",
+        "requests": 6,
+        "slowRequests": 3,
+        "progress": 302080,
+        "aborts": 3,
+        "completed": 0,
+        "startedAt": 1789175757985
+      },
+      "before": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 93,
+          "rendered": 6,
+          "renderMs": 38.4100000038743,
+          "copyMs": 10.479999989271164,
+          "maxRenderMs": 13.5,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 0.166,
+          "ioPending": false,
+          "ioSerial": 10,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 786432,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "248805945",
+            "reads": 10,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 0.166,
+          "queuedFrames": 7168
+        }
+      },
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/beta-streaming.mjs:60:49",
+      "state": {
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "toneMapping": "off",
+          "resourceLimits": {
+            "maxDecodePixels": 8294400,
+            "maxAllocationBytes": 134217728
+          },
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 4986,
+            "rendered": 10,
+            "renderMs": 62.78500001132488,
+            "copyMs": 21.524999983608723,
+            "maxRenderMs": 13.5,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 1,
+            "presentedPosition": 634.5333333333334,
+            "ioPending": true,
+            "ioSerial": 13,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1088512,
+              "requests": 5,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 786432,
+              "peakCacheBytes": 786432,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "248805945",
+              "reads": 12,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 634.5333333333334,
+            "queuedFrames": 0
+          }
+        },
+        "errors": [
+          "Source transport: Media read retry deadline exceeded",
+          "Error: Source transport: Media read retry deadline exceeded",
+          "Source transport: Media read retry deadline exceeded"
+        ]
+      }
+    },
+    {
+      "name": "software:destroy-progress",
+      "server": {
+        "mode": "deadline",
+        "requests": 6,
+        "slowRequests": 3,
+        "progress": 303104,
+        "aborts": 3,
+        "completed": 0,
+        "startedAt": 1789175790249
+      },
+      "before": {
+        "mode": "software",
+        "selection": {
+          "automatic": false,
+          "attempts": []
+        },
+        "switching": false,
+        "videoFilters": "",
+        "audioFilters": "",
+        "toneMapping": "off",
+        "resourceLimits": {
+          "maxDecodePixels": 8294400,
+          "maxAllocationBytes": 134217728
+        },
+        "backend": {
+          "softwarePresenter": "rgb",
+          "pumpTicks": 96,
+          "rendered": 6,
+          "renderMs": 42.604999989271164,
+          "copyMs": 8.010000005364418,
+          "maxRenderMs": 11.445000000298023,
+          "heapBytes": 134217728,
+          "epoch": 2,
+          "path": "wasm",
+          "decoder": "software",
+          "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+          "seekPrerollSeconds": 1,
+          "presentedPosition": 0.166,
+          "ioPending": false,
+          "ioSerial": 10,
+          "interruptions": 0,
+          "io": {
+            "fetchedBytes": 786432,
+            "requests": 3,
+            "retries": 0,
+            "aborts": 0,
+            "cacheBytes": 786432,
+            "peakCacheBytes": 786432,
+            "activeBytes": 0,
+            "peakActiveBytes": 262144,
+            "size": "248805945",
+            "reads": 10,
+            "seeks": 1,
+            "interruptions": 0
+          },
+          "seeking": false,
+          "position": 0.166,
+          "queuedFrames": 6912
+        }
+      },
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/beta-streaming.mjs:60:49",
+      "state": {
+        "diagnostics": {
+          "mode": "software",
+          "selection": {
+            "automatic": false,
+            "attempts": []
+          },
+          "switching": false,
+          "videoFilters": "",
+          "audioFilters": "",
+          "toneMapping": "off",
+          "resourceLimits": {
+            "maxDecodePixels": 8294400,
+            "maxAllocationBytes": 134217728
+          },
+          "backend": {
+            "softwarePresenter": "rgb",
+            "pumpTicks": 4995,
+            "rendered": 10,
+            "renderMs": 67.19499997794628,
+            "copyMs": 16.96500000357628,
+            "maxRenderMs": 11.445000000298023,
+            "heapBytes": 134217728,
+            "epoch": 6,
+            "path": "wasm",
+            "decoder": "software",
+            "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+            "seekPrerollSeconds": 1,
+            "presentedPosition": 634.5333333333334,
+            "ioPending": true,
+            "ioSerial": 13,
+            "interruptions": 0,
+            "io": {
+              "fetchedBytes": 1088512,
+              "requests": 5,
+              "retries": 0,
+              "aborts": 0,
+              "cacheBytes": 786432,
+              "peakCacheBytes": 786432,
+              "activeBytes": 0,
+              "peakActiveBytes": 262144,
+              "size": "248805945",
+              "reads": 12,
+              "seeks": 2,
+              "interruptions": 0
+            },
+            "seeking": false,
+            "position": 634.5333333333334,
+            "queuedFrames": 0
+          }
+        },
+        "errors": [
+          "Source transport: Media read retry deadline exceeded",
+          "Error: Source transport: Media read retry deadline exceeded",
+          "Source transport: Media read retry deadline exceeded"
+        ]
+      }
+    }
+  ],
+  "passed": false
+}

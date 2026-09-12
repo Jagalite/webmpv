@@ -4,6 +4,7 @@
 #include <stdatomic.h>
 #include <libavutil/mem.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdint.h>
 #include "audio_bridge.h"
 #include "stream_bridge.h"
@@ -27,10 +28,18 @@ EMSCRIPTEN_KEEPALIVE void web_experiment_skip_render(int value) { experiment_ski
 static void render_wakeup(void *ctx) { atomic_store(&render_pending, 1); }
 
 EMSCRIPTEN_KEEPALIVE uintptr_t web_audio_ptr(void) { return (uintptr_t)&web_audio; }
+static int decode_pixels = 3840 * 2160;
+static size_t allocation_limit = 128 * 1024 * 1024;
+EMSCRIPTEN_KEEPALIVE int web_configure(int pixels, int allocation) {
+    if (player || pixels < 1 || pixels > 3840*2160 || allocation < 32*1024*1024 || allocation > 256*1024*1024) return -1;
+    decode_pixels = pixels; allocation_limit = allocation; return 0;
+}
 EMSCRIPTEN_KEEPALIVE int web_create(int rate)
 {
     if (player) return MPV_ERROR_INVALID_PARAMETER;
-    av_max_alloc(32 * 1024 * 1024);
+    av_max_alloc(allocation_limit);
+    char decoder_options[96];
+    snprintf(decoder_options,sizeof(decoder_options),"max_pixels=%d",decode_pixels);
     atomic_store(&web_audio.rate,rate);
     player = mpv_create();
     if (!player) return MPV_ERROR_NOMEM;
@@ -42,7 +51,7 @@ EMSCRIPTEN_KEEPALIVE int web_create(int rate)
         {"video-timing-offset","0"},
         {"sws-fast","yes"}, {"sws-scaler","bilinear"},
         {"vd-lavc-threads","2"}, {"ad-lavc-threads","1"},
-        {"vd-lavc-o","max_pixels=2073600"},
+        {"vd-lavc-o",decoder_options},
         {"idle","yes"}, {"keep-open","yes"}, {"pause","yes"},
         {"audio-buffer","0.1"}, {"demuxer-max-bytes","33554432"},
         {"demuxer-max-back-bytes","8388608"}, {"cache","no"},
@@ -74,6 +83,12 @@ EMSCRIPTEN_KEEPALIVE int web_create(int rate)
 EMSCRIPTEN_KEEPALIVE int web_command_args(uint32_t id,const char *a,const char *b,const char *c,const char *d)
 {
     const char *args[]={a,b,c,d,NULL};
+    return player?mpv_command_async(player,id,args):MPV_ERROR_UNINITIALIZED;
+}
+EMSCRIPTEN_KEEPALIVE int web_add_subtitle(uint32_t id, const char *path,
+                                              const char *title, const char *lang, int select)
+{
+    const char *args[]={"sub-add",path,select?"select":"auto",title,lang,NULL};
     return player?mpv_command_async(player,id,args):MPV_ERROR_UNINITIALIZED;
 }
 EMSCRIPTEN_KEEPALIVE char *web_event(void)

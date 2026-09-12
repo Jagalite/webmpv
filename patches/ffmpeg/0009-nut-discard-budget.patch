@@ -1,0 +1,29 @@
+--- a/libavformat/nutdec.c
++++ b/libavformat/nutdec.c
+@@ -1112,6 +1112,26 @@
+ 
+     stc = &nut->stream[stream_id];
+ 
++    // Preserve the no-allocation discard path for unselected streams and
++    // codecs whose container keyframe flags need no inspection.
++    discard = s->streams[stream_id]->discard;
++    if (discard >= AVDISCARD_ALL) {
++        avio_skip(bc, size);
++        return 1;
++    }
++    if (s->streams[stream_id]->codecpar->codec_id != AV_CODEC_ID_DFPWM &&
++        s->streams[stream_id]->codecpar->codec_id != AV_CODEC_ID_DIRAC) {
++        if (stc->last_flags & FLAG_KEY)
++            stc->skip_until_key_frame = 0;
++        last_IP_pts = ffstream(s->streams[stream_id])->last_IP_pts;
++        if ((discard >= AVDISCARD_NONKEY && !(stc->last_flags & FLAG_KEY)) ||
++            (discard >= AVDISCARD_BIDIR && last_IP_pts != AV_NOPTS_VALUE && last_IP_pts > pts) ||
++            stc->skip_until_key_frame) {
++            avio_skip(bc, size);
++            return 1;
++        }
++    }
++
+     ret = av_new_packet(pkt, size + nut->header_len[header_idx]);
+     if (ret < 0)
+         return ret;

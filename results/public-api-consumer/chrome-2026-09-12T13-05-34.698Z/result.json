@@ -1,0 +1,109 @@
+{
+  "family": "chrome",
+  "browser": "152.0.7977.83",
+  "archiveSHA256": "d6e1bd79bf02ea1aeab5a3538a1d11c05fda051641000a0a95af4bcb961ed19f",
+  "archive": "/Volumes/seed2/Projects/webmpv/build/public-api-candidate-2/webmpv-0.3.0-beta.2.tgz",
+  "root": "/Volumes/seed2/Projects/webmpv/build/public-api-consumer-WsyjzD",
+  "ssr": true,
+  "typecheck": true,
+  "copyPreservesUnrelated": true,
+  "bundler": "esbuild 0.28.2",
+  "checks": [
+    {
+      "name": "static application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "static application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "missing assets have structured errors",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'ABORTED'\n- 'ASSET_LOAD_FAILED'\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:28:461\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:479:9)\n    at process.callbackTrampoline (node:internal/async_hooks:130:17)\n    at async check (file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:21:70)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:28:1",
+      "state": {
+        "status": "idle",
+        "playbackIntent": "pause",
+        "pendingOperation": null,
+        "sourceId": null,
+        "currentTime": 0,
+        "duration": null,
+        "streamType": "unknown",
+        "volume": 1,
+        "muted": false,
+        "playbackRate": 1,
+        "activeMode": null,
+        "automaticSelection": false,
+        "buffered": null,
+        "seekable": null,
+        "audioTracks": [],
+        "subtitleTracks": [],
+        "mediaInfo": {
+          "displayWidth": null,
+          "displayHeight": null,
+          "aspectRatio": null,
+          "rotation": null,
+          "video": null,
+          "audio": null,
+          "subtitle": null
+        },
+        "capabilities": {
+          "videoFilters": false,
+          "audioFilters": false,
+          "mpvSubtitles": true,
+          "externalTextTracks": false,
+          "externalSubtitles": true,
+          "customFonts": true,
+          "customRequestHeaders": true,
+          "deployment": {
+            "isolated": true,
+            "webCodecs": true,
+            "mediaSource": true
+          },
+          "features": {
+            "seek": {
+              "availability": "unknown",
+              "reason": "Seek window has not been established"
+            },
+            "audioTracks": {
+              "availability": "unknown",
+              "reason": "Open a source to establish availability"
+            },
+            "subtitleTracks": {
+              "availability": "unknown",
+              "reason": "Open a source to establish availability"
+            },
+            "externalSubtitles": {
+              "availability": "available"
+            },
+            "customFonts": {
+              "availability": "available"
+            },
+            "videoFilters": {
+              "availability": "unavailable",
+              "reason": "Select software mode first"
+            },
+            "audioFilters": {
+              "availability": "unavailable",
+              "reason": "Select software mode first"
+            }
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "name": "isolation failure is distinct from unsupported media",
+      "passed": true
+    }
+  ],
+  "passed": false
+}

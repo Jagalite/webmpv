@@ -1,0 +1,62 @@
+{
+  "browser": "152.0.7977.83",
+  "family": "chrome",
+  "checks": [
+    {
+      "name": "immutable state, stable identity and no core UI import",
+      "passed": true
+    },
+    {
+      "name": "native state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "hybrid state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "software state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "canceled replacement preserves accepted state and bounded close",
+      "passed": true
+    },
+    {
+      "name": "failed replacement stays usable and redacts signed URL",
+      "passed": true
+    },
+    {
+      "name": "stable source-scoped tracks and explicit transition preservation",
+      "passed": true
+    },
+    {
+      "name": "stale backend events cannot overwrite accepted playback",
+      "passed": true
+    },
+    {
+      "name": "unknown duration and live windows remain truthful (adapter injection)",
+      "passed": true
+    },
+    {
+      "name": "waiting and ended reflect observed playback (native events)",
+      "passed": true
+    },
+    {
+      "name": "idempotent destroy settles queue and removes workers",
+      "passed": true
+    },
+    {
+      "name": "no uncaught errors",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/unified-player.ts": "7f4cf6f21657655579c2457197b98cf11262d16d49e261a9d28a4dccb192f5a1",
+    "src/types.ts": "fd9959449062fdb377b3da3924957fe1d1e3c21b6f1a0b98f1005f8a0426eea1",
+    "src/internal/wasm-player.ts": "1791e0e10087c062af6cba1347ee3e0adca62929b95a6217b753fb1cbb67162b",
+    "src/internal/native-player.ts": "433b755e0aee9e68dc32ff891fc9cd1eb7cf1138f176d3b8fac39de236ad1296",
+    "tests/public-api.mjs": "ac33e826283f07c40ecd652206cc5c2af05c30f0118d7e9d2c351d6231418426"
+  },
+  "passed": true
+}

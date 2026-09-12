@@ -1,0 +1,209 @@
+{
+  "scope": "Generated source functional qualification; no physical-speaker, HDR display or real-time 4K claim",
+  "started": "2026-09-11T16:44:50.272Z",
+  "cases": [
+    {
+      "name": "Standard dynamic DASH open, playback and cancellation",
+      "passed": true,
+      "milliseconds": 1670,
+      "evidence": {
+        "manifestRequests": 3,
+        "state": {
+          "properties": {
+            "time-pos": 0.16666666666666666,
+            "duration": 1.3333333333333333,
+            "pause": false,
+            "eof-reached": false,
+            "track-list": [
+              {
+                "id": "1",
+                "type": "video",
+                "image": false,
+                "albumart": false,
+                "default": true,
+                "forced": false,
+                "dependent": false,
+                "visual-impaired": false,
+                "hearing-impaired": false,
+                "external": false,
+                "selected": true,
+                "main-selection": 0,
+                "ff-index": 0,
+                "hls-bitrate": 8264,
+                "program-id": 0,
+                "decoder": "h264",
+                "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec": "h264",
+                "codec-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "codec-profile": "Constrained Baseline",
+                "demux-w": 320,
+                "demux-h": 180,
+                "demux-fps": 12,
+                "format-name": "yuv420p",
+                "metadata": {
+                  "variant_bitrate": "8264",
+                  "id": "0"
+                }
+              }
+            ],
+            "video-codec": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "volume": 100,
+            "speed": 1,
+            "paused-for-cache": false,
+            "cache-buffering-state": 100,
+            "demuxer-cache-state": {
+              "cache-end": 1.25,
+              "reader-pts": 0.16666666666666666,
+              "cache-duration": 1.0833333333333333,
+              "eof": false,
+              "underrun": false,
+              "idle": true,
+              "total-bytes": 5288,
+              "fw-bytes": 5288,
+              "raw-input-rate": 1317,
+              "debug-low-level-seeks": 0,
+              "debug-byte-level-seeks": 0,
+              "debug-ts-last": 1.25,
+              "ts-per-stream": [
+                {
+                  "type": "video",
+                  "cache-duration": 1.0833333333333333,
+                  "reader-pts": 0.16666666666666666,
+                  "cache-end": 1.25
+                }
+              ],
+              "bof-cached": false,
+              "eof-cached": false,
+              "seekable-ranges": []
+            },
+            "decoder-frame-drop-count": 0,
+            "frame-drop-count": 0,
+            "video-params": {
+              "pixelformat": "yuv420p",
+              "average-bpp": 12,
+              "w": 320,
+              "h": 180,
+              "dw": 320,
+              "dh": 180,
+              "crop-x": 0,
+              "crop-y": 0,
+              "crop-w": 320,
+              "crop-h": 180,
+              "aspect": 1.7777777777777777,
+              "aspect-name": "16:9",
+              "par": 1,
+              "sar": 1.7777777777777777,
+              "sar-name": "16:9",
+              "colormatrix": "bt.601",
+              "colorlevels": "limited",
+              "primaries": "bt.709",
+              "gamma": "bt.1886",
+              "sig-peak": 0,
+              "light": "display",
+              "chroma-location": "mpeg2/4/h264",
+              "stereo-in": "mono",
+              "rotate": 0
+            }
+          },
+          "diagnostics": {
+            "mode": "software",
+            "selection": {
+              "automatic": false,
+              "attempts": []
+            },
+            "switching": false,
+            "videoFilters": "",
+            "audioFilters": "",
+            "toneMapping": "off",
+            "resourceLimits": {
+              "maxDecodePixels": 8294400,
+              "maxAllocationBytes": 134217728
+            },
+            "backend": {
+              "softwarePresenter": "rgb",
+              "pumpTicks": 94,
+              "rendered": 5,
+              "renderMs": 3.580000001937151,
+              "copyMs": 3.4649999998509884,
+              "maxRenderMs": 2.5099999997764826,
+              "heapBytes": 134217728,
+              "epoch": 0,
+              "path": "wasm",
+              "decoder": "software",
+              "demuxFormat": "dash",
+              "seekPrerollSeconds": 1,
+              "presentedPosition": 0.16666666666666666,
+              "ioPending": false,
+              "ioSerial": 15,
+              "interruptions": 0,
+              "io": {
+                "opens": 6,
+                "requests": 6,
+                "retries": 0,
+                "aborts": 0,
+                "handles": 2,
+                "retainedBytes": 1516,
+                "peakRetainedBytes": 2113,
+                "fetchedBytes": 5381,
+                "size": "0",
+                "reads": 6,
+                "seeks": 1,
+                "interruptions": 0
+              },
+              "seeking": false,
+              "position": 0.16666666666666666,
+              "queuedFrames": 0
+            }
+          },
+          "audio": {
+            "requestedOutput": "stereo",
+            "outputChannels": 2,
+            "deviceChannels": 2,
+            "channelLayout": "stereo",
+            "state": "running",
+            "sampleRate": 48000,
+            "mediaFrames": 0,
+            "underruns": 0,
+            "rms": 0,
+            "latencyConfidence": "reported-latency estimate"
+          },
+          "logs": [
+            "ffmpeg: swscaler: No accelerated colorspace conversion found from yuv420p to rgba.\n"
+          ]
+        }
+      }
+    }
+  ],
+  "browser": "152.0.7977.83",
+  "hashes": {
+    "src/unified-player.ts": "ea1f59feaf6a0466e169a1930e420df7a8066b24f129c675902ad36ff4c3c867",
+    "src/internal/wasm-player.ts": "6193830317cec627d266f9477df6993965c20d40d6da810964c69bbe82d48621",
+    "web/software-full-engine-worker.js": "1e1b447a8229f9d3a46fff23bac8770879bcfb9811065619c4cc1eec63975292",
+    "web/filter-retained-engine-worker.js": "a850fb64d4764c51871775dbb18d887002f3c9d8b7c3c2d46e80105a75f5e8cd",
+    "web/audio-worklet.js": "7e9bab53911f10f6e05822ceffaa1136670835088d0da3285a5f05c617aad590",
+    "web/resource-loader.js": "146edc9f32f6cbff9c36c534fc51a941272971189be4bb28ecd0ea4b1524d25e",
+    "web/streaming-manifest.js": "a82d5c4eb6a6ba0b002665d3c7fa4bb4c7aaba7f77caf8833b3b06bb96445a63",
+    "web/segmented-subtitles.js": "7417266d8f4f586f3ec356edfeb84ba8a08827103d7ac80e7a7019027d5a59cb",
+    "web/engine-software-full/player.wasm": "4fa470481dd5be45a0b87873b91dfd2d8bd0d15bf00a4ed10a6cb978800fc49c",
+    "web/engine-hybrid/player.wasm": "07799fc02d05f6f6396f96375084cac235379a4ec99d1f1462ebeac4505aefb0",
+    "tests/compatibility-expansion.mjs": "e895c984ff4194f94f05eea611eb803dee4fb388fd1b1a824f65620fddcd3ebd",
+    "build/fixtures/compatibility/manifest.json": "d288d53f35f3c3fb35b3c3f06f89b233e4e908f1ca47fbb13e17c7eb93bd3d7f"
+  },
+  "finished": "2026-09-11T16:44:55.761Z",
+  "hashesAfter": {
+    "src/unified-player.ts": "ea1f59feaf6a0466e169a1930e420df7a8066b24f129c675902ad36ff4c3c867",
+    "src/internal/wasm-player.ts": "6193830317cec627d266f9477df6993965c20d40d6da810964c69bbe82d48621",
+    "web/software-full-engine-worker.js": "1e1b447a8229f9d3a46fff23bac8770879bcfb9811065619c4cc1eec63975292",
+    "web/filter-retained-engine-worker.js": "a850fb64d4764c51871775dbb18d887002f3c9d8b7c3c2d46e80105a75f5e8cd",
+    "web/audio-worklet.js": "7e9bab53911f10f6e05822ceffaa1136670835088d0da3285a5f05c617aad590",
+    "web/resource-loader.js": "146edc9f32f6cbff9c36c534fc51a941272971189be4bb28ecd0ea4b1524d25e",
+    "web/streaming-manifest.js": "a82d5c4eb6a6ba0b002665d3c7fa4bb4c7aaba7f77caf8833b3b06bb96445a63",
+    "web/segmented-subtitles.js": "7417266d8f4f586f3ec356edfeb84ba8a08827103d7ac80e7a7019027d5a59cb",
+    "web/engine-software-full/player.wasm": "4fa470481dd5be45a0b87873b91dfd2d8bd0d15bf00a4ed10a6cb978800fc49c",
+    "web/engine-hybrid/player.wasm": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/compatibility-expansion.mjs": "e895c984ff4194f94f05eea611eb803dee4fb388fd1b1a824f65620fddcd3ebd",
+    "build/fixtures/compatibility/manifest.json": "d288d53f35f3c3fb35b3c3f06f89b233e4e908f1ca47fbb13e17c7eb93bd3d7f"
+  },
+  "passed": false,
+  "inputsUnchanged": false
+}

@@ -123,7 +123,7 @@ static int seek_ts(double target){
   clear_prefetch();aac_anchor=AV_NOPTS_VALUE;aac_count=0;double point=target>back?target-back:0;
   int r=point>0?av_seek_frame(in,video,(int64_t)((point+origin)/av_q2d(in->streams[video]->time_base)),AVSEEK_FLAG_BACKWARD):av_seek_frame(in,-1,0,AVSEEK_FLAG_BYTE|AVSEEK_FLAG_BACKWARD);
   if(r<0)return reject("Source seek failed or discontinuous timeline");avformat_flush(in);
-  r=configure_aac(in->streams[audio]->codecpar,NULL,0);if(r<0)return r;
+  if(audio>=0){r=configure_aac(in->streams[audio]->codecpar,NULL,0);if(r<0)return r;}
   int bytes=0,found=0;
   for(int count=0;count<4096;count++){
    AVPacket*q=av_packet_alloc();r=av_read_frame(in,q);if(r<0){av_packet_free(&q);break;}bytes+=q->size;
@@ -236,8 +236,8 @@ EMSCRIPTEN_KEEPALIVE int rm_open(double size,int selected_video,int selected_aud
  AVCodecParameters*ap=audio>=0?in->streams[audio]->codecpar:NULL;audio_codec[0]=0;
  mux_webm=(video>=0&&in->streams[video]->codecpar->codec_id==AV_CODEC_ID_VP8)||(ap&&ap->codec_id==AV_CODEC_ID_VORBIS)||(video<0&&ap&&ap->codec_id==AV_CODEC_ID_OPUS);
  EM_ASM({Module.container=$0?'webm':'mp4';},mux_webm);
- if(is_ts&&(video<0||generic_video||!ap||ap->codec_id!=AV_CODEC_ID_AAC))return reject("TS timestamp repair currently requires AVC and AAC");
- if(is_ts){
+ if(is_ts&&(video<0||generic_video||(ap&&ap->codec_id!=AV_CODEC_ID_AAC)))return reject("TS timestamp repair requires AVC with optional AAC audio");
+ if(is_ts&&ap){
   int bytes=0,found=0;
   for(int i=0;i<256;i++){AVPacket*q=av_packet_alloc();r=av_read_frame(in,q);if(r<0){av_packet_free(&q);return r;}prefetch[prefetched++]=q;bytes+=q->size;if(bytes>2*1024*1024)return reject("AAC probe budget exceeded");if(q->stream_index==audio){r=configure_aac(ap,q->data,q->size);if(r<0)return r;found=1;break;}}
   if(!found)return reject("AAC configuration probe exhausted");

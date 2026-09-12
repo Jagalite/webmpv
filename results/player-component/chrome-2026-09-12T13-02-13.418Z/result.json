@@ -1,0 +1,59 @@
+{
+  "family": "chrome",
+  "browser": "152.0.7977.83",
+  "checks": [
+    {
+      "name": "two idle instances, lazy engines and idempotent registration",
+      "passed": true
+    },
+    {
+      "name": "same public core and independent playback",
+      "passed": true
+    },
+    {
+      "name": "keyboard shortcuts scoped and focused controls retain native behavior",
+      "passed": true
+    },
+    {
+      "name": "timeline previews locally and commits once",
+      "passed": true
+    },
+    {
+      "name": "settings focus restoration and accessible controls",
+      "passed": true
+    },
+    {
+      "name": "fullscreen contains controls and keeps settings inside",
+      "passed": true
+    },
+    {
+      "name": "synchronous DOM moves keep the same core",
+      "passed": true
+    },
+    {
+      "name": "removal releases resources and reconnect waits for cleanup",
+      "passed": true
+    },
+    {
+      "name": "src changes cancel stale opens; property reflection and pre-upgrade properties",
+      "passed": true
+    },
+    {
+      "name": "terminal destruction before connection settles ready",
+      "passed": true
+    },
+    {
+      "name": "mobile, reduced motion, high contrast and no uncaught errors",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/player/index.ts": "9165f0f23cd686b6874287cf08c48e7f743e129a3a005ef1b1ab3151a546e594",
+    "src/player/styles.ts": "49e5b86447508c6256507108a9bda34c3c4e4c95f565baa9d80794d5762a3ee1",
+    "src/unified-player.ts": "8331ffd9fd21f9b336971cbcfea8a8099e5219f3bb9fe8a79e9ca40084a78095",
+    "tests/player-component.mjs": "a8c4af24d4d10ca7e97bdf8fca8cae84ce92cec3547d09a53303cb6602807386"
+  },
+  "screenReader": "Semantic accessibility tree and keyboard checks; no physical screen-reader session",
+  "accessibility": "- region \"Media player\":\n  - slider \"Playback position\": \"3\"\n  - button \"Play\"\n  - text: 0:03 / 0:12\n  - button \"Mute\"\n  - slider \"Volume\": \"1\"\n  - button \"Playback settings\"\n  - button \"Fullscreen\"",
+  "passed": true
+}

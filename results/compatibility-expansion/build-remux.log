@@ -1,0 +1,11 @@
+make: make -j 4
+CC	libavformat/nutdec.o
+src/libavformat/nutdec.c:1087:13: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+ 1087 |         int code = data[at + 4];
+      |             ^
+src/libavformat/nutdec.c:1162:20: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+ 1162 |     enum AVCodecID codec = s->streams[stream_id]->codecpar->codec_id;
+      |                    ^
+2 warnings generated.
+AR	libavformat/libavformat.a
+emcc: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]

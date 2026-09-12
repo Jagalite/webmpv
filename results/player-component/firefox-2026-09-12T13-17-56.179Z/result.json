@@ -1,0 +1,67 @@
+{
+  "family": "firefox",
+  "browser": "146.0.1",
+  "checks": [
+    {
+      "name": "two idle instances, lazy engines and idempotent registration",
+      "passed": true
+    },
+    {
+      "name": "same public core and independent playback",
+      "passed": true
+    },
+    {
+      "name": "keyboard shortcuts scoped and focused controls retain native behavior",
+      "passed": true
+    },
+    {
+      "name": "timeline previews locally and commits once",
+      "passed": true
+    },
+    {
+      "name": "settings focus restoration and accessible controls",
+      "passed": true
+    },
+    {
+      "name": "fullscreen contains controls and keeps settings inside",
+      "passed": true
+    },
+    {
+      "name": "synchronous DOM moves keep the same core",
+      "passed": true
+    },
+    {
+      "name": "removal releases resources and reconnect waits for cleanup",
+      "passed": true
+    },
+    {
+      "name": "src changes cancel stale opens; property reflection and pre-upgrade properties",
+      "passed": true
+    },
+    {
+      "name": "close cancels an open waiting for initial connection",
+      "passed": true
+    },
+    {
+      "name": "terminal destruction before connection settles ready",
+      "passed": true
+    },
+    {
+      "name": "mobile, reduced motion, high contrast and no uncaught errors",
+      "passed": true
+    },
+    {
+      "name": "migrated playground uses the shipped component and core",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/player/index.ts": "667f76e1ed2bc757f14071a2394df1c9a3ac1f277de6aac1e4295c4385d29da7",
+    "src/player/styles.ts": "49e5b86447508c6256507108a9bda34c3c4e4c95f565baa9d80794d5762a3ee1",
+    "src/unified-player.ts": "7f4cf6f21657655579c2457197b98cf11262d16d49e261a9d28a4dccb192f5a1",
+    "tests/player-component.mjs": "d5dd1c86a70a6e3174b309a6d88c327ca85846b23ab2c73958c41e370c6cf69c"
+  },
+  "screenReader": "Semantic accessibility tree and keyboard checks; no physical screen-reader session",
+  "accessibility": "- region \"Media player\":\n  - slider \"Playback position\": \"3\"\n  - button \"Play\"\n  - text: 0:03 / 0:12\n  - button \"Mute\"\n  - slider \"Volume\": \"1\"\n  - button \"Playback settings\"\n  - button \"Fullscreen\"",
+  "passed": true
+}

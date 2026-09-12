@@ -1,0 +1,83 @@
+{
+  "passed": false,
+  "started": "2026-09-12T03:09:54.392Z",
+  "checks": [
+    "Local server media types, byte ranges, validators and HEAD",
+    "Isolated page, automatic controls and desktop layout",
+    "First-source failure is visible and retains all failed engine attempts",
+    "Real local File playback with no upload",
+    "Pause, volume, playback speed and seek",
+    "Manual Hybrid and Software switching",
+    "SRT and custom font uploads through the real API",
+    "HDR-to-SDR control"
+  ],
+  "browser": "152.0.7977.83",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'' !== 'volume=0.5'\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/player-demo.mjs:92:10",
+  "state": {
+    "status": "TypeError: Cannot set properties of undefined (setting 'width')\n    at self.onmessage (http://127.0.0.1:52885/web/software-full-engine-worker.js:203:99)",
+    "diagnostics": {
+      "mode": "software",
+      "selection": {
+        "automatic": false,
+        "attempts": [
+          {
+            "mode": "probe",
+            "outcome": "selected",
+            "reason": "Local MP4 metadata: 16329 bytes; no inspector Wasm required"
+          },
+          {
+            "mode": "native",
+            "outcome": "selected",
+            "reason": "Playback requirements and actual presentation accepted"
+          }
+        ]
+      },
+      "switching": false,
+      "videoFilters": "hflip",
+      "audioFilters": "",
+      "toneMapping": "off",
+      "resourceLimits": {
+        "maxDecodePixels": 8294400,
+        "maxAllocationBytes": 134217728
+      },
+      "backend": {
+        "softwarePresenter": "rgb",
+        "pumpTicks": 77,
+        "rendered": 6,
+        "renderMs": 39.34499999973923,
+        "copyMs": 21.165000000037253,
+        "maxRenderMs": 10.365000000223517,
+        "heapBytes": 134217728,
+        "epoch": 4,
+        "path": "wasm",
+        "decoder": "software",
+        "demuxFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "seekPrerollSeconds": 1,
+        "presentedPosition": 2,
+        "ioPending": false,
+        "ioSerial": 4,
+        "interruptions": 0,
+        "io": {
+          "fetchedBytes": 652457,
+          "requests": 4,
+          "aborts": 0,
+          "discardedBytes": 0,
+          "cacheBytes": 0,
+          "peakCacheBytes": 0,
+          "activeBytes": 0,
+          "peakActiveBytes": 252568,
+          "peakChunkBytes": 65536,
+          "peakOwnedBytes": 318104,
+          "size": "1372304",
+          "reads": 4,
+          "seeks": 3,
+          "interruptions": 0
+        },
+        "seeking": false,
+        "position": 2,
+        "queuedFrames": 0
+      }
+    }
+  },
+  "finished": "2026-09-12T03:10:10.569Z"
+}

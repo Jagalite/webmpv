@@ -1,8 +1,9 @@
 {
   "schema": 1,
-  "scope": "Built-in software playback, FFmpeg 7.1.1. Registrations are not per-format runtime qualification.",
+  "scope": "Software playback with dav1d and zimg, FFmpeg 7.1.1. Registrations are not per-format runtime qualification.",
+  "rotation": "RGB VO clears ROTATE90; mpv autorotates before software rendering.",
   "decoderSimd": true,
-  "selection": "Upstream defaults with GPL filters and already bundled zlib/libxml2/libass; no new external codec libraries. Encoding, muxing, devices, hardware acceleration and native network protocols disabled.",
+  "selection": "Upstream defaults with GPL filters and already bundled zlib/libxml2/libass; dav1d AV1 decoding and zimg color conversion. Encoding, muxing, devices, hardware acceleration and native network protocols disabled.",
   "baseline": {
     "decoder": [
       "AAC",
@@ -272,6 +273,7 @@
       "KMVC",
       "LAGARITH",
       "LEAD",
+      "LIBDAV1D",
       "LOCO",
       "LSCR",
       "M101",
@@ -1480,7 +1482,8 @@
       "YAEPBLUR",
       "YUVTESTSRC",
       "ZONEPLATE",
-      "ZOOMPAN"
+      "ZOOMPAN",
+      "ZSCALE"
     ],
     "encoder": [],
     "muxer": [],
@@ -1712,6 +1715,7 @@
       "KMVC",
       "LAGARITH",
       "LEAD",
+      "LIBDAV1D",
       "LOCO",
       "LSCR",
       "M101",
@@ -2897,7 +2901,8 @@
       "YAEPBLUR",
       "YUVTESTSRC",
       "ZONEPLATE",
-      "ZOOMPAN"
+      "ZOOMPAN",
+      "ZSCALE"
     ],
     "encoder": [],
     "muxer": [],
@@ -2907,8 +2912,8 @@
   "counts": {
     "decoder": {
       "baseline": 6,
-      "expanded": 496,
-      "added": 490
+      "expanded": 497,
+      "added": 491
     },
     "demuxer": {
       "baseline": 11,
@@ -2927,8 +2932,8 @@
     },
     "filter": {
       "baseline": 6,
-      "expanded": 472,
-      "added": 466
+      "expanded": 473,
+      "added": 467
     },
     "encoder": {
       "baseline": 0,
@@ -2952,66 +2957,71 @@
     }
   },
   "knownLimitations": [
-    "Built-in AV1 registration in FFmpeg 7.1.1 has no software reconstruction; software AV1 needs an external library.",
     "Only representative fixtures are runtime checked. No all-format or real-time guarantee.",
-    "Existing 1080p pixel cap, 512 MiB Wasm cap, 32 MiB individual allocation/local-file limits, stereo output and browser I/O restrictions remain."
+    "Output remains within 1080p. Configurable input cap up to 4K, 1 GiB heap cap, 32-256 MiB individual allocation cap; ArrayBuffer inputs remain capped at 32 MiB. PCM layout depends on device negotiation. Browser I/O restrictions remain."
   ],
   "artifacts": {
     "web/engine-software-full/player.mjs": {
-      "bytes": 53315,
-      "gzipBytes": 14515,
-      "sha256": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e"
+      "bytes": 60540,
+      "gzipBytes": 15728,
+      "sha256": "59d5407debb60253f3c785e809011478eeec9f0413e2cbffc9999b4f1906adb7"
     },
     "web/engine-software-full/player.wasm": {
-      "bytes": 20752667,
-      "gzipBytes": 7656068,
-      "sha256": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9"
+      "bytes": 21427704,
+      "gzipBytes": 7920537,
+      "sha256": "beda71fb5dbc56b5e0a6cb7ac2c060c1cc010fee7ed446d5dce0b2db1fb611ef"
     }
   },
   "hashes": {
-    "build/obj-software-full-ffmpeg/config.h": "11929043c0000a8789c4bbc123639cb54eba0b7cfd74987ed6cc0e74346332cf",
+    "build/obj-software-full-ffmpeg/config.h": "e5d2eea9a0bbc15d63593db41261ea6cd9c89141e9ffbee0b1bd844fe92c6080",
     "build/obj-software-full-ffmpeg/libavutil/ffversion.h": "ffa457d6d4cfeb3f4a53e82998ae74d50bcff46cacf6dd9b0c0cfc7afb7b4f61",
-    "build/obj-software-full-ffmpeg/config_components.h": "54992dde29ce601a9e10e70db72fe1280c3b0a16444f98dd657bce3e6562a419",
-    "build/obj-software-full-ffmpeg/configure-request": "0fd081ea967e0c92b551c0c3ac8201d0f5e8a5b846603ad5cebfc1befa24f993",
-    "sources.lock.json": "70019eb91b62a65348706d9232a51f8eb31d099560a741a5c50ab7eb65677e51",
+    "build/obj-software-full-ffmpeg/config_components.h": "fee65661908f29a243d5e6a5004556d58316d6e02cc6ea37821dd7f91f548293",
+    "build/obj-software-full-ffmpeg/configure-request": "1c259b97ba99210263a913f292978c75b72b65b405df3d00064e7f3b784a6606",
+    "sources.lock.json": "ceaeb1bf1ae0d0079d5fd7955894a7330cd20348972993ae14367415948145c0",
     "toolchain.lock.json": "160b8c7090ff9406cd649ad223d59d675ea345b984a54b276624082ed49762c6",
-    "build/prefix/lib/libmpv.a": "534cd5de05982fc372ee10a090d31ee4d6ab9f5a8454da9bf36d3df04daba1f2",
+    "build/prefix/lib/libmpv.a": "43c68e017d3b3129e07486bd6fffa695652c3bdd6f16cdce8d02905d0960baff",
     "build/obj-mpv/config.h": "6d81971517392dd0bf7f494fc0376e162a92c968788c0f186b4c3f6b4adcb5bc",
-    "build/obj-software-full-ffmpeg/libavcodec/libavcodec.a": "331cc794da297555b78d944d08ddc61a82afa394574d7e9e5fe816ce3c28dd0c",
-    "build/obj-software-full-ffmpeg/libavfilter/libavfilter.a": "04f86c3d3544c19e2f26e2a7c210c7d05388f3e7c248c5700857ea796590c9ae",
-    "build/obj-software-full-ffmpeg/libavformat/libavformat.a": "7098662ec4fd2a247c30a33bf5d973cd91d1c8d8be61430c317945a34db67068",
-    "build/obj-software-full-ffmpeg/libavutil/libavutil.a": "7cec6a7720ce81e0f52df9a2fdc9a6212b6e2c383644d7ac79407307a86c4cf7",
-    "build/obj-software-full-ffmpeg/libpostproc/libpostproc.a": "b17de7838e074e1d4844c1358849c9ce591467ad755f3462e7113ec7e889571d",
-    "build/obj-software-full-ffmpeg/libswresample/libswresample.a": "ea7f20fc42fe3887962c2eb127f1fa5568ea94e9cda9428b7ad39abcc6ababe0",
-    "build/obj-software-full-ffmpeg/libswscale/libswscale.a": "806ecae72bc0441b6ebe5eb2582647e6338e19a2f52a95acddd2e5ca7363957e",
-    "native/player.c": "a48655b92a18ddc035656438900e719a2c4f1c3952c7c52d16ddaa6898144ac4",
+    "build/obj-software-full-ffmpeg/libavcodec/libavcodec.a": "039f0d9e068ce79667b49229684ee847d9fb7bfbaa4364512511c6b0343a13f0",
+    "build/obj-software-full-ffmpeg/libavfilter/libavfilter.a": "df2889063a24b030b3ae4fdea1fa2c5a86f85e033b7e462aaeed9c69bdb580c3",
+    "build/obj-software-full-ffmpeg/libavformat/libavformat.a": "db21e81a3dffb46bcd40833223bf553bd593a23eb6c08618db9f451e9fba4cf3",
+    "build/obj-software-full-ffmpeg/libavutil/libavutil.a": "37dcaebf9f8e1a823acb4bd7047c0f8a6cfc80c78cbf8224c707997d20bf88f3",
+    "build/obj-software-full-ffmpeg/libpostproc/libpostproc.a": "fac8b7012333cdc73dac767d3ca178715ca77ccd484d483d84ac2bef75bf2147",
+    "build/obj-software-full-ffmpeg/libswresample/libswresample.a": "286254b463e3f74c0c44a049943524e3f706884040c11b930013731aadc42baa",
+    "build/obj-software-full-ffmpeg/libswscale/libswscale.a": "41acd89c635548b20f5bc61061999be74afe93dcc5437d3958bf658f120c48ec",
+    "native/player.c": "fccba678246f8ae16251ebc3b3acd2bc08d2c0c933a7fdc17823e5fb7a53e421",
     "native/events.c": "6981c5e2c391417a8731a6ef00322a4ad94ebf51e1162b9be60871b4899e081c",
-    "native/stream_bridge.c": "78c5e7665bcb1e5122c2793e51086f86a6da7f3e482a703f50b0f0ef2672ebe5",
+    "native/stream_bridge.c": "56ec36f48c1461deb30246bf664abd90a5c003e201e3a7a3c38c667295202ec5",
     "native/stream_bridge.h": "9d72d750f4103453831cf0c0b0f5d41b011db2a321da81093100ed4851cc13e9",
     "web/engine-worker.js": "77a8acecdce48e05332b0b77d20aa140e27bd7f9db7f93261bb97a893fe61382",
     "web/generated/player.js": "e3f81044f32634c064c5a6f8f23c7914c9ae9fe5d32e45b5a6c1c3eef1b4a4d4",
-    "web/software-full-engine-worker.js": "c91d620603dc49bc83b958569d3ca6a6e5c0fee120a4c4fbd99a3c6aeecf48b0",
+    "web/software-full-engine-worker.js": "1e1b447a8229f9d3a46fff23bac8770879bcfb9811065619c4cc1eec63975292",
     "web/generated/software-full-player.js": "2208b32d8aaa47570696f2a1ccb087b2bb42960d6d7789d454ef33d0ca439a68",
     "web/software-full.html": "c082f43c678d4a342c92e1620de5c05886a00f8dc7a7f65be9b835030418a29e",
-    "web/audio-worklet.js": "ba8dcad80407e6f91b0d87c66a35018caf4d65caf8d4fb4fcbdbf6a58c892ce1",
-    "web/io-worker.js": "edce1fc9018d0c99d54a01bb221ae86cbc0c22a25377c8a6792bbb7b69d5216c",
-    "web/range-reader.js": "6db70d5dc078a6e2171a9c5e7c5bb7ebb43cd8214d9f1fd9870c301bc76c9403",
-    "web/resource-loader.js": "a083c774a9846bd228c08023d2d324561d998dc12dc973066fccabcea053d473",
-    "web/vod-manifest.js": "bfa7141a0370939c071f3f227a37b9c021893bf1b12ede138604ec714c0b2d79",
+    "web/audio-worklet.js": "7e9bab53911f10f6e05822ceffaa1136670835088d0da3285a5f05c617aad590",
+    "web/io-worker.js": "cc82ed68dd38d72a037e0491aaec99991cfb2be1238237e51f5f4e2f0d406bbd",
+    "web/range-reader.js": "540294772b1f54adac5cf35ebbac479bed3e689e5feb505f2073d1a9256c8d86",
+    "web/resource-loader.js": "146edc9f32f6cbff9c36c534fc51a941272971189be4bb28ecd0ea4b1524d25e",
+    "web/vod-manifest.js": "309380e05021e2c146a22ca522b3fe7ad2fafb97582421668275685e74db7a44",
     "fixtures/DejaVuSans.ttf": "7da195a74c55bef988d0d48f9508bd5d849425c1770dba5d7bfc6ce9ed848954",
     "experiments/software-full/README.md": "c96b861b98fb33ae7f7c73788ba13582f7751f114c78cb67b3b2eab2011b16d7",
-    "experiments/software-full/build.sh": "ad4bf7ed36d6d02e2aa99e299e3e7a65b096dbf9bc45793d7bd84b1facfa7106",
+    "experiments/software-full/build.sh": "19918a18de6e7dc3724cd3b715392dba4ec64bee174f76fc249c66e353986725",
     "experiments/software-full/fixtures.py": "947fa873486221c89c5cf8070cfc10e71d10d5244eb41c0a9a69525abe217df1",
-    "experiments/software-full/inventory.py": "6628e32b5dc56c9a6c14e6fd3b2d8de6f61683aa874798ef3ff9bcf10ec277aa",
+    "experiments/software-full/inventory.py": "04113694e09308d87ac827025c78ebb6d1c46c52daf1cdac394b69022cd0eb9b",
     "experiments/software-full/prepare.py": "23a93b9371f446fb084f6343e03da6189be8e95feef22fc558406bc34e586f19",
     "experiments/software-full/scheduler.py": "eafb445d5d4723bf134d2514ffbab2b149fc3ce4b301e3900c7f20070c4940e7",
+    "build/prefix-playback/lib/libdav1d.a": "c4973adab0601b3138a3ecd248707736ae80318ec033c6e037d15ee3a61545a7",
+    "build/prefix-playback/lib/libzimg.a": "45586851082cb0973b8eb405bd06de9a4ba1f4eacd8257eda68e40c1fe01fed5",
     "native/simd/h264-biweight.c": "64778b147ad1ae29229b26c562b16bea2623b6cb94d58a814afad32ca401c8cc",
     "native/simd/h264-chroma.c": "aef6da01de0977579070e319bab406ae0f476be5df7e9b746bca395280bedc08",
     "native/simd/h264-deblock.c": "bd7aeef24c437bd440307b6df7233df563af86d8d2a65065bc3b6f4a8f1ccdd6",
     "native/simd/h264-dsp.c": "7f7ccc4b7a21f800cb65f249c1282f0a2b0f54ff4057a876fc947944a91ae02c",
     "native/simd/h264-qpel.c": "e4fd3152c592f3858b4c69731281494a18abe55dbbc2a09d6a76e0cd51f65683",
     "scripts/decoder-simd.sh": "733099a4c6e40fb9ef075d02eee912d293432245691a01eb88b15fe183384234",
-    "web/engine-software-full/player.mjs": "a9c772f4b44d884955889c9fab733e4bc0c0842322c69e9fd06316124b4ddf7e",
-    "web/engine-software-full/player.wasm": "7153a26494cec767bc7fc859d353b56e774f0ac57dd9da4bf9f535e3984283e9"
+    "scripts/compile-software-vo.py": "3bcc331048457e275488a52a31881707d644316815be8cb8780dcea37951f83d",
+    "build/software-vo/compile-command.json": "a871bb33776ececf0ad2184571551dbcbc0100b5d7a6893c441e1d676cd06f5b",
+    "build/software-vo/vo_libmpv.c": "c98d4cdbb42295e6ed57ff10fc6dd770b7afc415d2f5891e3ee329abc280da04",
+    "build/software-vo/vo_libmpv.o": "d4ecc4bc33e91989a5de7068460b8a71505ba89534488e5233cc5b0efde4f813",
+    "web/engine-software-full/player.mjs": "59d5407debb60253f3c785e809011478eeec9f0413e2cbffc9999b4f1906adb7",
+    "web/engine-software-full/player.wasm": "beda71fb5dbc56b5e0a6cb7ac2c060c1cc010fee7ed446d5dce0b2db1fb611ef"
   }
 }

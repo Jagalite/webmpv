@@ -1,0 +1,129 @@
+{
+  "family": "firefox",
+  "browser": "146.0.1",
+  "checks": [
+    {
+      "mode": "native",
+      "passed": true,
+      "evidence": {
+        "code": "AUTOPLAY_BLOCKED",
+        "message": "The play method is not allowed by the user agent or the platform in the current context, possibly because the user denied permission.",
+        "state": {
+          "status": "paused",
+          "playbackIntent": "pause",
+          "pendingOperation": null,
+          "sourceId": 1,
+          "currentTime": 0,
+          "duration": 12.034,
+          "streamType": "vod",
+          "volume": 1,
+          "muted": false,
+          "playbackRate": 1,
+          "activeMode": "native",
+          "automaticSelection": true,
+          "buffered": [
+            {
+              "start": 0,
+              "end": 12.001
+            }
+          ],
+          "seekable": [
+            {
+              "start": 0,
+              "end": 12.034
+            }
+          ],
+          "audioTracks": [],
+          "subtitleTracks": [],
+          "mediaInfo": {
+            "displayWidth": 640,
+            "displayHeight": 360,
+            "aspectRatio": 1.7777777777777777,
+            "rotation": null,
+            "video": null,
+            "audio": null,
+            "subtitle": null
+          },
+          "capabilities": {
+            "videoFilters": true,
+            "audioFilters": true,
+            "mpvSubtitles": false,
+            "externalTextTracks": true,
+            "externalSubtitles": true,
+            "customFonts": true,
+            "customRequestHeaders": true,
+            "deployment": {
+              "isolated": true,
+              "webCodecs": true,
+              "mediaSource": true
+            },
+            "features": {
+              "seek": {
+                "availability": "available"
+              },
+              "audioTracks": {
+                "availability": "unavailable",
+                "reason": "Audio track selection is not exposed by this source/browser"
+              },
+              "subtitleTracks": {
+                "availability": "unavailable",
+                "reason": "No subtitle tracks are available"
+              },
+              "externalSubtitles": {
+                "availability": "switch",
+                "mode": "hybrid",
+                "reason": "This feature requires hybrid playback"
+              },
+              "customFonts": {
+                "availability": "switch",
+                "mode": "hybrid",
+                "reason": "This feature requires hybrid playback"
+              },
+              "videoFilters": {
+                "availability": "switch",
+                "mode": "software",
+                "reason": "This feature requires software playback"
+              },
+              "audioFilters": {
+                "availability": "switch",
+                "mode": "software",
+                "reason": "This feature requires software playback"
+              }
+            }
+          },
+          "error": null
+        },
+        "attempts": [
+          {
+            "mode": "probe",
+            "outcome": "selected",
+            "reason": "Local MP4 metadata: 16329 bytes; no inspector Wasm required"
+          },
+          {
+            "mode": "native",
+            "outcome": "selected",
+            "reason": "Playback requirements and actual presentation accepted"
+          }
+        ],
+        "before": [
+          {
+            "mode": "probe",
+            "outcome": "selected",
+            "reason": "Local MP4 metadata: 16329 bytes; no inspector Wasm required"
+          },
+          {
+            "mode": "native",
+            "outcome": "selected",
+            "reason": "Playback requirements and actual presentation accepted"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "hybrid",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: \"allowed\"\n+ actual - expected\n\n+ undefined\n- 'AUTOPLAY_BLOCKED'\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/autoplay-policy.mjs:5:258"
+    }
+  ],
+  "passed": false
+}

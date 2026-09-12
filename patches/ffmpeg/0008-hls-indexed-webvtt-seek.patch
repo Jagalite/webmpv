@@ -1,0 +1,22 @@
+--- a/libavformat/hls.c
++++ b/libavformat/hls.c
+@@ -2624,6 +2624,19 @@
+              * specified stream where we should look for the keyframes */
+             pls->seek_stream_index = -1;
+             pls->seek_flags |= AVSEEK_FLAG_ANY;
++        }
++        // The bounded browser adapter supplies one indexed WebVTT resource.
++        // Its demuxer caches cues in read_header; flushing byte I/O alone leaves
++        // the cue cursor at EOF and loses subtitles after a seek.
++        if (!strcmp(pls->ctx->iformat->name, "webvtt") && pls->ctx->nb_streams == 1) {
++            int64_t sub_ts = av_rescale_q(seek_timestamp, AV_TIME_BASE_Q,
++                                          pls->ctx->streams[0]->time_base);
++            int ret = avformat_seek_file(pls->ctx, 0, INT64_MIN, sub_ts,
++                                         INT64_MAX, flags);
++            if (ret < 0)
++                return ret;
++            // Keep a cue that started before the target but still overlaps it.
++            pls->seek_timestamp = AV_NOPTS_VALUE;
+         }
+         if (pls->finished && (!strcmp(pls->ctx->iformat->name, "mpegts") || strstr(pls->ctx->iformat->name, "mov"))) {
+             int index = pls->cur_seq_no - pls->start_seq_no;

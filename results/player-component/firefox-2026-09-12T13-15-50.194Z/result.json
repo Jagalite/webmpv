@@ -1,0 +1,68 @@
+{
+  "family": "firefox",
+  "browser": "146.0.1",
+  "checks": [
+    {
+      "name": "two idle instances, lazy engines and idempotent registration",
+      "passed": true
+    },
+    {
+      "name": "same public core and independent playback",
+      "passed": true
+    },
+    {
+      "name": "keyboard shortcuts scoped and focused controls retain native behavior",
+      "passed": true
+    },
+    {
+      "name": "timeline previews locally and commits once",
+      "passed": true
+    },
+    {
+      "name": "settings focus restoration and accessible controls",
+      "passed": true
+    },
+    {
+      "name": "fullscreen contains controls and keeps settings inside",
+      "passed": true
+    },
+    {
+      "name": "synchronous DOM moves keep the same core",
+      "passed": true
+    },
+    {
+      "name": "removal releases resources and reconnect waits for cleanup",
+      "passed": true
+    },
+    {
+      "name": "src changes cancel stale opens; property reflection and pre-upgrade properties",
+      "passed": true
+    },
+    {
+      "name": "close cancels an open waiting for initial connection",
+      "passed": true
+    },
+    {
+      "name": "terminal destruction before connection settles ready",
+      "passed": true
+    },
+    {
+      "name": "mobile, reduced motion, high contrast and no uncaught errors",
+      "passed": true
+    },
+    {
+      "name": "migrated playground uses the shipped component and core",
+      "passed": false,
+      "error": "locator.click: Error: strict mode violation: locator('#settings-close') resolved to 2 elements:\n    1) <button class=\"secondary\" id=\"settings-close\" aria-label=\"Close developer settings\">Close</button> aka getByRole('button', { name: 'Close developer settings' })\n    2) <button id=\"settings-close\">Close settings</button> aka getByText('Close settings')\n\nCall log:\n\u001b[2m  - waiting for locator('#settings-close')\u001b[22m\n\n    at /Volumes/seed2/Projects/webmpv/tests/player-component.mjs:21:594\n    at async check (/Volumes/seed2/Projects/webmpv/tests/player-component.mjs:6:35)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/player-component.mjs:21:1"
+    }
+  ],
+  "hashes": {
+    "src/player/index.ts": "667f76e1ed2bc757f14071a2394df1c9a3ac1f277de6aac1e4295c4385d29da7",
+    "src/player/styles.ts": "49e5b86447508c6256507108a9bda34c3c4e4c95f565baa9d80794d5762a3ee1",
+    "src/unified-player.ts": "7f4cf6f21657655579c2457197b98cf11262d16d49e261a9d28a4dccb192f5a1",
+    "tests/player-component.mjs": "37a79604760e001e05e569fac357e95160a65779961cc5de64849496a2f01d47"
+  },
+  "screenReader": "Semantic accessibility tree and keyboard checks; no physical screen-reader session",
+  "accessibility": "- region \"Media player\":\n  - slider \"Playback position\": \"3\"\n  - button \"Play\"\n  - text: 0:03 / 0:12\n  - button \"Mute\"\n  - slider \"Volume\": \"1\"\n  - button \"Playback settings\"\n  - button \"Fullscreen\"",
+  "passed": false
+}

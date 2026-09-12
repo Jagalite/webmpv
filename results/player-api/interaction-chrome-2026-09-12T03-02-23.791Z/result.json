@@ -1,0 +1,167 @@
+{
+  "passed": false,
+  "browser": "chrome",
+  "checks": [
+    "native: 4:3, portrait, anamorphic and rotated media; canvas output has no extra bars",
+    "native: actual fullscreen, settings inside fullscreen and keyboard exit"
+  ],
+  "geometry": [
+    {
+      "name": "landscape",
+      "mode": "native",
+      "ratio": 1.3333333333333333,
+      "width": 1440,
+      "height": 1080,
+      "stage": {
+        "x": 65,
+        "y": 164,
+        "width": 1150,
+        "height": 738,
+        "top": 164,
+        "right": 1215,
+        "bottom": 902,
+        "left": 65
+      }
+    },
+    {
+      "name": "portrait",
+      "mode": "native",
+      "ratio": 0.5625,
+      "width": 608,
+      "height": 1080,
+      "stage": {
+        "x": 65,
+        "y": 164,
+        "width": 1150,
+        "height": 738,
+        "top": 164,
+        "right": 1215,
+        "bottom": 902,
+        "left": 65
+      }
+    },
+    {
+      "name": "anamorphic",
+      "mode": "native",
+      "ratio": 1.3333333333333333,
+      "width": 1440,
+      "height": 1080,
+      "stage": {
+        "x": 65,
+        "y": 164,
+        "width": 1150,
+        "height": 738,
+        "top": 164,
+        "right": 1215,
+        "bottom": 902,
+        "left": 65
+      }
+    },
+    {
+      "name": "rotated",
+      "mode": "native",
+      "ratio": 0.75,
+      "width": 810,
+      "height": 1080,
+      "stage": {
+        "x": 65,
+        "y": 164,
+        "width": 1150,
+        "height": 738,
+        "top": 164,
+        "right": 1215,
+        "bottom": 902,
+        "left": 65
+      }
+    }
+  ],
+  "failure": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Volumes/seed2/Projects/webmpv/tests/player-interaction.mjs:25:17",
+  "state": {
+    "status": "Playing landscape.mp4",
+    "params": {
+      "time-pos": 11.933333333333334,
+      "duration": 12,
+      "pause": true,
+      "eof-reached": true,
+      "track-list": [
+        {
+          "id": "1",
+          "type": "video",
+          "src-id": 1,
+          "image": false,
+          "albumart": false,
+          "default": true,
+          "forced": false,
+          "dependent": false,
+          "visual-impaired": false,
+          "hearing-impaired": false,
+          "external": false,
+          "selected": true,
+          "main-selection": 0,
+          "ff-index": 0,
+          "decoder": "h264",
+          "decoder-desc": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "codec": "h264",
+          "demux-w": 320,
+          "demux-h": 240,
+          "demux-fps": 15,
+          "demux-par": 1,
+          "metadata": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]",
+            "encoder": "Lavc62.28.102 libx264"
+          }
+        }
+      ],
+      "volume": 100,
+      "speed": 1,
+      "paused-for-cache": false,
+      "cache-buffering-state": 100,
+      "demuxer-cache-state": {
+        "cache-duration": 0,
+        "eof": true,
+        "underrun": false,
+        "idle": true,
+        "total-bytes": 0,
+        "fw-bytes": 0,
+        "debug-low-level-seeks": 0,
+        "debug-byte-level-seeks": 0,
+        "debug-ts-last": 11.933333333333334,
+        "ts-per-stream": [],
+        "bof-cached": false,
+        "eof-cached": false,
+        "seekable-ranges": []
+      },
+      "decoder-frame-drop-count": 0,
+      "frame-drop-count": 0,
+      "video-params": {
+        "pixelformat": "yuv420p",
+        "average-bpp": 12,
+        "w": 2,
+        "h": 2,
+        "dw": 2,
+        "dh": 2,
+        "crop-x": 0,
+        "crop-y": 0,
+        "crop-w": 2,
+        "crop-h": 2,
+        "aspect": 1,
+        "aspect-name": "Square",
+        "par": 1,
+        "sar": 1,
+        "sar-name": "Square",
+        "colormatrix": "bt.709",
+        "colorlevels": "limited",
+        "primaries": "bt.709",
+        "gamma": "bt.1886",
+        "sig-peak": 0,
+        "light": "display",
+        "chroma-location": "mpeg2/4/h264",
+        "stereo-in": "mono",
+        "rotate": 0
+      }
+    },
+    "error": ""
+  }
+}

@@ -1,0 +1,132 @@
+
+> webmpv@0.3.0-beta.1 test
+> node --test tests/audio-worklet.mjs tests/retained-video.mjs tests/timing-coalescing.mjs && node tests/player-api.mjs
+
+✔ PCM ring wraps and handles actual output quantum length (27.356709ms)
+✔ underrun silence never advances media consumption (1.732875ms)
+✔ pause and generation reset suppress queued stale PCM (4.936209ms)
+✔ closed output processor releases its processing lifetime (1.089958ms)
+✔ 6-channel PCM preserves order across wrap, pause and epoch reset (1.611ms)
+✔ 8-channel PCM preserves order across wrap, pause and epoch reset (0.579542ms)
+✔ 16:9 video is centered inside 4:3 canvas (0.921167ms)
+✔ anamorphic pixels use the demux sample aspect ratio (0.21025ms)
+✔ rotated video fits the canvas and restores subtitle coordinates (0.144333ms)
+✔ unchanged observations do not repeatedly wake the engine worker (0.835042ms)
+✔ changed latency and AudioContext state are delivered immediately (0.168ms)
+✔ post-initialization handoff republishes state even if an early message was ignored (0.100208ms)
+✔ destroyed players ignore even a forced late timing observation (0.062541ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 537.53475
+results/player-api/functional-2026-09-11T16-54-35.960Z
+PASS exactly three modes and native default
+PASS native local playback loads no Wasm
+PASS native text tracks and capability rejection
+PASS hybrid actual retained frames and subtitles
+PASS hybrid idle polling wakes for seek and resume
+PASS hybrid audio timing survives delayed worker initialization
+PASS hybrid seeks beyond the diagnostic sample budget
+PASS hybrid letterboxes and redraws without stretching
+PASS destroy cancels the current native text-track request
+PASS new source resets numeric subtitle and audio selections
+PASS software expanded decode and filters
+PASS explicit mode changes preserve playback state
+PASS filter reopens preserve state and reject leaving software
+PASS invalid filter rolls back to old playback
+PASS native unsupported request policy rolls back
+PASS unsupported hybrid source rolls back without a fourth mode
+PASS native remote playback
+PASS source replacement resets position and preserves controls
+PASS destroy interrupts native candidate load
+PASS explicit mode change recovers a terminated backend
+PASS queued changes and destroy release all workers
+
+> webmpv@0.3.0-beta.1 test:automatic-selection
+> npm run build && node --test tests/native-selection.mjs && node tests/automatic-selection.mjs
+
+
+> webmpv@0.3.0-beta.1 build
+> tsc
+
+✔ Native checks the selected audio, not every available track (0.8285ms)
+✔ Disabled subtitles do not disqualify Native; enabled embedded subtitles do (0.095583ms)
+✔ Unknown audio profiles and unsupported browser MIME fail qualification (0.133167ms)
+✔ Native packaging checks include MP4 for VP9 with AAC and platform Dolby audio (0.142833ms)
+✔ AAC ASC profiles are probed with their actual object type (0.587459ms)
+✔ exact inspected codec strings avoid Firefox generic AVC false rejection (0.121709ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 228.478125
+results/automatic-selection/run-2026-09-11T16-55-37.870Z
+PASS native-direct
+PASS native-remux
+PASS embedded-ass
+PASS incompatible-native-audio
+PASS software-codec
+PASS browser-rejection
+PASS reselect-new-source
+PASS automatic-filters
+PASS explicit-mode-pins
+PASS runtime-recovery
+PASS native-runtime-remux
+PASS subtitle-enable-reselect
+PASS source-identity-is-terminal
+PASS range-change-does-not-fallback
+PASS remote-authorization
+PASS disabled-tracks-survive-reselection
+PASS all-routes-fail-rollback
+PASS selected-language-survives-filters
+PASS second-failure-during-recovery
+PASS identity-survives-decoder-fallback
+PASS destroy-during-stalled-probe-import
+PASS destroy-during-probe
+
+> webmpv@0.3.0-beta.1 test:remux-regressions
+> node tests/remux-regressions.mjs
+
+PASS native-remux-source-worker.js: load failure rollback
+PASS native-remux-worker.js: load failure rollback
+PASS native-remux-source-worker.js: silent initialization deadline
+PASS invalid seeks preserve the live session, including the end boundary
+PASS seek rejects changed remote etag
+PASS seek rejects changed remote length
+results/media-routing-integration/review-fixes-2026-09-11T16-56-33.805Z
+
+> webmpv@0.3.0-beta.1 test:large-files
+> npm run build && node --test tests/file-reader.mjs && node tests/large-files.mjs
+
+
+> webmpv@0.3.0-beta.1 build
+> tsc
+
+✔ 64-bit local slices stay bounded and never materialize the complete file (7.895458ms)
+✔ epoch cancellation releases a blocked read and permits the next bounded read (0.825042ms)
+✔ destroy cancels reads; truncated and oversized sources fail explicitly (1.004125ms)
+✔ an epoch change during asynchronous reader cleanup cannot publish old bytes (0.232959ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 227.847417
+results/routing-completion/large-files-2026-09-11T16-57-27.566Z
+PASS hybrid-64m
+PASS hybrid-1g
+PASS hybrid-4g
+PASS software-64m
+PASS software-1g
+PASS software-4g
+PASS large-movie-recovery
+PASS destroy-during-file-read

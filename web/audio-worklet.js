@@ -1,11 +1,13 @@
 // A fixed SharedArrayBuffer, independent of growable Wasm memory.
 // Header: write, read, run, epoch, acknowledged epoch, media frames, underruns.
 class PCMOutput extends AudioWorkletProcessor {
-  constructor({ processorOptions: { buffer, capacity, measureOutput=false } }) {
+  constructor({ processorOptions: { buffer, capacity, channels=2, measureOutput=false } }) {
     super();
     this.h = new Int32Array(buffer, 0, 16);
     this.pcm = new Float32Array(buffer, 64);
     this.capacity = capacity;
+    if(![2,6,8].includes(channels))throw Error("Unsupported PCM layout");
+    this.channels=channels;
     this.epoch = -1;
     this.closed = false;this.measureOutput=measureOutput;this.lastPulse=-Infinity;
     this.port.onmessage = ({data}) => { if (data === 'close') this.closed = true; };
@@ -26,8 +28,8 @@ class PCMOutput extends AudioWorkletProcessor {
     const write = Atomics.load(h, 0) >>> 0;
     const count = Math.min((write - read) >>> 0, channels[0].length, this.capacity);
     for (let i = 0; i < count; i++) {
-      const at = ((read + i) % this.capacity) * 2;
-      for (let c = 0; c < channels.length; c++) channels[c][i] = this.pcm[at + Math.min(c, 1)];
+      const at = ((read + i) % this.capacity) * this.channels;
+      for (let c = 0; c < channels.length; c++) channels[c][i] = c<this.channels?this.pcm[at+c]:0;
     }
     if (Atomics.load(h, 3) !== epoch) {
       for (const channel of channels) channel.fill(0);

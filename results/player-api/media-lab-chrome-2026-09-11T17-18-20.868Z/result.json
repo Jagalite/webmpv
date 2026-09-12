@@ -1,0 +1,59 @@
+{
+  "passed": false,
+  "started": "2026-09-11T17:18:20.921Z",
+  "checks": [
+    "Isolated page, automatic controls and desktop layout",
+    "Real local File playback with no upload",
+    "Pause, volume, playback speed and seek",
+    "Manual Hybrid and Software switching",
+    "SRT and custom font uploads through the real API",
+    "HDR-to-SDR control",
+    "Filters and failed mode-change rollback",
+    "Downloadable session diagnostics",
+    "Close resets controls and releases playback surfaces",
+    "Audio-only WAV and surround output with device negotiation",
+    "Drag-and-drop media",
+    "Failed source replacement keeps previous media playable"
+  ],
+  "browser": "152.0.7977.83",
+  "audio": {
+    "requestedOutput": "7.1",
+    "outputChannels": 2,
+    "deviceChannels": 2,
+    "channelLayout": "stereo",
+    "state": "running",
+    "sampleRate": 48000,
+    "mediaFrames": 768,
+    "underruns": 0,
+    "rms": 0.3923381028624952,
+    "latencyConfidence": "reported-latency estimate"
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'dropped.mp4'\n- 'example.mp4'\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/player-demo.mjs:104:10",
+  "state": {
+    "status": "Source transport: Error: Expected HTTP 206; received 200",
+    "diagnostics": {
+      "mode": "native",
+      "selection": {
+        "automatic": true,
+        "attempts": []
+      },
+      "switching": false,
+      "videoFilters": "",
+      "audioFilters": "",
+      "toneMapping": "off",
+      "resourceLimits": {
+        "maxDecodePixels": 8294400,
+        "maxAllocationBytes": 134217728
+      },
+      "backend": {
+        "path": "native",
+        "plan": "direct",
+        "position": 0.526099,
+        "rendered": 21,
+        "dropped": 0,
+        "readyState": 4
+      }
+    }
+  },
+  "finished": "2026-09-11T17:19:09.248Z"
+}

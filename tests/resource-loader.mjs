@@ -76,13 +76,14 @@ test('DASH admission accepts fixed static and rejects live, adaptive, entities a
   validateVODManifest(encode(mpd),'dash');
   for(const value of [mpd.replace('static','dynamic'),mpd.replace('<Representation','<Representation id="x"/><Representation'),mpd.replace('</MPD>','<Period/></MPD>'),'<!DOCTYPE x>'+mpd,mpd.replace('<Representation','<ContentProtection/><Representation')])assert.throws(()=>validateVODManifest(encode(value),'dash'));
 });
-test('HLS subtitle policy admits one full-timeline resource and rejects segmented subtitles',async()=>{
+test('HLS subtitles combine multiple segments into a bounded virtual resource',async()=>{
   const master='#EXTM3U\n#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID="s",URI="subs.m3u8"\n#EXT-X-STREAM-INF:BANDWIDTH=1,SUBTITLES="s"\nvideo.m3u8\n';
-  const sub='#EXTM3U\n#EXTINF:24,\nfull.vtt\n#EXT-X-ENDLIST\n';
-  mock(async url=>new Response(url.endsWith('root.m3u8')?master:url.endsWith('subs.m3u8')?sub:'WEBVTT\n\n00:00:00.000 --> 00:00:24.000\nCaption\n'));
-  const loader=new ResourceLoader(options);await loader.open(options.url,{manifest:true});await loader.open('subs.m3u8');await loader.open('full.vtt');loader.close();
-  mock(async url=>new Response(url.endsWith('root.m3u8')?master:sub.replace('#EXT-X-ENDLIST','#EXTINF:2,\nsecond.vtt\n#EXT-X-ENDLIST')));
-  const rejected=new ResourceLoader(options);await rejected.open(options.url,{manifest:true});await assert.rejects(rejected.open('subs.m3u8'),/Segmented HLS subtitles/);rejected.close();
+  const sub='#EXTM3U\n#EXTINF:2,\nfirst.vtt\n#EXTINF:2,\nsecond.vtt\n#EXT-X-ENDLIST\n';
+  mock(async url=>new Response(url.endsWith('root.m3u8')?master:url.endsWith('subs.m3u8')?sub:`WEBVTT\nX-TIMESTAMP-MAP=LOCAL:00:00:00.000,MPEGTS:${url.endsWith('first.vtt')?0:180000}\n\n00:00:00.100 --> 00:00:01.900\nCaption\n`));
+  const loader=new ResourceLoader(options);await loader.open(options.url,{manifest:true});const info=await loader.open('subs.m3u8');
+  const playlist=new TextDecoder().decode(loader.read(info.id,0n,262144));const uri=playlist.split('\n').find(l=>l.startsWith('https:'));const combined=await loader.open(uri);
+  const text=new TextDecoder().decode(loader.read(combined.id,0n,262144));assert.ok(text.includes('00:00:02.100'));assert.equal(text.match(/Caption/g).length,2);
+  loader.close();assert.equal(loader.virtual.size,0);assert.equal(loader.stats.retainedBytes,0);
 });
 
 test('fixed HLS discontinuities remain native timeline input',()=>{
@@ -91,4 +92,14 @@ test('fixed HLS discontinuities remain native timeline input',()=>{
 });
 test('DASH timeline and template resource counts are bounded',()=>{
   for(const inner of ['<SegmentTemplate/>','<SegmentTimeline><S d="1" r="10000"/></SegmentTimeline>','<SegmentTimeline><S d="1" r="-1"/></SegmentTimeline>'])assert.throws(()=>validateVODManifest(encode(`<MPD type="static"><Period>${inner}</Period></MPD>`),'dash'));
+});
+test('virtual resources retain range offsets and reject over-budget mutation atomically',async()=>{
+ const loader=new ResourceLoader(options);loader.storeVirtual([['https://media.example/catalog/a.vtt',encode('abcdef')]]);
+ const info=await loader.open('a.vtt',{start:2n,end:5n});assert.equal(info.start,'2');assert.equal(info.size,'6');assert.equal(new TextDecoder().decode(loader.read(info.id,2n,3)),'cde');assert.equal(loader.stats.opens,1);
+ assert.throws(()=>loader.storeVirtual([['https://media.example/catalog/b',new Uint8Array(4*1024*1024)]]),/budget/);assert.equal(loader.virtual.size,1);
+ await assert.rejects(loader.open('a.vtt',{start:3n,end:10n}),/range/);loader.close();assert.equal(loader.stats.retainedBytes,0);
+});
+test('live sessions keep per-open budgets without a finite lifetime request cap',async()=>{
+ mock(async()=>new Response('part'));const live=new ResourceLoader({...options,streaming:{live:true}});live.stats.opens=10000;const info=await live.open('part.ts');assert.equal(info.length,4);live.close();
+ const vod=new ResourceLoader(options);vod.stats.opens=10000;await assert.rejects(vod.open('part.ts'),/count limit/);vod.close();
 });

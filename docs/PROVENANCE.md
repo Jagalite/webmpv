@@ -16,7 +16,10 @@ the image build fails if any differ. Build package inventories accompany each co
 
 The copied upstream notices are under `third_party/notices/`; their source paths
 and hashes are in `third_party/notices.json`. mpv's default GPL build setting is
-retained. FFmpeg's configured build does not enable its GPL or nonfree options.
+retained. The current Hybrid and Software profiles enable FFmpeg's GPL option;
+the independent remux profile does not. None enables nonfree or version3. See
+[the licensing contract](LICENSING.md) and the actual clean build's
+`build/beta-build.json`; the earlier baseline configuration is historical.
 These are recorded build settings; the upstream copyright inventories contain
 individual-file terms. The bundled DejaVu Sans 2.37 font has its own notice at
 `fixtures/FONT-LICENSE.txt` and byte hash at `fixtures/assets.lock.json`.
@@ -41,5 +44,6 @@ final assembled player.
 
 The final browser assembly also records the public mpv format query and MKV
 preroll configuration, plus first-output diagnostics after reopening/seeking.
-These are original binding/configuration changes; the qualified native source
-and engine files remain those from the two clean container builds.
+These historical binding/configuration results refer to their recorded native
+engine hashes. They do not qualify the expanded three-engine beta. Follow
+[the current release recipe](RELEASE.md) for its clean build and exact-archive tests.

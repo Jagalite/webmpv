@@ -1,3 +1,4 @@
+let audioChannels=2;
 import {drawRetainedVideo} from './retained-video.js';
 let videoTrack;
 let minFramePts=-Infinity;
@@ -133,9 +134,8 @@ function pumpAudio() {
   if (count > CAPACITY) throw new Error('PCM capacity invariant violated');
   const source = (nativeAudio + 32) >>> 2;
   for (let i = 0; i < count; i++) {
-    const index = ((forwarded + i) % CAPACITY) * 2;
-    pcm[index] = engine.HEAPF32[source + index];
-    pcm[index + 1] = engine.HEAPF32[source + index + 1];
+    const index = ((forwarded + i) % CAPACITY) * audioChannels;
+    for(let c=0;c<audioChannels;c++)pcm[index+c]=engine.HEAPF32[source+index+c];
   }
   // A reset during the copy discards this batch before publishing it.
   if (Atomics.load(h, at + 3) !== epoch) return;
@@ -171,6 +171,7 @@ function tick() {
       // Source replacement/destroy still cancel I/O through closeIO().
       if(event.event==='property-change'&&event.name==='time-pos'){position=event.data;releaseSeek();}
       if(event.event==='playback-restart'){restarted=true;releaseSeek();}
+      if(event.event==='log-message')post({type:'log',message:event.prefix+': '+event.text});
       post({type:'event', event});
     }
     const renderStart=performance.now();
@@ -208,6 +209,7 @@ self.onmessage = async ({data}) => {
       if (closing) return;
       engine.FS.mkdir('/fonts');
       engine.FS.writeFile('/fonts/DejaVuSans.ttf', new Uint8Array(data.font));
+      for(const font of data.fonts??[])engine.FS.writeFile('/fonts/'+font.name,new Uint8Array(font.bytes));
       const fontSize=engine.FS.stat('/fonts/DejaVuSans.ttf').size;
       if(Number(fontSize) !== data.font.byteLength) throw new Error('Subtitle font write failed');
       if(data.decoder==='webcodecs'){
@@ -226,6 +228,9 @@ self.onmessage = async ({data}) => {
         });
         engine._web_decoder_enable(2); // Retained frames cannot use software replay.
       }
+      audioChannels=data.audioChannels??2;
+      if(engine._web_audio_configure(audioChannels)<0)throw Error("Invalid output channel count");
+      if(engine._web_configure(data.maxDecodePixels??8294400,data.maxAllocationBytes??134217728)<0)throw Error("Invalid decode resource limits");
       const result = engine._web_create(data.sampleRate);
       if (result < 0) throw new Error(`mpv initialization failed: ${result}`);
       engine._web_experiment_skip_render(mode!=='copy-render');
@@ -246,6 +251,12 @@ self.onmessage = async ({data}) => {
       engine.FS.writeFile('/media.mkv', new Uint8Array(data.bytes));
       if(Number(engine.FS.stat('/media.mkv').size) !== data.bytes.byteLength) throw new Error('Local media write failed');
       submit(data.id, ['loadfile','/media.mkv','replace']);
+    } else if(data.type==='subtitle'){
+      const path='/subtitle-'+data.id+'.'+data.format;
+      engine.FS.writeFile(path,new Uint8Array(data.bytes));
+      const result=engine.ccall('web_add_subtitle','number',['number','string','string','string','number'],[data.id,path,data.label??'',data.language??'',+data.select]);
+      if(result<0)throw Error('Could not add subtitle: '+result);
+      busyUntil=performance.now()+300;schedulePump(0);
     } else if (data.type === 'command') submit(data.id,data.args);
     else if (data.type === 'resize') {busyUntil=performance.now()+300;schedulePump(0);subtitles.clear();canvas.width=data.width;canvas.height=data.height;force=true;}
     else if (data.type === 'destroy') {

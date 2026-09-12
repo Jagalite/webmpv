@@ -1,0 +1,77 @@
+--- a/libavformat/nutdec.c
++++ b/libavformat/nutdec.c
+@@ -1076,6 +1076,27 @@
+     return ret;
+ }
+ 
++// Some FFmpeg encoders omit NUT keyframe flags. Recover only contracts that
++// can be verified: DFPWM's headerless audio and self-contained Dirac intra units.
++static int dirac_intra_packet(const uint8_t *data, int size)
++{
++    int sequence = 0;
++    for (int at = 0; at <= size - 13;) {
++        if (AV_RB32(data + at) != 0x42424344)
++            return 0;
++        int code = data[at + 4];
++        unsigned next = AV_RB32(data + at + 5);
++        if (code == 0)
++            sequence = 1;
++        if (code & 8)
++            return sequence && !(code & 3);
++        if (next < 13 || next > size - at)
++            return 0;
++        at += next;
++    }
++    return 0;
++}
++
+ static int decode_frame(NUTContext *nut, AVPacket *pkt, int frame_code)
+ {
+     AVFormatContext *s = nut->avf;
+@@ -1090,20 +1111,6 @@
+         return size;
+ 
+     stc = &nut->stream[stream_id];
+-
+-    if (stc->last_flags & FLAG_KEY)
+-        stc->skip_until_key_frame = 0;
+-
+-    discard     = s->streams[stream_id]->discard;
+-    last_IP_pts = ffstream(s->streams[stream_id])->last_IP_pts;
+-    if ((discard >= AVDISCARD_NONKEY && !(stc->last_flags & FLAG_KEY)) ||
+-        (discard >= AVDISCARD_BIDIR  && last_IP_pts != AV_NOPTS_VALUE &&
+-         last_IP_pts > pts) ||
+-        discard >= AVDISCARD_ALL ||
+-        stc->skip_until_key_frame) {
+-        avio_skip(bc, size);
+-        return 1;
+-    }
+ 
+     ret = av_new_packet(pkt, size + nut->header_len[header_idx]);
+     if (ret < 0)
+@@ -1131,6 +1138,25 @@
+             goto fail;
+     }
+     av_shrink_packet(pkt, nut->header_len[header_idx] + ret);
++
++    enum AVCodecID codec = s->streams[stream_id]->codecpar->codec_id;
++    if (codec == AV_CODEC_ID_DFPWM ||
++        (codec == AV_CODEC_ID_DIRAC && dirac_intra_packet(pkt->data, pkt->size)))
++        stc->last_flags |= FLAG_KEY;
++
++    if (stc->last_flags & FLAG_KEY)
++        stc->skip_until_key_frame = 0;
++
++    discard     = s->streams[stream_id]->discard;
++    last_IP_pts = ffstream(s->streams[stream_id])->last_IP_pts;
++    if ((discard >= AVDISCARD_NONKEY && !(stc->last_flags & FLAG_KEY)) ||
++        (discard >= AVDISCARD_BIDIR  && last_IP_pts != AV_NOPTS_VALUE &&
++         last_IP_pts > pts) ||
++        discard >= AVDISCARD_ALL ||
++        stc->skip_until_key_frame) {
++        av_packet_unref(pkt);
++        return 1;
++    }
+ 
+     pkt->stream_index = stream_id;
+     if (stc->last_flags & FLAG_KEY)

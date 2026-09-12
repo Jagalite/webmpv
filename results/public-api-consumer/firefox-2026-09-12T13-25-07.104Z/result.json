@@ -1,0 +1,117 @@
+{
+  "family": "firefox",
+  "browser": "146.0.1",
+  "archiveSHA256": "3f3a2aa68d9e5e93c59d083f1053df2647f25cbc97e79cc1646a40f55df5cd09",
+  "archive": "/Volumes/seed2/Projects/webmpv/build/public-api-candidate-4/webmpv-0.3.0-beta.2.tgz",
+  "root": "/Volumes/seed2/Projects/webmpv/build/public-api-consumer-AENvYe",
+  "ssr": true,
+  "typecheck": true,
+  "copyPreservesUnrelated": true,
+  "bundler": "esbuild 0.28.2",
+  "checks": [
+    {
+      "name": "static application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "static application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "missing assets have structured errors",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'DECODE_FAILED'\n- 'ASSET_LOAD_FAILED'\n\n    at file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:29:389\n    at async check (file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:22:70)\n    at async file:///Volumes/seed2/Projects/webmpv/tests/public-api-consumer.mjs:29:1",
+      "state": {
+        "status": "error",
+        "playbackIntent": "pause",
+        "pendingOperation": null,
+        "sourceId": null,
+        "currentTime": 0,
+        "duration": null,
+        "streamType": "unknown",
+        "subtitlesVisible": true,
+        "volume": 1,
+        "muted": false,
+        "playbackRate": 1,
+        "activeMode": null,
+        "automaticSelection": false,
+        "buffered": null,
+        "seekable": null,
+        "audioTracks": [],
+        "subtitleTracks": [],
+        "mediaInfo": {
+          "displayWidth": null,
+          "displayHeight": null,
+          "aspectRatio": null,
+          "rotation": null,
+          "video": null,
+          "audio": null,
+          "subtitle": null
+        },
+        "capabilities": {
+          "videoFilters": false,
+          "audioFilters": false,
+          "mpvSubtitles": true,
+          "externalTextTracks": false,
+          "externalSubtitles": true,
+          "customFonts": true,
+          "customRequestHeaders": true,
+          "deployment": {
+            "isolated": true,
+            "webCodecs": true,
+            "mediaSource": true
+          },
+          "features": {
+            "seek": {
+              "availability": "unknown",
+              "reason": "Seek window has not been established"
+            },
+            "audioTracks": {
+              "availability": "unknown",
+              "reason": "Open a source to establish availability"
+            },
+            "subtitleTracks": {
+              "availability": "unknown",
+              "reason": "Open a source to establish availability"
+            },
+            "externalSubtitles": {
+              "availability": "available"
+            },
+            "customFonts": {
+              "availability": "available"
+            },
+            "videoFilters": {
+              "availability": "unavailable",
+              "reason": "Select software mode first"
+            },
+            "audioFilters": {
+              "availability": "unavailable",
+              "reason": "Select software mode first"
+            }
+          }
+        },
+        "error": {
+          "code": "DECODE_FAILED",
+          "message": "abort@http://127.0.0.1:50905/assets/webmpv/web/engine-hybrid/player.mjs:1:4253\ninstantiateArrayBuffer@http://127.0.0.1:50905/assets/webmpv/web/engine-hybrid/player.mjs:1:5098\nasync*instantiateAsync@http://127.0.0.1:50905/assets/webmpv/web/engine-hybrid/player.mjs:1:5469\nasync*createWasm@http://127.0.0.1:50905/assets/webmpv/web/engine-hybrid/player.mjs:1:6358\ncreateEngine@http://127.0.0.1:50905/assets/webmpv/web/engine-hybrid/player.mjs:1:61191\nself.onmessage@http://127.0.0.1:50905/assets/webmpv/web/filter-retained-engine-worker.js?[redacted]\nasync*@http://127.0.0.1:50905/assets/webmpv/web/filter-retained-engine-worker.js?[redacted]\n",
+          "operationId": 2,
+          "operation": "opening",
+          "scope": "session",
+          "retryable": false
+        }
+      }
+    },
+    {
+      "name": "isolation failure is distinct from unsupported media",
+      "passed": true
+    }
+  ],
+  "passed": false
+}

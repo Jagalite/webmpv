@@ -1,0 +1,46 @@
+{
+  "family": "chrome",
+  "browser": "152.0.7977.83",
+  "archiveSHA256": "beb9953455ab10676d2b2e7dd23f2942125780e0a76a77cd186a0518d2af7ea4",
+  "archive": "/Volumes/seed2/Projects/webmpv/build/public-api-final-3/webmpv-0.3.0-beta.2.tgz",
+  "root": "/Volumes/seed2/Projects/webmpv/build/public-api-consumer-BJtS4g",
+  "ssr": true,
+  "typecheck": true,
+  "copyPreservesUnrelated": true,
+  "bundler": "esbuild 0.28.2",
+  "checks": [
+    {
+      "name": "static core-only import has no UI or engine side effects",
+      "passed": true
+    },
+    {
+      "name": "bundled core-only import has no UI or engine side effects",
+      "passed": true
+    },
+    {
+      "name": "static application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "static application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /assets/webmpv/",
+      "passed": true
+    },
+    {
+      "name": "bundled application at /deep/runtime-v2/",
+      "passed": true
+    },
+    {
+      "name": "missing assets have structured errors",
+      "passed": true
+    },
+    {
+      "name": "isolation failure is distinct from unsupported media",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

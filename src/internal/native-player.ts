@@ -17,6 +17,7 @@ export class NativePlayer extends EventTarget implements Backend {
   readonly ready = Promise.resolve();
   readonly properties = new Map<string, unknown>();
   private stopped = false;
+  private destruction?:Promise<void>;
   private opening = false;
   private remux?: RemuxController;
   private remuxSource?: RemuxSource;
@@ -30,13 +31,14 @@ export class NativePlayer extends EventTarget implements Backend {
   private cancelers = new Set<(error: Error) => void>();
   private listeners: Array<() => void> = [];
 
-  constructor(private video: HTMLVideoElement, private remuxPolicy: 'auto' | 'never' | 'always' = 'auto') {
+  constructor(private video: HTMLVideoElement, private remuxPolicy: 'auto' | 'never' | 'always' = 'auto', private assetBase = new URL('../../../',import.meta.url)) {
     super();
     video.playsInline = true;
     video.preload = 'auto';
-    for (const event of ['timeupdate', 'durationchange', 'loadedmetadata', 'play', 'pause', 'volumechange', 'ratechange', 'ended']) {
+    for (const event of ['timeupdate', 'durationchange', 'loadedmetadata', 'play', 'pause', 'volumechange', 'ratechange', 'ended', 'waiting', 'playing', 'progress', 'seeking', 'seeked', 'resize']) {
       const listener = () => {
         this.refresh();
+        this.emit('activity', event);
         if (event === 'ended') this.emit('mpv', {event: 'end-file', reason: 'eof'});
       };
       video.addEventListener(event, listener);
@@ -73,7 +75,8 @@ export class NativePlayer extends EventTarget implements Backend {
     const audio = (this.video as VideoWithAudioTracks).audioTracks;
     if(this.remux?.tracks)tracks.push(...this.remux.tracks.filter(t=>t.type==='audio').map(t=>({...t,selected:t.selected&&!this.video.muted})));
     else if (audio) tracks.push(...Array.from(audio, (t, i) => ({id: String(i + 1), type: 'audio', title: t.label, lang: t.language, selected: t.enabled})));
-    const values: Record<string, unknown> = {'time-pos': this.sourceTime(), duration: this.sourceDuration(), pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks};
+    const timeRanges=(r:TimeRanges)=>Array.from({length:r.length},(_,i)=>({start:Math.max(0,r.start(i)-(this.remux?.timelineBias??0)),end:Math.max(0,r.end(i)-(this.remux?.timelineBias??0))}));
+    const values: Record<string, unknown> = {'time-pos': this.sourceTime(), duration: Number.isFinite(this.video.duration)?this.sourceDuration():null, 'native-buffered':timeRanges(this.video.buffered),'native-seekable':timeRanges(this.video.seekable),'native-live':this.video.duration===Infinity, pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks};
     for (const [name, data] of Object.entries(values)) {
       if (name !== 'track-list' && this.properties.get(name) === data) continue;
       this.properties.set(name, data);this.emit('mpv', {event: 'property-change', name, data});
@@ -88,7 +91,7 @@ export class NativePlayer extends EventTarget implements Backend {
     this.assertActive();
     if(!crossOriginIsolated||typeof MediaSource==='undefined')throw Error('Native remux requires MediaSource and cross-origin isolation');
     if(source.options?.format&&source.options.format!=='file')throw Error('Native remux currently requires a random-access file source; use Hybrid for this manifest');
-    const moduleURL=new URL('../../native-remux-player.js',import.meta.url).href;
+    const moduleURL=new URL('web/native-remux-player.js',this.assetBase).href;
     const {RemuxPlayer}=await import(moduleURL);
     this.assertActive();
     this.remux??=new RemuxPlayer(this.video) as RemuxController;
@@ -132,8 +135,8 @@ export class NativePlayer extends EventTarget implements Backend {
       await this.load(url.href);
     },requiresRemux);
   }
-  async play() {this.assertActive();await this.video.play();this.refresh();}
-  async pause() {this.assertActive();this.video.pause();this.refresh();}
+  async play() {this.assertActive();if(this.remux)await this.remux.play();else await this.video.play();this.refresh();}
+  async pause() {this.assertActive();if(this.remux)this.remux.pause();else this.video.pause();this.refresh();}
   async seek(seconds: number) {
     this.assertActive();
     if(this.remux){const paused=this.video.paused;await this.remux.seek(seconds);if(this.video.seeking)await this.wait('seeked',()=>{});if(!paused)await this.video.play();this.refresh();return;}
@@ -192,8 +195,11 @@ export class NativePlayer extends EventTarget implements Backend {
   }
   resize(width: number, height: number) {this.assertActive();this.video.width = width;this.video.height = height;}
   audioDiagnostics() {return {state: this.stopped ? 'closed' : this.video.paused ? 'paused' : 'running', source: 'native', decodedSampleCountersAvailable: false};}
-  async destroy() {
-    if (this.stopped) return;
+  destroy():Promise<void> {
+    if(this.destruction)return this.destruction;
+    this.destruction=this.dispose();return this.destruction;
+  }
+  private async dispose() {
     this.stopped = true;for (const cancel of this.cancelers) cancel(new Error('Player is destroyed'));
     await this.remux?.destroy();
     this.listeners.forEach(remove => remove());this.listeners = [];

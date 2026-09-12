@@ -20,7 +20,7 @@ result.hashes=await hashes();result.fixtures={mp4:hash(fixture),tracks:hash(trac
 const only=process.env.ONLY?.split('|');result.selection=only||'full';
 const total=only?.length||21;
 async function setup(){
- await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await page.goto(origin+'/');
+ await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await page.goto(origin+'/examples/custom-controls.html');
  await page.waitForFunction(()=>window.player);await page.evaluate(()=>player.destroy());
  await page.evaluate(async()=>{const m=await import('/web/generated/index.js');window.API=m;window.errors=[];window.events=[];window.make=(mode,options={})=>{window.player=new API.Player(document.querySelector('#surface'),{mode,width:640,height:360,...options});player.addEventListener('error',e=>errors.push(e.detail));player.addEventListener('mpv',e=>events.push(e.detail));};});
 }
@@ -124,6 +124,6 @@ try{
   await page.evaluate(()=>make('software'));await open();await page.evaluate(async()=>{await Promise.all([player.volume(25),player.rate(1.5),player.seek(1)]);});const p=await page.evaluate(()=>Object.fromEntries(player.properties));assert.equal(p.volume,25);assert.equal(p.speed,1.5);
   const data=await page.evaluate(async()=>{const changing=player.setMode('hybrid').then(()=>null,e=>e.message);await new Promise(r=>setTimeout(r,100));await player.destroy();let error;try{await player.play();}catch(e){error=e.message;}return {change:await changing,error};});assert.match(data.error,/destroyed/);return data;
  });
- result.hashesAfter=await hashes();assert.deepEqual(result.hashesAfter,result.hashes);result.passed=result.tests.length===total&&result.tests.every(t=>t.passed);if(!result.passed)process.exitCode=1;
+ console.log("Verifying final source hashes");result.hashesAfter=await hashes();assert.deepEqual(result.hashesAfter,result.hashes);result.passed=result.tests.length===total&&result.tests.every(t=>t.passed);if(!result.passed)process.exitCode=1;
 }catch(e){result.failure=String(e.stack);process.exitCode=1;console.error(e);}
-finally{if(performanceConfig)result.assetSnapshotAfter=await(await fetch(origin+'/__metadata')).json();await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await browser.close();server.kill('SIGTERM');result.finished=new Date().toISOString();await writeFile(`${out}/result.json`,JSON.stringify(result,null,2)+'\n');}
+finally{console.log('Final API harness cleanup');if(performanceConfig)result.assetSnapshotAfter=await(await fetch(origin+'/__metadata')).json();await page.evaluate(()=>window.player?.destroy()).catch(()=>{});await browser.close();server.kill('SIGTERM');result.finished=new Date().toISOString();await writeFile(`${out}/result.json`,JSON.stringify(result,null,2)+'\n');}

@@ -1,3 +1,4 @@
+import type { AudioOutput, FontAsset, ResourceLimits, SubtitleAsset, MediaInputOptions, StreamingOptions } from '../types.js';
 export type PlayerEvent = {
     event: string;
     id?: number;
@@ -6,7 +7,8 @@ export type PlayerEvent = {
     error?: string;
     [key: string]: unknown;
 };
-export type RemoteSource = {
+export type RemoteSource = MediaInputOptions & {
+    streaming?: StreamingOptions;
     url: string;
     format?: 'file' | 'hls' | 'dash';
     headers?: Record<string, string>;
@@ -47,6 +49,7 @@ export type PlayerDiagnostics = {
 };
 /** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export declare class WasmPlayer extends EventTarget {
+    private loading;
     private worker;
     private workerOwner;
     private audioContext;
@@ -66,11 +69,19 @@ export declare class WasmPlayer extends EventTarget {
     private opening;
     private refreshAuthorization?;
     private audioHeader;
+    private outputChannels;
+    private requestedOutput;
+    private deviceChannels;
     diagnostics?: PlayerDiagnostics;
     browserCodecsAbsent: boolean;
     properties: Map<string, unknown>;
     readonly ready: Promise<void>;
-    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, mode, softwarePresenter }?: {
+    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, mode, softwarePresenter, audioOutput, audioFallback, resourceLimits, fonts, assetBase }?: {
+        assetBase?: URL;
+        audioOutput?: AudioOutput;
+        audioFallback?: 'stereo' | 'reject';
+        resourceLimits?: ResourceLimits;
+        fonts?: FontAsset[];
         disableBrowserCodecs?: boolean;
         measureOutput?: boolean;
         mode?: 'hybrid' | 'software';
@@ -79,21 +90,27 @@ export declare class WasmPlayer extends EventTarget {
     private sendTiming;
     private fail;
     private request;
-    open(file: File | ArrayBuffer): Promise<void>;
+    open(file: File | ArrayBuffer, options?: MediaInputOptions): Promise<void>;
     openRemote(source: RemoteSource): Promise<void>;
     private waitForEvent;
     private openLocal;
+    inspectMetadata(): Promise<void>;
     command(...args: string[]): Promise<void>;
     private setPause;
     play(): Promise<void>;
     pause(): Promise<void>;
-    seek(seconds: number): Promise<void>;
+    seek(seconds: number): Promise<any>;
     rate(rate: number): Promise<void>;
     volume(percent: number): Promise<void>;
     selectTrack(type: 'audio' | 'sub', id: string): Promise<void>;
+    addSubtitle(subtitle: SubtitleAsset): Promise<any>;
     subtitleVisible(visible: boolean): Promise<void>;
     resize(width: number, height: number): void;
     audioDiagnostics(): {
+        requestedOutput: AudioOutput;
+        outputChannels: number;
+        deviceChannels: number;
+        channelLayout: string;
         state: AudioContextState;
         sampleRate: number;
         mediaFrames: number;

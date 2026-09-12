@@ -1,5 +1,7 @@
+import { PlayerError } from './errors.js';
 /** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export class WasmPlayer extends EventTarget {
+    loading = new AbortController();
     worker;
     workerOwner;
     audioContext;
@@ -19,16 +21,35 @@ export class WasmPlayer extends EventTarget {
     opening = false;
     refreshAuthorization;
     audioHeader;
+    outputChannels;
+    requestedOutput;
+    deviceChannels;
     diagnostics;
     browserCodecsAbsent = false;
     properties = new Map();
     ready;
-    constructor(canvas, { disableBrowserCodecs = false, measureOutput = false, mode = 'software', softwarePresenter = 'rgb' } = {}) {
+    constructor(canvas, { disableBrowserCodecs = false, measureOutput = false, mode = 'software', softwarePresenter = 'rgb', audioOutput = 'stereo', audioFallback = 'stereo', resourceLimits = {}, fonts = [], assetBase = new URL('../../../', import.meta.url) } = {}) {
         super();
         const decoder = mode === 'hybrid' ? 'webcodecs' : 'software';
         if (!crossOriginIsolated)
             throw new Error('This player requires a secure, cross-origin isolated page.');
         this.audioContext = new AudioContext({ latencyHint: 'interactive' });
+        this.requestedOutput = audioOutput;
+        this.deviceChannels = this.audioContext.destination.maxChannelCount;
+        const wanted = audioOutput === 'auto' ? (this.deviceChannels >= 8 ? 8 : this.deviceChannels >= 6 ? 6 : 2) : audioOutput === '7.1' ? 8 : audioOutput === '5.1' ? 6 : 2;
+        if (wanted > this.deviceChannels && audioFallback === 'reject') {
+            void this.audioContext.close();
+            throw Error('Requested audio layout is unavailable on this output device');
+        }
+        this.outputChannels = wanted <= this.deviceChannels ? wanted : 2;
+        try {
+            this.audioContext.destination.channelCount = this.outputChannels;
+        }
+        catch (error) {
+            void this.audioContext.close();
+            throw error;
+        }
+        this.audioContext.destination.channelCountMode = 'explicit';
         // A disposable same-origin owner gives the browser a complete worker-tree
         // teardown boundary, including native pthread workers and decoder resources.
         this.workerOwner = canvas.ownerDocument.createElement('iframe');
@@ -37,19 +58,19 @@ export class WasmPlayer extends EventTarget {
         canvas.ownerDocument.body.append(this.workerOwner);
         const owner = this.workerOwner.contentWindow;
         try {
-            this.worker = new owner.Worker(new URL(mode === 'hybrid' ? '../../filter-retained-engine-worker.js?mode=retained' : '../../software-full-engine-worker.js', import.meta.url), { type: 'module' });
+            this.worker = new owner.Worker(new URL(mode === 'hybrid' ? 'web/filter-retained-engine-worker.js?mode=retained' : 'web/software-full-engine-worker.js', assetBase), { type: 'module' });
         }
         catch (error) {
             this.workerOwner.remove();
             void this.audioContext.close();
             throw error;
         }
-        const audio = new SharedArrayBuffer(64 + 8192 * 2 * 4);
+        const audio = new SharedArrayBuffer(64 + 8192 * this.outputChannels * 4);
         this.audioHeader = new Int32Array(audio, 0, 16);
         this.ready = new Promise((resolve, reject) => {
             this.rejectReady = reject;
             const timeout = this.readyTimer = setTimeout(() => reject(new Error('Player initialization timed out')), 60000);
-            this.worker.onerror = event => { clearTimeout(timeout); reject(new Error(event.message)); this.fail(new Error(event.message)); };
+            this.worker.onerror = event => { clearTimeout(timeout); reject(new PlayerError('ASSET_LOAD_FAILED', 'Playback engine initialization failed: ' + event.message, null, null, 'operation', true)); this.fail(new Error(event.message)); };
             this.worker.onmessage = ({ data }) => {
                 if (data.type === 'ready') {
                     clearTimeout(timeout);
@@ -60,7 +81,7 @@ export class WasmPlayer extends EventTarget {
                 else if (data.type === 'error') {
                     clearTimeout(timeout);
                     const error = new Error(data.message);
-                    reject(error);
+                    reject(new PlayerError('ASSET_LOAD_FAILED', 'Playback engine initialization failed: ' + error.message, null, null, 'operation', true));
                     this.fail(error, data.id);
                 }
                 else if (data.type === 'destroyed') {
@@ -72,7 +93,9 @@ export class WasmPlayer extends EventTarget {
                     this.onDestroyed?.();
                 }
                 else if (data.type === 'refresh') {
-                    void this.refreshAuthorization?.(data.resource).then(update => this.worker.postMessage({ type: 'refreshed', id: data.id, update }), () => this.worker.postMessage({ type: 'refreshed', id: data.id, error: true }));
+                    void this.refreshAuthorization?.(data.resource).then(update => { if (!this.destroyed)
+                        this.worker.postMessage({ type: 'refreshed', id: data.id, update }); }, () => { if (!this.destroyed)
+                        this.worker.postMessage({ type: 'refreshed', id: data.id, error: true }); });
                 }
                 else if (data.type === 'output')
                     this.dispatchEvent(new CustomEvent('output', { detail: data.data }));
@@ -95,7 +118,7 @@ export class WasmPlayer extends EventTarget {
                         if (pending) {
                             clearTimeout(pending.timer);
                             this.pending.delete(event.id);
-                            event.error ? pending.reject(new Error(event.error)) : pending.resolve();
+                            event.error ? pending.reject(new Error(event.error)) : pending.resolve(event.result);
                         }
                     }
                     if (event.event === 'property-change' && event.name)
@@ -104,25 +127,25 @@ export class WasmPlayer extends EventTarget {
                 }
             };
             void (async () => {
-                await this.audioContext.audioWorklet.addModule(new URL('../../audio-worklet.js', import.meta.url));
+                await this.audioContext.audioWorklet.addModule(new URL('web/audio-worklet.js', assetBase));
                 if (this.destroyed)
                     throw new Error('Player destroyed during initialization');
-                this.audioNode = new AudioWorkletNode(this.audioContext, 'webmpv-pcm', { numberOfInputs: 0, numberOfOutputs: 1, outputChannelCount: [2], processorOptions: { buffer: audio, capacity: 8192, measureOutput } });
+                this.audioNode = new AudioWorkletNode(this.audioContext, 'webmpv-pcm', { numberOfInputs: 0, numberOfOutputs: 1, outputChannelCount: [this.outputChannels], channelCount: this.outputChannels, channelCountMode: 'explicit', processorOptions: { buffer: audio, capacity: 8192, channels: this.outputChannels, measureOutput } });
                 this.audioNode.port.onmessage = ({ data }) => { const stamp = this.audioContext.getOutputTimestamp(); const wallTime = stamp.performanceTime !== undefined && stamp.contextTime !== undefined ? performance.timeOrigin + stamp.performanceTime + (data.audioFrame / data.sampleRate - stamp.contextTime) * 1000 : null; this.dispatchEvent(new CustomEvent('output', { detail: { ...data, wallTime, stamp } })); };
                 this.analyser = this.audioContext.createAnalyser();
                 this.audioNode.connect(this.analyser);
-                this.analyser.connect(this.audioContext.destination);
-                const response = await fetch(new URL('../../../fixtures/DejaVuSans.ttf', import.meta.url));
+                this.audioNode.connect(this.audioContext.destination);
+                const response = await fetch(new URL('fixtures/DejaVuSans.ttf', assetBase), { signal: this.loading.signal });
                 if (!response.ok)
                     throw new Error('Could not load the bundled subtitle font');
                 const font = await response.arrayBuffer();
                 if (this.destroyed)
                     throw new Error('Player destroyed during initialization');
                 const offscreen = canvas.transferControlToOffscreen();
-                this.worker.postMessage({ type: 'init', canvas: offscreen, audio, font, sampleRate: this.audioContext.sampleRate, disableBrowserCodecs, measureOutput, decoder, softwarePresenter, decoderFaultAfter: 0 }, [offscreen, font]);
+                this.worker.postMessage({ type: 'init', canvas: offscreen, audio, font, fonts, audioChannels: this.outputChannels, maxDecodePixels: resourceLimits.maxDecodePixels, maxAllocationBytes: resourceLimits.maxAllocationBytes, sampleRate: this.audioContext.sampleRate, disableBrowserCodecs, measureOutput, decoder, softwarePresenter, decoderFaultAfter: 0 }, [offscreen, font]);
                 this.timing = setInterval(() => this.sendTiming(), 20);
                 this.sendTiming();
-            })().catch(error => { clearTimeout(timeout); reject(error); });
+            })().catch(error => { clearTimeout(timeout); reject(new PlayerError('ASSET_LOAD_FAILED', 'Playback engine initialization failed: ' + String(error), null, null, 'operation', true)); });
         });
     }
     sendTiming(force = false) {
@@ -161,14 +184,14 @@ export class WasmPlayer extends EventTarget {
             this.worker.postMessage({ ...message, id }, transfer);
         });
     }
-    async open(file) {
+    async open(file, options = {}) {
         if (this.destroyed)
             throw new Error('Player is destroyed');
         if (this.opening)
             throw new Error('Another open is in progress');
         this.opening = true;
         try {
-            await this.openLocal(file);
+            await this.openLocal(file, options);
         }
         finally {
             this.opening = false;
@@ -186,6 +209,9 @@ export class WasmPlayer extends EventTarget {
                 await Promise.all([this.waitForEvent(e => e.event === 'end-file'), this.command('stop')]);
             else
                 await this.command('stop');
+            if (source.demuxer && !/^[a-z0-9_]{1,64}$/.test(source.demuxer))
+                throw Error('Invalid demuxer hint');
+            await this.command('set', 'demuxer-lavf-format', source.demuxer ?? '');
             const { refreshAuthorization, ...options } = source;
             this.refreshAuthorization = refreshAuthorization;
             const loaded = this.waitForEvent(e => e.event === 'file-loaded' || (e.event === 'end-file' && e.reason === 'error' ? new Error(String(e.file_error)) : false));
@@ -206,7 +232,7 @@ export class WasmPlayer extends EventTarget {
             this.addEventListener('mpv', listener);
         });
     }
-    async openLocal(file) {
+    async openLocal(file, options) {
         await this.ready;
         const size = file instanceof File ? file.size : file.byteLength;
         if (!(file instanceof File) && size > 32 * 1024 * 1024)
@@ -215,6 +241,11 @@ export class WasmPlayer extends EventTarget {
             await Promise.all([this.waitForEvent(event => event.event === 'end-file'), this.command('stop')]);
         else
             await this.command('stop');
+        const suffix = file instanceof File ? file.name.split('.').at(-1)?.toLowerCase() : undefined;
+        const demuxer = options.demuxer ?? (suffix === 'sbc' || suffix === 'msbc' ? 'sbc' : '');
+        if (demuxer && !/^[a-z0-9_]{1,64}$/.test(demuxer))
+            throw Error('Invalid demuxer hint');
+        await this.command('set', 'demuxer-lavf-format', demuxer);
         const loaded = this.waitForEvent(event => event.event === 'file-loaded' || (event.event === 'end-file' && event.reason === 'error' ? new Error(String(event.file_error)) : false));
         if (file instanceof File)
             await Promise.all([loaded, this.request({ type: 'open-file', file })]);
@@ -222,6 +253,11 @@ export class WasmPlayer extends EventTarget {
             const bytes = file.slice(0);
             await Promise.all([loaded, this.request({ type: 'open', bytes }, [bytes])]);
         }
+    }
+    async inspectMetadata() {
+        const value = await this.request({ type: 'command', args: ['expand-text', '${seekable}'] });
+        if (value === 'yes' || value === 'no')
+            this.properties.set('seekable', value === 'yes');
     }
     async command(...args) { await this.ready; return this.request({ type: 'command', args }); }
     async setPause(paused) {
@@ -231,7 +267,15 @@ export class WasmPlayer extends EventTarget {
         }
         await Promise.all([this.waitForEvent(e => e.event === 'property-change' && e.name === 'pause' && e.data === paused), this.command('set', 'pause', paused ? 'yes' : 'no')]);
     }
-    async play() { await this.audioContext.resume(); this.sendTiming(); await this.setPause(false); }
+    async play() {
+        const resume = this.audioContext.resume();
+        void resume.catch(() => { });
+        if (this.audioContext.state === 'suspended' && !navigator.userActivation?.isActive)
+            throw new DOMException('Playback needs a user gesture', 'NotAllowedError');
+        await resume;
+        this.sendTiming();
+        await this.setPause(false);
+    }
     pause() { return this.setPause(true); }
     seek(seconds) { if (!Number.isFinite(seconds) || seconds < 0)
         throw new Error('Invalid seek time'); Atomics.store(this.audioHeader, 2, 0); return this.ready.then(() => this.request({ type: 'seek', seconds })); }
@@ -244,6 +288,7 @@ export class WasmPlayer extends EventTarget {
             throw new Error('Invalid track selection');
         return this.command('set', type === 'audio' ? 'aid' : 'sid', id);
     }
+    async addSubtitle(subtitle) { await this.ready; const bytes = subtitle.bytes.slice(0); return this.request({ type: 'subtitle', ...subtitle, bytes }, [bytes]); }
     subtitleVisible(visible) { return this.command('set', 'sub-visibility', visible ? 'yes' : 'no'); }
     resize(width, height) { if (this.destroyed)
         throw new Error('Player is destroyed'); if (!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1 || width > 1920 || height > 1080)
@@ -251,12 +296,14 @@ export class WasmPlayer extends EventTarget {
     audioDiagnostics() {
         const samples = new Float32Array(this.analyser?.fftSize || 2048);
         this.analyser?.getFloatTimeDomainData(samples);
-        return { state: this.audioContext.state, sampleRate: this.audioContext.sampleRate, mediaFrames: Atomics.load(this.audioHeader, 5), underruns: Atomics.load(this.audioHeader, 6), rms: Math.sqrt(samples.reduce((sum, v) => sum + v * v, 0) / samples.length), latencyConfidence: 'reported-latency estimate' };
+        return { requestedOutput: this.requestedOutput, outputChannels: this.outputChannels, deviceChannels: this.deviceChannels, channelLayout: this.outputChannels === 8 ? '7.1' : this.outputChannels === 6 ? '5.1' : 'stereo', state: this.audioContext.state, sampleRate: this.audioContext.sampleRate, mediaFrames: Atomics.load(this.audioHeader, 5), underruns: Atomics.load(this.audioHeader, 6), rms: Math.sqrt(samples.reduce((sum, v) => sum + v * v, 0) / samples.length), latencyConfidence: 'reported-latency estimate' };
     }
     destroy() {
         if (this.destruction)
             return this.destruction;
         this.destroyed = true;
+        this.loading.abort();
+        this.refreshAuthorization = undefined;
         clearTimeout(this.readyTimer);
         this.rejectReady?.(new Error('Player destroyed'));
         for (const cancel of this.eventWaiters)

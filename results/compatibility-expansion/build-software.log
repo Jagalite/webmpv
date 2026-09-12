@@ -1,0 +1,58 @@
+make: make -j 4
+CC	libavformat/nutdec.o
+src/libavformat/nutdec.c:1087:13: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+ 1087 |         int code = data[at + 4];
+      |             ^
+src/libavformat/nutdec.c:1162:20: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+ 1162 |     enum AVCodecID codec = s->streams[stream_id]->codecpar->codec_id;
+      |                    ^
+2 warnings generated.
+AR	libavformat/libavformat.a
+emcc: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]
+{
+  "decoder": {
+    "baseline": 6,
+    "expanded": 497,
+    "added": 491
+  },
+  "demuxer": {
+    "baseline": 11,
+    "expanded": 352,
+    "added": 341
+  },
+  "parser": {
+    "baseline": 3,
+    "expanded": 60,
+    "added": 57
+  },
+  "bsf": {
+    "baseline": 0,
+    "expanded": 45,
+    "added": 45
+  },
+  "filter": {
+    "baseline": 6,
+    "expanded": 473,
+    "added": 467
+  },
+  "encoder": {
+    "baseline": 0,
+    "expanded": 0,
+    "added": 0
+  },
+  "muxer": {
+    "baseline": 0,
+    "expanded": 0,
+    "added": 0
+  },
+  "protocol": {
+    "baseline": 1,
+    "expanded": 1,
+    "added": 0
+  },
+  "hwaccel": {
+    "baseline": 0,
+    "expanded": 0,
+    "added": 0
+  }
+}

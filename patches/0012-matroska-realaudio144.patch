@@ -1,0 +1,16 @@
+--- a/demux/demux_mkv.c
++++ b/demux/demux_mkv.c
+@@ -1927,6 +1927,13 @@
+         mp_set_pcm_codec(sh_a, sign, false, sh_a->bits_per_coded_sample, true);
+     } else if (!strcmp(track->codec_id, "A_PCM/FLOAT/IEEE")) {
+         sh_a->codec = sh_a->bits_per_coded_sample == 64 ? "pcm_f64le" : "pcm_f32le";
++    } else if (!strcmp(track->codec_id, "A_REAL/14_4")) {
++        // RealAudio 1.0 uses independent 20-byte blocks and needs none of the
++        // later RealAudio interleave/codec-private headers.
++        sh_a->codec = "ra_144";
++        sh_a->samplerate = 8000;
++        sh_a->block_align = 20;
++        mp_chmap_from_channels(&sh_a->channels, 1);
+     } else if (!strncmp(track->codec_id, "A_REAL/", 7)) {
+         if (track->private_size < RAPROPERTIES4_SIZE)
+             goto error;
