@@ -2,9 +2,11 @@
 export class NativePlayer extends EventTarget {
     video;
     remuxPolicy;
+    assetBase;
     ready = Promise.resolve();
     properties = new Map();
     stopped = false;
+    destruction;
     opening = false;
     remux;
     remuxSource;
@@ -17,15 +19,17 @@ export class NativePlayer extends EventTarget {
     subsVisible = true;
     cancelers = new Set();
     listeners = [];
-    constructor(video, remuxPolicy = 'auto') {
+    constructor(video, remuxPolicy = 'auto', assetBase = new URL('../../../', import.meta.url)) {
         super();
         this.video = video;
         this.remuxPolicy = remuxPolicy;
+        this.assetBase = assetBase;
         video.playsInline = true;
         video.preload = 'auto';
-        for (const event of ['timeupdate', 'durationchange', 'loadedmetadata', 'play', 'pause', 'volumechange', 'ratechange', 'ended']) {
+        for (const event of ['timeupdate', 'durationchange', 'loadedmetadata', 'play', 'pause', 'volumechange', 'ratechange', 'ended', 'waiting', 'playing', 'progress', 'seeking', 'seeked', 'resize']) {
             const listener = () => {
                 this.refresh();
+                this.emit('activity', event);
                 if (event === 'ended')
                     this.emit('mpv', { event: 'end-file', reason: 'eof' });
             };
@@ -77,7 +81,8 @@ export class NativePlayer extends EventTarget {
             tracks.push(...this.remux.tracks.filter(t => t.type === 'audio').map(t => ({ ...t, selected: t.selected && !this.video.muted })));
         else if (audio)
             tracks.push(...Array.from(audio, (t, i) => ({ id: String(i + 1), type: 'audio', title: t.label, lang: t.language, selected: t.enabled })));
-        const values = { 'time-pos': this.sourceTime(), duration: this.sourceDuration(), pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks };
+        const timeRanges = (r) => Array.from({ length: r.length }, (_, i) => ({ start: Math.max(0, r.start(i) - (this.remux?.timelineBias ?? 0)), end: Math.max(0, r.end(i) - (this.remux?.timelineBias ?? 0)) }));
+        const values = { 'time-pos': this.sourceTime(), duration: Number.isFinite(this.video.duration) ? this.sourceDuration() : null, 'native-buffered': timeRanges(this.video.buffered), 'native-seekable': timeRanges(this.video.seekable), 'native-live': this.video.duration === Infinity, pause: this.video.paused, 'eof-reached': this.video.ended, volume: this.video.volume * 100, speed: this.video.playbackRate, 'track-list': tracks };
         for (const [name, data] of Object.entries(values)) {
             if (name !== 'track-list' && this.properties.get(name) === data)
                 continue;
@@ -97,7 +102,7 @@ export class NativePlayer extends EventTarget {
             throw Error('Native remux requires MediaSource and cross-origin isolation');
         if (source.options?.format && source.options.format !== 'file')
             throw Error('Native remux currently requires a random-access file source; use Hybrid for this manifest');
-        const moduleURL = new URL('../../native-remux-player.js', import.meta.url).href;
+        const moduleURL = new URL('web/native-remux-player.js', this.assetBase).href;
         const { RemuxPlayer } = await import(moduleURL);
         this.assertActive();
         this.remux ??= new RemuxPlayer(this.video);
@@ -296,9 +301,13 @@ export class NativePlayer extends EventTarget {
     }
     resize(width, height) { this.assertActive(); this.video.width = width; this.video.height = height; }
     audioDiagnostics() { return { state: this.stopped ? 'closed' : this.video.paused ? 'paused' : 'running', source: 'native', decodedSampleCountersAvailable: false }; }
-    async destroy() {
-        if (this.stopped)
-            return;
+    destroy() {
+        if (this.destruction)
+            return this.destruction;
+        this.destruction = this.dispose();
+        return this.destruction;
+    }
+    async dispose() {
         this.stopped = true;
         for (const cancel of this.cancelers)
             cancel(new Error('Player is destroyed'));

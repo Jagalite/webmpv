@@ -4,9 +4,11 @@ import type { Backend } from './backend.js';
 export declare class NativePlayer extends EventTarget implements Backend {
     private video;
     private remuxPolicy;
+    private assetBase;
     readonly ready: Promise<void>;
     readonly properties: Map<string, unknown>;
     private stopped;
+    private destruction?;
     private opening;
     private remux?;
     private remuxSource?;
@@ -19,7 +21,7 @@ export declare class NativePlayer extends EventTarget implements Backend {
     private subsVisible;
     private cancelers;
     private listeners;
-    constructor(video: HTMLVideoElement, remuxPolicy?: 'auto' | 'never' | 'always');
+    constructor(video: HTMLVideoElement, remuxPolicy?: 'auto' | 'never' | 'always', assetBase?: URL);
     private emit;
     private assertActive;
     private wait;
@@ -56,4 +58,5 @@ export declare class NativePlayer extends EventTarget implements Backend {
         decodedSampleCountersAvailable: boolean;
     };
     destroy(): Promise<void>;
+    private dispose;
 }

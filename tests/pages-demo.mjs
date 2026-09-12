@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import {chromium, firefox} from 'playwright';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
@@ -41,25 +42,24 @@ page.on('pageerror',error=>errors.push(String(error)));
 page.on('request',req=>{if(/^https?:/.test(req.url()))result.requests.push({url:req.url(),method:req.method()});});
 try {
  await page.goto(origin);
+ const manifest=await page.request.get(new URL('release-manifest.json',origin).href);assert.ok(manifest.ok());result.runtimeManifestSHA256=createHash('sha256').update(await manifest.body()).digest('hex');result.testHarnessSHA256=createHash('sha256').update(await readFile(import.meta.filename)).digest('hex');
  await page.waitForFunction(()=>crossOriginIsolated && window.player,{},{timeout:60000});
  assert.equal(await page.evaluate(()=>typeof SharedArrayBuffer),'function');
  assert.equal(await page.locator('#pages-startup').count(),0);
  assert.ok(await page.evaluate(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/webmpv/pages-isolation-sw.js')));
  check('Fresh visit becomes cross-origin isolated through the scoped service worker');
  for(const mode of ['native','hybrid','software']){
-   await page.click('#settings-toggle');await page.uncheck('#automatic');
-   await page.waitForFunction(()=>!document.querySelector('#file').disabled);
-   await page.selectOption('#mode',mode);await page.waitForFunction(()=>!document.querySelector('#file').disabled);
-   await page.click('#settings-close');
-   await page.click('#demo');await page.waitForFunction(()=>!document.querySelector('#file').disabled);
-   await page.waitForFunction(()=>player.properties.get('time-pos')>.3);
+   await page.evaluate(mode=>player.setMode(mode),mode);
+   const previousSource=await page.evaluate(()=>player.state.sourceId);
+   await page.getByRole('button',{name:'Try an example'}).click();
+   await page.waitForFunction(previous=>player.state.sourceId!==null&&player.state.sourceId!==previous&&player.state.pendingOperation===null,previousSource);
+   const viewer=page.locator('webmpv-player');await viewer.getByRole('button',{name:'Play',exact:true}).click();
+   await page.waitForFunction(()=>player.state.currentTime>.3);
    assert.equal(await page.evaluate(()=>player.mode),mode);
-   await page.click('#pause');await page.waitForFunction(()=>!document.querySelector('#file').disabled);
-   await page.locator('#timeline').fill('2');await page.locator('#timeline').dispatchEvent('change');await page.waitForFunction(()=>!document.querySelector('#file').disabled);
-   assert.ok(Math.abs(await page.evaluate(()=>player.properties.get('time-pos'))-2)<.3);
-   assert.equal(await page.locator('#playback-error').isVisible(),false);
-   await page.screenshot({path:`${out}/${mode}.png`});
-   await page.click('#close');await page.waitForFunction(()=>!document.querySelector('#file').disabled);
+   await viewer.getByRole('button',{name:'Pause',exact:true}).click();
+   await page.evaluate(()=>document.querySelector('webmpv-player').seek(2));
+   await page.waitForFunction(()=>player.state.pendingOperation===null&&Math.abs(player.state.currentTime-2)<.3);
+   assert.equal(await page.evaluate(()=>player.state.error),null);
    check(`${mode} plays and seeks with assets beneath the project subpath`);
  }
  const range=await page.evaluate(async()=>{const response=await fetch('./fixtures/example.mp4',{headers:{Range:'bytes=10-29'}});return {status:response.status,length:(await response.arrayBuffer()).byteLength};});
@@ -74,5 +74,5 @@ try {
  result.source=await response.json();assert.ok(result.source['webmpv-source.tar.gz']);assert.ok(result.source['emscripten-source.tar.gz']);
  check('Source downloads and license materials accompany the demo');
  result.passed=true;
-}catch(error){result.failure=String(error.stack);console.error(error);process.exitCode=1;await page.screenshot({path:`${out}/failure.png`,fullPage:true}).catch(()=>{});result.state=await page.evaluate(()=>({isolated:crossOriginIsolated,status:document.querySelector('#status')?.textContent,startup:document.querySelector('#pages-startup')?.textContent})).catch(()=>null);}
+}catch(error){result.failure=String(error.stack);console.error(error);process.exitCode=1;await page.screenshot({path:`${out}/failure.png`,fullPage:true}).catch(()=>{});result.state=await page.evaluate(()=>({player:window.player?.state,isolated:crossOriginIsolated,status:document.querySelector('#status')?.textContent,startup:document.querySelector('#pages-startup')?.textContent})).catch(()=>null);}
 finally{await browser.close();await new Promise(resolve=>server?server.close(resolve):resolve());await writeFile(`${out}/result.json`,JSON.stringify(result,null,2)+'\n');}

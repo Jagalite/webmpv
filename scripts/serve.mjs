@@ -24,7 +24,7 @@ const server=http.createServer(async(req,res)=>{
     if(!['GET','HEAD'].includes(req.method)){res.writeHead(405,{'Allow':'GET, HEAD'}).end();return;}
     const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
     if(pathname==='/favicon.ico'){res.writeHead(204).end();return;}
-    if(!pathname.startsWith('/web/')&&!pathname.startsWith('/fixtures/')&&pathname!=='/') {res.writeHead(404).end();return;}
+    if(!pathname.startsWith('/web/')&&!pathname.startsWith('/fixtures/')&&!pathname.startsWith('/examples/')&&pathname!=='/') {res.writeHead(404).end();return;}
     const file=path.resolve(root,'.'+(pathname==='/'?'/web/player.html':pathname));
     const mount=path.join(root,pathname==='/'?'web':pathname.split('/')[1]);
     if(!file.startsWith(mount+path.sep)) {res.writeHead(403).end();return;}

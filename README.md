@@ -1,5 +1,7 @@
 # webmpv
 
+**[Try the live demo](https://jagalite.github.io/webmpv/)** — play local media in your browser; files are not uploaded. The first visit reloads once to enable the playback engines.
+
 A browser media compatibility runtime that selects the cheapest correct path across three playback modes:
 
 1. **Native** — browser video playback, with a progressive packet-copy remux fallback.
@@ -13,6 +15,31 @@ Native direct/remux, Hybrid or Software. An explicit `mode` pins that engine;
 automatically when automatic selection is enabled. See the
 [integration guide](docs/INTEGRATION.md) for capabilities, state preservation,
 source restrictions and migration from the older decoder API.
+
+## Embed a player or build custom controls
+
+The working API candidate adds normalized state, typed events, transactional
+cancellation and a reusable `<webmpv-player>` component using the same playback
+core. It is not yet an npm release. Install the locally assembled archive and
+copy its verified runtime assets:
+
+```sh
+npm install /path/to/webmpv-0.3.0-beta.2.tgz
+npx webmpv copy-assets public/assets/webmpv
+```
+
+```js
+import {Player} from 'webmpv';
+const player = new Player(container, {assetBase: '/assets/webmpv/'});
+const unsubscribe = player.subscribe(state => render(state));
+await player.open(file);
+```
+
+For ready-made controls, import `definePlayerElement` from `webmpv/player`, call
+it, and use `<webmpv-player controls asset-base="/assets/webmpv/"></webmpv-player>`.
+See the [API contract](docs/PUBLIC-API.md), [component guide](docs/PLAYER-COMPONENT.md),
+[migration notes](docs/API-MIGRATION.md), [runtime installation](docs/RUNTIME-ASSETS.md)
+and [exact validation evidence](docs/PUBLIC-API-VALIDATION.md).
 
 ## Release status
 

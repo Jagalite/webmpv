@@ -49,6 +49,7 @@ export type PlayerDiagnostics = {
 };
 /** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export declare class WasmPlayer extends EventTarget {
+    private loading;
     private worker;
     private workerOwner;
     private audioContext;
@@ -75,7 +76,8 @@ export declare class WasmPlayer extends EventTarget {
     browserCodecsAbsent: boolean;
     properties: Map<string, unknown>;
     readonly ready: Promise<void>;
-    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, mode, softwarePresenter, audioOutput, audioFallback, resourceLimits, fonts }?: {
+    constructor(canvas: HTMLCanvasElement, { disableBrowserCodecs, measureOutput, mode, softwarePresenter, audioOutput, audioFallback, resourceLimits, fonts, assetBase }?: {
+        assetBase?: URL;
         audioOutput?: AudioOutput;
         audioFallback?: 'stereo' | 'reject';
         resourceLimits?: ResourceLimits;
@@ -92,15 +94,16 @@ export declare class WasmPlayer extends EventTarget {
     openRemote(source: RemoteSource): Promise<void>;
     private waitForEvent;
     private openLocal;
+    inspectMetadata(): Promise<void>;
     command(...args: string[]): Promise<void>;
     private setPause;
     play(): Promise<void>;
     pause(): Promise<void>;
-    seek(seconds: number): Promise<void>;
+    seek(seconds: number): Promise<any>;
     rate(rate: number): Promise<void>;
     volume(percent: number): Promise<void>;
     selectTrack(type: 'audio' | 'sub', id: string): Promise<void>;
-    addSubtitle(subtitle: SubtitleAsset): Promise<void>;
+    addSubtitle(subtitle: SubtitleAsset): Promise<any>;
     subtitleVisible(visible: boolean): Promise<void>;
     resize(width: number, height: number): void;
     audioDiagnostics(): {

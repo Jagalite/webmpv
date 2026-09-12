@@ -1,5 +1,10 @@
 # Browser integration
 
+The additive normalized API and optional component are documented in
+[PUBLIC-API.md](PUBLIC-API.md), [PLAYER-COMPONENT.md](PLAYER-COMPONENT.md),
+[API-MIGRATION.md](API-MIGRATION.md) and [RUNTIME-ASSETS.md](RUNTIME-ASSETS.md).
+[Validation](PUBLIC-API-VALIDATION.md) separates implementation from qualification.
+
 The public entry point is `web/generated/index.js` (with matching TypeScript
 declarations). It exports `Player`, `PLAYBACK_MODES`, and public types. Exactly
 three modes are accepted, in this order: `native`, `hybrid`, `software`.
@@ -55,8 +60,10 @@ for an empty chain. In manual mode, select software explicitly first. Clear acti
 leaving software mode. Filter changes reopen with filters configured before load.
 Mode/filter changes preserve position, pause, volume and speed. Failed candidate
 opens/configuration restore the old player. Changes are not gapless; at most an
-old and candidate session coexist. Track IDs are mode-specific and reset to auto
-when replacing a source or crossing between native and mpv modes. Disabled (`no`)
+old and candidate session coexist. Legacy backend track IDs are mode-specific and reset to auto
+when replacing a source or crossing between native and mpv modes. New public
+source-scoped IDs preserve explicit selection across routes where identity can
+be established; transitions reject instead of guessing when it cannot. Disabled (`no`)
 track selections remain disabled across mode changes. External browser text tracks remain
 associated with the current source and are restored when returning to native.
 
@@ -143,7 +150,7 @@ Replace `BrowserPlayer(canvas, {decoder: ...})` with `Player(container, {mode: .
 from `index.js`. Replace raw mpv `command('set', 'vf', ...)` calls with
 `setVideoFilters()` in software mode. There is no arbitrary public `command()`;
 use typed controls so state survives a reopen. The package export map exposes
-only this entry point.
+the core and optional `webmpv/player` entry points.
 
 The old `src/player.ts`, generated clients, `/web/index.html`,
 `/web/legacy-example.html`, filter router and

@@ -1,3 +1,4 @@
+// Historical demo-source 8bb451b UI harness. The maintained component/playground suite is tests/player-component.mjs.
 import {chromium, firefox} from 'playwright';
 import {spawn} from 'node:child_process';
 import {mkdir, writeFile, readFile} from 'node:fs/promises';

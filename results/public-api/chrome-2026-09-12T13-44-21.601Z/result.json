@@ -1,0 +1,70 @@
+{
+  "browser": "152.0.7977.83",
+  "family": "chrome",
+  "checks": [
+    {
+      "name": "immutable state, stable identity and no core UI import",
+      "passed": true
+    },
+    {
+      "name": "native state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "hybrid state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "software state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "canceled replacement preserves accepted state and bounded close",
+      "passed": true
+    },
+    {
+      "name": "close remains available with a full bounded operation queue",
+      "passed": true
+    },
+    {
+      "name": "failed replacement stays usable and redacts signed URL",
+      "passed": true
+    },
+    {
+      "name": "stable source-scoped tracks and explicit transition preservation",
+      "passed": true
+    },
+    {
+      "name": "canceling Wasm asset initialization preserves the previous session",
+      "passed": true
+    },
+    {
+      "name": "stale backend events cannot overwrite accepted playback",
+      "passed": true
+    },
+    {
+      "name": "unknown duration and live windows remain truthful (adapter injection)",
+      "passed": true
+    },
+    {
+      "name": "waiting and ended reflect observed playback (native events)",
+      "passed": true
+    },
+    {
+      "name": "idempotent destroy settles queue and removes workers",
+      "passed": true
+    },
+    {
+      "name": "no uncaught errors",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/unified-player.ts": "acd6c760ab0a4ebc7e0e4a0564658069ef3f18be0d6fa24df23a899d77c886a1",
+    "src/types.ts": "24f43026282210763ed88a0a7b6c7557a661f8ac08c0d433106edc6895becb25",
+    "src/internal/wasm-player.ts": "f22e9e5ccd254ee3d205e14082f1f00654ea8add8d94d33d70e3fcf6f167404e",
+    "src/internal/native-player.ts": "433b755e0aee9e68dc32ff891fc9cd1eb7cf1138f176d3b8fac39de236ad1296",
+    "tests/public-api.mjs": "958b90d000f2a64a6121ea49cad0c87fdc1c2ab11bfdc7f3fa19a15a6fceb4e9"
+  },
+  "passed": true
+}

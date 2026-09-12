@@ -1,0 +1,95 @@
+{
+  "browser": "152.0.7977.83",
+  "family": "chrome",
+  "checks": [
+    {
+      "name": "immutable state, stable identity and no core UI import",
+      "passed": true
+    },
+    {
+      "name": "native state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "hybrid state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "software state events, seek completion, mute and reopen",
+      "passed": true
+    },
+    {
+      "name": "canceled replacement preserves accepted state and bounded close",
+      "passed": true
+    },
+    {
+      "name": "close remains available with a full bounded operation queue",
+      "passed": true
+    },
+    {
+      "name": "failed replacement stays usable and redacts signed URL",
+      "passed": true
+    },
+    {
+      "name": "stable source-scoped tracks and explicit transition preservation",
+      "passed": true
+    },
+    {
+      "name": "external subtitles have distinct identities and preserve explicit selection across modes",
+      "passed": true
+    },
+    {
+      "name": "native fatal end-file reaches normalized state before error (adapter injection)",
+      "passed": true
+    },
+    {
+      "name": "hybrid fatal end-file reaches normalized state before error (adapter injection)",
+      "passed": true
+    },
+    {
+      "name": "software fatal end-file reaches normalized state before error (adapter injection)",
+      "passed": true
+    },
+    {
+      "name": "native caller abort at source acceptance does not reject committed open",
+      "passed": true
+    },
+    {
+      "name": "software caller abort at source acceptance does not reject committed open",
+      "passed": true
+    },
+    {
+      "name": "canceling Wasm asset initialization preserves the previous session",
+      "passed": true
+    },
+    {
+      "name": "stale backend events cannot overwrite accepted playback",
+      "passed": true
+    },
+    {
+      "name": "unknown duration and live windows remain truthful (adapter injection)",
+      "passed": true
+    },
+    {
+      "name": "waiting and ended reflect observed playback (native events)",
+      "passed": true
+    },
+    {
+      "name": "idempotent destroy settles queue and removes workers",
+      "passed": true
+    },
+    {
+      "name": "no uncaught errors",
+      "passed": true
+    }
+  ],
+  "hashes": {
+    "src/unified-player.ts": "ffaab3ca31aa3240ae3b9a932154928185881bf9ca4fe5b20d7de2033cef1575",
+    "src/internal/state.ts": "3c90e5ee62943674bbf2990236ed651bd733f20c072c9cb3a53faca7dc4b18f0",
+    "src/types.ts": "24f43026282210763ed88a0a7b6c7557a661f8ac08c0d433106edc6895becb25",
+    "src/internal/wasm-player.ts": "f22e9e5ccd254ee3d205e14082f1f00654ea8add8d94d33d70e3fcf6f167404e",
+    "src/internal/native-player.ts": "433b755e0aee9e68dc32ff891fc9cd1eb7cf1138f176d3b8fac39de236ad1296",
+    "tests/public-api.mjs": "53a843ce49d5be6756f3190587524b94b57ec5e86c5541645b2ea81a668b6895"
+  },
+  "passed": true
+}

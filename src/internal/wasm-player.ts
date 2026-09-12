@@ -1,3 +1,4 @@
+import {PlayerError} from './errors.js';
 import type {AudioOutput, FontAsset, ResourceLimits, SubtitleAsset, MediaInputOptions, StreamingOptions} from '../types.js';
 export type PlayerEvent = {event:string; id?:number; name?:string; data?:unknown; error?:string; [key:string]:unknown};
 export type RemoteSource = MediaInputOptions & {streaming?:StreamingOptions;url:string;format?:'file'|'hls'|'dash';headers?:Record<string,string>;credentials?:RequestCredentials;allowedOrigins?:string[];immutable?:boolean;refreshAuthorization?:(resource?:{url:string})=>Promise<{url?:string;headers?:Record<string,string>}>};
@@ -5,6 +6,7 @@ export type PlayerDiagnostics = {path:'wasm';presentation?:{position?:number;pts
 
 /** One isolated software engine per player; bounded remote ranges and local File reads; ArrayBuffer inputs remain capped. */
 export class WasmPlayer extends EventTarget {
+  private loading=new AbortController();
   private worker: Worker;
   private workerOwner: HTMLIFrameElement;
   private audioContext: AudioContext;
@@ -13,7 +15,7 @@ export class WasmPlayer extends EventTarget {
   private timing?: ReturnType<typeof setInterval>;
   private lastTiming?: {latencyUs:number;running:boolean};
   private nextId = 100;
-  private pending = new Map<number,{resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>}>();
+  private pending = new Map<number,{resolve:(result?:any)=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>}>();
   private destroyed = false;
   private destruction?: Promise<void>;
   private onDestroyed?: () => void;
@@ -32,7 +34,7 @@ export class WasmPlayer extends EventTarget {
   properties = new Map<string, unknown>();
   readonly ready: Promise<void>;
 
-  constructor(canvas:HTMLCanvasElement, {disableBrowserCodecs=false,measureOutput=false,mode='software',softwarePresenter='rgb',audioOutput='stereo',audioFallback='stereo',resourceLimits={},fonts=[]}:{audioOutput?:AudioOutput;audioFallback?:'stereo'|'reject';resourceLimits?:ResourceLimits;fonts?:FontAsset[];disableBrowserCodecs?:boolean;measureOutput?:boolean;mode?:'hybrid'|'software';softwarePresenter?:'rgb'|'experimental-yuv'}={}) {
+  constructor(canvas:HTMLCanvasElement, {disableBrowserCodecs=false,measureOutput=false,mode='software',softwarePresenter='rgb',audioOutput='stereo',audioFallback='stereo',resourceLimits={},fonts=[],assetBase=new URL('../../../',import.meta.url)}:{assetBase?:URL;audioOutput?:AudioOutput;audioFallback?:'stereo'|'reject';resourceLimits?:ResourceLimits;fonts?:FontAsset[];disableBrowserCodecs?:boolean;measureOutput?:boolean;mode?:'hybrid'|'software';softwarePresenter?:'rgb'|'experimental-yuv'}={}) {
     super();
     const decoder=mode==='hybrid'?'webcodecs':'software';
     if(!crossOriginIsolated) throw new Error('This player requires a secure, cross-origin isolated page.');
@@ -49,19 +51,19 @@ export class WasmPlayer extends EventTarget {
     this.workerOwner.hidden=true;this.workerOwner.setAttribute('aria-hidden','true');
     canvas.ownerDocument.body.append(this.workerOwner);
     const owner=this.workerOwner.contentWindow as Window & typeof globalThis;
-    try {this.worker = new owner.Worker(new URL(mode==='hybrid'?'../../filter-retained-engine-worker.js?mode=retained':'../../software-full-engine-worker.js',import.meta.url),{type:'module'});}
+    try {this.worker = new owner.Worker(new URL(mode==='hybrid'?'web/filter-retained-engine-worker.js?mode=retained':'web/software-full-engine-worker.js',assetBase),{type:'module'});}
     catch(error){this.workerOwner.remove();void this.audioContext.close();throw error;}
     const audio = new SharedArrayBuffer(64 + 8192 * this.outputChannels * 4);
     this.audioHeader = new Int32Array(audio,0,16);
     this.ready = new Promise<void>((resolve,reject) => {
       this.rejectReady=reject;
       const timeout=this.readyTimer=setTimeout(()=>reject(new Error('Player initialization timed out')),60000);
-      this.worker.onerror = event => { clearTimeout(timeout);reject(new Error(event.message));this.fail(new Error(event.message)); };
+      this.worker.onerror = event => { clearTimeout(timeout);reject(new PlayerError('ASSET_LOAD_FAILED','Playback engine initialization failed: '+event.message,null,null,'operation',true));this.fail(new Error(event.message)); };
       this.worker.onmessage = ({data}) => {
         if(data.type==='ready') {clearTimeout(timeout);this.browserCodecsAbsent=data.browserCodecsAbsent;this.sendTiming(true);resolve();}
-        else if(data.type==='error') {clearTimeout(timeout);const error=new Error(data.message);reject(error);this.fail(error,data.id);}
+        else if(data.type==='error') {clearTimeout(timeout);const error=new Error(data.message);reject(new PlayerError('ASSET_LOAD_FAILED','Playback engine initialization failed: '+error.message,null,null,'operation',true));this.fail(error,data.id);}
         else if(data.type==='destroyed') {if(this.diagnostics){this.diagnostics.decoderStats=data.decoderStats;if(data.presentation)this.diagnostics.presentation=data.presentation;}this.onDestroyed?.();}
-        else if(data.type==='refresh'){void this.refreshAuthorization?.(data.resource).then(update=>this.worker.postMessage({type:'refreshed',id:data.id,update}),()=>this.worker.postMessage({type:'refreshed',id:data.id,error:true}));}
+        else if(data.type==='refresh'){void this.refreshAuthorization?.(data.resource).then(update=>{if(!this.destroyed)this.worker.postMessage({type:'refreshed',id:data.id,update});},()=>{if(!this.destroyed)this.worker.postMessage({type:'refreshed',id:data.id,error:true});});}
         else if(data.type==='output')this.dispatchEvent(new CustomEvent('output',{detail:data.data}));
         else if(data.type==='source')this.dispatchEvent(new CustomEvent('source',{detail:data.info}));
         else if(data.type==='diagnostics') this.diagnostics=data.data;
@@ -74,20 +76,20 @@ export class WasmPlayer extends EventTarget {
             event.data=event.data.map(track=>({...track,id:String(track.id)}));
           if(event.event==='command-reply' && event.id) {
             const pending=this.pending.get(event.id);
-            if(pending) {clearTimeout(pending.timer);this.pending.delete(event.id);event.error?pending.reject(new Error(event.error)):pending.resolve();}
+            if(pending) {clearTimeout(pending.timer);this.pending.delete(event.id);event.error?pending.reject(new Error(event.error)):pending.resolve(event.result);}
           }
           if(event.event==='property-change' && event.name) this.properties.set(event.name,event.data);
           this.dispatchEvent(new CustomEvent('mpv',{detail:event}));
         }
       };
       void (async()=>{
-        await this.audioContext.audioWorklet.addModule(new URL('../../audio-worklet.js',import.meta.url));
+        await this.audioContext.audioWorklet.addModule(new URL('web/audio-worklet.js',assetBase));
         if(this.destroyed) throw new Error('Player destroyed during initialization');
         this.audioNode=new AudioWorkletNode(this.audioContext,'webmpv-pcm',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[this.outputChannels],channelCount:this.outputChannels,channelCountMode:'explicit',processorOptions:{buffer:audio,capacity:8192,channels:this.outputChannels,measureOutput}});
         this.audioNode.port.onmessage=({data})=>{const stamp=this.audioContext.getOutputTimestamp();const wallTime=stamp.performanceTime!==undefined&&stamp.contextTime!==undefined?performance.timeOrigin+stamp.performanceTime+(data.audioFrame/data.sampleRate-stamp.contextTime)*1000:null;this.dispatchEvent(new CustomEvent('output',{detail:{...data,wallTime,stamp}}));};
         this.analyser=this.audioContext.createAnalyser();
         this.audioNode.connect(this.analyser);this.audioNode.connect(this.audioContext.destination);
-        const response=await fetch(new URL('../../../fixtures/DejaVuSans.ttf',import.meta.url));
+        const response=await fetch(new URL('fixtures/DejaVuSans.ttf',assetBase),{signal:this.loading.signal});
         if(!response.ok) throw new Error('Could not load the bundled subtitle font');
         const font=await response.arrayBuffer();
         if(this.destroyed) throw new Error('Player destroyed during initialization');
@@ -95,7 +97,7 @@ export class WasmPlayer extends EventTarget {
         this.worker.postMessage({type:'init',canvas:offscreen,audio,font,fonts,audioChannels:this.outputChannels,maxDecodePixels:resourceLimits.maxDecodePixels,maxAllocationBytes:resourceLimits.maxAllocationBytes,sampleRate:this.audioContext.sampleRate,disableBrowserCodecs,measureOutput,decoder,softwarePresenter,decoderFaultAfter:0},[offscreen,font]);
         this.timing=setInterval(()=>this.sendTiming(),20);
         this.sendTiming();
-      })().catch(error=>{clearTimeout(timeout);reject(error);});
+      })().catch(error=>{clearTimeout(timeout);reject(new PlayerError('ASSET_LOAD_FAILED','Playback engine initialization failed: '+String(error),null,null,'operation',true));});
     });
   }
   private sendTiming(force=false) {
@@ -112,7 +114,7 @@ export class WasmPlayer extends EventTarget {
     if(report)for(const cancel of this.eventWaiters)cancel(error);
     if(report) this.dispatchEvent(new CustomEvent('error',{detail:error.message}));
   }
-  private request(message:Record<string,unknown>,transfer:Transferable[]=[]):Promise<void> {
+  private request(message:Record<string,unknown>,transfer:Transferable[]=[]):Promise<any> {
     if(this.destroyed) return Promise.reject(new Error('Player is destroyed'));
     if(this.pending.size>=128) return Promise.reject(new Error('Command queue is full'));
     const id=this.nextId++;
@@ -166,12 +168,20 @@ export class WasmPlayer extends EventTarget {
     if(file instanceof File)await Promise.all([loaded,this.request({type:'open-file',file})]);
     else {const bytes=file.slice(0);await Promise.all([loaded,this.request({type:'open',bytes},[bytes])]);}
   }
+  async inspectMetadata() {
+    const value=await this.request({type:'command',args:['expand-text','${seekable}']});
+    if(value==='yes'||value==='no')this.properties.set('seekable',value==='yes');
+  }
   async command(...args:string[]):Promise<void> {await this.ready;return this.request({type:'command',args});}
   private async setPause(paused:boolean) {
     if(this.properties.get('pause')===paused){await this.command('set','pause',paused?'yes':'no');return;}
     await Promise.all([this.waitForEvent(e=>e.event==='property-change'&&e.name==='pause'&&e.data===paused),this.command('set','pause',paused?'yes':'no')]);
   }
-  async play() {await this.audioContext.resume();this.sendTiming();await this.setPause(false);}
+  async play() {
+    const resume=this.audioContext.resume();void resume.catch(()=>{});
+    if(this.audioContext.state==='suspended' && !navigator.userActivation?.isActive) throw new DOMException('Playback needs a user gesture','NotAllowedError');
+    await resume;this.sendTiming();await this.setPause(false);
+  }
   pause() {return this.setPause(true);}
   seek(seconds:number) {if(!Number.isFinite(seconds)||seconds<0) throw new Error('Invalid seek time');Atomics.store(this.audioHeader,2,0);return this.ready.then(()=>this.request({type:'seek',seconds}));}
   rate(rate:number){if(!Number.isFinite(rate)||rate<0.5||rate>2)throw new Error('Playback rate must be 0.5 to 2');return this.command('set','speed',String(rate));}
@@ -190,7 +200,7 @@ export class WasmPlayer extends EventTarget {
   }
   destroy():Promise<void> {
     if(this.destruction) return this.destruction;
-    this.destroyed=true;
+    this.destroyed=true;this.loading.abort();this.refreshAuthorization=undefined;
     clearTimeout(this.readyTimer);
     this.rejectReady?.(new Error('Player destroyed'));
     for(const cancel of this.eventWaiters) cancel(new Error('Player destroyed'));
