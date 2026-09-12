@@ -1,5 +1,7 @@
 # webmpv
 
+**[Try the live demo](https://jagalite.github.io/webmpv/)** — play local media in your browser; files are not uploaded. The first visit reloads once to enable the playback engines.
+
 A browser media compatibility runtime that selects the cheapest correct path across three playback modes:
 
 1. **Native** — browser video playback, with a progressive packet-copy remux fallback.
